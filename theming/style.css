@@ -1,0 +1,13 @@
+/* Theme the label where entered text is displayed */
+/* window box:nth-child(2)> label {
+  background-image: url("pic.png");
+}*/
+
+/* Theme the suggestion buttons */
+/*window frame button {
+  background-image: url("pic.png");
+}*/
+
+drawingArea {
+  background-image: url("pic.png");
+}
