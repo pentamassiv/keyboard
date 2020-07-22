@@ -38,7 +38,10 @@ use self::Msg::*;
 
 // Defines color of path
 const PATHCOLOR: (f64, f64, f64, f64) = (0.105, 0.117, 0.746, 0.9);
+const PATHLENGTH: usize = 20;
+const PATHWIDTH: f64 = 4.5;
 
+#[derive(Clone)]
 struct Dot {
     position: (f64, f64),
 }
@@ -53,6 +56,23 @@ pub struct Model {
     draw_handler: DrawHandler<DrawingArea>,
     dots: Vec<Dot>,
     is_pressed: bool,
+}
+
+impl Model {
+    fn get_two_last_dots(&self) -> (Dot, Dot) {
+        let len = self.dots.len();
+        let subtract_to_get_second_last = if len >= 2 { 2 } else { len };
+        let last_dot = self.dots.last().unwrap_or(&Dot {
+            position: (0.0, 0.0),
+        });
+        let second_last_dot = self
+            .dots
+            .get(len - subtract_to_get_second_last)
+            .unwrap_or(&Dot {
+                position: (0.0, 0.0),
+            });
+        (last_dot.clone(), second_last_dot.clone())
+    }
 }
 
 #[derive(Msg)]
@@ -135,14 +155,6 @@ impl Widget for Win {
                         label: "but",
                     },
                 }
-                //#[name="drawing_area"]
-                //gtk::DrawingArea {
-                //    child: {
-                //        expand: true,
-                //    },
-                //    draw(_, _) => (UpdateDrawBuffer, Inhibit(false)),
-                //
-                //},
             },
             delete_event(_, _) => (Quit, Inhibit(false)),
         }
@@ -171,31 +183,39 @@ impl Widget for Win {
                 let mut label_text = String::from(self.label.get_text());
                 label_text.push_str(&self.model.dots.len().to_string());
                 label_text.push_str(" ");
-                self.model.dots = Vec::new();
                 self.label.set_text(&label_text);
+                self.remove_path();
+                self.model.dots = Vec::new();
+                //self.model.draw_handler.get_context().show_page();
             }
             MovePointer(pos) => {
                 if self.model.is_pressed {
+                    print!("len: {} ", self.model.dots.len());
                     self.model.dots.push(Dot::generate(pos));
                 }
             }
             Quit => gtk::main_quit(),
             UpdateDrawBuffer => {
-                self.draw_path();
+                self.draw_path(self.model.get_two_last_dots());
             }
         }
     }
 
-    fn draw_path(&mut self) {
+    fn remove_path(&mut self) {
         let context = self.model.draw_handler.get_context();
-        //context.set_antialias(Antialias::Best);
-        //context.set_line_cap(LineCap::Round); //Default is LineCap::Butt
+        context.set_operator(cairo::Operator::Clear);
         context.set_source_rgba(PATHCOLOR.0, PATHCOLOR.1, PATHCOLOR.2, PATHCOLOR.3);
-        for dot in &self.model.dots {
-            context.line_to(dot.position.0, dot.position.1);
-        }
-        context.set_line_width(5.);
-        context.stroke();
+        context.paint();
+    }
+
+    fn draw_path(&mut self, dots: (Dot, Dot)) {
+        let context = self.model.draw_handler.get_context();
+        context.set_operator(cairo::Operator::Over);
+        context.set_source_rgba(PATHCOLOR.0, PATHCOLOR.1, PATHCOLOR.2, PATHCOLOR.3);
+        context.move_to(dots.0.position.0, dots.0.position.1);
+        context.line_to(dots.1.position.0, dots.1.position.1);
+        context.set_line_width(PATHWIDTH);
+        context.stroke_preserve();
     }
 }
 
