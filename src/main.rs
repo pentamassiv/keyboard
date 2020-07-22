@@ -25,9 +25,8 @@ use gtk::Orientation::*;
 
 use gtk::*;
 use gtk::{
-    prelude::WidgetExtManual, BoxExt, ButtonExt, ContainerExt, CssProviderExt, DrawingArea,
-    GtkWindowExt, Inhibit, LabelExt, NotebookExt, OrientableExt, TextBuffer, TextBufferExt,
-    TextTag, TextTagTable, TextTagTableExt, TextViewExt, WidgetExt,
+    prelude::WidgetExtManual, BoxExt, ButtonExt, CssProviderExt, DrawingArea, GtkWindowExt,
+    Inhibit, LabelExt, OrientableExt, WidgetExt,
 };
 
 //use cairo::{Antialias, Context, LineCap};
@@ -39,7 +38,6 @@ use self::Msg::*;
 
 // Defines color of path
 const PATHCOLOR: (f64, f64, f64, f64) = (0.105, 0.117, 0.746, 0.9);
-const BACKGROUNDCOLOR: (f64, f64, f64, f64) = (1.0, 1.0, 1.0, 0.0); // Background is translucent so the buttons beneight are visible
 
 struct Dot {
     position: (f64, f64),
@@ -66,6 +64,7 @@ pub enum Msg {
     UpdateDrawBuffer,
 }
 
+#[allow(clippy::redundant_field_names)]
 #[widget]
 impl Widget for Win {
     fn model() -> Model {
@@ -80,6 +79,7 @@ impl Widget for Win {
         gtk::Window {
             property_default_height: 720,
             property_default_width: 360,
+            #[name="vbox"]
             gtk::Box {
                 orientation: Vertical,
                 spacing: 2,
@@ -123,27 +123,40 @@ impl Widget for Win {
                         },
                     },
                 },
-                #[name="drawing_area"]
-                gtk::DrawingArea {
-                    child: {
-                        expand: true,
-                    },
-                    draw(_, _) => (UpdateDrawBuffer, Inhibit(false)),
+                #[name="overlay"]
+                gtk::Overlay {
                     motion_notify_event(_, event) => (MovePointer(event.get_position()), Inhibit(false)),
                     button_press_event(_, event) => (Press, Inhibit(false)),
-                    button_release_event(_, event) => (Release, Inhibit(false))
-                },
+                    button_release_event(_, event) => (Release, Inhibit(false)),
+                    draw(_, _) => (UpdateDrawBuffer, Inhibit(false)),
+                    #[name="suggestion_button"]
+                    gtk::Button {
+                        vexpand: true,
+                        label: "but",
+                    },
+                }
+                //#[name="drawing_area"]
+                //gtk::DrawingArea {
+                //    child: {
+                //        expand: true,
+                //    },
+                //    draw(_, _) => (UpdateDrawBuffer, Inhibit(false)),
+                //
+                //},
             },
             delete_event(_, _) => (Quit, Inhibit(false)),
         }
     }
 
     fn init_view(&mut self) {
-        self.model.draw_handler.init(&self.drawing_area);
-        self.drawing_area.add_events(EventMask::POINTER_MOTION_MASK);
-        self.drawing_area.add_events(EventMask::BUTTON_PRESS_MASK);
-        self.drawing_area.add_events(EventMask::BUTTON_RELEASE_MASK);
         self.label.set_size_request(360, 200);
+        let drawing_area = gtk::DrawingArea::new();
+        self.model.draw_handler.init(&drawing_area);
+        drawing_area.add_events(EventMask::POINTER_MOTION_MASK);
+        drawing_area.add_events(EventMask::BUTTON_PRESS_MASK);
+        drawing_area.add_events(EventMask::BUTTON_RELEASE_MASK);
+        self.overlay.add_overlay(&drawing_area);
+        self.overlay.show_all();
         load_css();
     }
 
@@ -155,11 +168,10 @@ impl Widget for Win {
             }
             Release => {
                 self.model.is_pressed = false;
-                self.model.dots = Vec::new();
-                //self.model.draw_handler.get_context().restore();
-                //self.reset_keyboard();
                 let mut label_text = String::from(self.label.get_text());
-                label_text.push_str(&"word ");
+                label_text.push_str(&self.model.dots.len().to_string());
+                label_text.push_str(" ");
+                self.model.dots = Vec::new();
                 self.label.set_text(&label_text);
             }
             MovePointer(pos) => {
@@ -172,18 +184,6 @@ impl Widget for Win {
                 self.draw_path();
             }
         }
-    }
-
-    fn reset_keyboard(&mut self) {
-        let context = self.model.draw_handler.get_context();
-        //Set color of background to white
-        context.set_source_rgba(
-            BACKGROUNDCOLOR.0,
-            BACKGROUNDCOLOR.1,
-            BACKGROUNDCOLOR.2,
-            BACKGROUNDCOLOR.3,
-        );
-        context.paint();
     }
 
     fn draw_path(&mut self) {
