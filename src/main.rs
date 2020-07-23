@@ -58,23 +58,6 @@ pub struct Model {
     is_pressed: bool,
 }
 
-impl Model {
-    fn get_two_last_dots(&self) -> (Dot, Dot) {
-        let len = self.dots.len();
-        let subtract_to_get_second_last = if len >= 2 { 2 } else { len };
-        let last_dot = self.dots.last().unwrap_or(&Dot {
-            position: (0.0, 0.0),
-        });
-        let second_last_dot = self
-            .dots
-            .get(len - subtract_to_get_second_last)
-            .unwrap_or(&Dot {
-                position: (0.0, 0.0),
-            });
-        (last_dot.clone(), second_last_dot.clone())
-    }
-}
-
 #[derive(Msg)]
 pub enum Msg {
     Press,
@@ -195,7 +178,7 @@ impl Widget for Win {
             }
             Quit => gtk::main_quit(),
             UpdateDrawBuffer => {
-                self.draw_path(self.model.get_two_last_dots());
+                self.draw_path();
             }
         }
     }
@@ -207,7 +190,7 @@ impl Widget for Win {
         context.paint();
     }
 
-    fn draw_path(&mut self, dots: (Dot, Dot)) {
+    fn draw_path(&mut self) {
         let context = self.model.draw_handler.get_context();
         self.erase_path();
         context.set_operator(cairo::Operator::Over);
