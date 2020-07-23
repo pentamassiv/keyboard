@@ -38,7 +38,7 @@ use self::Msg::*;
 
 // Defines color of path
 const PATHCOLOR: (f64, f64, f64, f64) = (0.105, 0.117, 0.746, 0.9);
-const PATHLENGTH: usize = 20;
+const PATHLENGTH: usize = 10;
 const PATHWIDTH: f64 = 4.5;
 
 #[derive(Clone)]
@@ -184,13 +184,12 @@ impl Widget for Win {
                 label_text.push_str(&self.model.dots.len().to_string());
                 label_text.push_str(" ");
                 self.label.set_text(&label_text);
-                self.remove_path();
+                self.erase_path();
                 self.model.dots = Vec::new();
                 //self.model.draw_handler.get_context().show_page();
             }
             MovePointer(pos) => {
                 if self.model.is_pressed {
-                    print!("len: {} ", self.model.dots.len());
                     self.model.dots.push(Dot::generate(pos));
                 }
             }
@@ -201,21 +200,23 @@ impl Widget for Win {
         }
     }
 
-    fn remove_path(&mut self) {
+    fn erase_path(&mut self) {
         let context = self.model.draw_handler.get_context();
         context.set_operator(cairo::Operator::Clear);
-        context.set_source_rgba(PATHCOLOR.0, PATHCOLOR.1, PATHCOLOR.2, PATHCOLOR.3);
+        context.set_source_rgba(0.0, 0.0, 0.0, 0.0);
         context.paint();
     }
 
     fn draw_path(&mut self, dots: (Dot, Dot)) {
         let context = self.model.draw_handler.get_context();
+        self.erase_path();
         context.set_operator(cairo::Operator::Over);
         context.set_source_rgba(PATHCOLOR.0, PATHCOLOR.1, PATHCOLOR.2, PATHCOLOR.3);
-        context.move_to(dots.0.position.0, dots.0.position.1);
-        context.line_to(dots.1.position.0, dots.1.position.1);
+        for dot in self.model.dots.iter().rev().take(PATHLENGTH) {
+            context.line_to(dot.position.0, dot.position.1);
+        }
         context.set_line_width(PATHWIDTH);
-        context.stroke_preserve();
+        context.stroke();
     }
 }
 
