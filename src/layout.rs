@@ -5,7 +5,7 @@ use std::fs::File;
 
 mod fallback_layout;
 
-const PATH_TO_LAYOUTS: &str = "../data/keyboards";
+const PATH_TO_LAYOUTS: &str = "./data/keyboards";
 
 /// The root element describing an entire keyboard
 #[derive(Debug, Deserialize, PartialEq)]
