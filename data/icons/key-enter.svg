@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<svg xmlns="http://www.w3.org/2000/svg" height="16" width="16"
+     version="1.1" viewBox="0 0 24 24">
+   
+    <path d="M 24,1 L 24,10 C 24,15 20,17 17,17 L 7,17 L 10,20 L 10,23
+             L 7,23 L 0,15 L 7,7 L 10,7 L 10,10 L 7,13 L 17,13
+             C 19,13 20,12 20,10 L 20,1 Z"
+          stroke="none" fill="black" />
+</svg>
