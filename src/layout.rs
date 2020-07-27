@@ -2,6 +2,7 @@ use fallback_layout::FALLBACK_LAYOUT;
 use serde::Deserialize;
 use std::collections::HashMap;
 use std::fs::File;
+use std::path;
 
 mod fallback_layout;
 
@@ -26,50 +27,65 @@ struct Outline {
     height: f64,
 }
 
+enum LayoutSource {
+    YamlFile(path::PathBuf),
+    FallbackStr,
+}
+impl Layout {
+    fn from(source: LayoutSource) -> Result<(String, Layout), serde_yaml::Error> {
+        let mut layout_name: String = String::from(FALLBACK_LAYOUT_NAME);
+        let layout = match source {
+            LayoutSource::YamlFile(path) => {
+                layout_name = String::from(path.file_stem().unwrap().to_str().unwrap());
+                let file_descriptor: String = format!("{}", &path.display());
+                let yaml_file = File::open(&file_descriptor).expect("No file found!");
+                serde_yaml::from_reader(yaml_file)
+            }
+            LayoutSource::FallbackStr => serde_yaml::from_str(&FALLBACK_LAYOUT),
+        };
+
+        match layout {
+            Ok(layout) => Ok((layout_name, layout)),
+            Err(err) => Err(err),
+        }
+    }
+}
+fn add_layout_to_hashmap(
+    hashmap_with_layouts: &mut HashMap<String, Layout>,
+    layout_result: Result<(String, Layout), serde_yaml::Error>,
+) {
+    match layout_result {
+        Ok((file_name, layout)) => {
+            hashmap_with_layouts.insert(file_name, layout);
+        }
+        Err(err) => {
+            eprintln!(
+                "Error loading layout. File was skipped. Error description: {}",
+                err
+            );
+        }
+    }
+}
+
 pub fn get_layouts() -> HashMap<String, Layout> {
     let mut layouts = HashMap::new();
 
     // Try loading layouts from directory
     if let Ok(paths) = std::fs::read_dir(PATH_TO_LAYOUTS) {
-        // Load layout from all yaml files in the directory
+        // Load layout from all yaml files in the directory. Other files and subdirectories are ignored
         for file in paths
             .filter_map(|x| x.ok())
             .filter(|x| x.path().extension().is_some() && x.path().extension().unwrap() == "yaml")
         {
-            let file_descriptor: String = format!("{}", &file.path().display());
-            let file_name: String =
-                String::from(file.path().file_stem().unwrap().to_str().unwrap());
-            let yaml_file = File::open(&file_descriptor).expect("No file found!");
-            let res = serde_yaml::from_reader(yaml_file);
-
-            match res {
-                Ok(res) => {
-                    layouts.insert(file_name, res);
-                }
-                Err(err) => {
-                    eprintln!(
-                        "Error loading layout from file {}. File was skipped",
-                        &file_descriptor
-                    );
-                    eprintln!("Error description: {}", err);
-                }
-            }
+            let layout_source = LayoutSource::YamlFile(file.path());
+            add_layout_to_hashmap(&mut layouts, Layout::from(layout_source));
         }
     }
 
     // If no layout was loaded, use hardcoded fallback layout
     if layouts.is_empty() {
-        let res = serde_yaml::from_str(&FALLBACK_LAYOUT);
-
-        match res {
-            Ok(res) => {
-                eprintln!("Fallback layout used: {:?}", &res);
-                layouts.insert(String::from(FALLBACK_LAYOUT_NAME), res);
-            }
-            Err(err) => {
-                eprintln!("Error: Fallback failed!{}", err);
-            }
-        }
+        let layout_source = LayoutSource::FallbackStr;
+        add_layout_to_hashmap(&mut layouts, Layout::from(layout_source));
     };
     layouts
 }
