@@ -28,21 +28,29 @@ struct Outline {
 pub fn get_layouts() -> HashMap<String, Layout> {
     let mut layouts = HashMap::new();
 
-    // Try loading layouts from file
-    if let Ok(path) = std::fs::read_dir(PATH_TO_LAYOUTS) {
-        for file in path {
-            let filepath: String = format!("{}", &file.unwrap().path().display());
-            println!("filepath: {}", &filepath);
-            let yaml_file = File::open(&filepath).expect("No file found!");
+    // Try loading layouts from directory
+    if let Ok(paths) = std::fs::read_dir(PATH_TO_LAYOUTS) {
+        // Load layout from all yaml files in the directory
+        for file in paths
+            .filter_map(|x| x.ok())
+            .filter(|x| x.path().extension().is_some() && x.path().extension().unwrap() == "yaml")
+        {
+            let file_descriptor: String = format!("{}", &file.path().display());
+            let file_name: String =
+                String::from(file.path().file_stem().unwrap().to_str().unwrap());
+            let yaml_file = File::open(&file_descriptor).expect("No file found!");
             let res = serde_yaml::from_reader(yaml_file);
 
             match res {
                 Ok(res) => {
-                    println!("{:?}", &res);
-                    layouts.insert(filepath, res);
+                    layouts.insert(file_name, res);
                 }
-                Err(_) => {
-                    println!("Error");
+                Err(err) => {
+                    eprintln!(
+                        "Error loading layout from file {}. File was skipped",
+                        &file_descriptor
+                    );
+                    eprintln!("Error description: {}", err);
                 }
             }
         }
@@ -54,11 +62,11 @@ pub fn get_layouts() -> HashMap<String, Layout> {
 
         match res {
             Ok(res) => {
-                println!("Fallback layout used: {:?}", &res);
+                eprintln!("Fallback layout used: {:?}", &res);
                 layouts.insert(String::from("Fallback"), res);
             }
             Err(err) => {
-                println!("Error: Fallback failed!{}", err);
+                eprintln!("Error: Fallback failed!{}", err);
             }
         }
     };
