@@ -9,7 +9,7 @@ use gtk::{
 };
 
 //use cairo::{Antialias, Context, LineCap};
-use relm::{DrawHandler, Widget};
+use relm::{DrawHandler, Relm, Widget};
 use relm_derive::widget;
 use relm_derive::Msg;
 
@@ -37,6 +37,7 @@ pub struct Model {
     draw_handler: DrawHandler<DrawingArea>,
     dots: Vec<Dot>,
     is_pressed: bool,
+    layouts: std::collections::HashMap<String, super::layout::Layout>,
 }
 
 #[derive(Msg)]
@@ -51,11 +52,15 @@ pub enum Msg {
 #[allow(clippy::redundant_field_names)]
 #[widget]
 impl Widget for Win {
-    fn model() -> Model {
+    fn model(
+        _: &Relm<Self>,
+        layouts: std::collections::HashMap<String, super::layout::Layout>,
+    ) -> Model {
         Model {
             draw_handler: DrawHandler::new().expect("draw handler"),
             dots: Vec::new(),
             is_pressed: false,
+            layouts,
         }
     }
 
@@ -109,14 +114,16 @@ impl Widget for Win {
                 },
                 #[name="overlay"]
                 gtk::Overlay {
+                    hexpand:true,
                     motion_notify_event(_, event) => (MovePointer(event.get_position(), event.get_time()), Inhibit(false)),
                     button_press_event(_, event) => (Press, Inhibit(false)),
                     button_release_event(_, event) => (Release, Inhibit(false)),
                     draw(_, _) => (UpdateDrawBuffer, Inhibit(false)),
-                    #[name="suggestion_button"]
-                    gtk::Button {
-                        vexpand: true,
-                        label: "but",
+                    #[name="keyboard_box"]
+                    gtk::Box {
+                        orientation: Vertical,
+                        valign: Fill,
+                        hexpand:true,
                     },
                 }
             },
@@ -132,8 +139,31 @@ impl Widget for Win {
         drawing_area.add_events(EventMask::BUTTON_PRESS_MASK);
         drawing_area.add_events(EventMask::BUTTON_RELEASE_MASK);
         self.overlay.add_overlay(&drawing_area);
+        self.load_keys_from_layout();
+
         self.overlay.show_all();
+
+        println!("{:?}", self.model.layouts);
         load_css();
+    }
+
+    fn load_keys_from_layout(&self) {
+        let views = self.model.layouts.get("us").unwrap().get_buttons();
+        let view = views.get("base").unwrap();
+        for row in view {
+            let button_box = gtk::Box::new(gtk::Orientation::Horizontal, 2);
+            button_box.set_halign(Fill);
+            for button in row {
+                let insert_button = button;
+                insert_button.set_halign(Fill);
+                insert_button.set_hexpand(true);
+                button_box.add(insert_button);
+            }
+            self.keyboard_box.add(&button_box);
+        }
+        //let mut buttons = Vec::new();
+        //buttons.push(&dummy_button);
+        //for button in buttons {}
     }
 
     fn update(&mut self, event: Msg) {
@@ -145,6 +175,12 @@ impl Widget for Win {
             Release => {
                 self.model.is_pressed = false;
                 let mut label_text = String::from(self.label.get_text());
+                //label_text.push_str(
+                //    &self
+                //        .suggestion_button_right
+                //        .get_allocated_size()
+                //        .to_string(),
+                //);
                 label_text.push_str(&self.model.dots.len().to_string());
                 label_text.push_str(" ");
                 self.label.set_text(&label_text);

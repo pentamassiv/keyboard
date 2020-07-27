@@ -49,7 +49,28 @@ impl Layout {
             Err(err) => Err(err),
         }
     }
+    pub fn get_buttons(&self) -> HashMap<String, Vec<Vec<gtk::Button>>> {
+        let mut result = HashMap::new();
+        for (view_name, view) in &self.views {
+            let mut button_rows = Vec::new();
+            for button_id_string in view {
+                button_rows.push(create_buttons_from_string(button_id_string));
+            }
+            result.insert(String::from(view_name), button_rows);
+        }
+        result
+    }
 }
+
+fn create_buttons_from_string(string_with_button_ids: &str) -> Vec<gtk::Button> {
+    let mut button_vec = Vec::new();
+    for button_id in string_with_button_ids.split_ascii_whitespace() {
+        let button = gtk::Button::with_label(button_id);
+        button_vec.push(button);
+    }
+    button_vec
+}
+
 fn add_layout_to_hashmap(
     hashmap_with_layouts: &mut HashMap<String, Layout>,
     layout_result: Result<(String, Layout), serde_yaml::Error>,
