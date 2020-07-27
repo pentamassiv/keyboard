@@ -205,7 +205,7 @@ fn load_css() {
             );
         }
         Err(_) => {
-            print! {"CSS file to customize the keyboard could not be loaded. The file might be missing or broken. Using default CSS"}
+            eprint! {"No CSS file to customize the keyboard could be loaded. The file might be missing or broken. Using default CSS"}
         }
     }
 }

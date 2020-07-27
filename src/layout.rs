@@ -6,6 +6,7 @@ use std::fs::File;
 mod fallback_layout;
 
 const PATH_TO_LAYOUTS: &str = "./data/keyboards";
+const FALLBACK_LAYOUT_NAME: &str = "Fallback";
 
 /// The root element describing an entire keyboard
 #[derive(Debug, Deserialize, PartialEq)]
@@ -63,7 +64,7 @@ pub fn get_layouts() -> HashMap<String, Layout> {
         match res {
             Ok(res) => {
                 eprintln!("Fallback layout used: {:?}", &res);
-                layouts.insert(String::from("Fallback"), res);
+                layouts.insert(String::from(FALLBACK_LAYOUT_NAME), res);
             }
             Err(err) => {
                 eprintln!("Error: Fallback failed!{}", err);
