@@ -21,6 +21,8 @@ const PATHLENGTH: usize = 100;
 const PATHWIDTH: f64 = 4.5;
 const PATHFADINGTIME: u32 = 400;
 
+const CSS_DIRECTORY: &str = "./theming/style.css";
+
 #[derive(Clone)]
 struct Dot {
     position: (f64, f64),
@@ -47,6 +49,7 @@ pub enum Msg {
     MovePointer((f64, f64), u32),
     Quit,
     UpdateDrawBuffer,
+    SuggestionPress(String),
 }
 
 #[allow(clippy::redundant_field_names)]
@@ -92,6 +95,7 @@ impl Widget for Win {
                         #[name="suggestion_button_left"]
                         gtk::Button {
                             label: "sug_but_l",
+                            button_press_event(clicked_button, event) => (SuggestionPress(clicked_button.get_label().unwrap().to_string()), Inhibit(false)),
                             child: {
                                 expand: true,
                             },
@@ -99,6 +103,7 @@ impl Widget for Win {
                         #[name="suggestion_button_center"]
                         gtk::Button {
                             label: "sug_but_c",
+                            button_press_event(clicked_button, event) => (SuggestionPress(clicked_button.get_label().unwrap().to_string()), Inhibit(false)),
                             child: {
                                 expand: true,
                             },
@@ -106,6 +111,7 @@ impl Widget for Win {
                         #[name="suggestion_button_right"]
                         gtk::Button {
                             label: "sug_but_r",
+                            button_press_event(clicked_button, event) => (SuggestionPress(clicked_button.get_label().unwrap().to_string()), Inhibit(false)),
                             child: {
                                 expand: true,
                             },
@@ -119,9 +125,9 @@ impl Widget for Win {
                     button_press_event(_, event) => (Press, Inhibit(false)),
                     button_release_event(_, event) => (Release, Inhibit(false)),
                     draw(_, _) => (UpdateDrawBuffer, Inhibit(false)),
-                    #[name="keyboard_box"]
-                    gtk::Box {
-                        orientation: Vertical,
+                    #[name="layout_stack"]
+                    gtk::Stack {
+                        transition_type: gtk::StackTransitionType::None,
                         valign: Fill,
                         hexpand:true,
                     },
@@ -138,28 +144,41 @@ impl Widget for Win {
         drawing_area.add_events(EventMask::POINTER_MOTION_MASK);
         drawing_area.add_events(EventMask::BUTTON_PRESS_MASK);
         drawing_area.add_events(EventMask::BUTTON_RELEASE_MASK);
+        //delete the following
+        self.suggestion_button_left
+            .add_events(EventMask::BUTTON_PRESS_MASK);
+        self.suggestion_button_center
+            .add_events(EventMask::BUTTON_PRESS_MASK);
+        self.suggestion_button_right
+            .add_events(EventMask::BUTTON_PRESS_MASK);
         self.overlay.add_overlay(&drawing_area);
-        self.load_keys_from_layout();
-
+        self.load_keys_from_all_layouts();
         self.overlay.show_all();
-
-        println!("{:?}", self.model.layouts);
         load_css();
     }
 
-    fn load_keys_from_layout(&self) {
-        let views = self.model.layouts.get("us").unwrap().get_buttons();
-        let view = views.get("base").unwrap();
-        for row in view {
-            let button_box = gtk::Box::new(gtk::Orientation::Horizontal, 2);
-            button_box.set_halign(Fill);
-            for button in row {
-                let insert_button = button;
-                insert_button.set_halign(Fill);
-                insert_button.set_hexpand(true);
-                button_box.add(insert_button);
+    fn load_keys_from_all_layouts(&self) {
+        for (layout_name, layout) in &self.model.layouts {
+            let view_stack = gtk::Stack::new();
+            view_stack.set_transition_type(gtk::StackTransitionType::None);
+            for (view_name, view) in layout.get_buttons() {
+                let button_vbox = gtk::Box::new(gtk::Orientation::Vertical, 2);
+                button_vbox.set_halign(Fill);
+                for row in view {
+                    let button_hbox = gtk::Box::new(gtk::Orientation::Horizontal, 2);
+                    button_hbox.set_halign(Fill);
+                    for button in row {
+                        let insert_button = button;
+                        insert_button.set_halign(Fill);
+                        insert_button.set_hexpand(true);
+                        button_hbox.add(&insert_button);
+                    }
+                    button_vbox.add(&button_hbox);
+                }
+                view_stack.add_named(&button_vbox, &view_name);
             }
-            self.keyboard_box.add(&button_box);
+
+            self.layout_stack.add_named(&view_stack, &layout_name);
         }
         //let mut buttons = Vec::new();
         //buttons.push(&dummy_button);
@@ -171,6 +190,12 @@ impl Widget for Win {
             Press => {
                 self.model.is_pressed = true;
                 //self.model.draw_handler.get_context().save();
+            }
+            SuggestionPress(button_label) => {
+                let mut label_text = String::from(self.label.get_text());
+                label_text.push_str(&(button_label + " "));
+                self.label.set_text(&label_text);
+                //self.layout_stack.set_visible_child_name("numbers");
             }
             Release => {
                 self.model.is_pressed = false;
@@ -230,7 +255,7 @@ impl Widget for Win {
 
 fn load_css() {
     let provider = gtk::CssProvider::new();
-    match provider.load_from_path(&"./theming/style.css") {
+    match provider.load_from_path(CSS_DIRECTORY) {
         Ok(_) => {
             // We give the CssProvided to the default screen so the CSS rules we added
             // can be applied to our window.
@@ -241,7 +266,7 @@ fn load_css() {
             );
         }
         Err(_) => {
-            eprint! {"No CSS file to customize the keyboard could be loaded. The file might be missing or broken. Using default CSS"}
+            eprintln! {"No CSS file to customize the keyboard could be loaded. The file might be missing or broken. Using default CSS"}
         }
     }
 }
