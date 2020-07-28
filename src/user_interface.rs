@@ -5,8 +5,10 @@ use gtk::Orientation::*;
 use gtk::*;
 use gtk::{
     prelude::WidgetExtManual, BoxExt, ButtonExt, CssProviderExt, DrawingArea, GtkWindowExt,
-    Inhibit, LabelExt, OrientableExt, Popover, PopoverExt, WidgetExt,
+    Inhibit, LabelExt, OrientableExt, WidgetExt,
 };
+
+//Popover, PopoverExt,
 
 //use cairo::{Antialias, Context, LineCap};
 use relm::{DrawHandler, Relm, Widget};
@@ -17,7 +19,7 @@ use self::Msg::*;
 
 // Defines const for drawn path
 const PATHCOLOR: (f64, f64, f64, f64) = (0.105, 0.117, 0.746, 0.9);
-const PATHLENGTH: usize = 100;
+const PATHLENGTH: usize = 10;
 const PATHWIDTH: f64 = 4.5;
 const PATHFADINGTIME: u32 = 400;
 
@@ -248,14 +250,15 @@ impl Widget for Win {
         context.set_source_rgba(PATHCOLOR.0, PATHCOLOR.1, PATHCOLOR.2, PATHCOLOR.3);
         let mut time_now = 0;
         for dot in self.model.dots.iter().rev().take(PATHLENGTH) {
-            if dot.time > time_now {
-                time_now = dot.time
-            }
-            if time_now - dot.time < PATHFADINGTIME {
-                context.line_to(dot.position.0, dot.position.1);
-            } else {
-                break;
-            }
+            // Only draw the last dots within a certain time period. Works but there would have to be a draw signal in a regular interval to make it look good
+            //if dot.time > time_now {
+            //    time_now = dot.time
+            //}
+            //if time_now - dot.time < PATHFADINGTIME {
+            context.line_to(dot.position.0, dot.position.1);
+            //} else {
+            //    break;
+            //}
         }
         context.set_line_width(PATHWIDTH);
         context.stroke();

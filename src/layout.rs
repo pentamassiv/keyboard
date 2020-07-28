@@ -22,9 +22,13 @@ type ButtonIds = String;
 
 #[derive(Debug, Clone, Deserialize, PartialEq)]
 #[serde(deny_unknown_fields)]
-struct Outline {
-    width: f64,
-    height: f64,
+// floats are not possible so this needs to be an integer value. These values reflect how many spaces in the grid of buttons the outline should take
+pub enum Outline {
+    Standard = 2,
+    Half = 1,
+    OneAndAHalf = 3,
+    Double = 4,
+    Quadruple = 8,
 }
 
 enum LayoutSource {
@@ -59,6 +63,12 @@ impl Layout {
             result.insert(String::from(view_name), button_rows);
         }
         result
+    }
+    pub fn get_size_of_button(&self, button_id: &str) -> usize {
+        self.outlines
+            .get(button_id)
+            .unwrap_or(&Outline::Standard)
+            .to_owned() as usize
     }
 }
 

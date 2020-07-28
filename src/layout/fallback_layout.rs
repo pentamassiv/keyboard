@@ -1,11 +1,9 @@
 // All " within the layout definition need to be escape
 pub const FALLBACK_LAYOUT: &str = "---
 outlines:
-    default: { width: 35.33, height: 52 }
-    altline: { width: 52.67, height: 52 }
-    wide: { width: 62, height: 52 }
-    spaceline: { width: 142, height: 52 }
-    special: { width: 44, height: 52 }
+    s: Standard
+    backspace: Double
+    space: Quadruple
 
 views:
     base:

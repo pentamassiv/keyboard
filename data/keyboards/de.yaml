@@ -1,11 +1,9 @@
 # Maintained by: Mark Müller <markmueller86@gmail.com>
 ---
 outlines:
-    default: { width: 35.33, height: 52 }
-    altline: { width: 52.67, height: 52 }
-    wide: { width: 62, height: 52 }
-    spaceline: { width: 99.67, height: 52 }
-    special: { width: 35.33, height: 52 }
+    c: Standard
+    x: Double
+    e: Quadruple
 
 views:
     base:
