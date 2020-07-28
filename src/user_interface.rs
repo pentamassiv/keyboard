@@ -144,7 +144,6 @@ impl Widget for Win {
         drawing_area.add_events(EventMask::POINTER_MOTION_MASK);
         drawing_area.add_events(EventMask::BUTTON_PRESS_MASK);
         drawing_area.add_events(EventMask::BUTTON_RELEASE_MASK);
-        //delete the following
         self.suggestion_button_left
             .add_events(EventMask::BUTTON_PRESS_MASK);
         self.suggestion_button_center
@@ -177,25 +176,26 @@ impl Widget for Win {
                 }
                 view_stack.add_named(&button_vbox, &view_name);
             }
-
             self.layout_stack.add_named(&view_stack, &layout_name);
         }
-        //let mut buttons = Vec::new();
-        //buttons.push(&dummy_button);
-        //for button in buttons {}
     }
 
     fn update(&mut self, event: Msg) {
         match event {
             Press => {
                 self.model.is_pressed = true;
-                //self.model.draw_handler.get_context().save();
             }
             SuggestionPress(button_label) => {
                 let mut label_text = String::from(self.label.get_text());
-                label_text.push_str(&(button_label + " "));
+                label_text.push_str(&button_label);
+                label_text.push_str(" ");
                 self.label.set_text(&label_text);
-                //self.layout_stack.set_visible_child_name("numbers");
+                // Delete the following, its just for testing
+                if &button_label == "sug_but_r" {
+                    self.layout_stack.set_visible_child_name("us");
+                } else {
+                    self.layout_stack.set_visible_child_name("de");
+                }
             }
             Release => {
                 self.model.is_pressed = false;
