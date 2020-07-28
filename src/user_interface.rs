@@ -5,7 +5,7 @@ use gtk::Orientation::*;
 use gtk::*;
 use gtk::{
     prelude::WidgetExtManual, BoxExt, ButtonExt, CssProviderExt, DrawingArea, GtkWindowExt,
-    Inhibit, LabelExt, OrientableExt, WidgetExt,
+    Inhibit, LabelExt, OrientableExt, Popover, PopoverExt, WidgetExt,
 };
 
 //use cairo::{Antialias, Context, LineCap};
@@ -144,6 +144,15 @@ impl Widget for Win {
         drawing_area.add_events(EventMask::POINTER_MOTION_MASK);
         drawing_area.add_events(EventMask::BUTTON_PRESS_MASK);
         drawing_area.add_events(EventMask::BUTTON_RELEASE_MASK);
+
+        /*
+        Testing popover
+        let button_popover = gtk::Button::new();
+        button_popover.set_label("jflksd");
+        let popover = gtk::Popover::new(Some(&self.suggestion_button_left));
+        popover.add(&button_popover);
+        popover.show();*/
+
         self.suggestion_button_left
             .add_events(EventMask::BUTTON_PRESS_MASK);
         self.suggestion_button_center
