@@ -21,7 +21,7 @@ use self::Msg::*;
 const PATHCOLOR: (f64, f64, f64, f64) = (0.105, 0.117, 0.746, 0.9);
 const PATHLENGTH: usize = 10;
 const PATHWIDTH: f64 = 4.5;
-const PATHFADINGTIME: u32 = 400;
+//const PATHFADINGTIME: u32 = 400;
 
 const CSS_DIRECTORY: &str = "./theming/style.css";
 
@@ -123,6 +123,7 @@ impl Widget for Win {
                 #[name="overlay"]
                 gtk::Overlay {
                     hexpand:true,
+                    valign: Fill,
                     motion_notify_event(_, event) => (MovePointer(event.get_position(), event.get_time()), Inhibit(false)),
                     button_press_event(_, event) => (Press, Inhibit(false)),
                     button_release_event(_, event) => (Release, Inhibit(false)),
@@ -146,7 +147,7 @@ impl Widget for Win {
         drawing_area.add_events(EventMask::POINTER_MOTION_MASK);
         drawing_area.add_events(EventMask::BUTTON_PRESS_MASK);
         drawing_area.add_events(EventMask::BUTTON_RELEASE_MASK);
-
+        println!("{:?}", self.model.layouts);
         /*
         Testing popover
         let button_popover = gtk::Button::new();
@@ -162,32 +163,23 @@ impl Widget for Win {
         self.suggestion_button_right
             .add_events(EventMask::BUTTON_PRESS_MASK);
         self.overlay.add_overlay(&drawing_area);
-        self.load_keys_from_all_layouts();
+        self.add_layouts_to_layout_stack(&self.layout_stack);
         self.overlay.show_all();
         load_css();
     }
 
-    fn load_keys_from_all_layouts(&self) {
+    fn add_layouts_to_layout_stack(&self, layout_stack: &gtk::Stack) {
         for (layout_name, layout) in &self.model.layouts {
+            println!("layoutname: {}", layout_name);
             let view_stack = gtk::Stack::new();
-            view_stack.set_transition_type(gtk::StackTransitionType::None);
-            for (view_name, view) in layout.get_buttons() {
-                let button_vbox = gtk::Box::new(gtk::Orientation::Vertical, 2);
-                button_vbox.set_halign(Fill);
-                for row in view {
-                    let button_hbox = gtk::Box::new(gtk::Orientation::Horizontal, 2);
-                    button_hbox.set_halign(Fill);
-                    for button in row {
-                        let insert_button = button;
-                        insert_button.set_halign(Fill);
-                        insert_button.set_hexpand(true);
-                        button_hbox.add(&insert_button);
-                    }
-                    button_vbox.add(&button_hbox);
-                }
-                view_stack.add_named(&button_vbox, &view_name);
+            //view_stack.set_hexpand(true);
+            //view_stack.set_valign(Fill);
+            let view_grids = layout.build_button_grid();
+            for (view_name, view_grid) in view_grids {
+                view_stack.add_named(&view_grid, &view_name);
             }
-            self.layout_stack.add_named(&view_stack, &layout_name);
+            view_stack.set_transition_type(gtk::StackTransitionType::None);
+            layout_stack.add_named(&view_stack, &layout_name);
         }
     }
 
@@ -248,7 +240,7 @@ impl Widget for Win {
         self.erase_path();
         context.set_operator(cairo::Operator::Over);
         context.set_source_rgba(PATHCOLOR.0, PATHCOLOR.1, PATHCOLOR.2, PATHCOLOR.3);
-        let mut time_now = 0;
+        //let mut time_now = 0;
         for dot in self.model.dots.iter().rev().take(PATHLENGTH) {
             // Only draw the last dots within a certain time period. Works but there would have to be a draw signal in a regular interval to make it look good
             //if dot.time > time_now {
