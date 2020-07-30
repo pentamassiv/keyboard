@@ -1,5 +1,5 @@
 use fallback_layout::FALLBACK_LAYOUT;
-use gtk::GridExt;
+use gtk::{GridExt, StyleContextExt, WidgetExt};
 use serde::Deserialize;
 use std::collections::HashMap;
 use std::fs::File;
@@ -57,7 +57,7 @@ impl Layout {
         let mut result = HashMap::new();
         for (view_name, view) in &self.views {
             let grid = gtk::Grid::new();
-            grid.set_column_homogeneous(true);
+            //grid.set_column_homogeneous(true);
             //grid.set_hexpand(true);
             //grid.set_valign(gtk::Align::Fill);
             // Get a vector that contains a vector for each row of the view. The contained vector contains the sizes of the buttons
@@ -71,7 +71,8 @@ impl Layout {
                     row_width += size_for_id;
                     let button = gtk::Button::with_label(button_id);
                     //button.set_size_request(1,2);
-                    //button.set_hexpand(true);
+                    button.set_hexpand(true);
+                    button.get_style_context().add_class("key");
                     vec_of_buttons_with_sizes.push((size_for_id, button));
                 }
                 vec_with_rows_of_buttons_and_sizes.push(vec_of_buttons_with_sizes);

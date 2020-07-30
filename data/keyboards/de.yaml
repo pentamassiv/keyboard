@@ -1,9 +1,11 @@
 # Maintained by: Mark Müller <markmueller86@gmail.com>
 ---
 outlines:
-    c: Standard
-    x: Standard
-    e: Quadruple
+    c: Double
+    C: Double
+    2: Double
+    $: Double
+    ö: Double
 
 views:
     base:
