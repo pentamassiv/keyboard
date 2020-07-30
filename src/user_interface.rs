@@ -1,16 +1,12 @@
 use gdk::EventMask;
-use gtk::Align::*;
 use gtk::Orientation::*;
 
 use gtk::*;
 use gtk::{
     prelude::WidgetExtManual, BoxExt, ButtonExt, CssProviderExt, DrawingArea, GtkWindowExt,
-    Inhibit, LabelExt, OrientableExt, WidgetExt,
+    Inhibit, LabelExt, OrientableExt,
 };
 
-//Popover, PopoverExt,
-
-//use cairo::{Antialias, Context, LineCap};
 use relm::{DrawHandler, Relm, Widget};
 use relm_derive::widget;
 use relm_derive::Msg;
@@ -32,7 +28,7 @@ struct Dot {
 }
 
 impl Dot {
-    fn generate(position: (f64, f64), time: u32) -> Self {
+    fn new(position: (f64, f64), time: u32) -> Self {
         Dot { position, time }
     }
 }
@@ -72,8 +68,7 @@ impl Widget for Win {
     view! {
         gtk::Window {
             property_default_height: 720,
-            property_default_width: 360,
-            #[name="vbox"]
+            //property_default_width: 10,
             gtk::Box {
                 orientation: Vertical,
                 spacing: 2,
@@ -83,47 +78,36 @@ impl Widget for Win {
                     margin_end: 5,
                     text: "",
                     line_wrap: true,
-                    child: {
-                        expand: true,
-                    },
+                    vexpand:true,
                 },
                 gtk::Frame{
                     gtk::Box {
                         orientation: Horizontal,
-                        halign: Fill,
                         margin_start: 0,
                         margin_end: 0,
                         spacing: 0,
                         #[name="suggestion_button_left"]
                         gtk::Button {
-                            label: "sug_but_l",
+                            label: "sug_l",
+                            hexpand:true,
                             button_press_event(clicked_button, event) => (SuggestionPress(clicked_button.get_label().unwrap().to_string()), Inhibit(false)),
-                            child: {
-                                expand: true,
-                            },
                         },
                         #[name="suggestion_button_center"]
                         gtk::Button {
-                            label: "sug_but_c",
+                            label: "sug_c",
+                            hexpand:true,
                             button_press_event(clicked_button, event) => (SuggestionPress(clicked_button.get_label().unwrap().to_string()), Inhibit(false)),
-                            child: {
-                                expand: true,
-                            },
                         },
                         #[name="suggestion_button_right"]
                         gtk::Button {
-                            label: "sug_but_r",
+                            label: "sug_r",
+                            hexpand:true,
                             button_press_event(clicked_button, event) => (SuggestionPress(clicked_button.get_label().unwrap().to_string()), Inhibit(false)),
-                            child: {
-                                expand: true,
-                            },
                         },
                     },
                 },
                 #[name="overlay"]
                 gtk::Overlay {
-                    hexpand:true,
-                    valign: Fill,
                     motion_notify_event(_, event) => (MovePointer(event.get_position(), event.get_time()), Inhibit(false)),
                     button_press_event(_, event) => (Press, Inhibit(false)),
                     button_release_event(_, event) => (Release, Inhibit(false)),
@@ -131,8 +115,6 @@ impl Widget for Win {
                     #[name="layout_stack"]
                     gtk::Stack {
                         transition_type: gtk::StackTransitionType::None,
-                        valign: Fill,
-                        hexpand:true,
                     },
                 }
             },
@@ -141,13 +123,12 @@ impl Widget for Win {
     }
 
     fn init_view(&mut self) {
-        self.label.set_size_request(360, 200);
         let drawing_area = gtk::DrawingArea::new();
         self.model.draw_handler.init(&drawing_area);
         drawing_area.add_events(EventMask::POINTER_MOTION_MASK);
         drawing_area.add_events(EventMask::BUTTON_PRESS_MASK);
         drawing_area.add_events(EventMask::BUTTON_RELEASE_MASK);
-        println!("{:?}", self.model.layouts);
+
         /*
         Testing popover
         let button_popover = gtk::Button::new();
@@ -163,23 +144,20 @@ impl Widget for Win {
         self.suggestion_button_right
             .add_events(EventMask::BUTTON_PRESS_MASK);
         self.overlay.add_overlay(&drawing_area);
-        self.add_layouts_to_layout_stack(&self.layout_stack);
+        self.add_layouts_to_layout_stack();
         self.overlay.show_all();
         load_css();
     }
 
-    fn add_layouts_to_layout_stack(&self, layout_stack: &gtk::Stack) {
+    fn add_layouts_to_layout_stack(&self) {
         for (layout_name, layout) in &self.model.layouts {
-            println!("layoutname: {}", layout_name);
             let view_stack = gtk::Stack::new();
-            //view_stack.set_hexpand(true);
-            //view_stack.set_valign(Fill);
             let view_grids = layout.build_button_grid();
             for (view_name, view_grid) in view_grids {
                 view_stack.add_named(&view_grid, &view_name);
             }
             view_stack.set_transition_type(gtk::StackTransitionType::None);
-            layout_stack.add_named(&view_stack, &layout_name);
+            self.layout_stack.add_named(&view_stack, &layout_name);
         }
     }
 
@@ -203,22 +181,15 @@ impl Widget for Win {
             Release => {
                 self.model.is_pressed = false;
                 let mut label_text = String::from(self.label.get_text());
-                //label_text.push_str(
-                //    &self
-                //        .suggestion_button_right
-                //        .get_allocated_size()
-                //        .to_string(),
-                //);
                 label_text.push_str(&self.model.dots.len().to_string());
                 label_text.push_str(" ");
                 self.label.set_text(&label_text);
                 self.erase_path();
                 self.model.dots = Vec::new();
-                //self.model.draw_handler.get_context().show_page();
             }
             MovePointer(pos, time) => {
                 if self.model.is_pressed {
-                    self.model.dots.push(Dot::generate(pos, time));
+                    self.model.dots.push(Dot::new(pos, time));
                 }
             }
             Quit => gtk::main_quit(),

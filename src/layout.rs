@@ -1,5 +1,5 @@
 use fallback_layout::FALLBACK_LAYOUT;
-use gtk::{ButtonExt, GridExt, WidgetExt};
+use gtk::GridExt;
 use serde::Deserialize;
 use std::collections::HashMap;
 use std::fs::File;
@@ -22,13 +22,13 @@ type ButtonIds = String;
 
 #[derive(Debug, Clone, Deserialize, PartialEq)]
 #[serde(deny_unknown_fields)]
-// floats are not possible so this needs to be an integer value. These values reflect how many spaces in the grid of buttons the outline should take
-pub enum Outline {
-    Standard = 4,
-    Half = 2,
-    OneAndAHalf = 6,
-    Double = 8,
-    Quadruple = 16,
+// These values reflect how many spaces in the grid of buttons the outline should take. That's why it needs to be an integer value
+enum Outline {
+    Standard = 2,
+    Half = 1,
+    OneAndAHalf = 3,
+    Double = 4,
+    Quadruple = 8,
 }
 
 enum LayoutSource {
@@ -53,47 +53,11 @@ impl Layout {
             Err(err) => Err(err),
         }
     }
-    /*pub fn get_grids_for_layout(&self, layout_name: &str) -> HashMap<String, gtk::Grid> {
-        let mut result = HashMap::new();
-        for (view_name, view) in &self.views {
-            let mut button_grid = gtk::Grid::new();
-            for button_id_string in view {
-                button_rows.push(create_buttons_from_string(button_id_string));
-            }
-            result.insert(String::from(view_name), button_rows);
-        }
-        result
-    }*/
-    /*pub fn get_button_grid_for_all_views(&self) {
-            let view_stack = gtk::Stack::new();
-            view_stack.set_transition_type(gtk::StackTransitionType::None);
-            for (view_name, view_grid) in self.views {
-            for (view_name, view) in layout.get_buttons() {
-                let button_vbox = gtk::Box::new(gtk::Orientation::Vertical, 2);
-                button_vbox.set_halign(Fill);
-                for row in view {
-                    let button_hbox = gtk::Box::new(gtk::Orientation::Horizontal, 2);
-                    button_hbox.set_halign(Fill);
-                    for button in row {
-                        let insert_button = button;
-                        insert_button.set_halign(Fill);
-                        insert_button.set_hexpand(true);
-                        button_hbox.add(&insert_button);
-                    }
-                    button_vbox.add(&button_hbox);
-                }
-                view_stack.add_named(&button_vbox, &view_name);
-            }
-            self.layout_stack.add_named(&view_stack, &layout_name);
-        }
-    }*/
-
     pub fn build_button_grid(&self) -> HashMap<String, gtk::Grid> {
         let mut result = HashMap::new();
         for (view_name, view) in &self.views {
             let grid = gtk::Grid::new();
-            println!("view_name: {}", view_name);
-            //grid.set_column_homogeneous(true);
+            grid.set_column_homogeneous(true);
             //grid.set_hexpand(true);
             //grid.set_valign(gtk::Align::Fill);
             // Get a vector that contains a vector for each row of the view. The contained vector contains the sizes of the buttons
@@ -106,16 +70,13 @@ impl Layout {
                     let size_for_id = self.get_size_of_button(&button_id);
                     row_width += size_for_id;
                     let button = gtk::Button::with_label(button_id);
-                    button.set_hexpand(true);
+                    //button.set_size_request(1,2);
+                    //button.set_hexpand(true);
                     vec_of_buttons_with_sizes.push((size_for_id, button));
                 }
                 vec_with_rows_of_buttons_and_sizes.push(vec_of_buttons_with_sizes);
                 vec_row_widths.push(row_width);
             }
-            //println!("Vec of buttons and sizes:");
-            //println!("{:?}", vec_with_rows_of_buttons_and_sizes);
-            println!("Vec of row widths:");
-            println!("{:?}", vec_row_widths);
             //Get the widest row
             let max_row_width = vec_row_widths
                 .iter()
@@ -125,13 +86,6 @@ impl Layout {
             for (row_no, row) in vec_with_rows_of_buttons_and_sizes.into_iter().enumerate() {
                 let mut position = (max_row_width - vec_row_widths.get(row_no).unwrap()) / 2;
                 for (size, button) in row {
-                    println!(
-                        "buttonlabel: {}, position: {}, row_no: {}, size: {}",
-                        button.get_label().unwrap(),
-                        position,
-                        row_no,
-                        size
-                    );
                     grid.attach(&button, position, row_no as i32, size, 1);
                     position += size;
                 }
@@ -139,26 +93,16 @@ impl Layout {
             }
             result.insert(String::from(view_name), grid);
         }
-        //println!("{:?}",result);
         result
     }
 
-    pub fn get_size_of_button(&self, button_id: &str) -> i32 {
+    fn get_size_of_button(&self, button_id: &str) -> i32 {
         self.outlines
             .get(button_id)
             .unwrap_or(&Outline::Standard)
             .to_owned() as i32
     }
 }
-
-//fn create_buttons_from_string(string_with_button_ids: &str) -> Vec<gtk::Button> {
-//    let mut button_vec = Vec::new();
-//    for button_id in string_with_button_ids.split_ascii_whitespace() {
-//        let button = gtk::Button::with_label(button_id);
-//        button_vec.push(button);
-//    }
-//    button_vec
-//}
 
 fn add_layout_to_hashmap(
     hashmap_with_layouts: &mut HashMap<String, Layout>,

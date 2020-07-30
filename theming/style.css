@@ -1,6 +1,7 @@
 /* Theme the label where entered text is displayed */
 /* window box:nth-child(2)> label {
   background-image: url("pic.png");
+  font-size: 0.75em;
 }*/
 
 /* Theme the suggestion buttons */
@@ -8,6 +9,7 @@
   background-image: url("pic.png");
 }*/
 
-drawingArea {
-  background-image: url("pic.png");
+
+button{
+  padding: 0px;
 }
