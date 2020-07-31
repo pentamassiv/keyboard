@@ -1,17 +1,6 @@
 use gdk::EventMask;
-use gtk::Orientation::*;
-
+use gtk::prelude::WidgetExtManual;
 use gtk::*;
-use gtk::{
-    prelude::WidgetExtManual, BoxExt, ButtonExt, CssProviderExt, DrawingArea, GtkWindowExt,
-    Inhibit, LabelExt, OrientableExt,
-};
-
-use relm::{DrawHandler, Relm, Widget};
-use relm_derive::widget;
-use relm_derive::Msg;
-
-use self::Msg::*;
 
 // Defines const for drawn path
 const PATHCOLOR: (f64, f64, f64, f64) = (0.105, 0.117, 0.746, 0.9);
@@ -34,185 +23,27 @@ impl Dot {
 }
 
 pub struct Model {
-    draw_handler: DrawHandler<DrawingArea>,
+    draw_handler: relm::DrawHandler<DrawingArea>,
     dots: Vec<Dot>,
     is_pressed: bool,
     layouts: std::collections::HashMap<String, super::layout::Layout>,
 }
 
-#[derive(Msg)]
-pub enum Msg {
-    Press,
-    Release,
-    MovePointer((f64, f64), u32),
-    Quit,
-    UpdateDrawBuffer,
-    SuggestionPress(String),
-}
-
-#[allow(clippy::redundant_field_names)]
-#[widget]
-impl Widget for Win {
-    fn model(
-        _: &Relm<Self>,
-        layouts: std::collections::HashMap<String, super::layout::Layout>,
-    ) -> Model {
-        Model {
-            draw_handler: DrawHandler::new().expect("draw handler"),
-            dots: Vec::new(),
-            is_pressed: false,
-            layouts,
-        }
-    }
-
-    view! {
-        gtk::Window {
-            property_default_height: 720,
-            //property_default_width: 10,
-            gtk::Box {
-                orientation: Vertical,
-                spacing: 2,
-                #[name="label"]
-                gtk::Label {
-                    margin_start: 5,
-                    margin_end: 5,
-                    text: "",
-                    line_wrap: true,
-                    vexpand:true,
-                },
-                gtk::Frame{
-                    gtk::Box {
-                        orientation: Horizontal,
-                        margin_start: 0,
-                        margin_end: 0,
-                        spacing: 0,
-                        #[name="suggestion_button_left"]
-                        gtk::Button {
-                            label: "sug_l",
-                            hexpand:true,
-                            button_press_event(clicked_button, event) => (SuggestionPress(clicked_button.get_label().unwrap().to_string()), Inhibit(false)),
-                        },
-                        #[name="suggestion_button_center"]
-                        gtk::Button {
-                            label: "sug_c",
-                            hexpand:true,
-                            button_press_event(clicked_button, event) => (SuggestionPress(clicked_button.get_label().unwrap().to_string()), Inhibit(false)),
-                        },
-                        #[name="suggestion_button_right"]
-                        gtk::Button {
-                            label: "sug_r",
-                            hexpand:true,
-                            button_press_event(clicked_button, event) => (SuggestionPress(clicked_button.get_label().unwrap().to_string()), Inhibit(false)),
-                        },
-                    },
-                },
-                #[name="overlay"]
-                gtk::Overlay {
-                    motion_notify_event(_, event) => (MovePointer(event.get_position(), event.get_time()), Inhibit(false)),
-                    button_press_event(_, event) => (Press, Inhibit(false)),
-                    button_release_event(_, event) => (Release, Inhibit(false)),
-                    draw(_, _) => (UpdateDrawBuffer, Inhibit(false)),
-                    #[name="layout_stack"]
-                    gtk::Stack {
-                        transition_type: gtk::StackTransitionType::None,
-                    },
-                }
-            },
-            delete_event(_, _) => (Quit, Inhibit(false)),
-        }
-    }
-
-    fn init_view(&mut self) {
-        let drawing_area = gtk::DrawingArea::new();
-        self.model.draw_handler.init(&drawing_area);
-        drawing_area.add_events(EventMask::POINTER_MOTION_MASK);
-        drawing_area.add_events(EventMask::BUTTON_PRESS_MASK);
-        drawing_area.add_events(EventMask::BUTTON_RELEASE_MASK);
-
-        /*
-        Testing popover
-        let button_popover = gtk::Button::new();
-        button_popover.set_label("jflksd");
-        let popover = gtk::Popover::new(Some(&self.suggestion_button_left));
-        popover.add(&button_popover);
-        popover.show();*/
-
-        self.suggestion_button_left
-            .add_events(EventMask::BUTTON_PRESS_MASK);
-        self.suggestion_button_center
-            .add_events(EventMask::BUTTON_PRESS_MASK);
-        self.suggestion_button_right
-            .add_events(EventMask::BUTTON_PRESS_MASK);
-        self.overlay.add_overlay(&drawing_area);
-        self.add_layouts_to_layout_stack();
-        self.overlay.show_all();
-        load_css();
-    }
-
-    fn add_layouts_to_layout_stack(&self) {
-        for (layout_name, layout) in &self.model.layouts {
-            let view_stack = gtk::Stack::new();
-            let view_grids = layout.build_button_grid();
-            for (view_name, view_grid) in view_grids {
-                view_stack.add_named(&view_grid, &view_name);
-            }
-            view_stack.set_transition_type(gtk::StackTransitionType::None);
-            self.layout_stack.add_named(&view_stack, &layout_name);
-        }
-    }
-
-    fn update(&mut self, event: Msg) {
-        match event {
-            Press => {
-                self.model.is_pressed = true;
-            }
-            SuggestionPress(button_label) => {
-                let mut label_text = String::from(self.label.get_text());
-                label_text.push_str(&button_label);
-                label_text.push_str(" ");
-                self.label.set_text(&label_text);
-                // Delete the following, its just for testing
-                if &button_label == "sug_but_r" {
-                    self.layout_stack.set_visible_child_name("us");
-                } else {
-                    self.layout_stack.set_visible_child_name("de");
-                }
-            }
-            Release => {
-                self.model.is_pressed = false;
-                let mut label_text = String::from(self.label.get_text());
-                label_text.push_str(&self.model.dots.len().to_string());
-                label_text.push_str(" ");
-                self.label.set_text(&label_text);
-                self.erase_path();
-                self.model.dots = Vec::new();
-            }
-            MovePointer(pos, time) => {
-                if self.model.is_pressed {
-                    self.model.dots.push(Dot::new(pos, time));
-                }
-            }
-            Quit => gtk::main_quit(),
-            UpdateDrawBuffer => {
-                self.draw_path();
-            }
-        }
-    }
-
+impl Model {
     fn erase_path(&mut self) {
-        let context = self.model.draw_handler.get_context();
+        let context = self.draw_handler.get_context();
         context.set_operator(cairo::Operator::Clear);
         context.set_source_rgba(0.0, 0.0, 0.0, 0.0);
         context.paint();
     }
 
     fn draw_path(&mut self) {
-        let context = self.model.draw_handler.get_context();
+        let context = self.draw_handler.get_context();
         self.erase_path();
         context.set_operator(cairo::Operator::Over);
         context.set_source_rgba(PATHCOLOR.0, PATHCOLOR.1, PATHCOLOR.2, PATHCOLOR.3);
         //let mut time_now = 0;
-        for dot in self.model.dots.iter().rev().take(PATHLENGTH) {
+        for dot in self.dots.iter().rev().take(PATHLENGTH) {
             // Only draw the last dots within a certain time period. Works but there would have to be a draw signal in a regular interval to make it look good
             //if dot.time > time_now {
             //    time_now = dot.time
@@ -225,6 +56,269 @@ impl Widget for Win {
         }
         context.set_line_width(PATHWIDTH);
         context.stroke();
+    }
+}
+
+#[derive(relm_derive::Msg)]
+pub enum Msg {
+    Press,
+    Release,
+    MovePointer((f64, f64), u32),
+    Quit,
+    UpdateDrawBuffer,
+    SuggestionPress(String),
+}
+
+pub struct Win {
+    drawing_area: gtk::DrawingArea,
+    layout_stack: gtk::Stack,
+    //overlay: gtk::Overlay,
+
+    //suggestion_button_left: gtk::Button,
+    //suggestion_button_center: gtk::Button,
+    //suggestion_button_right: gtk::Button,
+    //vbox: gtk::Box,
+    //frame: gtk::Frame,
+    label: gtk::Label,
+    //hbox: gtk::Box,
+
+    // …
+    model: Model,
+    window: Window,
+}
+
+impl relm::Update for Win {
+    // Specify the model used for this widget.
+    type Model = Model;
+    // Specify the model parameter used to init the model.
+    type ModelParam = std::collections::HashMap<String, super::layout::Layout>;
+    // Specify the type of the messages sent to the update function.
+    type Msg = Msg;
+
+    // Return the initial model.
+    fn model(
+        _: &relm::Relm<Self>,
+        layouts: std::collections::HashMap<String, super::layout::Layout>,
+    ) -> Model {
+        Model {
+            draw_handler: relm::DrawHandler::new().expect("draw handler"),
+            dots: Vec::new(),
+            is_pressed: false,
+            layouts,
+        }
+    }
+
+    // The model may be updated when a message is received.
+    // Widgets may also be updated in this function.
+    fn update(&mut self, event: Msg) {
+        match event {
+            Msg::Press => {
+                self.model.is_pressed = true;
+            }
+            Msg::SuggestionPress(button_label) => {
+                let mut label_text = String::from(self.label.get_text());
+                label_text.push_str(&button_label);
+                label_text.push_str(" ");
+                self.label.set_text(&label_text);
+                // Delete the following, its just for testing
+                if &button_label == "sug_but_r" {
+                    self.layout_stack.set_visible_child_name("us");
+                } else {
+                    self.layout_stack.set_visible_child_name("de");
+                }
+            }
+            Msg::Release => {
+                self.model.is_pressed = false;
+                let mut label_text = String::from(self.label.get_text());
+                label_text.push_str(&self.model.dots.len().to_string());
+                label_text.push_str(" ");
+                self.label.set_text(&label_text);
+                self.model.erase_path();
+                self.model.dots = Vec::new();
+            }
+            Msg::MovePointer(pos, time) => {
+                if self.model.is_pressed {
+                    self.model.dots.push(Dot::new(pos, time));
+                }
+            }
+            Msg::Quit => gtk::main_quit(),
+            Msg::UpdateDrawBuffer => {
+                self.model.draw_path();
+            }
+        }
+    }
+}
+
+impl relm::Widget for Win {
+    // Specify the type of the root widget.
+    type Root = Window;
+
+    // Return the root widget.
+    fn root(&self) -> Self::Root {
+        self.window.clone()
+    }
+
+    // Create the widgets.
+    fn view(relm: &relm::Relm<Self>, model: Self::Model) -> Self {
+        //Might have to be called after the show_all() method
+        load_css();
+        // GTK+ widgets are used normally within a `Widget`.
+
+        let layout_stack = gtk::Stack::new();
+        layout_stack.set_transition_type(gtk::StackTransitionType::None);
+
+        for (layout_name, layout) in &model.layouts {
+            let view_stack = gtk::Stack::new();
+            let view_grids = layout.build_button_grid();
+            for (view_name, view_grid) in view_grids {
+                view_stack.add_named(&view_grid, &view_name);
+            }
+            view_stack.set_transition_type(gtk::StackTransitionType::None);
+            layout_stack.add_named(&view_stack, &layout_name);
+        }
+
+        let drawing_area = gtk::DrawingArea::new();
+        let overlay = gtk::Overlay::new();
+        overlay.add(&layout_stack);
+        overlay.add_overlay(&drawing_area);
+
+        let suggestion_button_left = gtk::Button::new();
+        suggestion_button_left.set_label("sug_l");
+        suggestion_button_left.set_hexpand(true);
+
+        let suggestion_button_center = gtk::Button::new();
+        suggestion_button_center.set_label("sug_c");
+        suggestion_button_center.set_hexpand(true);
+
+        let suggestion_button_right = gtk::Button::new();
+        suggestion_button_right.set_label("sug_r");
+        suggestion_button_right.set_hexpand(true);
+
+        let hbox = gtk::Box::new(Orientation::Horizontal, 0);
+        hbox.set_margin_start(0);
+        hbox.set_margin_end(0);
+        hbox.add(&suggestion_button_left);
+        hbox.add(&suggestion_button_center);
+        hbox.add(&suggestion_button_right);
+
+        let frame = gtk::Frame::new(None);
+        frame.add(&hbox);
+
+        let label = gtk::Label::new(None);
+        label.set_margin_start(5);
+        label.set_margin_end(5);
+        label.set_line_wrap(true);
+        label.set_vexpand(true);
+
+        let vbox = gtk::Box::new(Orientation::Vertical, 2);
+        vbox.add(&label);
+        vbox.add(&frame);
+        vbox.add(&overlay);
+
+        let window = Window::new(WindowType::Toplevel);
+        window.set_property_default_height(720);
+        window.add(&vbox);
+
+        // Connect the signal `delete_event` to send the `Quit` message.
+        relm::connect!(
+            relm,
+            window,
+            connect_delete_event(_, _),
+            return (Some(Msg::Quit), Inhibit(false))
+        );
+
+        drawing_area.add_events(EventMask::POINTER_MOTION_MASK);
+        drawing_area.add_events(EventMask::BUTTON_PRESS_MASK);
+        drawing_area.add_events(EventMask::BUTTON_RELEASE_MASK);
+
+        suggestion_button_left.add_events(EventMask::BUTTON_PRESS_MASK);
+        suggestion_button_center.add_events(EventMask::BUTTON_PRESS_MASK);
+        suggestion_button_right.add_events(EventMask::BUTTON_PRESS_MASK);
+
+        relm::connect!(
+            relm,
+            suggestion_button_left,
+            connect_button_press_event(clicked_button, _),
+            return (
+                Some(Msg::SuggestionPress(
+                    clicked_button.get_label().unwrap().to_string()
+                )),
+                gtk::Inhibit(false)
+            )
+        );
+        relm::connect!(
+            relm,
+            suggestion_button_center,
+            connect_button_press_event(clicked_button, _),
+            return (
+                Some(Msg::SuggestionPress(
+                    clicked_button.get_label().unwrap().to_string()
+                )),
+                gtk::Inhibit(false)
+            )
+        );
+        relm::connect!(
+            relm,
+            suggestion_button_right,
+            connect_button_press_event(clicked_button, _),
+            return (
+                Some(Msg::SuggestionPress(
+                    clicked_button.get_label().unwrap().to_string()
+                )),
+                gtk::Inhibit(false)
+            )
+        );
+
+        relm::connect!(
+            relm,
+            overlay,
+            connect_motion_notify_event(_, event),
+            return (
+                Some(Msg::MovePointer(event.get_position(), event.get_time())),
+                gtk::Inhibit(false)
+            )
+        );
+
+        relm::connect!(
+            relm,
+            overlay,
+            connect_button_press_event(_, _),
+            return (Some(Msg::Press), gtk::Inhibit(false))
+        );
+
+        relm::connect!(
+            relm,
+            overlay,
+            connect_button_release_event(_, _),
+            return (Some(Msg::Release), gtk::Inhibit(false))
+        );
+
+        relm::connect!(
+            relm,
+            overlay,
+            connect_draw(_, _),
+            return (Some(Msg::UpdateDrawBuffer), gtk::Inhibit(false))
+        );
+
+        window.show_all();
+
+        Win {
+            drawing_area,
+            layout_stack,
+            //overlay,
+            //suggestion_button_left,
+            //suggestion_button_center,
+            //suggestion_button_right,
+            //vbox,
+            //frame,
+            label,
+            //hbox,
+            model,
+            window,
+        }
+    }
+    fn init_view(&mut self) {
+        self.model.draw_handler.init(&self.drawing_area);
     }
 }
 
