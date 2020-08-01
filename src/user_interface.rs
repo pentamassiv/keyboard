@@ -1,14 +1,8 @@
+use crate::config::directories;
+use crate::config::ui_defaults;
 use gdk::EventMask;
 use gtk::prelude::WidgetExtManual;
 use gtk::*;
-
-// Defines const for drawn path
-const PATHCOLOR: (f64, f64, f64, f64) = (0.105, 0.117, 0.746, 0.9);
-const PATHLENGTH: usize = 10;
-const PATHWIDTH: f64 = 4.5;
-//const PATHFADINGTIME: u32 = 400;
-
-const CSS_DIRECTORY: &str = "./theming/style.css";
 
 #[derive(Clone)]
 struct Dot {
@@ -41,9 +35,14 @@ impl Model {
         let context = self.draw_handler.get_context();
         self.erase_path();
         context.set_operator(cairo::Operator::Over);
-        context.set_source_rgba(PATHCOLOR.0, PATHCOLOR.1, PATHCOLOR.2, PATHCOLOR.3);
+        context.set_source_rgba(
+            ui_defaults::PATHCOLOR.0,
+            ui_defaults::PATHCOLOR.1,
+            ui_defaults::PATHCOLOR.2,
+            ui_defaults::PATHCOLOR.3,
+        );
         //let mut time_now = 0;
-        for dot in self.dots.iter().rev().take(PATHLENGTH) {
+        for dot in self.dots.iter().rev().take(ui_defaults::PATHLENGTH) {
             // Only draw the last dots within a certain time period. Works but there would have to be a draw signal in a regular interval to make it look good
             //if dot.time > time_now {
             //    time_now = dot.time
@@ -54,7 +53,7 @@ impl Model {
             //    break;
             //}
         }
-        context.set_line_width(PATHWIDTH);
+        context.set_line_width(ui_defaults::PATHWIDTH);
         context.stroke();
     }
 }
@@ -72,17 +71,7 @@ pub enum Msg {
 pub struct Win {
     drawing_area: gtk::DrawingArea,
     layout_stack: gtk::Stack,
-    //overlay: gtk::Overlay,
-
-    //suggestion_button_left: gtk::Button,
-    //suggestion_button_center: gtk::Button,
-    //suggestion_button_right: gtk::Button,
-    //vbox: gtk::Box,
-    //frame: gtk::Frame,
     label: gtk::Label,
-    //hbox: gtk::Box,
-
-    // …
     model: Model,
     window: Window,
 }
@@ -305,14 +294,7 @@ impl relm::Widget for Win {
         Win {
             drawing_area,
             layout_stack,
-            //overlay,
-            //suggestion_button_left,
-            //suggestion_button_center,
-            //suggestion_button_right,
-            //vbox,
-            //frame,
             label,
-            //hbox,
             model,
             window,
         }
@@ -324,7 +306,7 @@ impl relm::Widget for Win {
 
 fn load_css() {
     let provider = gtk::CssProvider::new();
-    match provider.load_from_path(CSS_DIRECTORY) {
+    match provider.load_from_path(directories::CSS_DIRECTORY) {
         Ok(_) => {
             // We give the CssProvided to the default screen so the CSS rules we added
             // can be applied to our window.
