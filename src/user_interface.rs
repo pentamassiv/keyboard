@@ -1,26 +1,21 @@
 use crate::config::directories;
 use crate::config::ui_defaults;
-use gdk::EventMask;
-use gtk::prelude::WidgetExtManual;
 use gtk::*;
+use std::time::SystemTime;
 
 #[derive(Clone)]
 struct Dot {
     position: (f64, f64),
-    time: u32,
+    time: SystemTime,
 }
 
-impl Dot {
-    fn new(position: (f64, f64), time: u32) -> Self {
-        Dot { position, time }
-    }
-}
+
 
 pub struct Model {
-    draw_handler: relm::DrawHandler<DrawingArea>,
     dots: Vec<Dot>,
     is_pressed: bool,
     layouts: std::collections::HashMap<String, super::layout::Layout>,
+    draw_handler: relm::DrawHandler<DrawingArea>,
 }
 
 impl Model {
@@ -62,18 +57,32 @@ impl Model {
 pub enum Msg {
     Press,
     Release,
-    MovePointer((f64, f64), u32),
+    //MovePointer((f64, f64), u32),
     Quit,
     UpdateDrawBuffer,
     SuggestionPress(String),
+    ButtonPressedLong(f64, f64),
+    ButtonDrag(f64, f64, SystemTime),
 }
 
-pub struct Win {
+//The gestures are never read but they can't be freed otherwise the gesture detection does not work
+struct Gestures {
+    _long_press_gesture: GestureLongPress,
+    _drag_gesture: GestureDrag,
+}
+
+struct Widgets {
     drawing_area: gtk::DrawingArea,
     layout_stack: gtk::Stack,
     label: gtk::Label,
-    model: Model,
     window: Window,
+}
+
+//The gestures are never read but they can't be freed otherwise the gesture detection does not work
+pub struct Win {
+    model: Model,
+    widgets: Widgets,
+    _gestures: Gestures,
 }
 
 impl relm::Update for Win {
@@ -105,31 +114,43 @@ impl relm::Update for Win {
                 self.model.is_pressed = true;
             }
             Msg::SuggestionPress(button_label) => {
-                let mut label_text = String::from(self.label.get_text());
+                let mut label_text = String::from(self.widgets.label.get_text());
                 label_text.push_str(&button_label);
                 label_text.push_str(" ");
-                self.label.set_text(&label_text);
+                self.widgets.label.set_text(&label_text);
                 // Delete the following, its just for testing
                 if &button_label == "sug_but_r" {
-                    self.layout_stack.set_visible_child_name("us");
+                    self.widgets.layout_stack.set_visible_child_name("us");
                 } else {
-                    self.layout_stack.set_visible_child_name("de");
+                    self.widgets.layout_stack.set_visible_child_name("de");
                 }
+            }
+            Msg::ButtonPressedLong(x, y) => {
+                println!("LongPress: x: {}, y: {}", x, y);
+            }
+            Msg::ButtonDrag(x, y, time) => {
+                if self.model.is_pressed {
+                    self.model.dots.push(Dot {
+                        position: (x, y),
+                        time,
+                    });
+                }
+                println!("Drag: x: {}, y: {}, time: {:?}", x, y, time)
             }
             Msg::Release => {
                 self.model.is_pressed = false;
-                let mut label_text = String::from(self.label.get_text());
+                let mut label_text = String::from(self.widgets.label.get_text());
                 label_text.push_str(&self.model.dots.len().to_string());
                 label_text.push_str(" ");
-                self.label.set_text(&label_text);
+                self.widgets.label.set_text(&label_text);
                 self.model.erase_path();
                 self.model.dots = Vec::new();
             }
-            Msg::MovePointer(pos, time) => {
-                if self.model.is_pressed {
-                    self.model.dots.push(Dot::new(pos, time));
-                }
-            }
+            //Msg::MovePointer(pos, time) => {
+            //    if self.model.is_pressed {
+            //        self.model.dots.push(Dot::new(pos, time));
+            //    }
+            //}
             Msg::Quit => gtk::main_quit(),
             Msg::UpdateDrawBuffer => {
                 self.model.draw_path();
@@ -144,7 +165,7 @@ impl relm::Widget for Win {
 
     // Return the root widget.
     fn root(&self) -> Self::Root {
-        self.window.clone()
+        self.widgets.window.clone()
     }
 
     // Create the widgets.
@@ -208,6 +229,26 @@ impl relm::Widget for Win {
         window.set_property_default_height(720);
         window.add(&vbox);
 
+        let long_press_gesture = GestureLongPress::new(&drawing_area);
+        let drag_gesture = GestureDrag::new(&drawing_area);
+        relm::connect!(
+            long_press_gesture,
+            connect_pressed(_, x, y),
+            relm,
+            Msg::ButtonPressedLong(x, y)
+        );
+
+        relm::connect!(
+            drag_gesture,
+            connect_drag_update(drag, x, y),
+            &relm,
+            Msg::ButtonDrag(
+                drag.get_start_point().unwrap().0 + x,
+                drag.get_start_point().unwrap().1 + y,
+                SystemTime::now()
+            )
+        );
+
         // Connect the signal `delete_event` to send the `Quit` message.
         relm::connect!(
             relm,
@@ -215,14 +256,6 @@ impl relm::Widget for Win {
             connect_delete_event(_, _),
             return (Some(Msg::Quit), Inhibit(false))
         );
-
-        drawing_area.add_events(EventMask::POINTER_MOTION_MASK);
-        drawing_area.add_events(EventMask::BUTTON_PRESS_MASK);
-        drawing_area.add_events(EventMask::BUTTON_RELEASE_MASK);
-
-        suggestion_button_left.add_events(EventMask::BUTTON_PRESS_MASK);
-        suggestion_button_center.add_events(EventMask::BUTTON_PRESS_MASK);
-        suggestion_button_right.add_events(EventMask::BUTTON_PRESS_MASK);
 
         relm::connect!(
             relm,
@@ -261,16 +294,6 @@ impl relm::Widget for Win {
         relm::connect!(
             relm,
             overlay,
-            connect_motion_notify_event(_, event),
-            return (
-                Some(Msg::MovePointer(event.get_position(), event.get_time())),
-                gtk::Inhibit(false)
-            )
-        );
-
-        relm::connect!(
-            relm,
-            overlay,
             connect_button_press_event(_, _),
             return (Some(Msg::Press), gtk::Inhibit(false))
         );
@@ -292,15 +315,22 @@ impl relm::Widget for Win {
         window.show_all();
 
         Win {
-            drawing_area,
-            layout_stack,
-            label,
             model,
-            window,
+            //relm: relm.clone(),
+            _gestures: Gestures {
+                _long_press_gesture: long_press_gesture,
+                _drag_gesture: drag_gesture,
+            },
+            widgets: Widgets {
+                drawing_area,
+                layout_stack,
+                label,
+                window,
+            },
         }
     }
     fn init_view(&mut self) {
-        self.model.draw_handler.init(&self.drawing_area);
+        self.model.draw_handler.init(&self.widgets.drawing_area);
     }
 }
 
