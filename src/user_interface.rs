@@ -5,15 +5,18 @@ use std::time::SystemTime;
 
 #[derive(Clone)]
 struct Dot {
-    position: (f64, f64),
+    x: f64,
+    y: f64,
     time: SystemTime,
 }
 
-
+struct Input {
+    is_long_press: bool,
+    path: Vec<Dot>,
+}
 
 pub struct Model {
-    dots: Vec<Dot>,
-    is_pressed: bool,
+    input: Input,
     layouts: std::collections::HashMap<String, super::layout::Layout>,
     draw_handler: relm::DrawHandler<DrawingArea>,
 }
@@ -27,42 +30,43 @@ impl Model {
     }
 
     fn draw_path(&mut self) {
-        let context = self.draw_handler.get_context();
-        self.erase_path();
-        context.set_operator(cairo::Operator::Over);
-        context.set_source_rgba(
-            ui_defaults::PATHCOLOR.0,
-            ui_defaults::PATHCOLOR.1,
-            ui_defaults::PATHCOLOR.2,
-            ui_defaults::PATHCOLOR.3,
-        );
-        //let mut time_now = 0;
-        for dot in self.dots.iter().rev().take(ui_defaults::PATHLENGTH) {
-            // Only draw the last dots within a certain time period. Works but there would have to be a draw signal in a regular interval to make it look good
-            //if dot.time > time_now {
-            //    time_now = dot.time
-            //}
-            //if time_now - dot.time < PATHFADINGTIME {
-            context.line_to(dot.position.0, dot.position.1);
-            //} else {
-            //    break;
-            //}
+        if !self.input.is_long_press {
+            self.erase_path();
+            let context = self.draw_handler.get_context();
+            context.set_operator(cairo::Operator::Over);
+            context.set_source_rgba(
+                ui_defaults::PATHCOLOR.0,
+                ui_defaults::PATHCOLOR.1,
+                ui_defaults::PATHCOLOR.2,
+                ui_defaults::PATHCOLOR.3,
+            );
+            //let mut time_now = 0;
+            for dot in self.input.path.iter().rev().take(ui_defaults::PATHLENGTH) {
+                // Only draw the last dots within a certain time period. Works but there would have to be a draw signal in a regular interval to make it look good
+                //if dot.time > time_now {
+                //    time_now = dot.time
+                //}
+                //if time_now - dot.time < PATHFADINGTIME {
+                context.line_to(dot.x, dot.y);
+                //} else {
+                //    break;
+                //}
+            }
+            context.set_line_width(ui_defaults::PATHWIDTH);
+            context.stroke();
         }
-        context.set_line_width(ui_defaults::PATHWIDTH);
-        context.stroke();
     }
 }
 
 #[derive(relm_derive::Msg)]
 pub enum Msg {
-    Press,
-    Release,
-    //MovePointer((f64, f64), u32),
+    Press(f64, f64, SystemTime),
+    ButtonPressedLong(f64, f64, SystemTime),
+    ButtonDrag(f64, f64, SystemTime),
+    Release(f64, f64, SystemTime),
     Quit,
     UpdateDrawBuffer,
     SuggestionPress(String),
-    ButtonPressedLong(f64, f64),
-    ButtonDrag(f64, f64, SystemTime),
 }
 
 //The gestures are never read but they can't be freed otherwise the gesture detection does not work
@@ -100,8 +104,10 @@ impl relm::Update for Win {
     ) -> Model {
         Model {
             draw_handler: relm::DrawHandler::new().expect("draw handler"),
-            dots: Vec::new(),
-            is_pressed: false,
+            input: Input {
+                is_long_press: false,
+                path: Vec::new(),
+            },
             layouts,
         }
     }
@@ -110,8 +116,30 @@ impl relm::Update for Win {
     // Widgets may also be updated in this function.
     fn update(&mut self, event: Msg) {
         match event {
-            Msg::Press => {
-                self.model.is_pressed = true;
+            Msg::Press(x, y, time) => {
+                self.model.input.path = Vec::new();
+                println!("Press");
+            }
+            Msg::ButtonPressedLong(x, y, time) => {
+                self.model.input.is_long_press = true;
+                //self.model.input.path = Vec::new();
+                println!("LongPress: x: {}, y: {}", x, y);
+            }
+            Msg::ButtonDrag(x, y, time) => {
+                //if !self.model.input.is_long_press {
+                self.model.input.path.push(Dot { x, y, time });
+                println!("Drag: x: {}, y: {}, time: {:?}", x, y, time);
+                //}
+            }
+            Msg::Release(x, y, time) => {
+                println!("Release: x: {}, y: {}, time: {:?}", x, y, time);
+                let mut label_text = String::from(self.widgets.label.get_text());
+                label_text.push_str("JoHo"); //String for testing
+                label_text.push_str(" ");
+                self.widgets.label.set_text(&label_text);
+                self.model.erase_path();
+                self.model.input.is_long_press = false;
+                self.model.input.path = Vec::new();
             }
             Msg::SuggestionPress(button_label) => {
                 let mut label_text = String::from(self.widgets.label.get_text());
@@ -125,36 +153,10 @@ impl relm::Update for Win {
                     self.widgets.layout_stack.set_visible_child_name("de");
                 }
             }
-            Msg::ButtonPressedLong(x, y) => {
-                println!("LongPress: x: {}, y: {}", x, y);
-            }
-            Msg::ButtonDrag(x, y, time) => {
-                if self.model.is_pressed {
-                    self.model.dots.push(Dot {
-                        position: (x, y),
-                        time,
-                    });
-                }
-                println!("Drag: x: {}, y: {}, time: {:?}", x, y, time)
-            }
-            Msg::Release => {
-                self.model.is_pressed = false;
-                let mut label_text = String::from(self.widgets.label.get_text());
-                label_text.push_str(&self.model.dots.len().to_string());
-                label_text.push_str(" ");
-                self.widgets.label.set_text(&label_text);
-                self.model.erase_path();
-                self.model.dots = Vec::new();
-            }
-            //Msg::MovePointer(pos, time) => {
-            //    if self.model.is_pressed {
-            //        self.model.dots.push(Dot::new(pos, time));
-            //    }
-            //}
-            Msg::Quit => gtk::main_quit(),
             Msg::UpdateDrawBuffer => {
                 self.model.draw_path();
             }
+            Msg::Quit => gtk::main_quit(),
         }
     }
 }
@@ -235,7 +237,7 @@ impl relm::Widget for Win {
             long_press_gesture,
             connect_pressed(_, x, y),
             relm,
-            Msg::ButtonPressedLong(x, y)
+            Msg::ButtonPressedLong(x, y, SystemTime::now())
         );
 
         relm::connect!(
@@ -243,6 +245,26 @@ impl relm::Widget for Win {
             connect_drag_update(drag, x, y),
             &relm,
             Msg::ButtonDrag(
+                drag.get_start_point().unwrap().0 + x,
+                drag.get_start_point().unwrap().1 + y,
+                SystemTime::now()
+            )
+        );
+        relm::connect!(
+            drag_gesture,
+            connect_drag_begin(drag, x, y),
+            &relm,
+            Msg::Press(
+                drag.get_start_point().unwrap().0 + x,
+                drag.get_start_point().unwrap().1 + y,
+                SystemTime::now()
+            )
+        );
+        relm::connect!(
+            drag_gesture,
+            connect_drag_end(drag, x, y),
+            &relm,
+            Msg::Release(
                 drag.get_start_point().unwrap().0 + x,
                 drag.get_start_point().unwrap().1 + y,
                 SystemTime::now()
@@ -289,20 +311,6 @@ impl relm::Widget for Win {
                 )),
                 gtk::Inhibit(false)
             )
-        );
-
-        relm::connect!(
-            relm,
-            overlay,
-            connect_button_press_event(_, _),
-            return (Some(Msg::Press), gtk::Inhibit(false))
-        );
-
-        relm::connect!(
-            relm,
-            overlay,
-            connect_button_release_event(_, _),
-            return (Some(Msg::Release), gtk::Inhibit(false))
         );
 
         relm::connect!(
