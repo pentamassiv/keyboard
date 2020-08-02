@@ -1,13 +1,13 @@
 use crate::config::directories;
 use crate::config::ui_defaults;
 use gtk::*;
-use std::time::SystemTime;
+use std::time::Instant;
 
 #[derive(Clone)]
 struct Dot {
     x: f64,
     y: f64,
-    time: SystemTime,
+    time: Instant,
 }
 
 struct Input {
@@ -22,10 +22,10 @@ pub struct Model {
 
 #[derive(relm_derive::Msg)]
 pub enum Msg {
-    Press(f64, f64, SystemTime),
-    ButtonPressedLong(f64, f64, SystemTime),
-    ButtonDrag(f64, f64, SystemTime),
-    Release(f64, f64, SystemTime),
+    Press(f64, f64, Instant),
+    ButtonPressedLong(f64, f64, Instant),
+    ButtonDrag(f64, f64, Instant),
+    Release(f64, f64, Instant),
     SuggestionPress(String),
     UpdateDrawBuffer,
     Quit,
@@ -71,6 +71,10 @@ impl relm::Update for Win {
             },
             layouts,
         }
+    }
+
+    fn subscriptions(&mut self, relm: &relm::Relm<Self>) {
+        relm::interval(relm.stream(), 1000, || Msg::UpdateDrawBuffer);
     }
 
     // The model may be updated when a message is received.
@@ -199,7 +203,7 @@ impl relm::Widget for Win {
             long_press_gesture,
             connect_pressed(_, x, y),
             relm,
-            Msg::ButtonPressedLong(x, y, SystemTime::now())
+            Msg::ButtonPressedLong(x, y, Instant::now())
         );
 
         relm::connect!(
@@ -209,14 +213,14 @@ impl relm::Widget for Win {
             Msg::ButtonDrag(
                 drag.get_start_point().unwrap().0 + x,
                 drag.get_start_point().unwrap().1 + y,
-                SystemTime::now()
+                Instant::now()
             )
         );
         relm::connect!(
             drag_gesture,
             connect_drag_begin(_, x, y),
             &relm,
-            Msg::Press(x, y, SystemTime::now())
+            Msg::Press(x, y, Instant::now())
         );
         relm::connect!(
             drag_gesture,
@@ -225,7 +229,7 @@ impl relm::Widget for Win {
             Msg::Release(
                 drag.get_start_point().unwrap().0 + x,
                 drag.get_start_point().unwrap().1 + y,
-                SystemTime::now()
+                Instant::now()
             )
         );
 
@@ -315,7 +319,7 @@ impl Win {
                 ui_defaults::PATHCOLOR.2,
                 ui_defaults::PATHCOLOR.3,
             );
-            //let mut time_now = 0;
+            let max_duration = std::time::Duration::from_millis(ui_defaults::PATHFADINGDURATION);
             for dot in self
                 .model
                 .input
@@ -325,14 +329,11 @@ impl Win {
                 .take(ui_defaults::PATHLENGTH)
             {
                 // Only draw the last dots within a certain time period. Works but there would have to be a draw signal in a regular interval to make it look good
-                //if dot.time > time_now {
-                //    time_now = dot.time
-                //}
-                //if time_now - dot.time < PATHFADINGTIME {
-                context.line_to(dot.x, dot.y);
-                //} else {
-                //    break;
-                //}
+                if dot.time.elapsed() < max_duration {
+                    context.line_to(dot.x, dot.y);
+                } else {
+                    break;
+                }
             }
             context.set_line_width(ui_defaults::PATHWIDTH);
             context.stroke();
