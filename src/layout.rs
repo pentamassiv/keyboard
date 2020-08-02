@@ -1,6 +1,7 @@
 use crate::config::directories;
 use crate::config::fallback_layout::FALLBACK_LAYOUT;
-use gtk::{GridExt, StyleContextExt, WidgetExt};
+use crate::user_interface;
+use gtk::{ButtonExt, GridExt, StyleContextExt, WidgetExt};
 use serde::Deserialize;
 use std::collections::HashMap;
 use std::fs::File;
@@ -50,7 +51,10 @@ impl Layout {
             Err(err) => Err(err),
         }
     }
-    pub fn build_button_grid(&self) -> HashMap<String, gtk::Grid> {
+    pub fn build_button_grid(
+        &self,
+        relm: &relm::Relm<user_interface::Win>,
+    ) -> HashMap<String, gtk::Grid> {
         let mut result = HashMap::new();
         for (view_name, view) in &self.views {
             let grid = gtk::Grid::new();
@@ -70,6 +74,17 @@ impl Layout {
                     //button.set_size_request(1,2);
                     button.set_hexpand(true);
                     button.get_style_context().add_class("key");
+                    relm::connect!(
+                        relm,
+                        button,
+                        connect_button_press_event(clicked_button, _),
+                        return (
+                            Some(user_interface::Msg::KeyPress(
+                                clicked_button.get_label().unwrap().to_string()
+                            )),
+                            gtk::Inhibit(false)
+                        )
+                    );
                     vec_of_buttons_with_sizes.push((size_for_id, button));
                 }
                 vec_with_rows_of_buttons_and_sizes.push(vec_of_buttons_with_sizes);
@@ -102,8 +117,8 @@ impl Layout {
     }
 }
 
-pub struct LayoutBuilder;
-impl LayoutBuilder {
+pub struct LayoutParser;
+impl LayoutParser {
     pub fn get_layouts() -> HashMap<String, Layout> {
         let mut layouts = HashMap::new();
 
@@ -114,14 +129,14 @@ impl LayoutBuilder {
                 x.path().extension().is_some() && x.path().extension().unwrap() == "yaml"
             }) {
                 let layout_source = LayoutSource::YamlFile(file.path());
-                LayoutBuilder::add_layout_to_hashmap(&mut layouts, Layout::from(layout_source));
+                LayoutParser::add_layout_to_hashmap(&mut layouts, Layout::from(layout_source));
             }
         }
 
         // If no layout was loaded, use hardcoded fallback layout
         if layouts.is_empty() {
             let layout_source = LayoutSource::FallbackStr;
-            LayoutBuilder::add_layout_to_hashmap(&mut layouts, Layout::from(layout_source));
+            LayoutParser::add_layout_to_hashmap(&mut layouts, Layout::from(layout_source));
         };
         layouts
     }

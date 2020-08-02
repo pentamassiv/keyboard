@@ -27,6 +27,7 @@ pub enum Msg {
     ButtonDrag(f64, f64, Instant),
     Release(f64, f64, Instant),
     SuggestionPress(String),
+    KeyPress(String),
     UpdateDrawBuffer,
     Quit,
 }
@@ -116,6 +117,12 @@ impl relm::Update for Win {
                     self.widgets.layout_stack.set_visible_child_name("de");
                 }
             }
+            Msg::KeyPress(button_label) => {
+                let mut label_text = String::from(self.widgets.label.get_text());
+                label_text.push_str(&button_label);
+                label_text.push_str(" ");
+                self.widgets.label.set_text(&label_text);
+            }
             Msg::UpdateDrawBuffer => {
                 self.draw_path();
             }
@@ -144,7 +151,7 @@ impl relm::Widget for Win {
 
         for (layout_name, layout) in &model.layouts {
             let view_stack = gtk::Stack::new();
-            let view_grids = layout.build_button_grid();
+            let view_grids = layout.build_button_grid(&relm);
             for (view_name, view_grid) in view_grids {
                 view_stack.add_named(&view_grid, &view_name);
             }

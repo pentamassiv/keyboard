@@ -25,9 +25,7 @@ mod config;
 mod layout;
 mod user_interface;
 
-
 fn main() {
-    let layouts = layout::LayoutBuilder::get_layouts();
-    //println!("{:?}", layouts);
+    let layouts = layout::LayoutParser::get_layouts();
     user_interface::Win::run(layouts).unwrap();
 }
