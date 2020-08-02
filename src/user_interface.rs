@@ -296,11 +296,7 @@ impl relm::Widget for Win {
     }
 }
 
-trait VisualizePath {
-    fn erase_path(&mut self);
-    fn draw_path(&mut self);
-}
-impl VisualizePath for Win {
+impl Win {
     fn erase_path(&mut self) {
         let context = self.widgets.draw_handler.get_context();
         context.set_operator(cairo::Operator::Clear);
