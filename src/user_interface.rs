@@ -18,44 +18,6 @@ struct Input {
 pub struct Model {
     input: Input,
     layouts: std::collections::HashMap<String, super::layout::Layout>,
-    draw_handler: relm::DrawHandler<DrawingArea>,
-}
-
-impl Model {
-    fn erase_path(&mut self) {
-        let context = self.draw_handler.get_context();
-        context.set_operator(cairo::Operator::Clear);
-        context.set_source_rgba(0.0, 0.0, 0.0, 0.0);
-        context.paint();
-    }
-
-    fn draw_path(&mut self) {
-        if !self.input.is_long_press {
-            self.erase_path();
-            let context = self.draw_handler.get_context();
-            context.set_operator(cairo::Operator::Over);
-            context.set_source_rgba(
-                ui_defaults::PATHCOLOR.0,
-                ui_defaults::PATHCOLOR.1,
-                ui_defaults::PATHCOLOR.2,
-                ui_defaults::PATHCOLOR.3,
-            );
-            //let mut time_now = 0;
-            for dot in self.input.path.iter().rev().take(ui_defaults::PATHLENGTH) {
-                // Only draw the last dots within a certain time period. Works but there would have to be a draw signal in a regular interval to make it look good
-                //if dot.time > time_now {
-                //    time_now = dot.time
-                //}
-                //if time_now - dot.time < PATHFADINGTIME {
-                context.line_to(dot.x, dot.y);
-                //} else {
-                //    break;
-                //}
-            }
-            context.set_line_width(ui_defaults::PATHWIDTH);
-            context.stroke();
-        }
-    }
 }
 
 #[derive(relm_derive::Msg)]
@@ -64,9 +26,9 @@ pub enum Msg {
     ButtonPressedLong(f64, f64, SystemTime),
     ButtonDrag(f64, f64, SystemTime),
     Release(f64, f64, SystemTime),
-    Quit,
-    UpdateDrawBuffer,
     SuggestionPress(String),
+    UpdateDrawBuffer,
+    Quit,
 }
 
 //The gestures are never read but they can't be freed otherwise the gesture detection does not work
@@ -76,10 +38,10 @@ struct Gestures {
 }
 
 struct Widgets {
-    drawing_area: gtk::DrawingArea,
-    layout_stack: gtk::Stack,
-    label: gtk::Label,
     window: Window,
+    label: gtk::Label,
+    draw_handler: relm::DrawHandler<DrawingArea>,
+    layout_stack: gtk::Stack,
 }
 
 //The gestures are never read but they can't be freed otherwise the gesture detection does not work
@@ -103,7 +65,6 @@ impl relm::Update for Win {
         layouts: std::collections::HashMap<String, super::layout::Layout>,
     ) -> Model {
         Model {
-            draw_handler: relm::DrawHandler::new().expect("draw handler"),
             input: Input {
                 is_long_press: false,
                 path: Vec::new(),
@@ -118,18 +79,16 @@ impl relm::Update for Win {
         match event {
             Msg::Press(x, y, time) => {
                 self.model.input.path = Vec::new();
+                self.model.input.path.push(Dot { x, y, time });
                 println!("Press");
             }
-            Msg::ButtonPressedLong(x, y, time) => {
+            Msg::ButtonPressedLong(x, y, _) => {
                 self.model.input.is_long_press = true;
-                //self.model.input.path = Vec::new();
                 println!("LongPress: x: {}, y: {}", x, y);
             }
             Msg::ButtonDrag(x, y, time) => {
-                //if !self.model.input.is_long_press {
                 self.model.input.path.push(Dot { x, y, time });
                 println!("Drag: x: {}, y: {}, time: {:?}", x, y, time);
-                //}
             }
             Msg::Release(x, y, time) => {
                 println!("Release: x: {}, y: {}, time: {:?}", x, y, time);
@@ -137,7 +96,7 @@ impl relm::Update for Win {
                 label_text.push_str("JoHo"); //String for testing
                 label_text.push_str(" ");
                 self.widgets.label.set_text(&label_text);
-                self.model.erase_path();
+                self.erase_path();
                 self.model.input.is_long_press = false;
                 self.model.input.path = Vec::new();
             }
@@ -154,7 +113,7 @@ impl relm::Update for Win {
                 }
             }
             Msg::UpdateDrawBuffer => {
-                self.model.draw_path();
+                self.draw_path();
             }
             Msg::Quit => gtk::main_quit(),
         }
@@ -190,6 +149,9 @@ impl relm::Widget for Win {
         }
 
         let drawing_area = gtk::DrawingArea::new();
+        let mut draw_handler = relm::DrawHandler::new().expect("draw handler");
+        draw_handler.init(&drawing_area);
+
         let overlay = gtk::Overlay::new();
         overlay.add(&layout_stack);
         overlay.add_overlay(&drawing_area);
@@ -252,13 +214,9 @@ impl relm::Widget for Win {
         );
         relm::connect!(
             drag_gesture,
-            connect_drag_begin(drag, x, y),
+            connect_drag_begin(_, x, y),
             &relm,
-            Msg::Press(
-                drag.get_start_point().unwrap().0 + x,
-                drag.get_start_point().unwrap().1 + y,
-                SystemTime::now()
-            )
+            Msg::Press(x, y, SystemTime::now())
         );
         relm::connect!(
             drag_gesture,
@@ -324,21 +282,65 @@ impl relm::Widget for Win {
 
         Win {
             model,
-            //relm: relm.clone(),
+            widgets: Widgets {
+                window,
+                label,
+                draw_handler,
+                layout_stack,
+            },
             _gestures: Gestures {
                 _long_press_gesture: long_press_gesture,
                 _drag_gesture: drag_gesture,
             },
-            widgets: Widgets {
-                drawing_area,
-                layout_stack,
-                label,
-                window,
-            },
         }
     }
-    fn init_view(&mut self) {
-        self.model.draw_handler.init(&self.widgets.drawing_area);
+}
+
+trait VisualizePath {
+    fn erase_path(&mut self);
+    fn draw_path(&mut self);
+}
+impl VisualizePath for Win {
+    fn erase_path(&mut self) {
+        let context = self.widgets.draw_handler.get_context();
+        context.set_operator(cairo::Operator::Clear);
+        context.set_source_rgba(0.0, 0.0, 0.0, 0.0);
+        context.paint();
+    }
+
+    fn draw_path(&mut self) {
+        if !self.model.input.is_long_press {
+            self.erase_path();
+            let context = self.widgets.draw_handler.get_context();
+            context.set_operator(cairo::Operator::Over);
+            context.set_source_rgba(
+                ui_defaults::PATHCOLOR.0,
+                ui_defaults::PATHCOLOR.1,
+                ui_defaults::PATHCOLOR.2,
+                ui_defaults::PATHCOLOR.3,
+            );
+            //let mut time_now = 0;
+            for dot in self
+                .model
+                .input
+                .path
+                .iter()
+                .rev()
+                .take(ui_defaults::PATHLENGTH)
+            {
+                // Only draw the last dots within a certain time period. Works but there would have to be a draw signal in a regular interval to make it look good
+                //if dot.time > time_now {
+                //    time_now = dot.time
+                //}
+                //if time_now - dot.time < PATHFADINGTIME {
+                context.line_to(dot.x, dot.y);
+                //} else {
+                //    break;
+                //}
+            }
+            context.set_line_width(ui_defaults::PATHWIDTH);
+            context.stroke();
+        }
     }
 }
 
