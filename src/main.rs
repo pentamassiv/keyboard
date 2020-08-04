@@ -23,9 +23,9 @@ use relm::Widget;
 
 mod config;
 mod layout;
+mod spacial_model;
 mod user_interface;
 
 fn main() {
-    let layouts = layout::LayoutParser::get_layouts();
-    user_interface::Win::run(layouts).unwrap();
+    user_interface::Win::run(()).unwrap();
 }

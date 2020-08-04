@@ -51,14 +51,16 @@ impl Layout {
             Err(err) => Err(err),
         }
     }
-    pub fn build_button_grid(
+    // Returns a grid with all the buttons and a tupel with the grids number of rows and columns
+    pub fn build_button_grid_and_its_dimensions(
         &self,
         relm: &relm::Relm<user_interface::Win>,
-    ) -> HashMap<String, gtk::Grid> {
+    ) -> HashMap<String, (gtk::Grid, (usize, usize))> {
         let mut result = HashMap::new();
         for (view_name, view) in &self.views {
             let grid = gtk::Grid::new();
-            //grid.set_column_homogeneous(true);
+            grid.set_column_homogeneous(true);
+            grid.set_row_homogeneous(true);
             //grid.set_hexpand(true);
             //grid.set_valign(gtk::Align::Fill);
             // Get a vector that contains a vector for each row of the view. The contained vector contains the sizes of the buttons
@@ -77,12 +79,9 @@ impl Layout {
                     relm::connect!(
                         relm,
                         button,
-                        connect_button_press_event(clicked_button, _),
-                        return (
-                            Some(user_interface::Msg::KeyPress(
-                                clicked_button.get_label().unwrap().to_string()
-                            )),
-                            gtk::Inhibit(false)
+                        connect_clicked(clicked_button),
+                        user_interface::Msg::KeyPress(
+                            clicked_button.get_label().unwrap().to_string()
                         )
                     );
                     vec_of_buttons_with_sizes.push((size_for_id, button));
@@ -91,20 +90,26 @@ impl Layout {
                 vec_row_widths.push(row_width);
             }
             //Get the widest row
-            let max_row_width = vec_row_widths
+            let max_row_width = *vec_row_widths
                 .iter()
                 .max()
                 .expect("View needs at least one button");
-            //let mut row_no = 0;
+            let mut max_row_heigth = 0;
             for (row_no, row) in vec_with_rows_of_buttons_and_sizes.into_iter().enumerate() {
                 let mut position = (max_row_width - vec_row_widths.get(row_no).unwrap()) / 2;
                 for (size, button) in row {
                     grid.attach(&button, position, row_no as i32, size, 1);
                     position += size;
                 }
-                //row_no += 1;
+                max_row_heigth = row_no + 1;
             }
-            result.insert(String::from(view_name), grid);
+            result.insert(
+                String::from(view_name),
+                (
+                    grid,
+                    (max_row_width.to_owned() as usize, max_row_heigth.to_owned()),
+                ),
+            );
         }
         result
     }
