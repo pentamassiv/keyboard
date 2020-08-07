@@ -2,8 +2,9 @@ use crate::config::directories;
 use crate::config::ui_defaults;
 use crate::spacial_model;
 //use glib::object::Cast;
-use gtk::GestureExt;
+use gtk::prelude::WidgetExtManual;
 use gtk::*;
+use gtk::{GestureExt, OverlayExt};
 use std::collections::HashMap;
 use std::time::Instant;
 
@@ -44,11 +45,12 @@ pub struct Model {
 #[derive(relm_derive::Msg)]
 pub enum Msg {
     Press(f64, f64, Instant),
-    ButtonPressedLong(f64, f64, Instant),
-    ButtonDrag(f64, f64, Instant),
+    LongPress(f64, f64, Instant),
+    Swipe(f64, f64, Instant),
     Release(f64, f64, Instant),
-    SuggestionPress(String),
-    KeyPress(String),
+    EnterInput(String, bool),
+    //EventButton(gdk::EventButton),
+    //EventMotion(gdk::EventMotion),
     UpdateDrawBuffer,
     Quit,
 }
@@ -62,8 +64,9 @@ struct Gestures {
 struct Widgets {
     window: Window,
     label: gtk::Label,
+    drawing_area: gtk::DrawingArea,
     draw_handler: relm::DrawHandler<DrawingArea>,
-    stack: gtk::Stack,
+    overlay: gtk::Overlay,
     layout_views: HashMap<String, Grid>,
 }
 
@@ -108,37 +111,29 @@ impl relm::Update for Win {
             Msg::Press(x, y, time) => {
                 self.model.input.path = Vec::new();
                 self.model.input.path.push(Dot { x, y, time });
-                //println!("Press");
+                println!("Press");
             }
-            Msg::ButtonPressedLong(x, y, _) => {
+            Msg::LongPress(x, y, _) => {
                 self.model.input.is_long_press = true;
-                //println!("LongPress: x: {}, y: {}", x, y);
+                println!("LongPress: x: {}, y: {}", x, y);
             }
-            Msg::ButtonDrag(x, y, time) => {
+            Msg::Swipe(x, y, time) => {
                 self.model.input.path.push(Dot { x, y, time });
-                //println!("Drag: x: {}, y: {}, time: {:?}", x, y, time);
+                println!("Drag: x: {}, y: {}, time: {:?}", x, y, time);
             }
             Msg::Release(x, y, time) => {
-                let button_to_activate = self.get_activated_button(x, y);
-                if let Some(button_to_activate) = button_to_activate {
-                    println!("Button detected!");
-                    button_to_activate.activate();
-                }
-                println!("Button NOT detected!");
-                self.erase_path();
+                //let button_to_activate = self.get_activated_button(x, y);
+                //if let Some(button_to_activate) = button_to_activate {
+                //    println!("Button detected!");
+                //    button_to_activate.activate();
+                //}
+                //self.erase_path();
+                println!("Release: x: {}, y: {}, time: {:?}", x, y, time);
                 self.model.input.is_long_press = false;
                 self.model.input.path = Vec::new();
             }
-            Msg::SuggestionPress(button_label) => {
-                let mut label_text = String::from(self.widgets.label.get_text());
-                label_text.push_str(&button_label);
-                label_text.push_str(" ");
-                self.widgets.label.set_text(&label_text);
-            }
-            Msg::KeyPress(button_label) => {
-                let mut label_text = String::from(self.widgets.label.get_text());
-                label_text.push_str(&button_label);
-                self.widgets.label.set_text(&label_text);
+            Msg::EnterInput(button_label, end_with_space) => {
+                self.type_input(&button_label, end_with_space);
             }
             Msg::UpdateDrawBuffer => {
                 self.draw_path();
@@ -180,10 +175,10 @@ impl relm::Widget for Win {
                 )
             }
         }
+
         let drawing_area = gtk::DrawingArea::new();
         let mut draw_handler = relm::DrawHandler::new().expect("draw handler");
         draw_handler.init(&drawing_area);
-
         let overlay = gtk::Overlay::new();
         overlay.add(&stack);
         overlay.add_overlay(&drawing_area);
@@ -233,13 +228,16 @@ impl relm::Widget for Win {
             &long_press_gesture,
             &drag_gesture,
             &window,
-            overlay,
-            suggestion_button_left,
-            suggestion_button_center,
-            suggestion_button_right,
+            &overlay,
+            &drawing_area,
+            &suggestion_button_left,
+            &suggestion_button_center,
+            &suggestion_button_right,
         );
 
         window.show_all();
+        //overlay.add_events(gdk::EventMask::BUTTON_PRESS_MASK);
+        //overlay.add_events(gdk::EventMask::POINTER_MOTION_MASK);
 
         // Set visible child MUST be called after show_all. Otherwise it takes no effect!
         stack.set_visible_child_name("us_base");
@@ -250,8 +248,9 @@ impl relm::Widget for Win {
             widgets: Widgets {
                 window,
                 label,
+                drawing_area,
                 draw_handler,
-                stack,
+                overlay,
                 layout_views,
             },
             _gestures: Gestures {
@@ -263,7 +262,15 @@ impl relm::Widget for Win {
 }
 
 impl Win {
-    fn get_activated_button(&self, x: f64, y: f64) -> Option<Widget> {
+    fn type_input(&self, input: &str, end_with_space: bool) {
+        let mut label_text = String::from(self.widgets.label.get_text());
+        label_text.push_str(&input);
+        if end_with_space {
+            label_text.push_str(" ");
+        }
+        self.widgets.label.set_text(&label_text);
+    }
+    /*fn get_activated_button(&self, x: f64, y: f64) -> Option<Widget> {
         let keyboard_allocation = self.widgets.stack.get_allocation();
         let keyboard_allocation_width = keyboard_allocation.width as f64;
         let keyboard_allocation_height = keyboard_allocation.height as f64;
@@ -293,7 +300,7 @@ impl Win {
         let column = column as i32;
         println!("Row_converted: {}, Column_converted: {}", row, column);
         grid.get_child_at(column, row)
-    }
+    }*/
     fn erase_path(&mut self) {
         let context = self.widgets.draw_handler.get_context();
         context.set_operator(cairo::Operator::Clear);
@@ -302,8 +309,8 @@ impl Win {
     }
 
     fn draw_path(&mut self) {
+        self.erase_path();
         if !self.model.input.is_long_press {
-            self.erase_path();
             let context = self.widgets.draw_handler.get_context();
             context.set_operator(cairo::Operator::Over);
             context.set_source_rgba(
@@ -340,34 +347,37 @@ fn connect_signals(
     long_press_gesture: &GestureLongPress,
     drag_gesture: &GestureDrag,
     window: &Window,
-    overlay: Overlay,
-    suggestion_button_left: Button,
-    suggestion_button_center: Button,
-    suggestion_button_right: Button,
+    overlay: &Overlay,
+    drawing_area: &DrawingArea,
+    suggestion_button_left: &Button,
+    suggestion_button_center: &Button,
+    suggestion_button_right: &Button,
 ) {
-    relm::connect!(
-        long_press_gesture,
-        connect_pressed(_, x, y),
-        relm,
-        Msg::ButtonPressedLong(x, y, Instant::now())
-    );
-
-    relm::connect!(
-        drag_gesture,
-        connect_drag_update(drag, x, y),
-        &relm,
-        Msg::ButtonDrag(
-            drag.get_start_point().unwrap().0 + x,
-            drag.get_start_point().unwrap().1 + y,
-            Instant::now()
-        )
-    );
     relm::connect!(
         drag_gesture,
         connect_drag_begin(_, x, y),
         &relm,
         Msg::Press(x, y, Instant::now())
     );
+
+    relm::connect!(
+        long_press_gesture,
+        connect_pressed(_, x, y), // Long press detected
+        relm,
+        Msg::LongPress(x, y, Instant::now()) //Maybe this should be an event and not a coordinate?
+    );
+
+    relm::connect!(
+        drag_gesture,
+        connect_drag_update(drag, x, y),
+        &relm,
+        Msg::Swipe(
+            drag.get_start_point().unwrap().0 + x,
+            drag.get_start_point().unwrap().1 + y,
+            Instant::now()
+        )
+    );
+
     relm::connect!(
         drag_gesture,
         connect_drag_end(drag, x, y),
@@ -392,8 +402,9 @@ fn connect_signals(
         suggestion_button_left,
         connect_button_press_event(clicked_button, _),
         return (
-            Some(Msg::SuggestionPress(
-                clicked_button.get_label().unwrap().to_string()
+            Some(Msg::EnterInput(
+                clicked_button.get_label().unwrap().to_string(),
+                true
             )),
             gtk::Inhibit(false)
         )
@@ -403,8 +414,9 @@ fn connect_signals(
         suggestion_button_center,
         connect_button_press_event(clicked_button, _),
         return (
-            Some(Msg::SuggestionPress(
-                clicked_button.get_label().unwrap().to_string()
+            Some(Msg::EnterInput(
+                clicked_button.get_label().unwrap().to_string(),
+                true
             )),
             gtk::Inhibit(false)
         )
@@ -414,12 +426,32 @@ fn connect_signals(
         suggestion_button_right,
         connect_button_press_event(clicked_button, _),
         return (
-            Some(Msg::SuggestionPress(
-                clicked_button.get_label().unwrap().to_string()
+            Some(Msg::EnterInput(
+                clicked_button.get_label().unwrap().to_string(),
+                true
             )),
             gtk::Inhibit(false)
         )
     );
+
+    /*relm::connect!(
+        relm,
+        drawing_area,
+        connect_button_press_event(_, event),
+        return (Some(Msg::EventButton(event.clone())), gtk::Inhibit(false))
+    );
+    relm::connect!(
+        relm,
+        drawing_area,
+        connect_button_release_event(_, event),
+        return (Some(Msg::EventButton(event.clone())), gtk::Inhibit(false))
+    );
+    relm::connect!(
+        relm,
+        drawing_area,
+        connect_motion_notify_event(_, event),
+        return (Some(Msg::EventMotion(event.clone())), gtk::Inhibit(false))
+    );*/
 
     relm::connect!(
         relm,

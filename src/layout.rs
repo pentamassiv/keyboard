@@ -76,14 +76,20 @@ impl Layout {
                     //button.set_size_request(1,2);
                     button.set_hexpand(true);
                     button.get_style_context().add_class("key");
+                    //button.set_sensitive(false);
                     relm::connect!(
                         relm,
                         button,
-                        connect_clicked(clicked_button),
-                        user_interface::Msg::KeyPress(
-                            clicked_button.get_label().unwrap().to_string()
+                        connect_button_release_event(clicked_button, _),
+                        return (
+                            Some(user_interface::Msg::EnterInput(
+                                clicked_button.get_label().unwrap().to_string(),
+                                false
+                            )),
+                            gtk::Inhibit(false)
                         )
                     );
+
                     vec_of_buttons_with_sizes.push((size_for_id, button));
                 }
                 vec_with_rows_of_buttons_and_sizes.push(vec_of_buttons_with_sizes);
