@@ -7,6 +7,9 @@ use std::collections::HashMap;
 use std::fs::File;
 use std::path;
 
+pub const RESOLUTIONX: i32 = 10000;
+pub const RESOLUTIONY: i32 = 10000;
+
 /// The root element describing an entire keyboard
 #[derive(Debug, Deserialize, PartialEq)]
 #[serde(deny_unknown_fields)]
@@ -52,10 +55,10 @@ impl Layout {
         }
     }
     // Returns a grid with all the buttons and a tupel with the grids number of rows and columns
-    pub fn build_button_grid_and_its_dimensions(
+    pub fn build_button_grids_and_spacial_model(
         &self,
         relm: &relm::Relm<user_interface::Win>,
-    ) -> HashMap<String, (gtk::Grid, (usize, usize))> {
+    ) -> HashMap<String, (gtk::Grid, super::spacial_model::SpacialModelView)> {
         let mut result = HashMap::new();
         for (view_name, view) in &self.views {
             let grid = gtk::Grid::new();
@@ -64,7 +67,7 @@ impl Layout {
             //grid.set_hexpand(true);
             //grid.set_valign(gtk::Align::Fill);
             // Get a vector that contains a vector for each row of the view. The contained vector contains the sizes of the buttons
-            let mut vec_with_rows_of_buttons_and_sizes = Vec::new();
+            let mut view_buttons_and_sizes = Vec::new();
             let mut vec_row_widths = Vec::new();
             for row in view {
                 let mut row_width = 0;
@@ -92,7 +95,7 @@ impl Layout {
 
                     vec_of_buttons_with_sizes.push((size_for_id, button));
                 }
-                vec_with_rows_of_buttons_and_sizes.push(vec_of_buttons_with_sizes);
+                view_buttons_and_sizes.push(vec_of_buttons_with_sizes);
                 vec_row_widths.push(row_width);
             }
             //Get the widest row
@@ -100,22 +103,26 @@ impl Layout {
                 .iter()
                 .max()
                 .expect("View needs at least one button");
-            let mut max_row_heigth = 0;
-            for (row_no, row) in vec_with_rows_of_buttons_and_sizes.into_iter().enumerate() {
+            let width_of_cell = RESOLUTIONX / max_row_width;
+            let height_of_cell = RESOLUTIONY / (vec_row_widths.len() as i32);
+            let half_width_of_cell = width_of_cell / 2;
+            let half_height_of_cell = height_of_cell / 2;
+            let mut spacial_model_view = super::spacial_model::SpacialModelView::new();
+            for (row_no, row) in view_buttons_and_sizes.into_iter().enumerate() {
                 let mut position = (max_row_width - vec_row_widths.get(row_no).unwrap()) / 2;
                 for (size, button) in row {
                     grid.attach(&button, position, row_no as i32, size, 1);
+                    for s in 0..size {
+                        spacial_model_view.add_button_coordinate(
+                            (position + s) * width_of_cell + half_width_of_cell,
+                            (row_no as i32) * height_of_cell + half_height_of_cell,
+                            button.clone(),
+                        )
+                    }
                     position += size;
                 }
-                max_row_heigth = row_no + 1;
             }
-            result.insert(
-                String::from(view_name),
-                (
-                    grid,
-                    (max_row_width.to_owned() as usize, max_row_heigth.to_owned()),
-                ),
-            );
+            result.insert(String::from(view_name), (grid, spacial_model_view));
         }
         result
     }
