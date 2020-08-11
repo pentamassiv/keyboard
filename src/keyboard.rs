@@ -114,16 +114,6 @@ impl Keyboard {
         }
     }
 
-    /*
-    // Returns a grid with all the buttons and a spacial model of the view
-        pub fn build_button_grids_and_spacial_model(
-            &self,
-            relm: &relm::Relm<user_interface::Win>,
-        ) -> HashMap<String, (gtk::Grid, super::keyboard::View)> {
-            }
-            result
-        }*/
-
     pub fn init(
         &mut self,
         layout_metas: HashMap<String, crate::layout_meta::LayoutMeta>,
@@ -177,19 +167,15 @@ impl Keyboard {
                     gtk::Inhibit(false)
                 )
             );*/
-            println!("layout: {}, view: {}", layout_name, view_name);
             let button_sizes = self.get_all_button_sizes(view_meta, &layout_meta);
-            println!("button_sizes: {:?}", button_sizes);
             let mut row_widths: Vec<i32> = Vec::new();
             for button_row in &button_sizes {
                 row_widths.push(button_row.iter().sum());
             }
-            println!("row_widths: {:?}", row_widths);
             let max_row_width: i32 = *row_widths
                 .iter()
                 .max()
                 .expect("View needs at least one button");
-            println!("max_row_width: {:?}", max_row_width);
             let width_of_cell = RESOLUTIONX / max_row_width;
             let height_of_cell = RESOLUTIONY / (row_widths.len() as i32);
             let half_width_of_cell = width_of_cell / 2;
@@ -206,7 +192,6 @@ impl Keyboard {
                             key_id.to_string(),
                         ));
                         if let Some(key) = key_option {
-                            println!("key to add: {}", key_id);
                             grid.attach(&key.button, position, row_no as i32, size, 1);
                             for s in 0..size {
                                 view.add_button_coordinate(
