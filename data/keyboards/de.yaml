@@ -1,30 +1,106 @@
 # Maintained by: Mark Müller <markmueller86@gmail.com>
 ---
-outlines:
-    c: Double
-    C: Double
-    2: Double
-    $: Double
-    ö: Double
-
 views:
     base:
         - "q w e r t z u i o p"
         - "a s d f g h j k l"
-        - "y x c v b n m"
+        - "Shift_L   y x c v b n m  BackSpace"
+        - "show_numbers show_eschars preferences         space        , . Return"
     upper:
         - "Q W E R T Z U I O P"
         - "A S D F G H J K L"
-        - "Y X C V B N M"
+        - "Shift_L   Y X C V B N M  BackSpace"
+        - "show_numbers show_eschars preferences         space        ! ? Return"
     numbers:
         - "1 2 3 4 5 6 7 8 9 0"
         - "@ # € % & - _ + ( )"
-        - ", \" ' : = < >"
+        - "show_symbols   , \" ' : = < >  BackSpace"
+        - "show_letters show_eschars preferences         space        , . Return"
     symbols:
         - "~ ` ´ | · √ µ ÷ × ¶"
         - "© ® £ $ ¥ ^ ° * { }"
-        - "\\ / § π τ [ ]"
+        - "show_numbers   \\ / § π τ [ ]  BackSpace"
+        - "show_letters show_eschars preferences         space        , . Return"
     eschars:
         - "ä è é ö ü Ä È É Ö Ü"
         - "à â ê î ô À Â È Î Ô"
-        - "« » ç Ç æ œ ß „ “"
+        - "show_numbers  « » ç Ç æ œ ß  BackSpace"
+        - "show_letters show_eschars preferences         space        „ “ Return"
+
+buttons:
+    Shift_L:
+        actions:
+            short_press:
+                - switch_view: upper
+            long_press:
+                - open_popup
+                - erase
+        key_display:
+            image: key-shift.svg
+        outline: standard
+        popup: ~
+    BackSpace:
+        actions:
+            short_press:
+                - erase
+        key_display:
+            image: edit-clear-symbolic.svg
+        outline: double
+        popup: ~
+    preferences:
+        actions:
+            short_press:
+                - switch_view: upper
+        outline: standard
+        key_display:
+            image: keyboard-mode-symbolic.svg
+    show_numbers:
+        actions:
+            short_press:
+                - switch_view: numbers
+        outline: standard
+        key_display:
+            text: 123
+    show_numbers_from_symbols:
+        actions:
+            short_press:
+                - switch_view: numbers
+        outline: standard
+        key_display:
+            text: 123
+    show_letters:
+        actions:
+            short_press:
+                - switch_view: base
+        outline: double
+        key_display:
+            text: ABC
+    show_symbols:
+        actions:
+            short_press:
+                - switch_view: symbols
+        outline: standard
+        key_display:
+            text: "*/="
+    period:
+        outline: standard
+        key_display:
+            text: "."
+    space:
+        outline: standard
+        key_display:
+            text: "space"
+    Return:
+        outline: standard
+        key_display:
+            image: key-enter.svg
+    colon:
+        key_display:
+            text: ":"
+    show_eschars:
+        actions:
+            short_press:
+                - switch_view: eschars
+        outline: standard
+        key_display:
+            text: "äÄ"

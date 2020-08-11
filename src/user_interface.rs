@@ -1,6 +1,6 @@
 use crate::config::directories;
 use crate::config::ui_defaults;
-use crate::spacial_model;
+use crate::keyboard;
 use gtk::*;
 use gtk::{GestureExt, OverlayExt};
 use std::collections::HashMap;
@@ -18,25 +18,8 @@ struct Input {
     path: Vec<Dot>,
 }
 
-pub struct Keyboard {
-    layout_name: String,
-    view_name: String,
-    spacial_model: spacial_model::SpacialModel,
-}
-impl Keyboard {
-    fn get_layout_view_name(&self) -> String {
-        Self::make_layout_view_name(&self.layout_name, &self.view_name)
-    }
-    pub fn make_layout_view_name(layout_name: &str, view_name: &str) -> String {
-        let mut layout_view_name = String::from(layout_name);
-        layout_view_name.push_str("_"); //Separator Character
-        layout_view_name.push_str(view_name);
-        layout_view_name
-    }
-}
-
 pub struct Model {
-    keyboard: Keyboard,
+    keyboard: keyboard::Keyboard,
     input: Input,
 }
 
@@ -62,7 +45,6 @@ struct Widgets {
     label: gtk::Label,
     draw_handler: relm::DrawHandler<DrawingArea>,
     stack: gtk::Stack,
-    layout_views: HashMap<String, Grid>,
 }
 
 //The gestures are never read but they can't be freed otherwise the gesture detection does not work
@@ -88,11 +70,7 @@ impl relm::Update for Win {
                 is_long_press: false,
                 path: Vec::new(),
             },
-            keyboard: Keyboard {
-                layout_name: "".to_string(),
-                view_name: "".to_string(),
-                spacial_model: spacial_model::SpacialModel::new(),
-            },
+            keyboard: keyboard::Keyboard::new(),
         }
     }
 
@@ -119,14 +97,11 @@ impl relm::Update for Win {
             }
             Msg::Release(x, y, time) => {
                 let (x_rel, y_rel) = self.get_rel_coordinates(x, y);
-                let layout_name = &self.model.keyboard.layout_name;
-                let view_name = &self.model.keyboard.view_name;
-                let button_to_activate = self.model.keyboard.spacial_model.get_closest_button(
-                    layout_name,
-                    view_name,
-                    x_rel,
-                    y_rel,
-                );
+                let (layout_name, view_name) = &self.model.keyboard.get_view_name();
+                let button_to_activate =
+                    self.model
+                        .keyboard
+                        .get_closest_button(layout_name, view_name, x_rel, y_rel);
                 if let Some(button_to_activate) = button_to_activate {
                     self.relm.stream().emit(Msg::EnterInput(
                         button_to_activate.get_label().unwrap().to_string(),
@@ -167,21 +142,12 @@ impl relm::Widget for Win {
 
         let stack = gtk::Stack::new();
         stack.set_transition_type(gtk::StackTransitionType::None);
-        let layouts = crate::layout::LayoutParser::get_layouts();
-        let mut layout_views = HashMap::new();
-        for (layout_name, layout) in layouts {
-            let view_grids = layout.build_button_grids_and_spacial_model(&relm);
-            for (view_name, (view_grid, spacial_model_view)) in view_grids {
-                let layout_view_name = Keyboard::make_layout_view_name(&layout_name, &view_name);
-                stack.add_named(&view_grid, &layout_view_name);
-                layout_views.insert(layout_view_name, view_grid);
-                model.keyboard.spacial_model.add_spacial_model(
-                    &layout_name,
-                    &view_name,
-                    spacial_model_view,
-                )
-            }
+        let layout_meta = crate::layout_meta::LayoutYamlParser::get_layouts();
+        let grids = model.keyboard.init(relm, layout_meta);
+        for (grid_name, grid) in grids {
+            stack.add_named(&grid, &grid_name);
         }
+
         let drawing_area = gtk::DrawingArea::new();
         let mut draw_handler = relm::DrawHandler::new().expect("draw handler");
         draw_handler.init(&drawing_area);
@@ -243,9 +209,11 @@ impl relm::Widget for Win {
         window.show_all();
 
         // Set visible child MUST be called after show_all. Otherwise it takes no effect!
-        stack.set_visible_child_name("us_base");
-        model.keyboard.view_name = String::from("base");
-        model.keyboard.layout_name = String::from("us");
+        let (layout_name, view_name) = model.keyboard.get_view_name();
+        stack.set_visible_child_name(&keyboard::Keyboard::make_view_name(
+            &layout_name,
+            &view_name,
+        ));
         Win {
             relm: relm.clone(),
             model,
@@ -254,7 +222,6 @@ impl relm::Widget for Win {
                 label,
                 draw_handler,
                 stack,
-                layout_views,
             },
             _gestures: Gestures {
                 _long_press_gesture: long_press_gesture,
@@ -277,8 +244,8 @@ impl Win {
     fn get_rel_coordinates(&self, x: f64, y: f64) -> (i32, i32) {
         let allocation = self.widgets.stack.get_allocation();
         let (width, height) = (allocation.width, allocation.height);
-        let x_rel = (crate::layout::RESOLUTIONX as f64 * (x / width as f64)) as i32;
-        let y_rel = (crate::layout::RESOLUTIONY as f64 * (y / height as f64)) as i32;
+        let x_rel = (crate::keyboard::RESOLUTIONX as f64 * (x / width as f64)) as i32;
+        let y_rel = (crate::keyboard::RESOLUTIONY as f64 * (y / height as f64)) as i32;
         (x_rel, y_rel)
     }
 
@@ -412,7 +379,6 @@ fn connect_signals(
         connect_draw(_, _),
         return (Some(Msg::UpdateDrawBuffer), gtk::Inhibit(false))
     );
-    
     // Connect the signal `delete_event` to send the `Quit` message.
     relm::connect!(
         relm,

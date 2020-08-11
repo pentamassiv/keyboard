@@ -22,8 +22,8 @@
 use relm::Widget;
 
 mod config;
-mod layout;
-mod spacial_model;
+mod keyboard;
+mod layout_meta;
 mod user_interface;
 
 fn main() {
