@@ -143,7 +143,7 @@ impl relm::Widget for Win {
         let stack = gtk::Stack::new();
         stack.set_transition_type(gtk::StackTransitionType::None);
         let layout_meta = crate::layout_meta::LayoutYamlParser::get_layouts();
-        let grids = model.keyboard.init(relm, layout_meta);
+        let grids = model.keyboard.init(layout_meta);
         for (grid_name, grid) in grids {
             stack.add_named(&grid, &grid_name);
         }

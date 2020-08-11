@@ -59,6 +59,8 @@ impl Key {
     fn from(key_id: &str, key_meta: Option<&KeyMeta>) -> Key {
         let button = gtk::Button::new();
         button.set_label(key_id);
+        button.set_hexpand(true);
+        button.get_style_context().add_class("key");
         let mut actions = Self::make_default_actions(key_id);
         if let Some(key_meta) = key_meta {
             if let Some(key_display_enum) = &key_meta.key_display {
@@ -86,7 +88,7 @@ impl Key {
 #[derive(Debug)]
 pub struct Keyboard {
     pub views: HashMap<(String, String), View>,
-    keys: HashMap<(String, String), Key>, //Key for HashMap is (layout_name, key_name)
+    keys: HashMap<(String, String, String), Key>, //Key for HashMap is (layout_name, key_name)
     active_view: (String, String),
     active_keys: Vec<Key>,
 }
@@ -115,12 +117,11 @@ impl Keyboard {
 
     pub fn init(
         &mut self,
-        relm: &relm::Relm<crate::user_interface::Win>,
         layout_metas: HashMap<String, crate::layout_meta::LayoutMeta>,
     ) -> HashMap<String, gtk::Grid> {
         let mut result = HashMap::new();
         for (layout_name, layout_meta) in layout_metas {
-            for (view_name, grid) in self.add_layout(relm, &layout_name, layout_meta) {
+            for (view_name, grid) in self.add_layout(&layout_name, layout_meta) {
                 let grid_name = Self::make_view_name(&layout_name, &view_name);
                 result.insert(grid_name, grid);
             }
@@ -140,13 +141,12 @@ impl Keyboard {
 
     fn add_layout(
         &mut self,
-        relm: &relm::Relm<crate::user_interface::Win>,
         layout_name: &str,
         layout_meta: crate::layout_meta::LayoutMeta,
     ) -> HashMap<String, gtk::Grid> {
         let mut result = HashMap::new();
         for (view_name, view_meta) in &layout_meta.views {
-            self.add_keys(layout_name, view_meta, &layout_meta.buttons);
+            self.add_keys(layout_name, view_name, view_meta, &layout_meta.buttons);
             let grid = gtk::Grid::new();
             grid.set_column_homogeneous(true);
             grid.set_row_homogeneous(true);
@@ -168,16 +168,19 @@ impl Keyboard {
                     gtk::Inhibit(false)
                 )
             );*/
-
+            println!("layout: {}, view: {}", layout_name, view_name);
             let button_sizes = self.get_all_button_sizes(view_meta, &layout_meta);
+            println!("button_sizes: {:?}", button_sizes);
             let mut row_widths: Vec<i32> = Vec::new();
             for button_row in &button_sizes {
                 row_widths.push(button_row.iter().sum());
             }
+            println!("row_widths: {:?}", row_widths);
             let max_row_width: i32 = *row_widths
                 .iter()
                 .max()
                 .expect("View needs at least one button");
+            println!("max_row_width: {:?}", max_row_width);
             let width_of_cell = RESOLUTIONX / max_row_width;
             let height_of_cell = RESOLUTIONY / (row_widths.len() as i32);
             let half_width_of_cell = width_of_cell / 2;
@@ -187,9 +190,14 @@ impl Keyboard {
                 let mut position = (max_row_width - row_widths[row_no]) / 2;
                 let mut button_id_iter = view_meta[row_no].split_ascii_whitespace();
                 for size in row {
-                    if let Some(key) = button_id_iter.next() {
-                        let key_option = self.keys.get(&(layout_name.to_string(), key.to_string()));
+                    if let Some(key_id) = button_id_iter.next() {
+                        let key_option = self.keys.get(&(
+                            layout_name.to_string(),
+                            view_name.to_string(),
+                            key_id.to_string(),
+                        ));
                         if let Some(key) = key_option {
+                            println!("key to add: {}", key_id);
                             grid.attach(&key.button, position, row_no as i32, size, 1);
                             for s in 0..size {
                                 view.add_button_coordinate(
@@ -217,21 +225,19 @@ impl Keyboard {
     fn add_keys(
         &mut self,
         layout_name: &str,
+        view_name: &str,
         view_meta: &Vec<String>,
         key_meta_hashmap: &HashMap<String, KeyMeta>,
     ) {
         for button_id_string in view_meta {
             for button_id in button_id_string.split_ascii_whitespace() {
-                if self
-                    .keys
-                    .contains_key(&(layout_name.to_string(), button_id.to_string()))
-                {
-                    return; // Key does not need to be added because it was added before
-                } else {
-                    let new_key = Key::from(button_id, key_meta_hashmap.get(button_id));
-                    self.keys
-                        .insert((layout_name.to_string(), button_id.to_string()), new_key);
-                }
+                self.keys
+                    .entry((
+                        layout_name.to_string(),
+                        view_name.to_string(),
+                        button_id.to_string(),
+                    ))
+                    .or_insert_with(|| Key::from(button_id, key_meta_hashmap.get(button_id)));
             }
         }
     }
