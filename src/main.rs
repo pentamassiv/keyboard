@@ -21,11 +21,11 @@
 
 use relm::Widget;
 
-mod layout;
+mod config;
+mod keyboard;
+mod layout_meta;
 mod user_interface;
 
 fn main() {
-    let layouts = layout::get_layouts();
-    //println!("{:?}", layouts);
-    user_interface::Win::run(layouts).unwrap();
+    user_interface::Win::run(()).unwrap();
 }
