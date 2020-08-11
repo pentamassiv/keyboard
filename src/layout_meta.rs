@@ -1,7 +1,5 @@
 use crate::config::directories;
 use crate::config::fallback_layout::FALLBACK_LAYOUT;
-use crate::user_interface;
-use gtk::{ButtonExt, GridExt, StyleContextExt, WidgetExt};
 use serde::Deserialize;
 use serde::Serialize;
 use std::collections::HashMap;

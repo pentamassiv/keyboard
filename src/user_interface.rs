@@ -3,7 +3,6 @@ use crate::config::ui_defaults;
 use crate::keyboard;
 use gtk::*;
 use gtk::{GestureExt, OverlayExt};
-use std::collections::HashMap;
 use std::time::Instant;
 
 #[derive(Clone)]

@@ -4,6 +4,7 @@ use serde::Deserialize;
 use serde::Serialize;
 use std::collections::HashMap;
 
+pub const ICON_FOLDER: &str = "./data/icons/";
 pub const RESOLUTIONX: i32 = 10000;
 pub const RESOLUTIONY: i32 = 10000;
 
@@ -66,7 +67,15 @@ impl Key {
             if let Some(key_display_enum) = &key_meta.key_display {
                 match key_display_enum {
                     KeyDisplay::Text(label_text) => button.set_label(&label_text),
-                    KeyDisplay::Image(icon_path) => {}
+                    KeyDisplay::Image(icon_name) => {
+                        let mut icon_path = String::from(ICON_FOLDER);
+                        icon_path.push_str(icon_name);
+                        println!("resource_path: {}", icon_path);
+                        let image = gtk::Image::from_file(&icon_path);
+                        button.set_image(Some(&image));
+                        button.set_always_show_image(true);
+                        button.set_label("");
+                    }
                 }
             }
             if let Some(key_actions) = &key_meta.actions {
@@ -226,7 +235,7 @@ impl Keyboard {
         &mut self,
         layout_name: &str,
         view_name: &str,
-        view_meta: &Vec<String>,
+        view_meta: &[String],
         key_meta_hashmap: &HashMap<String, KeyMeta>,
     ) {
         for button_id_string in view_meta {
@@ -260,7 +269,7 @@ impl Keyboard {
     }
     fn get_all_button_sizes(
         &self,
-        button_ids: &Vec<String>,
+        button_ids: &[String],
         layout_meta: &crate::layout_meta::LayoutMeta,
     ) -> Vec<Vec<i32>> {
         let mut button_sizes = Vec::new();

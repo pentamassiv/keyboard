@@ -3,12 +3,12 @@ views:
     base:
         - "q w e r t y u i o p"
         - "a s d f g h j k l"
-        - "Shift_L   z x c v b n m  BackSpace"
+        - "Shift_L_upper   z x c v b n m  BackSpace"
         - "show_numbers preferences         space        period Return"
     upper:
         - "Q W E R T Y U I O P"
         - "A S D F G H J K L"
-        - "Shift_L   Z X C V B N M  BackSpace"
+        - "Shift_L_base   Z X C V B N M  BackSpace"
         - "show_numbers preferences         space        period Return"
     numbers:
         - "1 2 3 4 5 6 7 8 9 0"
@@ -22,10 +22,21 @@ views:
         - "show_letters preferences         space        period Return"
 
 buttons:
-    Shift_L:
+    Shift_L_upper:
         actions:
             short_press:
                 - switch_view: upper
+            long_press:
+                - open_popup
+                - erase
+        key_display:
+            image: key-shift.svg
+        outline: standard
+        popup: ~
+    Shift_L_base:
+        actions:
+            short_press:
+                - switch_view: base
             long_press:
                 - open_popup
                 - erase
