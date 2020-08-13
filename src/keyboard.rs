@@ -1,5 +1,6 @@
 use crate::layout_meta::Outline;
-use gtk::{ButtonExt, GridExt, StyleContextExt, WidgetExt};
+use gtk::*;
+use gtk::{ButtonExt, GridExt, PopoverExt, StyleContextExt, WidgetExt};
 use serde::Deserialize;
 use serde::Serialize;
 use std::collections::HashMap;
@@ -17,16 +18,19 @@ pub struct KeyMeta {
     actions: Option<HashMap<KeyEvent, Vec<KeyAction>>>,
     key_display: Option<KeyDisplay>,
     pub outline: Option<Outline>,
-    popup: Option<Vec<KeyMeta>>,
+    popup: Option<Vec<String>>,
+    styles: Option<Vec<String>>,
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize, PartialEq, Eq, Hash)]
 #[serde(deny_unknown_fields)]
-enum KeyEvent {
+pub enum KeyEvent {
     #[serde(rename = "long_press")]
     LongPress,
     #[serde(rename = "short_press")]
     ShortPress,
+    #[serde(rename = "swipe")]
+    Swipe,
 }
 #[derive(Debug, Clone, Deserialize, Serialize, PartialEq, Eq, Hash)]
 #[serde(deny_unknown_fields)]
@@ -51,26 +55,36 @@ enum KeyDisplay {
     Image(String),
 }
 
-#[derive(Debug)]
-struct Key {
+#[derive(Debug, Clone)]
+pub struct Key {
     actions: HashMap<KeyEvent, Vec<KeyAction>>,
     button: gtk::Button,
+    popover: gtk::Popover,
 }
 impl Key {
-    fn from(key_id: &str, key_meta: Option<&KeyMeta>) -> Key {
+    fn from(
+        relm: &relm::Relm<crate::user_interface::Win>,
+        key_id: &str,
+        key_meta: Option<&KeyMeta>,
+    ) -> Key {
         let button = gtk::Button::new();
         button.set_label(key_id);
         button.set_hexpand(true);
         button.get_style_context().add_class("key");
+        let popover = gtk::Popover::new(Some(&button));
         let mut actions = Self::make_default_actions(key_id);
         if let Some(key_meta) = key_meta {
+            if let Some(style_classes) = &key_meta.styles {
+                for style_classes in style_classes {
+                    button.get_style_context().add_class(style_classes);
+                }
+            }
             if let Some(key_display_enum) = &key_meta.key_display {
                 match key_display_enum {
                     KeyDisplay::Text(label_text) => button.set_label(&label_text),
                     KeyDisplay::Image(icon_name) => {
                         let mut icon_path = String::from(ICON_FOLDER);
                         icon_path.push_str(icon_name);
-                        println!("resource_path: {}", icon_path);
                         let image = gtk::Image::from_file(&icon_path);
                         button.set_image(Some(&image));
                         button.set_always_show_image(true);
@@ -81,8 +95,35 @@ impl Key {
             if let Some(key_actions) = &key_meta.actions {
                 actions = key_actions.clone();
             }
+            if let Some(popup) = &key_meta.popup {
+                let hbox = gtk::Box::new(gtk::Orientation::Horizontal, 0);
+                for popup_string in popup {
+                    let new_popup_button = gtk::Button::new();
+                    new_popup_button.set_label(popup_string);
+                    hbox.add(&new_popup_button);
+                    let tmp_popover_ref = popover.clone();
+                    new_popup_button.connect_clicked(move |_| tmp_popover_ref.hide());
+                    relm::connect!(
+                        relm,
+                        new_popup_button,
+                        connect_button_release_event(clicked_button, _),
+                        return (
+                            Some(crate::user_interface::Msg::EnterInput(
+                                clicked_button.get_label().unwrap().to_string(),
+                                false,
+                            )),
+                            gtk::Inhibit(false)
+                        )
+                    );
+                }
+                popover.add(&hbox);
+            }
         }
-        Key { actions, button }
+        Key {
+            actions,
+            button,
+            popover,
+        }
     }
 
     fn make_default_actions(key_id: &str) -> HashMap<KeyEvent, Vec<KeyAction>> {
@@ -92,13 +133,43 @@ impl Key {
         actions.insert(key_event, vec![action_events]);
         actions
     }
+
+    pub fn activate(&self, win: &crate::user_interface::Win, key_event: &KeyEvent) {
+        let tmp_vec = Vec::new();
+        let actions_vec = self.actions.get(&key_event).unwrap_or(&tmp_vec);
+        for action in actions_vec {
+            match action {
+                KeyAction::EnterKeycode(keycode) => {
+                    win.relm
+                        .stream()
+                        .emit(crate::user_interface::Msg::EnterInput(
+                            keycode[0].clone(),
+                            false,
+                        ))
+                }
+                KeyAction::SwitchView(new_view) => {
+                    win.relm
+                        .stream()
+                        .emit(crate::user_interface::Msg::SwitchView(new_view.to_string()));
+                }
+                KeyAction::Erase => {
+                    win.relm.stream().emit(crate::user_interface::Msg::Erase);
+                }
+                KeyAction::OpenPopup => {
+                    self.popover.show_all();
+                }
+                _ => {}
+            }
+        }
+        self.button.activate();
+    }
 }
 
 #[derive(Debug)]
 pub struct Keyboard {
     pub views: HashMap<(String, String), View>,
     keys: HashMap<(String, String, String), Key>, //Key for HashMap is (layout_name, key_name)
-    active_view: (String, String),
+    pub active_view: (String, String),
     active_keys: Vec<Key>,
 }
 impl Keyboard {
@@ -116,11 +187,12 @@ impl Keyboard {
 
     pub fn init(
         &mut self,
+        relm: &relm::Relm<crate::user_interface::Win>,
         layout_metas: HashMap<String, crate::layout_meta::LayoutMeta>,
     ) -> HashMap<String, gtk::Grid> {
         let mut result = HashMap::new();
         for (layout_name, layout_meta) in layout_metas {
-            for (view_name, grid) in self.add_layout(&layout_name, layout_meta) {
+            for (view_name, grid) in self.add_layout(relm, &layout_name, layout_meta) {
                 let grid_name = Self::make_view_name(&layout_name, &view_name);
                 result.insert(grid_name, grid);
             }
@@ -140,12 +212,19 @@ impl Keyboard {
 
     fn add_layout(
         &mut self,
+        relm: &relm::Relm<crate::user_interface::Win>,
         layout_name: &str,
         layout_meta: crate::layout_meta::LayoutMeta,
     ) -> HashMap<String, gtk::Grid> {
         let mut result = HashMap::new();
         for (view_name, view_meta) in &layout_meta.views {
-            self.add_keys(layout_name, view_name, view_meta, &layout_meta.buttons);
+            self.add_keys(
+                relm,
+                layout_name,
+                view_name,
+                view_meta,
+                &layout_meta.buttons,
+            );
             let grid = gtk::Grid::new();
             grid.set_column_homogeneous(true);
             grid.set_row_homogeneous(true);
@@ -194,10 +273,10 @@ impl Keyboard {
                         if let Some(key) = key_option {
                             grid.attach(&key.button, position, row_no as i32, size, 1);
                             for s in 0..size {
-                                view.add_button_coordinate(
+                                view.add_key_coordinate(
                                     (position + s) * width_of_cell + half_width_of_cell,
                                     (row_no as i32) * height_of_cell + half_height_of_cell,
-                                    key.button.clone(),
+                                    (*key).clone(),
                                 )
                             }
                             position += size;
@@ -218,6 +297,7 @@ impl Keyboard {
 
     fn add_keys(
         &mut self,
+        relm: &relm::Relm<crate::user_interface::Win>,
         layout_name: &str,
         view_name: &str,
         view_meta: &[String],
@@ -231,23 +311,23 @@ impl Keyboard {
                         view_name.to_string(),
                         button_id.to_string(),
                     ))
-                    .or_insert_with(|| Key::from(button_id, key_meta_hashmap.get(button_id)));
+                    .or_insert_with(|| Key::from(relm, button_id, key_meta_hashmap.get(button_id)));
             }
         }
     }
 
-    pub fn get_closest_button(
+    pub fn get_closest_key(
         &self,
         layout_name: &str,
         view_name: &str,
         x: i32,
         y: i32,
-    ) -> Option<gtk::Button> {
-        if let Some(spacial_model_view) = self
+    ) -> Option<&Key> {
+        if let Some(view) = self
             .views
             .get(&(layout_name.to_string(), view_name.to_string()))
         {
-            spacial_model_view.get_closest_button(x, y)
+            view.get_closest_key(x, y)
         } else {
             None
         }
@@ -272,34 +352,34 @@ impl Keyboard {
 
 #[derive(Debug)]
 pub struct View {
-    button_coordinates: HashMap<(i32, i32), gtk::Button>,
+    key_coordinates: HashMap<(i32, i32), Key>,
 }
 
 impl View {
     pub fn new() -> View {
         View {
-            button_coordinates: HashMap::new(),
+            key_coordinates: HashMap::new(),
         }
     }
 
-    pub fn add_button_coordinate(&mut self, x: i32, y: i32, button: gtk::Button) {
-        self.button_coordinates.insert((x, y), button);
+    pub fn add_key_coordinate(&mut self, x: i32, y: i32, key: Key) {
+        self.key_coordinates.insert((x, y), key);
     }
 
-    fn get_closest_button(&self, input_x: i32, input_y: i32) -> Option<gtk::Button> {
-        let mut closest_button = None;
+    fn get_closest_key(&self, input_x: i32, input_y: i32) -> Option<&Key> {
+        let mut closest_key = None;
         let mut closest_distance = i32::MAX;
-        for (x, y) in self.button_coordinates.keys() {
+        for (x, y) in self.key_coordinates.keys() {
             let distance_new_point = self.get_distance((*x, *y), (input_x, input_y));
             if distance_new_point < closest_distance {
-                closest_button = self.button_coordinates.get(&(*x, *y));
+                closest_key = self.key_coordinates.get(&(*x, *y));
                 closest_distance = distance_new_point;
             }
         }
         let mut result = None;
-        if let Some(button) = closest_button {
-            let buttons = button.clone();
-            result = Some(buttons);
+        if let Some(key) = closest_key {
+            let keys = key;
+            result = Some(keys);
         }
         result
     }

@@ -32,7 +32,10 @@ buttons:
         key_display:
             image: key-shift.svg
         outline: standard
-        popup: ~
+        popup:
+            - a
+            - u
+            - b
     Shift_L_base:
         actions:
             short_press:
@@ -44,6 +47,8 @@ buttons:
             image: key-shift.svg
         outline: standard
         popup: ~
+        styles:
+            - locked
     BackSpace:
         actions:
             short_press:
@@ -51,7 +56,6 @@ buttons:
         key_display:
             image: edit-clear-symbolic.svg
         outline: double
-        popup: ~
     preferences:
         actions:
             short_press:
@@ -99,6 +103,8 @@ buttons:
         outline: standard
         key_display:
             image: key-enter.svg
+        styles:
+            - return
     colon:
         key_display:
             text: ":"

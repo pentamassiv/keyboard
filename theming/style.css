@@ -13,3 +13,14 @@
 .key{
   padding: 0px;
 }
+
+/*Change the style of the node with the style class modifier*/
+.return{
+  background: @theme_selected_bg_color; /* #1c71d8; */
+  border-color: @borders; /*#1a5fb4;*/
+}
+
+.locked{
+  background: whitesmoke;
+  border-color: @borders; /*#1a5fb4;*/
+}

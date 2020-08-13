@@ -2,7 +2,8 @@ use crate::config::directories;
 use crate::config::ui_defaults;
 use crate::keyboard;
 use gtk::*;
-use gtk::{GestureExt, OverlayExt};
+use gtk::{Button, GestureExt, OverlayExt};
+use std::collections::HashMap;
 use std::time::Instant;
 
 #[derive(Clone)]
@@ -13,7 +14,7 @@ struct Dot {
 }
 
 struct Input {
-    is_long_press: bool,
+    input_type: crate::keyboard::KeyEvent,
     path: Vec<Dot>,
 }
 
@@ -29,6 +30,9 @@ pub enum Msg {
     Swipe(f64, f64, Instant),
     Release(f64, f64, Instant),
     EnterInput(String, bool),
+    Erase,
+    SwitchView(String),
+    SwitchLayout(String),
     UpdateDrawBuffer,
     Quit,
 }
@@ -37,18 +41,21 @@ pub enum Msg {
 struct Gestures {
     _long_press_gesture: GestureLongPress,
     _drag_gesture: GestureDrag,
+    _pan_gesture: GesturePan,
 }
 
 struct Widgets {
     window: Window,
     label: gtk::Label,
+    //pref_popover: gtk::Popover,
+    //preferences_button: gtk::Button,
     draw_handler: relm::DrawHandler<DrawingArea>,
     stack: gtk::Stack,
 }
 
 //The gestures are never read but they can't be freed otherwise the gesture detection does not work
 pub struct Win {
-    relm: relm::Relm<Win>,
+    pub relm: relm::Relm<Win>,
     model: Model,
     widgets: Widgets,
     _gestures: Gestures,
@@ -66,7 +73,7 @@ impl relm::Update for Win {
     fn model(_: &relm::Relm<Self>, _: Self::ModelParam) -> Model {
         Model {
             input: Input {
-                is_long_press: false,
+                input_type: crate::keyboard::KeyEvent::ShortPress,
                 path: Vec::new(),
             },
             keyboard: keyboard::Keyboard::new(),
@@ -81,40 +88,64 @@ impl relm::Update for Win {
     // Widgets may also be updated in this function.
     fn update(&mut self, event: Msg) {
         match event {
-            Msg::Press(x, y, time) => {
-                self.model.input.path = Vec::new();
-                self.model.input.path.push(Dot { x, y, time });
+            Msg::Press(_, _, _) => {
+                self.model.input.input_type = crate::keyboard::KeyEvent::ShortPress;
+                //self.model.input.path = Vec::new();
+                //self.model.input.path.push(Dot { x, y, time });
                 println!("Press");
             }
             Msg::LongPress(x, y, _) => {
-                self.model.input.is_long_press = true;
+                self.model.input.input_type = crate::keyboard::KeyEvent::LongPress;
+                self.activate_button(x, y);
                 println!("LongPress: x: {}, y: {}", x, y);
             }
             Msg::Swipe(x, y, time) => {
-                self.model.input.path.push(Dot { x, y, time });
+                if !(self.model.input.input_type == crate::keyboard::KeyEvent::LongPress) {
+                    self.model.input.input_type = crate::keyboard::KeyEvent::Swipe;
+                    self.model.input.path.push(Dot { x, y, time });
+                }
                 println!("Drag: x: {}, y: {}, time: {:?}", x, y, time);
             }
             Msg::Release(x, y, time) => {
-                let (x_rel, y_rel) = self.get_rel_coordinates(x, y);
-                let (layout_name, view_name) = &self.model.keyboard.get_view_name();
-                let button_to_activate =
-                    self.model
-                        .keyboard
-                        .get_closest_button(layout_name, view_name, x_rel, y_rel);
-                if let Some(button_to_activate) = button_to_activate {
-                    self.relm.stream().emit(Msg::EnterInput(
-                        button_to_activate.get_label().unwrap().to_string(),
-                        false,
-                    ));
-                    button_to_activate.activate();
+                match self.model.input.input_type {
+                    crate::keyboard::KeyEvent::ShortPress => {
+                        self.activate_button(x, y);
+                    }
+                    crate::keyboard::KeyEvent::LongPress => {
+                        println!("LongPress");
+                    }
+                    crate::keyboard::KeyEvent::Swipe => {
+                        println!("Swipe");
+                    }
                 }
                 println!("Release: x: {}, y: {}, time: {:?}", x, y, time);
-                self.model.input.is_long_press = false;
                 self.model.input.path = Vec::new();
             }
             Msg::EnterInput(button_label, end_with_space) => {
                 println!("Input: {}", button_label);
                 self.type_input(&button_label, end_with_space);
+            }
+            Msg::SwitchView(new_view) => {
+                let layout_name = &self.model.keyboard.active_view.0;
+                self.widgets.stack.set_visible_child_name(
+                    &crate::keyboard::Keyboard::make_view_name(layout_name, &new_view),
+                );
+                self.model.keyboard.active_view = (layout_name.to_string(), new_view);
+            }
+            Msg::SwitchLayout(new_layout) => {
+                self.widgets.stack.set_visible_child_name(
+                    &crate::keyboard::Keyboard::make_view_name(&new_layout, "base"),
+                );
+                self.model.keyboard.active_view = (new_layout, "base".to_string());
+            }
+            Msg::Erase => {
+                let mut label_text = String::from(self.widgets.label.get_text());
+                let mut label_end = label_text.len();
+                if !label_text.is_empty() {
+                    label_end = label_text.len() - 1;
+                }
+                label_text = label_text[0..label_end].to_string();
+                self.widgets.label.set_text(&label_text);
             }
             Msg::UpdateDrawBuffer => {
                 self.draw_path();
@@ -142,7 +173,7 @@ impl relm::Widget for Win {
         let stack = gtk::Stack::new();
         stack.set_transition_type(gtk::StackTransitionType::None);
         let layout_meta = crate::layout_meta::LayoutYamlParser::get_layouts();
-        let grids = model.keyboard.init(layout_meta);
+        let grids = model.keyboard.init(relm, layout_meta);
         for (grid_name, grid) in grids {
             stack.add_named(&grid, &grid_name);
         }
@@ -157,14 +188,49 @@ impl relm::Widget for Win {
         let suggestion_button_left = gtk::Button::new();
         suggestion_button_left.set_label("sug_l");
         suggestion_button_left.set_hexpand(true);
+        suggestion_button_left.set_focus_on_click(false);
 
         let suggestion_button_center = gtk::Button::new();
         suggestion_button_center.set_label("sug_c");
         suggestion_button_center.set_hexpand(true);
+        suggestion_button_center.set_focus_on_click(false);
 
         let suggestion_button_right = gtk::Button::new();
         suggestion_button_right.set_label("sug_r");
         suggestion_button_right.set_hexpand(true);
+        suggestion_button_right.set_focus_on_click(false);
+
+        let preferences_button = gtk::Button::new();
+        preferences_button.set_label("pref");
+        preferences_button.set_hexpand(true);
+        preferences_button.set_focus_on_click(false);
+
+        let pref_popover = gtk::Popover::new(Some(&preferences_button));
+        let pref_vbox = gtk::Box::new(gtk::Orientation::Vertical, 0);
+        pref_popover.add(&pref_vbox);
+        let mut tmp_layouts = HashMap::new();
+        for (layout_name, _) in model.keyboard.views.keys() {
+            tmp_layouts.insert(layout_name, ());
+        }
+        for unique_layout_name in tmp_layouts.keys() {
+            let new_layout_button = gtk::Button::new();
+            new_layout_button.set_label(unique_layout_name);
+            pref_vbox.add(&new_layout_button);
+            let tmp_popover_ref = pref_popover.clone();
+            new_layout_button.connect_clicked(move |_| tmp_popover_ref.hide());
+            relm::connect!(
+                relm,
+                new_layout_button,
+                connect_button_release_event(clicked_button, _),
+                return (
+                    Some(crate::user_interface::Msg::SwitchLayout(
+                        clicked_button.get_label().unwrap().to_string()
+                    )),
+                    gtk::Inhibit(false)
+                )
+            );
+        }
+        preferences_button.connect_clicked(move |_| pref_popover.show_all());
 
         let hbox = gtk::Box::new(Orientation::Horizontal, 0);
         hbox.set_margin_start(0);
@@ -172,6 +238,7 @@ impl relm::Widget for Win {
         hbox.add(&suggestion_button_left);
         hbox.add(&suggestion_button_center);
         hbox.add(&suggestion_button_right);
+        hbox.add(&preferences_button);
 
         let frame = gtk::Frame::new(None);
         frame.add(&hbox);
@@ -192,7 +259,8 @@ impl relm::Widget for Win {
 
         let long_press_gesture = GestureLongPress::new(&drawing_area);
         let drag_gesture = GestureDrag::new(&drawing_area);
-        long_press_gesture.group(&drag_gesture); //Is the grouping necessary???
+        let pan_gesture = GesturePan::new(&hbox, gtk::Orientation::Horizontal);
+        //long_press_gesture.group(&drag_gesture); //Is the grouping necessary???
 
         connect_signals(
             relm,
@@ -219,12 +287,14 @@ impl relm::Widget for Win {
             widgets: Widgets {
                 window,
                 label,
+                //preferences_button,
                 draw_handler,
                 stack,
             },
             _gestures: Gestures {
                 _long_press_gesture: long_press_gesture,
                 _drag_gesture: drag_gesture,
+                _pan_gesture: pan_gesture,
             },
         }
     }
@@ -255,9 +325,21 @@ impl Win {
         context.paint();
     }
 
+    fn activate_button(&self, x: f64, y: f64) {
+        let (x_rel, y_rel) = self.get_rel_coordinates(x, y);
+        let (layout_name, view_name) = &self.model.keyboard.get_view_name();
+        if let Some(key_to_activate) =
+            self.model
+                .keyboard
+                .get_closest_key(layout_name, view_name, x_rel, y_rel)
+        {
+            key_to_activate.activate(self, &self.model.input.input_type);
+        }
+    }
+
     fn draw_path(&mut self) {
         self.erase_path();
-        if !self.model.input.is_long_press {
+        if self.model.input.input_type == crate::keyboard::KeyEvent::Swipe {
             let context = self.widgets.draw_handler.get_context();
             context.set_operator(cairo::Operator::Over);
             context.set_source_rgba(
@@ -329,9 +411,9 @@ fn connect_signals(
         connect_drag_end(drag, x, y),
         &relm,
         Msg::Release(
-            drag.get_start_point().unwrap().0 + x,
-            drag.get_start_point().unwrap().1 + y,
-            Instant::now()
+            drag.get_start_point().unwrap_or((-0.5, -0.5)).0 + x, // Hack to avoid crashing when long press on button opens popup. Apparently then there is no starting point
+            drag.get_start_point().unwrap_or((-0.5, -0.5)).1 + y,
+            Instant::now(),
         )
     );
 
