@@ -6,12 +6,55 @@ use std::collections::HashMap;
 use std::fs::File;
 use std::path;
 
+#[derive(Debug, Default, Clone, Deserialize, Serialize, PartialEq, Eq)]
+#[serde(deny_unknown_fields, default)]
+pub struct KeyMeta {
+    pub actions: Option<HashMap<KeyEvent, Vec<KeyAction>>>,
+    pub key_display: Option<KeyDisplay>,
+    pub outline: Option<Outline>,
+    pub popup: Option<Vec<String>>,
+    pub styles: Option<Vec<String>>,
+}
+
+#[derive(Debug, Clone, Deserialize, Serialize, PartialEq, Eq, Hash)]
+#[serde(deny_unknown_fields)]
+pub enum KeyEvent {
+    #[serde(rename = "long_press")]
+    LongPress,
+    #[serde(rename = "short_press")]
+    ShortPress,
+    #[serde(rename = "swipe")]
+    Swipe,
+}
+#[derive(Debug, Clone, Deserialize, Serialize, PartialEq, Eq, Hash)]
+#[serde(deny_unknown_fields)]
+pub enum KeyAction {
+    #[serde(rename = "modifier")]
+    Modifier(String),
+    #[serde(rename = "switch_view")]
+    SwitchView(String),
+    #[serde(rename = "erase")]
+    Erase,
+    #[serde(rename = "enter_keycode")]
+    EnterKeycode(Vec<String>),
+    #[serde(rename = "open_popup")]
+    OpenPopup,
+}
+#[derive(Debug, Clone, Deserialize, Serialize, PartialEq, Eq, Hash)]
+#[serde(deny_unknown_fields)]
+pub enum KeyDisplay {
+    #[serde(rename = "text")]
+    Text(String),
+    #[serde(rename = "image")]
+    Image(String),
+}
+
 /// The root element describing an entire keyboard
 #[derive(Debug, Deserialize, PartialEq)]
 #[serde(deny_unknown_fields)]
 pub struct LayoutMeta {
     pub views: HashMap<String, Vec<ButtonIds>>,
-    pub buttons: HashMap<String, crate::keyboard::KeyMeta>,
+    pub buttons: HashMap<String, KeyMeta>,
 }
 
 /// Buttons are embedded in a single string

@@ -1,6 +1,7 @@
 use crate::config::directories;
 use crate::config::ui_defaults;
 use crate::keyboard;
+use crate::layout_meta::*;
 use gtk::*;
 use gtk::{Button, GestureExt, OverlayExt};
 use std::collections::HashMap;
@@ -14,7 +15,7 @@ struct Dot {
 }
 
 struct Input {
-    input_type: crate::keyboard::KeyEvent,
+    input_type: KeyEvent,
     path: Vec<Dot>,
 }
 
@@ -73,7 +74,7 @@ impl relm::Update for Win {
     fn model(_: &relm::Relm<Self>, _: Self::ModelParam) -> Model {
         Model {
             input: Input {
-                input_type: crate::keyboard::KeyEvent::ShortPress,
+                input_type: KeyEvent::ShortPress,
                 path: Vec::new(),
             },
             keyboard: keyboard::Keyboard::new(),
@@ -89,32 +90,32 @@ impl relm::Update for Win {
     fn update(&mut self, event: Msg) {
         match event {
             Msg::Press(_, _, _) => {
-                self.model.input.input_type = crate::keyboard::KeyEvent::ShortPress;
+                self.model.input.input_type = KeyEvent::ShortPress;
                 //self.model.input.path = Vec::new();
                 //self.model.input.path.push(Dot { x, y, time });
                 println!("Press");
             }
             Msg::LongPress(x, y, _) => {
-                self.model.input.input_type = crate::keyboard::KeyEvent::LongPress;
+                self.model.input.input_type = KeyEvent::LongPress;
                 self.activate_button(x, y);
                 println!("LongPress: x: {}, y: {}", x, y);
             }
             Msg::Swipe(x, y, time) => {
-                if !(self.model.input.input_type == crate::keyboard::KeyEvent::LongPress) {
-                    self.model.input.input_type = crate::keyboard::KeyEvent::Swipe;
+                if !(self.model.input.input_type == KeyEvent::LongPress) {
+                    self.model.input.input_type = KeyEvent::Swipe;
                     self.model.input.path.push(Dot { x, y, time });
                 }
                 println!("Drag: x: {}, y: {}, time: {:?}", x, y, time);
             }
             Msg::Release(x, y, time) => {
                 match self.model.input.input_type {
-                    crate::keyboard::KeyEvent::ShortPress => {
+                    KeyEvent::ShortPress => {
                         self.activate_button(x, y);
                     }
-                    crate::keyboard::KeyEvent::LongPress => {
+                    KeyEvent::LongPress => {
                         println!("LongPress");
                     }
-                    crate::keyboard::KeyEvent::Swipe => {
+                    KeyEvent::Swipe => {
                         println!("Swipe");
                     }
                 }
@@ -339,7 +340,7 @@ impl Win {
 
     fn draw_path(&mut self) {
         self.erase_path();
-        if self.model.input.input_type == crate::keyboard::KeyEvent::Swipe {
+        if self.model.input.input_type == KeyEvent::Swipe {
             let context = self.widgets.draw_handler.get_context();
             context.set_operator(cairo::Operator::Over);
             context.set_source_rgba(

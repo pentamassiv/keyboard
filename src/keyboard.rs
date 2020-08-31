@@ -1,4 +1,4 @@
-use crate::layout_meta::Outline;
+use crate::layout_meta::*;
 use gtk::*;
 use gtk::{ButtonExt, GridExt, PopoverExt, StyleContextExt, WidgetExt};
 use serde::Deserialize;
@@ -11,49 +11,6 @@ pub const RESOLUTIONY: i32 = 10000;
 
 pub const KEYBOARD_DEFAULT_LAYOUT: &str = "us";
 pub const KEYBOARD_DEFAULT_VIEW: &str = "base";
-
-#[derive(Debug, Default, Clone, Deserialize, Serialize, PartialEq, Eq)]
-#[serde(deny_unknown_fields, default)]
-pub struct KeyMeta {
-    actions: Option<HashMap<KeyEvent, Vec<KeyAction>>>,
-    key_display: Option<KeyDisplay>,
-    pub outline: Option<Outline>,
-    popup: Option<Vec<String>>,
-    styles: Option<Vec<String>>,
-}
-
-#[derive(Debug, Clone, Deserialize, Serialize, PartialEq, Eq, Hash)]
-#[serde(deny_unknown_fields)]
-pub enum KeyEvent {
-    #[serde(rename = "long_press")]
-    LongPress,
-    #[serde(rename = "short_press")]
-    ShortPress,
-    #[serde(rename = "swipe")]
-    Swipe,
-}
-#[derive(Debug, Clone, Deserialize, Serialize, PartialEq, Eq, Hash)]
-#[serde(deny_unknown_fields)]
-enum KeyAction {
-    #[serde(rename = "modifier")]
-    Modifier(String),
-    #[serde(rename = "switch_view")]
-    SwitchView(String),
-    #[serde(rename = "erase")]
-    Erase,
-    #[serde(rename = "enter_keycode")]
-    EnterKeycode(Vec<String>),
-    #[serde(rename = "open_popup")]
-    OpenPopup,
-}
-#[derive(Debug, Clone, Deserialize, Serialize, PartialEq, Eq, Hash)]
-#[serde(deny_unknown_fields)]
-enum KeyDisplay {
-    #[serde(rename = "text")]
-    Text(String),
-    #[serde(rename = "image")]
-    Image(String),
-}
 
 #[derive(Debug, Clone)]
 pub struct Key {

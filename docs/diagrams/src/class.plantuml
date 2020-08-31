@@ -1,0 +1,186 @@
+@startuml user_interface
+!define DARKBLUE
+!includeurl https://raw.githubusercontent.com/grelltrier/RedDress-PlantUML/master/style.puml
+
+package user_interface {
+    class Dot {
+        x: f64
+        y: f64
+        time: Instant
+    }
+    class Input {
+        input_type: KeyEvent,
+        path: Vec<Dot>,
+    }
+    class Model {
+        keyboard: Keyboard
+        input: Input
+    }
+    enum Msg {
+        Press
+        LongPress
+        Swipe
+        Release
+        EnterInput
+        Erase
+        SwitchView
+        SwitchLayout
+        UpdateDrawBuffer
+        Quit
+    }
+    class Gestures {
+        _long_press_gesture: GestureLongPress,
+        _drag_gesture: GestureDrag,
+        _pan_gesture: GesturePan,
+    }
+    class Widgets {
+        window: Window,
+        label: gtk::Label,
+        draw_handler: relm::DrawHandler<DrawingArea>,
+        stack: gtk::Stack,
+    }
+    class Win {
+        type_input(&self, input: &str, end_with_space: bool)
+        get_rel_coordinates(&self, x: f64, y: f64): (i32, i32)
+        erase_path(&mut self)
+        activate_button(&self, x: f64, y: f64)
+        draw_path(&mut self)
+        connect_signals()
+        {static} load_css()
+    }
+    interface relm::Update {
+        model(_: &relm::Relm<Self>, _: Self::ModelParam): Model
+        subscriptions(&mut self, relm: &relm::Relm<Self>)
+        update(&mut self, event: Msg)
+    }
+    interface relm::Widget {
+        root(&self): Self::Root
+        view(relm: &relm::Relm<Self>, mut model: Self::Model): Self
+    }
+
+    Input -- layout_meta.KeyEvent
+    Input -- Dot
+    Model -- keyboard.Keyboard
+    Model -- Input
+    Win -- Widgets
+    Win -- Gestures
+    Win -- Model
+    class Win implements relm::Update
+    class Win implements relm::Widget
+    relm::Update - Msg : reacts_to
+}
+
+package keyboard {
+    
+    class Key {
+        actions: HashMap<KeyEvent, Vec<KeyAction>>
+        button: gtk::Button
+        popover: gtk::Popover
+        from(relm: &relm::Relm<Win>, key_id: &str, key_meta: Option<&KeyMeta>): Key
+        make_default_actions(key_id: &str): HashMap<KeyEvent, Vec<KeyAction>>
+        activate(&self, win: &Win, key_event: &KeyEvent)
+    }
+    class Keyboard {
+        pub views: HashMap<(String, String), View>
+        keys: HashMap<(String, String, String), Key>,
+        pub active_view: (String, String)
+        active_keys: Vec<Key>
+        new(): Keyboard
+        init(&mut self, relm: &relm::Relm<Win>, layout_metas: HashMap<String, LayoutMeta>): HashMap<String, gtk::Grid>
+        get_view_name(&self): (String, String)
+        make_view_name(layout_name: &str, view_name: &str): String
+        add_layout(&mut self, relm: &relm::Relm<Win>, layout_name: &str, layout_meta: LayoutMeta): HashMap<String, gtk::Grid>
+        add_view(&mut self, layout_name: &str, view_name: &str, view: View)
+        add_keys(&mut self, relm: &relm::Relm<Win>, layout_name: &str, view_name: &str, view_meta: &[String], key_meta_hashmap: &HashMap<String, KeyMeta>)
+        get_closest_key(&self, layout_name: &str, view_name: &str, x: i32, y: i32): Option<&Key>
+        get_all_button_sizes(&self, button_ids: &[String], layout_meta: &LayoutMeta): Vec<Vec<i32>>
+    }
+    class View {
+        key_coordinates: HashMap<(i32, i32), Key>
+        new(): View
+        add_key_coordinate(&mut self, x: i32, y: i32, key: Key)
+        get_closest_key(&self, input_x: i32, input_y: i32): Option<&Key>
+        get_distance(&self, coordinate_a: (i32, i32), coordinate_b: (i32, i32)): i32
+    }
+
+    Key -- layout_meta.KeyEvent
+    Key -- layout_meta.KeyAction
+    Key -- user_interface.Win
+
+    Keyboard -- View : has
+    Keyboard -- Key : has
+    Keyboard -- Key : are_active
+
+    View -- Key : saves_location
+}
+
+package layout_meta {
+    class KeyMeta {
+        actions: Option<HashMap<KeyEvent, Vec<KeyAction>>>
+        key_display: Option<KeyDisplay>
+        pub outline: Option<Outline>
+        popup: Option<Vec<String>>
+        styles: Option<Vec<String>>
+    }
+    enum KeyEvent {
+        LongPress
+        ShortPress
+        Swipe
+    }
+    enum KeyAction {
+        Modifier
+        SwitchView
+        Erase
+        EnterKeycode
+        OpenPopup
+    }
+    enum KeyDisplay {
+        Text
+        Image
+    }
+    class LayoutMeta {
+        pub views: HashMap<String, Vec<ButtonIds>>
+        pub buttons: HashMap<String, KeyMeta>
+        from(source: LayoutMetaSource): Result<(String, LayoutMeta), serde_yaml::Error>
+        get_size_of_button(&self, button_id: &str): i32
+    }
+    enum Outline {
+        Standard
+        Half
+        OneAndAHalf
+        Double
+        Quadruple
+    }
+    enum LayoutMetaSource {
+        YamlFile
+        FallbackStr
+    }
+    enum Action {
+        Locking
+        SetView
+        ShowPrefs
+        Erase
+    }
+    enum Modifier {
+        Control
+        Shift
+        Lock
+        Alt
+        Mod2
+        Mod3
+        Mod4
+        Mod5
+    }
+    abstract class LayoutYamlParser {
+        get_layouts(): HashMap<String, LayoutMeta>
+        add_layout_to_hashmap(hashmap_with_layouts: &mut HashMap<String, LayoutMeta>, layout_result: Result<(String, LayoutMeta), serde_yaml::Error>)
+    }
+    LayoutYamlParser "1" -- "n" LayoutMeta: creates
+    LayoutYamlParser "1" - "n" LayoutMetaSource: parses
+    LayoutMeta "n" -- "1" KeyMeta : consists_of
+    KeyMeta "n" -- "m" KeyEvent : describes
+    KeyMeta "n" -- "m" KeyAction : describes
+    KeyMeta "n" -- "1" KeyDisplay : describes
+    KeyMeta "n" -- "1" Outline : describes
+}
+@enduml
