@@ -61,6 +61,7 @@ package user_interface {
     Win *-- Widgets
     Win *-- Gestures
     Win *-- Model
+    Win -- keyboard.Key
     class Win implements relm::Update
     class Win implements relm::Widget
     relm::Update - Msg : reacts_to
@@ -78,7 +79,6 @@ package keyboard {
     }
     class Keyboard {
         {field} pub views: HashMap<(String, String), View>
-        {field} keys: HashMap<(String, String, String), Key>
         {field} pub active_view: (String, String)
         {field} active_keys: Vec<Key>
         new(): Keyboard
@@ -86,8 +86,6 @@ package keyboard {
         get_view_name(&self): (String, String)
         make_view_name(layout_name: &str, view_name: &str): String
         add_layout(&mut self, relm: &relm::Relm<Win>, layout_name: &str, layout_meta: LayoutMeta): HashMap<String, gtk::Grid>
-        add_view(&mut self, layout_name: &str, view_name: &str, view: View)
-        add_keys(&mut self, relm: &relm::Relm<Win>, layout_name: &str, view_name: &str, view_meta: &[String], key_meta_hashmap: &HashMap<String, KeyMeta>)
         get_closest_key(&self, layout_name: &str, view_name: &str, x: i32, y: i32): Option<&Key>
         get_all_button_sizes(&self, button_ids: &[String], layout_meta: &LayoutMeta): Vec<Vec<i32>>
     }
@@ -101,13 +99,11 @@ package keyboard {
 
     Key -- layout_meta.KeyEvent
     Key -- layout_meta.KeyAction
-    Key -- user_interface.Win
 
     Keyboard *-- View : has
-    Keyboard -- Key : has
     Keyboard -- Key : are_active
 
-    View -- Key : saves_location
+    View *-- Key : consists_of
 }
 
 package layout_meta {

@@ -123,7 +123,6 @@ impl Key {
 #[derive(Debug)]
 pub struct Keyboard {
     pub views: HashMap<(String, String), View>,
-    keys: HashMap<(String, String, String), Key>, //Key for HashMap is (layout_name, key_name)
     pub active_view: (String, String),
     active_keys: Vec<Key>,
 }
@@ -135,7 +134,6 @@ impl Keyboard {
                 String::from(KEYBOARD_DEFAULT_LAYOUT),
                 String::from(KEYBOARD_DEFAULT_VIEW),
             ),
-            keys: HashMap::new(),
             active_keys: Vec::new(),
         }
     }
@@ -173,34 +171,9 @@ impl Keyboard {
     ) -> HashMap<String, gtk::Grid> {
         let mut result = HashMap::new();
         for (view_name, view_meta) in &layout_meta.views {
-            self.add_keys(
-                relm,
-                layout_name,
-                view_name,
-                view_meta,
-                &layout_meta.buttons,
-            );
             let grid = gtk::Grid::new();
             grid.set_column_homogeneous(true);
             grid.set_row_homogeneous(true);
-            // Get a vector that contains a vector for each row of the view_meta. The contained vector contains the sizes of the buttons
-            //Get the widest row
-
-            /*let button = gtk::Button::with_label(button_id);
-            button.set_hexpand(true);
-            button.get_style_context().add_class("key");
-            relm::connect!(
-                relm,
-                button,
-                connect_button_release_event(clicked_button, _),
-                return (
-                    Some(crate::user_interface::Msg::EnterInput(
-                        clicked_button.get_label().unwrap().to_string(),
-                        false
-                    )),
-                    gtk::Inhibit(false)
-                )
-            );*/
             let button_sizes = self.get_all_button_sizes(view_meta, &layout_meta);
             let mut row_widths: Vec<i32> = Vec::new();
             for button_row in &button_sizes {
@@ -220,55 +193,24 @@ impl Keyboard {
                 let mut button_id_iter = view_meta[row_no].split_ascii_whitespace();
                 for size in row {
                     if let Some(key_id) = button_id_iter.next() {
-                        let key_option = self.keys.get(&(
-                            layout_name.to_string(),
-                            view_name.to_string(),
-                            key_id.to_string(),
-                        ));
-                        if let Some(key) = key_option {
-                            grid.attach(&key.button, position, row_no as i32, size, 1);
-                            for s in 0..size {
-                                view.add_key_coordinate(
-                                    (position + s) * width_of_cell + half_width_of_cell,
-                                    (row_no as i32) * height_of_cell + half_height_of_cell,
-                                    (*key).clone(),
-                                )
-                            }
-                            position += size;
+                        let key = Key::from(relm, key_id, layout_meta.buttons.get(key_id));
+                        grid.attach(&key.button, position, row_no as i32, size, 1);
+                        for s in 0..size {
+                            view.add_key_coordinate(
+                                (position + s) * width_of_cell + half_width_of_cell,
+                                (row_no as i32) * height_of_cell + half_height_of_cell,
+                                key.clone(),
+                            )
                         }
+                        position += size;
                     }
                 }
             }
             result.insert(String::from(view_name), grid);
-            self.add_view(layout_name, &view_name, view);
+            self.views
+                .insert((String::from(layout_name), String::from(view_name)), view);
         }
         result
-    }
-
-    pub fn add_view(&mut self, layout_name: &str, view_name: &str, view: View) {
-        self.views
-            .insert((String::from(layout_name), String::from(view_name)), view);
-    }
-
-    fn add_keys(
-        &mut self,
-        relm: &relm::Relm<crate::user_interface::Win>,
-        layout_name: &str,
-        view_name: &str,
-        view_meta: &[String],
-        key_meta_hashmap: &HashMap<String, KeyMeta>,
-    ) {
-        for button_id_string in view_meta {
-            for button_id in button_id_string.split_ascii_whitespace() {
-                self.keys
-                    .entry((
-                        layout_name.to_string(),
-                        view_name.to_string(),
-                        button_id.to_string(),
-                    ))
-                    .or_insert_with(|| Key::from(relm, button_id, key_meta_hashmap.get(button_id)));
-            }
-        }
     }
 
     pub fn get_closest_key(
