@@ -3,7 +3,7 @@ use crate::config::ui_defaults;
 use crate::keyboard;
 use crate::layout_meta::*;
 use gtk::*;
-use gtk::{Button, GestureExt, OverlayExt};
+use gtk::{Button, OverlayExt};
 use std::collections::HashMap;
 use std::time::Instant;
 

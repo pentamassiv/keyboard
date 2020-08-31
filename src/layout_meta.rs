@@ -26,6 +26,7 @@ pub enum KeyEvent {
     #[serde(rename = "swipe")]
     Swipe,
 }
+
 #[derive(Debug, Clone, Deserialize, Serialize, PartialEq, Eq, Hash)]
 #[serde(deny_unknown_fields)]
 pub enum KeyAction {
@@ -79,22 +80,6 @@ pub enum Outline {
 enum LayoutMetaSource {
     YamlFile(path::PathBuf),
     FallbackStr,
-}
-
-#[derive(Debug, Deserialize, PartialEq, Clone)]
-#[serde(deny_unknown_fields)]
-enum Action {
-    #[serde(rename = "locking")]
-    Locking {
-        lock_view: String,
-        unlock_view: String,
-    },
-    #[serde(rename = "set_view")]
-    SetView(String),
-    #[serde(rename = "show_prefs")]
-    ShowPrefs,
-    #[serde(rename = "erase")]
-    Erase,
 }
 
 #[derive(Debug, Clone, PartialEq, Deserialize)]

@@ -9,12 +9,8 @@ package user_interface {
         time: Instant
     }
     class Input {
-        input_type: KeyEvent,
-        path: Vec<Dot>,
     }
     class Model {
-        keyboard: Keyboard
-        input: Input
     }
     enum Msg {
         Press
@@ -58,13 +54,13 @@ package user_interface {
         view(relm: &relm::Relm<Self>, mut model: Self::Model): Self
     }
 
-    Input -- layout_meta.KeyEvent
-    Input -- Dot
-    Model -- keyboard.Keyboard
-    Model -- Input
-    Win -- Widgets
-    Win -- Gestures
-    Win -- Model
+    Input *-- layout_meta.KeyEvent
+    Input *-- Dot
+    Model *-- keyboard.Keyboard
+    Model *-- Input
+    Win *-- Widgets
+    Win *-- Gestures
+    Win *-- Model
     class Win implements relm::Update
     class Win implements relm::Widget
     relm::Update - Msg : reacts_to
@@ -81,10 +77,10 @@ package keyboard {
         activate(&self, win: &Win, key_event: &KeyEvent)
     }
     class Keyboard {
-        pub views: HashMap<(String, String), View>
-        keys: HashMap<(String, String, String), Key>,
-        pub active_view: (String, String)
-        active_keys: Vec<Key>
+        {field} pub views: HashMap<(String, String), View>
+        {field} keys: HashMap<(String, String, String), Key>
+        {field} pub active_view: (String, String)
+        {field} active_keys: Vec<Key>
         new(): Keyboard
         init(&mut self, relm: &relm::Relm<Win>, layout_metas: HashMap<String, LayoutMeta>): HashMap<String, gtk::Grid>
         get_view_name(&self): (String, String)
@@ -107,7 +103,7 @@ package keyboard {
     Key -- layout_meta.KeyAction
     Key -- user_interface.Win
 
-    Keyboard -- View : has
+    Keyboard *-- View : has
     Keyboard -- Key : has
     Keyboard -- Key : are_active
 
@@ -154,12 +150,6 @@ package layout_meta {
     enum LayoutMetaSource {
         YamlFile
         FallbackStr
-    }
-    enum Action {
-        Locking
-        SetView
-        ShowPrefs
-        Erase
     }
     enum Modifier {
         Control

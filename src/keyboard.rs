@@ -1,8 +1,6 @@
 use crate::layout_meta::*;
 use gtk::*;
-use gtk::{ButtonExt, GridExt, PopoverExt, StyleContextExt, WidgetExt};
-use serde::Deserialize;
-use serde::Serialize;
+use gtk::{ButtonExt, GridExt, StyleContextExt, WidgetExt};
 use std::collections::HashMap;
 
 pub const ICON_FOLDER: &str = "./data/icons/";
