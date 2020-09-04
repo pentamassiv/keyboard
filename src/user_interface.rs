@@ -2,6 +2,7 @@ use crate::config::directories;
 use crate::config::ui_defaults;
 use crate::keyboard;
 use crate::layout_meta::*;
+use crate::wayland_input::*;
 use gtk::*;
 use gtk::{Button, OverlayExt};
 use std::collections::HashMap;
@@ -60,6 +61,7 @@ pub struct Win {
     model: Model,
     widgets: Widgets,
     _gestures: Gestures,
+    input_handler: InputHandler,
 }
 
 impl relm::Update for Win {
@@ -93,6 +95,7 @@ impl relm::Update for Win {
                 self.model.input.input_type = KeyEvent::ShortPress;
                 //self.model.input.path = Vec::new();
                 //self.model.input.path.push(Dot { x, y, time });
+                self.input_handler.enter_key();
                 println!("Press");
             }
             Msg::LongPress(x, y, _) => {
@@ -274,6 +277,8 @@ impl relm::Widget for Win {
             &suggestion_button_right,
         );
 
+        let input_handler = crate::wayland_input::init_wayland(&window);
+
         window.show_all();
 
         // Set visible child MUST be called after show_all. Otherwise it takes no effect!
@@ -297,6 +302,7 @@ impl relm::Widget for Win {
                 _drag_gesture: drag_gesture,
                 _pan_gesture: pan_gesture,
             },
+            input_handler,
         }
     }
 }
