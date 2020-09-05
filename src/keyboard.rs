@@ -116,7 +116,7 @@ impl Key {
                 _ => {}
             }
         }
-        self.button.activate();
+        //self.button.activate(); // Disabled, because the transition takes too long and makes it looks sluggish
     }
 }
 

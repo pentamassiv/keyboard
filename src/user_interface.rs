@@ -95,20 +95,19 @@ impl relm::Update for Win {
                 self.model.input.input_type = KeyEvent::ShortPress;
                 //self.model.input.path = Vec::new();
                 //self.model.input.path.push(Dot { x, y, time });
-                self.input_handler.enter_key();
-                println!("Press");
+                //println!("Press");
             }
             Msg::LongPress(x, y, _) => {
                 self.model.input.input_type = KeyEvent::LongPress;
                 self.activate_button(x, y);
-                println!("LongPress: x: {}, y: {}", x, y);
+                //println!("LongPress: x: {}, y: {}", x, y);
             }
             Msg::Swipe(x, y, time) => {
                 if !(self.model.input.input_type == KeyEvent::LongPress) {
                     self.model.input.input_type = KeyEvent::Swipe;
                     self.model.input.path.push(Dot { x, y, time });
                 }
-                println!("Drag: x: {}, y: {}, time: {:?}", x, y, time);
+                //println!("Drag: x: {}, y: {}, time: {:?}", x, y, time);
             }
             Msg::Release(x, y, time) => {
                 match self.model.input.input_type {
@@ -116,17 +115,18 @@ impl relm::Update for Win {
                         self.activate_button(x, y);
                     }
                     KeyEvent::LongPress => {
-                        println!("LongPress");
+                        //println!("LongPress");
                     }
                     KeyEvent::Swipe => {
-                        println!("Swipe");
+                        //println!("Swipe");
                     }
                 }
-                println!("Release: x: {}, y: {}, time: {:?}", x, y, time);
+                //println!("Release: x: {}, y: {}, time: {:?}", x, y, time);
                 self.model.input.path = Vec::new();
             }
             Msg::EnterInput(button_label, end_with_space) => {
-                println!("Input: {}", button_label);
+                //println!("Input: {}", button_label);
+                self.input_handler.send_key(&button_label);
                 self.type_input(&button_label, end_with_space);
             }
             Msg::SwitchView(new_view) => {

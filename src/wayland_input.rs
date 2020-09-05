@@ -23,8 +23,6 @@ type wl_seat = libc::c_void;
 extern "C" {
     fn gdk_wayland_display_get_wl_display(display: *mut GdkDisplay) -> *mut wl_display;
     fn gdk_wayland_seat_get_wl_seat(seat: *mut GdkSeat) -> *mut wl_seat;
-//fn gdk_wayland_window_set_use_custom_surface(window: *mut GdkWindow);
-//fn gdk_wayland_window_get_wl_surface(window: *mut GdkWindow) -> *mut wl_surface;
 }
 
 pub fn init_wayland(window: &gtk::Window) -> InputHandler {
@@ -54,14 +52,10 @@ fn make_overlay_layer(window: gtk::Window) {
     // Order above normal windows
     gtk_layer_shell::set_layer(&window, gtk_layer_shell::Layer::Overlay);
 
-    // Push other windows out of the way
-    //gtk_layer_shell::auto_exclusive_zone_enable(&window);
-
     // The margins are the gaps around the window's edges
     // Margins and anchors can be set like this...
     gtk_layer_shell::set_margin(&window, gtk_layer_shell::Edge::Left, 0);
     gtk_layer_shell::set_margin(&window, gtk_layer_shell::Edge::Right, 0);
-    //gtk_layer_shell::set_margin(&window, gtk_layer_shell::Edge::Top, 20);
     // ... or like this
     // Anchors are if the window is pinned to each edge of the output
     gtk_layer_shell::set_anchor(&window, gtk_layer_shell::Edge::Left, true);
@@ -70,11 +64,10 @@ fn make_overlay_layer(window: gtk::Window) {
     gtk_layer_shell::set_anchor(&window, gtk_layer_shell::Edge::Bottom, true);
 }
 
-//wlr_layer_shell
 fn get_wayland_globals(global_manager: &GlobalManager) -> HashMap<String, (u32, u32)> {
+    let mut globals = HashMap::new();
     // GlobalManager::list() provides a list of all globals advertized by the
     // server
-    let mut globals = HashMap::new();
     for (wayland_no, interface, version_no) in global_manager.list() {
         globals.insert(interface, (wayland_no, version_no));
     }
@@ -141,7 +134,7 @@ fn init_virtual_keyboard(
         .read(true)
         .write(true)
         .create(true)
-        .open("test.mmap")
+        .open("keymap.mmap")
         .expect("Unable to open file");
 
     // Allocate space in the file first
@@ -161,20 +154,47 @@ fn init_virtual_keyboard(
     virtual_keyboard
 }
 
+enum KeyMotion {
+    Press = 1,
+    Release = 0,
+}
+
 pub struct InputHandler {
     base_time: std::time::Instant,
     virtual_keyboard: Option<wayland_client::Main<ZwpVirtualKeyboardV1>>,
 }
 impl InputHandler {
-    pub fn enter_key(&self) {
+    fn enter_key(&self, keycode: u32, key_motion: u32) {
         if let Some(virtual_keyboard) = &self.virtual_keyboard {
             let duration = self.base_time.elapsed();
             let time = duration.as_millis();
             let time = time.try_into().unwrap();
-            let key = 33; // F key
-
-            virtual_keyboard.key(time, key, 1);
-            virtual_keyboard.key(time, key, 0);
+            virtual_keyboard.key(time, keycode, key_motion);
         }
+    }
+
+    pub fn send_str(&self, string: &str) {}
+    pub fn send_char(&self, character: char) {}
+
+    //fn send_combo(&self, combo_vec: Vec<KeyCode>) {
+    //Key::Physical(Physical::E),
+    //Key::Unicode('c'),
+    //Key::Unicode('h'),
+    //Key::Unicode('o'),
+    //}
+    // Press and then release the key
+    pub fn send_key(&self, keycode: &str) {
+        if let Some(keycode) = input_event_codes_hashmap::KEY.get(keycode) {
+            self.press_key(*keycode);
+            self.release_key(*keycode);
+        }
+    }
+
+    fn press_key(&self, keycode: u32) {
+        self.enter_key(keycode, KeyMotion::Press as u32);
+    }
+
+    fn release_key(&self, keycode: u32) {
+        self.enter_key(keycode, KeyMotion::Release as u32);
     }
 }
