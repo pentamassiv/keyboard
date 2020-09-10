@@ -2,7 +2,7 @@ use crate::config::directories;
 use crate::config::ui_defaults;
 use crate::keyboard;
 use crate::layout_meta::*;
-use crate::wayland_input::*;
+use crate::wayland::*;
 use gtk::*;
 use gtk::{Button, OverlayExt};
 use std::collections::HashMap;
@@ -33,6 +33,7 @@ pub enum Msg {
     Release(f64, f64, Instant),
     EnterInput(String, bool),
     Erase,
+    Modifier(Modifier),
     SwitchView(String),
     SwitchLayout(String),
     UpdateDrawBuffer,
@@ -61,7 +62,7 @@ pub struct Win {
     model: Model,
     widgets: Widgets,
     _gestures: Gestures,
-    input_handler: InputHandler,
+    submission: Submission,
 }
 
 impl relm::Update for Win {
@@ -126,7 +127,7 @@ impl relm::Update for Win {
             }
             Msg::EnterInput(button_label, end_with_space) => {
                 //println!("Input: {}", button_label);
-                self.input_handler.send_key(&button_label);
+                self.submission.send_key(&button_label);
                 self.type_input(&button_label, end_with_space);
             }
             Msg::SwitchView(new_view) => {
@@ -135,6 +136,12 @@ impl relm::Update for Win {
                     &crate::keyboard::Keyboard::make_view_name(layout_name, &new_view),
                 );
                 self.model.keyboard.active_view = (layout_name.to_string(), new_view);
+            }
+            Msg::Modifier(modifier) => {
+                if modifier == Modifier::Shift {
+                    println!("SHift");
+                    self.submission.shift();
+                }
             }
             Msg::SwitchLayout(new_layout) => {
                 self.widgets.stack.set_visible_child_name(
@@ -277,7 +284,7 @@ impl relm::Widget for Win {
             &suggestion_button_right,
         );
 
-        let input_handler = crate::wayland_input::init_wayland(&window);
+        let submission = init_wayland();
 
         window.show_all();
 
@@ -302,7 +309,7 @@ impl relm::Widget for Win {
                 _drag_gesture: drag_gesture,
                 _pan_gesture: pan_gesture,
             },
-            input_handler,
+            submission,
         }
     }
 }

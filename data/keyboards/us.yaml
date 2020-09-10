@@ -26,6 +26,7 @@ buttons:
         actions:
             short_press:
                 - switch_view: upper
+                - modifier: Shift
             long_press:
                 - open_popup
                 - erase

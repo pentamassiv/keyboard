@@ -31,7 +31,7 @@ pub enum KeyEvent {
 #[serde(deny_unknown_fields)]
 pub enum KeyAction {
     #[serde(rename = "modifier")]
-    Modifier(String),
+    Modifier(Modifier),
     #[serde(rename = "switch_view")]
     SwitchView(String),
     #[serde(rename = "erase")]
@@ -82,9 +82,9 @@ enum LayoutMetaSource {
     FallbackStr,
 }
 
-#[derive(Debug, Clone, PartialEq, Deserialize)]
+#[derive(Debug, Clone, Deserialize, Serialize, PartialEq, Eq, Hash)]
 #[serde(deny_unknown_fields)]
-enum Modifier {
+pub enum Modifier {
     Control,
     Shift,
     Lock,

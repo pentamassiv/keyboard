@@ -107,6 +107,10 @@ impl Key {
                         .stream()
                         .emit(crate::user_interface::Msg::SwitchView(new_view.to_string()));
                 }
+                KeyAction::Modifier(modifier) => win
+                    .relm
+                    .stream()
+                    .emit(crate::user_interface::Msg::Modifier(modifier.clone())),
                 KeyAction::Erase => {
                     win.relm.stream().emit(crate::user_interface::Msg::Erase);
                 }

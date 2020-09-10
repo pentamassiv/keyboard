@@ -25,7 +25,7 @@ mod config;
 mod keyboard;
 mod layout_meta;
 mod user_interface;
-mod wayland_input;
+mod wayland;
 
 fn main() {
     user_interface::Win::run(()).unwrap();
