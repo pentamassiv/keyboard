@@ -31,7 +31,8 @@ pub enum Msg {
     LongPress(f64, f64, Instant),
     Swipe(f64, f64, Instant),
     Release(f64, f64, Instant),
-    EnterInput(String, bool),
+    EnterKeycode(String, bool),
+    EnterString(String, bool),
     Erase,
     Modifier(Modifier),
     SwitchView(String),
@@ -125,7 +126,12 @@ impl relm::Update for Win {
                 //println!("Release: x: {}, y: {}, time: {:?}", x, y, time);
                 self.model.input.path = Vec::new();
             }
-            Msg::EnterInput(button_label, end_with_space) => {
+            Msg::EnterKeycode(button_label, end_with_space) => {
+                //println!("Input: {}", button_label);
+                self.submission.send_key(&button_label);
+                self.type_input(&button_label, end_with_space);
+            }
+            Msg::EnterString(button_label, end_with_space) => {
                 //println!("Input: {}", button_label);
                 self.submission.send_key(&button_label);
                 self.type_input(&button_label, end_with_space);
@@ -139,7 +145,7 @@ impl relm::Update for Win {
             }
             Msg::Modifier(modifier) => {
                 if modifier == Modifier::Shift {
-                    println!("SHift");
+                    println!("Shift");
                     self.submission.shift();
                 }
             }

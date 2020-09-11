@@ -37,7 +37,9 @@ pub enum KeyAction {
     #[serde(rename = "erase")]
     Erase,
     #[serde(rename = "enter_keycode")]
-    EnterKeycode(Vec<String>),
+    EnterKeycode(String),
+    #[serde(rename = "enter_string")]
+    EnterString(String),
     #[serde(rename = "open_popup")]
     OpenPopup,
 }

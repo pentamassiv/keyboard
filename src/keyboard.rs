@@ -63,7 +63,7 @@ impl Key {
                         new_popup_button,
                         connect_button_release_event(clicked_button, _),
                         return (
-                            Some(crate::user_interface::Msg::EnterInput(
+                            Some(crate::user_interface::Msg::EnterString(
                                 clicked_button.get_label().unwrap().to_string(),
                                 false,
                             )),
@@ -97,8 +97,8 @@ impl Key {
                 KeyAction::EnterKeycode(keycode) => {
                     win.relm
                         .stream()
-                        .emit(crate::user_interface::Msg::EnterInput(
-                            keycode[0].clone(),
+                        .emit(crate::user_interface::Msg::EnterString(
+                            keycode.to_string(),
                             false,
                         ))
                 }

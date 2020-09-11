@@ -4,13 +4,11 @@ use wayland_protocols::wlr::unstable::layer_shell::v1::client::zwlr_layer_shell_
 use zwp_virtual_keyboard::virtual_keyboard_unstable_v1::zwp_virtual_keyboard_manager_v1::ZwpVirtualKeyboardManagerV1;
 
 use zwp_input_method::input_method_unstable_v2::zwp_input_method_manager_v2::ZwpInputMethodManagerV2;
-use zwp_input_method::input_method_unstable_v2::zwp_input_method_v2::ZwpInputMethodV2;
 
-pub mod input_method;
 pub mod keymap;
 pub mod layer_shell;
-pub mod submission;
-pub mod virtual_keyboard;
+pub mod submitter;
+mod vk_service;
 
 fn get_wl_display_global_mgr() -> (Display, GlobalManager) {
     let display = Display::connect_to_name("wayland-0").unwrap();
@@ -62,11 +60,11 @@ fn try_get_mgrs(
 ) -> (
     Option<wayland_client::Main<ZwlrLayerShellV1>>,
     Option<wayland_client::Main<ZwpVirtualKeyboardManagerV1>>,
-    Option<wayland_client::Main<ZwpInputMethodV2>>,
+    Option<wayland_client::Main<ZwpInputMethodManagerV2>>,
 ) {
     let layer_shell_option = None;
     let virtual_keyboard_option = None;
-    let input_method_option = None;
+    let input_method_mgr_option = None;
     if let Ok(layer_shell) = get_wl_layer_shell(global_mgr) {
         let layer_shell_option = Some(layer_shell);
     //let window_clone = window.clone();
@@ -76,24 +74,30 @@ fn try_get_mgrs(
     }
     if let Ok(vk_mgr) = get_wl_vk_manager(global_mgr) {
         let virtual_keyboard = vk_mgr.create_virtual_keyboard(seat);
-        let virtual_keyboard = virtual_keyboard::init_virtual_keyboard(virtual_keyboard);
         let virtual_keyboard_option = Some(virtual_keyboard);
+    } else {
+        println!("Sorry, but your wayland compositor does not understand wp_virtual_keyboard. The keyboard is started with a label to enter the text");
+    }
+    if let Ok(im_mgr) = get_wl_im_manager(global_mgr) {
+        let input_method_mgr_option = Some(im_mgr);
     } else {
         println!("Sorry, but your wayland compositor does not understand wp_virtual_keyboard. The keyboard is started with a label to enter the text");
     }
     (
         layer_shell_option,
         virtual_keyboard_option,
-        input_method_option,
+        input_method_mgr_option,
     )
 }
 
 pub fn init_wayland() -> (
+    Main<WlSeat>,
     Option<wayland_client::Main<ZwlrLayerShellV1>>,
     Option<wayland_client::Main<ZwpVirtualKeyboardManagerV1>>,
-    Option<wayland_client::Main<ZwpInputMethodV2>>,
+    Option<wayland_client::Main<ZwpInputMethodManagerV2>>,
 ) {
     let (display, global_mgr) = get_wl_display_global_mgr();
     let seat = get_wl_seat(global_mgr);
-    try_get_mgrs(&global_mgr, &seat)
+    let (layer_shell, vk_mgr, im_mgr) = try_get_mgrs(&global_mgr, &seat);
+    (seat, layer_shell, vk_mgr, im_mgr)
 }
