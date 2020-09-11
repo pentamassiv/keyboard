@@ -5,13 +5,15 @@ use zwp_virtual_keyboard::virtual_keyboard_unstable_v1::zwp_virtual_keyboard_man
 
 use zwp_input_method::input_method_unstable_v2::zwp_input_method_manager_v2::ZwpInputMethodManagerV2;
 
+mod connector;
 pub mod keymap;
 pub mod layer_shell;
 pub mod submitter;
 mod vk_service;
 
 fn get_wl_display_global_mgr() -> (Display, GlobalManager) {
-    let display = Display::connect_to_name("wayland-0").unwrap();
+    let display =
+        Display::connect_to_env().unwrap_or(Display::connect_to_name("wayland-0").unwrap());
     let mut event_queue = display.create_event_queue();
     let attached_display = (*display).clone().attach(event_queue.token());
     let global_mgr = GlobalManager::new(&attached_display);

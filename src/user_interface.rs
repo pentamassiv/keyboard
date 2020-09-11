@@ -1,3 +1,4 @@
+use super::wayland::submitter::Submission;
 use crate::config::directories;
 use crate::config::ui_defaults;
 use crate::keyboard;
@@ -5,8 +6,12 @@ use crate::layout_meta::*;
 use crate::wayland::*;
 use gtk::*;
 use gtk::{Button, OverlayExt};
+use input_method_service::{HintPurpose, KeyboardVisability};
 use std::collections::HashMap;
 use std::time::Instant;
+use wayland_protocols::unstable::text_input::v3::client::zwp_text_input_v3::{
+    ContentHint, ContentPurpose,
+};
 
 #[derive(Clone)]
 struct Dot {
@@ -31,10 +36,11 @@ pub enum Msg {
     LongPress(f64, f64, Instant),
     Swipe(f64, f64, Instant),
     Release(f64, f64, Instant),
-    EnterKeycode(String, bool),
-    EnterString(String, bool),
+    Submit(String, bool),
     Erase,
     Modifier(Modifier),
+    Visable(bool),
+    HintPurpose(ContentHint, ContentPurpose),
     SwitchView(String),
     SwitchLayout(String),
     UpdateDrawBuffer,
@@ -63,7 +69,7 @@ pub struct Win {
     model: Model,
     widgets: Widgets,
     _gestures: Gestures,
-    submission: Submission,
+    submitter: super::wayland::submitter::Submitter<T>,
 }
 
 impl relm::Update for Win {
@@ -126,14 +132,9 @@ impl relm::Update for Win {
                 //println!("Release: x: {}, y: {}, time: {:?}", x, y, time);
                 self.model.input.path = Vec::new();
             }
-            Msg::EnterKeycode(button_label, end_with_space) => {
+            Msg::Submit(button_label, end_with_space) => {
                 //println!("Input: {}", button_label);
-                self.submission.send_key(&button_label);
-                self.type_input(&button_label, end_with_space);
-            }
-            Msg::EnterString(button_label, end_with_space) => {
-                //println!("Input: {}", button_label);
-                self.submission.send_key(&button_label);
+                self.submitter.submit(Submission::Text(button_label));
                 self.type_input(&button_label, end_with_space);
             }
             Msg::SwitchView(new_view) => {
@@ -146,9 +147,14 @@ impl relm::Update for Win {
             Msg::Modifier(modifier) => {
                 if modifier == Modifier::Shift {
                     println!("Shift");
-                    self.submission.shift();
+                    self.submitter.toggle_shift();
                 }
             }
+            Msg::Visable(visable) => println!("Visable: {}", visable),
+            Msg::HintPurpose(content_hint, content_purpose) => println!(
+                "ContentHint: {:?}, ContentPurpose: {:?}",
+                content_hint, content_purpose
+            ),
             Msg::SwitchLayout(new_layout) => {
                 self.widgets.stack.set_visible_child_name(
                     &crate::keyboard::Keyboard::make_view_name(&new_layout, "base"),
@@ -290,7 +296,7 @@ impl relm::Widget for Win {
             &suggestion_button_right,
         );
 
-        let submission = init_wayland();
+        let submitter = init_wayland();
 
         window.show_all();
 
@@ -315,7 +321,7 @@ impl relm::Widget for Win {
                 _drag_gesture: drag_gesture,
                 _pan_gesture: pan_gesture,
             },
-            submission,
+            submitter,
         }
     }
 }
@@ -442,7 +448,7 @@ fn connect_signals(
         suggestion_button_left,
         connect_button_press_event(clicked_button, _),
         return (
-            Some(Msg::EnterInput(
+            Some(Msg::Submit(
                 clicked_button.get_label().unwrap().to_string(),
                 true
             )),
@@ -454,7 +460,7 @@ fn connect_signals(
         suggestion_button_center,
         connect_button_press_event(clicked_button, _),
         return (
-            Some(Msg::EnterInput(
+            Some(Msg::Submit(
                 clicked_button.get_label().unwrap().to_string(),
                 true
             )),
@@ -466,7 +472,7 @@ fn connect_signals(
         suggestion_button_right,
         connect_button_press_event(clicked_button, _),
         return (
-            Some(Msg::EnterInput(
+            Some(Msg::Submit(
                 clicked_button.get_label().unwrap().to_string(),
                 true
             )),
@@ -505,4 +511,10 @@ fn load_css() {
             eprintln! {"No CSS file to customize the keyboard could be loaded. The file might be missing or broken. Using default CSS"}
         }
     }
+}
+
+// Needed because Rust does not allow implementing a trait for a struct if neighter of them is defined in the scope
+// Relm is from the relm crate and EmitUIMsg is from another module
+struct MessagePipe<'a> {
+    relm: &'a relm::Relm<crate::user_interface::Win>,
 }

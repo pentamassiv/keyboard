@@ -2,7 +2,9 @@ use crate::layout_meta::*;
 use gtk::*;
 use gtk::{ButtonExt, GridExt, StyleContextExt, WidgetExt};
 use std::collections::HashMap;
-
+use wayland_protocols::unstable::text_input::v3::client::zwp_text_input_v3::{
+    ContentHint, ContentPurpose,
+};
 pub const ICON_FOLDER: &str = "./data/icons/";
 pub const RESOLUTIONX: i32 = 10000;
 pub const RESOLUTIONY: i32 = 10000;
@@ -122,6 +124,17 @@ impl Key {
         }
         //self.button.activate(); // Disabled, because the transition takes too long and makes it looks sluggish
     }
+}
+
+pub enum UIMsg {
+    Visable(bool),
+    HintPurpose(ContentHint, ContentPurpose),
+    SwitchView(String),
+    SwitchLayout(String),
+}
+
+pub trait EmitUIMsg {
+    fn emit(&self, message: UIMsg);
 }
 
 #[derive(Debug)]

@@ -28,6 +28,11 @@ impl<T: 'static + KeyboardVisability + HintPurpose> Submitter<T> {
             virtual_keyboard,
         }
     }
+    pub fn toggle_shift(&self) {
+        if let Some(virtual_keyboard) = self.virtual_keyboard {
+            virtual_keyboard.toggle_shift()
+        }
+    }
 
     pub fn submit(&self, submission: Submission) {
         match submission {
@@ -49,7 +54,12 @@ impl<T: 'static + KeyboardVisability + HintPurpose> Submitter<T> {
     }
 
     fn erase(&self) {
-        // TODO
-        let x = 0;
+        if let Some(im) = &self.im_service {
+            im.delete_surrounding_text(1, 0);
+        } else if let Some(virtual_keyboard) = &self.virtual_keyboard {
+            virtual_keyboard.submit_keycode("DELETE"); // Double check if this is the correct str to delete the last letter
+        } else {
+            println!("No way to delete");
+        }
     }
 }
