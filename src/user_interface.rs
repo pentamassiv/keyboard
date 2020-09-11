@@ -1,12 +1,9 @@
-use super::wayland::submitter::Submission;
 use crate::config::directories;
 use crate::config::ui_defaults;
 use crate::keyboard;
 use crate::layout_meta::*;
-use crate::wayland::*;
+use gtk::OverlayExt;
 use gtk::*;
-use gtk::{Button, OverlayExt};
-use input_method_service::{HintPurpose, KeyboardVisability};
 use std::collections::HashMap;
 use std::time::Instant;
 use wayland_protocols::unstable::text_input::v3::client::zwp_text_input_v3::{
@@ -36,9 +33,6 @@ pub enum Msg {
     LongPress(f64, f64, Instant),
     Swipe(f64, f64, Instant),
     Release(f64, f64, Instant),
-    Submit(String, bool),
-    Erase,
-    Modifier(Modifier),
     Visable(bool),
     HintPurpose(ContentHint, ContentPurpose),
     SwitchView(String),
@@ -57,8 +51,6 @@ struct Gestures {
 struct Widgets {
     window: Window,
     label: gtk::Label,
-    //pref_popover: gtk::Popover,
-    //preferences_button: gtk::Button,
     draw_handler: relm::DrawHandler<DrawingArea>,
     stack: gtk::Stack,
 }
@@ -69,7 +61,6 @@ pub struct Win {
     model: Model,
     widgets: Widgets,
     _gestures: Gestures,
-    submitter: super::wayland::submitter::Submitter<T>,
 }
 
 impl relm::Update for Win {
@@ -132,23 +123,12 @@ impl relm::Update for Win {
                 //println!("Release: x: {}, y: {}, time: {:?}", x, y, time);
                 self.model.input.path = Vec::new();
             }
-            Msg::Submit(button_label, end_with_space) => {
-                //println!("Input: {}", button_label);
-                self.submitter.submit(Submission::Text(button_label));
-                self.type_input(&button_label, end_with_space);
-            }
             Msg::SwitchView(new_view) => {
                 let layout_name = &self.model.keyboard.active_view.0;
                 self.widgets.stack.set_visible_child_name(
                     &crate::keyboard::Keyboard::make_view_name(layout_name, &new_view),
                 );
                 self.model.keyboard.active_view = (layout_name.to_string(), new_view);
-            }
-            Msg::Modifier(modifier) => {
-                if modifier == Modifier::Shift {
-                    println!("Shift");
-                    self.submitter.toggle_shift();
-                }
             }
             Msg::Visable(visable) => println!("Visable: {}", visable),
             Msg::HintPurpose(content_hint, content_purpose) => println!(
@@ -160,15 +140,6 @@ impl relm::Update for Win {
                     &crate::keyboard::Keyboard::make_view_name(&new_layout, "base"),
                 );
                 self.model.keyboard.active_view = (new_layout, "base".to_string());
-            }
-            Msg::Erase => {
-                let mut label_text = String::from(self.widgets.label.get_text());
-                let mut label_end = label_text.len();
-                if !label_text.is_empty() {
-                    label_end = label_text.len() - 1;
-                }
-                label_text = label_text[0..label_end].to_string();
-                self.widgets.label.set_text(&label_text);
             }
             Msg::UpdateDrawBuffer => {
                 self.draw_path();
@@ -189,9 +160,7 @@ impl relm::Widget for Win {
 
     // Create the widgets.
     fn view(relm: &relm::Relm<Self>, mut model: Self::Model) -> Self {
-        //Might have to be called after the show_all() method
         load_css();
-        // GTK+ widgets are used normally within a `Widget`.
 
         let stack = gtk::Stack::new();
         stack.set_transition_type(gtk::StackTransitionType::None);
@@ -222,6 +191,12 @@ impl relm::Widget for Win {
         suggestion_button_right.set_label("sug_r");
         suggestion_button_right.set_hexpand(true);
         suggestion_button_right.set_focus_on_click(false);
+
+        let suggestion_closure = |button: gtk::Button| model.keyboard.submit(button.get_label());
+
+        suggestion_button_left.connect_clicked(suggestion_closure);
+        suggestion_button_center.connect_clicked(suggestion_closure);
+        suggestion_button_right.connect_clicked(suggestion_closure);
 
         let preferences_button = gtk::Button::new();
         preferences_button.set_label("pref");
@@ -285,18 +260,7 @@ impl relm::Widget for Win {
         let pan_gesture = GesturePan::new(&hbox, gtk::Orientation::Horizontal);
         //long_press_gesture.group(&drag_gesture); //Is the grouping necessary???
 
-        connect_signals(
-            relm,
-            &long_press_gesture,
-            &drag_gesture,
-            &window,
-            &overlay,
-            &suggestion_button_left,
-            &suggestion_button_center,
-            &suggestion_button_right,
-        );
-
-        let submitter = init_wayland();
+        connect_signals(relm, &long_press_gesture, &drag_gesture, &window, &overlay);
 
         window.show_all();
 
@@ -321,19 +285,21 @@ impl relm::Widget for Win {
                 _drag_gesture: drag_gesture,
                 _pan_gesture: pan_gesture,
             },
-            submitter,
         }
     }
 }
 
 impl Win {
-    fn type_input(&self, input: &str, end_with_space: bool) {
-        let mut label_text = String::from(self.widgets.label.get_text());
-        label_text.push_str(&input);
-        if end_with_space {
-            label_text.push_str(" ");
+    fn activate_button(&self, x: f64, y: f64) {
+        let (x_rel, y_rel) = self.get_rel_coordinates(x, y);
+        let (layout_name, view_name) = &self.model.keyboard.get_view_name();
+        if let Some(key_to_activate) =
+            self.model
+                .keyboard
+                .get_closest_key(layout_name, view_name, x_rel, y_rel)
+        {
+            key_to_activate.activate(self, &self.model.input.input_type);
         }
-        self.widgets.label.set_text(&label_text);
     }
 
     fn get_rel_coordinates(&self, x: f64, y: f64) -> (i32, i32) {
@@ -349,18 +315,6 @@ impl Win {
         context.set_operator(cairo::Operator::Clear);
         context.set_source_rgba(0.0, 0.0, 0.0, 0.0);
         context.paint();
-    }
-
-    fn activate_button(&self, x: f64, y: f64) {
-        let (x_rel, y_rel) = self.get_rel_coordinates(x, y);
-        let (layout_name, view_name) = &self.model.keyboard.get_view_name();
-        if let Some(key_to_activate) =
-            self.model
-                .keyboard
-                .get_closest_key(layout_name, view_name, x_rel, y_rel)
-        {
-            key_to_activate.activate(self, &self.model.input.input_type);
-        }
     }
 
     fn draw_path(&mut self) {
@@ -396,16 +350,12 @@ impl Win {
     }
 }
 
-#[allow(clippy::too_many_arguments)]
 fn connect_signals(
     relm: &relm::Relm<Win>,
     long_press_gesture: &GestureLongPress,
     drag_gesture: &GestureDrag,
     window: &Window,
     overlay: &Overlay,
-    suggestion_button_left: &Button,
-    suggestion_button_center: &Button,
-    suggestion_button_right: &Button,
 ) {
     relm::connect!(
         drag_gesture,
@@ -440,43 +390,6 @@ fn connect_signals(
             drag.get_start_point().unwrap_or((-0.5, -0.5)).0 + x, // Hack to avoid crashing when long press on button opens popup. Apparently then there is no starting point
             drag.get_start_point().unwrap_or((-0.5, -0.5)).1 + y,
             Instant::now(),
-        )
-    );
-
-    relm::connect!(
-        relm,
-        suggestion_button_left,
-        connect_button_press_event(clicked_button, _),
-        return (
-            Some(Msg::Submit(
-                clicked_button.get_label().unwrap().to_string(),
-                true
-            )),
-            gtk::Inhibit(false)
-        )
-    );
-    relm::connect!(
-        relm,
-        suggestion_button_center,
-        connect_button_press_event(clicked_button, _),
-        return (
-            Some(Msg::Submit(
-                clicked_button.get_label().unwrap().to_string(),
-                true
-            )),
-            gtk::Inhibit(false)
-        )
-    );
-    relm::connect!(
-        relm,
-        suggestion_button_right,
-        connect_button_press_event(clicked_button, _),
-        return (
-            Some(Msg::Submit(
-                clicked_button.get_label().unwrap().to_string(),
-                true
-            )),
-            gtk::Inhibit(false)
         )
     );
 

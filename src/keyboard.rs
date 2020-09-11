@@ -142,6 +142,7 @@ pub struct Keyboard {
     pub views: HashMap<(String, String), View>,
     pub active_view: (String, String),
     active_keys: Vec<Key>,
+    submitter: super::wayland::submitter::Submitter<T>,
 }
 impl Keyboard {
     pub fn new() -> Keyboard {
@@ -154,6 +155,7 @@ impl Keyboard {
             active_keys: Vec::new(),
         }
     }
+    pub fn submit(&self, String){}
 
     pub fn init(
         &mut self,
