@@ -26,8 +26,8 @@ pub struct Key {
     popover: gtk::Popover,
 }
 impl Key {
-    fn from(
-        relm: &relm::Relm<crate::user_interface::Win>,
+    fn from<T: EmitUIMsg>(
+        relm: &relm::Relm<crate::user_interface::Win<T>>,
         key_id: &str,
         key_meta: Option<&KeyMeta>,
     ) -> Key {
@@ -67,7 +67,7 @@ impl Key {
                     hbox.add(&new_popup_button);
                     let tmp_popover_ref = popover.clone();
                     new_popup_button.connect_clicked(move |_| tmp_popover_ref.hide());
-                    relm::connect!(
+                    /*relm::connect!(
                         relm,
                         new_popup_button,
                         connect_button_release_event(clicked_button, _),
@@ -78,7 +78,7 @@ impl Key {
                             )),
                             gtk::Inhibit(false)
                         )
-                    );
+                    );*/
                 }
                 popover.add(&hbox);
             }
@@ -98,18 +98,17 @@ impl Key {
         actions
     }
 
-    pub fn activate(&self, win: &crate::user_interface::Win, key_event: &KeyEvent) {
+    pub fn activate<T: EmitUIMsg>(
+        &self,
+        win: &crate::user_interface::Win<T>,
+        key_event: &KeyEvent,
+    ) {
         let tmp_vec = Vec::new();
         let actions_vec = self.actions.get(&key_event).unwrap_or(&tmp_vec);
         for action in actions_vec {
-            match action {
+            /*match action {
                 KeyAction::EnterKeycode(keycode) => {
-                    win.relm
-                        .stream()
-                        .emit(crate::user_interface::Msg::EnterString(
-                            keycode.to_string(),
-                            false,
-                        ))
+                    self.submitter.submit(Submission::Keycode(keycode))
                 }
                 KeyAction::SwitchView(new_view) => {
                     win.relm
@@ -127,7 +126,7 @@ impl Key {
                     self.popover.show_all();
                 }
                 _ => {}
-            }
+            }*/
         }
         //self.button.activate(); // Disabled, because the transition takes too long and makes it looks sluggish
     }
@@ -180,7 +179,7 @@ where
 
     pub fn init(
         &mut self,
-        relm: &relm::Relm<crate::user_interface::Win>,
+        relm: &relm::Relm<crate::user_interface::Win<T>>,
         layout_metas: HashMap<String, crate::layout_meta::LayoutMeta>,
     ) -> HashMap<String, gtk::Grid> {
         let mut result = HashMap::new();
@@ -205,7 +204,7 @@ where
 
     fn add_layout(
         &mut self,
-        relm: &relm::Relm<crate::user_interface::Win>,
+        relm: &relm::Relm<crate::user_interface::Win<T>>,
         layout_name: &str,
         layout_meta: crate::layout_meta::LayoutMeta,
     ) -> HashMap<String, gtk::Grid> {

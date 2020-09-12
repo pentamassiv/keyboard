@@ -1,3 +1,4 @@
+use super::wayland::submitter::Submission;
 use crate::config::directories;
 use crate::config::ui_defaults;
 use crate::keyboard;
@@ -26,8 +27,11 @@ struct Input {
     path: Vec<Dot>,
 }
 
-pub struct Model {
-    keyboard: keyboard::Keyboard<SubConnector<UIConnector<MessagePipe>>>,
+pub struct Model<T: 'static>
+where
+    T: EmitUIMsg,
+{
+    keyboard: crate::keyboard::Keyboard<SubConnector<T>>,
     input: Input,
 }
 
@@ -60,23 +64,23 @@ struct Widgets {
 }
 
 //The gestures are never read but they can't be freed otherwise the gesture detection does not work
-pub struct Win {
-    pub relm: relm::Relm<Win>,
-    model: Model,
+pub struct Win<MessagePipe> {
+    pub relm: relm::Relm<Win<MessagePipe>>,
+    model: Model<MessagePipe>,
     widgets: Widgets,
     _gestures: Gestures,
 }
 
-impl relm::Update for Win {
+impl<MessagePipe> relm::Update for Win<MessagePipe> {
     // Specify the model used for this widget.
-    type Model = Model;
+    type Model = Model<MessagePipe>;
     // Specify the model parameter used to init the model.
     type ModelParam = ();
     // Specify the type of the messages sent to the update function.
     type Msg = Msg;
 
     // Return the initial model.
-    fn model(relm: &relm::Relm<Self>, _: Self::ModelParam) -> Model {
+    fn model(relm: &relm::Relm<Self>, _: Self::ModelParam) -> Model<MessagePipe> {
         Model {
             input: Input {
                 input_type: KeyEvent::ShortPress,
@@ -153,7 +157,10 @@ impl relm::Update for Win {
     }
 }
 
-impl relm::Widget for Win {
+impl<T> relm::Widget for Win<T>
+where
+    T: EmitUIMsg,
+{
     // Specify the type of the root widget.
     type Root = Window;
 
@@ -196,7 +203,11 @@ impl relm::Widget for Win {
         suggestion_button_right.set_hexpand(true);
         suggestion_button_right.set_focus_on_click(false);
 
-        let suggestion_closure = |button: gtk::Button| model.keyboard.submit(button.get_label());
+        let suggestion_closure = |button: &gtk::Button| {
+            model
+                .keyboard
+                .submit(Submission::Text(button.get_label().unwrap().to_string()))
+        };
 
         suggestion_button_left.connect_clicked(suggestion_closure);
         suggestion_button_center.connect_clicked(suggestion_closure);
@@ -293,7 +304,10 @@ impl relm::Widget for Win {
     }
 }
 
-impl Win {
+impl<T> Win<T>
+where
+    T: EmitUIMsg,
+{
     fn activate_button(&self, x: f64, y: f64) {
         let (x_rel, y_rel) = self.get_rel_coordinates(x, y);
         let (layout_name, view_name) = &self.model.keyboard.get_view_name();
@@ -354,8 +368,8 @@ impl Win {
     }
 }
 
-fn connect_signals(
-    relm: &relm::Relm<Win>,
+fn connect_signals<T>(
+    relm: &relm::Relm<Win<T>>,
     long_press_gesture: &GestureLongPress,
     drag_gesture: &GestureDrag,
     window: &Window,
@@ -433,10 +447,11 @@ fn load_css() {
 // Needed because Rust does not allow implementing a trait for a struct if neighter of them is defined in the scope
 // Relm is from the relm crate and EmitUIMsg is from another module
 pub struct MessagePipe {
-    relm: &'static relm::Relm<crate::user_interface::Win>,
+    relm: &'static relm::Relm<crate::user_interface::Win<Self>>,
 }
+
 impl MessagePipe {
-    fn new(relm: &'static relm::Relm<Win>) -> MessagePipe {
+    fn new(relm: &'static relm::Relm<Win<MessagePipe>>) -> MessagePipe {
         MessagePipe { relm }
     }
 }

@@ -20,6 +20,7 @@
  */
 
 use relm::Widget;
+use user_interface::MessagePipe;
 
 mod config;
 mod keyboard;
@@ -28,5 +29,5 @@ mod user_interface;
 mod wayland;
 
 fn main() {
-    user_interface::Win::run(()).unwrap();
+    user_interface::Win::<MessagePipe>::run(()).unwrap();
 }
