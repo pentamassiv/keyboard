@@ -1,9 +1,13 @@
 use crate::config::directories;
 use crate::config::ui_defaults;
 use crate::keyboard;
+use crate::keyboard::{EmitUIMsg, UIMsg};
 use crate::layout_meta::*;
+use crate::wayland::vk_sub_connector::SubConnector;
+use crate::wayland::vk_ui_connector::UIConnector;
 use gtk::OverlayExt;
 use gtk::*;
+use input_method_service::{HintPurpose, KeyboardVisability};
 use std::collections::HashMap;
 use std::time::Instant;
 use wayland_protocols::unstable::text_input::v3::client::zwp_text_input_v3::{
@@ -23,7 +27,7 @@ struct Input {
 }
 
 pub struct Model {
-    keyboard: keyboard::Keyboard,
+    keyboard: keyboard::Keyboard<SubConnector<UIConnector<MessagePipe>>>,
     input: Input,
 }
 
@@ -72,13 +76,13 @@ impl relm::Update for Win {
     type Msg = Msg;
 
     // Return the initial model.
-    fn model(_: &relm::Relm<Self>, _: Self::ModelParam) -> Model {
+    fn model(relm: &relm::Relm<Self>, _: Self::ModelParam) -> Model {
         Model {
             input: Input {
                 input_type: KeyEvent::ShortPress,
                 path: Vec::new(),
             },
-            keyboard: keyboard::Keyboard::new(),
+            keyboard: keyboard::Keyboard::new(MessagePipe::new(relm)),
         }
     }
 
@@ -428,6 +432,22 @@ fn load_css() {
 
 // Needed because Rust does not allow implementing a trait for a struct if neighter of them is defined in the scope
 // Relm is from the relm crate and EmitUIMsg is from another module
-struct MessagePipe<'a> {
-    relm: &'a relm::Relm<crate::user_interface::Win>,
+pub struct MessagePipe {
+    relm: &'static relm::Relm<crate::user_interface::Win>,
+}
+impl MessagePipe {
+    fn new(relm: &'static relm::Relm<Win>) -> MessagePipe {
+        MessagePipe { relm }
+    }
+}
+
+impl EmitUIMsg for MessagePipe {
+    fn emit(&self, message: UIMsg) {
+        match message {
+            UIMsg::SwitchView(view) => {
+                self.relm.stream().emit(Msg::SwitchView(view));
+            }
+            _ => {}
+        }
+    }
 }

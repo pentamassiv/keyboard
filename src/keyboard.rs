@@ -1,10 +1,17 @@
+use super::wayland::submitter::Submission;
+use super::wayland::submitter::Submitter;
+use super::wayland::vk_sub_connector::SubConnector;
+use super::wayland::vk_ui_connector::UIConnector;
 use crate::layout_meta::*;
 use gtk::*;
 use gtk::{ButtonExt, GridExt, StyleContextExt, WidgetExt};
+use input_method_service::*;
+
 use std::collections::HashMap;
 use wayland_protocols::unstable::text_input::v3::client::zwp_text_input_v3::{
     ContentHint, ContentPurpose,
 };
+
 pub const ICON_FOLDER: &str = "./data/icons/";
 pub const RESOLUTIONX: i32 = 10000;
 pub const RESOLUTIONY: i32 = 10000;
@@ -137,15 +144,25 @@ pub trait EmitUIMsg {
     fn emit(&self, message: UIMsg);
 }
 
-#[derive(Debug)]
-pub struct Keyboard {
+//#[derive(Debug)]
+pub struct Keyboard<T: 'static>
+where
+    T: KeyboardVisability + HintPurpose,
+{
     pub views: HashMap<(String, String), View>,
     pub active_view: (String, String),
     active_keys: Vec<Key>,
     submitter: super::wayland::submitter::Submitter<T>,
 }
-impl Keyboard {
-    pub fn new() -> Keyboard {
+
+impl<T> Keyboard<SubConnector<T>>
+where
+    T: EmitUIMsg,
+{
+    pub fn new(ui_message_pipe: T) -> Keyboard<SubConnector<T>> {
+        let ui_connector = UIConnector::new(ui_message_pipe);
+        let sub_connector = SubConnector::new(ui_connector);
+        let submitter = Submitter::new(sub_connector);
         Keyboard {
             views: HashMap::new(),
             active_view: (
@@ -153,9 +170,13 @@ impl Keyboard {
                 String::from(KEYBOARD_DEFAULT_VIEW),
             ),
             active_keys: Vec::new(),
+            submitter,
         }
     }
-    pub fn submit(&self, String){}
+
+    pub fn submit(&self, submission: Submission) {
+        self.submitter.submit(submission);
+    }
 
     pub fn init(
         &mut self,

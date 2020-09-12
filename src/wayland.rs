@@ -5,11 +5,12 @@ use zwp_virtual_keyboard::virtual_keyboard_unstable_v1::zwp_virtual_keyboard_man
 
 use zwp_input_method::input_method_unstable_v2::zwp_input_method_manager_v2::ZwpInputMethodManagerV2;
 
-mod connector;
 pub mod keymap;
 pub mod layer_shell;
 pub mod submitter;
 mod vk_service;
+pub mod vk_sub_connector;
+pub mod vk_ui_connector;
 
 fn get_wl_display_global_mgr() -> (Display, GlobalManager) {
     let display =

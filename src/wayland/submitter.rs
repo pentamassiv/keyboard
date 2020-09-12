@@ -12,7 +12,7 @@ pub struct Submitter<T: 'static + KeyboardVisability + HintPurpose> {
 }
 
 impl<T: 'static + KeyboardVisability + HintPurpose> Submitter<T> {
-    fn new(connector: T) -> Submitter<T> {
+    pub fn new(connector: T) -> Submitter<T> {
         let (seat, layer_shell, vk_mgr, im_mgr) = super::init_wayland();
         let im_service = None;
         let virtual_keyboard = None;
