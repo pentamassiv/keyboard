@@ -63,22 +63,37 @@ impl<T: 'static + KeyboardVisability + HintPurpose> Submitter<T> {
     }
 
     fn submit_text(&mut self, text: String) {
+        let mut success = Err(SubmitError::NotActive);
         if let Some(im) = &mut self.im_service {
-            im.commit_string(text);
-            im.commit();
-        } else if let Some(virtual_keyboard) = &mut self.virtual_keyboard {
-            virtual_keyboard.submit_keycode(&text);
+            if im.commit_string(text.clone()).is_ok() && im.commit().is_ok() {
+                success = Ok(());
+            };
+        }
+        if success.is_err() {
+            if let Some(virtual_keyboard) = &mut self.virtual_keyboard {
+                virtual_keyboard.submit_keycode(&text);
+                // there is no result returned so there is no way of knowing if it was sucessful.
+                // a success is assumed
+            }
         } else {
-            println!("No way to submit");
+            println!("Error: No way to submit");
         }
     }
 
     fn erase(&mut self) {
+        let mut success = Err(SubmitError::NotActive);
         if let Some(im) = &self.im_service {
-            im.delete_surrounding_text(1, 0);
-            im.commit();
-        } else if let Some(virtual_keyboard) = &mut self.virtual_keyboard {
-            virtual_keyboard.submit_keycode("DELETE"); // Double check if this is the correct str to delete the last letter
+            if im.delete_surrounding_text(1, 0).is_ok() && im.commit().is_ok() {
+                success = Ok(());
+            };
+        }
+        if success.is_err() {
+            if let Some(virtual_keyboard) = &mut self.virtual_keyboard {
+                virtual_keyboard.submit_keycode("DELETE"); // TODO: Double check if this is the correct str to delete the last letter
+
+                // there is no result returned so there is no way of knowing if it was sucessful.
+                // a success is assumed
+            }
         } else {
             println!("No way to delete");
         }

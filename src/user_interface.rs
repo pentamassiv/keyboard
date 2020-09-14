@@ -53,7 +53,6 @@ struct Gestures {
 
 struct Widgets {
     window: Window,
-    label: gtk::Label,
     draw_handler: relm::DrawHandler<DrawingArea>,
     stack: gtk::Stack,
 }
@@ -266,13 +265,7 @@ impl relm::Widget for Win {
         let frame = gtk::Frame::new(None);
         frame.add(&hbox);
 
-        let label = gtk::Label::new(None);
-        label.set_margin_start(5);
-        label.set_margin_end(5);
-        label.set_line_wrap(true);
-        label.set_vexpand(true);
         let vbox = gtk::Box::new(Orientation::Vertical, 2);
-        vbox.add(&label);
         vbox.add(&frame);
         vbox.add(&overlay);
 
@@ -303,7 +296,6 @@ impl relm::Widget for Win {
             model,
             widgets: Widgets {
                 window,
-                label,
                 //preferences_button,
                 draw_handler,
                 stack,
