@@ -86,7 +86,7 @@ impl relm::Update for Win {
 
     fn subscriptions(&mut self, relm: &relm::Relm<Self>) {
         relm::interval(relm.stream(), 1000, || Msg::UpdateDrawBuffer);
-        relm::interval(relm.stream(), 1000, || Msg::PollEvents);
+        relm::interval(relm.stream(), 100, || Msg::PollEvents);
     }
 
     // The model may be updated when a message is received.
@@ -134,7 +134,13 @@ impl relm::Update for Win {
                 );
                 self.model.keyboard.active_view = (layout_name.to_string(), new_view);
             }
-            Msg::Visable(visable) => println!("Visable: {}", visable),
+            Msg::Visable(show) => {
+                if show {
+                    self.widgets.window.show();
+                } else {
+                    self.widgets.window.hide();
+                }
+            }
             Msg::HintPurpose(content_hint, content_purpose) => println!(
                 "ContentHint: {:?}, ContentPurpose: {:?}",
                 content_hint, content_purpose

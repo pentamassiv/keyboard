@@ -22,23 +22,20 @@ impl SubConnector {
 
 impl KeyboardVisability for SubConnector {
     fn show_keyboard(&self) {
-        //Removed for testing
-        //self.ui_connector.message_pipe.emit(UIMsg::Visable(true));
+        self.ui_connector.message_pipe.emit(UIMsg::Visable(true));
         println!("Show keyboard");
     }
     fn hide_keyboard(&self) {
-        //Removed for testing
-        //self.ui_connector.message_pipe.emit(UIMsg::Visable(false));
+        self.ui_connector.message_pipe.emit(UIMsg::Visable(false));
         println!("Hide keyboard");
     }
 }
 
 impl HintPurpose for SubConnector {
     fn set_hint_purpose(&self, content_hint: ContentHint, content_purpose: ContentPurpose) {
-        //Removed for testing
-        //self.ui_connector
-        //    .message_pipe
-        //    .emit(UIMsg::HintPurpose(content_hint, content_purpose));
+        self.ui_connector
+            .message_pipe
+            .emit(UIMsg::HintPurpose(content_hint, content_purpose));
         println!("Hint: {:?}, Purpose: {:?}", content_hint, content_purpose);
     }
 }
