@@ -1,14 +1,10 @@
-use super::wayland::submitter::Submission;
+use super::submitter::*;
 use crate::config::directories;
 use crate::config::ui_defaults;
 use crate::keyboard;
-use crate::keyboard::{EmitUIMsg, UIMsg};
-use crate::layout_meta::*;
-use crate::wayland::vk_sub_connector::SubConnector;
-use crate::wayland::vk_ui_connector::UIConnector;
+use crate::keyboard::{EmitUIMsg, KeyAction, KeyEvent, UIMsg};
 use gtk::OverlayExt;
 use gtk::*;
-use input_method_service::{HintPurpose, KeyboardVisability};
 use std::collections::HashMap;
 use std::time::Instant;
 use wayland_protocols::unstable::text_input::v3::client::zwp_text_input_v3::{
@@ -27,11 +23,8 @@ struct Input {
     path: Vec<Dot>,
 }
 
-pub struct Model<T: 'static>
-where
-    T: EmitUIMsg,
-{
-    keyboard: crate::keyboard::Keyboard<SubConnector<T>>,
+pub struct Model {
+    keyboard: crate::keyboard::Keyboard,
     input: Input,
 }
 
@@ -41,10 +34,12 @@ pub enum Msg {
     LongPress(f64, f64, Instant),
     Swipe(f64, f64, Instant),
     Release(f64, f64, Instant),
+    Submit(Submission),
     Visable(bool),
     HintPurpose(ContentHint, ContentPurpose),
     SwitchView(String),
     SwitchLayout(String),
+    PollEvents,
     UpdateDrawBuffer,
     Quit,
 }
@@ -64,34 +59,35 @@ struct Widgets {
 }
 
 //The gestures are never read but they can't be freed otherwise the gesture detection does not work
-pub struct Win<MessagePipe> {
-    pub relm: relm::Relm<Win<MessagePipe>>,
-    model: Model<MessagePipe>,
+pub struct Win {
+    pub relm: relm::Relm<Win>,
+    model: Model,
     widgets: Widgets,
     _gestures: Gestures,
 }
 
-impl<MessagePipe> relm::Update for Win<MessagePipe> {
+impl relm::Update for Win {
     // Specify the model used for this widget.
-    type Model = Model<MessagePipe>;
+    type Model = Model;
     // Specify the model parameter used to init the model.
     type ModelParam = ();
     // Specify the type of the messages sent to the update function.
     type Msg = Msg;
 
     // Return the initial model.
-    fn model(relm: &relm::Relm<Self>, _: Self::ModelParam) -> Model<MessagePipe> {
+    fn model(relm: &relm::Relm<Self>, _: Self::ModelParam) -> Model {
         Model {
             input: Input {
                 input_type: KeyEvent::ShortPress,
                 path: Vec::new(),
             },
-            keyboard: keyboard::Keyboard::new(MessagePipe::new(relm)),
+            keyboard: keyboard::Keyboard::new(MessagePipe::new(relm.clone())),
         }
     }
 
     fn subscriptions(&mut self, relm: &relm::Relm<Self>) {
         relm::interval(relm.stream(), 1000, || Msg::UpdateDrawBuffer);
+        relm::interval(relm.stream(), 1000, || Msg::PollEvents);
     }
 
     // The model may be updated when a message is received.
@@ -131,6 +127,7 @@ impl<MessagePipe> relm::Update for Win<MessagePipe> {
                 //println!("Release: x: {}, y: {}, time: {:?}", x, y, time);
                 self.model.input.path = Vec::new();
             }
+            Msg::Submit(submission) => self.model.keyboard.submit(submission),
             Msg::SwitchView(new_view) => {
                 let layout_name = &self.model.keyboard.active_view.0;
                 self.widgets.stack.set_visible_child_name(
@@ -149,6 +146,9 @@ impl<MessagePipe> relm::Update for Win<MessagePipe> {
                 );
                 self.model.keyboard.active_view = (new_layout, "base".to_string());
             }
+            Msg::PollEvents => {
+                self.model.keyboard.fetch_events();
+            }
             Msg::UpdateDrawBuffer => {
                 self.draw_path();
             }
@@ -157,10 +157,7 @@ impl<MessagePipe> relm::Update for Win<MessagePipe> {
     }
 }
 
-impl<T> relm::Widget for Win<T>
-where
-    T: EmitUIMsg,
-{
+impl relm::Widget for Win {
     // Specify the type of the root widget.
     type Root = Window;
 
@@ -175,7 +172,7 @@ where
 
         let stack = gtk::Stack::new();
         stack.set_transition_type(gtk::StackTransitionType::None);
-        let layout_meta = crate::layout_meta::LayoutYamlParser::get_layouts();
+        let layout_meta = keyboard::parser::LayoutYamlParser::get_layouts();
         let grids = model.keyboard.init(relm, layout_meta);
         for (grid_name, grid) in grids {
             stack.add_named(&grid, &grid_name);
@@ -203,15 +200,28 @@ where
         suggestion_button_right.set_hexpand(true);
         suggestion_button_right.set_focus_on_click(false);
 
-        let suggestion_closure = |button: &gtk::Button| {
-            model
-                .keyboard
-                .submit(Submission::Text(button.get_label().unwrap().to_string()))
+        let relm_copy_left = relm.clone();
+        let suggestion_closure_left = move |button: &gtk::Button| {
+            relm_copy_left.stream().emit(Msg::Submit(Submission::Text(
+                button.get_label().unwrap().to_string(),
+            )))
+        };
+        let relm_copy_center = relm.clone();
+        let suggestion_closure_center = move |button: &gtk::Button| {
+            relm_copy_center.stream().emit(Msg::Submit(Submission::Text(
+                button.get_label().unwrap().to_string(),
+            )))
+        };
+        let relm_copy_right = relm.clone();
+        let suggestion_closure_right = move |button: &gtk::Button| {
+            relm_copy_right.stream().emit(Msg::Submit(Submission::Text(
+                button.get_label().unwrap().to_string(),
+            )))
         };
 
-        suggestion_button_left.connect_clicked(suggestion_closure);
-        suggestion_button_center.connect_clicked(suggestion_closure);
-        suggestion_button_right.connect_clicked(suggestion_closure);
+        suggestion_button_left.connect_clicked(suggestion_closure_left);
+        suggestion_button_center.connect_clicked(suggestion_closure_center);
+        suggestion_button_right.connect_clicked(suggestion_closure_right);
 
         let preferences_button = gtk::Button::new();
         preferences_button.set_label("pref");
@@ -276,7 +286,10 @@ where
         //long_press_gesture.group(&drag_gesture); //Is the grouping necessary???
 
         connect_signals(relm, &long_press_gesture, &drag_gesture, &window, &overlay);
-
+        if super::submitter::wayland::get_layer_shell().is_some() {
+            let window_clone = window.clone();
+            wayland::layer_shell::make_overlay_layer(window_clone);
+        }
         window.show_all();
 
         // Set visible child MUST be called after show_all. Otherwise it takes no effect!
@@ -304,10 +317,7 @@ where
     }
 }
 
-impl<T> Win<T>
-where
-    T: EmitUIMsg,
-{
+impl Win {
     fn activate_button(&self, x: f64, y: f64) {
         let (x_rel, y_rel) = self.get_rel_coordinates(x, y);
         let (layout_name, view_name) = &self.model.keyboard.get_view_name();
@@ -368,8 +378,8 @@ where
     }
 }
 
-fn connect_signals<T>(
-    relm: &relm::Relm<Win<T>>,
+fn connect_signals(
+    relm: &relm::Relm<Win>,
     long_press_gesture: &GestureLongPress,
     drag_gesture: &GestureDrag,
     window: &Window,
@@ -411,18 +421,19 @@ fn connect_signals<T>(
         )
     );
 
-    relm::connect!(
-        relm,
-        overlay,
-        connect_draw(_, _),
-        return (Some(Msg::UpdateDrawBuffer), gtk::Inhibit(false))
-    );
     // Connect the signal `delete_event` to send the `Quit` message.
     relm::connect!(
         relm,
         window,
         connect_delete_event(_, _),
         return (Some(Msg::Quit), Inhibit(false))
+    );
+
+    relm::connect!(
+        relm,
+        overlay,
+        connect_draw(_, _),
+        return (Some(Msg::UpdateDrawBuffer), gtk::Inhibit(false))
     );
 }
 
@@ -447,11 +458,11 @@ fn load_css() {
 // Needed because Rust does not allow implementing a trait for a struct if neighter of them is defined in the scope
 // Relm is from the relm crate and EmitUIMsg is from another module
 pub struct MessagePipe {
-    relm: &'static relm::Relm<crate::user_interface::Win<Self>>,
+    relm: relm::Relm<crate::user_interface::Win>,
 }
 
 impl MessagePipe {
-    fn new(relm: &'static relm::Relm<Win<MessagePipe>>) -> MessagePipe {
+    fn new(relm: relm::Relm<Win>) -> MessagePipe {
         MessagePipe { relm }
     }
 }
@@ -462,6 +473,12 @@ impl EmitUIMsg for MessagePipe {
             UIMsg::SwitchView(view) => {
                 self.relm.stream().emit(Msg::SwitchView(view));
             }
+            UIMsg::Visable(visable) => {
+                println!("Relm: visability: {}", visable);
+                self.relm.stream().emit(Msg::Visable(visable));
+            }
+            UIMsg::HintPurpose(content_hint, content_purpose) => println!("Relm: contentpurpose"),
+            UIMsg::SwitchLayout(layout) => println!("Relm: switch layout"),
             _ => {}
         }
     }

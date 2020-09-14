@@ -1,16 +1,17 @@
-use super::wayland::submitter::Submission;
-use super::wayland::submitter::Submitter;
-use super::wayland::vk_sub_connector::SubConnector;
-use super::wayland::vk_ui_connector::UIConnector;
-use crate::layout_meta::*;
+use super::submitter::*;
+use crate::user_interface::MessagePipe;
 use gtk::*;
 use gtk::{ButtonExt, GridExt, StyleContextExt, WidgetExt};
-use input_method_service::*;
 
 use std::collections::HashMap;
 use wayland_protocols::unstable::text_input::v3::client::zwp_text_input_v3::{
     ContentHint, ContentPurpose,
 };
+
+pub mod parser;
+pub use parser::{KeyAction, KeyEvent}; // Re-export
+pub mod vk_sub_connector;
+pub mod vk_ui_connector;
 
 pub const ICON_FOLDER: &str = "./data/icons/";
 pub const RESOLUTIONX: i32 = 10000;
@@ -26,10 +27,10 @@ pub struct Key {
     popover: gtk::Popover,
 }
 impl Key {
-    fn from<T: EmitUIMsg>(
-        relm: &relm::Relm<crate::user_interface::Win<T>>,
+    fn from(
+        relm: &relm::Relm<crate::user_interface::Win>,
         key_id: &str,
-        key_meta: Option<&KeyMeta>,
+        key_meta: Option<&parser::KeyMeta>,
     ) -> Key {
         let button = gtk::Button::new();
         button.set_label(key_id);
@@ -45,8 +46,8 @@ impl Key {
             }
             if let Some(key_display_enum) = &key_meta.key_display {
                 match key_display_enum {
-                    KeyDisplay::Text(label_text) => button.set_label(&label_text),
-                    KeyDisplay::Image(icon_name) => {
+                    parser::KeyDisplay::Text(label_text) => button.set_label(&label_text),
+                    parser::KeyDisplay::Image(icon_name) => {
                         let mut icon_path = String::from(ICON_FOLDER);
                         icon_path.push_str(icon_name);
                         let image = gtk::Image::from_file(&icon_path);
@@ -93,40 +94,49 @@ impl Key {
     fn make_default_actions(key_id: &str) -> HashMap<KeyEvent, Vec<KeyAction>> {
         let mut actions = HashMap::new();
         let key_event = KeyEvent::ShortPress;
-        let action_events = KeyAction::EnterKeycode(vec![key_id.to_string()]);
+        let action_events = KeyAction::EnterString(key_id.to_string());
         actions.insert(key_event, vec![action_events]);
         actions
     }
 
-    pub fn activate<T: EmitUIMsg>(
-        &self,
-        win: &crate::user_interface::Win<T>,
-        key_event: &KeyEvent,
-    ) {
+    pub fn activate(&self, win: &crate::user_interface::Win, key_event: &KeyEvent) {
         let tmp_vec = Vec::new();
         let actions_vec = self.actions.get(&key_event).unwrap_or(&tmp_vec);
         for action in actions_vec {
-            /*match action {
+            match action {
                 KeyAction::EnterKeycode(keycode) => {
-                    self.submitter.submit(Submission::Keycode(keycode))
+                    win.relm.stream().emit(crate::user_interface::Msg::Submit(
+                        Submission::Keycode(keycode.to_string()),
+                    ));
+                    //self.submitter.submit(Submission::Keycode(keycode))
+                }
+                KeyAction::EnterString(text) => {
+                    win.relm
+                        .stream()
+                        .emit(crate::user_interface::Msg::Submit(Submission::Text(
+                            text.to_string(),
+                        )));
+                    //self.submitter.submit(Submission::Keycode(keycode))
                 }
                 KeyAction::SwitchView(new_view) => {
                     win.relm
                         .stream()
                         .emit(crate::user_interface::Msg::SwitchView(new_view.to_string()));
                 }
-                KeyAction::Modifier(modifier) => win
-                    .relm
-                    .stream()
-                    .emit(crate::user_interface::Msg::Modifier(modifier.clone())),
+                KeyAction::Modifier(modifier) => {
+                    win.relm.stream().emit(crate::user_interface::Msg::Submit(
+                        Submission::Keycode("SHIFT".to_string()), // TODO: set up properly
+                    ));
+                }
                 KeyAction::Erase => {
-                    win.relm.stream().emit(crate::user_interface::Msg::Erase);
+                    win.relm
+                        .stream()
+                        .emit(crate::user_interface::Msg::Submit(Submission::Erase));
                 }
                 KeyAction::OpenPopup => {
                     self.popover.show_all();
                 }
-                _ => {}
-            }*/
+            }
         }
         //self.button.activate(); // Disabled, because the transition takes too long and makes it looks sluggish
     }
@@ -144,23 +154,17 @@ pub trait EmitUIMsg {
 }
 
 //#[derive(Debug)]
-pub struct Keyboard<T: 'static>
-where
-    T: KeyboardVisability + HintPurpose,
-{
+pub struct Keyboard {
     pub views: HashMap<(String, String), View>,
     pub active_view: (String, String),
     active_keys: Vec<Key>,
-    submitter: super::wayland::submitter::Submitter<T>,
+    submitter: Submitter<vk_sub_connector::SubConnector>,
 }
 
-impl<T> Keyboard<SubConnector<T>>
-where
-    T: EmitUIMsg,
-{
-    pub fn new(ui_message_pipe: T) -> Keyboard<SubConnector<T>> {
-        let ui_connector = UIConnector::new(ui_message_pipe);
-        let sub_connector = SubConnector::new(ui_connector);
+impl Keyboard {
+    pub fn new(ui_message_pipe: MessagePipe) -> Keyboard {
+        let ui_connector = vk_ui_connector::UIConnector::new(ui_message_pipe);
+        let sub_connector = vk_sub_connector::SubConnector::new(ui_connector);
         let submitter = Submitter::new(sub_connector);
         Keyboard {
             views: HashMap::new(),
@@ -172,15 +176,19 @@ where
             submitter,
         }
     }
+    pub fn fetch_events(&mut self) {
+        self.submitter.fetch_events();
+    }
 
-    pub fn submit(&self, submission: Submission) {
+    pub fn submit(&mut self, submission: Submission) {
+        println!("Submit: {:?}", submission);
         self.submitter.submit(submission);
     }
 
     pub fn init(
         &mut self,
-        relm: &relm::Relm<crate::user_interface::Win<T>>,
-        layout_metas: HashMap<String, crate::layout_meta::LayoutMeta>,
+        relm: &relm::Relm<crate::user_interface::Win>,
+        layout_metas: HashMap<String, parser::LayoutMeta>,
     ) -> HashMap<String, gtk::Grid> {
         let mut result = HashMap::new();
         for (layout_name, layout_meta) in layout_metas {
@@ -197,16 +205,16 @@ where
     }
     pub fn make_view_name(layout_name: &str, view_name: &str) -> String {
         let mut layout_view_name = String::from(layout_name);
-        layout_view_name.push_str("_"); //Separator Character
+        layout_view_name.push('_'); //Separator Character
         layout_view_name.push_str(view_name);
         layout_view_name
     }
 
     fn add_layout(
         &mut self,
-        relm: &relm::Relm<crate::user_interface::Win<T>>,
+        relm: &relm::Relm<crate::user_interface::Win>,
         layout_name: &str,
-        layout_meta: crate::layout_meta::LayoutMeta,
+        layout_meta: parser::LayoutMeta,
     ) -> HashMap<String, gtk::Grid> {
         let mut result = HashMap::new();
         for (view_name, view_meta) in &layout_meta.views {
@@ -271,7 +279,7 @@ where
     fn get_all_button_sizes(
         &self,
         button_ids: &[String],
-        layout_meta: &crate::layout_meta::LayoutMeta,
+        layout_meta: &parser::LayoutMeta,
     ) -> Vec<Vec<i32>> {
         let mut button_sizes = Vec::new();
         for row in button_ids {

@@ -40,6 +40,7 @@ impl VKService {
     }
 
     fn init_virtual_keyboard(&self) {
+        println!("keyboard initialized");
         let src = super::keymap::KEYMAP;
         let keymap_size = super::keymap::KEYMAP.len();
         let keymap_size_u32: u32 = keymap_size.try_into().unwrap(); // Convert it from usize to u32, panics if it is not possible
@@ -81,6 +82,7 @@ impl VKService {
 
     fn send_key(&self, keycode: u32, keymotion: KeyMotion) {
         let time = self.get_time();
+        println!("time: {}, keycode: {}", time, keycode);
         self.virtual_keyboard.key(time, keycode, keymotion as u32);
     }
 
