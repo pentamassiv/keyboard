@@ -36,7 +36,7 @@ impl<T: 'static + KeyboardVisability + HintPurpose> Submitter<T> {
     }
     pub fn fetch_events(&mut self) {
         self.event_queue
-            .dispatch(&mut (), |event, _, _| println!("Event: {:?}", event))
+            .dispatch_pending(&mut (), |event, _, _| println!("Event: {:?}", event))
             .unwrap();
     }
 
