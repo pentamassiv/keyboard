@@ -5,11 +5,15 @@ use crate::keyboard;
 use crate::keyboard::{EmitUIMsg, KeyAction, KeyEvent, UIMsg};
 use gtk::OverlayExt;
 use gtk::*;
+use relm::Channel;
 use std::collections::HashMap;
 use std::time::Instant;
 use wayland_protocols::unstable::text_input::v3::client::zwp_text_input_v3::{
     ContentHint, ContentPurpose,
 };
+
+mod dbus;
+use self::dbus::DBusService;
 
 #[derive(Clone)]
 struct Dot {
@@ -35,7 +39,7 @@ pub enum Msg {
     Swipe(f64, f64, Instant),
     Release(f64, f64, Instant),
     Submit(Submission),
-    Visable(bool),
+    Visible(bool),
     HintPurpose(ContentHint, ContentPurpose),
     SwitchView(String),
     SwitchLayout(String),
@@ -63,6 +67,8 @@ pub struct Win {
     model: Model,
     widgets: Widgets,
     _gestures: Gestures,
+    dbus_service: DBusService,
+    _channel: Channel<Msg>,
 }
 
 impl relm::Update for Win {
@@ -134,12 +140,14 @@ impl relm::Update for Win {
                 );
                 self.model.keyboard.active_view = (layout_name.to_string(), new_view);
             }
-            Msg::Visable(show) => {
-                if show {
+            Msg::Visible(new_visibility) => {
+                println!("Msg visiblility: {}", new_visibility);
+                if new_visibility {
                     self.widgets.window.show();
                 } else {
                     self.widgets.window.hide();
                 }
+                self.dbus_service.change_visibility(new_visibility);
             }
             Msg::HintPurpose(content_hint, content_purpose) => println!(
                 "ContentHint: {:?}, ContentPurpose: {:?}",
@@ -289,7 +297,17 @@ impl relm::Widget for Win {
             let window_clone = window.clone();
             wayland::layer_shell::make_overlay_layer(window_clone);
         }
-        window.show_all();
+
+        let stream = relm.stream().clone();
+        // Create a channel to be able to send a message from another thread.
+        let (channel, sender) = Channel::new(move |msg| {
+            // This closure is executed whenever a message is received from the sender.
+            // We send a message to the current widget.
+            stream.emit(msg);
+        });
+        let dbus_service = DBusService::new(sender).unwrap();
+        window.show_all(); // All widgets are visible
+        window.hide(); // Keyboard starts out being invisible and is only shown if requested via DBus or input-method
 
         // Set visible child MUST be called after show_all. Otherwise it takes no effect!
         let (layout_name, view_name) = model.keyboard.get_view_name();
@@ -311,6 +329,8 @@ impl relm::Widget for Win {
                 _drag_gesture: drag_gesture,
                 _pan_gesture: pan_gesture,
             },
+            dbus_service,
+            _channel: channel,
         }
     }
 }
@@ -473,7 +493,7 @@ impl EmitUIMsg for MessagePipe {
             }
             UIMsg::Visable(visable) => {
                 println!("Relm: visability: {}", visable);
-                self.relm.stream().emit(Msg::Visable(visable));
+                self.relm.stream().emit(Msg::Visible(visable));
             }
             UIMsg::HintPurpose(content_hint, content_purpose) => println!("Relm: contentpurpose"),
             UIMsg::SwitchLayout(layout) => println!("Relm: switch layout"),

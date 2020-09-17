@@ -27,6 +27,8 @@ zwp-virtual-keyboard = "0.1"
 input_event_codes_hashmap = "0.1.0"
 zwp-input-method = "0.1.0"
 tempfile = "3.1.0"
+dbus = "0.8.4"
+dbus-crossroads = "0.2.2"
 
 [dependencies.input_method_service]
 path = "../test/input_method_service"
