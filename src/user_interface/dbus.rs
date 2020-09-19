@@ -41,7 +41,7 @@ impl DBusClient {
             Duration::from_millis(5000),
         );
         let app_id = "Dbus.client.test";
-        let timeout = 10;
+        let timeout = -1;
         /*let event = "button-pressed";
         let hints: HashMap<String, Variant<String>> = HashMap::new();
         let (event_id,): (u32,) = haptic_proxy.method_call(
