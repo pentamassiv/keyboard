@@ -59,40 +59,19 @@ impl relm::Update for Win {
                 self.model.input.path = Vec::new();
             }
             Msg::Submit(submission) => self.model.keyboard.submit(submission),
-            Msg::SwitchView(new_view) => {
-                let layout_name = &self.model.keyboard.active_view.0;
-                self.widgets.stack.set_visible_child_name(
-                    &crate::keyboard::Keyboard::make_view_name(layout_name, &new_view),
-                );
-                self.model.keyboard.active_view = (layout_name.to_string(), new_view);
-            }
             Msg::Visible(new_visibility) => {
-                println!("Msg visiblility: {}", new_visibility);
-                if new_visibility {
-                    self.widgets.window.show();
-                } else {
-                    self.widgets.window.hide();
-                }
-                self.dbus_service.change_visibility(new_visibility);
+                self.ui_manager.change_visibility(new_visibility);
             }
-            Msg::HintPurpose(content_hint, content_purpose) => println!(
-                "ContentHint: {:?}, ContentPurpose: {:?}",
-                content_hint, content_purpose
-            ),
-            Msg::SwitchLayout(new_layout) => {
-                if self.widgets.stack.get_child_by_name(&new_layout).is_some() {
-                    self.widgets.stack.set_visible_child_name(
-                        &crate::keyboard::Keyboard::make_view_name(&new_layout, "base"),
-                    );
-                    self.model.keyboard.active_view = (new_layout, "base".to_string());
-                } else {
-                    println!("The requested layout {} does not exist", new_layout);
-                }
+            Msg::HintPurpose(content_hint, content_purpose) => self
+                .ui_manager
+                .change_hint_purpose(content_hint, content_purpose),
+            Msg::ChangeUILayoutView(layout, view) => {
+                self.ui_manager.change_layout_view(layout, view);
             }
-            Msg::SwitchMode(mode) => match mode {
-                Mode::Landscape => println!("Mode changed to Landscape"),
-                Mode::Portrait => println!("Mode changed to Portrait"),
-            },
+            Msg::ChangeKBLayoutView(layout, view) => {
+                self.model.keyboard.active_view = (layout, view);
+            }
+            Msg::ChangeUIMode(mode) => self.ui_manager.change_mode(mode),
             Msg::PollEvents => {
                 self.model.keyboard.fetch_events();
             }

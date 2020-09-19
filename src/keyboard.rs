@@ -119,9 +119,11 @@ impl Key {
                     //self.submitter.submit(Submission::Keycode(keycode))
                 }
                 KeyAction::SwitchView(new_view) => {
-                    win.relm
-                        .stream()
-                        .emit(crate::user_interface::Msg::SwitchView(new_view.to_string()));
+                    let switch_view_msg = crate::user_interface::Msg::ChangeUILayoutView(
+                        None,
+                        Some(new_view.to_string()),
+                    );
+                    win.relm.stream().emit(switch_view_msg);
                 }
                 KeyAction::Modifier(modifier) => {
                     win.relm.stream().emit(crate::user_interface::Msg::Submit(
@@ -145,8 +147,7 @@ impl Key {
 pub enum UIMsg {
     Visable(bool),
     HintPurpose(ContentHint, ContentPurpose),
-    SwitchView(String),
-    SwitchLayout(String),
+    ChangeUILayoutView(Option<String>, Option<String>),
 }
 
 pub trait EmitUIMsg {

@@ -2,7 +2,7 @@ use super::submitter::*;
 use crate::config::directories;
 use crate::config::ui_defaults;
 use crate::keyboard;
-use crate::keyboard::{EmitUIMsg, KeyAction, KeyEvent, UIMsg};
+use crate::keyboard::{EmitUIMsg, KeyEvent, UIMsg};
 use gtk::OverlayExt;
 use gtk::*;
 use relm::Channel;
@@ -15,7 +15,8 @@ use wayland_protocols::unstable::text_input::v3::client::zwp_text_input_v3::{
 mod dbus;
 mod relm_update;
 mod relm_widget;
-use self::dbus::DBusService;
+mod ui_manager;
+use ui_manager::*;
 
 #[derive(Clone)]
 struct Dot {
@@ -43,15 +44,15 @@ pub enum Msg {
     Submit(Submission),
     Visible(bool),
     HintPurpose(ContentHint, ContentPurpose),
-    SwitchView(String),
-    SwitchLayout(String),
-    SwitchMode(Mode),
+    ChangeUILayoutView(Option<String>, Option<String>),
+    ChangeUIMode(Mode),
+    ChangeKBLayoutView(String, String),
     PollEvents,
     UpdateDrawBuffer,
     Quit,
 }
 
-enum Mode {
+pub enum Mode {
     Landscape,
     Portrait,
 }
@@ -75,7 +76,7 @@ pub struct Win {
     model: Model,
     widgets: Widgets,
     _gestures: Gestures,
-    dbus_service: DBusService,
+    ui_manager: UIManager,
     _channel: Channel<Msg>,
 }
 
@@ -155,15 +156,19 @@ impl MessagePipe {
 impl EmitUIMsg for MessagePipe {
     fn emit(&self, message: UIMsg) {
         match message {
-            UIMsg::SwitchView(view) => {
-                self.relm.stream().emit(Msg::SwitchView(view));
+            UIMsg::ChangeUILayoutView(layout, view) => {
+                self.relm
+                    .stream()
+                    .emit(Msg::ChangeUILayoutView(layout, view));
             }
             UIMsg::Visable(visable) => {
-                println!("Relm: visability: {}", visable);
                 self.relm.stream().emit(Msg::Visible(visable));
             }
-            UIMsg::HintPurpose(content_hint, content_purpose) => println!("Relm: contentpurpose"),
-            UIMsg::SwitchLayout(layout) => println!("Relm: switch layout"),
+            UIMsg::HintPurpose(content_hint, content_purpose) => {
+                self.relm
+                    .stream()
+                    .emit(Msg::HintPurpose(content_hint, content_purpose));
+            }
         }
     }
 }

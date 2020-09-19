@@ -89,8 +89,9 @@ impl relm::Widget for Win {
                 new_layout_button,
                 connect_button_release_event(clicked_button, _),
                 return (
-                    Some(crate::user_interface::Msg::SwitchLayout(
-                        clicked_button.get_label().unwrap().to_string()
+                    Some(crate::user_interface::Msg::ChangeUILayoutView(
+                        Some(clicked_button.get_label().unwrap().to_string()),
+                        None
                     )),
                     gtk::Inhibit(false)
                 )
@@ -123,7 +124,7 @@ impl relm::Widget for Win {
             } else {
                 Mode::Portrait
             };
-            relm_clone.stream().emit(Msg::SwitchMode(mode));
+            relm_clone.stream().emit(Msg::ChangeUIMode(mode));
             false
         });
         window.add(&vbox);
@@ -146,7 +147,6 @@ impl relm::Widget for Win {
             // We send a message to the current widget.
             stream.emit(msg);
         });
-        let dbus_service = DBusService::new(sender).unwrap();
         window.show_all(); // All widgets are visible
         window.hide(); // Keyboard starts out being invisible and is only shown if requested via DBus or input-method
 
@@ -156,6 +156,12 @@ impl relm::Widget for Win {
             &layout_name,
             &view_name,
         ));
+        let ui_manager = UIManager::new(
+            sender,
+            window.clone(),
+            stack.clone(),
+            (layout_name, view_name),
+        );
         Win {
             relm: relm.clone(),
             model,
@@ -170,7 +176,7 @@ impl relm::Widget for Win {
                 _drag_gesture: drag_gesture,
                 _pan_gesture: pan_gesture,
             },
-            dbus_service,
+            ui_manager,
             _channel: channel,
         }
     }
