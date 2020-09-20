@@ -161,7 +161,7 @@ impl EmitUIMsg for MessagePipe {
                     .stream()
                     .emit(Msg::ChangeUILayoutView(layout, view));
             }
-            UIMsg::Visable(visable) => {
+            UIMsg::Visible(visable) => {
                 self.relm.stream().emit(Msg::Visible(visable));
             }
             UIMsg::HintPurpose(content_hint, content_purpose) => {

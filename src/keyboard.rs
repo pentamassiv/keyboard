@@ -145,7 +145,7 @@ impl Key {
 }
 
 pub enum UIMsg {
-    Visable(bool),
+    Visible(bool),
     HintPurpose(ContentHint, ContentPurpose),
     ChangeUILayoutView(Option<String>, Option<String>),
 }

@@ -22,11 +22,11 @@ impl SubConnector {
 
 impl KeyboardVisability for SubConnector {
     fn show_keyboard(&self) {
-        self.ui_connector.message_pipe.emit(UIMsg::Visable(true));
+        self.ui_connector.message_pipe.emit(UIMsg::Visible(true));
         println!("Show keyboard");
     }
     fn hide_keyboard(&self) {
-        self.ui_connector.message_pipe.emit(UIMsg::Visable(false));
+        self.ui_connector.message_pipe.emit(UIMsg::Visible(false));
         println!("Hide keyboard");
     }
 }
