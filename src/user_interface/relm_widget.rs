@@ -1,4 +1,12 @@
-use super::*;
+use super::{Gestures, Msg, Orientation, UIManager, Widgets, Win};
+use crate::config::directories;
+use crate::keyboard;
+use crate::submitter::*;
+use gtk::OverlayExt;
+use gtk::*;
+use relm::Channel;
+use std::collections::HashMap;
+use std::time::Instant;
 
 impl relm::Widget for Win {
     // Specify the type of the root widget.
@@ -76,7 +84,11 @@ impl relm::Widget for Win {
         pref_popover.add(&pref_vbox);
         let mut tmp_layouts = HashMap::new();
         for (layout_name, _) in model.keyboard.views.keys() {
-            tmp_layouts.insert(layout_name, ());
+            // Only layouts that are for portrait mode can be switched to.
+            //Layouts for landscape mode are switched automatically to when the orientation changes
+            if layout_name.strip_suffix("_wide").is_none() {
+                tmp_layouts.insert(layout_name, ());
+            }
         }
         for unique_layout_name in tmp_layouts.keys() {
             let new_layout_button = gtk::Button::new();
@@ -99,7 +111,7 @@ impl relm::Widget for Win {
         }
         preferences_button.connect_clicked(move |_| pref_popover.show_all());
 
-        let hbox = gtk::Box::new(Orientation::Horizontal, 0);
+        let hbox = gtk::Box::new(gtk::Orientation::Horizontal, 0);
         hbox.set_margin_start(0);
         hbox.set_margin_end(0);
         hbox.add(&suggestion_button_left);
@@ -110,7 +122,7 @@ impl relm::Widget for Win {
         let frame = gtk::Frame::new(None);
         frame.add(&hbox);
 
-        let vbox = gtk::Box::new(Orientation::Vertical, 2);
+        let vbox = gtk::Box::new(gtk::Orientation::Vertical, 2);
         vbox.add(&frame);
         vbox.add(&overlay);
 
@@ -119,12 +131,14 @@ impl relm::Widget for Win {
         let relm_clone = relm.clone();
         window.connect_configure_event(move |_, configure_event| {
             let (width, _) = configure_event.get_size();
-            let mode = if width == 720 {
-                Mode::Landscape
+            let orientation = if width == 720 {
+                Orientation::Landscape
             } else {
-                Mode::Portrait
+                Orientation::Portrait
             };
-            relm_clone.stream().emit(Msg::ChangeUIMode(mode));
+            relm_clone
+                .stream()
+                .emit(Msg::ChangeUIOrientation(orientation));
             false
         });
         window.add(&vbox);

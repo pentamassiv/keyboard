@@ -1,5 +1,5 @@
 use super::dbus::DBusService;
-use super::{Mode, Msg};
+use super::{Msg, Orientation};
 use gtk::{Stack, StackExt, WidgetExt, Window};
 use relm::Sender;
 use wayland_protocols::unstable::text_input::v3::client::zwp_text_input_v3::{
@@ -48,14 +48,42 @@ impl UIManager {
         )
     }
 
-    pub fn change_mode(&self, mode: Mode) {
-        match mode {
-            Mode::Landscape => println!("Mode changed to Landscape"),
-            Mode::Portrait => println!("Mode changed to Portrait"),
+    pub fn change_orientation(&mut self, orientation: Orientation) {
+        match orientation {
+            Orientation::Landscape => {
+                let (layout, _) = &self.current_layout_view;
+                if layout.ends_with("_wide") {
+                    println!("Already in landscape orientation")
+                } else {
+                    let mut landscape_layout = layout.to_string();
+                    landscape_layout.push_str("_wide");
+                    match self.change_layout_view(Some(landscape_layout), None) {
+                        Ok(()) => println!("Sucessfully changed to landscape orientation"),
+                        _ => println!("Failed to change to landscape orientation"),
+                    }
+                }
+            }
+            Orientation::Portrait => {
+                let (layout, _) = self.current_layout_view.clone();
+                if let Some(portrait_layout) = layout.strip_suffix("_wide") {
+                    // If str ends with suffix, Some(prefix) is returned, if not None is returned
+                    match self.change_layout_view(Some(portrait_layout.to_string()), None) {
+                        // View is changed back to base when orientation is changed
+                        Ok(()) => println!("Sucessfully changed to portrait orientation"),
+                        _ => println!("Failed to change to portrait orientation"),
+                    }
+                } else {
+                    println!("Already in portrait orientation")
+                }
+            }
         }
     }
 
-    pub fn change_layout_view(&mut self, new_layout: Option<String>, new_view: Option<String>) {
+    pub fn change_layout_view(
+        &mut self,
+        new_layout: Option<String>,
+        new_view: Option<String>,
+    ) -> Result<(), UIError> {
         let layout;
         let mut view = self.current_layout_view.1.clone();
         if let Some(new_layout) = new_layout {
@@ -78,11 +106,17 @@ impl UIManager {
                 .send(Msg::ChangeKBLayoutView(layout.clone(), view.clone()))
                 .expect("send message");
             self.current_layout_view = (layout, view);
+            Ok(())
         } else {
             println!(
                 "The requested layout {} does not exist",
                 new_layout_view_name
             );
+            Err(UIError::LayoutViewError)
         }
     }
+}
+
+pub enum UIError {
+    LayoutViewError,
 }

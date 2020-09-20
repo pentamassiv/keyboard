@@ -10,8 +10,7 @@ use wayland_protocols::unstable::text_input::v3::client::zwp_text_input_v3::{
 
 pub mod parser;
 pub use parser::{KeyAction, KeyEvent}; // Re-export
-pub mod vk_sub_connector;
-pub mod vk_ui_connector;
+pub mod ui_sub_connector;
 
 pub const ICON_FOLDER: &str = "./data/icons/";
 pub const RESOLUTIONX: i32 = 10000;
@@ -147,7 +146,7 @@ impl Key {
 pub enum UIMsg {
     Visible(bool),
     HintPurpose(ContentHint, ContentPurpose),
-    ChangeUILayoutView(Option<String>, Option<String>),
+    //ChangeUILayoutView(Option<String>, Option<String>),
 }
 
 pub trait EmitUIMsg {
@@ -159,14 +158,13 @@ pub struct Keyboard {
     pub views: HashMap<(String, String), View>,
     pub active_view: (String, String),
     active_keys: Vec<Key>,
-    submitter: Submitter<vk_sub_connector::SubConnector>,
+    submitter: Submitter<ui_sub_connector::UISubmitterConnector>,
 }
 
 impl Keyboard {
     pub fn new(ui_message_pipe: MessagePipe) -> Keyboard {
-        let ui_connector = vk_ui_connector::UIConnector::new(ui_message_pipe);
-        let sub_connector = vk_sub_connector::SubConnector::new(ui_connector);
-        let submitter = Submitter::new(sub_connector);
+        let ui_sub_connector = ui_sub_connector::UISubmitterConnector::new(ui_message_pipe);
+        let submitter = Submitter::new(ui_sub_connector);
         Keyboard {
             views: HashMap::new(),
             active_view: (

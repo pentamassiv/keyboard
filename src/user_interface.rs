@@ -1,12 +1,9 @@
 use super::submitter::*;
-use crate::config::directories;
 use crate::config::ui_defaults;
 use crate::keyboard;
 use crate::keyboard::{EmitUIMsg, KeyEvent, UIMsg};
-use gtk::OverlayExt;
 use gtk::*;
 use relm::Channel;
-use std::collections::HashMap;
 use std::time::Instant;
 use wayland_protocols::unstable::text_input::v3::client::zwp_text_input_v3::{
     ContentHint, ContentPurpose,
@@ -45,14 +42,14 @@ pub enum Msg {
     Visible(bool),
     HintPurpose(ContentHint, ContentPurpose),
     ChangeUILayoutView(Option<String>, Option<String>),
-    ChangeUIMode(Mode),
+    ChangeUIOrientation(Orientation),
     ChangeKBLayoutView(String, String),
     PollEvents,
     UpdateDrawBuffer,
     Quit,
 }
 
-pub enum Mode {
+pub enum Orientation {
     Landscape,
     Portrait,
 }
@@ -156,11 +153,11 @@ impl MessagePipe {
 impl EmitUIMsg for MessagePipe {
     fn emit(&self, message: UIMsg) {
         match message {
-            UIMsg::ChangeUILayoutView(layout, view) => {
-                self.relm
-                    .stream()
-                    .emit(Msg::ChangeUILayoutView(layout, view));
-            }
+            //UIMsg::ChangeUILayoutView(layout, view) => {
+            //    self.relm
+            //        .stream()
+            //        .emit(Msg::ChangeUILayoutView(layout, view));
+            //}
             UIMsg::Visible(visable) => {
                 self.relm.stream().emit(Msg::Visible(visable));
             }
