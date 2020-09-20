@@ -10,13 +10,13 @@ pub enum Submission {
     Erase,
 }
 
-pub struct Submitter<T: 'static + KeyboardVisability + HintPurpose> {
+pub struct Submitter<T: 'static + KeyboardVisibility + HintPurpose> {
     event_queue: EventQueue,
     im_service: Option<IMService<T>>,
     virtual_keyboard: Option<wayland::vk_service::VKService>,
 }
 
-impl<T: 'static + KeyboardVisability + HintPurpose> Submitter<T> {
+impl<T: 'static + KeyboardVisibility + HintPurpose> Submitter<T> {
     pub fn new(connector: T) -> Submitter<T> {
         let (event_queue, seat, vk_mgr, im_mgr) = wayland::init_wayland(); //let (seat, layer_shell, vk_mgr, im_mgr) = super::init_wayland();
         let mut im_service = None;

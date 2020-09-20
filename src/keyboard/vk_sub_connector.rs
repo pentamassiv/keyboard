@@ -20,7 +20,7 @@ impl SubConnector {
     }
 }
 
-impl KeyboardVisability for SubConnector {
+impl KeyboardVisibility for SubConnector {
     fn show_keyboard(&self) {
         self.ui_connector.message_pipe.emit(UIMsg::Visible(true));
         println!("Show keyboard");
