@@ -1,11 +1,21 @@
 //use super::super::keyboard::EmitUIMsg;
-use super::{EmitUIMsg, UIMsg};
+
 //use crate::keyboard::vk_ui_connector::UIConnector;
 use crate::user_interface::MessagePipe;
 use input_method_service::*;
 use wayland_protocols::unstable::text_input::v3::client::zwp_text_input_v3::{
     ContentHint, ContentPurpose,
 };
+
+pub enum UIMsg {
+    Visible(bool),
+    HintPurpose(ContentHint, ContentPurpose),
+    //ChangeUILayoutView(Option<String>, Option<String>),
+}
+
+pub trait EmitUIMsg {
+    fn emit(&self, message: UIMsg);
+}
 
 pub struct UISubmitterConnector {
     pub message_pipe: MessagePipe,

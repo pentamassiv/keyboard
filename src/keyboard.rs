@@ -4,13 +4,11 @@ use gtk::*;
 use gtk::{ButtonExt, GridExt, StyleContextExt, WidgetExt};
 
 use std::collections::HashMap;
-use wayland_protocols::unstable::text_input::v3::client::zwp_text_input_v3::{
-    ContentHint, ContentPurpose,
-};
 
 pub mod parser;
 pub use parser::{KeyAction, KeyEvent}; // Re-export
 pub mod ui_sub_connector;
+pub use ui_sub_connector::{EmitUIMsg, UIMsg};
 
 pub const ICON_FOLDER: &str = "./data/icons/";
 pub const RESOLUTIONX: i32 = 10000;
@@ -141,16 +139,6 @@ impl Key {
         }
         //self.button.activate(); // Disabled, because the transition takes too long and makes it looks sluggish
     }
-}
-
-pub enum UIMsg {
-    Visible(bool),
-    HintPurpose(ContentHint, ContentPurpose),
-    //ChangeUILayoutView(Option<String>, Option<String>),
-}
-
-pub trait EmitUIMsg {
-    fn emit(&self, message: UIMsg);
 }
 
 //#[derive(Debug)]
