@@ -23,6 +23,7 @@ impl View {
                 }
             }
         }
+        key_coordinates.shrink_to_fit();
         View { key_coordinates }
     }
 

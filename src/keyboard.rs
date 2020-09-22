@@ -40,6 +40,7 @@ impl Keyboard {
             }
         }
         let active_view = Keyboard::get_default_layout_view();
+        views.shrink_to_fit();
         Keyboard {
             views,
             active_view,

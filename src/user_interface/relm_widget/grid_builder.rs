@@ -20,6 +20,7 @@ impl GridBuilder {
                 hashmap_with_key_refs.extend(key_refs)
             }
         }
+        hashmap_with_key_refs.shrink_to_fit();
         (stack, hashmap_with_key_refs)
     }
 
