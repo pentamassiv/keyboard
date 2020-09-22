@@ -1,4 +1,5 @@
 use super::dbus::DBusService;
+use super::relm_widget::GridBuilder;
 use super::{Msg, Orientation};
 use gtk::{Stack, StackExt, WidgetExt, Window};
 use relm::Sender;
@@ -11,7 +12,7 @@ pub struct UIManager {
     window: Window,
     stack: Stack,
     dbus_service: DBusService,
-    current_layout_view: (String, String),
+    pub current_layout_view: (String, String),
 }
 
 impl UIManager {
@@ -95,7 +96,7 @@ impl UIManager {
         if let Some(new_view) = new_view {
             view = new_view;
         }
-        let new_layout_view_name = crate::keyboard::Keyboard::make_view_name(&layout, &view);
+        let new_layout_view_name = GridBuilder::make_grid_name(&layout, &view);
         if self
             .stack
             .get_child_by_name(&new_layout_view_name)

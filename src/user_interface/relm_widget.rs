@@ -1,4 +1,4 @@
-use super::{Gestures, Msg, Orientation, UIManager, Widgets, Win};
+use super::{Gestures, MessagePipe, Msg, Orientation, UIManager, Widgets, Win};
 use crate::config::directories;
 use crate::keyboard;
 use crate::submitter::*;
@@ -7,6 +7,9 @@ use gtk::*;
 use relm::Channel;
 use std::collections::HashMap;
 use std::time::Instant;
+
+mod grid_builder;
+pub use grid_builder::GridBuilder;
 
 impl relm::Widget for Win {
     // Specify the type of the root widget.
@@ -21,13 +24,10 @@ impl relm::Widget for Win {
     fn view(relm: &relm::Relm<Self>, mut model: Self::Model) -> Self {
         load_css();
 
-        let stack = gtk::Stack::new();
-        stack.set_transition_type(gtk::StackTransitionType::None);
-        let layout_meta = keyboard::parser::LayoutYamlParser::get_layouts();
-        let grids = model.keyboard.init(relm, layout_meta);
-        for (grid_name, grid) in grids {
-            stack.add_named(&grid, &grid_name);
-        }
+        let message_pipe = MessagePipe::new(relm.clone());
+        let layout_meta = keyboard::LayoutMeta::new();
+        let keyboard = keyboard::Keyboard::from(message_pipe, &layout_meta);
+        let (stack, key_refs) = GridBuilder::make_stack(layout_meta);
 
         let drawing_area = gtk::DrawingArea::new();
         let mut draw_handler = relm::DrawHandler::new().expect("draw handler");
@@ -83,7 +83,7 @@ impl relm::Widget for Win {
         let pref_vbox = gtk::Box::new(gtk::Orientation::Vertical, 0);
         pref_popover.add(&pref_vbox);
         let mut tmp_layouts = HashMap::new();
-        for (layout_name, _) in model.keyboard.views.keys() {
+        for (layout_name, _) in keyboard.views.keys() {
             // Only layouts that are for portrait mode can be switched to.
             //Layouts for landscape mode are switched automatically to when the orientation changes
             if layout_name.strip_suffix("_wide").is_none() {
@@ -165,11 +165,8 @@ impl relm::Widget for Win {
         window.hide(); // Keyboard starts out being invisible and is only shown if requested via DBus or input-method
 
         // Set visible child MUST be called after show_all. Otherwise it takes no effect!
-        let (layout_name, view_name) = model.keyboard.get_view_name();
-        stack.set_visible_child_name(&keyboard::Keyboard::make_view_name(
-            &layout_name,
-            &view_name,
-        ));
+        let (layout_name, view_name) = keyboard.active_view.clone();
+        stack.set_visible_child_name(&GridBuilder::make_grid_name(&layout_name, &view_name));
         let ui_manager = UIManager::new(
             sender,
             window.clone(),
@@ -179,6 +176,7 @@ impl relm::Widget for Win {
         Win {
             relm: relm.clone(),
             model,
+            keyboard,
             widgets: Widgets {
                 window,
                 //preferences_button,

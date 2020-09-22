@@ -28,7 +28,6 @@ struct Input {
 }
 
 pub struct Model {
-    keyboard: crate::keyboard::Keyboard,
     input: Input,
 }
 
@@ -71,6 +70,7 @@ struct Widgets {
 pub struct Win {
     pub relm: relm::Relm<Win>,
     model: Model,
+    keyboard: crate::keyboard::Keyboard,
     widgets: Widgets,
     _gestures: Gestures,
     ui_manager: UIManager,
@@ -80,10 +80,9 @@ pub struct Win {
 impl Win {
     fn activate_button(&self, x: f64, y: f64) {
         let (x_rel, y_rel) = self.get_rel_coordinates(x, y);
-        let (layout_name, view_name) = &self.model.keyboard.get_view_name();
+        let (layout_name, view_name) = &self.ui_manager.current_layout_view;
         if let Some(key_to_activate) =
-            self.model
-                .keyboard
+            self.keyboard
                 .get_closest_key(layout_name, view_name, x_rel, y_rel)
         {
             key_to_activate.activate(self, &self.model.input.input_type);

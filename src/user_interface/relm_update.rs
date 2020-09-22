@@ -15,7 +15,7 @@ impl relm::Update for Win {
                 input_type: KeyEvent::ShortPress,
                 path: Vec::new(),
             },
-            keyboard: keyboard::Keyboard::new(MessagePipe::new(relm.clone())),
+            //keyboard: keyboard::Keyboard::new(MessagePipe::new(relm.clone())),
         }
     }
 
@@ -58,7 +58,7 @@ impl relm::Update for Win {
                 //println!("Release: x: {}, y: {}, time: {:?}", x, y, time);
                 self.model.input.path = Vec::new();
             }
-            Msg::Submit(submission) => self.model.keyboard.submit(submission),
+            Msg::Submit(submission) => self.keyboard.submit(submission),
             Msg::Visible(new_visibility) => {
                 self.ui_manager.change_visibility(new_visibility);
             }
@@ -69,11 +69,11 @@ impl relm::Update for Win {
                 let _ = self.ui_manager.change_layout_view(layout, view); // Result not relevant
             }
             Msg::ChangeKBLayoutView(layout, view) => {
-                self.model.keyboard.active_view = (layout, view);
+                self.keyboard.active_view = (layout, view);
             }
             Msg::ChangeUIOrientation(mode) => self.ui_manager.change_orientation(mode),
             Msg::PollEvents => {
-                self.model.keyboard.fetch_events();
+                self.keyboard.fetch_events();
             }
             Msg::UpdateDrawBuffer => {
                 self.draw_path();
