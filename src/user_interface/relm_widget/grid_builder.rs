@@ -1,6 +1,7 @@
 use crate::keyboard::{KeyArrangement, KeyDisplay, KeyMeta, LayoutMeta, Location};
 use gtk::{Button, ButtonExt, Grid, GridExt, Stack, StackExt, StyleContextExt, WidgetExt};
 use std::collections::HashMap;
+use std::convert::TryInto;
 
 pub const ICON_FOLDER: &str = "./data/icons/";
 
@@ -24,13 +25,6 @@ impl GridBuilder {
         (stack, hashmap_with_key_refs)
     }
 
-    /*
-    pub struct Location {
-        pub coordinate: (u32, u32),
-        pub size: (u32, u32),
-    }
-    */
-
     fn make_grid(
         view_arrangement: &KeyArrangement,
         view_keys: &HashMap<String, KeyMeta>,
@@ -42,10 +36,18 @@ impl GridBuilder {
         for (key_id, location) in &view_arrangement.key_arrangement {
             let button = GridBuilder::make_button(&key_id, view_keys.get(key_id).unwrap());
             let Location {
-                coordinate: (x, y),
-                size: (width, height),
+                x,
+                y,
+                width,
+                height,
             } = location;
-            grid.attach(&button, *x, *y, *width, *height);
+            grid.attach(
+                &button,
+                (*x).try_into().unwrap(),
+                (*y).try_into().unwrap(),
+                (*width).try_into().unwrap(),
+                (*height).try_into().unwrap(),
+            );
         }
         (grid, hashmap_with_key_refs)
     }

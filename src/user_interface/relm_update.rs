@@ -9,13 +9,12 @@ impl relm::Update for Win {
     type Msg = Msg;
 
     // Return the initial model.
-    fn model(relm: &relm::Relm<Self>, _: Self::ModelParam) -> Model {
+    fn model(_: &relm::Relm<Self>, _: Self::ModelParam) -> Model {
         Model {
             input: Input {
                 input_type: KeyEvent::ShortPress,
                 path: Vec::new(),
             },
-            //keyboard: keyboard::Keyboard::new(MessagePipe::new(relm.clone())),
         }
     }
 

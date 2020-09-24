@@ -109,13 +109,17 @@ impl LayoutMeta {
 
 #[derive(Debug)]
 pub struct Location {
-    pub coordinate: (i32, i32),
-    pub size: (i32, i32),
+    pub x: i32,
+    pub y: i32,
+    pub width: i32,
+    pub height: i32,
 }
 
 #[derive(Debug)]
 pub struct KeyArrangement {
     pub key_arrangement: HashMap<String, Location>,
+    pub no_rows: i32,
+    pub no_columns: i32,
 }
 impl KeyArrangement {
     pub fn from(
@@ -124,10 +128,12 @@ impl KeyArrangement {
     ) -> KeyArrangement {
         let (uncentered_key_arrangement, row_widths) =
             KeyArrangement::get_uncentered_key_arrangement(key_arrangement_deserialized, key_meta);
-        let centered_key_arrangement =
+        let (centered_key_arrangement, no_columns, no_rows) =
             KeyArrangement::get_centered_key_arrangement(uncentered_key_arrangement, row_widths);
         KeyArrangement {
             key_arrangement: centered_key_arrangement,
+            no_rows,
+            no_columns,
         }
     }
 
@@ -140,7 +146,7 @@ impl KeyArrangement {
         for (row_no, row) in key_arrangement_deserialized.iter().enumerate() {
             row_widths.insert(row_no, 0);
             for key_id in row.split_ascii_whitespace() {
-                let coordinate = (row_widths[row_no], row_no as i32);
+                let (x, y) = (row_widths[row_no], row_no as i32);
                 let (width, height) = (
                     key_meta
                         .get(key_id)
@@ -149,8 +155,10 @@ impl KeyArrangement {
                     1,
                 );
                 let location = Location {
-                    coordinate,
-                    size: (width, height),
+                    x,
+                    y,
+                    width,
+                    height,
                 };
                 row_widths[row_no] += width;
                 key_arrangement.insert(key_id.to_string(), location);
@@ -162,24 +170,29 @@ impl KeyArrangement {
     fn get_centered_key_arrangement(
         uncentered_key_arrangement: HashMap<String, Location>,
         row_widths: Vec<i32>,
-    ) -> HashMap<String, Location> {
-        let max_width_rows = row_widths.iter().max().unwrap();
+    ) -> (HashMap<String, Location>, i32, i32) {
+        let no_columns = row_widths.iter().max().unwrap();
+        let no_rows = row_widths.len() as i32;
         let mut key_arrangement_centered = HashMap::new();
         for (
             key,
             Location {
-                coordinate: (x, y),
-                size,
+                x,
+                y,
+                width,
+                height,
             },
         ) in uncentered_key_arrangement
         {
-            let new_x = (max_width_rows - row_widths[y as usize]) / 2 + x;
+            let new_x = (no_columns - row_widths[y as usize]) / 2 + x;
             let new_location = Location {
-                coordinate: (new_x, y),
-                size,
+                x: new_x,
+                y,
+                width,
+                height,
             };
             key_arrangement_centered.insert(key, new_location);
         }
-        key_arrangement_centered
+        (key_arrangement_centered, *no_columns, no_rows)
     }
 }

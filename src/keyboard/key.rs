@@ -3,7 +3,7 @@ use std::collections::HashMap;
 
 #[derive(Debug, Clone)]
 pub struct Key {
-    id: String,
+    pub id: String,
     actions: HashMap<KeyEvent, Vec<KeyAction>>,
 }
 

@@ -4,8 +4,8 @@ mod ui_sub_connector;
 pub use ui_sub_connector::{EmitUIMsg, UIMsg, UISubmitterConnector};
 
 pub const ICON_FOLDER: &str = "./data/icons/";
-pub const RESOLUTIONX: i32 = 10000;
-pub const RESOLUTIONY: i32 = 10000;
+pub const RESOLUTIONX: i32 = 1000; // TODO: Think about the exact value
+pub const RESOLUTIONY: i32 = 1000;
 
 pub const KEYBOARD_DEFAULT_LAYOUT: &str = "us";
 pub const KEYBOARD_DEFAULT_VIEW: &str = "base";
