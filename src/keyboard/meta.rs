@@ -45,6 +45,10 @@ impl KeyMeta {
             KeyEvent::ShortPress,
             vec![KeyAction::EnterString(key_id.clone())],
         );
+        actions.insert(
+            KeyEvent::LongPress,
+            vec![KeyAction::EnterString(key_id.clone())],
+        );
         let key_display = KeyDisplay::Text(key_id);
         let outline = Outline::Standard;
         let popup = None;

@@ -10,12 +10,7 @@ impl relm::Update for Win {
 
     // Return the initial model.
     fn model(_: &relm::Relm<Self>, _: Self::ModelParam) -> Model {
-        Model {
-            input: Input {
-                input_type: KeyEvent::ShortPress,
-                path: Vec::new(),
-            },
-        }
+        Model { path: Vec::new() }
     }
 
     fn subscriptions(&mut self, relm: &relm::Relm<Self>) {
@@ -27,35 +22,31 @@ impl relm::Update for Win {
     // Widgets may also be updated in this function.
     fn update(&mut self, event: Msg) {
         match event {
-            Msg::Press(_, _, _) => {
-                self.model.input.input_type = KeyEvent::ShortPress;
-            }
-            Msg::LongPress(x, y, _) => {
-                self.model.input.input_type = KeyEvent::LongPress;
-                // self.dbus_service.haptic_feedback(); // Not working reliably
-                self.activate_button(x, y);
-            }
-            Msg::Swipe(x, y, time) => {
-                if !(self.model.input.input_type == KeyEvent::LongPress) {
-                    self.model.input.input_type = KeyEvent::Swipe;
-                    self.model.input.path.push(Dot { x, y, time });
+            Msg::Input((x, y), input_type) => {
+                if let InputType::Move(time) = input_type {
+                    self.model.path.push(Point { x, y, time });
                 }
-            }
-            Msg::Release(x, y, time) => {
-                match self.model.input.input_type {
-                    KeyEvent::ShortPress => {
-                        // self.dbus_service.haptic_feedback(); // Not working reliably
-                        self.activate_button(x, y);
-                    }
-                    KeyEvent::LongPress => {
-                        //println!("LongPress");
-                    }
-                    KeyEvent::Swipe => {
-                        //println!("Swipe");
-                    }
+                if let InputType::Release = input_type {
+                    self.model.path = Vec::new();
                 }
-                //println!("Release: x: {}, y: {}, time: {:?}", x, y, time);
-                self.model.input.path = Vec::new();
+                let (x, y) = self.get_rel_coordinates(x, y);
+                self.keyboard.input(x, y, input_type);
+            }
+            Msg::ButtonInteraction(key_id, key_motion) => {
+                // Should never be possible to fail
+                let (layout, view) = self.ui_manager.current_layout_view.clone();
+                if let Some(button) = self.key_refs.get(&(layout, view, key_id)) {
+                    // TODO: Check what the ui is supposed to do when a button is activated
+                    match key_motion {
+                        KeyMotion::Press => {
+                            button.set_active(true);
+                        }
+                        KeyMotion::Release => {
+                            button.set_active(false);
+                        } //button.deactivate(),
+                    }
+                    // self.dbus_service.haptic_feedback();
+                }
             }
             Msg::Submit(submission) => self.keyboard.submit(submission),
             Msg::Visible(new_visibility) => {

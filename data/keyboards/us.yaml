@@ -22,6 +22,12 @@ views:
         - "show_letters preferences         space        period Return"
 
 buttons:
+    w:
+        actions:
+            short_press:
+                - enter_keycode: W
+            long_press:
+                - enter_keycode: W
     Shift_L_upper:
         actions:
             short_press:

@@ -1,3 +1,4 @@
+pub use self::wayland::vk_service::KeyMotion;
 use input_method_service::*;
 use wayland_client::EventQueue;
 
@@ -7,6 +8,7 @@ pub mod wayland;
 pub enum Submission {
     Text(String),
     Keycode(String),
+    StickyKeycode(String, KeyMotion),
     Erase,
 }
 
@@ -56,6 +58,12 @@ impl<T: 'static + KeyboardVisibility + HintPurpose> Submitter<T> {
                 if let Some(virtual_keyboard) = &mut self.virtual_keyboard {
                     println!("Submitter, Keycode, virtual keyboard");
                     virtual_keyboard.submit_keycode(&keycode);
+                };
+            }
+            Submission::StickyKeycode(keycode, key_motion) => {
+                if let Some(virtual_keyboard) = &mut self.virtual_keyboard {
+                    println!("Submitter, Keycode, virtual keyboard");
+                    virtual_keyboard.send_key(&keycode, key_motion);
                 };
             }
             Submission::Erase => self.erase(),

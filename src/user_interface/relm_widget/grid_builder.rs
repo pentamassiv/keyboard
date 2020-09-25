@@ -1,7 +1,6 @@
 use crate::keyboard::{KeyArrangement, KeyDisplay, KeyMeta, LayoutMeta, Location};
-use gtk::{Button, ButtonExt, Grid, GridExt, Stack, StackExt, StyleContextExt, WidgetExt};
+use gtk::{ButtonExt, Grid, GridExt, Stack, StackExt, StyleContextExt, ToggleButton, WidgetExt};
 use std::collections::HashMap;
-use std::convert::TryInto;
 
 pub const ICON_FOLDER: &str = "./data/icons/";
 
@@ -9,8 +8,9 @@ pub struct GridBuilder;
 impl GridBuilder {
     pub fn make_stack(
         layout_meta_hashmap: HashMap<String, LayoutMeta>,
-    ) -> (Stack, HashMap<String, Button>) {
+    ) -> (Stack, HashMap<(String, String, String), ToggleButton>) {
         let stack = Stack::new();
+        stack.get_style_context().add_class("view");
         let mut hashmap_with_key_refs = HashMap::new();
         stack.set_transition_type(gtk::StackTransitionType::None);
         for (layout_name, layout_meta) in layout_meta_hashmap {
@@ -18,7 +18,10 @@ impl GridBuilder {
                 let grid_name = GridBuilder::make_grid_name(&layout_name, &view_name);
                 let (grid, key_refs) = GridBuilder::make_grid(&view_arrangement, &layout_meta.keys);
                 stack.add_named(&grid, &grid_name);
-                hashmap_with_key_refs.extend(key_refs)
+                for (key_id, button) in key_refs {
+                    hashmap_with_key_refs
+                        .insert((layout_name.clone(), view_name.clone(), key_id), button);
+                }
             }
         }
         hashmap_with_key_refs.shrink_to_fit();
@@ -28,11 +31,11 @@ impl GridBuilder {
     fn make_grid(
         view_arrangement: &KeyArrangement,
         view_keys: &HashMap<String, KeyMeta>,
-    ) -> (Grid, HashMap<String, Button>) {
+    ) -> (Grid, HashMap<String, ToggleButton>) {
         let grid = Grid::new();
         grid.set_column_homogeneous(true);
         grid.set_row_homogeneous(true);
-        let hashmap_with_key_refs = HashMap::new();
+        let mut hashmap_with_key_refs = HashMap::new();
         for (key_id, location) in &view_arrangement.key_arrangement {
             let button = GridBuilder::make_button(&key_id, view_keys.get(key_id).unwrap());
             let Location {
@@ -41,18 +44,13 @@ impl GridBuilder {
                 width,
                 height,
             } = location;
-            grid.attach(
-                &button,
-                (*x).try_into().unwrap(),
-                (*y).try_into().unwrap(),
-                (*width).try_into().unwrap(),
-                (*height).try_into().unwrap(),
-            );
+            grid.attach(&button, *x, *y, *width, *height);
+            hashmap_with_key_refs.insert(key_id.to_string(), button.clone());
         }
         (grid, hashmap_with_key_refs)
     }
-    fn make_button(key_id: &str, key_meta: &KeyMeta) -> Button {
-        let button = Button::new();
+    fn make_button(key_id: &str, key_meta: &KeyMeta) -> ToggleButton {
+        let button = ToggleButton::new();
         button.set_label(key_id);
         button.set_hexpand(true);
         button.get_style_context().add_class("key");
@@ -79,7 +77,7 @@ impl GridBuilder {
         if let Some(popup) = &key_meta.popup {
                         let hbox = gtk::Box::new(gtk::Orientation::Horizontal, 0);
                         for popup_string in popup {
-                            let new_popup_button = gtk::Button::new();
+                            let new_popup_button = gtk::ToggleButton::new();
                             new_popup_button.set_label(popup_string);
                             hbox.add(&new_popup_button);
                             let tmp_popover_ref = popover.clone();

@@ -12,10 +12,10 @@ pub type KeyIds = String;
 #[derive(Debug, Clone, Deserialize, Serialize, PartialEq, Eq, Hash)]
 #[serde(deny_unknown_fields)]
 pub enum KeyEvent {
-    #[serde(rename = "long_press")]
-    LongPress,
     #[serde(rename = "short_press")]
     ShortPress,
+    #[serde(rename = "long_press")]
+    LongPress,
     #[serde(rename = "swipe")]
     Swipe,
 }

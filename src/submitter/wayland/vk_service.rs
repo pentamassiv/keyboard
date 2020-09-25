@@ -8,7 +8,8 @@ use wayland_client::Main;
 use zwp_virtual_keyboard::virtual_keyboard_unstable_v1::zwp_virtual_keyboard_manager_v1::ZwpVirtualKeyboardManagerV1;
 use zwp_virtual_keyboard::virtual_keyboard_unstable_v1::zwp_virtual_keyboard_v1::ZwpVirtualKeyboardV1;
 
-enum KeyMotion {
+#[derive(Debug)]
+pub enum KeyMotion {
     Press = 1,
     Release = 0,
 }
@@ -72,18 +73,20 @@ impl VKService {
         if keycode == "Shift_L_upper" || keycode == "Shift_L_base" {
             println!("Shift");
             self.toggle_shift();
-        } else if let Some(keycode) = input_event_codes_hashmap::KEY.get(keycode) {
-            self.send_key(*keycode, KeyMotion::Press);
-            self.send_key(*keycode, KeyMotion::Release);
         } else {
-            println!("Not a valid keycode!")
+            self.send_key(keycode, KeyMotion::Press);
+            self.send_key(keycode, KeyMotion::Release);
         }
     }
 
-    fn send_key(&self, keycode: u32, keymotion: KeyMotion) {
-        let time = self.get_time();
-        println!("time: {}, keycode: {}", time, keycode);
-        self.virtual_keyboard.key(time, keycode, keymotion as u32);
+    pub fn send_key(&self, keycode: &str, keymotion: KeyMotion) {
+        if let Some(keycode) = input_event_codes_hashmap::KEY.get(keycode) {
+            let time = self.get_time();
+            println!("time: {}, keycode: {}", time, keycode);
+            self.virtual_keyboard.key(time, *keycode, keymotion as u32);
+        } else {
+            println!("Not a valid keycode!")
+        }
     }
 
     pub fn toggle_shift(&mut self) {

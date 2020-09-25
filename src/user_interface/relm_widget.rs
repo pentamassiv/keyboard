@@ -1,9 +1,10 @@
-use super::{Gestures, MessagePipe, Msg, Orientation, UIManager, Widgets, Win};
+use super::{Gestures, InputType, Msg, Orientation, UIManager, Widgets, Win};
 use crate::config::directories;
 use crate::keyboard;
 use crate::submitter::*;
 use gtk::OverlayExt;
 use gtk::*;
+use keyboard::UIConnector;
 use relm::Channel;
 use std::collections::HashMap;
 use std::time::Instant;
@@ -21,10 +22,10 @@ impl relm::Widget for Win {
     }
 
     // Create the widgets.
-    fn view(relm: &relm::Relm<Self>, mut model: Self::Model) -> Self {
+    fn view(relm: &relm::Relm<Self>, model: Self::Model) -> Self {
         load_css();
 
-        let message_pipe = MessagePipe::new(relm.clone());
+        let message_pipe = UIConnector::new(relm.clone());
         let layout_meta = keyboard::LayoutMeta::new();
         let keyboard = keyboard::Keyboard::from(message_pipe, &layout_meta);
         let (stack, key_refs) = GridBuilder::make_stack(layout_meta);
@@ -177,6 +178,7 @@ impl relm::Widget for Win {
             relm: relm.clone(),
             model,
             keyboard,
+            key_refs,
             widgets: Widgets {
                 window,
                 //preferences_button,
@@ -205,24 +207,26 @@ fn connect_signals(
         drag_gesture,
         connect_drag_begin(_, x, y),
         &relm,
-        Msg::Press(x, y, Instant::now())
+        Msg::Input((x, y), InputType::Press)
     );
 
     relm::connect!(
         long_press_gesture,
         connect_pressed(_, x, y), // Long press detected
         relm,
-        Msg::LongPress(x, y, Instant::now())
+        Msg::Input((x, y), InputType::LongPress)
     );
 
     relm::connect!(
         drag_gesture,
         connect_drag_update(drag, x, y),
         &relm,
-        Msg::Swipe(
-            drag.get_start_point().unwrap().0 + x,
-            drag.get_start_point().unwrap().1 + y,
-            Instant::now()
+        Msg::Input(
+            (
+                drag.get_start_point().unwrap().0 + x,
+                drag.get_start_point().unwrap().1 + y
+            ),
+            InputType::Move(Instant::now())
         )
     );
 
@@ -230,10 +234,12 @@ fn connect_signals(
         drag_gesture,
         connect_drag_end(drag, x, y),
         &relm,
-        Msg::Release(
-            drag.get_start_point().unwrap_or((-0.5, -0.5)).0 + x, // Hack to avoid crashing when long press on button opens popup. Apparently then there is no starting point
-            drag.get_start_point().unwrap_or((-0.5, -0.5)).1 + y,
-            Instant::now(),
+        Msg::Input(
+            (
+                drag.get_start_point().unwrap_or((-0.5, -0.5)).0 + x, // Hack to avoid crashing when long press on button opens popup. Apparently then there is no starting point
+                drag.get_start_point().unwrap_or((-0.5, -0.5)).1 + y,
+            ),
+            InputType::Release
         )
     );
 
