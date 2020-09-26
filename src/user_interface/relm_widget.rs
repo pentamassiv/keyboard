@@ -6,8 +6,10 @@ use gtk::OverlayExt;
 use gtk::*;
 use keyboard::UIConnector;
 use relm::Channel;
-use std::collections::HashMap;
 use std::time::Instant;
+
+#[cfg(feature = "suggestions")]
+use std::collections::HashMap;
 
 mod grid_builder;
 pub use grid_builder::GridBuilder;
@@ -37,87 +39,24 @@ impl relm::Widget for Win {
         overlay.add(&stack);
         overlay.add_overlay(&drawing_area);
 
-        let suggestion_button_left = gtk::Button::new();
-        suggestion_button_left.set_label("sug_l");
-        suggestion_button_left.set_hexpand(true);
-        suggestion_button_left.set_focus_on_click(false);
+        #[cfg(feature = "suggestions")]
+        let suggestion_buttons = make_suggestion_buttons(relm.clone());
 
-        let suggestion_button_center = gtk::Button::new();
-        suggestion_button_center.set_label("sug_c");
-        suggestion_button_center.set_hexpand(true);
-        suggestion_button_center.set_focus_on_click(false);
-
-        let suggestion_button_right = gtk::Button::new();
-        suggestion_button_right.set_label("sug_r");
-        suggestion_button_right.set_hexpand(true);
-        suggestion_button_right.set_focus_on_click(false);
-
-        let relm_copy_left = relm.clone();
-        let suggestion_closure_left = move |button: &gtk::Button| {
-            relm_copy_left.stream().emit(Msg::Submit(Submission::Text(
-                button.get_label().unwrap().to_string(),
-            )))
-        };
-        let relm_copy_center = relm.clone();
-        let suggestion_closure_center = move |button: &gtk::Button| {
-            relm_copy_center.stream().emit(Msg::Submit(Submission::Text(
-                button.get_label().unwrap().to_string(),
-            )))
-        };
-        let relm_copy_right = relm.clone();
-        let suggestion_closure_right = move |button: &gtk::Button| {
-            relm_copy_right.stream().emit(Msg::Submit(Submission::Text(
-                button.get_label().unwrap().to_string(),
-            )))
-        };
-
-        suggestion_button_left.connect_clicked(suggestion_closure_left);
-        suggestion_button_center.connect_clicked(suggestion_closure_center);
-        suggestion_button_right.connect_clicked(suggestion_closure_right);
-
-        let preferences_button = gtk::Button::new();
-        preferences_button.set_label("pref");
-        preferences_button.set_hexpand(true);
-        preferences_button.set_focus_on_click(false);
-
-        let pref_popover = gtk::Popover::new(Some(&preferences_button));
-        let pref_vbox = gtk::Box::new(gtk::Orientation::Vertical, 0);
-        pref_popover.add(&pref_vbox);
-        let mut tmp_layouts = HashMap::new();
+        let mut layout_names = Vec::new();
         for (layout_name, _) in keyboard.views.keys() {
-            // Only layouts that are for portrait mode can be switched to.
-            //Layouts for landscape mode are switched automatically to when the orientation changes
-            if layout_name.strip_suffix("_wide").is_none() {
-                tmp_layouts.insert(layout_name, ());
-            }
+            layout_names.push(layout_name);
         }
-        for unique_layout_name in tmp_layouts.keys() {
-            let new_layout_button = gtk::Button::new();
-            new_layout_button.set_label(unique_layout_name);
-            pref_vbox.add(&new_layout_button);
-            let tmp_popover_ref = pref_popover.clone();
-            new_layout_button.connect_clicked(move |_| tmp_popover_ref.hide());
-            relm::connect!(
-                relm,
-                new_layout_button,
-                connect_button_release_event(clicked_button, _),
-                return (
-                    Some(crate::user_interface::Msg::ChangeUILayoutView(
-                        Some(clicked_button.get_label().unwrap().to_string()),
-                        None
-                    )),
-                    gtk::Inhibit(false)
-                )
-            );
-        }
-        preferences_button.connect_clicked(move |_| pref_popover.show_all());
-
+        #[cfg(feature = "suggestions")]
+        let preferences_button = make_pref_button(relm.clone(), layout_names);
         let hbox = gtk::Box::new(gtk::Orientation::Horizontal, 0);
         hbox.set_margin_start(0);
         hbox.set_margin_end(0);
-        hbox.add(&suggestion_button_left);
-        hbox.add(&suggestion_button_center);
-        hbox.add(&suggestion_button_right);
+
+        #[cfg(feature = "suggestions")]
+        for suggestion_button in suggestion_buttons {
+            hbox.add(&suggestion_button);
+        }
+        #[cfg(feature = "suggestions")]
         hbox.add(&preferences_button);
 
         let frame = gtk::Frame::new(None);
@@ -201,7 +140,7 @@ fn connect_signals(
     long_press_gesture: &GestureLongPress,
     drag_gesture: &GestureDrag,
     window: &Window,
-    overlay: &Overlay,
+    _overlay: &Overlay,
 ) {
     relm::connect!(
         drag_gesture,
@@ -250,7 +189,7 @@ fn connect_signals(
         connect_delete_event(_, _),
         return (Some(Msg::Quit), Inhibit(false))
     );
-
+    #[cfg(feature = "gesture")]
     relm::connect!(
         relm,
         overlay,
@@ -275,4 +214,74 @@ fn load_css() {
             eprintln! {"No CSS file to customize the keyboard could be loaded. The file might be missing or broken. Using default CSS"}
         }
     }
+}
+
+#[cfg(feature = "suggestions")]
+fn make_pref_button(relm: relm::Relm<super::Win>, layout_names: Vec<&String>) -> Button {
+    let preferences_button = gtk::Button::new();
+    preferences_button.set_label("pref");
+    preferences_button.set_hexpand(true);
+    preferences_button.set_focus_on_click(false);
+
+    let pref_popover = gtk::Popover::new(Some(&preferences_button));
+    let pref_vbox = gtk::Box::new(gtk::Orientation::Vertical, 0);
+    pref_popover.add(&pref_vbox);
+    let mut tmp_layouts = HashMap::new();
+    for layout_name in layout_names {
+        // Only layouts that are for portrait mode can be switched to.
+        //Layouts for landscape mode are switched automatically to when the orientation changes
+        if layout_name.strip_suffix("_wide").is_none() {
+            tmp_layouts.insert(layout_name, ());
+        }
+    }
+    for unique_layout_name in tmp_layouts.keys() {
+        let new_layout_button = gtk::Button::new();
+        new_layout_button.set_label(unique_layout_name);
+        pref_vbox.add(&new_layout_button);
+        let tmp_popover_ref = pref_popover.clone();
+        new_layout_button.connect_clicked(move |_| tmp_popover_ref.hide());
+        relm::connect!(
+            relm,
+            new_layout_button,
+            connect_button_release_event(clicked_button, _),
+            return (
+                Some(crate::user_interface::Msg::ChangeUILayoutView(
+                    Some(clicked_button.get_label().unwrap().to_string()),
+                    None
+                )),
+                gtk::Inhibit(false)
+            )
+        );
+    }
+    preferences_button.connect_clicked(move |_| pref_popover.show_all());
+    preferences_button
+}
+
+#[cfg(feature = "suggestions")]
+fn make_suggestion_buttons(relm: relm::Relm<super::Win>) -> Vec<Button> {
+    let mut buttons = Vec::new();
+    let button_names = [
+        "sug_l".to_string(),
+        "sug_c".to_string(),
+        "sug_r".to_string(),
+    ];
+    for name in button_names.iter() {
+        let new_suggestion_button = gtk::Button::new();
+        new_suggestion_button.set_label(name);
+        new_suggestion_button.set_hexpand(true);
+        new_suggestion_button.set_focus_on_click(false);
+
+        let relm_clone = relm.clone();
+        let suggestion_closure = move |button: &gtk::Button| {
+            relm_clone.stream().emit(Msg::Submit(Submission::Text(
+                button.get_label().unwrap().to_string(),
+            )))
+        };
+
+        new_suggestion_button.connect_clicked(suggestion_closure);
+
+        buttons.push(new_suggestion_button);
+    }
+
+    buttons
 }

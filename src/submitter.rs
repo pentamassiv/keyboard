@@ -4,12 +4,12 @@ use wayland_client::EventQueue;
 
 pub mod wayland;
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq, Clone)]
 pub enum Submission {
     Text(String),
     Keycode(String),
     StickyKeycode(String, KeyMotion),
-    Erase,
+    Erase(u32),
 }
 
 pub struct Submitter<T: 'static + KeyboardVisibility + HintPurpose> {
@@ -52,21 +52,18 @@ impl<T: 'static + KeyboardVisibility + HintPurpose> Submitter<T> {
         match submission {
             Submission::Text(text) => {
                 self.submit_text(text);
-                println!("Submitter, Text");
             }
             Submission::Keycode(keycode) => {
                 if let Some(virtual_keyboard) = &mut self.virtual_keyboard {
-                    println!("Submitter, Keycode, virtual keyboard");
                     virtual_keyboard.submit_keycode(&keycode);
                 };
             }
             Submission::StickyKeycode(keycode, key_motion) => {
                 if let Some(virtual_keyboard) = &mut self.virtual_keyboard {
-                    println!("Submitter, Keycode, virtual keyboard");
                     virtual_keyboard.send_key(&keycode, key_motion);
                 };
             }
-            Submission::Erase => self.erase(),
+            Submission::Erase(no_char) => self.erase(no_char),
         }
     }
 
@@ -80,30 +77,32 @@ impl<T: 'static + KeyboardVisibility + HintPurpose> Submitter<T> {
         if success.is_err() {
             if let Some(virtual_keyboard) = &mut self.virtual_keyboard {
                 virtual_keyboard.submit_keycode(&text);
-                // there is no result returned so there is no way of knowing if it was sucessful.
-                // a success is assumed
+            // there is no result returned so there is no way of knowing if it was sucessful.
+            // a success is assumed
+            } else {
+                println!("Error: No way to submit");
             }
-        } else {
-            println!("Error: No way to submit");
         }
     }
 
-    fn erase(&mut self) {
+    fn erase(&mut self, no_char: u32) {
         let mut success = Err(SubmitError::NotActive);
         if let Some(im) = &self.im_service {
-            if im.delete_surrounding_text(1, 0).is_ok() && im.commit().is_ok() {
+            if im.delete_surrounding_text(no_char, 0).is_ok() && im.commit().is_ok() {
                 success = Ok(());
             };
         }
         if success.is_err() {
             if let Some(virtual_keyboard) = &mut self.virtual_keyboard {
-                virtual_keyboard.submit_keycode("DELETE"); // TODO: Double check if this is the correct str to delete the last letter
+                for i in 0..no_char {
+                    virtual_keyboard.submit_keycode("DELETE"); // TODO: Double check if this is the correct str to delete the last letter
+                }
 
-                // there is no result returned so there is no way of knowing if it was sucessful.
-                // a success is assumed
+            // there is no result returned so there is no way of knowing if it was sucessful.
+            // a success is assumed
+            } else {
+                println!("No way to delete");
             }
-        } else {
-            println!("No way to delete");
         }
     }
 }

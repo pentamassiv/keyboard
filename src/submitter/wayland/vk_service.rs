@@ -8,7 +8,7 @@ use wayland_client::Main;
 use zwp_virtual_keyboard::virtual_keyboard_unstable_v1::zwp_virtual_keyboard_manager_v1::ZwpVirtualKeyboardManagerV1;
 use zwp_virtual_keyboard::virtual_keyboard_unstable_v1::zwp_virtual_keyboard_v1::ZwpVirtualKeyboardV1;
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq, Clone)]
 pub enum KeyMotion {
     Press = 1,
     Release = 0,

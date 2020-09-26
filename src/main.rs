@@ -22,6 +22,7 @@
 use relm::Widget;
 
 mod config;
+mod interpreter;
 mod keyboard;
 mod submitter;
 mod user_interface;

@@ -14,7 +14,7 @@ glib = "0.10"
 gdk-sys = "0.10"
 gdk = "0.13"
 gtk = "0.9"
-cairo-rs = "0.9"
+cairo-rs = { version = "0.9", optional = true }
 relm = "0.20"
 relm-derive = "0.20"
 relm-attributes = "0.16"
@@ -32,3 +32,19 @@ dbus-crossroads = "0.2.2"
 
 [dependencies.input_method_service]
 path = "../test/input_method_service"
+
+[features]
+# The default set of optional packages. Most people will want to use these
+# packages, but they are strictly optional.
+default = []
+
+# A feature with no dependencies is used mainly for conditional compilation,
+# like `#[cfg(feature = "go-faster")]`.
+gesture = ["cairo-rs"]
+
+# Enables haptic feedback via dbus
+# Currently there is an issue with the vibration being very mild and barely noticable
+haptic-feedback = []
+
+# Suggestions are not functional yet so they can be ignored
+suggestions = []

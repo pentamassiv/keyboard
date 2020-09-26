@@ -14,8 +14,9 @@ impl relm::Update for Win {
     }
 
     fn subscriptions(&mut self, relm: &relm::Relm<Self>) {
-        relm::interval(relm.stream(), 1000, || Msg::UpdateDrawBuffer);
         relm::interval(relm.stream(), 100, || Msg::PollEvents);
+        #[cfg(feature = "gesture")]
+        relm::interval(relm.stream(), 1000, || Msg::UpdateDrawBuffer);
     }
 
     // The model may be updated when a message is received.
@@ -45,9 +46,13 @@ impl relm::Update for Win {
                             button.set_active(false);
                         } //button.deactivate(),
                     }
-                    // self.dbus_service.haptic_feedback();
+
+                    #[cfg(feature = "haptic-feedback")]
+                    self.dbus_service.haptic_feedback();
                 }
             }
+
+            #[cfg(feature = "suggestions")]
             Msg::Submit(submission) => self.keyboard.submit(submission),
             Msg::Visible(new_visibility) => {
                 self.ui_manager.change_visibility(new_visibility);
@@ -65,6 +70,7 @@ impl relm::Update for Win {
             Msg::PollEvents => {
                 self.keyboard.fetch_events();
             }
+            #[cfg(feature = "gesture")]
             Msg::UpdateDrawBuffer => {
                 self.draw_path();
             }

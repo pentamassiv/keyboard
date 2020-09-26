@@ -104,6 +104,11 @@ buttons:
             text: "."
     space:
         outline: standard
+        actions:
+            short_press:
+                - enter_string: " " 
+            long_press:
+                - enter_string: " " 
         key_display:
             text: "space"
     Return:

@@ -1,4 +1,5 @@
 use super::submitter::*;
+#[cfg(feature = "suggestions")]
 use crate::config::ui_defaults;
 use crate::keyboard::input_handler::InputType;
 use gtk::*;
@@ -15,6 +16,7 @@ mod relm_widget;
 mod ui_manager;
 use ui_manager::*;
 
+// Is only read when gestures feature is turned on
 struct Point {
     x: f64,
     y: f64,
@@ -29,6 +31,8 @@ pub struct Model {
 pub enum Msg {
     Input((f64, f64), InputType),
     ButtonInteraction(String, KeyMotion),
+
+    #[cfg(feature = "suggestions")]
     Submit(Submission),
     Visible(bool),
     HintPurpose(ContentHint, ContentPurpose),
@@ -36,6 +40,7 @@ pub enum Msg {
     ChangeUIOrientation(Orientation),
     ChangeKBLayoutView(String, String),
     PollEvents,
+    #[cfg(feature = "gesture")]
     UpdateDrawBuffer,
     Quit,
 }
@@ -71,17 +76,6 @@ pub struct Win {
 }
 
 impl Win {
-    /*fn activate_button(&self, x: f64, y: f64) {
-        let (x_rel, y_rel) = self.get_rel_coordinates(x, y);
-        let (layout_name, view_name) = &self.ui_manager.current_layout_view;
-        if let Some(key_to_activate) =
-            self.keyboard
-                .get_closest_key(layout_name, view_name, x_rel, y_rel)
-        {
-            key_to_activate.activate(self, &self.model.input.input_type);
-        }
-    }*/
-
     fn get_rel_coordinates(&self, x: f64, y: f64) -> (i32, i32) {
         let allocation = self.widgets.stack.get_allocation();
         let (width, height) = (allocation.width, allocation.height);
@@ -90,6 +84,7 @@ impl Win {
         (x_rel, y_rel)
     }
 
+    #[cfg(feature = "gesture")]
     fn erase_path(&mut self) {
         let context = self.widgets.draw_handler.get_context();
         context.set_operator(cairo::Operator::Clear);
@@ -97,6 +92,7 @@ impl Win {
         context.paint();
     }
 
+    #[cfg(feature = "gesture")]
     fn draw_path(&mut self) {
         self.erase_path();
         let context = self.widgets.draw_handler.get_context();

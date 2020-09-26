@@ -1,4 +1,3 @@
-use super::{KeyEvent, View};
 use std::time::Instant;
 
 #[derive(Debug, PartialEq, Eq)]

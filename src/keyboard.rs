@@ -1,5 +1,6 @@
 pub use super::submitter::KeyMotion;
 use super::submitter::*;
+use crate::interpreter::Interpreter;
 use crate::user_interface::Msg;
 use std::collections::HashMap;
 
@@ -27,6 +28,7 @@ pub struct Keyboard {
     pub active_view: (String, String),
     input_handler: InputHandler,
     ui_connection: UIConnector,
+    interpreter: Interpreter,
     submitter: Submitter<ui_connector::UIConnector>,
 }
 
@@ -46,12 +48,14 @@ impl Keyboard {
         }
         let active_view = Keyboard::get_default_layout_view();
         let input_handler = InputHandler::new();
+        let interpreter = Interpreter::new();
         views.shrink_to_fit();
         Keyboard {
             views,
             active_view,
             input_handler,
             ui_connection,
+            interpreter,
             submitter,
         }
     }
@@ -95,23 +99,21 @@ impl Keyboard {
 
     fn execute(&mut self, actions_vec: &[KeyAction], output_type: OutputType) {
         for action in actions_vec {
-            println!("execute");
+            let mut submission = None;
+            let mut ui_message = None;
             match action {
                 KeyAction::EnterKeycode(keycode) => match output_type {
                     OutputType::ShortPressRelease => {
-                        self.submitter
-                            .submit(Submission::Keycode(keycode.to_string()));
+                        submission = Some(Submission::Keycode(keycode.to_string()));
                     }
                     OutputType::LongPress => {
-                        println!("StickyPress");
-                        self.submitter.submit(Submission::StickyKeycode(
+                        submission = Some(Submission::StickyKeycode(
                             keycode.to_string(),
                             KeyMotion::Press,
                         ));
                     }
                     OutputType::LongPressRelease => {
-                        println!("StickyRelease");
-                        self.submitter.submit(Submission::StickyKeycode(
+                        submission = Some(Submission::StickyKeycode(
                             keycode.to_string(),
                             KeyMotion::Release,
                         ));
@@ -119,30 +121,38 @@ impl Keyboard {
                     _ => println!("Should never be reached"),
                 },
                 KeyAction::EnterString(text) => {
-                    self.submitter.submit(Submission::Text(text.to_string()))
+                    submission = Some(Submission::Text(text.to_string()))
                 }
                 KeyAction::SwitchView(new_view) => {
-                    let switch_view_msg = crate::user_interface::Msg::ChangeUILayoutView(
+                    ui_message = Some(crate::user_interface::Msg::ChangeUILayoutView(
                         None,
                         Some(new_view.to_string()),
-                    );
-                    self.ui_connection.emit(switch_view_msg);
+                    ));
                 }
                 KeyAction::Modifier(modifier) => {
-                    self.submitter.submit(
+                    submission = Some(
                         Submission::Keycode("SHIFT".to_string()), // TODO: set up properly
                     );
                 }
                 KeyAction::Erase => {
-                    self.submitter.submit(Submission::Erase);
+                    submission = Some(Submission::Erase(1));
                 }
                 KeyAction::OpenPopup => {
                     // TODO
                     //self.popover.show_all();
                 }
             }
+
+            // Each action can only result in eighter a ui_message or a submission
+            if let Some(submission) = submission {
+                let interpreted_submissions = self.interpreter.interpret(submission);
+                for submission in interpreted_submissions {
+                    self.submitter.submit(submission);
+                }
+            } else if let Some(ui_message) = ui_message {
+                self.ui_connection.emit(ui_message);
+            }
         }
-        //self.button.activate(); // Disabled, because the transition takes too long and makes it looks sluggish
     }
 
     fn get_default_layout_view() -> (String, String) {

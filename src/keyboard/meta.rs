@@ -45,9 +45,13 @@ impl KeyMeta {
             KeyEvent::ShortPress,
             vec![KeyAction::EnterString(key_id.clone())],
         );
+        let mut long_press_str = key_id.clone();
+        if key_id.len() == 1 {
+            long_press_str.make_ascii_uppercase();
+        }
         actions.insert(
             KeyEvent::LongPress,
-            vec![KeyAction::EnterString(key_id.clone())],
+            vec![KeyAction::EnterString(long_press_str)],
         );
         let key_display = KeyDisplay::Text(key_id);
         let outline = Outline::Standard;
