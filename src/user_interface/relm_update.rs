@@ -36,7 +36,7 @@ impl relm::Update for Win {
             Msg::ButtonInteraction(key_id, key_motion) => {
                 // Should never be possible to fail
                 let (layout, view) = self.ui_manager.current_layout_view.clone();
-                if let Some(button) = self.key_refs.get(&(layout, view, key_id)) {
+                if let Some((button, _)) = self.key_refs.get(&(layout, view, key_id)) {
                     // TODO: Check what the ui is supposed to do when a button is activated
                     match key_motion {
                         KeyMotion::Press => {
@@ -51,9 +51,16 @@ impl relm::Update for Win {
                     self.dbus_service.haptic_feedback();
                 }
             }
-
-            #[cfg(feature = "suggestions")]
-            Msg::Submit(submission) => self.keyboard.submit(submission),
+            Msg::OpenPopup(key_id) => {
+                let (layout, view) = self.ui_manager.current_layout_view.clone();
+                if let Some((button, popover)) = self.key_refs.get(&(layout, view, key_id)) {
+                    button.set_active(false);
+                    if let Some(popover) = popover {
+                        popover.show_all();
+                    }
+                }
+            }
+            Msg::SubmitText(text) => self.keyboard.submit_text(text),
             Msg::Visible(new_visibility) => {
                 self.ui_manager.change_visibility(new_visibility);
             }
@@ -61,6 +68,7 @@ impl relm::Update for Win {
                 .ui_manager
                 .change_hint_purpose(content_hint, content_purpose),
             Msg::ChangeUILayoutView(layout, view) => {
+                println!("new_layout: {:?}, new_view: {:?}", layout, view);
                 let _ = self.ui_manager.change_layout_view(layout, view); // Result not relevant
             }
             Msg::ChangeKBLayoutView(layout, view) => {

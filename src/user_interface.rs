@@ -31,9 +31,8 @@ pub struct Model {
 pub enum Msg {
     Input((f64, f64), InputType),
     ButtonInteraction(String, KeyMotion),
-
-    #[cfg(feature = "suggestions")]
-    Submit(Submission),
+    OpenPopup(String),
+    SubmitText(String),
     Visible(bool),
     HintPurpose(ContentHint, ContentPurpose),
     ChangeUILayoutView(Option<String>, Option<String>),
@@ -68,7 +67,7 @@ pub struct Win {
     pub relm: relm::Relm<Win>,
     model: Model,
     keyboard: crate::keyboard::Keyboard,
-    key_refs: HashMap<(String, String, String), ToggleButton>,
+    key_refs: HashMap<(String, String, String), (ToggleButton, Option<Popover>)>,
     widgets: Widgets,
     _gestures: Gestures,
     ui_manager: UIManager,

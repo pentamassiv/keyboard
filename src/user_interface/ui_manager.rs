@@ -13,6 +13,7 @@ pub struct UIManager {
     stack: Stack,
     dbus_service: DBusService,
     pub current_layout_view: (String, String),
+    prev_layout: String,
 }
 
 impl UIManager {
@@ -23,12 +24,14 @@ impl UIManager {
         current_layout_view: (String, String),
     ) -> UIManager {
         let dbus_service = DBusService::new(sender.clone()).unwrap();
+        let prev_layout = current_layout_view.0.clone();
         UIManager {
             sender,
             window,
             stack,
             dbus_service,
             current_layout_view,
+            prev_layout,
         }
     }
 
@@ -85,11 +88,16 @@ impl UIManager {
         new_layout: Option<String>,
         new_view: Option<String>,
     ) -> Result<(), UIError> {
+        println!("new_layout: {:?}, new_view: {:?}", new_layout, new_view);
         let layout;
         let mut view = self.current_layout_view.1.clone();
-        if let Some(new_layout) = new_layout {
-            layout = new_layout;
-            view = "base".to_string(); // If the layout is changed, the view is always changed to base because the new layout might not have the same view
+        if let Some(new_layout) = &new_layout {
+            if new_layout == "previous" {
+                layout = self.prev_layout.clone();
+            } else {
+                layout = new_layout.to_string();
+            }
+            view = "base".to_string(); // If the layout is changed, the view is always changed to base because the new layout might not have the same view}
         } else {
             layout = self.current_layout_view.0.clone();
         }
@@ -106,6 +114,9 @@ impl UIManager {
             self.sender
                 .send(Msg::ChangeKBLayoutView(layout.clone(), view.clone()))
                 .expect("send message");
+            if new_layout.is_some() {
+                self.prev_layout = self.current_layout_view.0.clone();
+            }
             self.current_layout_view = (layout, view);
             Ok(())
         } else {

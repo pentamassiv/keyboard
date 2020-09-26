@@ -17,7 +17,7 @@ impl InputType {
 }
 
 #[derive(Debug)]
-pub enum OutputType {
+pub enum PressType {
     ShortPress,
     ShortPressRelease,
     LongPress,
@@ -36,25 +36,25 @@ impl InputHandler {
             prev_input_type: InputType::Release,
         }
     }
-    pub fn input(&mut self, input: InputType) -> OutputType {
+    pub fn input(&mut self, input: InputType) -> PressType {
         let output_type;
         if self.prev_input_type == InputType::Release && input == InputType::Press {
-            output_type = OutputType::ShortPress;
+            output_type = PressType::ShortPress;
         } else if self.prev_input_type == InputType::Press && input == InputType::LongPress {
-            output_type = OutputType::LongPress;
+            output_type = PressType::LongPress;
         } else if self.prev_input_type == InputType::Press && input == InputType::Release {
-            output_type = OutputType::ShortPressRelease;
+            output_type = PressType::ShortPressRelease;
         } else if self.prev_input_type.is_move() && input == InputType::Release {
-            output_type = OutputType::SwipeRelease;
+            output_type = PressType::SwipeRelease;
         } else if self.prev_input_type.is_move() && input == InputType::LongPress {
-            output_type = OutputType::LongPress;
+            output_type = PressType::LongPress;
         } else if self.prev_input_type == InputType::LongPress && input == InputType::Release {
-            output_type = OutputType::LongPressRelease;
+            output_type = PressType::LongPressRelease;
         } else if input.is_move() {
-            output_type = OutputType::Swipe;
+            output_type = PressType::Swipe;
         } else {
             println!("Awkward! This should not happen!");
-            output_type = OutputType::ShortPressRelease;
+            output_type = PressType::ShortPressRelease;
         }
         self.prev_input_type = input;
         output_type

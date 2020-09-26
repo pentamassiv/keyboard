@@ -80,7 +80,8 @@ impl VKService {
     }
 
     pub fn send_key(&self, keycode: &str, keymotion: KeyMotion) {
-        if let Some(keycode) = input_event_codes_hashmap::KEY.get(keycode) {
+        let keycode: String = keycode.to_ascii_uppercase(); // Necessary because all keycodes are uppercase
+        if let Some(keycode) = input_event_codes_hashmap::KEY.get::<str>(&keycode) {
             let time = self.get_time();
             println!("time: {}, keycode: {}", time, keycode);
             self.virtual_keyboard.key(time, *keycode, keymotion as u32);

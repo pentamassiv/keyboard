@@ -4,6 +4,8 @@ use std::collections::HashMap;
 #[derive(Debug)]
 pub struct View {
     key_coordinates: HashMap<(i32, i32), Key>,
+    cell_height: i32,
+    cell_width: i32,
 }
 
 impl View {
@@ -30,14 +32,21 @@ impl View {
             }
         }
         key_coordinates.shrink_to_fit();
-        View { key_coordinates }
+        View {
+            key_coordinates,
+            cell_height,
+            cell_width,
+        }
     }
 
     pub fn get_closest_key(&self, input_x: i32, input_y: i32) -> Option<&Key> {
         let mut closest_key = None;
         let mut closest_distance = i32::MAX;
+        let max_delta_x = 2 * self.cell_width;
+        let max_delta_y = 2 * self.cell_height;
         for (x, y) in self.key_coordinates.keys() {
-            let distance_new_point = self.get_distance(*x, *y, input_x, input_y);
+            let distance_new_point =
+                self.get_distance(*x, *y, input_x, input_y, max_delta_x, max_delta_y);
             if distance_new_point < closest_distance {
                 closest_key = self.key_coordinates.get(&(*x, *y));
                 closest_distance = distance_new_point;
@@ -51,10 +60,22 @@ impl View {
         result
     }
 
-    fn get_distance(&self, point_a_x: i32, point_a_y: i32, point_b_x: i32, point_b_y: i32) -> i32 {
+    fn get_distance(
+        &self,
+        point_a_x: i32,
+        point_a_y: i32,
+        point_b_x: i32,
+        point_b_y: i32,
+        max_delta_x: i32,
+        max_delta_y: i32,
+    ) -> i32 {
         let delta_x = (point_a_x - point_b_x).abs();
         let delta_y = (point_a_y - point_b_y).abs();
-        let tmp = (delta_x.pow(2) + delta_y.pow(2)) as f64;
-        tmp.sqrt() as i32
+        if delta_x >= max_delta_x || delta_y >= max_delta_y {
+            i32::MAX
+        } else {
+            let tmp = (delta_x.pow(2) + delta_y.pow(2)) as f64;
+            tmp.sqrt() as i32
+        }
     }
 }

@@ -16,6 +16,8 @@ pub enum KeyEvent {
     ShortPress,
     #[serde(rename = "long_press")]
     LongPress,
+    #[serde(rename = "long_press_release")]
+    LongPressRelease,
     #[serde(rename = "swipe")]
     Swipe,
 }
@@ -27,6 +29,8 @@ pub enum KeyAction {
     Modifier(Modifier),
     #[serde(rename = "switch_view")]
     SwitchView(String),
+    #[serde(rename = "switch_layout")]
+    SwitchLayout(String),
     #[serde(rename = "erase")]
     Erase,
     #[serde(rename = "enter_keycode")]

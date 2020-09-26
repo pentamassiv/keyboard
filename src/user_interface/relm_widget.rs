@@ -30,7 +30,7 @@ impl relm::Widget for Win {
         let message_pipe = UIConnector::new(relm.clone());
         let layout_meta = keyboard::LayoutMeta::new();
         let keyboard = keyboard::Keyboard::from(message_pipe, &layout_meta);
-        let (stack, key_refs) = GridBuilder::make_stack(layout_meta);
+        let (stack, key_refs) = GridBuilder::make_stack(relm, layout_meta);
 
         let drawing_area = gtk::DrawingArea::new();
         let mut draw_handler = relm::DrawHandler::new().expect("draw handler");

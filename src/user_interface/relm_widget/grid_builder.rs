@@ -1,5 +1,8 @@
 use crate::keyboard::{KeyArrangement, KeyDisplay, KeyMeta, LayoutMeta, Location};
-use gtk::{ButtonExt, Grid, GridExt, Stack, StackExt, StyleContextExt, ToggleButton, WidgetExt};
+use gtk::{
+    ButtonExt, ContainerExt, Grid, GridExt, Popover, Stack, StackExt, StyleContextExt,
+    ToggleButton, WidgetExt,
+};
 use std::collections::HashMap;
 
 pub const ICON_FOLDER: &str = "./data/icons/";
@@ -7,8 +10,12 @@ pub const ICON_FOLDER: &str = "./data/icons/";
 pub struct GridBuilder;
 impl GridBuilder {
     pub fn make_stack(
+        relm: &relm::Relm<crate::user_interface::Win>,
         layout_meta_hashmap: HashMap<String, LayoutMeta>,
-    ) -> (Stack, HashMap<(String, String, String), ToggleButton>) {
+    ) -> (
+        Stack,
+        HashMap<(String, String, String), (ToggleButton, Option<Popover>)>,
+    ) {
         let stack = Stack::new();
         stack.get_style_context().add_class("view");
         let mut hashmap_with_key_refs = HashMap::new();
@@ -16,11 +23,14 @@ impl GridBuilder {
         for (layout_name, layout_meta) in layout_meta_hashmap {
             for (view_name, view_arrangement) in layout_meta.views {
                 let grid_name = GridBuilder::make_grid_name(&layout_name, &view_name);
-                let (grid, key_refs) = GridBuilder::make_grid(&view_arrangement, &layout_meta.keys);
+                let (grid, key_refs) =
+                    GridBuilder::make_grid(relm, &view_arrangement, &layout_meta.keys);
                 stack.add_named(&grid, &grid_name);
-                for (key_id, button) in key_refs {
-                    hashmap_with_key_refs
-                        .insert((layout_name.clone(), view_name.clone(), key_id), button);
+                for (key_id, button_popup) in key_refs {
+                    hashmap_with_key_refs.insert(
+                        (layout_name.clone(), view_name.clone(), key_id),
+                        button_popup,
+                    );
                 }
             }
         }
@@ -29,15 +39,18 @@ impl GridBuilder {
     }
 
     fn make_grid(
+        relm: &relm::Relm<crate::user_interface::Win>,
         view_arrangement: &KeyArrangement,
         view_keys: &HashMap<String, KeyMeta>,
-    ) -> (Grid, HashMap<String, ToggleButton>) {
+    ) -> (Grid, HashMap<String, (ToggleButton, Option<Popover>)>) {
         let grid = Grid::new();
         grid.set_column_homogeneous(true);
         grid.set_row_homogeneous(true);
         let mut hashmap_with_key_refs = HashMap::new();
         for (key_id, location) in &view_arrangement.key_arrangement {
-            let button = GridBuilder::make_button(&key_id, view_keys.get(key_id).unwrap());
+            let key_meta = view_keys.get(key_id).unwrap();
+            let button = GridBuilder::make_button(&key_id, key_meta);
+            let popover = GridBuilder::attach_popover(relm, &button, key_meta);
             let Location {
                 x,
                 y,
@@ -45,7 +58,7 @@ impl GridBuilder {
                 height,
             } = location;
             grid.attach(&button, *x, *y, *width, *height);
-            hashmap_with_key_refs.insert(key_id.to_string(), button.clone());
+            hashmap_with_key_refs.insert(key_id.to_string(), (button.clone(), popover));
         }
         (grid, hashmap_with_key_refs)
     }
@@ -73,33 +86,42 @@ impl GridBuilder {
         }
         /*
 
-                let popover = gtk::Popover::new(Some(&button));
-        if let Some(popup) = &key_meta.popup {
-                        let hbox = gtk::Box::new(gtk::Orientation::Horizontal, 0);
-                        for popup_string in popup {
-                            let new_popup_button = gtk::ToggleButton::new();
-                            new_popup_button.set_label(popup_string);
-                            hbox.add(&new_popup_button);
-                            let tmp_popover_ref = popover.clone();
-                            new_popup_button.connect_clicked(move |_| tmp_popover_ref.hide());
-                            /*relm::connect!(
-                                relm,
-                                new_popup_button,
-                                connect_button_release_event(clicked_button, _),
-                                return (
-                                    Some(crate::user_interface::Msg::EnterString(
-                                        clicked_button.get_label().unwrap().to_string(),
-                                        false,
-                                    )),
-                                    gtk::Inhibit(false)
-                                )
-                            );*/
-                        }
-                        popover.add(&hbox);
-                    }
         */
 
         button
+    }
+
+    fn attach_popover(
+        relm: &relm::Relm<crate::user_interface::Win>,
+        button: &ToggleButton,
+        key_meta: &KeyMeta,
+    ) -> Option<Popover> {
+        let mut popover_option = None;
+        let popover = Popover::new(Some(button));
+        if let Some(popup) = &key_meta.popup {
+            let hbox = gtk::Box::new(gtk::Orientation::Horizontal, 0);
+            for popup_string in popup {
+                let new_popup_button = gtk::Button::new();
+                new_popup_button.set_label(popup_string);
+                hbox.add(&new_popup_button);
+                let tmp_popover_ref = popover.clone();
+                new_popup_button.connect_clicked(move |_| tmp_popover_ref.hide());
+                relm::connect!(
+                    relm,
+                    new_popup_button,
+                    connect_button_release_event(clicked_button, _),
+                    return (
+                        Some(crate::user_interface::Msg::SubmitText(
+                            clicked_button.get_label().unwrap().to_string()
+                        )),
+                        gtk::Inhibit(false)
+                    )
+                );
+            }
+            popover.add(&hbox);
+            popover_option = Some(popover);
+        }
+        popover_option
     }
 
     pub fn make_grid_name(layout_name: &str, view_name: &str) -> String {

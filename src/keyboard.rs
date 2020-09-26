@@ -62,57 +62,62 @@ impl Keyboard {
 
     pub fn input(&mut self, x: i32, y: i32, input: InputType) {
         let active_view = &self.active_view;
-        let key_action = self.input_handler.input(input);
-        println!("key_action: {:?}", key_action);
+        let input_type = self.input_handler.input(input);
+        println!("key_action: {:?}", input_type);
         if let Some(key) = self.views.get(active_view).unwrap().get_closest_key(x, y) {
             let key = key.clone();
-            match key_action {
-                OutputType::ShortPress => self
+            match input_type {
+                PressType::ShortPress => self
                     .ui_connection
                     .emit(Msg::ButtonInteraction(key.id, KeyMotion::Press)),
-                OutputType::ShortPressRelease => {
+                PressType::ShortPressRelease => {
+                    self.ui_connection
+                        .emit(Msg::ButtonInteraction(key.id.clone(), KeyMotion::Release));
                     if let Some(key_actions) = key.get_actions(&KeyEvent::ShortPress) {
-                        self.execute(key_actions, key_action);
+                        self.interpret_execute_action(&key.id, key_actions, input_type);
                     }
+                }
+                PressType::LongPress => {
+                    if let Some(key_actions) = key.get_actions(&KeyEvent::LongPress) {
+                        self.interpret_execute_action(&key.id, key_actions, input_type);
+                    }
+                }
+                PressType::LongPressRelease => {
                     self.ui_connection
-                        .emit(Msg::ButtonInteraction(key.id, KeyMotion::Release));
-                }
-                OutputType::LongPress => {
-                    if let Some(key_actions) = key.get_actions(&KeyEvent::LongPress) {
-                        self.execute(key_actions, key_action);
-                    }
-                }
-                OutputType::LongPressRelease => {
-                    if let Some(key_actions) = key.get_actions(&KeyEvent::LongPress) {
-                        self.execute(key_actions, key_action);
+                        .emit(Msg::ButtonInteraction(key.id.clone(), KeyMotion::Release));
+                    if let Some(key_actions) = key.get_actions(&KeyEvent::LongPressRelease) {
+                        self.interpret_execute_action(&key.id, key_actions, input_type);
                     };
-                    self.ui_connection
-                        .emit(Msg::ButtonInteraction(key.id, KeyMotion::Release))
                 }
-                OutputType::Swipe => self
+                PressType::Swipe => self
                     .ui_connection
                     .emit(Msg::ButtonInteraction(key.id, KeyMotion::Release)),
-                OutputType::SwipeRelease => {}
+                PressType::SwipeRelease => {}
             }
         }
     }
 
-    fn execute(&mut self, actions_vec: &[KeyAction], output_type: OutputType) {
+    fn interpret_execute_action(
+        &mut self,
+        key_id: &str,
+        actions_vec: &[KeyAction],
+        press_type: PressType,
+    ) {
         for action in actions_vec {
             let mut submission = None;
             let mut ui_message = None;
             match action {
-                KeyAction::EnterKeycode(keycode) => match output_type {
-                    OutputType::ShortPressRelease => {
+                KeyAction::EnterKeycode(keycode) => match press_type {
+                    PressType::ShortPressRelease => {
                         submission = Some(Submission::Keycode(keycode.to_string()));
                     }
-                    OutputType::LongPress => {
+                    PressType::LongPress => {
                         submission = Some(Submission::StickyKeycode(
                             keycode.to_string(),
                             KeyMotion::Press,
                         ));
                     }
-                    OutputType::LongPressRelease => {
+                    PressType::LongPressRelease => {
                         submission = Some(Submission::StickyKeycode(
                             keycode.to_string(),
                             KeyMotion::Release,
@@ -129,6 +134,12 @@ impl Keyboard {
                         Some(new_view.to_string()),
                     ));
                 }
+                KeyAction::SwitchLayout(new_layout) => {
+                    ui_message = Some(crate::user_interface::Msg::ChangeUILayoutView(
+                        Some(new_layout.to_string()),
+                        None,
+                    ));
+                }
                 KeyAction::Modifier(modifier) => {
                     submission = Some(
                         Submission::Keycode("SHIFT".to_string()), // TODO: set up properly
@@ -138,8 +149,7 @@ impl Keyboard {
                     submission = Some(Submission::Erase(1));
                 }
                 KeyAction::OpenPopup => {
-                    // TODO
-                    //self.popover.show_all();
+                    ui_message = Some(crate::user_interface::Msg::OpenPopup(key_id.to_string()));
                 }
             }
 
@@ -163,8 +173,7 @@ impl Keyboard {
         self.submitter.fetch_events();
     }
 
-    pub fn submit(&mut self, submission: Submission) {
-        println!("Submit: {:?}", submission);
-        self.submitter.submit(submission);
+    pub fn submit_text(&mut self, text: String) {
+        self.submitter.submit(Submission::Text(text));
     }
 }
