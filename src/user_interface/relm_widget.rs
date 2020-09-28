@@ -59,11 +59,7 @@ impl relm::Widget for Win {
         #[cfg(feature = "suggestions")]
         hbox.add(&preferences_button);
 
-        let frame = gtk::Frame::new(None);
-        frame.add(&hbox);
-
         let vbox = gtk::Box::new(gtk::Orientation::Vertical, 2);
-        vbox.add(&frame);
         vbox.add(&overlay);
 
         let window = Window::new(WindowType::Toplevel);
@@ -219,6 +215,9 @@ fn load_css() {
 #[cfg(feature = "suggestions")]
 fn make_pref_button(relm: relm::Relm<super::Win>, layout_names: Vec<&String>) -> Button {
     let preferences_button = gtk::Button::new();
+    preferences_button
+        .get_style_context()
+        .add_class("preferences");
     preferences_button.set_label("pref");
     preferences_button.set_hexpand(true);
     preferences_button.set_focus_on_click(false);
@@ -267,6 +266,9 @@ fn make_suggestion_buttons(relm: relm::Relm<super::Win>) -> Vec<Button> {
     ];
     for name in button_names.iter() {
         let new_suggestion_button = gtk::Button::new();
+        new_suggestion_button
+            .get_style_context()
+            .add_class("suggestions");
         new_suggestion_button.set_label(name);
         new_suggestion_button.set_hexpand(true);
         new_suggestion_button.set_focus_on_click(false);

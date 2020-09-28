@@ -1,0 +1,206 @@
+---
+views:
+    base:
+        - "blank1 ↑ blank2 blankDouble1 blankDouble2 blank3"
+        - "← blank4 → blankDouble3 A blank5 B"
+        - "blank6 ↓ blank7 blankDouble4 blankDouble5 blank8"
+        - "ABC blankDouble6 blankDouble7 start blank9 select"
+
+buttons:
+    "A":
+        styles: 
+            - "circular"
+            - "gba_a_b"
+    "B":
+        styles: 
+            - "circular"
+            - "gba_a_b"
+    "start":
+        styles: 
+            - "circular"
+            - "gba_start_select"
+    "select":
+        styles: 
+            - "circular"
+            - "gba_start_select"
+    "↑":
+        actions:
+            short_press:
+                - enter_keycode: Up
+            long_press:
+                - enter_keycode: Up
+            long_press_release:
+                - enter_keycode: Up
+        styles: 
+            - "gba_arrows"
+    "↓":
+        actions:
+            short_press:
+                - enter_keycode: Down
+            long_press:
+                - enter_keycode: Down
+            long_press_release:
+                - enter_keycode: Down
+        styles: 
+            - "gba_arrows"
+    "←":
+        actions:
+            short_press:
+                - enter_keycode: Left
+            long_press:
+                - enter_keycode: Left
+            long_press_release:
+                - enter_keycode: Left
+        styles: 
+            - "gba_arrows"
+    "→":
+        actions:
+            short_press:
+                - enter_keycode: Right
+            long_press:
+                - enter_keycode: Right
+            long_press_release:
+                - enter_keycode: Right
+        styles: 
+            - "gba_arrows"
+    ABC:
+        actions:
+            short_press:
+                - switch_layout: previous
+            long_press:
+                - switch_layout: previous
+    blank1:
+        actions:
+            short_press:
+                - enter_string: ""
+        key_display:
+            text: ""
+        styles:
+            - transparent
+    blank2:
+        actions:
+            short_press:
+                - enter_string: ""
+        key_display:
+            text: ""
+        styles:
+            - transparent
+    blank3:
+        actions:
+            short_press:
+                - enter_string: ""
+        key_display:
+            text: ""
+        styles:
+            - transparent
+    blank4:
+        actions:
+            short_press:
+                - enter_string: ""
+        key_display:
+            text: ""
+        styles:
+            - transparent
+    blank5:
+        actions:
+            short_press:
+                - enter_string: ""
+        key_display:
+            text: ""
+        styles:
+            - transparent
+    blank6:
+        actions:
+            short_press:
+                - enter_string: ""
+        key_display:
+            text: ""
+        styles:
+            - transparent
+    blank7:
+        actions:
+            short_press:
+                - enter_string: ""
+        key_display:
+            text: ""
+        styles:
+            - transparent
+    blank8:
+        actions:
+            short_press:
+                - enter_string: ""
+        key_display:
+            text: ""
+        styles:
+            - transparent
+    blank9:
+        actions:
+            short_press:
+                - enter_string: ""
+        key_display:
+            text: ""
+        styles:
+            - transparent
+    blankDouble1:
+        actions:
+            short_press:
+                - enter_string: ""
+        key_display:
+            text: ""
+        styles:
+            - transparent
+        outline: double
+    blankDouble2:
+        actions:
+            short_press:
+                - enter_string: ""
+        key_display:
+            text: ""
+        styles:
+            - transparent
+        outline: double
+    blankDouble3:
+        actions:
+            short_press:
+                - enter_string: ""
+        key_display:
+            text: ""
+        styles:
+            - transparent
+        outline: double
+    blankDouble4:
+        actions:
+            short_press:
+                - enter_string: ""
+        key_display:
+            text: ""
+        styles:
+            - transparent
+        outline: double
+    blankDouble5:
+        actions:
+            short_press:
+                - enter_string: ""
+        key_display:
+            text: ""
+        styles:
+            - transparent
+        outline: double
+    blankDouble6:
+        actions:
+            short_press:
+                - enter_string: ""
+        key_display:
+            text: ""
+        styles:
+            - transparent
+        outline: double
+    blankDouble7:
+        actions:
+            short_press:
+                - enter_string: ""
+        key_display:
+            text: ""
+        styles:
+            - transparent
+        outline: double

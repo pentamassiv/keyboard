@@ -17,7 +17,6 @@ impl GridBuilder {
         HashMap<(String, String, String), (ToggleButton, Option<Popover>)>,
     ) {
         let stack = Stack::new();
-        stack.get_style_context().add_class("view");
         let mut hashmap_with_key_refs = HashMap::new();
         stack.set_transition_type(gtk::StackTransitionType::None);
         for (layout_name, layout_meta) in layout_meta_hashmap {
@@ -25,6 +24,8 @@ impl GridBuilder {
                 let grid_name = GridBuilder::make_grid_name(&layout_name, &view_name);
                 let (grid, key_refs) =
                     GridBuilder::make_grid(relm, &view_arrangement, &layout_meta.keys);
+                grid.get_style_context()
+                    .add_class(&format!("grid_{}", grid_name));
                 stack.add_named(&grid, &grid_name);
                 for (key_id, button_popup) in key_refs {
                     hashmap_with_key_refs.insert(
@@ -67,6 +68,9 @@ impl GridBuilder {
         button.set_label(key_id);
         button.set_hexpand(true);
         button.get_style_context().add_class("key");
+        button
+            .get_style_context()
+            .add_class(&format!("key_{}", key_id));
 
         if let Some(style_classes) = &key_meta.styles {
             for style_classes in style_classes {

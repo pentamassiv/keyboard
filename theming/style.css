@@ -1,27 +1,85 @@
-/* Theme the label where entered text is displayed */
-/* window box:nth-child(2)> label {
-  background-image: url("pic.png");
-  font-size: 0.75em;
-}*/
+window {
+  background: transparent;
+}
 
-/* Theme the suggestion buttons */
-/*window frame button {
-  background-image: url("pic.png");
-}*/
-
+grid {
+  background-color: @theme_base_color; /*rgba(0, 0, 0, 255);*/
+  color: @theme_text_color; /*#ffffff;*/
+  font-family: cantarell, sans-serif;
+}
 
 .key{
   padding: 0px;
   font-size: 13px;
+  color: @theme_fg_color; /*#deddda;*/
+  background: mix(@theme_bg_color, @theme_base_color, -0.5); /* #464448; */
+  border-style: solid;
+  border-width: 1px;
+  border-color: @borders; /* #5e5c64;*/
+  border-radius: 3px;
 }
 
-/*Change the style of the node with the style class modifier*/
-.return{
+/* Theme the suggestion buttons */
+/*.suggestions {
+  background-image: url("pic.png");
+}*/
+
+
+/* View for GBA layout becomes transparent*/
+.grid_gba_base {
+  background: transparent;
+  outline-color: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+
+/* Buttons for GBA layout*/
+.gba_a_b{
+  background: rgb(105, 37, 79);
+}
+
+.gba_start_select{
+  background: rgb(87, 87, 87);
+}
+
+.gba_arrows{
+  background: black;
+}
+
+.key .locked {
+  background: @theme_fg_color; /*#ffffff;*/
+  color: @theme_bg_color; /*#2b292f;*/
+}
+
+sq_button:active,
+sq_button.altline:active,
+sq_button.special:active,
+sq_button.wide:active {
+  background: mix(@theme_bg_color, @theme_selected_bg_color, 0.4);/* #747077; */
+  border-color: mix(@borders, @theme_selected_fg_color, 0.5);/* #96949d; */
+}
+
+sq_button.altline,
+sq_button.special,
+sq_button.wide {
+  background: mix(@theme_bg_color, @theme_base_color, 0.5); /*#2b292f;*/
+  border-color: @borders; /* #3e3a44; */
+}
+
+#Return {
   background: @theme_selected_bg_color; /* #1c71d8; */
   border-color: @borders; /*#1a5fb4;*/
 }
 
-.locked{
-  background: whitesmoke;
-  border-color: @borders; /*#1a5fb4;*/
+#Return:active {
+  background: mix(@theme_selected_bg_color, @theme_bg_color, 0.4); /*#1c71d8;*/
+  border-color: @borders; /*#3584e4;*/
+}
+
+.transparent {
+  background: transparent;
+  outline-color: transparent;
+  border-color: transparent;
+  color: transparent;
+  box-shadow: none;
 }

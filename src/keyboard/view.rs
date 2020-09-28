@@ -14,9 +14,9 @@ impl View {
         let cell_width = RESOLUTIONX / key_arrangement.no_columns; // Hashmaps keys can not be f64 so a lorge number instead of 1 is used to avoid large errors from rounding the result
         let cell_height = RESOLUTIONY / key_arrangement.no_rows;
         // Get the name and location and size of each key that will be in this view
-        for (key_name, location) in &key_arrangement.key_arrangement {
+        for (key_id, location) in &key_arrangement.key_arrangement {
             // Make a new key based on the key meta information
-            let key = Key::from(&key_name, key_meta.get(key_name).unwrap());
+            let key = Key::from(&key_id, key_meta.get(key_id).unwrap());
             // The keys will be arranged in a grid so if a key has a size of e.g. two,
             // a clone of the key needs to be placed in each of the two cells that the wide key would cover
             let (x, y) = (location.x, location.y); // top left edge of the "button"
