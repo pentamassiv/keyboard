@@ -99,7 +99,7 @@ impl Keyboard {
                     SwipeAction::Begin => {
                         self.ui_connection
                             .emit(Msg::ButtonInteraction(key.id, TapMotion::Release));
-                        //self.submitter.release_all_keys();
+                        self.submitter.release_all_keys();
                     }
                     SwipeAction::Update => {}
                     SwipeAction::Finish => {}
@@ -149,6 +149,9 @@ impl Keyboard {
         match action {
             KeyAction::EnterKeycode(keycode) => {
                 submission = Some(Submission::Keycode(keycode.to_string()));
+            }
+            KeyAction::ToggleKeycode(keycode) => {
+                submission = Some(Submission::ToggleKeycode(keycode.to_string()));
             }
             KeyAction::EnterString(text) => submission = Some(Submission::Text(text.to_string())),
             KeyAction::Modifier(modifier) => {

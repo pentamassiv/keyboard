@@ -8,7 +8,7 @@ pub mod wayland;
 pub enum Submission {
     Text(String),
     Keycode(String),
-    StickyKeycode(String, KeyMotion),
+    ToggleKeycode(String),
     Erase(u32),
 }
 
@@ -50,6 +50,14 @@ impl<T: 'static + KeyboardVisibility + HintPurpose> Submitter<T> {
         }
     }
 
+    pub fn release_all_keys(&mut self) {
+        if let Some(virtual_keyboard) = &mut self.virtual_keyboard {
+            if virtual_keyboard.release_all_keys().is_err() {
+                self.print_submission_error("ReleaseAllKeys");
+            }
+        }
+    }
+
     pub fn submit(&mut self, submission: Submission) {
         match submission {
             Submission::Text(text) => {
@@ -57,14 +65,14 @@ impl<T: 'static + KeyboardVisibility + HintPurpose> Submitter<T> {
             }
             Submission::Keycode(keycode) => {
                 if let Some(virtual_keyboard) = &mut self.virtual_keyboard {
-                    if virtual_keyboard.submit_keycode(&keycode).is_err() {
+                    if virtual_keyboard.press_release_key(&keycode).is_err() {
                         self.print_submission_error(&keycode);
                     }
                 };
             }
-            Submission::StickyKeycode(keycode, key_motion) => {
+            Submission::ToggleKeycode(keycode) => {
                 if let Some(virtual_keyboard) = &mut self.virtual_keyboard {
-                    if virtual_keyboard.send_key(&keycode, key_motion).is_err() {
+                    if virtual_keyboard.toggle_key(&keycode).is_err() {
                         self.print_submission_error(&keycode);
                     }
                 };
@@ -84,7 +92,7 @@ impl<T: 'static + KeyboardVisibility + HintPurpose> Submitter<T> {
             if let Some(virtual_keyboard) = &mut self.virtual_keyboard {
                 // TODO:
                 // Should probably be a loop submitting each char of the text individually
-                if virtual_keyboard.submit_keycode(&text).is_ok() {
+                if virtual_keyboard.press_release_key(&text).is_ok() {
                     success = true;
                 }
             }
@@ -104,7 +112,7 @@ impl<T: 'static + KeyboardVisibility + HintPurpose> Submitter<T> {
         if !success {
             if let Some(virtual_keyboard) = &mut self.virtual_keyboard {
                 for _ in 0..no_char {
-                    if virtual_keyboard.submit_keycode("DELETE").is_err() {
+                    if virtual_keyboard.press_release_key("DELETE").is_err() {
                         break;
                     } else {
                         success = true;

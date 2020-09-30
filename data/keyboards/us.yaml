@@ -75,7 +75,7 @@ buttons:
             short_press:
                 - enter_keycode: BackSpace
             long_press:
-                - enter_keycode: BackSpace
+                - toggle_keycode: BackSpace
         key_display:
             image: edit-clear-symbolic.svg
         outline: double
@@ -125,9 +125,9 @@ buttons:
         outline: double
         actions:
             short_press:
-                - enter_keycode: RTRN
+                - enter_keycode: Enter
             long_press:
-                - enter_keycode: RTRN
+                - toggle_keycode: Enter
         key_display:
             image: key-enter.svg
         styles:
@@ -411,8 +411,7 @@ buttons:
                 - enter_keycode: BackSpace
                 - switch_view: base
             long_press:
-                - enter_keycode: BackSpace
-                - switch_view: base
+                - toggle_keycode: BackSpace
         key_display:
             image: edit-clear-symbolic.svg
         outline: double
@@ -431,11 +430,10 @@ buttons:
         outline: double
         actions:
             short_press:
-                - enter_keycode: RTRN
+                - enter_keycode: Enter
                 - switch_view: base
             long_press:
-                - enter_keycode: RTRN
-                - switch_view: base
+                - toggle_keycode: Enter
         key_display:
             image: key-enter.svg
         styles:

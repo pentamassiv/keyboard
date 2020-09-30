@@ -29,7 +29,7 @@ impl Interpreter {
             Submission::Keycode(_) => {
                 new_submissions.push(submission);
             }
-            Submission::StickyKeycode(_, _) => {
+            Submission::ToggleKeycode(_) => {
                 new_submissions.push(submission);
             }
         }

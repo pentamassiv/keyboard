@@ -23,6 +23,12 @@ pub enum KeyEvent {
 #[derive(Debug, Clone, Deserialize, Serialize, PartialEq, Eq, Hash)]
 #[serde(deny_unknown_fields)]
 pub enum KeyAction {
+    #[serde(rename = "enter_keycode")]
+    EnterKeycode(String),
+    #[serde(rename = "toggle_keycode")]
+    ToggleKeycode(String),
+    #[serde(rename = "enter_string")]
+    EnterString(String),
     #[serde(rename = "modifier")]
     Modifier(Modifier),
     #[serde(rename = "switch_view")]
@@ -31,10 +37,6 @@ pub enum KeyAction {
     SwitchLayout(String),
     #[serde(rename = "erase")]
     Erase,
-    #[serde(rename = "enter_keycode")]
-    EnterKeycode(String),
-    #[serde(rename = "enter_string")]
-    EnterString(String),
     #[serde(rename = "open_popup")]
     OpenPopup,
 }
