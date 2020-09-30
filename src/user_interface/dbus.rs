@@ -17,6 +17,8 @@ use std::thread;
 #[cfg(feature = "haptic-feedback")]
 use dbus::arg::Variant;
 #[cfg(feature = "haptic-feedback")]
+use std::collections::HashMap;
+#[cfg(feature = "haptic-feedback")]
 use std::time::Duration;
 
 struct Visibility {
@@ -69,9 +71,9 @@ impl DBusClient {
 impl DBusService {
     pub fn new(sender: Sender<super::Msg>) -> Option<DBusService> {
         // Let's start by starting up a connection to the session bus and request a name.
+        let server_connection = Connection::new_session().unwrap();
         #[cfg(feature = "haptic-feedback")]
         let client_connection = Connection::new_session().unwrap();
-        let server_connection = Connection::new_session().unwrap();
         #[cfg(feature = "haptic-feedback")]
         let client = DBusClient::new(client_connection);
         let visibility = Arc::new(Mutex::new(Visibility { is_visible: false }));

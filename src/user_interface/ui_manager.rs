@@ -35,6 +35,11 @@ impl UIManager {
         }
     }
 
+    #[cfg(feature = "haptic-feedback")]
+    pub fn haptic_feedback(&self) {
+        self.dbus_service.haptic_feedback();
+    }
+
     pub fn change_visibility(&mut self, new_visibility: bool) {
         println!("Msg visiblility: {}", new_visibility);
         if new_visibility {
