@@ -96,8 +96,7 @@ impl DBusService {
     }
 
     #[cfg(feature = "haptic-feedback")]
-    pub fn haptic_feedback(&self) {
-        let event = "button-released".to_string();
+    pub fn haptic_feedback(&self, event: String) {
         self.client.send_event(event);
     }
 

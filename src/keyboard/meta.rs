@@ -134,7 +134,7 @@ impl LayoutMeta {
     ) -> HashMap<String, KeyMeta> {
         let mut keys = HashMap::new();
         for row in key_arrangement_deserialized {
-            for key_id in row.split_ascii_whitespace() {
+            for key_id in row.split_whitespace() {
                 let key_meta = KeyMeta::from(key_id, key_meta.get(key_id));
                 keys.insert(key_id.to_string(), key_meta);
             }
@@ -181,7 +181,7 @@ impl KeyArrangement {
         let mut row_widths = Vec::new(); // Tracks width of the rows to later center the rows
         for (row_no, row) in key_arrangement_deserialized.iter().enumerate() {
             row_widths.insert(row_no, 0);
-            for key_id in row.split_ascii_whitespace() {
+            for key_id in row.split_whitespace() {
                 let (x, y) = (row_widths[row_no], row_no as i32);
                 let (width, height) = (
                     key_meta

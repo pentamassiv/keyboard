@@ -36,8 +36,14 @@ impl UIManager {
     }
 
     #[cfg(feature = "haptic-feedback")]
-    pub fn haptic_feedback(&self) {
-        self.dbus_service.haptic_feedback();
+    pub fn haptic_feedback(&self, is_press: bool) {
+        let event;
+        if is_press {
+            event = "button-pressed".to_string();
+        } else {
+            event = "button-released".to_string();
+        };
+        self.dbus_service.haptic_feedback(event);
     }
 
     pub fn change_visibility(&mut self, new_visibility: bool) {

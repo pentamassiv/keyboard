@@ -49,6 +49,7 @@ pub const KEYBOARD_DEFAULT_VIEW: &str = "base";
 pub struct Keyboard {
     pub views: HashMap<(String, String), View>,
     pub active_view: (String, String),
+    next_view: Option<(String, String)>,
     ui_connection: UIConnector,
     interpreter: Interpreter,
     submitter: Submitter<ui_connector::UIConnector>,
@@ -74,6 +75,7 @@ impl Keyboard {
         Keyboard {
             views,
             active_view,
+            next_view: None,
             ui_connection,
             interpreter,
             submitter,
@@ -146,6 +148,10 @@ impl Keyboard {
     ) -> (Option<Msg>, Option<Submission>) {
         let mut submission = None;
         let mut ui_message = None;
+
+        //if let Some(layout), view) = self.next_view {
+        //    crate::user_interface::Msg::ChangeUILayoutView(Some(layout), Some(view));self.ui_connection.emit(ui_message);
+        //};
         match action {
             KeyAction::EnterKeycode(keycode) => {
                 submission = Some(Submission::Keycode(keycode.to_string()));

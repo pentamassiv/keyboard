@@ -1,0 +1,492 @@
+---
+views:
+    base:
+        - "q w e r t y u i o p"
+        - "a s d f g h j k l"
+        - "Shift_L_base z x c v b n m BackSpace"
+        - "show_numbers GBA :) space . Return"
+    shifted:
+        - "Q_shifted W_shifted E_shifted R_shifted T_shifted Y_shifted U_shifted I_shifted O_shifted P_shifted"
+        - "A_shifted S_shifted D_shifted F_shifted G_shifted H_shifted J_shifted K_shifted L_shifted"
+        - "Shift_L_shifted Z_shifted X_shifted C_shifted V_shifted B_shifted N_shifted M_shifted BackSpace_shifted"
+        - "show_numbers GBA :) space_shifted ._shifted Return_shifted"
+    caps:
+        - "Q W E R T Y U I O P"
+        - "A S D F G H J K L"
+        - "Shift_L_caps Z X C V B N M BackSpace"
+        - "show_numbers GBA :) space . Return"
+    numbers:
+        - "1 2 3 4 5 6 7 8 9 0"
+        - "@ # $ % & - _ + ( )"
+        - "show_symbols , \" ' : ; ! ? BackSpace"
+        - "show_letters GBA :) space . Return"
+    symbols:
+        - "~ ` | · √ π τ ÷ × ¶"
+        - "© ® £ € ¥ ^ ° * { }"
+        - "show_numbers_from_symbols \\ / < > = [ ] BackSpace"
+        - "show_letters GBA :) space . Return"
+
+buttons:
+    a:
+        actions:
+            short_press:
+                - enter_string: a
+            long_press:
+                - open_popup
+        popup:
+            - "ä"
+            - "à"
+            - "â"
+    A:
+        actions:
+            short_press:
+                - enter_string: A
+            long_press:
+                - open_popup
+        popup:
+            - "À"
+            - "Â"
+            - "Ä"
+    u:
+        actions:
+            short_press:
+                - enter_string: u
+            long_press:
+                - open_popup
+        popup:
+            - "ü"
+    U:
+        actions:
+            short_press:
+                - enter_string: U
+            long_press:
+                - open_popup
+        popup:
+            - "Ü"
+    o:
+        actions:
+            short_press:
+                - enter_string: o
+            long_press:
+                - open_popup
+        popup:
+            - "ö"
+    O:
+        actions:
+            short_press:
+                - enter_string: O
+            long_press:
+                - open_popup
+        popup:
+            - "Ö"
+    :):
+        actions:
+            short_press:
+                - switch_layout: :-)
+            long_press:
+                - switch_layout: emoji
+    GBA:
+        actions:
+            short_press:
+                - switch_layout: gba
+            long_press:
+                - switch_layout: gba
+    Shift_L_base:
+        actions:
+            short_press:
+                - switch_view: shifted
+            long_press:
+                - switch_view: caps
+        key_display:
+            image: key-shift.svg
+        outline: standard
+    Shift_L_shifted:
+        actions:
+            short_press:
+                - switch_view: base
+            long_press:
+                - switch_view: caps
+        key_display:
+            image: key-shift.svg
+        outline: standard
+        styles:
+            - locked
+    Shift_L_caps:
+        actions:
+            short_press:
+                - switch_view: base
+            long_press:
+                - switch_view: base
+        key_display:
+            image: key-shift.svg
+        outline: standard
+        styles:
+            - locked
+    BackSpace:
+        actions:
+            short_press:
+                - enter_keycode: BackSpace
+            long_press:
+                - toggle_keycode: BackSpace
+        key_display:
+            image: edit-clear-symbolic.svg
+        outline: double
+    show_numbers:
+        actions:
+            short_press:
+                - switch_view: numbers
+            long_press:
+                - switch_view: numbers
+        outline: standard
+        key_display:
+            text: 123
+    show_numbers_from_symbols:
+        actions:
+            short_press:
+                - switch_view: numbers
+            long_press:
+                - switch_view: numbers
+        outline: standard
+        key_display:
+            text: 123
+    show_letters:
+        actions:
+            short_press:
+                - switch_view: base
+            long_press:
+                - switch_view: base
+        key_display:
+            text: ABC
+    show_symbols:
+        actions:
+            short_press:
+                - switch_view: symbols
+            long_press:
+                - switch_view: symbols
+        outline: standard
+        key_display:
+            text: "*/="
+    space:
+        outline: quadruple
+        actions:
+            short_press:
+                - enter_string: " " 
+            long_press:
+                - enter_string: " " 
+    Return:
+        outline: double
+        actions:
+            short_press:
+                - enter_keycode: Enter
+            long_press:
+                - toggle_keycode: Enter
+        key_display:
+            image: key-enter.svg
+        styles:
+            - return
+
+    Q_shifted:
+        actions:
+            short_press:
+                - enter_string: Q
+                - switch_view: base
+            long_press:
+                - enter_string: Q
+                - switch_view: base
+        key_display:
+            text: Q
+    W_shifted:
+        actions:
+            short_press:
+                - enter_string: W
+                - switch_view: base
+            long_press:
+                - enter_string: W
+                - switch_view: base
+        key_display:
+            text: W
+    E_shifted:
+        actions:
+            short_press:
+                - enter_string: E
+                - switch_view: base
+            long_press:
+                - enter_string: E
+                - switch_view: base
+        key_display:
+            text: E
+    R_shifted:
+        actions:
+            short_press:
+                - enter_string: R
+                - switch_view: base
+            long_press:
+                - enter_string: R
+                - switch_view: base
+        key_display:
+            text: R
+    T_shifted:
+        actions:
+            short_press:
+                - enter_string: T
+                - switch_view: base
+            long_press:
+                - enter_string: T
+                - switch_view: base
+        key_display:
+            text: T
+    Y_shifted:
+        actions:
+            short_press:
+                - enter_string: Y
+                - switch_view: base
+            long_press:
+                - enter_string: Y
+                - switch_view: base
+        key_display:
+            text: Y
+    U_shifted:
+        actions:
+            short_press:
+                - enter_string: U
+                - switch_view: base
+            long_press:
+                - enter_string: U
+                - switch_view: base
+        key_display:
+            text: U
+    I_shifted:
+        actions:
+            short_press:
+                - enter_string: I
+                - switch_view: base
+            long_press:
+                - enter_string: I
+                - switch_view: base
+        key_display:
+            text: I
+    O_shifted:
+        actions:
+            short_press:
+                - enter_string: O
+                - switch_view: base
+            long_press:
+                - enter_string: O
+                - switch_view: base
+        key_display:
+            text: O
+    P_shifted:
+        actions:
+            short_press:
+                - enter_string: P
+                - switch_view: base
+            long_press:
+                - enter_string: P
+                - switch_view: base
+        key_display:
+            text: P
+    A_shifted:
+        actions:
+            short_press:
+                - enter_string: A
+                - switch_view: base
+            long_press:
+                - enter_string: A
+                - switch_view: base
+        key_display:
+            text: A
+    S_shifted:
+        actions:
+            short_press:
+                - enter_string: S
+                - switch_view: base
+            long_press:
+                - enter_string: S
+                - switch_view: base
+        key_display:
+            text: S
+    D_shifted:
+        actions:
+            short_press:
+                - enter_string: D
+                - switch_view: base
+            long_press:
+                - enter_string: D
+                - switch_view: base
+        key_display:
+            text: D
+    F_shifted:
+        actions:
+            short_press:
+                - enter_string: F
+                - switch_view: base
+            long_press:
+                - enter_string: F
+                - switch_view: base
+        key_display:
+            text: F
+    G_shifted:
+        actions:
+            short_press:
+                - enter_string: G
+                - switch_view: base
+            long_press:
+                - enter_string: G
+                - switch_view: base
+        key_display:
+            text: G
+    H_shifted:
+        actions:
+            short_press:
+                - enter_string: H
+                - switch_view: base
+            long_press:
+                - enter_string: H
+                - switch_view: base
+        key_display:
+            text: H
+    J_shifted:
+        actions:
+            short_press:
+                - enter_string: J
+                - switch_view: base
+            long_press:
+                - enter_string: J
+                - switch_view: base
+        key_display:
+            text: J
+    K_shifted:
+        actions:
+            short_press:
+                - enter_string: K
+                - switch_view: base
+            long_press:
+                - enter_string: K
+                - switch_view: base
+        key_display:
+            text: K
+    L_shifted:
+        actions:
+            short_press:
+                - enter_string: L
+                - switch_view: base
+            long_press:
+                - enter_string: L
+                - switch_view: base
+        key_display:
+            text: L
+    Z_shifted:
+        actions:
+            short_press:
+                - enter_string: Z
+                - switch_view: base
+            long_press:
+                - enter_string: Z
+                - switch_view: base
+        key_display:
+            text: Z
+    X_shifted:
+        actions:
+            short_press:
+                - enter_string: X
+                - switch_view: base
+            long_press:
+                - enter_string: X
+                - switch_view: base
+        key_display:
+            text: X
+    C_shifted:
+        actions:
+            short_press:
+                - enter_string: C
+                - switch_view: base
+            long_press:
+                - enter_string: C
+                - switch_view: base
+        key_display:
+            text: C
+    V_shifted:
+        actions:
+            short_press:
+                - enter_string: V
+                - switch_view: base
+            long_press:
+                - enter_string: V
+                - switch_view: base
+        key_display:
+            text: V
+    B_shifted:
+        actions:
+            short_press:
+                - enter_string: B
+                - switch_view: base
+            long_press:
+                - enter_string: B
+                - switch_view: base
+        key_display:
+            text: B
+    N_shifted:
+        actions:
+            short_press:
+                - enter_string: N
+                - switch_view: base
+            long_press:
+                - enter_string: N
+                - switch_view: base
+        key_display:
+            text: N
+    M_shifted:
+        actions:
+            short_press:
+                - enter_string: M
+                - switch_view: base
+            long_press:
+                - enter_string: M
+                - switch_view: base
+        key_display:
+            text: M
+    ._shifted:
+        actions:
+            short_press:
+                - enter_string: .
+                - switch_view: base
+            long_press:
+                - open_popup
+        key_display:
+            text: .
+        popup:
+            - "!"
+            - "?"
+    BackSpace_shifted:
+        actions:
+            short_press:
+                - enter_keycode: BackSpace
+                - switch_view: base
+            long_press:
+                - toggle_keycode: BackSpace
+        key_display:
+            image: edit-clear-symbolic.svg
+        outline: double
+    space_shifted:
+        outline: quadruple
+        actions:
+            short_press:
+                - enter_string: " " 
+                - switch_view: base
+            long_press:
+                - enter_string: " " 
+                - switch_view: base
+        key_display:
+            text: space
+    Return_shifted:
+        outline: double
+        actions:
+            short_press:
+                - enter_keycode: Enter
+                - switch_view: base
+            long_press:
+                - toggle_keycode: Enter
+        key_display:
+            image: key-enter.svg
+        styles:
+            - return
