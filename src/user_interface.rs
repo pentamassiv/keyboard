@@ -1,7 +1,7 @@
 use super::submitter::*;
-#[cfg(feature = "suggestions")]
+#[cfg(feature = "gesture")]
 use crate::config::ui_defaults;
-use crate::keyboard::input_handler::InputType;
+use crate::keyboard::{Interaction, TapMotion};
 use gtk::*;
 use relm::Channel;
 use std::collections::HashMap;
@@ -15,22 +15,18 @@ mod relm_update;
 mod relm_widget;
 mod ui_manager;
 use ui_manager::*;
-
-// Is only read when gestures feature is turned on
-struct Point {
-    x: f64,
-    y: f64,
-    time: Instant,
-}
+mod gesture_handler;
+use gesture_handler::{GestureModel, GestureSignal, Point};
 
 pub struct Model {
-    path: Vec<Point>,
+    gesture: GestureModel,
 }
 
 #[derive(relm_derive::Msg)]
 pub enum Msg {
-    Input((f64, f64), InputType),
-    ButtonInteraction(String, KeyMotion),
+    GestureSignal(f64, f64, GestureSignal),
+    Interaction((f64, f64), Interaction),
+    ButtonInteraction(String, TapMotion),
     OpenPopup(String),
     SubmitText(String),
     Visible(bool),
@@ -49,29 +45,27 @@ pub enum Orientation {
     Portrait,
 }
 
-//The gestures are never read but they can't be freed otherwise the gesture detection does not work
 struct Gestures {
-    _long_press_gesture: GestureLongPress,
-    _drag_gesture: GestureDrag,
-    _pan_gesture: GesturePan,
+    long_press_gesture: GestureLongPress,
+    drag_gesture: GestureDrag,
 }
 
 struct Widgets {
     window: Window,
+    overlay: Overlay,
     draw_handler: relm::DrawHandler<DrawingArea>,
     stack: gtk::Stack,
 }
 
-//The gestures are never read but they can't be freed otherwise the gesture detection does not work
 pub struct Win {
     pub relm: relm::Relm<Win>,
     model: Model,
     keyboard: crate::keyboard::Keyboard,
     key_refs: HashMap<(String, String, String), (ToggleButton, Option<Popover>)>,
     widgets: Widgets,
-    _gestures: Gestures,
+    gestures: Gestures,
     ui_manager: UIManager,
-    _channel: Channel<Msg>,
+    _channel: Channel<Msg>, // The channel needs to be saved to prevent dropping it and thus closing the channel
 }
 
 impl Win {
@@ -103,7 +97,14 @@ impl Win {
             ui_defaults::PATHCOLOR.3,
         );
         let max_duration = std::time::Duration::from_millis(ui_defaults::PATHFADINGDURATION);
-        for dot in self.model.path.iter().rev().take(ui_defaults::PATHLENGTH) {
+        for dot in self
+            .model
+            .gesture
+            .get_swipe_path()
+            .iter()
+            .rev()
+            .take(ui_defaults::PATHLENGTH)
+        {
             // Only draw the last dots within a certain time period. Works but there would have to be a draw signal in a regular interval to make it look good
             if dot.time.elapsed() < max_duration {
                 context.line_to(dot.x, dot.y);

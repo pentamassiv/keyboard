@@ -31,19 +31,19 @@ buttons:
         actions:
             short_press:
                 - switch_layout: :-)
-            long_press_release:
+            long_press:
                 - switch_layout: emoji
     GBA:
         actions:
             short_press:
                 - switch_layout: gba
-            long_press_release:
+            long_press:
                 - switch_layout: gba
     Shift_L_base:
         actions:
             short_press:
                 - switch_view: shifted
-            long_press_release:
+            long_press:
                 - switch_view: caps
         key_display:
             image: key-shift.svg
@@ -52,7 +52,7 @@ buttons:
         actions:
             short_press:
                 - switch_view: base
-            long_press_release:
+            long_press:
                 - switch_view: caps
         key_display:
             image: key-shift.svg
@@ -63,7 +63,7 @@ buttons:
         actions:
             short_press:
                 - switch_view: base
-            long_press_release:
+            long_press:
                 - switch_view: base
         key_display:
             image: key-shift.svg
@@ -76,8 +76,6 @@ buttons:
                 - enter_keycode: BackSpace
             long_press:
                 - enter_keycode: BackSpace
-            long_press_release:
-                - enter_keycode: BackSpace
         key_display:
             image: edit-clear-symbolic.svg
         outline: double
@@ -85,7 +83,7 @@ buttons:
         actions:
             short_press:
                 - switch_view: numbers
-            long_press_release:
+            long_press:
                 - switch_view: numbers
         outline: standard
         key_display:
@@ -94,7 +92,7 @@ buttons:
         actions:
             short_press:
                 - switch_view: numbers
-            long_press_release:
+            long_press:
                 - switch_view: numbers
         outline: standard
         key_display:
@@ -103,7 +101,7 @@ buttons:
         actions:
             short_press:
                 - switch_view: base
-            long_press_release:
+            long_press:
                 - switch_view: base
         key_display:
             text: ABC
@@ -111,7 +109,7 @@ buttons:
         actions:
             short_press:
                 - switch_view: symbols
-            long_press_release:
+            long_press:
                 - switch_view: symbols
         outline: standard
         key_display:
@@ -121,17 +119,15 @@ buttons:
         actions:
             short_press:
                 - enter_string: " " 
-            long_press_release:
+            long_press:
                 - enter_string: " " 
     Return:
         outline: double
         actions:
             short_press:
-                - enter_keycode: Return
+                - enter_keycode: RTRN
             long_press:
-                - enter_keycode: Return
-            long_press_release:
-                - enter_keycode: Return
+                - enter_keycode: RTRN
         key_display:
             image: key-enter.svg
         styles:
@@ -142,7 +138,7 @@ buttons:
             short_press:
                 - enter_string: Q
                 - switch_view: base
-            long_press_release:
+            long_press:
                 - enter_string: Q
                 - switch_view: base
         key_display:
@@ -152,7 +148,7 @@ buttons:
             short_press:
                 - enter_string: W
                 - switch_view: base
-            long_press_release:
+            long_press:
                 - enter_string: W
                 - switch_view: base
         key_display:
@@ -162,7 +158,7 @@ buttons:
             short_press:
                 - enter_string: E
                 - switch_view: base
-            long_press_release:
+            long_press:
                 - enter_string: E
                 - switch_view: base
         key_display:
@@ -172,7 +168,7 @@ buttons:
             short_press:
                 - enter_string: R
                 - switch_view: base
-            long_press_release:
+            long_press:
                 - enter_string: R
                 - switch_view: base
         key_display:
@@ -182,7 +178,7 @@ buttons:
             short_press:
                 - enter_string: T
                 - switch_view: base
-            long_press_release:
+            long_press:
                 - enter_string: T
                 - switch_view: base
         key_display:
@@ -192,7 +188,7 @@ buttons:
             short_press:
                 - enter_string: Y
                 - switch_view: base
-            long_press_release:
+            long_press:
                 - enter_string: Y
                 - switch_view: base
         key_display:
@@ -202,7 +198,7 @@ buttons:
             short_press:
                 - enter_string: U
                 - switch_view: base
-            long_press_release:
+            long_press:
                 - enter_string: U
                 - switch_view: base
         key_display:
@@ -212,7 +208,7 @@ buttons:
             short_press:
                 - enter_string: I
                 - switch_view: base
-            long_press_release:
+            long_press:
                 - enter_string: I
                 - switch_view: base
         key_display:
@@ -222,7 +218,7 @@ buttons:
             short_press:
                 - enter_string: O
                 - switch_view: base
-            long_press_release:
+            long_press:
                 - enter_string: O
                 - switch_view: base
         key_display:
@@ -232,7 +228,7 @@ buttons:
             short_press:
                 - enter_string: P
                 - switch_view: base
-            long_press_release:
+            long_press:
                 - enter_string: P
                 - switch_view: base
         key_display:
@@ -242,7 +238,7 @@ buttons:
             short_press:
                 - enter_string: A
                 - switch_view: base
-            long_press_release:
+            long_press:
                 - enter_string: A
                 - switch_view: base
         key_display:
@@ -252,7 +248,7 @@ buttons:
             short_press:
                 - enter_string: S
                 - switch_view: base
-            long_press_release:
+            long_press:
                 - enter_string: S
                 - switch_view: base
         key_display:
@@ -262,7 +258,7 @@ buttons:
             short_press:
                 - enter_string: D
                 - switch_view: base
-            long_press_release:
+            long_press:
                 - enter_string: D
                 - switch_view: base
         key_display:
@@ -272,7 +268,7 @@ buttons:
             short_press:
                 - enter_string: F
                 - switch_view: base
-            long_press_release:
+            long_press:
                 - enter_string: F
                 - switch_view: base
         key_display:
@@ -282,7 +278,7 @@ buttons:
             short_press:
                 - enter_string: G
                 - switch_view: base
-            long_press_release:
+            long_press:
                 - enter_string: G
                 - switch_view: base
         key_display:
@@ -292,7 +288,7 @@ buttons:
             short_press:
                 - enter_string: H
                 - switch_view: base
-            long_press_release:
+            long_press:
                 - enter_string: H
                 - switch_view: base
         key_display:
@@ -302,7 +298,7 @@ buttons:
             short_press:
                 - enter_string: J
                 - switch_view: base
-            long_press_release:
+            long_press:
                 - enter_string: J
                 - switch_view: base
         key_display:
@@ -312,7 +308,7 @@ buttons:
             short_press:
                 - enter_string: K
                 - switch_view: base
-            long_press_release:
+            long_press:
                 - enter_string: K
                 - switch_view: base
         key_display:
@@ -322,7 +318,7 @@ buttons:
             short_press:
                 - enter_string: L
                 - switch_view: base
-            long_press_release:
+            long_press:
                 - enter_string: L
                 - switch_view: base
         key_display:
@@ -332,7 +328,7 @@ buttons:
             short_press:
                 - enter_string: Z
                 - switch_view: base
-            long_press_release:
+            long_press:
                 - enter_string: Z
                 - switch_view: base
         key_display:
@@ -342,7 +338,7 @@ buttons:
             short_press:
                 - enter_string: X
                 - switch_view: base
-            long_press_release:
+            long_press:
                 - enter_string: X
                 - switch_view: base
         key_display:
@@ -352,7 +348,7 @@ buttons:
             short_press:
                 - enter_string: C
                 - switch_view: base
-            long_press_release:
+            long_press:
                 - enter_string: C
                 - switch_view: base
         key_display:
@@ -362,7 +358,7 @@ buttons:
             short_press:
                 - enter_string: V
                 - switch_view: base
-            long_press_release:
+            long_press:
                 - enter_string: V
                 - switch_view: base
         key_display:
@@ -372,7 +368,7 @@ buttons:
             short_press:
                 - enter_string: B
                 - switch_view: base
-            long_press_release:
+            long_press:
                 - enter_string: B
                 - switch_view: base
         key_display:
@@ -382,7 +378,7 @@ buttons:
             short_press:
                 - enter_string: N
                 - switch_view: base
-            long_press_release:
+            long_press:
                 - enter_string: N
                 - switch_view: base
         key_display:
@@ -392,7 +388,7 @@ buttons:
             short_press:
                 - enter_string: M
                 - switch_view: base
-            long_press_release:
+            long_press:
                 - enter_string: M
                 - switch_view: base
         key_display:
@@ -402,7 +398,7 @@ buttons:
             short_press:
                 - enter_string: .
                 - switch_view: base
-            long_press_release:
+            long_press:
                 - open_popup
         key_display:
             text: .
@@ -416,8 +412,6 @@ buttons:
                 - switch_view: base
             long_press:
                 - enter_keycode: BackSpace
-            long_press_release:
-                - enter_keycode: BackSpace
                 - switch_view: base
         key_display:
             image: edit-clear-symbolic.svg
@@ -428,7 +422,7 @@ buttons:
             short_press:
                 - enter_string: " " 
                 - switch_view: base
-            long_press_release:
+            long_press:
                 - enter_string: " " 
                 - switch_view: base
         key_display:
@@ -437,12 +431,10 @@ buttons:
         outline: double
         actions:
             short_press:
-                - enter_keycode: Return
+                - enter_keycode: RTRN
                 - switch_view: base
             long_press:
-                - enter_keycode: Return
-            long_press_release:
-                - enter_keycode: Return
+                - enter_keycode: RTRN
                 - switch_view: base
         key_display:
             image: key-enter.svg

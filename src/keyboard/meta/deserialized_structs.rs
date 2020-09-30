@@ -16,10 +16,8 @@ pub enum KeyEvent {
     ShortPress,
     #[serde(rename = "long_press")]
     LongPress,
-    #[serde(rename = "long_press_release")]
-    LongPressRelease,
-    #[serde(rename = "swipe")]
-    Swipe,
+    #[serde(rename = "swipe")] // TODO: Should not be needed, delete?
+    Swipe, // TODO: Should not be needed, delete?
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize, PartialEq, Eq, Hash)]
@@ -40,6 +38,7 @@ pub enum KeyAction {
     #[serde(rename = "open_popup")]
     OpenPopup,
 }
+
 #[derive(Debug, Clone, Deserialize, Serialize, PartialEq, Eq, Hash)]
 #[serde(deny_unknown_fields)]
 pub enum KeyDisplay {

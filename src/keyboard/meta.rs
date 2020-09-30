@@ -1,5 +1,5 @@
+use crate::keyboard::{Interaction, TapDuration, TapMotion};
 use std::collections::HashMap;
-
 mod deserializer;
 use deserializer::LayoutYamlParser;
 mod deserialized_structs;
@@ -8,7 +8,7 @@ use deserialized_structs::{KeyDeserialized, KeyIds, LayoutDeserialized};
 
 #[derive(Debug)]
 pub struct KeyMeta {
-    pub actions: HashMap<KeyEvent, Vec<KeyAction>>,
+    pub actions: HashMap<Interaction, Vec<KeyAction>>,
     pub key_display: KeyDisplay,
     pub outline: Outline,
     pub popup: Option<Vec<String>>,
@@ -20,7 +20,8 @@ impl KeyMeta {
         let mut key_meta = KeyMeta::default(key_id);
         if let Some(key_deserialized) = key_deserialized {
             if let Some(deserialized_actions) = &key_deserialized.actions {
-                key_meta.actions = deserialized_actions.clone();
+                key_meta.actions =
+                    KeyMeta::make_interaction_keyaction_hashmap(deserialized_actions);
             };
             if let Some(deserialized_key_display) = &key_deserialized.key_display {
                 key_meta.key_display = deserialized_key_display.clone();
@@ -42,7 +43,7 @@ impl KeyMeta {
         let key_id = key_id.to_string();
         let mut actions = HashMap::new();
         actions.insert(
-            KeyEvent::ShortPress,
+            Interaction::Tap(TapDuration::Short, TapMotion::Release),
             vec![KeyAction::EnterString(key_id.clone())],
         );
         let mut long_press_str = key_id.clone();
@@ -50,7 +51,7 @@ impl KeyMeta {
             long_press_str.make_ascii_uppercase();
         }
         actions.insert(
-            KeyEvent::LongPress,
+            Interaction::Tap(TapDuration::Long, TapMotion::Release),
             vec![KeyAction::EnterString(long_press_str)],
         );
         let key_display = KeyDisplay::Text(key_id);
@@ -65,6 +66,33 @@ impl KeyMeta {
             popup,
             styles,
         }
+    }
+
+    fn make_interaction_keyaction_hashmap(
+        deserialized_actions: &HashMap<KeyEvent, Vec<KeyAction>>,
+    ) -> HashMap<Interaction, Vec<KeyAction>> {
+        let mut actions = HashMap::new();
+        for (key_event, key_action_vec) in deserialized_actions {
+            let (interaction_press, interaction_release) = match key_event {
+                KeyEvent::ShortPress => (
+                    None,
+                    Some(Interaction::Tap(TapDuration::Short, TapMotion::Release)),
+                ),
+                KeyEvent::LongPress => (
+                    Some(Interaction::Tap(TapDuration::Long, TapMotion::Press)),
+                    Some(Interaction::Tap(TapDuration::Long, TapMotion::Release)),
+                ),
+                KeyEvent::Swipe => (None, None),
+            };
+            if let Some(interaction_press) = interaction_press {
+                actions.insert(interaction_press, key_action_vec.clone());
+            }
+            if let Some(interaction_release) = interaction_release {
+                actions.insert(interaction_release, key_action_vec.clone());
+            }
+        }
+        actions.shrink_to_fit();
+        actions
     }
 }
 

@@ -4,7 +4,7 @@ use std::collections::HashMap;
 #[derive(Debug, Clone)]
 pub struct Key {
     pub id: String,
-    actions: HashMap<KeyEvent, Vec<KeyAction>>,
+    actions: HashMap<Interaction, Vec<KeyAction>>,
 }
 
 impl Key {
@@ -14,7 +14,7 @@ impl Key {
             actions: key_meta.actions.clone(),
         }
     }
-    pub fn get_actions(&self, key_event: &KeyEvent) -> Option<&Vec<KeyAction>> {
-        self.actions.get(&key_event)
+    pub fn get_actions(&self, interaction: &Interaction) -> Option<&Vec<KeyAction>> {
+        self.actions.get(interaction)
     }
 }
