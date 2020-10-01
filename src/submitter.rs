@@ -1,6 +1,6 @@
 pub use self::wayland::vk_service::KeyMotion;
-use input_method_service::*;
 use wayland_client::EventQueue;
+use zwp_input_method_service::*;
 
 pub mod wayland;
 
