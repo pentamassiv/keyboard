@@ -132,7 +132,8 @@ impl relm::Widget for Win {
             connect_drag_update(drag_gesture, x_offset, y_offset),
             self.relm,
             {
-                let (x_start, y_start) = drag_gesture.get_start_point().unwrap_or((-0.5, -0.5));
+                let (x_start, y_start) =
+                    drag_gesture.get_start_point().unwrap_or((-1000.0, -1000.0)); // When popup is opened, there is no startpoint. To avoid being close to any buttons this large negative number is given
                 let x = x_start + x_offset;
                 let y = y_start + y_offset;
                 Msg::GestureSignal(x, y, GestureSignal::DragUpdate)
@@ -144,7 +145,8 @@ impl relm::Widget for Win {
             connect_drag_end(drag_gesture, x_offset, y_offset),
             self.relm,
             {
-                let (x_start, y_start) = drag_gesture.get_start_point().unwrap_or((-0.5, -0.5));
+                let (x_start, y_start) =
+                    drag_gesture.get_start_point().unwrap_or((-1000.0, -1000.0)); // When popup is opened, there is no startpoint. To avoid being close to any buttons this large negative number is given
                 let x = x_start + x_offset;
                 let y = y_start + y_offset;
                 Msg::GestureSignal(x, y, GestureSignal::DragEnd)

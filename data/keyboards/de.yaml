@@ -29,9 +29,7 @@ buttons:
             long_press:
                 - open_popup
         popup:
-            - "ä"
-            - "à"
-            - "â"
+            - "à ä â"
     A:
         actions:
             short_press:
@@ -39,9 +37,7 @@ buttons:
             long_press:
                 - open_popup
         popup:
-            - "À"
-            - "Â"
-            - "Ä"
+            - "À Ä Â"
     u:
         actions:
             short_press:
@@ -77,9 +73,9 @@ buttons:
     :):
         actions:
             short_press:
-                - temporarily_switch_layout: :-)
+                - switch_layout: :-)
             long_press:
-                - temporarily_switch_layout: emoji
+                - switch_layout: emoji
     GBA:
         actions:
             short_press:
@@ -156,7 +152,17 @@ buttons:
             short_press:
                 - enter_string: " " 
             long_press:
-                - enter_string: " " 
+                - enter_string: " "
+    .:
+        actions:
+            short_press:
+                - enter_string: "." 
+            long_press:
+                - open_popup
+        popup:
+            - "# @ & % \" '"
+            - "( / - + ¡ ¿"
+            - ") : ; , ! ?"
     Return:
         outline: double
         actions:

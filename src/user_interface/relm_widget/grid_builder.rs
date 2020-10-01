@@ -101,28 +101,35 @@ impl GridBuilder {
         key_meta: &KeyMeta,
     ) -> Option<Popover> {
         let mut popover_option = None;
-        let popover = Popover::new(Some(button));
         if let Some(popup) = &key_meta.popup {
-            let hbox = gtk::Box::new(gtk::Orientation::Horizontal, 0);
+            let popover = Popover::new(Some(button));
+            let vbox = gtk::Box::new(gtk::Orientation::Vertical, 0);
             for popup_string in popup {
-                let new_popup_button = gtk::Button::new();
-                new_popup_button.set_label(popup_string);
-                hbox.add(&new_popup_button);
-                let tmp_popover_ref = popover.clone();
-                new_popup_button.connect_clicked(move |_| tmp_popover_ref.hide());
-                relm::connect!(
-                    relm,
-                    new_popup_button,
-                    connect_button_release_event(clicked_button, _),
-                    return (
-                        Some(crate::user_interface::Msg::SubmitText(
-                            clicked_button.get_label().unwrap().to_string()
-                        )),
-                        gtk::Inhibit(false)
-                    )
-                );
+                let hbox = gtk::Box::new(gtk::Orientation::Horizontal, 0);
+                for popup_id in popup_string.split_whitespace() {
+                    let new_popup_button = gtk::Button::new();
+                    new_popup_button
+                        .get_style_context()
+                        .add_class("popover_key");
+                    new_popup_button.set_label(popup_id);
+                    hbox.add(&new_popup_button);
+                    let tmp_popover_ref = popover.clone();
+                    new_popup_button.connect_clicked(move |_| tmp_popover_ref.hide());
+                    relm::connect!(
+                        relm,
+                        new_popup_button,
+                        connect_button_release_event(clicked_button, _),
+                        return (
+                            Some(crate::user_interface::Msg::SubmitText(
+                                clicked_button.get_label().unwrap().to_string()
+                            )),
+                            gtk::Inhibit(false)
+                        )
+                    );
+                }
+                vbox.add(&hbox);
             }
-            popover.add(&hbox);
+            popover.add(&vbox);
             popover_option = Some(popover);
         }
         popover_option
