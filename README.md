@@ -8,14 +8,13 @@ I have yet to look up how I properly mention it in the code so they get the prop
 ## Installation
 WARNING: Currently Fingerboard is unusable on versions newer than Arch 20200913. Any help with fixing this is highly appreciated!
 
-If you want to use Fingerboard on your Smartphone running Phosh, you need to build it with cargo and then replace squeekboards binary.
-You also need to install gtk-layer-shell.
-You can just build it on your phone or you can cross-compile it. There are some feature flags you might want to set to get more functionalities.
+If you want to use Fingerboard on your Smartphone running Phosh, you can download the binary or build it yourself with cargo. Currently it looks for a data and a theming folder in the same directory from which it was launched. An easy way to try Fingerboard is to save the squeekboard binary (/usr/bin/squeekboard) to a different location and then replace it with a dummy one (a simple hello world is enough but it needs to be executable). This will prevent squeekboard from comflicting with Fingerboard. Then you can launch Fingerboard via SSH and if you are done testing it you can put the squeekboard binary back.
+You also need to install gtk-layer-shell. If you are building Fingerboard yourself, there are some feature flags you might want to set to get more functionalities.
 Read the Cargo.toml for more information on this. If you build it on your phone it should be as easy as 
 ```bash
 $ cargo build --release
 ```
-There should not have been any errors, just some warnings, which you can ignore. Then replace /usr/bin/squeekboard with the resulting binary.
+There should not have been any errors, just some warnings, which you can ignore.
 Within the next few days I will package it at least for Arch so that it can easily be installed.
 
 ## Features
@@ -35,7 +34,6 @@ Within the next few days I will package it at least for Arch so that it can easi
 - Show when pressing the little keyboard symbol in Phosh
 - Detect rotation and switch to different layout
 - Make layouts/views partially transparent to make layouts perfect for playing Gameboy emulators
-
 
 ## TODO
 So far the code is not really commented but by the end of October I plan on adding tons of diagrams and comments because this is 
