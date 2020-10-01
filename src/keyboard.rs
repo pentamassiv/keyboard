@@ -148,6 +148,7 @@ impl Keyboard {
                 return (locale_language, start_view);
             }
         }
+        println!("WARNING: Fallback layout loaded");
         (start_layout, start_view)
     }
 

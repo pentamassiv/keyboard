@@ -1,32 +1,120 @@
-pub const FALLBACK_LAYOUT_NAME: &str = "Fallback";
+pub const FALLBACK_LAYOUT_NAME: &str = "FALLBACK";
 pub const FALLBACK_VIEW_NAME: &str = "base";
 
 // All " within the layout definition need to be escape
 pub const FALLBACK_LAYOUT: &str = "---
-outlines:
-    s: Standard
-    backspace: Double
-    space: Quadruple
-
 views:
     base:
         - \"q w e r t y u i o p\"
         - \"a s d f g h j k l\"
-        - \"Shift_L z x c v b n m BackSpace\"
-        - \"show_numbers preferences space period Return\"
-    upper:
+        - \"Shift_L_base z x c v b n m BackSpace\"
+        - \"show_numbers space . Return\"
+    caps:
         - \"Q W E R T Y U I O P\"
         - \"A S D F G H J K L\"
-        - \"Shift_L Z X C V B N M BackSpace\"
-        - \"show_numbers preferences space period Return\"
+        - \"Shift_L_caps Z X C V B N M BackSpace\"
+        - \"show_numbers space . Return\"
     numbers:
         - \"1 2 3 4 5 6 7 8 9 0\"
         - \"@ # $ % & - _ + ( )\"
-        - \"show_symbols , \\\" ' colon ; ! ? BackSpace\"
-        - \"show_letters preferences space period Return\"
+        - \"show_symbols , \\\" ' : ; ! ? BackSpace\"
+        - \"show_letters space . Return\"
     symbols:
         - \"~ ` | · √ π τ ÷ × ¶\"
         - \"© ® £ € ¥ ^ ° * { }\"
         - \"show_numbers_from_symbols \\\\ / < > = [ ] BackSpace\"
-        - \"show_letters preferences space period Return\"
-";
+        - \"show_letters space . Return\"
+
+buttons:
+    Shift_L_base:
+        actions:
+            short_press:
+                - temporarily_switch_view: caps
+            long_press:
+                - switch_view: caps
+        key_display:
+            image: key-shift.svg
+        outline: standard
+    Shift_L_caps:
+        actions:
+            short_press:
+                - switch_view: base
+            long_press:
+                - switch_view: base
+        key_display:
+            image: key-shift.svg
+        outline: standard
+        styles:
+            - locked
+    BackSpace:
+        actions:
+            short_press:
+                - enter_keycode: BackSpace
+            long_press:
+                - toggle_keycode: BackSpace
+        key_display:
+            image: edit-clear-symbolic.svg
+        outline: double
+    show_numbers:
+        actions:
+            short_press:
+                - switch_view: numbers
+            long_press:
+                - switch_view: numbers
+        outline: standard
+        key_display:
+            text: 123
+    show_numbers_from_symbols:
+        actions:
+            short_press:
+                - switch_view: numbers
+            long_press:
+                - switch_view: numbers
+        outline: standard
+        key_display:
+            text: 123
+    show_letters:
+        actions:
+            short_press:
+                - switch_view: base
+            long_press:
+                - switch_view: base
+        key_display:
+            text: ABC
+    show_symbols:
+        actions:
+            short_press:
+                - switch_view: symbols
+            long_press:
+                - switch_view: symbols
+        outline: standard
+        key_display:
+            text: \"*/=\"
+    space:
+        outline: quadruple
+        actions:
+            short_press:
+                - enter_string: \" \" 
+            long_press:
+                - enter_string: \" \" 
+    .:
+        actions:
+            short_press:
+                - enter_string: \".\" 
+            long_press:
+                - open_popup
+        popup:
+            - \"# @ & % \\\" '\"
+            - \"( / - + ¡ ¿\"
+            - \") : ; , ! ?\"
+    Return:
+        outline: double
+        actions:
+            short_press:
+                - enter_keycode: Enter
+            long_press:
+                - toggle_keycode: Enter
+        key_display:
+            image: key-enter.svg
+        styles:
+            - return";
