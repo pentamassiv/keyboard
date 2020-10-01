@@ -36,6 +36,8 @@ pub enum KeyAction {
     TempSwitchView(String),
     #[serde(rename = "switch_layout")]
     SwitchLayout(String),
+    #[serde(rename = "temporarily_switch_layout")]
+    TempSwitchLayout(String),
     #[serde(rename = "erase")]
     Erase,
     #[serde(rename = "open_popup")]

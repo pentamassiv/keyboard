@@ -47,7 +47,8 @@ pub enum SwipeAction {
 pub struct Keyboard {
     pub views: HashMap<(String, String), View>,
     pub active_view: (String, String),
-    next_view: Option<String>,
+    prev_layout: Option<String>,
+    prev_view: Option<String>,
     ui_connection: UIConnector,
     interpreter: Interpreter,
     submitter: Submitter<ui_connector::UIConnector>,
@@ -70,12 +71,14 @@ impl Keyboard {
             }
         }
         let active_view = Keyboard::get_start_layout_view(layout_names);
+        println!("starting view: {}, {}", active_view.0, active_view.1);
         let interpreter = Interpreter::new();
         views.shrink_to_fit();
         Keyboard {
             views,
             active_view,
-            next_view: None,
+            prev_layout: None,
+            prev_view: None,
             ui_connection,
             interpreter,
             submitter,
@@ -115,6 +118,8 @@ impl Keyboard {
             "execute_action: key_id {}, actions_vec {:?}",
             key_id, actions_vec
         );
+        let prev_layout = self.prev_layout.clone();
+        let prev_view = self.prev_view.clone();
         for action in actions_vec {
             let (ui_message, submission) = self.get_ui_submitter_msg_from_action(key_id, action);
             // Each action can only result in eighter a ui_message or a submission
@@ -127,20 +132,33 @@ impl Keyboard {
                 self.ui_connection.emit(ui_message);
             }
         }
+
+        self.switch_back_to_prev_view(prev_layout, prev_view);
     }
 
     fn get_start_layout_view(available_layout_names: HashSet<String>) -> (String, String) {
         let start_layout = FALLBACK_LAYOUT_NAME.to_string();
         let start_view = FALLBACK_VIEW_NAME.to_string();
         let locale = format!("{}", locale_config::Locale::user_default());
-        let locale_language: String = locale.rsplit('_').take(1).collect();
+        let locale_language: String = locale.rsplit('-').take(1).collect();
         let locale_language = locale_language.to_lowercase();
+        println!("local language: {}", locale_language);
         for layout_name in available_layout_names {
             if locale_language == layout_name {
                 return (locale_language, start_view);
             }
         }
         (start_layout, start_view)
+    }
+
+    fn switch_back_to_prev_view(&mut self, prev_layout: Option<String>, prev_view: Option<String>) {
+        // Switch view because last keypress said to switch back to old view
+        if prev_layout.is_some() || prev_view.is_some() {
+            let ui_message = crate::user_interface::Msg::ChangeUILayoutView(prev_layout, prev_view);
+            self.ui_connection.emit(ui_message);
+            self.prev_layout = None;
+            self.prev_view = None;
+        };
     }
 
     pub fn fetch_events(&mut self) {
@@ -158,15 +176,6 @@ impl Keyboard {
     ) -> (Option<Msg>, Option<Submission>) {
         let mut submission = None;
         let mut ui_message = None;
-
-        // Switch view because last keypress said to switch back to old view
-        if let Some(view) = &self.next_view {
-            let ui_message =
-                crate::user_interface::Msg::ChangeUILayoutView(None, Some(view.to_string()));
-            self.ui_connection.emit(ui_message);
-            self.next_view = None;
-        };
-
         match action {
             KeyAction::EnterKeycode(keycode) => {
                 submission = Some(Submission::Keycode(keycode.to_string()));
@@ -194,13 +203,20 @@ impl Keyboard {
                     None,
                     Some(new_view.to_string()),
                 ));
-                self.next_view = Some(self.active_view.1.clone());
+                self.prev_view = Some(self.active_view.1.clone());
             }
             KeyAction::SwitchLayout(new_layout) => {
                 ui_message = Some(crate::user_interface::Msg::ChangeUILayoutView(
                     Some(new_layout.to_string()),
                     None,
                 ));
+            }
+            KeyAction::TempSwitchLayout(new_layout) => {
+                ui_message = Some(crate::user_interface::Msg::ChangeUILayoutView(
+                    Some(new_layout.to_string()),
+                    None,
+                ));
+                self.prev_layout = Some(self.active_view.0.clone());
             }
             KeyAction::OpenPopup => {
                 ui_message = Some(crate::user_interface::Msg::OpenPopup(key_id.to_string()));

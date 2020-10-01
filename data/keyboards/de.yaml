@@ -77,9 +77,9 @@ buttons:
     :):
         actions:
             short_press:
-                - switch_layout: :-)
+                - temporarily_switch_layout: :-)
             long_press:
-                - switch_layout: emoji
+                - temporarily_switch_layout: emoji
     GBA:
         actions:
             short_press:
