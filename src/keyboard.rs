@@ -1,8 +1,9 @@
 pub use super::submitter::KeyMotion;
 use super::submitter::*;
+use crate::config::fallback_layout::*;
 use crate::interpreter::Interpreter;
 use crate::user_interface::Msg;
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet};
 
 mod ui_connector;
 pub use ui_connector::{EmitUIMsg, UIConnector, UIMsg};
@@ -12,6 +13,10 @@ use view::View;
 mod key;
 pub use self::meta::*;
 use key::Key;
+
+pub const ICON_FOLDER: &str = "./data/icons/";
+pub const RESOLUTIONX: i32 = 1000; // TODO: Think about the exact value
+pub const RESOLUTIONY: i32 = 1000;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub enum TapMotion {
@@ -38,18 +43,11 @@ pub enum SwipeAction {
     Finish,
 }
 
-pub const ICON_FOLDER: &str = "./data/icons/";
-pub const RESOLUTIONX: i32 = 1000; // TODO: Think about the exact value
-pub const RESOLUTIONY: i32 = 1000;
-
-pub const KEYBOARD_DEFAULT_LAYOUT: &str = "us";
-pub const KEYBOARD_DEFAULT_VIEW: &str = "base";
-
 //#[derive(Debug)]
 pub struct Keyboard {
     pub views: HashMap<(String, String), View>,
     pub active_view: (String, String),
-    next_view: Option<(String, String)>,
+    next_view: Option<String>,
     ui_connection: UIConnector,
     interpreter: Interpreter,
     submitter: Submitter<ui_connector::UIConnector>,
@@ -63,13 +61,15 @@ impl Keyboard {
         let ui_connection = ui_connector.clone();
         let submitter = Submitter::new(ui_connector);
         let mut views = HashMap::new();
+        let mut layout_names = HashSet::new();
         for (layout_name, layout_meta) in layout_meta_hashmap {
+            layout_names.insert(layout_name.to_string());
             for (view_name, key_arrangement) in &layout_meta.views {
                 let view = View::from(&key_arrangement, &layout_meta.keys);
                 views.insert((layout_name.clone(), view_name.clone()), view);
             }
         }
-        let active_view = Keyboard::get_default_layout_view();
+        let active_view = Keyboard::get_start_layout_view(layout_names);
         let interpreter = Interpreter::new();
         views.shrink_to_fit();
         Keyboard {
@@ -129,8 +129,18 @@ impl Keyboard {
         }
     }
 
-    fn get_default_layout_view() -> (String, String) {
-        ("us".to_string(), "base".to_string())
+    fn get_start_layout_view(available_layout_names: HashSet<String>) -> (String, String) {
+        let start_layout = FALLBACK_LAYOUT_NAME.to_string();
+        let start_view = FALLBACK_VIEW_NAME.to_string();
+        let locale = format!("{}", locale_config::Locale::user_default());
+        let locale_language: String = locale.rsplit('_').take(1).collect();
+        let locale_language = locale_language.to_lowercase();
+        for layout_name in available_layout_names {
+            if locale_language == layout_name {
+                return (locale_language, start_view);
+            }
+        }
+        (start_layout, start_view)
     }
 
     pub fn fetch_events(&mut self) {
@@ -142,16 +152,21 @@ impl Keyboard {
     }
 
     fn get_ui_submitter_msg_from_action(
-        &self,
+        &mut self,
         key_id: &str,
         action: &KeyAction,
     ) -> (Option<Msg>, Option<Submission>) {
         let mut submission = None;
         let mut ui_message = None;
 
-        //if let Some(layout), view) = self.next_view {
-        //    crate::user_interface::Msg::ChangeUILayoutView(Some(layout), Some(view));self.ui_connection.emit(ui_message);
-        //};
+        // Switch view because last keypress said to switch back to old view
+        if let Some(view) = &self.next_view {
+            let ui_message =
+                crate::user_interface::Msg::ChangeUILayoutView(None, Some(view.to_string()));
+            self.ui_connection.emit(ui_message);
+            self.next_view = None;
+        };
+
         match action {
             KeyAction::EnterKeycode(keycode) => {
                 submission = Some(Submission::Keycode(keycode.to_string()));
@@ -173,6 +188,13 @@ impl Keyboard {
                     None,
                     Some(new_view.to_string()),
                 ));
+            }
+            KeyAction::TempSwitchView(new_view) => {
+                ui_message = Some(crate::user_interface::Msg::ChangeUILayoutView(
+                    None,
+                    Some(new_view.to_string()),
+                ));
+                self.next_view = Some(self.active_view.1.clone());
             }
             KeyAction::SwitchLayout(new_layout) => {
                 ui_message = Some(crate::user_interface::Msg::ChangeUILayoutView(

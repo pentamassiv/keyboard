@@ -1,6 +1,5 @@
 use super::deserializer::LayoutSource;
-use crate::config::directories;
-use crate::config::fallback_layout::FALLBACK_LAYOUT;
+use crate::config::fallback_layout::*;
 use serde::Deserialize;
 use serde::Serialize;
 use std::collections::HashMap;
@@ -33,6 +32,8 @@ pub enum KeyAction {
     Modifier(Modifier),
     #[serde(rename = "switch_view")]
     SwitchView(String),
+    #[serde(rename = "temporarily_switch_view")]
+    TempSwitchView(String),
     #[serde(rename = "switch_layout")]
     SwitchLayout(String),
     #[serde(rename = "erase")]
@@ -102,7 +103,7 @@ pub struct LayoutDeserialized {
 
 impl LayoutDeserialized {
     pub fn from(source: LayoutSource) -> Result<(String, LayoutDeserialized), serde_yaml::Error> {
-        let mut layout_name: String = String::from(directories::FALLBACK_LAYOUT_NAME);
+        let mut layout_name: String = String::from(FALLBACK_LAYOUT_NAME);
         let layout = match source {
             LayoutSource::YamlFile(path) => {
                 layout_name = String::from(path.file_stem().unwrap().to_str().unwrap());
