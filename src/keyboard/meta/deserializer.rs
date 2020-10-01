@@ -14,16 +14,18 @@ impl LayoutYamlParser {
         let mut layouts = HashMap::new();
 
         // Try loading layouts from directory
-        if let Ok(paths) = std::fs::read_dir(directories::PATH_TO_LAYOUTS) {
-            // Load layout from all yaml files in the directory. Other files and subdirectories are ignored
-            for file in paths.filter_map(|x| x.ok()).filter(|x| {
-                x.path().extension().is_some() && x.path().extension().unwrap() == "yaml"
-            }) {
-                let layout_source = LayoutSource::YamlFile(file.path());
-                LayoutYamlParser::add_layout_to_hashmap(
-                    &mut layouts,
-                    LayoutDeserialized::from(layout_source),
-                );
+        if let Some(layout_dir_abs) = directories::get_absolute_path(directories::LAYOUT_PATH_REL) {
+            if let Ok(paths) = std::fs::read_dir(layout_dir_abs) {
+                // Load layout from all yaml files in the directory. Other files and subdirectories are ignored
+                for file in paths.filter_map(|x| x.ok()).filter(|x| {
+                    x.path().extension().is_some() && x.path().extension().unwrap() == "yaml"
+                }) {
+                    let layout_source = LayoutSource::YamlFile(file.path());
+                    LayoutYamlParser::add_layout_to_hashmap(
+                        &mut layouts,
+                        LayoutDeserialized::from(layout_source),
+                    );
+                }
             }
         }
 

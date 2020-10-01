@@ -182,7 +182,23 @@ impl relm::Widget for Win {
 
 fn load_css() {
     let provider = gtk::CssProvider::new();
-    match provider.load_from_path(directories::CSS_DIRECTORY) {
+    // Gets PathBuf and tries to convert it to a String
+    let css_path_abs = match directories::get_absolute_path(directories::CSS_FILE_REL) {
+        Some(path) => path.into_os_string().into_string(),
+        None => {
+            eprintln! {"No CSS file to customize the keyboard could be loaded. The home directory was not found"};
+            return;
+        }
+    };
+    // If conversion was unsuccessfull, return
+    let css_path_abs = match css_path_abs {
+        Ok(path) => path,
+        Err(_) => {
+            eprintln! {"No CSS file to customize the keyboard could be loaded. The filepath might not be UTF-8"};
+            return;
+        }
+    };
+    match provider.load_from_path(&css_path_abs) {
         Ok(_) => {
             // We give the CssProvided to the default screen so the CSS rules we added
             // can be applied to our window.
