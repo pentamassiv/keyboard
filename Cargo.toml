@@ -1,10 +1,10 @@
 [package]
 authors = ["Robin Grell <grellr@hochschule-trier.de>"]
 categories = ["internationalization", "gui"]
-description = "Keyboard built from scratch with modern features like Next Word Prediction and gesture typing in mind"
-license = "MIT"
-name = "keyboard"
-version = "0.19.0"
+description = "Keyboard built from scratch with modern features like Next Word Prediction and gesture recognition in mind"
+license = "GPL-3.0"
+name = "fingerboard"
+version = "0.1.0"
 edition = "2018"
 
 [dependencies]
@@ -14,21 +14,37 @@ glib = "0.10"
 gdk-sys = "0.10"
 gdk = "0.13"
 gtk = "0.9"
-cairo-rs = "0.9"
+cairo-rs = { version = "0.9", optional = true }
 relm = "0.20"
 relm-derive = "0.20"
 relm-attributes = "0.16"
 serde = { version = "1.0", features = ["derive"] }
 serde_yaml = "0.8"
 gtk-layer-shell="0.1"
-wayland-client = {version="0.27", features = ["use_system_lib"]}
-wayland-protocols = {version="0.27", features = ["client", "unstable_protocols"]}
-zwp-virtual-keyboard = "0.1"
+wayland-client = {version="0.28", features = ["use_system_lib"]}
+wayland-protocols = {version="0.28", features = ["client", "unstable_protocols"]}
+zwp-virtual-keyboard = "0.2"
 input_event_codes_hashmap = "0.1.0"
-zwp-input-method = "0.1.0"
+zwp-input-method = "0.2.0"
 tempfile = "3.1.0"
 dbus = "0.8.4"
 dbus-crossroads = "0.2.2"
+locale_config = "0.3.0"
 
 [dependencies.input_method_service]
 path = "../test/input_method_service"
+
+[features]
+# None of the optional features are activated in the default
+default = []
+
+# Activates gesture feature
+# Currently there will only be the path painted but no gesture detection. This will change within the next few months
+gesture = ["cairo-rs"]
+
+# Enables haptic feedback via dbus
+# Currently there is an issue with keypresses getting ignored when typing fast
+haptic-feedback = []
+
+# Suggestions are not functional yet so they can be ignored
+suggestions = []

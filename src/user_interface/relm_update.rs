@@ -11,16 +11,11 @@ impl relm::Update for Win {
     // Return the initial model.
     fn model(relm: &relm::Relm<Self>, _: Self::ModelParam) -> Model {
         Model {
-            input: Input {
-                input_type: KeyEvent::ShortPress,
-                path: Vec::new(),
-            },
-            keyboard: keyboard::Keyboard::new(MessagePipe::new(relm.clone())),
+            gesture: GestureModel::new(relm.clone()),
         }
     }
 
     fn subscriptions(&mut self, relm: &relm::Relm<Self>) {
-        relm::interval(relm.stream(), 1000, || Msg::UpdateDrawBuffer);
         relm::interval(relm.stream(), 100, || Msg::PollEvents);
     }
 
@@ -28,37 +23,33 @@ impl relm::Update for Win {
     // Widgets may also be updated in this function.
     fn update(&mut self, event: Msg) {
         match event {
-            Msg::Press(_, _, _) => {
-                self.model.input.input_type = KeyEvent::ShortPress;
+            Msg::GestureSignal(x, y, gesture_signal) => {
+                self.model.gesture.handle(x, y, gesture_signal);
             }
-            Msg::LongPress(x, y, _) => {
-                self.model.input.input_type = KeyEvent::LongPress;
-                // self.dbus_service.haptic_feedback(); // Not working reliably
-                self.activate_button(x, y);
+            Msg::Interaction((x, y), interaction) => {
+                let (x, y) = self.get_rel_coordinates(x, y);
+                self.keyboard.input(x, y, interaction);
             }
-            Msg::Swipe(x, y, time) => {
-                if !(self.model.input.input_type == KeyEvent::LongPress) {
-                    self.model.input.input_type = KeyEvent::Swipe;
-                    self.model.input.path.push(Dot { x, y, time });
+            Msg::ButtonInteraction(key_id, tap_motion) => {
+                // Should never be possible to fail
+                let (layout, view) = self.ui_manager.current_layout_view.clone();
+                if let Some((button, _)) = self.key_refs.get(&(layout, view, key_id)) {
+                    button.set_active(tap_motion == TapMotion::Press);
+                    #[cfg(feature = "haptic-feedback")]
+                    self.ui_manager
+                        .haptic_feedback(tap_motion == TapMotion::Press);
                 }
             }
-            Msg::Release(x, y, time) => {
-                match self.model.input.input_type {
-                    KeyEvent::ShortPress => {
-                        // self.dbus_service.haptic_feedback(); // Not working reliably
-                        self.activate_button(x, y);
-                    }
-                    KeyEvent::LongPress => {
-                        //println!("LongPress");
-                    }
-                    KeyEvent::Swipe => {
-                        //println!("Swipe");
+            Msg::OpenPopup(key_id) => {
+                let (layout, view) = self.ui_manager.current_layout_view.clone();
+                if let Some((button, popover)) = self.key_refs.get(&(layout, view, key_id)) {
+                    button.set_active(false);
+                    if let Some(popover) = popover {
+                        popover.show_all();
                     }
                 }
-                //println!("Release: x: {}, y: {}, time: {:?}", x, y, time);
-                self.model.input.path = Vec::new();
             }
-            Msg::Submit(submission) => self.model.keyboard.submit(submission),
+            Msg::SubmitText(text) => self.keyboard.submit_text(text),
             Msg::Visible(new_visibility) => {
                 self.ui_manager.change_visibility(new_visibility);
             }
@@ -66,15 +57,17 @@ impl relm::Update for Win {
                 .ui_manager
                 .change_hint_purpose(content_hint, content_purpose),
             Msg::ChangeUILayoutView(layout, view) => {
+                println!("new_layout: {:?}, new_view: {:?}", layout, view);
                 let _ = self.ui_manager.change_layout_view(layout, view); // Result not relevant
             }
             Msg::ChangeKBLayoutView(layout, view) => {
-                self.model.keyboard.active_view = (layout, view);
+                self.keyboard.active_view = (layout, view);
             }
             Msg::ChangeUIOrientation(mode) => self.ui_manager.change_orientation(mode),
             Msg::PollEvents => {
-                self.model.keyboard.fetch_events();
+                self.keyboard.fetch_events();
             }
+            #[cfg(feature = "gesture")]
             Msg::UpdateDrawBuffer => {
                 self.draw_path();
             }

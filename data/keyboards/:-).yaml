@@ -1,0 +1,277 @@
+---
+
+views:
+    base:
+        - ":-) :^) ^_^ (^^) :,-) 8-) *\\0/*"
+        - "o:-) :-D }:‑) ;) ;-) :-* :-P"
+        - ":‑X :-| :-\\ :-[ :-! :-$ :-O"
+        - ":-( :'( =_= >.< (+_+) (*_*) O_o"
+        - "ABC 1 2 3"
+    two:
+        - "smileStars grin smileFlower"
+        - "smileBlush laughSquinting grinBlush"
+        - " love sendLove inLove"
+        - "hugeFlex flex flexLookleft"
+        - "ABC 1 2 3"
+    three:
+        - "smile smileBigEyes trollSmile"
+        - "wideSmileStars blushingSmile smileRoundEyes"
+        - "iKnewIt smirk yesPlease"
+        - "excitedFlower stars4Everone meeeh"
+        - "ABC 1 2 3"
+
+
+buttons:
+    1:
+        actions:
+            short_press:
+                - switch_view: "base"
+    2:
+        actions:
+            short_press:
+                - switch_view: "two"
+    3:
+        actions:
+            short_press:
+                - switch_view: "three"
+    4:
+        actions:
+            short_press:
+                - switch_view: "four"
+    5:
+        actions:
+            short_press:
+                - switch_view: "five"
+    6:
+        actions:
+            short_press:
+                - switch_view: "six"
+    ABC:
+        actions:
+            short_press:
+                - switch_layout: "previous"
+    trollSmile:
+        actions:
+            short_press:
+                - enter_string: ಡ ͜ ʖ ಡ
+            long_press:
+                - enter_string: ಡ ͜ ʖ ಡ
+        key_display:
+            text:  ಡ ͜ ʖ ಡ
+        outline: double
+    blushingSmile:
+        actions:
+            short_press:
+                - enter_string: ( ꈍᴗꈍ)
+            long_press:
+                - enter_string: ( ꈍᴗꈍ)
+        key_display:
+            text: ( ꈍᴗꈍ)
+        outline: double
+    iKnewIt:
+        actions:
+            short_press:
+                - enter_string: <(￣︶￣)>
+            long_press:
+                - enter_string: <(￣︶￣)>
+        key_display:
+            text: <(￣︶￣)>
+        outline: double
+    yesPlease:
+        actions:
+            short_press:
+                - enter_string: (人 •͈ᴗ•͈)
+            long_press:
+                - enter_string: (人 •͈ᴗ•͈)
+        key_display:
+            text: (人 •͈ᴗ•͈)
+        outline: double
+    smile:
+        actions:
+            short_press:
+                - enter_string: (•‿•)
+            long_press:
+                - enter_string: (•‿•)
+        key_display:
+            text: (•‿•)
+        outline: double
+    smileBigEyes:
+        actions:
+            short_press:
+                - enter_string: ◉‿◉
+            long_press:
+                - enter_string: ◉‿◉
+        key_display:
+            text: ◉‿◉
+        outline: double
+    wideSmileStars:
+        actions:
+            short_press:
+                - enter_string: (✷‿✷)
+            long_press:
+                - enter_string: (✷‿✷)
+        key_display:
+            text: (✷‿✷)
+        outline: double
+    smileRoundEyes:
+        actions:
+            short_press:
+                - enter_string: (θ‿θ)
+            long_press:
+                - enter_string: (θ‿θ)
+        key_display:
+            text: (θ‿θ)
+        outline: double
+    smirk:
+        actions:
+            short_press:
+                - enter_string: ʘ‿ʘ
+            long_press:
+                - enter_string: ʘ‿ʘ
+        key_display:
+            text: ʘ‿ʘ
+        outline: double
+    grin:
+        actions:
+            short_press:
+                - enter_string: (◔‿◔)
+            long_press:
+                - enter_string: (◔‿◔)
+        key_display:
+            text: (◔‿◔)
+        outline: double
+    smileFlower:
+        actions:
+            short_press:
+                - enter_string: (ʘᴗʘ✿)
+            long_press:
+                - enter_string: (ʘᴗʘ✿)
+        key_display:
+            text: (ʘᴗʘ✿)
+        outline: double
+    smileBlush:
+        actions:
+            short_press:
+                - enter_string: (◍•ᴗ•◍)
+            long_press:
+                - enter_string: (◍•ᴗ•◍)
+        key_display:
+            text: (◍•ᴗ•◍)
+        outline: double
+    laughSquinting:
+        actions:
+            short_press:
+                - enter_string: (≧▽≦)
+            long_press:
+                - enter_string: (≧▽≦)
+        key_display:
+            text: (≧▽≦)
+        outline: double
+    smileStars:
+        actions:
+            short_press:
+                - enter_string: (✯ᴗ✯)
+            long_press:
+                - enter_string: (✯ᴗ✯)
+        key_display:
+            text: (✯ᴗ✯)
+        outline: double
+    grinBlush:
+        actions:
+            short_press:
+                - enter_string: (*´ω´*)
+            long_press:
+                - enter_string: (*´ω´*)
+        key_display:
+            text: (*´ω´*)
+        outline: double
+    excitedFlower:
+        actions:
+            short_press:
+                - enter_string: (✿^‿^)
+            long_press:
+                - enter_string: (✿^‿^)
+        key_display:
+            text: (✿^‿^)
+        outline: double
+    meeeh:
+        actions:
+            short_press:
+                - enter_string: ^_________^
+            long_press:
+                - enter_string: ^_________^
+        key_display:
+            text: ^_________^
+        outline: double
+    stars4Everone:
+        actions:
+            short_press:
+                - enter_string: ✧◝(⁰▿⁰)◜✧
+            long_press:
+                - enter_string: ✧◝(⁰▿⁰)◜✧
+        key_display:
+            text: ✧◝(⁰▿⁰)◜✧
+        outline: double
+    wink:
+        actions:
+            short_press:
+                - enter_string: (◠‿◕)
+            long_press:
+                - enter_string: (◠‿◕)
+        key_display:
+            text: (◠‿◕)
+        outline: double
+    hugeFlex:
+        actions:
+            short_press:
+                - enter_string: ᕙ(  • ‿ •  )ᕗ
+            long_press:
+                - enter_string: ᕙ(  • ‿ •  )ᕗ
+        key_display:
+            text: ᕙ(  • ‿ •  )ᕗ
+        outline: double
+    flex:
+        actions:
+            short_press:
+                - enter_string: ᕙ( ͡° ͜ʖ ͡°)ᕗ
+            long_press:
+                - enter_string: ᕙ( ͡° ͜ʖ ͡°)ᕗ
+        key_display:
+            text: ᕙ( ͡° ͜ʖ ͡°)ᕗ
+        outline: double
+    flexLookleft:
+        actions:
+            short_press:
+                - enter_string: ᕙ(͡°‿ ͡°)ᕗ
+            long_press:
+                - enter_string: ᕙ(͡°‿ ͡°)ᕗ
+        key_display:
+            text: ᕙ(͡°‿ ͡°)ᕗ
+        outline: double
+    sendLove:
+        actions:
+            short_press:
+                - enter_string: ( ◜‿◝ )♡
+            long_press:
+                - enter_string: ( ◜‿◝ )♡
+        key_display:
+            text: ( ◜‿◝ )♡
+        outline: double
+    love:
+        actions:
+            short_press:
+                - enter_string: (｡♡‿♡｡)
+            long_press:
+                - enter_string: (｡♡‿♡｡)
+        key_display:
+            text: (｡♡‿♡｡)
+        outline: double
+    inLove:
+        actions:
+            short_press:
+                - enter_string: (●♡∀♡)
+            long_press:
+                - enter_string: (●♡∀♡)
+        key_display:
+            text: (●♡∀♡)
+        outline: double

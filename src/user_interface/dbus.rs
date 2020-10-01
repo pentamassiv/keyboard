@@ -7,13 +7,18 @@
    and a "HelloHappened" signal (with a string argument) which is sent every time
    someone calls the "Hello" method.
 */
-use dbus::arg::Variant;
+
 use dbus::blocking::Connection;
 use dbus_crossroads::{Context, Crossroads};
 use relm::Sender;
-use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use std::thread;
+
+#[cfg(feature = "haptic-feedback")]
+use dbus::arg::Variant;
+#[cfg(feature = "haptic-feedback")]
+use std::collections::HashMap;
+#[cfg(feature = "haptic-feedback")]
 use std::time::Duration;
 
 struct Visibility {
@@ -21,15 +26,18 @@ struct Visibility {
 }
 
 pub struct DBusService {
+    #[cfg(feature = "haptic-feedback")]
     client: DBusClient,
     server_running: bool,
     visibility: Arc<Mutex<Visibility>>,
 }
 
+#[cfg(feature = "haptic-feedback")]
 struct DBusClient {
     connection: Connection,
 }
 
+#[cfg(feature = "haptic-feedback")]
 impl DBusClient {
     fn new(connection: Connection) -> DBusClient {
         DBusClient { connection }
@@ -63,12 +71,15 @@ impl DBusClient {
 impl DBusService {
     pub fn new(sender: Sender<super::Msg>) -> Option<DBusService> {
         // Let's start by starting up a connection to the session bus and request a name.
-        let client_connection = Connection::new_session().unwrap();
         let server_connection = Connection::new_session().unwrap();
+        #[cfg(feature = "haptic-feedback")]
+        let client_connection = Connection::new_session().unwrap();
+        #[cfg(feature = "haptic-feedback")]
         let client = DBusClient::new(client_connection);
         let visibility = Arc::new(Mutex::new(Visibility { is_visible: false }));
         let visibility_clone = Arc::clone(&visibility);
         let mut dbus_service = DBusService {
+            #[cfg(feature = "haptic-feedback")]
             client,
             visibility,
             server_running: false,
@@ -83,10 +94,12 @@ impl DBusService {
     pub fn change_visibility(&mut self, visible: bool) {
         self.visibility.lock().unwrap().is_visible = visible;
     }
-    pub fn haptic_feedback(&self) {
-        let event = "button-released".to_string();
+
+    #[cfg(feature = "haptic-feedback")]
+    pub fn haptic_feedback(&self, event: String) {
         self.client.send_event(event);
     }
+
     fn spawn_server_and_detach(
         &mut self,
         sender: Mutex<Sender<super::Msg>>,

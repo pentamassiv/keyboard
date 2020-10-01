@@ -1,62 +1,125 @@
-# Maintained by: Mark Müller <markmueller86@gmail.com>
 ---
 views:
     base:
-        - "q w e r t z u i o p"
+        - "q w e r t y u i o p"
         - "a s d f g h j k l"
-        - "Shift_L   y x c v b n m  BackSpace"
-        - "show_numbers show_eschars preferences         space        , . Return"
-    upper:
-        - "Q W E R T Z U I O P"
+        - "Shift_L_base z x c v b n m BackSpace"
+        - "show_numbers GBA :) space . Return"
+    caps:
+        - "Q W E R T Y U I O P"
         - "A S D F G H J K L"
-        - "Shift_L   Y X C V B N M  BackSpace"
-        - "show_numbers show_eschars preferences         space        ! ? Return"
+        - "Shift_L_caps Z X C V B N M BackSpace"
+        - "show_numbers GBA :) space . Return"
     numbers:
         - "1 2 3 4 5 6 7 8 9 0"
-        - "@ # € % & - _ + ( )"
-        - "show_symbols   , \" ' : = < >  BackSpace"
-        - "show_letters show_eschars preferences         space        , . Return"
+        - "@ # $ % & - _ + ( )"
+        - "show_symbols , \" ' : ; ! ? BackSpace"
+        - "show_letters GBA :) space . Return"
     symbols:
-        - "~ ` ´ | · √ µ ÷ × ¶"
-        - "© ® £ $ ¥ ^ ° * { }"
-        - "show_numbers   \\ / § π τ [ ]  BackSpace"
-        - "show_letters show_eschars preferences         space        , . Return"
-    eschars:
-        - "ä è é ö ü Ä È É Ö Ü"
-        - "à â ê î ô À Â È Î Ô"
-        - "show_numbers  « » ç Ç æ œ ß  BackSpace"
-        - "show_letters show_eschars preferences         space        „ “ Return"
+        - "~ ` | · √ π τ ÷ × ¶"
+        - "© ® £ € ¥ ^ ° * { }"
+        - "show_numbers_from_symbols \\ / < > = [ ] BackSpace"
+        - "show_letters GBA :) space . Return"
 
 buttons:
-    Shift_L:
+    a:
         actions:
             short_press:
-                - switch_view: upper
+                - enter_string: a
             long_press:
                 - open_popup
-                - erase
+        popup:
+            - "ä"
+            - "à"
+            - "â"
+    A:
+        actions:
+            short_press:
+                - enter_string: A
+            long_press:
+                - open_popup
+        popup:
+            - "À"
+            - "Â"
+            - "Ä"
+    u:
+        actions:
+            short_press:
+                - enter_string: u
+            long_press:
+                - open_popup
+        popup:
+            - "ü"
+    U:
+        actions:
+            short_press:
+                - enter_string: U
+            long_press:
+                - open_popup
+        popup:
+            - "Ü"
+    o:
+        actions:
+            short_press:
+                - enter_string: o
+            long_press:
+                - open_popup
+        popup:
+            - "ö"
+    O:
+        actions:
+            short_press:
+                - enter_string: O
+            long_press:
+                - open_popup
+        popup:
+            - "Ö"
+    :):
+        actions:
+            short_press:
+                - temporarily_switch_layout: :-)
+            long_press:
+                - temporarily_switch_layout: emoji
+    GBA:
+        actions:
+            short_press:
+                - switch_layout: gba
+            long_press:
+                - switch_layout: gba
+    Shift_L_base:
+        actions:
+            short_press:
+                 - temporarily_switch_view: caps
+            long_press:
+                - switch_view: caps
         key_display:
             image: key-shift.svg
         outline: standard
-        popup: ~
+    Shift_L_caps:
+        actions:
+            short_press:
+                - switch_view: base
+            long_press:
+                - switch_view: base
+        key_display:
+            image: key-shift.svg
+        outline: standard
+        styles:
+            - locked
     BackSpace:
         actions:
             short_press:
-                - erase
+                - enter_keycode: BackSpace
+            long_press:
+                - toggle_keycode: BackSpace
         key_display:
             image: edit-clear-symbolic.svg
         outline: double
-        popup: ~
-    preferences:
-        actions:
-            short_press:
-                - switch_view: upper
-        outline: standard
-        key_display:
-            image: keyboard-mode-symbolic.svg
     show_numbers:
         actions:
             short_press:
+                - switch_view: numbers
+            long_press:
                 - switch_view: numbers
         outline: standard
         key_display:
@@ -65,6 +128,8 @@ buttons:
         actions:
             short_press:
                 - switch_view: numbers
+            long_press:
+                - switch_view: numbers
         outline: standard
         key_display:
             text: 123
@@ -72,35 +137,34 @@ buttons:
         actions:
             short_press:
                 - switch_view: base
-        outline: double
+            long_press:
+                - switch_view: base
         key_display:
             text: ABC
     show_symbols:
         actions:
             short_press:
                 - switch_view: symbols
+            long_press:
+                - switch_view: symbols
         outline: standard
         key_display:
             text: "*/="
-    period:
-        outline: standard
-        key_display:
-            text: "."
     space:
-        outline: standard
-        key_display:
-            text: "space"
-    Return:
-        outline: standard
-        key_display:
-            image: key-enter.svg
-    colon:
-        key_display:
-            text: ":"
-    show_eschars:
+        outline: quadruple
         actions:
             short_press:
-                - switch_view: eschars
-        outline: standard
+                - enter_string: " " 
+            long_press:
+                - enter_string: " " 
+    Return:
+        outline: double
+        actions:
+            short_press:
+                - enter_keycode: Enter
+            long_press:
+                - toggle_keycode: Enter
         key_display:
-            text: "äÄ"
+            image: key-enter.svg
+        styles:
+            - return

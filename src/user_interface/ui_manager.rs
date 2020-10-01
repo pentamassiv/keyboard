@@ -1,4 +1,5 @@
 use super::dbus::DBusService;
+use super::relm_widget::GridBuilder;
 use super::{Msg, Orientation};
 use gtk::{Stack, StackExt, WidgetExt, Window};
 use relm::Sender;
@@ -11,7 +12,8 @@ pub struct UIManager {
     window: Window,
     stack: Stack,
     dbus_service: DBusService,
-    current_layout_view: (String, String),
+    pub current_layout_view: (String, String),
+    prev_layout: String,
 }
 
 impl UIManager {
@@ -22,13 +24,26 @@ impl UIManager {
         current_layout_view: (String, String),
     ) -> UIManager {
         let dbus_service = DBusService::new(sender.clone()).unwrap();
+        let prev_layout = current_layout_view.0.clone();
         UIManager {
             sender,
             window,
             stack,
             dbus_service,
             current_layout_view,
+            prev_layout,
         }
+    }
+
+    #[cfg(feature = "haptic-feedback")]
+    pub fn haptic_feedback(&self, is_press: bool) {
+        let event;
+        if is_press {
+            event = "button-pressed".to_string();
+        } else {
+            event = "button-released".to_string();
+        };
+        self.dbus_service.haptic_feedback(event);
     }
 
     pub fn change_visibility(&mut self, new_visibility: bool) {
@@ -84,18 +99,23 @@ impl UIManager {
         new_layout: Option<String>,
         new_view: Option<String>,
     ) -> Result<(), UIError> {
+        println!("new_layout: {:?}, new_view: {:?}", new_layout, new_view);
         let layout;
         let mut view = self.current_layout_view.1.clone();
-        if let Some(new_layout) = new_layout {
-            layout = new_layout;
-            view = "base".to_string(); // If the layout is changed, the view is always changed to base because the new layout might not have the same view
+        if let Some(new_layout) = &new_layout {
+            if new_layout == "previous" {
+                layout = self.prev_layout.clone();
+            } else {
+                layout = new_layout.to_string();
+            }
+            view = "base".to_string(); // If the layout is changed, the view is always changed to base because the new layout might not have the same view}
         } else {
             layout = self.current_layout_view.0.clone();
         }
         if let Some(new_view) = new_view {
             view = new_view;
         }
-        let new_layout_view_name = crate::keyboard::Keyboard::make_view_name(&layout, &view);
+        let new_layout_view_name = GridBuilder::make_grid_name(&layout, &view);
         if self
             .stack
             .get_child_by_name(&new_layout_view_name)
@@ -105,6 +125,9 @@ impl UIManager {
             self.sender
                 .send(Msg::ChangeKBLayoutView(layout.clone(), view.clone()))
                 .expect("send message");
+            if new_layout.is_some() {
+                self.prev_layout = self.current_layout_view.0.clone();
+            }
             self.current_layout_view = (layout, view);
             Ok(())
         } else {

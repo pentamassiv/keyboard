@@ -1,3 +1,4 @@
+use std::collections::HashSet;
 use std::convert::TryInto;
 use std::io::{Seek, SeekFrom, Write};
 use std::os::unix::io::IntoRawFd;
@@ -8,7 +9,15 @@ use wayland_client::Main;
 use zwp_virtual_keyboard::virtual_keyboard_unstable_v1::zwp_virtual_keyboard_manager_v1::ZwpVirtualKeyboardManagerV1;
 use zwp_virtual_keyboard::virtual_keyboard_unstable_v1::zwp_virtual_keyboard_v1::ZwpVirtualKeyboardV1;
 
-enum KeyMotion {
+#[derive(Debug, PartialEq, Clone)]
+pub enum SubmitError {
+    /// Virtual keyboard proxy was dropped and is no longer alive
+    NotAlive,
+    InvalidKeycode,
+}
+
+#[derive(Debug, PartialEq, Clone)]
+pub enum KeyMotion {
     Press = 1,
     Release = 0,
 }
@@ -21,6 +30,7 @@ enum KeyState {
 
 pub struct VKService {
     base_time: std::time::Instant,
+    pressed_keys: HashSet<u32>,
     shift_state: KeyState,
     virtual_keyboard: Main<ZwpVirtualKeyboardV1>,
 }
@@ -28,10 +38,14 @@ pub struct VKService {
 impl VKService {
     pub fn new(seat: &WlSeat, vk_mgr: Main<ZwpVirtualKeyboardManagerV1>) -> VKService {
         let base_time = Instant::now();
+        let pressed_keys = HashSet::new();
         let shift_state = KeyState::Released;
         let virtual_keyboard = vk_mgr.create_virtual_keyboard(&seat);
+
+        // let seat: WlSeat = WlSeat::from(seat.as_ref().clone());
         let vk_service = VKService {
             base_time,
+            pressed_keys,
             shift_state,
             virtual_keyboard,
         };
@@ -67,35 +81,78 @@ impl VKService {
         time.try_into().unwrap()
     }
 
+    pub fn release_all_keys(&mut self) -> Result<(), SubmitError> {
+        let pressed_keys: Vec<u32> = self.pressed_keys.iter().cloned().collect();
+        let mut success = Ok(());
+        for keycode in pressed_keys {
+            if let Err(err) = self.send_keycode(&keycode.clone(), KeyMotion::Release) {
+                success = Err(err); // Previous errors are disregarded
+            }
+        }
+        success
+    }
+
     // Press and then release the key
-    pub fn submit_keycode(&mut self, keycode: &str) {
-        if keycode == "Shift_L_upper" || keycode == "Shift_L_base" {
-            println!("Shift");
-            self.toggle_shift();
-        } else if let Some(keycode) = input_event_codes_hashmap::KEY.get(keycode) {
-            self.send_key(*keycode, KeyMotion::Press);
-            self.send_key(*keycode, KeyMotion::Release);
+    pub fn press_release_key(&mut self, keycode: &str) -> Result<(), SubmitError> {
+        let press_result = self.send_key(keycode, KeyMotion::Press);
+        if press_result.is_ok() {
+            self.send_key(keycode, KeyMotion::Release)
         } else {
-            println!("Not a valid keycode!")
+            press_result
         }
     }
 
-    fn send_key(&self, keycode: u32, keymotion: KeyMotion) {
-        let time = self.get_time();
-        println!("time: {}, keycode: {}", time, keycode);
-        self.virtual_keyboard.key(time, keycode, keymotion as u32);
+    pub fn toggle_key(&mut self, keycode: &str) -> Result<(), SubmitError> {
+        let keycode: String = keycode.to_ascii_uppercase(); // Necessary because all keycodes are uppercase
+        if let Some(keycode) = input_event_codes_hashmap::KEY.get::<str>(&keycode) {
+            if self.pressed_keys.contains(keycode) {
+                self.send_keycode(keycode, KeyMotion::Release)
+            } else {
+                self.send_keycode(keycode, KeyMotion::Press)
+            }
+        } else {
+            Err(SubmitError::InvalidKeycode)
+        }
     }
 
-    pub fn toggle_shift(&mut self) {
+    pub fn send_key(&mut self, keycode: &str, keymotion: KeyMotion) -> Result<(), SubmitError> {
+        let keycode: String = keycode.to_ascii_uppercase(); // Necessary because all keycodes are uppercase
+        if let Some(keycode) = input_event_codes_hashmap::KEY.get::<str>(&keycode) {
+            self.send_keycode(keycode, keymotion)
+        } else {
+            Err(SubmitError::InvalidKeycode)
+        }
+    }
+
+    pub fn send_keycode(&mut self, keycode: &u32, keymotion: KeyMotion) -> Result<(), SubmitError> {
+        let time = self.get_time();
+        if self.virtual_keyboard.as_ref().is_alive() {
+            match keymotion {
+                KeyMotion::Press => self.pressed_keys.insert(*keycode),
+                KeyMotion::Release => self.pressed_keys.remove(keycode),
+            };
+            self.virtual_keyboard.key(time, *keycode, keymotion as u32);
+            Ok(())
+        } else {
+            Err(SubmitError::NotAlive)
+        }
+    }
+
+    pub fn toggle_shift(&mut self) -> Result<(), SubmitError> {
         match self.shift_state {
             KeyState::Pressed => self.shift_state = KeyState::Released,
             KeyState::Released => self.shift_state = KeyState::Pressed,
         }
-        self.virtual_keyboard.modifiers(
-            self.shift_state as u32, //mods_depressed,
-            0,                       //mods_latched
-            0,                       //mods_locked
-            0,                       //group
-        )
+        if self.virtual_keyboard.as_ref().is_alive() {
+            self.virtual_keyboard.modifiers(
+                self.shift_state as u32, //mods_depressed,
+                0,                       //mods_latched
+                0,                       //mods_locked
+                0,                       //group
+            );
+            Ok(())
+        } else {
+            Err(SubmitError::NotAlive)
+        }
     }
 }

@@ -1,13 +1,15 @@
+pub use self::wayland::vk_service::KeyMotion;
 use input_method_service::*;
 use wayland_client::EventQueue;
 
 pub mod wayland;
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq, Clone)]
 pub enum Submission {
     Text(String),
     Keycode(String),
-    Erase,
+    ToggleKeycode(String),
+    Erase(u32),
 }
 
 pub struct Submitter<T: 'static + KeyboardVisibility + HintPurpose> {
@@ -42,7 +44,17 @@ impl<T: 'static + KeyboardVisibility + HintPurpose> Submitter<T> {
 
     pub fn toggle_shift(&mut self) {
         if let Some(virtual_keyboard) = &mut self.virtual_keyboard {
-            virtual_keyboard.toggle_shift();
+            if virtual_keyboard.toggle_shift().is_err() {
+                self.print_submission_error("ToggleShift");
+            }
+        }
+    }
+
+    pub fn release_all_keys(&mut self) {
+        if let Some(virtual_keyboard) = &mut self.virtual_keyboard {
+            if virtual_keyboard.release_all_keys().is_err() {
+                self.print_submission_error("ReleaseAllKeys");
+            }
         }
     }
 
@@ -50,52 +62,74 @@ impl<T: 'static + KeyboardVisibility + HintPurpose> Submitter<T> {
         match submission {
             Submission::Text(text) => {
                 self.submit_text(text);
-                println!("Submitter, Text");
             }
             Submission::Keycode(keycode) => {
                 if let Some(virtual_keyboard) = &mut self.virtual_keyboard {
-                    println!("Submitter, Keycode, virtual keyboard");
-                    virtual_keyboard.submit_keycode(&keycode);
+                    if virtual_keyboard.press_release_key(&keycode).is_err() {
+                        self.print_submission_error(&keycode);
+                    }
                 };
             }
-            Submission::Erase => self.erase(),
+            Submission::ToggleKeycode(keycode) => {
+                if let Some(virtual_keyboard) = &mut self.virtual_keyboard {
+                    if virtual_keyboard.toggle_key(&keycode).is_err() {
+                        self.print_submission_error(&keycode);
+                    }
+                };
+            }
+            Submission::Erase(no_char) => self.erase(no_char),
         }
     }
 
     fn submit_text(&mut self, text: String) {
-        let mut success = Err(SubmitError::NotActive);
+        let mut success = false;
         if let Some(im) = &mut self.im_service {
             if im.commit_string(text.clone()).is_ok() && im.commit().is_ok() {
-                success = Ok(());
+                success = true;
             };
         }
-        if success.is_err() {
+        if !success {
             if let Some(virtual_keyboard) = &mut self.virtual_keyboard {
-                virtual_keyboard.submit_keycode(&text);
-                // there is no result returned so there is no way of knowing if it was sucessful.
-                // a success is assumed
+                // TODO:
+                // Should probably be a loop submitting each char of the text individually
+                if virtual_keyboard.press_release_key(&text).is_ok() {
+                    success = true;
+                }
             }
-        } else {
-            println!("Error: No way to submit");
+        }
+        if !success {
+            self.print_submission_error(&text);
         }
     }
 
-    fn erase(&mut self) {
-        let mut success = Err(SubmitError::NotActive);
+    fn erase(&mut self, no_char: u32) {
+        let mut success = false;
         if let Some(im) = &self.im_service {
-            if im.delete_surrounding_text(1, 0).is_ok() && im.commit().is_ok() {
-                success = Ok(());
+            if im.delete_surrounding_text(no_char, 0).is_ok() && im.commit().is_ok() {
+                success = true;
             };
         }
-        if success.is_err() {
+        if !success {
             if let Some(virtual_keyboard) = &mut self.virtual_keyboard {
-                virtual_keyboard.submit_keycode("DELETE"); // TODO: Double check if this is the correct str to delete the last letter
-
-                // there is no result returned so there is no way of knowing if it was sucessful.
-                // a success is assumed
+                for _ in 0..no_char {
+                    if virtual_keyboard.press_release_key("DELETE").is_err() {
+                        break;
+                    } else {
+                        success = true;
+                    }
+                }
             }
-        } else {
-            println!("No way to delete");
         }
+        if !success {
+            let erase_text = format!("ERASE({})", no_char);
+            self.print_submission_error(&erase_text);
+        }
+    }
+
+    fn print_submission_error(&self, intended_submission: &str) {
+        println!(
+            "Unable to submit! Failed to submit: {}",
+            intended_submission
+        );
     }
 }
