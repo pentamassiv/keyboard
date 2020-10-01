@@ -1,6 +1,7 @@
 use super::gesture_handler::GestureSignal;
 use super::{Gestures, Msg, Orientation, UIManager, Widgets, Win};
 use crate::config::directories;
+use crate::config::input_settings;
 use crate::keyboard;
 use crate::submitter::*;
 use gtk::OverlayExt;
@@ -54,6 +55,7 @@ impl relm::Widget for Win {
         window.add(&vbox);
 
         let long_press_gesture = GestureLongPress::new(&drawing_area);
+        long_press_gesture.set_property_delay_factor(input_settings::LONG_PRESS_DELAY_FACTOR);
         let drag_gesture = GestureDrag::new(&drawing_area);
 
         let stream = relm.stream().clone();

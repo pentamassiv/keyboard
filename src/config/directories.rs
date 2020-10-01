@@ -2,6 +2,7 @@ use std::path::PathBuf;
 
 pub const CSS_FILE_REL: &str = "./.fingerboard/theming/style.css";
 pub const LAYOUT_PATH_REL: &str = "./.fingerboard/data/keyboards";
+pub const ICON_DIR_REL: &str = "./.fingerboard/data/icons/";
 
 pub fn get_absolute_path(path_in_home_dir: &str) -> Option<PathBuf> {
     match home::home_dir() {

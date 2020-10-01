@@ -73,23 +73,24 @@ impl KeyMeta {
     ) -> HashMap<Interaction, Vec<KeyAction>> {
         let mut actions = HashMap::new();
         for (key_event, key_action_vec) in deserialized_actions {
-            let (interaction_press, interaction_release) = match key_event {
-                KeyEvent::ShortPress => (
-                    None,
-                    Some(Interaction::Tap(TapDuration::Short, TapMotion::Release)),
-                ),
-                KeyEvent::LongPress => (
-                    Some(Interaction::Tap(TapDuration::Long, TapMotion::Press)),
-                    Some(Interaction::Tap(TapDuration::Long, TapMotion::Release)),
-                ),
-                KeyEvent::Swipe => (None, None),
+            // All actions are executed on release except for the toggle_keycode with a longpress
+            // Then one action is created for the long_press and one for the long_press_release
+            let mut long_press_action_vec = Vec::new();
+            for action in key_action_vec {
+                if let KeyAction::ToggleKeycode(_) = action {
+                    long_press_action_vec.push(action.clone())
+                }
+            }
+            if !long_press_action_vec.is_empty() {
+                let interaction_long_press = Interaction::Tap(TapDuration::Long, TapMotion::Press);
+                actions.insert(interaction_long_press, long_press_action_vec);
+            }
+            let interaction_release = match key_event {
+                KeyEvent::ShortPress => Interaction::Tap(TapDuration::Short, TapMotion::Release),
+                KeyEvent::LongPress => Interaction::Tap(TapDuration::Long, TapMotion::Release),
             };
-            if let Some(interaction_press) = interaction_press {
-                actions.insert(interaction_press, key_action_vec.clone());
-            }
-            if let Some(interaction_release) = interaction_release {
-                actions.insert(interaction_release, key_action_vec.clone());
-            }
+
+            actions.insert(interaction_release, key_action_vec.clone());
         }
         actions.shrink_to_fit();
         actions

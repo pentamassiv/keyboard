@@ -15,8 +15,6 @@ pub enum KeyEvent {
     ShortPress,
     #[serde(rename = "long_press")]
     LongPress,
-    #[serde(rename = "swipe")] // TODO: Should not be needed, delete?
-    Swipe, // TODO: Should not be needed, delete?
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize, PartialEq, Eq, Hash)]

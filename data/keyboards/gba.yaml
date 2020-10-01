@@ -28,7 +28,7 @@ buttons:
             short_press:
                 - enter_keycode: Up
             long_press:
-                - enter_keycode: Up
+                - toggle_keycode: Up
         styles: 
             - "gba_arrows"
     "↓":
@@ -36,7 +36,7 @@ buttons:
             short_press:
                 - enter_keycode: Down
             long_press:
-                - enter_keycode: Down
+                - toggle_keycode: Down
         styles: 
             - "gba_arrows"
     "←":
@@ -44,7 +44,7 @@ buttons:
             short_press:
                 - enter_keycode: Left
             long_press:
-                - enter_keycode: Left
+                - toggle_keycode: Left
         styles: 
             - "gba_arrows"
     "→":
@@ -52,7 +52,7 @@ buttons:
             short_press:
                 - enter_keycode: Right
             long_press:
-                - enter_keycode: Right
+                - toggle_keycode: Right
         styles: 
             - "gba_arrows"
     ABC:

@@ -1,11 +1,10 @@
+use crate::config::directories;
 use crate::keyboard::{KeyArrangement, KeyDisplay, KeyMeta, LayoutMeta, Location};
 use gtk::{
     ButtonExt, ContainerExt, Grid, GridExt, Popover, Stack, StackExt, StyleContextExt,
     ToggleButton, WidgetExt,
 };
 use std::collections::HashMap;
-
-pub const ICON_FOLDER: &str = "./data/icons/";
 
 pub struct GridBuilder;
 impl GridBuilder {
@@ -80,10 +79,14 @@ impl GridBuilder {
         match &key_meta.key_display {
             KeyDisplay::Text(label_text) => button.set_label(&label_text),
             KeyDisplay::Image(icon_name) => {
-                let mut icon_path = String::from(ICON_FOLDER);
-                icon_path.push_str(&icon_name);
-                let image = gtk::Image::from_file(&icon_path);
-                button.set_image(Some(&image));
+                if let Some(icon_dir_abs) =
+                    directories::get_absolute_path(directories::ICON_DIR_REL)
+                {
+                    let mut icon_path = icon_dir_abs;
+                    icon_path.push(&icon_name);
+                    let image = gtk::Image::from_file(&icon_path);
+                    button.set_image(Some(&image));
+                }
                 button.set_always_show_image(true);
                 button.set_label("");
             }
