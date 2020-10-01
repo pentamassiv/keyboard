@@ -104,7 +104,7 @@ buttons:
             short_press:
                 - enter_string: " " 
             long_press:
-                - enter_string: " " 
+                - toggle_keycode: Space 
     .:
         actions:
             short_press:
