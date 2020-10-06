@@ -28,9 +28,9 @@ Finally, edit the fstab configuration to add an entry for the swap file:
 
 ## Step 1: Get needed packages
 Install necessary packages for building:
-```
-sudo pacman -S gcc pkgconf gtk-layer-shell
 ```bash
+sudo pacman -S gcc pkgconf gtk-layer-shell
+```
 
 ## Step 2: Get Rust
 Fingerboard is written in Rust so the easiest way to build is it to use Cargo. To get everything you need, it is recommended to use rustup:
