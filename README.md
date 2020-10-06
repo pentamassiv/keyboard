@@ -8,8 +8,8 @@ I have yet to look up how I properly mention it in the code so they get the prop
 ## Installation
 WARNING: Currently Fingerboard is unusable on versions newer than Arch 20200913. Any help with fixing this is highly appreciated!
 
-If you want to use Fingerboard on your Smartphone running Phosh, you can download the binary or build it yourself with cargo. You also need to install gtk-layer-shell. If you are building Fingerboard yourself, there are some feature flags you might want to set to get more functionalities.
-Read the Cargo.toml for more information on this. Building it on your phone should be as easy as 
+If you want to use Fingerboard on your Smartphone running Phosh, you can download the binary or [build it yourself](installation/build_on_pinephone.md) with cargo. If you are building Fingerboard yourself, there are some feature flags you might want to set to get more functionalities.
+Read the [Cargo.toml](Cargo.toml) for more information on this. Building it on your phone should be as easy as 
 ```bash
 $ cargo build --release
 ```
