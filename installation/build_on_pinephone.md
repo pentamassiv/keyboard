@@ -4,7 +4,7 @@ You need about 2,2 GB of memory to build Fingerboard. This means you need to act
 if you have the 2 GB edition of the Pinephone. If you have the 3GB version you can skip to step 1.
 
 ## Step 0: Activate swap
-Make swap file
+Make a 1 GB swap file
 ```bash
 dd if=/dev/zero of=/swapfile bs=1M count=1028 status=progress
 ```

@@ -47,6 +47,7 @@ pub enum SwipeAction {
 pub struct Keyboard {
     pub views: HashMap<(String, String), View>,
     pub active_view: (String, String),
+    active_key: Option<Key>,
     prev_layout: Option<String>,
     prev_view: Option<String>,
     ui_connection: UIConnector,
@@ -77,6 +78,7 @@ impl Keyboard {
         Keyboard {
             views,
             active_view,
+            active_key: None,
             prev_layout: None,
             prev_view: None,
             ui_connection,
@@ -88,7 +90,23 @@ impl Keyboard {
     pub fn input(&mut self, x: i32, y: i32, interaction: Interaction) {
         let active_view = &self.active_view;
         println!("key_action: {:?}", interaction);
-        if let Some(key) = self.views.get(active_view).unwrap().get_closest_key(x, y) {
+        // Saves the closest key to interaction as active_key
+        // This is necessary to ensure a release always releases the last activated button because small moves of the input don't necessaryly trigger a SwipeUpdate
+        // This means a user could press a button at its edge and move it just enough for a different button to be returned as closest after slightly moving the finger
+        // Now the pressed button would never be released
+        let key = match interaction {
+            Interaction::Tap(TapDuration::Short, TapMotion::Press) => {
+                self.active_key = self
+                    .views
+                    .get(active_view)
+                    .unwrap()
+                    .get_closest_key(x, y)
+                    .cloned();
+                &self.active_key
+            }
+            _ => &self.active_key,
+        };
+        if let Some(key) = key {
             let key = key.clone();
 
             match interaction {
