@@ -1,7 +1,7 @@
 # Fingerboard
 Fingerboard is an open-source keyboard meant to be used on a smartphone. It serves as a drop-in replacement for squeekboard.
 It uses GTK-rs for the GUI and input-method-v2 and virtual-keyboard-v1 to talk to a wayland compositor like phoc/phosh.
-It should be fairly easy to add protocols or replace the GUI. Layouts can be easily customized and are loaded when Fingerboard is lauched.
+It should be fairly easy to add protocols or replace the GUI. Layouts can be easily customized and are loaded when Fingerboard is launched.
 Since GTK is used, customizing the looks is also very easy by using CSS and editing the stylesheet. Parts of the code are based on Purism's squeekboard.
 I have yet to look up how I properly mention it in the code so they get the props they deserve.
 
@@ -15,7 +15,7 @@ $ cargo build --release
 ```
 There should not have been any errors, just some warnings, which you can ignore.
 Within the next few days I will package it at least for Arch so that it can easily be installed.
-You can try Fingerboard by replace the squeekboard binary (/usr/bin/squeekboard) with a dummy one so squeekboard is not started. This will prevent squeekboard from comflicting with Fingerboard. A simple hello world binary is enough but it needs to be executable. Then you can launch Fingerboard via SSH and if you are done testing it you can put the squeekboard binary back.
+You can try Fingerboard by replace the squeekboard binary (/usr/bin/squeekboard) with a dummy one so squeekboard is not started. This will prevent squeekboard from conflicting with Fingerboard. A simple hello world binary is enough but it needs to be executable. Then you can launch Fingerboard via SSH and if you are done testing it you can put the squeekboard binary back.
 
 When Fingerboard is launched, it looks for subfolders for a stylesheet, user defined layouts and custom icons in the folder
 ```bash
@@ -33,7 +33,7 @@ It's easiest to copy the folders 'data' and 'theming' from the repository and pa
 - Input smileys ᕙ( ͡° ͜ʖ ͡°)ᕗ
 - Toggle keys
 - Switch layouts/views/layer
-- Double press space to enter ". " instead of " "
+- Double press space to enter ". " instead of "  "
 - Longpress to capitalize a letter
 - Longpress to open popup to select input text (great for our friends of the Umlaut àäâ)
 - Automatically show up only when needed and hide when no longer used
