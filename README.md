@@ -46,10 +46,11 @@ So far the code is not really commented but by the end of October I plan on addi
 a school project. Within the next months I will add next word prediction and gesture typing to it's functionality.
 
 ## Debugging
-If there are issues with fingerboard, you can set an environment variable and writes to standard error with nice colored output for log levels. There are the debugging levels info, warn and error. Errors are always shown. If you want to see warnings too, you would run Fingerboard like this
+If there are issues with fingerboard, you can set an environment variable and writes to standard error with nice colored output for log levels. There are the debugging levels info, warn and error. Errors are always shown. If you want to for example see all errors but warnings only from the ui_manager module, you would run Fingerboard like this
 ```bash
-RUST_LOG=warn ./fingerboard
+RUST_LOG=fingerboard::user_interface::ui_manager=warn ./fingerboard
 ```
+You can also filter the output with regular expressions, turn off colors and more. Read the documentation of [env_logger](https://docs.rs/env_logger) for all options.
 
 ## Contributing
 Since this is a school project and I don't want to deal with documenting every single line that was not written by myself, I would prefer 

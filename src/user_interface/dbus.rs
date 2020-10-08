@@ -1,13 +1,3 @@
-/*
-   This example is a WIP demo of the "Crossroads" module, successor of the "Tree" module.
-   This example creates a D-Bus server with the following functionality:
-   It registers the "com.example.dbustest" name, creates a "/hello" object path,
-   which has an "com.example.dbustest" interface.
-   The interface has a "Hello" method (which takes no arguments and returns a string),
-   and a "HelloHappened" signal (with a string argument) which is sent every time
-   someone calls the "Hello" method.
-*/
-
 use dbus::blocking::Connection;
 use dbus_crossroads::{Context, Crossroads};
 use relm::Sender;
@@ -50,14 +40,8 @@ impl DBusClient {
         );
         let app_id = "Dbus.client.test";
         let timeout = -1;
-        /*let event = "button-pressed";
         let hints: HashMap<String, Variant<String>> = HashMap::new();
-        let (event_id,): (u32,) = haptic_proxy.method_call(
-            "org.sigxcpu.Feedback",
-            "TriggerFeedback",
-            (app_id, event, hints, timeout),
-        )?;*/
-        let hints: HashMap<String, Variant<String>> = HashMap::new();
+        info!("Sent {} event to feedbackd", event);
         let (event_id,): (u32,) = proxy
             .method_call(
                 "org.sigxcpu.Feedback",
@@ -93,6 +77,7 @@ impl DBusService {
     }
     pub fn change_visibility(&mut self, visible: bool) {
         self.visibility.lock().unwrap().is_visible = visible;
+        info!("Keyboard visibility changed to {}", visible);
     }
 
     #[cfg(feature = "haptic-feedback")]
@@ -114,21 +99,23 @@ impl DBusService {
             // The instance is configured so that introspection and properties interfaces
             // are added by default on object path additions.
             let mut crossroads = Crossroads::new();
-            // Let's build a new interface, which can be used for "Hello" objects.
+            // Builds a new interface, which can be used for "Hello" objects.
             let iface_token = crossroads.register("sm.puri.OSK0", move |b| {
-                // Let's add a method to the interface. We have the method name, followed by
+                // Adds a method to the interface. We have the method name, followed by
                 // names of input and output arguments (used for introspection). The closure then controls
                 // the types of these arguments. The last argument to the closure is a tuple of the input arguments.
                 b.method(
                     "SetVisible",
                     ("visible",),
                     (),
-                    //("reply",),
                     move |ctx: &mut Context,
                           visibility: &mut Arc<Mutex<Visibility>>,
                           (visible,): (bool,)| {
                         // And here's what happens when the method is called.
-                        println!("Dbus received visiblility: {}", visible);
+                        info!(
+                            "Dbus server received request to change visiblility to {}",
+                            visible
+                        );
                         sender
                             .lock()
                             .unwrap()
@@ -139,10 +126,12 @@ impl DBusService {
                     },
                 );
                 // The "Visible" property is read only
-                b.property("Visible")
-                    .get(|_, visibility| Ok(visibility.lock().unwrap().is_visible));
+                b.property("Visible").get(|_, visibility| {
+                    info!("Property 'Visible' was read");
+                    Ok(visibility.lock().unwrap().is_visible)
+                });
             });
-            // Let's add the "/hello" path, which implements the com.example.dbustest interface,
+            // Let's add the "/sm/puri/OSK0" path, which implements the com.example.dbustest interface,
             // to the crossroads instance.
             crossroads.insert("/sm/puri/OSK0", &[iface_token], visibility);
             self.start_server(connection, crossroads);
@@ -153,6 +142,7 @@ impl DBusService {
         // Join handle is dropped because the new thread detaches itself from it when the handle is dropped and continues running
         // The handle is never used so its uneccessary
         self.server_running = true;
+        info!("DBus server was started");
         thread::spawn(move || crossroads.serve(&connection));
     }
 }
