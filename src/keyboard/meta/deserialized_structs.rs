@@ -115,8 +115,17 @@ impl LayoutDeserialized {
         };
 
         match layout {
-            Ok(layout) => Ok((layout_name, layout)),
-            Err(err) => Err(err),
+            Ok(layout) => {
+                info!("Successfully deserialized layout: {}", layout_name);
+                Ok((layout_name, layout))
+            }
+            Err(err) => {
+                info!(
+                    "Error deserializing layout {}. Error description: {}",
+                    layout_name, err
+                );
+                Err(err)
+            }
         }
     }
 }

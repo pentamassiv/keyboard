@@ -91,10 +91,6 @@ impl GridBuilder {
                 button.set_label("");
             }
         }
-        /*
-
-        */
-
         button
     }
 

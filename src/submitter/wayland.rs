@@ -59,31 +59,10 @@ fn get_wl_global_mgr(display: Display) -> (EventQueue, GlobalManager) {
             // The only object that can receive events is the WlRegistry, and the
             // GlobalManager already takes care of assigning it to a callback, so
             // we cannot receive orphan events at this point
-            |_, _, _| println!("Event received that was not handled"), // For testing
-                                                                       //|_, _, _| unreachable!(), // Original
+            |_, _, _| unreachable!(),
         )
         .unwrap();
     (event_queue, global_mgr)
-}
-
-fn get_wl_im_manager(
-    global_mgr: &GlobalManager,
-) -> Result<wayland_client::Main<ZwpInputMethodManagerV2>, GlobalError> {
-    global_mgr.instantiate_exact::<ZwpInputMethodManagerV2>(1)
-    //.expect("Error: Your compositor does not understand the virtual_keyboard protocol!")
-}
-
-fn get_wl_vk_manager(
-    global_mgr: &GlobalManager,
-) -> Result<wayland_client::Main<ZwpVirtualKeyboardManagerV1>, GlobalError> {
-    global_mgr.instantiate_exact::<ZwpVirtualKeyboardManagerV1>(1)
-    //.expect("Error: Your compositor does not understand the virtual_keyboard protocol!")
-}
-fn get_wl_layer_shell(
-    global_mgr: &GlobalManager,
-) -> Result<wayland_client::Main<ZwlrLayerShellV1>, GlobalError> {
-    global_mgr.instantiate_exact::<ZwlrLayerShellV1>(1)
-    //.expect("Error: Your compositor does not understand the layer-shell protocol!")
 }
 
 fn try_get_mgrs(
@@ -91,15 +70,15 @@ fn try_get_mgrs(
 ) -> (Option<VirtualKeyboardMgr>, Option<InputMethodMgr>) {
     let mut virtual_keyboard_option = None;
     let mut input_method_mgr_option = None;
-    if let Ok(vk_mgr) = get_wl_vk_manager(global_mgr) {
+    if let Ok(vk_mgr) = global_mgr.instantiate_exact::<ZwpVirtualKeyboardManagerV1>(1) {
         virtual_keyboard_option = Some(vk_mgr);
     } else {
-        println!("Sorry, but your wayland compositor does not understand wp_virtual_keyboard. The keyboard is started with a label to enter the text");
+        warn!("Your wayland compositor does not understand the wp_virtual_keyboard protocol. Entering any keycode will fail");
     }
-    if let Ok(im_mgr) = get_wl_im_manager(global_mgr) {
+    if let Ok(im_mgr) = global_mgr.instantiate_exact::<ZwpInputMethodManagerV2>(1) {
         input_method_mgr_option = Some(im_mgr);
     } else {
-        println!("Sorry, but your wayland compositor does not understand wp_virtual_keyboard. The keyboard is started with a label to enter the text");
+        warn!("Your wayland compositor does not understand the wp_virtual_keyboard protocol. Only keycodes can be entered");
     }
     (virtual_keyboard_option, input_method_mgr_option)
 }
@@ -107,10 +86,10 @@ pub fn get_layer_shell() -> Option<LayerShell> {
     let (display, _) = get_wl_display_seat();
     let (_, global_mgr) = get_wl_global_mgr(display); // Event queue can be dropped because it was only used to find out if layer_shell is available
     let mut layer_shell_option = None;
-    if let Ok(layer_shell) = get_wl_layer_shell(&global_mgr) {
+    if let Ok(layer_shell) = global_mgr.instantiate_exact::<ZwlrLayerShellV1>(1) {
         layer_shell_option = Some(layer_shell);
     } else {
-        println!("Sorry, but your wayland compositor does not understand gtk-layer-shell. The keyboard is started like a regular application")
+        warn!("Your wayland compositor does not understand the gtk-layer-shell protocol. The keyboard is started in a window, just like a regular application")
     }
     layer_shell_option
 }
@@ -125,6 +104,7 @@ pub fn init_wayland() -> (
     let (display, seat) = get_wl_display_seat();
     let (event_queue, global_mgr) = get_wl_global_mgr(display);
     //let seat = get_wl_seat(&global_mgr);
-    let (vk_mgr, im_mgr) = try_get_mgrs(&global_mgr); //let (layer_shell, vk_mgr, im_mgr) = try_get_mgrs(&global_mgr);
-    (event_queue, seat, vk_mgr, im_mgr) //(seat, layer_shell, vk_mgr, im_mgr)
+    let (vk_mgr, im_mgr) = try_get_mgrs(&global_mgr);
+    info!("Wayland connection and objects initialized");
+    (event_queue, seat, vk_mgr, im_mgr)
 }

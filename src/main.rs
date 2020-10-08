@@ -19,6 +19,8 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+#[macro_use]
+extern crate log;
 use relm::Widget;
 
 mod config;
@@ -28,5 +30,6 @@ mod submitter;
 mod user_interface;
 
 fn main() {
+    pretty_env_logger::init();
     user_interface::Win::run(()).unwrap();
 }

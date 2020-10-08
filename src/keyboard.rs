@@ -1,4 +1,6 @@
 pub use super::submitter::KeyMotion;
+extern crate pretty_env_logger;
+
 use super::submitter::*;
 use crate::config::fallback_layout::*;
 use crate::interpreter::Interpreter;
@@ -14,7 +16,6 @@ mod key;
 pub use self::meta::*;
 use key::Key;
 
-pub const ICON_FOLDER: &str = "./data/icons/";
 pub const RESOLUTIONX: i32 = 1000; // TODO: Think about the exact value
 pub const RESOLUTIONY: i32 = 1000;
 
@@ -28,6 +29,19 @@ pub enum TapMotion {
 pub enum Interaction {
     Tap(TapDuration, TapMotion),
     Swipe(SwipeAction),
+}
+impl std::fmt::Display for Interaction {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Interaction::Tap(TapDuration::Short, TapMotion::Press) => write!(f, "ShortPress"),
+            Interaction::Tap(TapDuration::Short, TapMotion::Release) => write!(f, "ShortRelease"),
+            Interaction::Tap(TapDuration::Long, TapMotion::Press) => write!(f, "LongPress"),
+            Interaction::Tap(TapDuration::Long, TapMotion::Release) => write!(f, "LongRelease"),
+            Interaction::Swipe(SwipeAction::Begin) => write!(f, "SwipeBegin"),
+            Interaction::Swipe(SwipeAction::Update) => write!(f, "SwipeUpdate"),
+            Interaction::Swipe(SwipeAction::Finish) => write!(f, "SwipeFinish"),
+        }
+    }
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
@@ -69,12 +83,19 @@ impl Keyboard {
             for (view_name, key_arrangement) in &layout_meta.views {
                 let view = View::from(&key_arrangement, &layout_meta.keys);
                 views.insert((layout_name.clone(), view_name.clone()), view);
+                info!(
+                    "Keyboard struct added new view: (layout: {}, view: {})",
+                    layout_name, view_name
+                );
             }
         }
-        let active_view = Keyboard::get_start_layout_view(layout_names);
-        println!("starting view: {}, {}", active_view.0, active_view.1);
-        let interpreter = Interpreter::new();
         views.shrink_to_fit();
+        let active_view = Keyboard::get_start_layout_view(layout_names);
+        info!(
+            "Keyboard starts in layout: {}, view: {}",
+            active_view.0, active_view.1
+        );
+        let interpreter = Interpreter::new();
         Keyboard {
             views,
             active_view,
@@ -89,7 +110,7 @@ impl Keyboard {
 
     pub fn input(&mut self, x: i32, y: i32, interaction: Interaction) {
         let active_view = &self.active_view;
-        println!("key_action: {:?}", interaction);
+        info!("Keyboard handles {} at x: {}, y: {}", interaction, x, y);
         // Saves the closest key to interaction as active_key
         // This is necessary to ensure a release always releases the last activated button because small moves of the input don't necessaryly trigger a SwipeUpdate
         // This means a user could press a button at its edge and move it just enough for a different button to be returned as closest after slightly moving the finger
@@ -102,6 +123,7 @@ impl Keyboard {
                     .unwrap()
                     .get_closest_key(x, y)
                     .cloned();
+                info!("Keyboard looked up closest key");
                 &self.active_key
             }
             _ => &self.active_key,
@@ -132,10 +154,7 @@ impl Keyboard {
     }
 
     fn execute_tap_action(&mut self, key_id: &str, actions_vec: &[KeyAction]) {
-        println!(
-            "execute_action: key_id {}, actions_vec {:?}",
-            key_id, actions_vec
-        );
+        info!("Keyboard handles actions for key {}", key_id);
         let prev_layout = self.prev_layout.clone();
         let prev_view = self.prev_view.clone();
         for action in actions_vec {
@@ -160,13 +179,17 @@ impl Keyboard {
         let locale = format!("{}", locale_config::Locale::user_default());
         let locale_language: String = locale.rsplit('-').take(1).collect();
         let locale_language = locale_language.to_lowercase();
-        println!("local language: {}", locale_language);
+        info!("The language was determined to be {}", locale_language);
         for layout_name in available_layout_names {
             if locale_language == layout_name {
+                info!("A layout for the language was found");
                 return (locale_language, start_view);
             }
         }
-        println!("WARNING: Fallback layout loaded");
+        warn!(
+            "No layout was found for the language. Falling back to layout: {}",
+            start_layout
+        );
         (start_layout, start_view)
     }
 

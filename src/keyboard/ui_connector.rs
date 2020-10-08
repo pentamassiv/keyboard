@@ -31,18 +31,21 @@ impl UIConnector {
 impl KeyboardVisibility for UIConnector {
     fn show_keyboard(&self) {
         self.emit_ui_msg(UIMsg::Visible(true));
-        println!("Show keyboard");
+        info!("Requested to show the keyboard");
     }
     fn hide_keyboard(&self) {
         self.emit_ui_msg(UIMsg::Visible(false));
-        println!("Hide keyboard");
+        info!("Requested to hide the keyboard");
     }
 }
 
 impl HintPurpose for UIConnector {
     fn set_hint_purpose(&self, content_hint: ContentHint, content_purpose: ContentPurpose) {
         self.emit_ui_msg(UIMsg::HintPurpose(content_hint, content_purpose));
-        println!("Hint: {:?}, Purpose: {:?}", content_hint, content_purpose);
+        info!(
+            "Requested to change to ContentHint: {:?} and  ContentPurpose: {:?}",
+            content_hint, content_purpose
+        );
     }
 }
 

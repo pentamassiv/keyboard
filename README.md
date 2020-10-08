@@ -45,6 +45,12 @@ It's easiest to copy the folders 'data' and 'theming' from the repository and pa
 So far the code is not really commented but by the end of October I plan on adding tons of diagrams and comments because this is 
 a school project. Within the next months I will add next word prediction and gesture typing to it's functionality.
 
+## Debugging
+If there are issues with fingerboard, you can set an environment variable and writes to standard error with nice colored output for log levels. There are the debugging levels info, warn and error. Errors are always shown. If you want to see warnings too, you would run Fingerboard like this
+```bash
+RUST_LOG=warn ./fingerboard
+```
+
 ## Contributing
 Since this is a school project and I don't want to deal with documenting every single line that was not written by myself, I would prefer 
 you to open an issue with a description of the mistake I made and possibly a hint on how I can fix it, instead of writing the code for me 
@@ -53,4 +59,3 @@ can improve the code quality, I'll be delighted to hear from you. I'll happily a
 
 ## License
 [GPL3](https://choosealicense.com/licenses/gpl-3.0/)
-

@@ -15,4 +15,5 @@ pub fn make_overlay_layer(window: gtk::Window) {
     gtk_layer_shell::set_anchor(&window, gtk_layer_shell::Edge::Right, true);
     gtk_layer_shell::set_anchor(&window, gtk_layer_shell::Edge::Top, false);
     gtk_layer_shell::set_anchor(&window, gtk_layer_shell::Edge::Bottom, true);
+    info!("The window is now a layer-shell overlay");
 }

@@ -74,6 +74,7 @@ impl Win {
         let (width, height) = (allocation.width, allocation.height);
         let x_rel = (crate::keyboard::RESOLUTIONX as f64 * (x / width as f64)) as i32;
         let y_rel = (crate::keyboard::RESOLUTIONY as f64 * (y / height as f64)) as i32;
+        info!("The relative coordinate is x: {}, y: {}", x_rel, y_rel);
         (x_rel, y_rel)
     }
 
@@ -83,6 +84,7 @@ impl Win {
         context.set_operator(cairo::Operator::Clear);
         context.set_source_rgba(0.0, 0.0, 0.0, 0.0);
         context.paint();
+        info!("Path of gesture was erased");
     }
 
     #[cfg(feature = "gesture")]
@@ -114,5 +116,6 @@ impl Win {
         }
         context.set_line_width(ui_defaults::PATHWIDTH);
         context.stroke();
+        info!("Path of gesture was drawn");
     }
 }

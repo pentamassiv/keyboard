@@ -47,7 +47,6 @@ impl UIManager {
     }
 
     pub fn change_visibility(&mut self, new_visibility: bool) {
-        println!("Msg visiblility: {}", new_visibility);
         if new_visibility {
             self.window.show();
         } else {
@@ -57,8 +56,8 @@ impl UIManager {
     }
 
     pub fn change_hint_purpose(&self, content_hint: ContentHint, content_purpose: ContentPurpose) {
-        println!(
-            "ContentHint: {:?}, ContentPurpose: {:?}",
+        info!(
+            "UI_manager tries to change the content hint/purpose to ContentHint: {:?}, ContentPurpose: {:?}. This is not implemented yet.",
             content_hint, content_purpose
         )
     }
@@ -68,13 +67,13 @@ impl UIManager {
             Orientation::Landscape => {
                 let (layout, _) = &self.current_layout_view;
                 if layout.ends_with("_wide") {
-                    println!("Already in landscape orientation")
+                    info!("Already in landscape orientation")
                 } else {
                     let mut landscape_layout = layout.to_string();
                     landscape_layout.push_str("_wide");
                     match self.change_layout_view(Some(landscape_layout), None) {
-                        Ok(()) => println!("Sucessfully changed to landscape orientation"),
-                        _ => println!("Failed to change to landscape orientation"),
+                        Ok(()) => info!("Sucessfully changed to landscape orientation"),
+                        _ => warn!("Failed to change to landscape orientation"),
                     }
                 }
             }
@@ -84,11 +83,11 @@ impl UIManager {
                     // If str ends with suffix, Some(prefix) is returned, if not None is returned
                     match self.change_layout_view(Some(portrait_layout.to_string()), None) {
                         // View is changed back to base when orientation is changed
-                        Ok(()) => println!("Sucessfully changed to portrait orientation"),
-                        _ => println!("Failed to change to portrait orientation"),
+                        Ok(()) => info!("Sucessfully changed to portrait orientation"),
+                        _ => warn!("Failed to change to portrait orientation"),
                     }
                 } else {
-                    println!("Already in portrait orientation")
+                    info!("Already in portrait orientation")
                 }
             }
         }
@@ -99,7 +98,6 @@ impl UIManager {
         new_layout: Option<String>,
         new_view: Option<String>,
     ) -> Result<(), UIError> {
-        println!("new_layout: {:?}, new_view: {:?}", new_layout, new_view);
         let layout;
         let mut view = self.current_layout_view.1.clone();
         if let Some(new_layout) = &new_layout {
@@ -129,17 +127,22 @@ impl UIManager {
                 self.prev_layout = self.current_layout_view.0.clone();
             }
             self.current_layout_view = (layout, view);
-            Ok(())
-        } else {
-            println!(
-                "The requested layout {} does not exist",
+            info!(
+                "UI_manager successfully changed to new layout/view: {}",
                 new_layout_view_name
             );
-            Err(UIError::LayoutViewError)
+            Ok(())
+        } else {
+            // Is only a warning because the ui_manager always tries to find a landscape layout. If none is provided, this is not an error but expected to fail
+            warn!(
+                "UI_manager failed to change to new layout/view because no child with the name {} exist in the gtk::Stack",
+                new_layout_view_name
+            );
+            Err(UIError::LayoutViewNonExistent)
         }
     }
 }
 
 pub enum UIError {
-    LayoutViewError,
+    LayoutViewNonExistent,
 }

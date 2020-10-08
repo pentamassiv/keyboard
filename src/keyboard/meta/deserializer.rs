@@ -15,22 +15,34 @@ impl LayoutYamlParser {
 
         // Try loading layouts from directory
         if let Some(layout_dir_abs) = directories::get_absolute_path(directories::LAYOUT_PATH_REL) {
-            if let Ok(paths) = std::fs::read_dir(layout_dir_abs) {
-                // Load layout from all yaml files in the directory. Other files and subdirectories are ignored
-                for file in paths.filter_map(|x| x.ok()).filter(|x| {
-                    x.path().extension().is_some() && x.path().extension().unwrap() == "yaml"
-                }) {
-                    let layout_source = LayoutSource::YamlFile(file.path());
-                    LayoutYamlParser::add_layout_to_hashmap(
-                        &mut layouts,
-                        LayoutDeserialized::from(layout_source),
-                    );
+            info!(
+                "Try searching for layout descriptions in directory {:?}",
+                layout_dir_abs
+            );
+            match std::fs::read_dir(layout_dir_abs) {
+                Ok(paths) => {
+                    info!("Searching for layout description in files {:?}", paths);
+                    // Load layout from all yaml files in the directory. Other files and subdirectories are ignored
+                    for file in paths.filter_map(|x| x.ok()).filter(|x| {
+                        x.path().extension().is_some() && x.path().extension().unwrap() == "yaml"
+                    }) {
+                        info!("Searching for layout description in file {:?}", file.path());
+                        let layout_source = LayoutSource::YamlFile(file.path());
+                        LayoutYamlParser::add_layout_to_hashmap(
+                            &mut layouts,
+                            LayoutDeserialized::from(layout_source),
+                        );
+                    }
+                }
+                Err(err) => {
+                    error!("There was an error when reading the directory: {}", err);
                 }
             }
         }
 
         // If no layout was loaded, use hardcoded fallback layout
         if layouts.is_empty() {
+            warn!("No yaml files describing a layout were found. Trying to create fallback layout");
             let layout_source = LayoutSource::FallbackStr;
             LayoutYamlParser::add_layout_to_hashmap(
                 &mut layouts,

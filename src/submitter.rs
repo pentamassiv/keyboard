@@ -20,14 +20,16 @@ pub struct Submitter<T: 'static + KeyboardVisibility + HintPurpose> {
 
 impl<T: 'static + KeyboardVisibility + HintPurpose> Submitter<T> {
     pub fn new(connector: T) -> Submitter<T> {
-        let (event_queue, seat, vk_mgr, im_mgr) = wayland::init_wayland(); //let (seat, layer_shell, vk_mgr, im_mgr) = super::init_wayland();
+        let (event_queue, seat, vk_mgr, im_mgr) = wayland::init_wayland();
         let mut im_service = None;
         let mut virtual_keyboard = None;
         if let Some(vk_mgr) = vk_mgr {
             virtual_keyboard = Some(wayland::vk_service::VKService::new(&seat, vk_mgr));
+            info!("VirtualKeyboard service available");
         };
         if let Some(im_mgr) = im_mgr {
             im_service = Some(IMService::new(&seat, im_mgr, connector));
+            info!("InputMethod service available");
         };
 
         Submitter {
@@ -45,7 +47,7 @@ impl<T: 'static + KeyboardVisibility + HintPurpose> Submitter<T> {
     pub fn toggle_shift(&mut self) {
         if let Some(virtual_keyboard) = &mut self.virtual_keyboard {
             if virtual_keyboard.toggle_shift().is_err() {
-                self.print_submission_error("ToggleShift");
+                error!("Submitter failed to toggle shift");
             }
         }
     }
@@ -53,7 +55,7 @@ impl<T: 'static + KeyboardVisibility + HintPurpose> Submitter<T> {
     pub fn release_all_keys(&mut self) {
         if let Some(virtual_keyboard) = &mut self.virtual_keyboard {
             if virtual_keyboard.release_all_keys().is_err() {
-                self.print_submission_error("ReleaseAllKeys");
+                error!("Submitter failed to release all keys");
             }
         }
     }
@@ -64,24 +66,42 @@ impl<T: 'static + KeyboardVisibility + HintPurpose> Submitter<T> {
                 self.submit_text(text);
             }
             Submission::Keycode(keycode) => {
+                info!("Submitter is trying to submit the keycode: {}", keycode);
                 if let Some(virtual_keyboard) = &mut self.virtual_keyboard {
                     if virtual_keyboard.press_release_key(&keycode).is_err() {
-                        self.print_submission_error(&keycode);
+                        error!(
+                            "Submitter failed to press and release the keycode {}",
+                            keycode
+                        );
                     }
+                } else {
+                    error!(
+                        "Virtual_keyboard protocol not available! Unable to submit keycode {}",
+                        keycode
+                    )
                 };
             }
             Submission::ToggleKeycode(keycode) => {
+                info!("Submitter is trying to toggle the keycode: {}", keycode);
                 if let Some(virtual_keyboard) = &mut self.virtual_keyboard {
                     if virtual_keyboard.toggle_key(&keycode).is_err() {
-                        self.print_submission_error(&keycode);
+                        error!("Submitter failed to toggle the keycode {}", keycode);
                     }
+                } else {
+                    error!(
+                        "Virtual_keyboard protocol not available! Unable to submit keycode {}",
+                        keycode
+                    )
                 };
             }
-            Submission::Erase(no_char) => self.erase(no_char),
+            Submission::Erase(no_char) => {
+                self.erase(no_char);
+            }
         }
     }
 
     fn submit_text(&mut self, text: String) {
+        info!("Submitter is trying to submit the text: {}", text);
         let mut success = false;
         if let Some(im) = &mut self.im_service {
             if im.commit_string(text.clone()).is_ok() && im.commit().is_ok() {
@@ -98,16 +118,21 @@ impl<T: 'static + KeyboardVisibility + HintPurpose> Submitter<T> {
             }
         }
         if !success {
-            self.print_submission_error(&text);
+            error!("Failed to submit the text: {}", text);
         }
     }
 
     fn erase(&mut self, no_char: u32) {
+        info!(
+            "Submitter is trying to erase the last {} characters",
+            no_char
+        );
         let mut success = false;
         if let Some(im) = &self.im_service {
             if im.delete_surrounding_text(no_char, 0).is_ok() && im.commit().is_ok() {
                 success = true;
             };
+            info!("Submitter successfully used input_method to erase the characters");
         }
         if !success {
             if let Some(virtual_keyboard) = &mut self.virtual_keyboard {
@@ -115,21 +140,16 @@ impl<T: 'static + KeyboardVisibility + HintPurpose> Submitter<T> {
                     if virtual_keyboard.press_release_key("DELETE").is_err() {
                         break;
                     } else {
+                        info!(
+                            "Submitter successfully used virtual_keyboard to erase the characters"
+                        );
                         success = true;
                     }
                 }
             }
         }
         if !success {
-            let erase_text = format!("ERASE({})", no_char);
-            self.print_submission_error(&erase_text);
+            error!("Submitter failed to erase the characters");
         }
-    }
-
-    fn print_submission_error(&self, intended_submission: &str) {
-        println!(
-            "Unable to submit! Failed to submit: {}",
-            intended_submission
-        );
     }
 }

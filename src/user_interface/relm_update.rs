@@ -31,7 +31,6 @@ impl relm::Update for Win {
                 self.keyboard.input(x, y, interaction);
             }
             Msg::ButtonInteraction(key_id, tap_motion) => {
-                // Should never be possible to fail
                 let (layout, view) = self.ui_manager.current_layout_view.clone();
                 if let Some((button, _)) = self.key_refs.get(&(layout, view, key_id)) {
                     button.set_active(tap_motion == TapMotion::Press);
@@ -46,7 +45,11 @@ impl relm::Update for Win {
                     button.set_active(false);
                     if let Some(popover) = popover {
                         popover.show_all();
+                    } else {
+                        error!("The button does not have a popup to open");
                     }
+                } else {
+                    error!("UI does not know the key id");
                 }
             }
             Msg::SubmitText(text) => self.keyboard.submit_text(text),
@@ -57,7 +60,6 @@ impl relm::Update for Win {
                 .ui_manager
                 .change_hint_purpose(content_hint, content_purpose),
             Msg::ChangeUILayoutView(layout, view) => {
-                println!("new_layout: {:?}, new_view: {:?}", layout, view);
                 let _ = self.ui_manager.change_layout_view(layout, view); // Result not relevant
             }
             Msg::ChangeKBLayoutView(layout, view) => {

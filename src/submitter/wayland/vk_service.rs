@@ -13,6 +13,7 @@ use zwp_virtual_keyboard::virtual_keyboard_unstable_v1::zwp_virtual_keyboard_v1:
 pub enum SubmitError {
     /// Virtual keyboard proxy was dropped and is no longer alive
     NotAlive,
+    /// The keycode was invalid
     InvalidKeycode,
 }
 
@@ -42,19 +43,18 @@ impl VKService {
         let shift_state = KeyState::Released;
         let virtual_keyboard = vk_mgr.create_virtual_keyboard(&seat);
 
-        // let seat: WlSeat = WlSeat::from(seat.as_ref().clone());
         let vk_service = VKService {
             base_time,
             pressed_keys,
             shift_state,
             virtual_keyboard,
         };
+        info!("VKService created");
         vk_service.init_virtual_keyboard();
         vk_service
     }
 
     fn init_virtual_keyboard(&self) {
-        println!("keyboard initialized");
         let src = super::keymap::KEYMAP;
         let keymap_size = super::keymap::KEYMAP.len();
         let keymap_size_u32: u32 = keymap_size.try_into().unwrap(); // Convert it from usize to u32, panics if it is not possible
@@ -73,6 +73,7 @@ impl VKService {
         let keymap_raw_fd = keymap_file.into_raw_fd();
         self.virtual_keyboard
             .keymap(1, keymap_raw_fd, keymap_size_u32);
+        info!("VKService initialized the keyboard");
     }
 
     fn get_time(&self) -> u32 {
@@ -87,6 +88,10 @@ impl VKService {
         for keycode in pressed_keys {
             if let Err(err) = self.send_keycode(&keycode.clone(), KeyMotion::Release) {
                 success = Err(err); // Previous errors are disregarded
+                error!(
+                    "Failed to release all keys. Keycode causing the error: {}",
+                    keycode
+                );
             }
         }
         success
@@ -111,6 +116,7 @@ impl VKService {
                 self.send_keycode(keycode, KeyMotion::Press)
             }
         } else {
+            error!("Keycode {} was invalid", keycode);
             Err(SubmitError::InvalidKeycode)
         }
     }
@@ -120,6 +126,7 @@ impl VKService {
         if let Some(keycode) = input_event_codes_hashmap::KEY.get::<str>(&keycode) {
             self.send_keycode(keycode, keymotion)
         } else {
+            error!("Keycode {} was invalid", keycode);
             Err(SubmitError::InvalidKeycode)
         }
     }
@@ -134,6 +141,7 @@ impl VKService {
             self.virtual_keyboard.key(time, *keycode, keymotion as u32);
             Ok(())
         } else {
+            error!("Virtual_keyboard proxy was no longer alive");
             Err(SubmitError::NotAlive)
         }
     }
@@ -152,6 +160,7 @@ impl VKService {
             );
             Ok(())
         } else {
+            error!("Virtual_keyboard proxy was no longer alive");
             Err(SubmitError::NotAlive)
         }
     }

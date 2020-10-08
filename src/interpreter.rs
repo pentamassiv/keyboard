@@ -17,6 +17,7 @@ impl Interpreter {
                 if current_submission == " "
                     && self.prev_submissions.last() == Some(&Submission::Text(" ".to_string()))
                 {
+                    info!("End of sentence suspected because space was entered twice in a row. Will be replaced with '. '");
                     new_submissions.push(Submission::Erase(1));
                     new_submissions.push(Submission::Text(". ".to_string()));
                 } else {

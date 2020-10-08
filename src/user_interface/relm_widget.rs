@@ -47,6 +47,7 @@ impl relm::Widget for Win {
         {
             let hbox = make_pref_hbox(relm, &keyboard);
             vbox.add(&hbox);
+            info! {"Suggestion buttons added"};
         }
         vbox.add(&overlay);
 
@@ -176,19 +177,23 @@ impl relm::Widget for Win {
         self.widgets.window.hide(); // Keyboard starts out being invisible and is only shown if requested via DBus or input-method
 
         let (layout_name, view_name) = self.keyboard.active_view.clone(); // Set visible child MUST be called after show_all. Otherwise it takes no effect!
+        let starting_layout_view = GridBuilder::make_grid_name(&layout_name, &view_name);
         self.widgets
             .stack
-            .set_visible_child_name(&GridBuilder::make_grid_name(&layout_name, &view_name));
+            .set_visible_child_name(&starting_layout_view);
+        info!("UI layout/view started in {}", starting_layout_view);
+        info!("UI initialized");
     }
 }
 
 fn load_css() {
+    info! {"Trying to load CSS file to customize the keyboard"};
     let provider = gtk::CssProvider::new();
     // Gets PathBuf and tries to convert it to a String
     let css_path_abs = match directories::get_absolute_path(directories::CSS_FILE_REL) {
         Some(path) => path.into_os_string().into_string(),
         None => {
-            eprintln! {"No CSS file to customize the keyboard could be loaded. The home directory was not found"};
+            error! {"Unable to load CSS file because the home directory was not found"};
             return;
         }
     };
@@ -196,7 +201,7 @@ fn load_css() {
     let css_path_abs = match css_path_abs {
         Ok(path) => path,
         Err(_) => {
-            eprintln! {"No CSS file to customize the keyboard could be loaded. The filepath might not be UTF-8"};
+            error! {"Unable to load CSS file because the filepath was not UTF-8 encoded"};
             return;
         }
     };
@@ -209,9 +214,10 @@ fn load_css() {
                 &provider,
                 gtk::STYLE_PROVIDER_PRIORITY_APPLICATION,
             );
+            info! {"CSS file successfully loaded"};
         }
         Err(_) => {
-            eprintln! {"No CSS file to customize the keyboard could be loaded. The file might be missing or broken. Using default CSS"}
+            warn! {"Unable to load CSS file. The file might be missing or broken. Using default CSS"}
         }
     }
 }

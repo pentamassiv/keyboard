@@ -105,9 +105,10 @@ pub struct LayoutMeta {
 
 impl LayoutMeta {
     pub fn new() -> HashMap<String, LayoutMeta> {
-        let layout_deserialized = LayoutYamlParser::get_layouts();
         let mut layout_meta = HashMap::new();
+        let layout_deserialized = LayoutYamlParser::get_layouts();
         for (layout_name, layout_deserialized) in layout_deserialized {
+            info!("LayoutMeta created for layout: {}", layout_name);
             layout_meta.insert(layout_name, LayoutMeta::from(layout_deserialized));
         }
         layout_meta
