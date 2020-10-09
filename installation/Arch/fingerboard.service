@@ -1,0 +1,12 @@
+[Unit]
+Description=Fingerboard is an advanced on-screen keyboard
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/fingerboard
+Restart=on-failure
+RestartSec=3
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target

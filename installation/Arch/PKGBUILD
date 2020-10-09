@@ -1,0 +1,54 @@
+# Maintainer: Robin Grell (pentamassiv) <pentamassiv@posteo.de>
+
+pkgname=fingerboard
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="A customizable open-source keyboard with advanced features"
+url="https://github.com/grelltrier/keyboard"
+arch=(any)
+license=(GPL3)
+depends=(gtk3)
+optdepends=('feedbackd: haptic feedback')
+makedepends=(git gcc pkgconf fakeroot gtk-layer-shell )
+provides=(squeekboard squeekboard-git)
+conflicts=(squeekboard squeekboard-git)
+replaces=(squeekboard squeekboard-git)
+_commit=e942d36e580a8f6e064636cafe54f9fb37193a26  # tags/v0.10
+source=("git+https://github.com/grelltrier/keyboard#commit=$_commit")
+sha256sums=("SKIP")
+
+pkgver() {
+  cd keyboard
+  git describe --tags
+}
+
+prepare() {
+  cd keyboard
+  cargo fetch --locked
+}
+
+build() {
+  cd keyboard
+  cargo build --release --frozen --all-targets
+}
+
+check() {
+  cd keyboard
+  cargo test --release --locked
+}
+
+package() {
+  cd keyboard
+  install -Dm 755 target/release/${pkgname} -t "${pkgdir}/usr/bin"
+  install -Dm 755 installation/Arch/virtboard -t "${pkgdir}/usr/bin" # This is just a placeholder to prevent crashes. Remove eventually
+
+  # Moves folders with keyboard layouts, stylesheets and icons
+  install -Dm 644 data/keyboards/* -t "${pkgdir}/${HOME}/.fingerboard/data/keyboards"
+  install -Dm 644 data/icons/* -t "${pkgdir}/${HOME}/.fingerboard/data/icons"
+  install -Dm 644 theming/* -t "${pkgdir}/${HOME}/.fingerboard/theming"
+
+  # Adds fingerboard to systemctl services
+  install -Dm 644 installation/Arch/fingerboard.service -t "${pkgdir}/etc/systemd/system/"
+  systemctl enable fingerboard
+  systemctl start fingerboard
+}

@@ -1,6 +1,6 @@
 # Building Fingerboard on the Pinephone
 
-You need about 2,2 GB of memory to build Fingerboard. This means you need to activate swap to build it 
+You need about 2,6 GB of memory to build Fingerboard. This means you need to activate swap to build it 
 if you have the 2 GB edition of the Pinephone. If you have the 3GB version you can skip to step 1.
 
 ## Step 0: Activate swap
