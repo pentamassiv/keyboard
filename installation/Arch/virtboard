@@ -3,3 +3,4 @@
 # It is just a placeholder because phosh expects an executable for a virtual keyboard here and would crash otherwise.
 # For some reason phosh crashes after 2 mins if phosh starts Fingerboard directly
 # Fingerboard is started through a systemd service
+nohup fingerboard &

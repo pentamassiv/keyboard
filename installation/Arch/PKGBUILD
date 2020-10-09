@@ -13,7 +13,7 @@ makedepends=(git gcc pkgconf fakeroot gtk-layer-shell )
 provides=(squeekboard squeekboard-git)
 conflicts=(squeekboard squeekboard-git)
 replaces=(squeekboard squeekboard-git)
-_commit=0a824771f15f501a1475d5ed9c122c18afe68023  # tags/v0.11
+_commit=1683d1d2989a57b5f3c5a01de69a2c5c873fbf7f  # tags/v0.12
 source=("git+https://github.com/grelltrier/keyboard#commit=$_commit")
 sha256sums=("SKIP")
 
@@ -46,10 +46,4 @@ package() {
   install -Dm 644 data/keyboards/* -t "${pkgdir}/${HOME}/.fingerboard/data/keyboards"
   install -Dm 644 data/icons/* -t "${pkgdir}/${HOME}/.fingerboard/data/icons"
   install -Dm 644 theming/* -t "${pkgdir}/${HOME}/.fingerboard/theming"
-
-  # Adds fingerboard to systemctl services
-  install -Dm 640 installation/Arch/fingerboard.service -t "${pkgdir}/etc/systemd/system/"
-  echo "Don't forget to enable and start the fingerboard service with"
-  echo "sudo systemctl enable fingerboard"
-  echo "sudo systemctl start fingerboard"
 }
