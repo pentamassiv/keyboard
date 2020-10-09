@@ -10,7 +10,7 @@ edition = "2018"
 [dependencies]
 libc = "0.2"
 memmap = "0.7"
-home = "0.5.3"
+home = "0.5"
 glib = "0.10"
 gdk-sys = "0.10"
 gdk = "0.13"
@@ -29,14 +29,14 @@ wayland-protocols = {version="0.28", features = ["client", "unstable_protocols"]
 zwp-virtual-keyboard = "0.2"
 input_event_codes_hashmap = "0.1.0"
 zwp-input-method = "0.2.0"
-tempfile = "3.1.0"
-dbus = "0.8.4"
-dbus-crossroads = "0.2.2"
-locale_config = "0.3.0"
-zwp-input-method-service="0.2.1"
+tempfile = "3.1"
+dbus = "0.8"
+dbus-crossroads = "0.2"
+locale_config = "0.3"
+zwp-input-method-service="0.2"
 
 [features]
-# None of the optional features are activated in the default
+# None of the optional features are activated by default
 default = []
 
 # Activates gesture feature
