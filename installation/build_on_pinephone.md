@@ -6,23 +6,23 @@ if you have the 2 GB edition of the Pinephone. If you have the 3GB version you c
 ## Step 0: Activate swap
 Make a 1 GB swap file
 ```bash
-dd if=/dev/zero of=/swapfile bs=1M count=1028 status=progress
+sudo dd if=/dev/zero of=/swapfile bs=1M count=1028 status=progress
 ```
 Set the right permissions (a world-readable swap file is a huge local vulnerability):
 ```bash
-chmod 600 /swapfile
+sudo chmod 600 /swapfile
 ```
 After creating the correctly sized file, format it to swap:
 ```bash
-mkswap /swapfile
+sudo mkswap /swapfile
 ```
 Activate the swap file
 ```bash
-swapon /swapfile
+sudo swapon /swapfile
 ```
 Finally, edit the fstab configuration to add an entry for the swap file:
 ```bash
-/etc/fstab
+sudo nano /etc/fstab
 /swapfile none swap defaults 0 0
 ```
 
