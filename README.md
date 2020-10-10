@@ -24,7 +24,7 @@ I have yet to look up how I properly mention it in the code so they get the prop
 - Make layouts/views partially transparent to make layouts perfect for playing Gameboy emulators
 
 ## Installation
-If you want to use Fingerboard on your smartphone running Arch, you can choose a PKGBUILD and install it with pacman. If you use a different distribution, you can easily [build it yourself](docs/building/build_on_pinephone.md) with cargo. 
+If you want to use Fingerboard on your smartphone running Arch, you can [choose a PKGBUILD](packaging/README.md) and install it with pacman. If you use a different distribution, you can easily [build it yourself](docs/building/build_on_pinephone.md) with cargo. 
 
 ## Customization
 You probably want to use a layout that was created for the language you speak.
