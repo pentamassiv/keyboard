@@ -1,11 +1,9 @@
-use super::submitter::*;
 #[cfg(feature = "gesture")]
 use crate::config::ui_defaults;
 use crate::keyboard::{Interaction, TapMotion};
 use gtk::*;
 use relm::Channel;
 use std::collections::HashMap;
-use std::time::Instant;
 use wayland_protocols::unstable::text_input::v3::client::zwp_text_input_v3::{
     ContentHint, ContentPurpose,
 };
@@ -16,7 +14,7 @@ mod relm_widget;
 mod ui_manager;
 use ui_manager::*;
 mod gesture_handler;
-use gesture_handler::{GestureModel, GestureSignal, Point};
+use gesture_handler::{GestureModel, GestureSignal};
 
 pub struct Model {
     gesture: GestureModel,

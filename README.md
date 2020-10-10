@@ -5,24 +5,6 @@ It should be fairly easy to add protocols or replace the GUI. Layouts can be eas
 Since GTK is used, customizing the looks is also very easy by using CSS and editing the stylesheet. Parts of the code are based on Purism's squeekboard.
 I have yet to look up how I properly mention it in the code so they get the props they deserve.
 
-## Installation
-WARNING: It used to not work on a Arch version newer than 20200913 but now it seems to work. Pleas tell me if you do experience crashes
-
-If you want to use Fingerboard on your Smartphone running Phosh, you can download the binary or [build it yourself](installation/build_on_pinephone.md) with cargo. If you are building Fingerboard yourself, there are some feature flags you might want to set to get more functionalities.
-Read the [Cargo.toml](Cargo.toml) for more information on this. Building it on your phone should be as easy as 
-```bash
-$ cargo build --release
-```
-There should not have been any errors, just some warnings, which you can ignore.
-Within the next few days I will package it at least for Arch so that it can easily be installed.
-You can try Fingerboard by replace the squeekboard binary (/usr/bin/squeekboard) with a dummy one so squeekboard is not started. This will prevent squeekboard from conflicting with Fingerboard. A simple hello world binary is enough but it needs to be executable. Then you can launch Fingerboard via SSH and if you are done testing it you can put the squeekboard binary back.
-
-When Fingerboard is launched, it looks for subfolders for a stylesheet, user defined layouts and custom icons in the folder
-```bash
-~/.fingerboard
-```
-It's easiest to copy the folders 'data' and 'theming' from the repository and paste it in that folder. You can also skip this step to get the fallback layout.
-
 ## Features
 - Visual/Haptic feedback
 - Customizable layouts/skin
@@ -41,8 +23,23 @@ It's easiest to copy the folders 'data' and 'theming' from the repository and pa
 - Detect rotation and switch to different layout
 - Make layouts/views partially transparent to make layouts perfect for playing Gameboy emulators
 
+## Installation
+If you want to use Fingerboard on your smartphone running Arch, you can choose a PKGBUILD and install it with pacman. If you use a different distribution, you can easily [build it yourself](docs/building/build_on_pinephone.md) with cargo. 
+
+## Customization
+You probably want to use a layout that was created for the language you speak.
+To add all available layouts and style, just copy the 'data' and theming folders:
+
+```bash
+mkdir ~/.fingerboard
+cp -r data ~/.fingerboard
+cp -r theming ~/.fingerboard
+```
+
+If the layout you are looking for is not available, you can easily edit one of the other layouts to adapt it to the missing language. You can't break anything with a malformed layout description. There is a (basic) fallback layout for exactly those cases :). If you made a layout for a missing language, share it with me so others can use it too.
+
 ## TODO
-So far the code is not really commented but by the end of October I plan on adding tons of diagrams and comments because this is 
+So far the code is not really commented but by the end of october I plan on adding tons of diagrams and comments because this is 
 a school project. Within the next months I will add next word prediction and gesture typing to it's functionality.
 
 ## Debugging

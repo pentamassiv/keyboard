@@ -6,15 +6,15 @@ use gtk::{
 };
 use std::collections::HashMap;
 
+/// Buttons are identified by a tuple of three strings (layout_name, view_name, key_id)
+pub type ButtonId = (String, String, String);
+
 pub struct GridBuilder;
 impl GridBuilder {
     pub fn make_stack(
         relm: &relm::Relm<crate::user_interface::Win>,
         layout_meta_hashmap: HashMap<String, LayoutMeta>,
-    ) -> (
-        Stack,
-        HashMap<(String, String, String), (ToggleButton, Option<Popover>)>,
-    ) {
+    ) -> (Stack, HashMap<ButtonId, (ToggleButton, Option<Popover>)>) {
         let stack = Stack::new();
         let mut hashmap_with_key_refs = HashMap::new();
         stack.set_transition_type(gtk::StackTransitionType::None);

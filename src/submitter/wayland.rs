@@ -1,8 +1,7 @@
 use gdk_sys::{GdkDisplay, GdkSeat};
 use glib::translate::ToGlibPtr;
 use wayland_client::{
-    protocol::wl_seat::WlSeat, sys::client::wl_display, Display, EventQueue, GlobalError,
-    GlobalManager, Proxy,
+    protocol::wl_seat::WlSeat, sys::client::wl_display, Display, EventQueue, GlobalManager, Proxy,
 };
 use wayland_protocols::wlr::unstable::layer_shell::v1::client::zwlr_layer_shell_v1::ZwlrLayerShellV1;
 use zwp_input_method::input_method_unstable_v2::zwp_input_method_manager_v2::ZwpInputMethodManagerV2;

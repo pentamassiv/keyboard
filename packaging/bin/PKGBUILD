@@ -2,7 +2,7 @@
 
 pkgname=fingerboard-bin
 _pkgname=fingerboard
-pkgver=0.14
+pkgver=0.15
 pkgrel=1
 pkgdesc="A customizable open-source keyboard with advanced features (pre-compiled)"
 url="https://github.com/grelltrier/keyboard"
@@ -19,7 +19,7 @@ source=("https://github.com/grelltrier/keyboard/releases/download/v${pkgver}/${_
 package() {
   cd keyboard
   install -Dm 755 target/release/${_pkgname} -t "${pkgdir}/usr/bin"
-  install -Dm 755 installation/packaging/virtboard -t "${pkgdir}/usr/bin" # This is just a placeholder to prevent crashes. Remove eventually
+  install -Dm 755 packaging/virtboard -t "${pkgdir}/usr/bin" # This is just a placeholder to prevent crashes. Remove eventually
 
   # Moves folders with keyboard layouts, stylesheets and icons
   install -Dm 644 data/keyboards/* -t "${pkgdir}/${HOME}/.fingerboard/data/keyboards"

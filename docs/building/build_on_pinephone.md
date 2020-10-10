@@ -49,8 +49,8 @@ Clone Fingerboards repository
 git clone https://github.com/grelltrier/keyboard.git
 cd ./keyboard
 ```
-
-Use Cargo to build Fingerboard
+There are some feature flags you might want to set to get more functionalities. Read the [Cargo.toml](../../Cargo.toml) for more information on this. 
+Use cargo to build Fingerboard
 ```bash
 cargo build --release
 ```
@@ -59,4 +59,14 @@ If you sent the command via ssh connection, open another one in which you run
 ```bash
 top
 ```
-to prevent the connection from time out
+to prevent the connection from time out. There should not have been any errors, just some warnings, which you can ignore.
+
+## Step 4: Disable Squeekboard
+To start fingerboard every time the device boots:
+```bash
+sudo cp ./packaging/virtboard /usr/bin
+```
+Squeekboard conflicts with Fingerboard. For testing purposes, you can move the original /usr/bin/squeekboard to a different location and then move it back once you switch back. Phosh crashes if it can not find one of virtboard or squeekboard!
+
+## Step 4 (Optional): Customization
+Fingerboards binary comes with a basic layout so you are never left without a possibility to type. You probably want to add a layout for your language or add a stylesheet to customize the look of the keyboard. It's super easy. Here are the [instructions](../../README.md#Customization).
