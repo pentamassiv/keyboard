@@ -1,0 +1,28 @@
+# Maintainer: Robin Grell (pentamassiv) <pentamassiv@posteo.de>
+
+pkgname=fingerboard-bin
+_pkgname=fingerboard
+pkgver=0.14
+pkgrel=1
+pkgdesc="A customizable open-source keyboard with advanced features (pre-compiled)"
+url="https://github.com/grelltrier/keyboard"
+arch=(aarch64)
+license=(GPL3)
+depends=(gtk3)
+optdepends=('feedbackd: haptic feedback')
+provides=(squeekboard squeekboard-git fingerboard)
+conflicts=(squeekboard squeekboard-git fingerboard)
+replaces=(squeekboard squeekboard-git fingerboard)
+sha256sums=("SKIP")
+source=("https://github.com/grelltrier/keyboard/releases/download/v${pkgver}/${_pkgname}-v${pkgver}-${pkgrel}-aarch64.tar.xz")
+
+package() {
+  cd keyboard
+  install -Dm 755 target/release/${_pkgname} -t "${pkgdir}/usr/bin"
+  install -Dm 755 installation/packaging/virtboard -t "${pkgdir}/usr/bin" # This is just a placeholder to prevent crashes. Remove eventually
+
+  # Moves folders with keyboard layouts, stylesheets and icons
+  install -Dm 644 data/keyboards/* -t "${pkgdir}/${HOME}/.fingerboard/data/keyboards"
+  install -Dm 644 data/icons/* -t "${pkgdir}/${HOME}/.fingerboard/data/icons"
+  install -Dm 644 theming/* -t "${pkgdir}/${HOME}/.fingerboard/theming"
+}

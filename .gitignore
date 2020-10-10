@@ -1,1 +1,6 @@
 /target
+installation/packaging/bin/fingerboard-v0.14-aarch64.tar.gz
+installation/packaging/bin/keyboard/data
+installation/packaging/bin/keyboard/theming
+installation/packaging/bin/keyboard/installation/packaging/virtboard
+installation/packaging/bin/keyboard/target/release/fingerboard

@@ -1,5 +1,5 @@
 # Building Fingerboard on the Pinephone
-
+On the phone building currently takes a little longer than 40 mins.
 You need about 2,6 GB of memory to build Fingerboard. This means you need to activate swap to build it 
 if you have the 2 GB edition of the Pinephone. If you have the 3GB version you can skip to step 1.
 
