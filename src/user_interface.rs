@@ -8,7 +8,6 @@ use wayland_protocols::unstable::text_input::v3::client::zwp_text_input_v3::{
     ContentHint, ContentPurpose,
 };
 
-mod dbus;
 mod relm_update;
 mod relm_widget;
 mod ui_manager;

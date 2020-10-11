@@ -24,6 +24,7 @@ extern crate log;
 use relm::Widget;
 
 mod config;
+mod dbus;
 mod interpreter;
 mod keyboard;
 mod submitter;

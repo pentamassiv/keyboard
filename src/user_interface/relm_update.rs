@@ -34,7 +34,6 @@ impl relm::Update for Win {
                 let (layout, view) = self.ui_manager.current_layout_view.clone();
                 if let Some((button, _)) = self.key_refs.get(&(layout, view, key_id)) {
                     button.set_active(tap_motion == TapMotion::Press);
-                    #[cfg(feature = "haptic-feedback")]
                     self.ui_manager
                         .haptic_feedback(tap_motion == TapMotion::Press);
                 }

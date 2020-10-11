@@ -1,6 +1,6 @@
-use super::dbus::DBusService;
 use super::relm_widget::GridBuilder;
 use super::{Msg, Orientation};
+use crate::dbus::DBusService;
 use gtk::{Stack, StackExt, WidgetExt, Window};
 use relm::Sender;
 use wayland_protocols::unstable::text_input::v3::client::zwp_text_input_v3::{
@@ -23,7 +23,7 @@ impl UIManager {
         stack: Stack,
         current_layout_view: (String, String),
     ) -> UIManager {
-        let dbus_service = DBusService::new(sender.clone()).unwrap();
+        let dbus_service = DBusService::new(sender.clone());
         let prev_layout = current_layout_view.0.clone();
         UIManager {
             sender,
@@ -35,7 +35,6 @@ impl UIManager {
         }
     }
 
-    #[cfg(feature = "haptic-feedback")]
     pub fn haptic_feedback(&self, is_press: bool) {
         let event;
         if is_press {

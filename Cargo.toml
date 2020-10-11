@@ -43,9 +43,5 @@ default = []
 # Currently there will only be the path painted but no gesture detection. This will change within the next few months
 gesture = ["cairo-rs"]
 
-# Enables haptic feedback via dbus
-# Currently there is an issue with keypresses getting ignored when typing fast
-haptic-feedback = []
-
 # Suggestions are not functional yet so they can be ignored
 suggestions = []
