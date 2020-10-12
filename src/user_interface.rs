@@ -52,8 +52,8 @@ struct Gestures {
 
 struct Widgets {
     window: Window,
-    overlay: Overlay,
-    draw_handler: relm::DrawHandler<DrawingArea>,
+    _overlay: Overlay,
+    _draw_handler: relm::DrawHandler<DrawingArea>,
     stack: gtk::Stack,
 }
 

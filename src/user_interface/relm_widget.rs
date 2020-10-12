@@ -81,8 +81,8 @@ impl relm::Widget for Win {
             key_refs,
             widgets: Widgets {
                 window,
-                overlay,
-                draw_handler,
+                _overlay: overlay,
+                _draw_handler: draw_handler,
                 stack,
             },
             gestures: Gestures {
