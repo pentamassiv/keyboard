@@ -126,7 +126,12 @@ impl Keyboard {
                 info!("Keyboard looked up closest key");
                 &self.active_key
             }
-            _ => &self.active_key,
+            _ => {
+                info!(
+                    "Keyboard did not look up the closest key, but used the previously pressed key"
+                );
+                &self.active_key
+            }
         };
         if let Some(key) = key {
             let key = key.clone();
@@ -134,17 +139,16 @@ impl Keyboard {
             match interaction {
                 Interaction::Tap(_, tap_motion) => {
                     self.ui_connection
-                        .emit(Msg::ButtonInteraction(key.id.to_string(), tap_motion));
+                        .emit(Msg::ButtonInteraction(key.get_id(), tap_motion));
                     if let Some(key_actions) = key.get_actions(&interaction) {
-                        self.execute_tap_action(&key.id, key_actions);
+                        self.execute_tap_action(&key.get_id(), key_actions);
                     };
                 }
 
                 Interaction::Swipe(swipe_action) => match swipe_action {
                     SwipeAction::Begin => {
-                        self.ui_connection
-                            .emit(Msg::ButtonInteraction(key.id, TapMotion::Release));
-                        self.submitter.release_all_keys();
+                        self.ui_connection.emit(Msg::ReleaseAllButtions);
+                        self.submitter.release_all_keys_and_modifiers();
                     }
                     SwipeAction::Update => {}
                     SwipeAction::Finish => {}
@@ -155,18 +159,30 @@ impl Keyboard {
 
     fn execute_tap_action(&mut self, key_id: &str, actions_vec: &[KeyAction]) {
         info!("Keyboard handles actions for key {}", key_id);
-        let prev_layout = self.prev_layout.clone();
-        let prev_view = self.prev_view.clone();
+        let mut prev_layout = self.prev_layout.clone();
+        let mut prev_view = self.prev_view.clone();
         for action in actions_vec {
             let (ui_message, submission) = self.get_ui_submitter_msg_from_action(key_id, action);
-            // Each action can only result in eighter a ui_message or a submission
+
+            if let Some(ui_message) = ui_message {
+                // If a change of the layout or the view is requested, the ui will not switch back to the previous layout/view
+                if let Msg::ChangeUILayoutView(_, _) = ui_message {
+                    if let KeyAction::TempSwitchView(_) = action {
+                    } else if let KeyAction::TempSwitchLayout(_) = action {
+                    } else {
+                        prev_layout = None;
+                        prev_view = None;
+                        self.prev_layout = None;
+                        self.prev_view = None;
+                    }
+                }
+                self.ui_connection.emit(ui_message);
+            }
             if let Some(submission) = submission {
                 let interpreted_submissions = self.interpreter.interpret(submission);
                 for submission in interpreted_submissions {
                     self.submitter.submit(submission);
                 }
-            } else if let Some(ui_message) = ui_message {
-                self.ui_connection.emit(ui_message);
             }
         }
 
@@ -227,9 +243,11 @@ impl Keyboard {
             }
             KeyAction::EnterString(text) => submission = Some(Submission::Text(text.to_string())),
             KeyAction::Modifier(modifier) => {
-                submission = Some(
-                    Submission::Keycode("SHIFT".to_string()), // TODO: set up properly
-                );
+                println!("Modifier keyaction");
+                submission = Some(Submission::Modifier(modifier.clone()));
+                ui_message = Some(crate::user_interface::Msg::LatchingButtonInteraction(
+                    key_id.to_string(),
+                ));
             }
             KeyAction::Erase => {
                 submission = Some(Submission::Erase(1));

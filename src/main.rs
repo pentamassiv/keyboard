@@ -20,6 +20,8 @@
  */
 
 #[macro_use]
+extern crate bitflags;
+#[macro_use]
 extern crate log;
 use relm::Widget;
 

@@ -48,7 +48,7 @@ buttons:
             short_press:
                 - switch_view: base
             long_press:
-                - switch_view: base
+                - switch_view: caps
         key_display:
             image: key-shift.svg
         outline: standard
@@ -126,3 +126,9 @@ buttons:
             image: key-enter.svg
         styles:
             - return
+    A:  
+        actions:
+            short_press:
+                - enter_keycode: A
+            long_press:
+                - modifier: Shift

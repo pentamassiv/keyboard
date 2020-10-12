@@ -1,4 +1,5 @@
 pub use self::wayland::vk_service::KeyMotion;
+use crate::keyboard;
 use wayland_client::EventQueue;
 use zwp_input_method_service::*;
 
@@ -9,6 +10,7 @@ pub enum Submission {
     Text(String),
     Keycode(String),
     ToggleKeycode(String),
+    Modifier(keyboard::Modifier),
     Erase(u32),
 }
 
@@ -40,22 +42,27 @@ impl<T: 'static + KeyboardVisibility + HintPurpose> Submitter<T> {
     }
     pub fn fetch_events(&mut self) {
         self.event_queue
-            .dispatch_pending(&mut (), |event, _, _| println!("Event: {:?}", event))
+            .dispatch_pending(&mut (), |event, _, _| {
+                error!(
+                    "Wayland event received, that was not handled. Event: {:?}",
+                    event
+                )
+            })
             .unwrap();
     }
 
-    pub fn toggle_shift(&mut self) {
+    /*pub fn toggle_shift(&mut self) {
         if let Some(virtual_keyboard) = &mut self.virtual_keyboard {
             if virtual_keyboard.toggle_shift().is_err() {
                 error!("Submitter failed to toggle shift");
             }
         }
-    }
+    }*/
 
-    pub fn release_all_keys(&mut self) {
+    pub fn release_all_keys_and_modifiers(&mut self) {
         if let Some(virtual_keyboard) = &mut self.virtual_keyboard {
-            if virtual_keyboard.release_all_keys().is_err() {
-                error!("Submitter failed to release all keys");
+            if virtual_keyboard.release_all_keys_and_modifiers().is_err() {
+                error!("Submitter failed to release all keys and modifiers");
             }
         }
     }
@@ -89,9 +96,22 @@ impl<T: 'static + KeyboardVisibility + HintPurpose> Submitter<T> {
                     }
                 } else {
                     error!(
-                        "Virtual_keyboard protocol not available! Unable to submit keycode {}",
+                        "Virtual_keyboard protocol not available! Unable to toggle keycode {}",
                         keycode
                     )
+                };
+            }
+            Submission::Modifier(modifier) => {
+                info!(
+                    "Submitter is trying to toggle the modifier '{:?}'",
+                    modifier
+                );
+                if let Some(virtual_keyboard) = &mut self.virtual_keyboard {
+                    if virtual_keyboard.toggle_modifier(modifier).is_err() {
+                        error!("Submitter failed to toggle the modifier");
+                    }
+                } else {
+                    error!("Virtual_keyboard protocol not available! Unable to toggle modifier")
                 };
             }
             Submission::Erase(no_char) => {

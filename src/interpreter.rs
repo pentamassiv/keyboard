@@ -33,6 +33,9 @@ impl Interpreter {
             Submission::ToggleKeycode(_) => {
                 new_submissions.push(submission);
             }
+            Submission::Modifier(_) => {
+                new_submissions.push(submission);
+            }
         }
         self.prev_submissions = new_submissions.clone();
         new_submissions

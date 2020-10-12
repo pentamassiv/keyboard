@@ -184,6 +184,7 @@ dependencies = [
 name = "fingerboard"
 version = "0.1.0"
 dependencies = [
+ "bitflags",
  "cairo-rs",
  "dbus",
  "dbus-crossroads",

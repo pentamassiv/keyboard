@@ -70,9 +70,9 @@ pub enum Outline {
 #[derive(Debug, Clone, Deserialize, Serialize, PartialEq, Eq, Hash)]
 #[serde(deny_unknown_fields)]
 pub enum Modifier {
-    Control,
     Shift,
     Lock,
+    Control,
     #[serde(alias = "Mod1")]
     Alt,
     Mod2,

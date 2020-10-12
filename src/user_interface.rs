@@ -3,7 +3,7 @@ use crate::config::ui_defaults;
 use crate::keyboard::{Interaction, TapMotion};
 use gtk::*;
 use relm::Channel;
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet};
 use wayland_protocols::unstable::text_input::v3::client::zwp_text_input_v3::{
     ContentHint, ContentPurpose,
 };
@@ -17,6 +17,7 @@ use gesture_handler::{GestureModel, GestureSignal};
 
 pub struct Model {
     gesture: GestureModel,
+    latched_keys: HashSet<String>,
 }
 
 #[derive(relm_derive::Msg)]
@@ -24,6 +25,8 @@ pub enum Msg {
     GestureSignal(f64, f64, GestureSignal),
     Interaction((f64, f64), Interaction),
     ButtonInteraction(String, TapMotion),
+    LatchingButtonInteraction(String),
+    ReleaseAllButtions,
     OpenPopup(String),
     SubmitText(String),
     Visible(bool),

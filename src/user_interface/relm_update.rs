@@ -12,6 +12,7 @@ impl relm::Update for Win {
     fn model(relm: &relm::Relm<Self>, _: Self::ModelParam) -> Model {
         Model {
             gesture: GestureModel::new(relm.clone()),
+            latched_keys: HashSet::new(),
         }
     }
 
@@ -31,11 +32,42 @@ impl relm::Update for Win {
                 self.keyboard.input(x, y, interaction);
             }
             Msg::ButtonInteraction(key_id, tap_motion) => {
+                info! {
+                    "Trying to interact with '{}' key", key_id
+                };
                 let (layout, view) = self.ui_manager.current_layout_view.clone();
-                if let Some((button, _)) = self.key_refs.get(&(layout, view, key_id)) {
-                    button.set_active(tap_motion == TapMotion::Press);
+                if let Some((button, _)) = self.key_refs.get(&(layout, view, key_id.clone())) {
+                    if !self.model.latched_keys.contains(&key_id) {
+                        button.set_active(tap_motion == TapMotion::Press);
+                    }
                     self.ui_manager
                         .haptic_feedback(tap_motion == TapMotion::Press);
+                }
+            }
+            Msg::LatchingButtonInteraction(key_id) => {
+                info! {
+                    "Trying to latch '{}' key", key_id
+                };
+                let (layout, view) = self.ui_manager.current_layout_view.clone();
+                if let Some((_, _)) = self.key_refs.get(&(layout, view, key_id.clone())) {
+                    if self.model.latched_keys.remove(&key_id) {
+                        info! {
+                            "'{}' key is no longer latched", key_id
+                        }
+                    } else {
+                        info! {
+                            "'{}' key is now latched", key_id
+                        }
+                        self.model.latched_keys.insert(key_id);
+                    }
+                }
+            }
+            Msg::ReleaseAllButtions => {
+                for key_id in self.model.latched_keys.drain() {
+                    let (layout, view) = self.ui_manager.current_layout_view.clone();
+                    if let Some((button, _)) = self.key_refs.get(&(layout, view, key_id.clone())) {
+                        button.set_active(false);
+                    }
                 }
             }
             Msg::OpenPopup(key_id) => {

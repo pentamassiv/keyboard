@@ -1,3 +1,4 @@
+use crate::keyboard;
 use std::collections::HashSet;
 use std::convert::TryInto;
 use std::io::{Seek, SeekFrom, Write};
@@ -23,16 +24,44 @@ pub enum KeyMotion {
     Release = 0,
 }
 
-#[derive(Debug, Clone, Copy)]
-enum KeyState {
-    Pressed = 1,
-    Released = 0,
+bitflags! {
+    /// Maps the names of the modifiers to their bitcodes (From squeekboard)
+    /// From https://www.x.org/releases/current/doc/kbproto/xkbproto.html#Keyboard_State
+    pub struct ModifiersBitflag: u32 {
+        const NO_MODIFIERS = 0x0;
+        const SHIFT = 0x1;
+        const LOCK = 0x2;
+        const CONTROL = 0x4;
+        /// Alt
+        const MOD1 = 0x8;
+        const MOD2 = 0x10;
+        const MOD3 = 0x20;
+        /// Meta
+        const MOD4 = 0x40;
+        /// AltGr
+        const MOD5 = 0x80;
+    }
+}
+
+impl From<keyboard::Modifier> for ModifiersBitflag {
+    fn from(item: keyboard::Modifier) -> Self {
+        match item {
+            keyboard::Modifier::Shift => ModifiersBitflag::SHIFT,
+            keyboard::Modifier::Lock => ModifiersBitflag::LOCK,
+            keyboard::Modifier::Control => ModifiersBitflag::CONTROL,
+            keyboard::Modifier::Alt => ModifiersBitflag::MOD1,
+            keyboard::Modifier::Mod2 => ModifiersBitflag::MOD2,
+            keyboard::Modifier::Mod3 => ModifiersBitflag::MOD3,
+            keyboard::Modifier::Mod4 => ModifiersBitflag::MOD4,
+            keyboard::Modifier::Mod5 => ModifiersBitflag::MOD5,
+        }
+    }
 }
 
 pub struct VKService {
     base_time: std::time::Instant,
     pressed_keys: HashSet<u32>,
-    shift_state: KeyState,
+    pressed_modifiers: ModifiersBitflag,
     virtual_keyboard: Main<ZwpVirtualKeyboardV1>,
 }
 
@@ -40,13 +69,13 @@ impl VKService {
     pub fn new(seat: &WlSeat, vk_mgr: Main<ZwpVirtualKeyboardManagerV1>) -> VKService {
         let base_time = Instant::now();
         let pressed_keys = HashSet::new();
-        let shift_state = KeyState::Released;
+        let pressed_modifiers = ModifiersBitflag::NO_MODIFIERS;
         let virtual_keyboard = vk_mgr.create_virtual_keyboard(&seat);
 
         let vk_service = VKService {
             base_time,
             pressed_keys,
-            shift_state,
+            pressed_modifiers,
             virtual_keyboard,
         };
         info!("VKService created");
@@ -82,6 +111,20 @@ impl VKService {
         time.try_into().unwrap()
     }
 
+    pub fn release_all_keys_and_modifiers(&mut self) -> Result<(), SubmitError> {
+        let result_key_release = self.release_all_keys();
+        let result_modifiert_release = self.release_all_modifiers();
+        if result_key_release.is_ok() && result_modifiert_release.is_ok() {
+            Ok(())
+        } else if result_key_release == Err(SubmitError::NotAlive)
+            || result_modifiert_release == Err(SubmitError::NotAlive)
+        {
+            Err(SubmitError::NotAlive) // This error is more important because it will no longer be possible to send any keycodes
+        } else {
+            Err(SubmitError::InvalidKeycode)
+        }
+    }
+
     pub fn release_all_keys(&mut self) -> Result<(), SubmitError> {
         let pressed_keys: Vec<u32> = self.pressed_keys.iter().cloned().collect();
         let mut success = Ok(());
@@ -107,6 +150,16 @@ impl VKService {
         }
     }
 
+    pub fn send_key(&mut self, keycode: &str, keymotion: KeyMotion) -> Result<(), SubmitError> {
+        let keycode: String = keycode.to_ascii_uppercase(); // Necessary because all keycodes are uppercase
+        if let Some(keycode) = input_event_codes_hashmap::KEY.get::<str>(&keycode) {
+            self.send_keycode(keycode, keymotion)
+        } else {
+            error!("Keycode {} was invalid", keycode);
+            Err(SubmitError::InvalidKeycode)
+        }
+    }
+
     pub fn toggle_key(&mut self, keycode: &str) -> Result<(), SubmitError> {
         let keycode: String = keycode.to_ascii_uppercase(); // Necessary because all keycodes are uppercase
         if let Some(keycode) = input_event_codes_hashmap::KEY.get::<str>(&keycode) {
@@ -115,16 +168,6 @@ impl VKService {
             } else {
                 self.send_keycode(keycode, KeyMotion::Press)
             }
-        } else {
-            error!("Keycode {} was invalid", keycode);
-            Err(SubmitError::InvalidKeycode)
-        }
-    }
-
-    pub fn send_key(&mut self, keycode: &str, keymotion: KeyMotion) -> Result<(), SubmitError> {
-        let keycode: String = keycode.to_ascii_uppercase(); // Necessary because all keycodes are uppercase
-        if let Some(keycode) = input_event_codes_hashmap::KEY.get::<str>(&keycode) {
-            self.send_keycode(keycode, keymotion)
         } else {
             error!("Keycode {} was invalid", keycode);
             Err(SubmitError::InvalidKeycode)
@@ -146,18 +189,26 @@ impl VKService {
         }
     }
 
-    pub fn toggle_shift(&mut self) -> Result<(), SubmitError> {
-        match self.shift_state {
-            KeyState::Pressed => self.shift_state = KeyState::Released,
-            KeyState::Released => self.shift_state = KeyState::Pressed,
-        }
+    pub fn release_all_modifiers(&mut self) -> Result<(), SubmitError> {
+        let new_modifier_state = ModifiersBitflag::NO_MODIFIERS;
+        self.send_modifiers_bitflag(new_modifier_state)
+    }
+
+    pub fn toggle_modifier(&mut self, modifier: keyboard::Modifier) -> Result<(), SubmitError> {
+        let mut new_modifier_state = self.pressed_modifiers;
+        new_modifier_state.toggle(ModifiersBitflag::from(modifier));
+        self.send_modifiers_bitflag(new_modifier_state)
+    }
+
+    fn send_modifiers_bitflag(&mut self, modifiers: ModifiersBitflag) -> Result<(), SubmitError> {
         if self.virtual_keyboard.as_ref().is_alive() {
             self.virtual_keyboard.modifiers(
-                self.shift_state as u32, //mods_depressed,
-                0,                       //mods_latched
-                0,                       //mods_locked
-                0,                       //group
+                modifiers.bits, //mods_depressed,
+                0,              //mods_latched
+                0,              //mods_locked
+                0,              //group
             );
+            self.pressed_modifiers = modifiers;
             Ok(())
         } else {
             error!("Virtual_keyboard proxy was no longer alive");

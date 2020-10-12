@@ -3,7 +3,7 @@ use std::collections::HashMap;
 mod deserializer;
 use deserializer::LayoutYamlParser;
 mod deserialized_structs;
-pub use deserialized_structs::{KeyAction, KeyDisplay, KeyEvent, Outline};
+pub use deserialized_structs::{KeyAction, KeyDisplay, KeyEvent, Modifier, Outline};
 use deserialized_structs::{KeyDeserialized, KeyIds, LayoutDeserialized};
 
 #[derive(Debug)]
@@ -75,22 +75,44 @@ impl KeyMeta {
         for (key_event, key_action_vec) in deserialized_actions {
             // All actions are executed on release except for the toggle_keycode with a longpress
             // Then one action is created for the long_press and one for the long_press_release
-            let mut long_press_action_vec = Vec::new();
+            let mut press_action_vec = Vec::new();
+            let mut release_action_vec = Vec::new();
             for action in key_action_vec {
-                if let KeyAction::ToggleKeycode(_) = action {
-                    long_press_action_vec.push(action.clone())
+                match action {
+                    KeyAction::ToggleKeycode(_) => {
+                        press_action_vec.push(action.clone());
+                        release_action_vec.push(action.clone());
+                    }
+                    KeyAction::Modifier(_) => press_action_vec.push(action.clone()),
+
+                    KeyAction::EnterKeycode(_)
+                    | KeyAction::EnterString(_)
+                    | KeyAction::SwitchView(_)
+                    | KeyAction::TempSwitchView(_)
+                    | KeyAction::SwitchLayout(_)
+                    | KeyAction::TempSwitchLayout(_)
+                    | KeyAction::Erase
+                    | KeyAction::OpenPopup => release_action_vec.push(action.clone()),
                 }
             }
-            if !long_press_action_vec.is_empty() {
-                let interaction_long_press = Interaction::Tap(TapDuration::Long, TapMotion::Press);
-                actions.insert(interaction_long_press, long_press_action_vec);
-            }
-            let interaction_release = match key_event {
-                KeyEvent::ShortPress => Interaction::Tap(TapDuration::Short, TapMotion::Release),
-                KeyEvent::LongPress => Interaction::Tap(TapDuration::Long, TapMotion::Release),
-            };
 
-            actions.insert(interaction_release, key_action_vec.clone());
+            if !press_action_vec.is_empty() {
+                let interaction_press = match key_event {
+                    KeyEvent::ShortPress => Interaction::Tap(TapDuration::Short, TapMotion::Press),
+                    KeyEvent::LongPress => Interaction::Tap(TapDuration::Long, TapMotion::Press),
+                };
+                actions.insert(interaction_press, press_action_vec);
+            }
+
+            if !release_action_vec.is_empty() {
+                let interaction_release = match key_event {
+                    KeyEvent::ShortPress => {
+                        Interaction::Tap(TapDuration::Short, TapMotion::Release)
+                    }
+                    KeyEvent::LongPress => Interaction::Tap(TapDuration::Long, TapMotion::Release),
+                };
+                actions.insert(interaction_release, release_action_vec);
+            }
         }
         actions.shrink_to_fit();
         actions
