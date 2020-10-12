@@ -4,3 +4,4 @@ installation/packaging/bin/keyboard/data
 installation/packaging/bin/keyboard/theming
 installation/packaging/bin/keyboard/installation/packaging/virtboard
 installation/packaging/bin/keyboard/target/release/fingerboard
+.vscode/settings.json
