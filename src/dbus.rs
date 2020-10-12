@@ -1,4 +1,5 @@
 use crate::user_interface;
+use std::sync::atomic::{AtomicBool, Ordering};
 use std::sync::{mpsc, mpsc::channel};
 use std::sync::{Arc, Mutex};
 mod dbus_client;
@@ -8,12 +9,12 @@ use dbus_server::DBusServer;
 
 pub struct DBusService {
     event_transmitter: mpsc::Sender<String>,
-    visibility: Arc<Mutex<bool>>,
+    visibility: Arc<AtomicBool>,
 }
 
 impl DBusService {
     pub fn new(sender: relm::Sender<user_interface::Msg>) -> DBusService {
-        let visibility = Arc::new(Mutex::new(false));
+        let visibility = Arc::new(AtomicBool::new(false));
         let visibility_clone = Arc::clone(&visibility); // Gets moved to DBusServer
 
         let (tx, rx) = channel(); // Create a simple streaming channel
@@ -26,7 +27,7 @@ impl DBusService {
     }
 
     pub fn change_visibility(&mut self, visible: bool) {
-        *self.visibility.lock().unwrap() = visible;
+        self.visibility.store(visible, Ordering::SeqCst);
         info!("Keyboard visibility changed to {}", visible);
     }
 

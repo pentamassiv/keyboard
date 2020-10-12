@@ -2,6 +2,7 @@ use crate::user_interface;
 use dbus::blocking::Connection;
 use dbus_crossroads::{Context, Crossroads};
 use relm::Sender;
+use std::sync::atomic::{AtomicBool, Ordering};
 use std::sync::{Arc, Mutex};
 use std::thread;
 
@@ -11,7 +12,7 @@ impl DBusServer {
     /// The new connection is used to allows for clients to change the keyboards visibility by calling the 'SetVisible' method or they can read the 'Visible' property
     pub fn spawn_and_detach(
         sender: Mutex<Sender<user_interface::Msg>>,
-        visibility: Arc<Mutex<bool>>,
+        visibility: Arc<AtomicBool>,
     ) {
         // Join handle is dropped because the new thread detaches itself from it when the handle is dropped and continues running
         // The handle is never used so its uneccessary
@@ -37,7 +38,7 @@ impl DBusServer {
                     ("visible",),
                     (),
                     move |_ctx: &mut Context,
-                          _visibility: &mut Arc<Mutex<bool>>,
+                          _visibility: &mut Arc<AtomicBool>,
                           (visible,): (bool,)| {
                         // This is what happens when the method is called.
                         info!(
@@ -56,7 +57,7 @@ impl DBusServer {
                 // Adds the property 'Visible' to the interface. It is read only and tells the clients if the keyboard is currently visible or hidden
                 b.property("Visible").get(|_, visibility| {
                     info!("Property 'Visible' was read");
-                    Ok(*visibility.lock().unwrap())
+                    Ok(visibility.load(Ordering::SeqCst))
                 });
             });
             // Adds the '/sm/puri/OSK0' path, which implements the sm.puri.OSK0 interface,
