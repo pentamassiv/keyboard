@@ -7,7 +7,7 @@ use std::sync::{Arc, Mutex};
 use std::time::Instant;
 use tempfile::tempfile;
 use wayland_client::protocol::wl_seat::WlSeat;
-use wayland_client::Main;
+use wayland_client::{Main, Proxy};
 use zwp_virtual_keyboard::virtual_keyboard_unstable_v1::zwp_virtual_keyboard_manager_v1::ZwpVirtualKeyboardManagerV1;
 use zwp_virtual_keyboard::virtual_keyboard_unstable_v1::zwp_virtual_keyboard_v1::ZwpVirtualKeyboardV1;
 
@@ -72,7 +72,7 @@ pub struct VKService {
     base_time: std::time::Instant,
     pressed_keys: HashSet<u32>,
     pressed_modifiers: ModifiersBitflag,
-    virtual_keyboard: Main<ZwpVirtualKeyboardV1>,
+    virtual_keyboard: Proxy<ZwpVirtualKeyboardV1>,
 }
 
 impl Drop for VKService {
@@ -87,29 +87,26 @@ impl Drop for VKService {
 }
 
 impl VKService {
-    pub fn new(seat: &WlSeat, vk_mgr: Main<ZwpVirtualKeyboardManagerV1>) -> VKService {
+    pub fn new(seat: &WlSeat, vk_mgr: Main<ZwpVirtualKeyboardManagerV1>) -> Arc<Mutex<VKService>> {
         let base_time = Instant::now();
         let pressed_keys = HashSet::new();
         let pressed_modifiers = ModifiersBitflag::NO_MODIFIERS;
-        let virtual_keyboard = vk_mgr.create_virtual_keyboard(&seat);
-
+        let virtual_keyboard_main = vk_mgr.create_virtual_keyboard(&seat);
+        let virtual_keyboard_proxy = virtual_keyboard_main.as_ref().clone();
         let vk_service = VKService {
             base_time,
             pressed_keys,
             pressed_modifiers,
-            virtual_keyboard,
+            virtual_keyboard: virtual_keyboard_proxy,
         };
         info!("VKService created");
-        vk_service.init_virtual_keyboard();
-        ctrlc::set_handler(move || {
-            println!("Aborted program");
-            std::process::exit(0);
-        })
-        .expect("Error setting Ctrl-C handler");
+        vk_service.init_virtual_keyboard(virtual_keyboard_main);
+        let vk_service = Arc::new(Mutex::new(vk_service));
+        VKService::release_keys_when_ctrl_c(Arc::clone(&vk_service));
         vk_service
     }
 
-    fn init_virtual_keyboard(&self) {
+    fn init_virtual_keyboard(&self, virtual_keyboard_main: Main<ZwpVirtualKeyboardV1>) {
         let src = super::keymap::KEYMAP;
         let keymap_size = super::keymap::KEYMAP.len();
         let keymap_size_u32: u32 = keymap_size.try_into().unwrap(); // Convert it from usize to u32, panics if it is not possible
@@ -126,8 +123,7 @@ impl VKService {
         };
         data[..src.len()].copy_from_slice(src.as_bytes());
         let keymap_raw_fd = keymap_file.into_raw_fd();
-        self.virtual_keyboard
-            .keymap(1, keymap_raw_fd, keymap_size_u32);
+        virtual_keyboard_main.keymap(1, keymap_raw_fd, keymap_size_u32);
         info!("VKService initialized the keyboard");
     }
 
@@ -197,12 +193,13 @@ impl VKService {
 
     pub fn send_keycode(&mut self, keycode: u32, keymotion: KeyMotion) -> Result<(), SubmitError> {
         let time = self.get_time();
-        if self.virtual_keyboard.as_ref().is_alive() {
+        if self.virtual_keyboard.is_alive() {
             match keymotion {
                 KeyMotion::Press => self.pressed_keys.insert(keycode),
                 KeyMotion::Release => self.pressed_keys.remove(&keycode),
             };
-            self.virtual_keyboard.key(time, keycode, keymotion as u32);
+            let virtual_keyboard = ZwpVirtualKeyboardV1::from(self.virtual_keyboard.clone());
+            virtual_keyboard.key(time, keycode, keymotion as u32);
             Ok(())
         } else {
             error!("Virtual_keyboard proxy was no longer alive");
@@ -222,8 +219,9 @@ impl VKService {
     }
 
     fn send_modifiers_bitflag(&mut self, modifiers: ModifiersBitflag) -> Result<(), SubmitError> {
-        if self.virtual_keyboard.as_ref().is_alive() {
-            self.virtual_keyboard.modifiers(
+        if self.virtual_keyboard.is_alive() {
+            let virtual_keyboard = ZwpVirtualKeyboardV1::from(self.virtual_keyboard.clone());
+            virtual_keyboard.modifiers(
                 modifiers.bits, //mods_depressed,
                 0,              //mods_latched
                 0,              //mods_locked
@@ -311,5 +309,21 @@ impl VKService {
                                                        // Release CTRL + SHIFT
         unwrap_or_return!(self.send_modifiers_bitflag(ModifiersBitflag::NO_MODIFIERS));
         Ok(())
+    }
+
+    fn release_keys_when_ctrl_c(vk_service: Arc<Mutex<VKService>>) {
+        ctrlc::set_handler(move || {
+        warn!("Received CTRL+C signal. Aborting program!");
+        if vk_service
+            .lock()
+            .unwrap()
+            .release_all_keys_and_modifiers()
+            .is_err()
+        {
+            error!("Some keys or modifiers could not be released and are still registered as pressed!");
+        }
+        std::process::exit(130);
+    })
+    .expect("Error setting Ctrl-C handler");
     }
 }

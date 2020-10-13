@@ -1,5 +1,6 @@
 pub use self::wayland::vk_service::KeyMotion;
 use crate::keyboard;
+use std::sync::{Arc, Mutex};
 use wayland_client::EventQueue;
 use zwp_input_method_service::*;
 
@@ -17,7 +18,7 @@ pub enum Submission {
 pub struct Submitter<T: 'static + KeyboardVisibility + HintPurpose> {
     event_queue: EventQueue,
     im_service: Option<IMService<T>>,
-    virtual_keyboard: Option<wayland::vk_service::VKService>,
+    virtual_keyboard: Option<Arc<Mutex<wayland::vk_service::VKService>>>,
 }
 
 impl<T: 'static + KeyboardVisibility + HintPurpose> Submitter<T> {
@@ -61,7 +62,12 @@ impl<T: 'static + KeyboardVisibility + HintPurpose> Submitter<T> {
 
     pub fn release_all_keys_and_modifiers(&mut self) {
         if let Some(virtual_keyboard) = &mut self.virtual_keyboard {
-            if virtual_keyboard.release_all_keys_and_modifiers().is_err() {
+            if virtual_keyboard
+                .lock()
+                .unwrap()
+                .release_all_keys_and_modifiers()
+                .is_err()
+            {
                 error!("Submitter failed to release all keys and modifiers");
             }
         }
@@ -75,7 +81,12 @@ impl<T: 'static + KeyboardVisibility + HintPurpose> Submitter<T> {
             Submission::Keycode(keycode) => {
                 info!("Submitter is trying to submit the keycode: {}", keycode);
                 if let Some(virtual_keyboard) = &mut self.virtual_keyboard {
-                    if virtual_keyboard.press_release_key(keycode).is_err() {
+                    if virtual_keyboard
+                        .lock()
+                        .unwrap()
+                        .press_release_key(keycode)
+                        .is_err()
+                    {
                         error!(
                             "Submitter failed to press and release the keycode {}",
                             keycode
@@ -91,7 +102,12 @@ impl<T: 'static + KeyboardVisibility + HintPurpose> Submitter<T> {
             Submission::ToggleKeycode(keycode) => {
                 info!("Submitter is trying to toggle the keycode: {}", keycode);
                 if let Some(virtual_keyboard) = &mut self.virtual_keyboard {
-                    if virtual_keyboard.toggle_key(keycode).is_err() {
+                    if virtual_keyboard
+                        .lock()
+                        .unwrap()
+                        .toggle_key(keycode)
+                        .is_err()
+                    {
                         error!("Submitter failed to toggle the keycode {}", keycode);
                     }
                 } else {
@@ -107,7 +123,12 @@ impl<T: 'static + KeyboardVisibility + HintPurpose> Submitter<T> {
                     modifier
                 );
                 if let Some(virtual_keyboard) = &mut self.virtual_keyboard {
-                    if virtual_keyboard.toggle_modifier(modifier).is_err() {
+                    if virtual_keyboard
+                        .lock()
+                        .unwrap()
+                        .toggle_modifier(modifier)
+                        .is_err()
+                    {
                         error!("Submitter failed to toggle the modifier");
                     }
                 } else {
@@ -131,7 +152,12 @@ impl<T: 'static + KeyboardVisibility + HintPurpose> Submitter<T> {
         if !success {
             if let Some(virtual_keyboard) = &mut self.virtual_keyboard {
                 // The virtual_keyboard protocol is very limited regarding text input and can only input individual keys. Trying to submit each character individually
-                if virtual_keyboard.send_unicode_str(&text).is_ok() {
+                if virtual_keyboard
+                    .lock()
+                    .unwrap()
+                    .send_unicode_str(&text)
+                    .is_ok()
+                {
                     success = true;
                 }
             }
@@ -157,7 +183,12 @@ impl<T: 'static + KeyboardVisibility + HintPurpose> Submitter<T> {
             if let Some(virtual_keyboard) = &mut self.virtual_keyboard {
                 for _ in 0..no_char {
                     // Keycode for 'DELETE is 111
-                    if virtual_keyboard.press_release_key(111).is_err() {
+                    if virtual_keyboard
+                        .lock()
+                        .unwrap()
+                        .press_release_key(111)
+                        .is_err()
+                    {
                         break;
                     } else {
                         info!(
