@@ -126,9 +126,3 @@ buttons:
             image: key-enter.svg
         styles:
             - return
-    A:  
-        actions:
-            short_press:
-                - enter_keycode: A
-            long_press:
-                - modifier: Shift

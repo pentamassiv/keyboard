@@ -3,12 +3,22 @@ use std::collections::HashSet;
 use std::convert::TryInto;
 use std::io::{Seek, SeekFrom, Write};
 use std::os::unix::io::IntoRawFd;
+use std::sync::{Arc, Mutex};
 use std::time::Instant;
 use tempfile::tempfile;
 use wayland_client::protocol::wl_seat::WlSeat;
 use wayland_client::Main;
 use zwp_virtual_keyboard::virtual_keyboard_unstable_v1::zwp_virtual_keyboard_manager_v1::ZwpVirtualKeyboardManagerV1;
 use zwp_virtual_keyboard::virtual_keyboard_unstable_v1::zwp_virtual_keyboard_v1::ZwpVirtualKeyboardV1;
+
+macro_rules! unwrap_or_return {
+    ( $e:expr ) => {
+        match $e {
+            Ok(x) => x,
+            Err(err) => return Err(err),
+        }
+    };
+}
 
 #[derive(Debug, PartialEq, Clone)]
 pub enum SubmitError {
@@ -65,6 +75,17 @@ pub struct VKService {
     virtual_keyboard: Main<ZwpVirtualKeyboardV1>,
 }
 
+impl Drop for VKService {
+    fn drop(&mut self) {
+        error!("VKService was dropped");
+        if self.release_all_keys_and_modifiers().is_err() {
+            error!(
+                "Some keys or modifiers could not be released and are still registered as pressed!"
+            );
+        };
+    }
+}
+
 impl VKService {
     pub fn new(seat: &WlSeat, vk_mgr: Main<ZwpVirtualKeyboardManagerV1>) -> VKService {
         let base_time = Instant::now();
@@ -80,6 +101,11 @@ impl VKService {
         };
         info!("VKService created");
         vk_service.init_virtual_keyboard();
+        ctrlc::set_handler(move || {
+            println!("Aborted program");
+            std::process::exit(0);
+        })
+        .expect("Error setting Ctrl-C handler");
         vk_service
     }
 
@@ -129,7 +155,7 @@ impl VKService {
         let pressed_keys: Vec<u32> = self.pressed_keys.iter().cloned().collect();
         let mut success = Ok(());
         for keycode in pressed_keys {
-            if let Err(err) = self.send_keycode(&keycode.clone(), KeyMotion::Release) {
+            if let Err(err) = self.send_keycode(keycode, KeyMotion::Release) {
                 success = Err(err); // Previous errors are disregarded
                 error!(
                     "Failed to release all keys. Keycode causing the error: {}",
@@ -141,7 +167,7 @@ impl VKService {
     }
 
     // Press and then release the key
-    pub fn press_release_key(&mut self, keycode: &str) -> Result<(), SubmitError> {
+    pub fn press_release_key(&mut self, keycode: u32) -> Result<(), SubmitError> {
         let press_result = self.send_key(keycode, KeyMotion::Press);
         if press_result.is_ok() {
             self.send_key(keycode, KeyMotion::Release)
@@ -150,9 +176,18 @@ impl VKService {
         }
     }
 
-    pub fn send_key(&mut self, keycode: &str, keymotion: KeyMotion) -> Result<(), SubmitError> {
-        let keycode: String = keycode.to_ascii_uppercase(); // Necessary because all keycodes are uppercase
-        if let Some(keycode) = input_event_codes_hashmap::KEY.get::<str>(&keycode) {
+    pub fn toggle_key(&mut self, keycode: u32) -> Result<(), SubmitError> {
+        if self.pressed_keys.contains(&keycode) {
+            self.send_key(keycode, KeyMotion::Release)
+        } else {
+            self.send_key(keycode, KeyMotion::Press)
+        }
+    }
+
+    pub fn send_key(&mut self, keycode: u32, keymotion: KeyMotion) -> Result<(), SubmitError> {
+        // The check is not necessary because it is checked when deserializing but if the module is used as library it becomes usefull
+        if input_event_codes_hashmap::is_valid_input_code(&input_event_codes_hashmap::KEY, keycode)
+        {
             self.send_keycode(keycode, keymotion)
         } else {
             error!("Keycode {} was invalid", keycode);
@@ -160,28 +195,14 @@ impl VKService {
         }
     }
 
-    pub fn toggle_key(&mut self, keycode: &str) -> Result<(), SubmitError> {
-        let keycode: String = keycode.to_ascii_uppercase(); // Necessary because all keycodes are uppercase
-        if let Some(keycode) = input_event_codes_hashmap::KEY.get::<str>(&keycode) {
-            if self.pressed_keys.contains(keycode) {
-                self.send_keycode(keycode, KeyMotion::Release)
-            } else {
-                self.send_keycode(keycode, KeyMotion::Press)
-            }
-        } else {
-            error!("Keycode {} was invalid", keycode);
-            Err(SubmitError::InvalidKeycode)
-        }
-    }
-
-    pub fn send_keycode(&mut self, keycode: &u32, keymotion: KeyMotion) -> Result<(), SubmitError> {
+    pub fn send_keycode(&mut self, keycode: u32, keymotion: KeyMotion) -> Result<(), SubmitError> {
         let time = self.get_time();
         if self.virtual_keyboard.as_ref().is_alive() {
             match keymotion {
-                KeyMotion::Press => self.pressed_keys.insert(*keycode),
-                KeyMotion::Release => self.pressed_keys.remove(keycode),
+                KeyMotion::Press => self.pressed_keys.insert(keycode),
+                KeyMotion::Release => self.pressed_keys.remove(&keycode),
             };
-            self.virtual_keyboard.key(time, *keycode, keymotion as u32);
+            self.virtual_keyboard.key(time, keycode, keymotion as u32);
             Ok(())
         } else {
             error!("Virtual_keyboard proxy was no longer alive");
@@ -214,5 +235,81 @@ impl VKService {
             error!("Virtual_keyboard proxy was no longer alive");
             Err(SubmitError::NotAlive)
         }
+    }
+
+    /// This method tries to submit a unicode string by entering each of its character individually with a combination of keypresses.
+    /// There are multiple keypresses needed for each character and some applications might not support this.
+    /// Some applications do not support it.
+    /// At least under GNOME this should work but it is very clumsy and should only be used as a last resort.
+    pub fn send_unicode_str(&mut self, text: &str) -> Result<(), SubmitError> {
+        warn!(
+            "Trying to submit unicode string '{}' with virtual_keyboard protocol. Some applications do not support it. This is clumsy and should be avoided",
+            text
+        );
+
+        // Save state of the keys and modifiers
+        let previously_pressed_keys = self.pressed_keys.clone();
+        let previously_pressed_modifiers = self.pressed_modifiers;
+
+        // Release everything to start in a clean state
+        unwrap_or_return!(self.release_all_keys_and_modifiers());
+
+        // Submit each unicode character individually
+        let mut result = Ok(());
+        for unicode_char in text.chars() {
+            match self.send_unicode_char(unicode_char) {
+                Ok(()) => {}
+                Err(err) => {
+                    result = Err(err);
+                    error!("Failed to submit the char '{}'", unicode_char);
+                    break;
+                }
+            }
+        }
+
+        // Restore previous state of the keys and modifiers
+        for keycode in previously_pressed_keys {
+            unwrap_or_return!(self.send_keycode(keycode, KeyMotion::Press));
+        }
+        unwrap_or_return!(self.send_modifiers_bitflag(previously_pressed_modifiers));
+        result
+    }
+
+    /// This method tries to submit a unicode char by looking up its hex value and then entering CTRL + SHIFT + u, the keycodes for the hex values and then 'SPACE'
+    /// At least under GNOME this should be converted to the corresponding unicode character. This is very clumsy and should only be used as a last resort.
+    fn send_unicode_char(&mut self, unicode_char: char) -> Result<(), SubmitError> {
+        // Press CTRL
+        unwrap_or_return!(self.send_modifiers_bitflag(ModifiersBitflag::CONTROL));
+
+        // Press CTRL + SHIFT
+        let ctrl_and_shift = ModifiersBitflag::CONTROL | ModifiersBitflag::SHIFT;
+        unwrap_or_return!(self.send_modifiers_bitflag(ctrl_and_shift));
+
+        // Press and release 'u'
+        unwrap_or_return!(self.press_release_key(22)); // 22 is the keycode for 'u'
+
+        // Get which codes to enter for the unicode char and enter each of the codes
+        // escape_unicode() returns \u{XXXX} but only the XXXX (hex code) are of interest so the rest is skipped. The number of X depends on the unicode character
+        for hexadecimal_unicode_escape in unicode_char
+            .escape_unicode()
+            .skip(3)
+            .take_while(|char| char.is_ascii_alphanumeric())
+        {
+            let keycode = String::from(hexadecimal_unicode_escape.to_ascii_uppercase()); // Necessary because all keys in the HashMap are uppercase
+            let keycode = if let Some(keycode) = input_event_codes_hashmap::KEY.get::<str>(&keycode)
+            {
+                keycode
+            } else {
+                error!("Keycode for '{}' was not found", hexadecimal_unicode_escape);
+                return Err(SubmitError::InvalidKeycode);
+            };
+            unwrap_or_return!(self.press_release_key(*keycode));
+        }
+
+        // Press and release 'SPACE'
+        unwrap_or_return!(self.press_release_key(57)); // The keycode for 'SPACE' is 57
+                                                       // Release CTRL + SHIFT
+        unwrap_or_return!(self.send_modifiers_bitflag(ModifiersBitflag::NO_MODIFIERS));
+        Ok(())
     }
 }

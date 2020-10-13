@@ -1,7 +1,6 @@
 use super::deserializer::LayoutSource;
 use crate::config::fallback_layout::*;
-use serde::Deserialize;
-use serde::Serialize;
+use serde::{de::Error, Deserialize, Deserializer, Serialize};
 use std::collections::HashMap;
 use std::fs::File;
 
@@ -21,9 +20,11 @@ pub enum KeyEvent {
 #[serde(deny_unknown_fields)]
 pub enum KeyAction {
     #[serde(rename = "enter_keycode")]
-    EnterKeycode(String),
+    #[serde(deserialize_with = "from_str")]
+    EnterKeycode(u32),
     #[serde(rename = "toggle_keycode")]
-    ToggleKeycode(String),
+    #[serde(deserialize_with = "from_str")]
+    ToggleKeycode(u32),
     #[serde(rename = "enter_string")]
     EnterString(String),
     #[serde(rename = "modifier")]
@@ -40,6 +41,19 @@ pub enum KeyAction {
     Erase,
     #[serde(rename = "open_popup")]
     OpenPopup,
+}
+
+fn from_str<'de, D>(deserializer: D) -> Result<u32, D::Error>
+where
+    D: Deserializer<'de>,
+{
+    let mut keycode_str: String = Deserialize::deserialize(deserializer)?;
+    keycode_str = keycode_str.to_ascii_uppercase(); // Necessary because all keys in the HashMap are uppercase
+    if let Some(keycode) = input_event_codes_hashmap::KEY.get::<str>(&keycode_str) {
+        Ok(*keycode)
+    } else {
+        Err(Error::custom("Not a valid keycode"))
+    }
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize, PartialEq, Eq, Hash)]
