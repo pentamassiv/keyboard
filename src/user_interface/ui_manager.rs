@@ -70,9 +70,11 @@ impl UIManager {
                 } else {
                     let mut landscape_layout = layout.to_string();
                     landscape_layout.push_str("_wide");
-                    match self.change_layout_view(Some(landscape_layout), None) {
-                        Ok(()) => info!("Sucessfully changed to landscape orientation"),
-                        _ => warn!("Failed to change to landscape orientation"),
+
+                    if let Ok(()) = self.change_layout_view(&Some(landscape_layout), None) {
+                        info!("Sucessfully changed to landscape orientation")
+                    } else {
+                        warn!("Failed to change to landscape orientation")
                     }
                 }
             }
@@ -80,10 +82,14 @@ impl UIManager {
                 let (layout, _) = self.current_layout_view.clone();
                 if let Some(portrait_layout) = layout.strip_suffix("_wide") {
                     // If str ends with suffix, Some(prefix) is returned, if not None is returned
-                    match self.change_layout_view(Some(portrait_layout.to_string()), None) {
+
+                    if let Ok(()) =
+                        self.change_layout_view(&Some(portrait_layout.to_string()), None)
+                    {
                         // View is changed back to base when orientation is changed
-                        Ok(()) => info!("Sucessfully changed to portrait orientation"),
-                        _ => warn!("Failed to change to portrait orientation"),
+                        info!("Sucessfully changed to portrait orientation")
+                    } else {
+                        warn!("Failed to change to portrait orientation")
                     }
                 } else {
                     info!("Already in portrait orientation")
@@ -94,7 +100,7 @@ impl UIManager {
 
     pub fn change_layout_view(
         &mut self,
-        new_layout: Option<String>,
+        new_layout: &Option<String>,
         new_view: Option<String>,
     ) -> Result<(), UIError> {
         let layout;

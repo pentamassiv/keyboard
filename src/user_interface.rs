@@ -40,11 +40,13 @@ pub enum Msg {
     Quit,
 }
 
+#[derive(Copy, Debug, Clone)]
 pub enum Orientation {
     Landscape,
     Portrait,
 }
 
+#[derive(Debug, Clone)]
 struct Gestures {
     long_press_gesture: GestureLongPress,
     drag_gesture: GestureDrag,

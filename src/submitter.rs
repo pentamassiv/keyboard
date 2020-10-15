@@ -27,7 +27,7 @@ impl<T: 'static + KeyboardVisibility + HintPurpose> Submitter<T> {
         let mut im_service = None;
         let mut virtual_keyboard = None;
         if let Some(vk_mgr) = vk_mgr {
-            virtual_keyboard = Some(wayland::vk_service::VKService::new(&seat, vk_mgr));
+            virtual_keyboard = Some(wayland::vk_service::VKService::new(&seat, &vk_mgr));
             info!("VirtualKeyboard service available");
         };
         if let Some(im_mgr) = im_mgr {
@@ -78,7 +78,7 @@ impl<T: 'static + KeyboardVisibility + HintPurpose> Submitter<T> {
     pub fn submit(&mut self, submission: Submission) {
         match submission {
             Submission::Text(text) => {
-                self.submit_text(text);
+                self.submit_text(&text);
             }
             Submission::Keycode(keycode) => {
                 info!("Submitter is trying to submit the keycode: {}", keycode);
@@ -143,11 +143,11 @@ impl<T: 'static + KeyboardVisibility + HintPurpose> Submitter<T> {
         }
     }
 
-    fn submit_text(&mut self, text: String) {
+    fn submit_text(&mut self, text: &str) {
         info!("Submitter is trying to submit the text: {}", text);
         let mut success = false;
         if let Some(im) = &mut self.im_service {
-            if im.commit_string(text.clone()).is_ok() && im.commit().is_ok() {
+            if im.commit_string(text.to_string()).is_ok() && im.commit().is_ok() {
                 success = true;
             };
         }

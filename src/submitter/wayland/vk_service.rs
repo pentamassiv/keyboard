@@ -87,7 +87,7 @@ impl Drop for VKService {
 }
 
 impl VKService {
-    pub fn new(seat: &WlSeat, vk_mgr: Main<ZwpVirtualKeyboardManagerV1>) -> Arc<Mutex<VKService>> {
+    pub fn new(seat: &WlSeat, vk_mgr: &Main<ZwpVirtualKeyboardManagerV1>) -> Arc<Mutex<VKService>> {
         let base_time = Instant::now();
         let pressed_keys = HashSet::new();
         let pressed_modifiers = ModifiersBitflag::NO_MODIFIERS;
@@ -100,13 +100,13 @@ impl VKService {
             virtual_keyboard: virtual_keyboard_proxy,
         };
         info!("VKService created");
-        vk_service.init_virtual_keyboard(virtual_keyboard_main);
+        VKService::init_virtual_keyboard(&virtual_keyboard_main);
         let vk_service = Arc::new(Mutex::new(vk_service));
         VKService::release_keys_when_ctrl_c(Arc::clone(&vk_service));
         vk_service
     }
 
-    fn init_virtual_keyboard(&self, virtual_keyboard_main: Main<ZwpVirtualKeyboardV1>) {
+    fn init_virtual_keyboard(virtual_keyboard_main: &Main<ZwpVirtualKeyboardV1>) {
         let src = super::keymap::KEYMAP;
         let keymap_size = super::keymap::KEYMAP.len();
         let keymap_size_u32: u32 = keymap_size.try_into().unwrap(); // Convert it from usize to u32, panics if it is not possible
@@ -291,7 +291,7 @@ impl VKService {
         for hexadecimal_unicode_escape in unicode_char
             .escape_unicode()
             .skip(3)
-            .take_while(|char| char.is_ascii_alphanumeric())
+            .take_while(char::is_ascii_alphanumeric)
         {
             let keycode = String::from(hexadecimal_unicode_escape.to_ascii_uppercase()); // Necessary because all keys in the HashMap are uppercase
             let keycode = if let Some(keycode) = input_event_codes_hashmap::KEY.get::<str>(&keycode)

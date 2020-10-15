@@ -91,7 +91,7 @@ impl relm::Update for Win {
                 .ui_manager
                 .change_hint_purpose(content_hint, content_purpose),
             Msg::ChangeUILayoutView(layout, view) => {
-                let _ = self.ui_manager.change_layout_view(layout, view); // Result not relevant
+                let _ = self.ui_manager.change_layout_view(&layout, view); // Result not relevant
             }
             Msg::ChangeKBLayoutView(layout, view) => {
                 self.keyboard.active_view = (layout, view);

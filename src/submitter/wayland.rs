@@ -36,7 +36,7 @@ fn get_wl_display_seat() -> (Display, WlSeat) {
     (display, seat)
 }
 
-fn get_wl_global_mgr(display: Display) -> (EventQueue, GlobalManager) {
+fn get_wl_global_mgr(display: &Display) -> (EventQueue, GlobalManager) {
     // Create the event queue
     let mut event_queue = display.create_event_queue();
     // Attach the display
@@ -83,7 +83,7 @@ fn try_get_mgrs(
 }
 pub fn get_layer_shell() -> Option<LayerShell> {
     let (display, _) = get_wl_display_seat();
-    let (_, global_mgr) = get_wl_global_mgr(display); // Event queue can be dropped because it was only used to find out if layer_shell is available
+    let (_, global_mgr) = get_wl_global_mgr(&display); // Event queue can be dropped because it was only used to find out if layer_shell is available
     let mut layer_shell_option = None;
     if let Ok(layer_shell) = global_mgr.instantiate_exact::<ZwlrLayerShellV1>(1) {
         layer_shell_option = Some(layer_shell);
@@ -101,7 +101,7 @@ pub fn init_wayland() -> (
     Option<InputMethodMgr>,
 ) {
     let (display, seat) = get_wl_display_seat();
-    let (event_queue, global_mgr) = get_wl_global_mgr(display);
+    let (event_queue, global_mgr) = get_wl_global_mgr(&display);
     //let seat = get_wl_seat(&global_mgr);
     let (vk_mgr, im_mgr) = try_get_mgrs(&global_mgr);
     info!("Wayland connection and objects initialized");

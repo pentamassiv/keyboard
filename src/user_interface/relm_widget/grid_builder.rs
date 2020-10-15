@@ -6,7 +6,7 @@ use gtk::{
 };
 use std::collections::HashMap;
 
-/// Buttons are identified by a tuple of three strings (layout_name, view_name, key_id)
+/// Buttons are identified by a tuple of three strings '(layout_name, view_name, key_id)'
 pub type ButtonId = (String, String, String);
 
 pub struct GridBuilder;
@@ -102,16 +102,16 @@ impl GridBuilder {
         let mut popover_option = None;
         if let Some(popup) = &key_meta.popup {
             let popover = Popover::new(Some(button));
-            let vbox = gtk::Box::new(gtk::Orientation::Vertical, 0);
+            let v_box = gtk::Box::new(gtk::Orientation::Vertical, 0);
             for popup_string in popup {
-                let hbox = gtk::Box::new(gtk::Orientation::Horizontal, 0);
+                let h_box = gtk::Box::new(gtk::Orientation::Horizontal, 0);
                 for popup_id in popup_string.split_whitespace() {
                     let new_popup_button = gtk::Button::new();
                     new_popup_button
                         .get_style_context()
                         .add_class("popover_key");
                     new_popup_button.set_label(popup_id);
-                    hbox.add(&new_popup_button);
+                    h_box.add(&new_popup_button);
                     let tmp_popover_ref = popover.clone();
                     new_popup_button.connect_clicked(move |_| tmp_popover_ref.hide());
                     relm::connect!(
@@ -126,9 +126,9 @@ impl GridBuilder {
                         )
                     );
                 }
-                vbox.add(&hbox);
+                v_box.add(&h_box);
             }
-            popover.add(&vbox);
+            popover.add(&v_box);
             popover_option = Some(popover);
         }
         popover_option

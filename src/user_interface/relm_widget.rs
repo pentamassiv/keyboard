@@ -188,21 +188,22 @@ fn load_css() {
     info! {"Trying to load CSS file to customize the keyboard"};
     let provider = gtk::CssProvider::new();
     // Gets PathBuf and tries to convert it to a String
-    let css_path_abs = match directories::get_absolute_path(directories::CSS_FILE_REL) {
-        Some(path) => path.into_os_string().into_string(),
-        None => {
-            error! {"Unable to load CSS file because the home directory was not found"};
-            return;
-        }
+    let css_path_abs = if let Some(path) = directories::get_absolute_path(directories::CSS_FILE_REL)
+    {
+        path.into_os_string().into_string()
+    } else {
+        error! {"Unable to load CSS file because the home directory was not found"};
+        return;
     };
+
     // If conversion was unsuccessfull, return
-    let css_path_abs = match css_path_abs {
-        Ok(path) => path,
-        Err(_) => {
-            error! {"Unable to load CSS file because the filepath was not UTF-8 encoded"};
-            return;
-        }
+    let css_path_abs = if let Ok(path) = css_path_abs {
+        path
+    } else {
+        error! {"Unable to load CSS file because the filepath was not UTF-8 encoded"};
+        return;
     };
+
     match provider.load_from_path(&css_path_abs) {
         Ok(_) => {
             // We give the CssProvided to the default screen so the CSS rules we added
