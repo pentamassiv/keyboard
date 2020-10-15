@@ -41,6 +41,7 @@ impl<T: 'static + KeyboardVisibility + HintPurpose> Submitter<T> {
             virtual_keyboard,
         }
     }
+
     pub fn fetch_events(&mut self) {
         self.event_queue
             .dispatch_pending(&mut (), |event, _, _| {
@@ -52,13 +53,14 @@ impl<T: 'static + KeyboardVisibility + HintPurpose> Submitter<T> {
             .unwrap();
     }
 
-    /*pub fn toggle_shift(&mut self) {
-        if let Some(virtual_keyboard) = &mut self.virtual_keyboard {
-            if virtual_keyboard.toggle_shift().is_err() {
-                error!("Submitter failed to toggle shift");
-            }
+    pub fn get_surrounding_text(&self) -> String {
+        if let Some(im) = &self.im_service {
+            return im.get_surrounding_text();
+        } else {
+            warn!("The surrounding text can not be requested because the imput_method protocol is unavailable");
         }
-    }*/
+        "".to_string()
+    }
 
     pub fn release_all_keys_and_modifiers(&mut self) {
         if let Some(virtual_keyboard) = &mut self.virtual_keyboard {

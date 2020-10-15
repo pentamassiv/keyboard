@@ -179,7 +179,9 @@ impl Keyboard {
                 self.ui_connection.emit(ui_message);
             }
             if let Some(submission) = submission {
-                let interpreted_submissions = self.interpreter.interpret(submission);
+                let surrounding_text = self.submitter.get_surrounding_text();
+                let interpreted_submissions =
+                    self.interpreter.interpret(surrounding_text, submission);
                 for submission in interpreted_submissions {
                     self.submitter.submit(submission);
                 }
