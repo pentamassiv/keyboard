@@ -10,11 +10,7 @@ impl Interpreter {
         Interpreter { prev_submissions }
     }
 
-    pub fn interpret(
-        &mut self,
-        surrounding_text: String,
-        submission: Submission,
-    ) -> Vec<Submission> {
+    pub fn interpret(&mut self, surrounding_text: &str, submission: Submission) -> Vec<Submission> {
         info!("Received the surrounding text: {}", surrounding_text);
         let mut new_submissions = Vec::new();
         match submission {

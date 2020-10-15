@@ -180,7 +180,7 @@ impl Keyboard {
             if let Some(submission) = submission {
                 let surrounding_text = self.submitter.get_surrounding_text();
                 let interpreted_submissions =
-                    self.interpreter.interpret(surrounding_text, submission);
+                    self.interpreter.interpret(&surrounding_text, submission);
                 for submission in interpreted_submissions {
                     self.submitter.submit(submission);
                 }

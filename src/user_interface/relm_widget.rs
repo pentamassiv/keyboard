@@ -1,8 +1,10 @@
 use gtk::{
-    ButtonExt, ContainerExt, CssProviderExt, GestureDragExt, GtkWindowExt, OverlayExt, StackExt,
-    StyleContextExt, WidgetExt,
+    ContainerExt, CssProviderExt, GestureDragExt, GtkWindowExt, OverlayExt, StackExt, WidgetExt,
 };
 use relm::Channel;
+
+#[cfg(feature = "suggestions")]
+use gtk::{ButtonExt, StyleContextExt};
 #[cfg(feature = "suggestions")]
 use std::collections::HashMap;
 
