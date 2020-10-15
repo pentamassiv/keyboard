@@ -13,7 +13,7 @@ makedepends=(git gcc pkgconf fakeroot gtk-layer-shell ) # It also requires cargo
 provides=(squeekboard squeekboard-git)
 conflicts=(squeekboard squeekboard-git fingerboard-bin)
 replaces=(squeekboard squeekboard-git fingerboard-bin)
-_commit=9d59dd543ed25d541444e555ed69b1bdf5db55b6  # tags/v0.13
+_commit=fae1e15969f207d8e6db9dbb1adc2a7efcb41426  # tags/v0.16
 source=("git+https://github.com/grelltrier/keyboard#commit=$_commit")
 sha256sums=("SKIP")
 
