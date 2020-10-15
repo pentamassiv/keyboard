@@ -28,12 +28,11 @@ If you want to use Fingerboard on your smartphone running Arch, you can [choose 
 
 ## Customization
 You probably want to use a layout that was created for the language you speak.
-To add all available layouts and style, just copy the 'data' and theming folders:
+To add all available layouts and style, just copy the 'data' folder:
 
 ```bash
 mkdir ~/.fingerboard
 cp -r data ~/.fingerboard
-cp -r theming ~/.fingerboard
 ```
 
 If the layout you are looking for is not available, you can easily edit one of the other layouts to adapt it to the missing language. You can't break anything with a malformed layout description. There is a (basic) fallback layout for exactly those cases :). If you made a layout for a missing language, share it with me so others can use it too.
