@@ -49,11 +49,11 @@ where
 {
     let mut keycode_str: String = Deserialize::deserialize(deserializer)?;
     keycode_str = keycode_str.to_ascii_uppercase(); // Necessary because all keys in the HashMap are uppercase
-    if let Some(keycode) = input_event_codes_hashmap::KEY.get::<str>(&keycode_str) {
-        Ok(*keycode)
-    } else {
-        Err(Error::custom("Not a valid keycode"))
-    }
+    input_event_codes_hashmap::KEY
+        .get::<str>(&keycode_str)
+        .map_or(Err(Error::custom("Not a valid keycode")), |keycode| {
+            Ok(*keycode)
+        })
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize, PartialEq, Eq, Hash)]

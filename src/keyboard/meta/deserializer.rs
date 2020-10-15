@@ -23,7 +23,7 @@ impl LayoutYamlParser {
                 Ok(paths) => {
                     info!("Searching for layout description in files {:?}", paths);
                     // Load layout from all yaml files in the directory. Other files and subdirectories are ignored
-                    for file in paths.filter_map(|x| x.ok()).filter(|x| {
+                    for file in paths.filter_map(std::result::Result::ok).filter(|x| {
                         x.path().extension().is_some() && x.path().extension().unwrap() == "yaml"
                     }) {
                         info!("Searching for layout description in file {:?}", file.path());

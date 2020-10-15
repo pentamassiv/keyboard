@@ -18,7 +18,7 @@ impl Key {
         self.id.clone()
     }
 
-    pub fn get_actions(&self, interaction: &Interaction) -> Option<&Vec<KeyAction>> {
-        self.actions.get(interaction)
+    pub fn get_actions(&self, interaction: Interaction) -> Option<&Vec<KeyAction>> {
+        self.actions.get(&interaction)
     }
 }

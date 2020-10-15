@@ -46,7 +46,7 @@ impl View {
         let max_delta_y = 2 * self.cell_height;
         for (x, y) in self.key_coordinates.keys() {
             let distance_new_point =
-                self.get_distance(*x, *y, input_x, input_y, max_delta_x, max_delta_y);
+                View::get_distance(*x, *y, input_x, input_y, max_delta_x, max_delta_y);
             if distance_new_point < closest_distance {
                 closest_key = self.key_coordinates.get(&(*x, *y));
                 closest_distance = distance_new_point;
@@ -61,7 +61,6 @@ impl View {
     }
 
     fn get_distance(
-        &self,
         point_a_x: i32,
         point_a_y: i32,
         point_b_x: i32,

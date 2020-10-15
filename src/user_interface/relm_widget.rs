@@ -40,19 +40,19 @@ impl relm::Widget for Win {
         overlay.add(&stack);
         overlay.add_overlay(&drawing_area);
 
-        let vbox = gtk::Box::new(gtk::Orientation::Vertical, 2);
+        let v_box = gtk::Box::new(gtk::Orientation::Vertical, 2);
 
         #[cfg(feature = "suggestions")]
         {
-            let hbox = make_pref_hbox(relm, &keyboard);
-            vbox.add(&hbox);
+            let h_box = make_pref_hbox(relm, &keyboard);
+            v_box.add(&h_box);
             info! {"Suggestion buttons added"};
         }
-        vbox.add(&overlay);
+        v_box.add(&overlay);
 
         let window = Window::new(WindowType::Toplevel);
         window.set_property_default_height(WINDOW_DEFAULT_HEIGHT);
-        window.add(&vbox);
+        window.add(&v_box);
 
         let long_press_gesture = GestureLongPress::new(&drawing_area);
         long_press_gesture.set_property_delay_factor(input_settings::LONG_PRESS_DELAY_FACTOR);
@@ -96,8 +96,7 @@ impl relm::Widget for Win {
 
     fn init_view(&mut self) {
         if crate::submitter::wayland::get_layer_shell().is_some() {
-            let window_clone = self.widgets.window.clone();
-            wayland::layer_shell::make_overlay_layer(window_clone);
+            wayland::layer_shell::make_overlay_layer(&self.widgets.window);
         }
 
         let relm_clone = self.relm.clone(); // Is moved in closure
@@ -229,14 +228,14 @@ fn make_pref_hbox(relm: &relm::Relm<super::Win>, keyboard: &keyboard::Keyboard) 
         layout_names.push(layout_name);
     }
     let preferences_button = make_pref_button(relm, layout_names);
-    let hbox = gtk::Box::new(gtk::Orientation::Horizontal, 0);
-    hbox.set_margin_start(0);
-    hbox.set_margin_end(0);
+    let h_box = gtk::Box::new(gtk::Orientation::Horizontal, 0);
+    h_box.set_margin_start(0);
+    h_box.set_margin_end(0);
     for suggestion_button in suggestion_buttons {
-        hbox.add(&suggestion_button);
+        h_box.add(&suggestion_button);
     }
-    hbox.add(&preferences_button);
-    hbox
+    h_box.add(&preferences_button);
+    h_box
 }
 
 #[cfg(feature = "suggestions")]

@@ -115,24 +115,21 @@ impl Keyboard {
         // This is necessary to ensure a release always releases the last activated button because small moves of the input don't necessaryly trigger a SwipeUpdate
         // This means a user could press a button at its edge and move it just enough for a different button to be returned as closest after slightly moving the finger
         // Now the pressed button would never be released
-        let key = match interaction {
-            Interaction::Tap(TapDuration::Short, TapMotion::Press) => {
-                self.active_key = self
-                    .views
-                    .get(active_view)
-                    .unwrap()
-                    .get_closest_key(x, y)
-                    .cloned();
-                info!("Keyboard looked up closest key");
-                &self.active_key
-            }
-            _ => {
-                info!(
-                    "Keyboard did not look up the closest key, but used the previously pressed key"
-                );
-                &self.active_key
-            }
+
+        let key = if let Interaction::Tap(TapDuration::Short, TapMotion::Press) = interaction {
+            self.active_key = self
+                .views
+                .get(active_view)
+                .unwrap()
+                .get_closest_key(x, y)
+                .cloned();
+            info!("Keyboard looked up closest key");
+            &self.active_key
+        } else {
+            info!("Keyboard did not look up the closest key, but used the previously pressed key");
+            &self.active_key
         };
+
         if let Some(key) = key {
             let key = key.clone();
 
@@ -140,7 +137,7 @@ impl Keyboard {
                 Interaction::Tap(_, tap_motion) => {
                     self.ui_connection
                         .emit(Msg::ButtonInteraction(key.get_id(), tap_motion));
-                    if let Some(key_actions) = key.get_actions(&interaction) {
+                    if let Some(key_actions) = key.get_actions(interaction) {
                         self.execute_tap_action(&key.get_id(), key_actions);
                     };
                 }
@@ -150,8 +147,7 @@ impl Keyboard {
                         self.ui_connection.emit(Msg::ReleaseAllButtions);
                         self.submitter.release_all_keys_and_modifiers();
                     }
-                    SwipeAction::Update => {}
-                    SwipeAction::Finish => {}
+                    SwipeAction::Update | SwipeAction::Finish => {}
                 },
             }
         }

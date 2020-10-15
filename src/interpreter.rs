@@ -29,16 +29,10 @@ impl Interpreter {
                     new_submissions.push(Submission::Text(current_submission));
                 }
             }
-            Submission::Erase(_) => {
-                new_submissions.push(submission);
-            }
-            Submission::Keycode(_) => {
-                new_submissions.push(submission);
-            }
-            Submission::ToggleKeycode(_) => {
-                new_submissions.push(submission);
-            }
-            Submission::Modifier(_) => {
+            Submission::Erase(_)
+            | Submission::Keycode(_)
+            | Submission::ToggleKeycode(_)
+            | Submission::Modifier(_) => {
                 new_submissions.push(submission);
             }
         }

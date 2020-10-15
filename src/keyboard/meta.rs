@@ -189,7 +189,7 @@ impl KeyArrangement {
         let (uncentered_key_arrangement, row_widths) =
             KeyArrangement::get_uncentered_key_arrangement(key_arrangement_deserialized, key_meta);
         let (centered_key_arrangement, no_columns, no_rows) =
-            KeyArrangement::get_centered_key_arrangement(uncentered_key_arrangement, row_widths);
+            KeyArrangement::get_centered_key_arrangement(uncentered_key_arrangement, &row_widths);
         KeyArrangement {
             key_arrangement: centered_key_arrangement,
             no_rows,
@@ -229,7 +229,7 @@ impl KeyArrangement {
 
     fn get_centered_key_arrangement(
         uncentered_key_arrangement: HashMap<String, Location>,
-        row_widths: Vec<i32>,
+        row_widths: &[i32],
     ) -> (HashMap<String, Location>, i32, i32) {
         let no_columns = row_widths.iter().max().unwrap();
         let no_rows = row_widths.len() as i32;

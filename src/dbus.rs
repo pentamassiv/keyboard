@@ -32,13 +32,10 @@ impl DBusService {
     }
 
     pub fn haptic_feedback(&self, event: String) {
-        match self.event_transmitter.send(event) {
-            Ok(()) => info!(
-                "Event was sent over the channel to the DBusClient"
-            ),
-            Err(_) => error!(
-                "It was not possible to send the event over the channel to the DBusClient. The receiver was deallocated before."
-            ),
-        }
+        if let Ok(()) = self.event_transmitter.send(event) {
+            info!("Event was sent over the channel to the DBusClient")
+        } else {
+            error!("It was not possible to send the event over the channel to the DBusClient. The receiver was deallocated before.")
+        };
     }
 }
