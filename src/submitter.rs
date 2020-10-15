@@ -1,8 +1,9 @@
-pub use self::wayland::vk_service::KeyMotion;
-use crate::keyboard;
 use std::sync::{Arc, Mutex};
 use wayland_client::EventQueue;
-use zwp_input_method_service::*;
+use zwp_input_method_service::{HintPurpose, IMService, KeyboardVisibility};
+
+pub use self::wayland::vk_service::KeyMotion;
+use crate::keyboard;
 
 pub mod wayland;
 

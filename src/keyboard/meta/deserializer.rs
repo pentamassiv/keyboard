@@ -1,7 +1,8 @@
-use super::deserialized_structs::*;
-use crate::config::directories;
 use std::collections::HashMap;
 use std::path;
+
+use super::deserialized_structs::LayoutDeserialized;
+use crate::config::directories;
 
 pub enum LayoutSource {
     YamlFile(path::PathBuf),

@@ -1,5 +1,6 @@
-use crate::keyboard::*;
 use std::collections::HashMap;
+
+use crate::keyboard::{Key, KeyArrangement, KeyMeta, RESOLUTIONX, RESOLUTIONY};
 
 #[derive(Debug)]
 pub struct View {

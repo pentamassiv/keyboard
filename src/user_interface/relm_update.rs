@@ -1,4 +1,7 @@
-use super::*;
+use gtk::{ToggleButtonExt, WidgetExt};
+use std::collections::HashSet;
+
+use super::{GestureModel, Model, Msg, TapMotion, Win};
 
 impl relm::Update for Win {
     // Specify the model used for this widget.

@@ -1,24 +1,27 @@
-use super::gesture_handler::GestureSignal;
-use super::{Gestures, Msg, Orientation, UIManager, Widgets, Win};
-use crate::config::directories;
-use crate::config::input_settings;
-use crate::keyboard;
-use crate::submitter::*;
-use gtk::OverlayExt;
-use gtk::*;
-use keyboard::UIConnector;
+use gtk::{
+    ButtonExt, ContainerExt, CssProviderExt, GestureDragExt, GtkWindowExt, OverlayExt, StackExt,
+    StyleContextExt, WidgetExt,
+};
 use relm::Channel;
 #[cfg(feature = "suggestions")]
 use std::collections::HashMap;
 
+use super::gesture_handler::GestureSignal;
+use super::{Gestures, Msg, Orientation, UIManager, Widgets, Win};
+use crate::config::directories;
+use crate::config::input_settings;
+use crate::submitter::wayland;
+use crate::{keyboard, keyboard::UIConnector};
+
 mod grid_builder;
+
 pub use grid_builder::GridBuilder;
 
 pub const WINDOW_DEFAULT_HEIGHT: i32 = 720;
 
 impl relm::Widget for Win {
     // Specify the type of the root widget.
-    type Root = Window;
+    type Root = gtk::Window;
 
     // Return the root widget.
     fn root(&self) -> Self::Root {
@@ -50,13 +53,13 @@ impl relm::Widget for Win {
         }
         v_box.add(&overlay);
 
-        let window = Window::new(WindowType::Toplevel);
+        let window = gtk::Window::new(gtk::WindowType::Toplevel);
         window.set_property_default_height(WINDOW_DEFAULT_HEIGHT);
         window.add(&v_box);
 
-        let long_press_gesture = GestureLongPress::new(&drawing_area);
+        let long_press_gesture = gtk::GestureLongPress::new(&drawing_area);
         long_press_gesture.set_property_delay_factor(input_settings::LONG_PRESS_DELAY_FACTOR);
-        let drag_gesture = GestureDrag::new(&drawing_area);
+        let drag_gesture = gtk::GestureDrag::new(&drawing_area);
 
         let stream = relm.stream().clone();
         // Create a channel to be able to send a message from another thread.
@@ -159,14 +162,14 @@ impl relm::Widget for Win {
             self.relm,
             self.widgets.window,
             connect_delete_event(_, _),
-            return (Some(Msg::Quit), Inhibit(false))
+            return (Some(Msg::Quit), gtk::Inhibit(false))
         );
 
         #[cfg(feature = "gesture")]
         relm::connect!(
             // TODO: Is this even necessary since it is drawn every few milliseconds anyways????
             self.relm,
-            self.widgets.overlay,
+            self.widgets._overlay,
             connect_draw(_, _),
             return (Some(Msg::UpdateDrawBuffer), gtk::Inhibit(false))
         );
@@ -222,7 +225,7 @@ fn load_css() {
 }
 
 #[cfg(feature = "suggestions")]
-fn make_pref_hbox(relm: &relm::Relm<super::Win>, keyboard: &keyboard::Keyboard) -> Box {
+fn make_pref_hbox(relm: &relm::Relm<super::Win>, keyboard: &keyboard::Keyboard) -> gtk::Box {
     let suggestion_buttons = make_suggestion_buttons(relm);
     let mut layout_names = Vec::new();
     for (layout_name, _) in keyboard.views.keys() {
@@ -240,7 +243,7 @@ fn make_pref_hbox(relm: &relm::Relm<super::Win>, keyboard: &keyboard::Keyboard) 
 }
 
 #[cfg(feature = "suggestions")]
-fn make_pref_button(relm: &relm::Relm<super::Win>, layout_names: Vec<&String>) -> Button {
+fn make_pref_button(relm: &relm::Relm<super::Win>, layout_names: Vec<&String>) -> gtk::Button {
     let preferences_button = gtk::Button::new();
     preferences_button
         .get_style_context()
@@ -284,7 +287,7 @@ fn make_pref_button(relm: &relm::Relm<super::Win>, layout_names: Vec<&String>) -
 }
 
 #[cfg(feature = "suggestions")]
-fn make_suggestion_buttons(relm: &relm::Relm<super::Win>) -> Vec<Button> {
+fn make_suggestion_buttons(relm: &relm::Relm<super::Win>) -> Vec<gtk::Button> {
     let mut buttons = Vec::new();
     let button_names = [
         "sug_l".to_string(),

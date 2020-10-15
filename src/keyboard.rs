@@ -1,20 +1,23 @@
-pub use super::submitter::KeyMotion;
 extern crate pretty_env_logger;
-
-use super::submitter::*;
-use crate::config::fallback_layout::*;
-use crate::interpreter::Interpreter;
-use crate::user_interface::Msg;
 use std::collections::{HashMap, HashSet};
 
-mod ui_connector;
-pub use ui_connector::{EmitUIMsg, UIConnector, UIMsg};
-mod meta;
-mod view;
-use view::View;
+use crate::config::fallback_layout::{FALLBACK_LAYOUT_NAME, FALLBACK_VIEW_NAME};
+use crate::interpreter::Interpreter;
+pub use crate::submitter::KeyMotion;
+use crate::submitter::{Submission, Submitter};
+use crate::user_interface::Msg;
+
 mod key;
-pub use self::meta::*;
+mod meta;
+mod ui_connector;
+mod view;
+
+pub use self::meta::{
+    KeyAction, KeyArrangement, KeyDisplay, KeyMeta, LayoutMeta, Location, Modifier,
+};
 use key::Key;
+pub use ui_connector::{EmitUIMsg, UIConnector, UIMsg};
+use view::View;
 
 pub const RESOLUTIONX: i32 = 1000; // TODO: Think about the exact value
 pub const RESOLUTIONY: i32 = 1000;

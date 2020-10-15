@@ -1,9 +1,10 @@
-use crate::user_interface::Msg;
-use crate::user_interface::Win;
 use wayland_protocols::unstable::text_input::v3::client::zwp_text_input_v3::{
     ContentHint, ContentPurpose,
 };
-use zwp_input_method_service::*;
+use zwp_input_method_service::{HintPurpose, KeyboardVisibility};
+
+use crate::user_interface::Msg;
+use crate::user_interface::Win;
 
 pub enum UIMsg {
     Visible(bool),

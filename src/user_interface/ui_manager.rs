@@ -1,11 +1,12 @@
-use super::relm_widget::GridBuilder;
-use super::{Msg, Orientation};
-use crate::dbus::DBusService;
 use gtk::{Stack, StackExt, WidgetExt, Window};
 use relm::Sender;
 use wayland_protocols::unstable::text_input::v3::client::zwp_text_input_v3::{
     ContentHint, ContentPurpose,
 };
+
+use super::relm_widget::GridBuilder;
+use super::{Msg, Orientation};
+use crate::dbus::DBusService;
 
 pub struct UIManager {
     sender: Sender<Msg>,

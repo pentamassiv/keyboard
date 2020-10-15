@@ -7,7 +7,6 @@ use wayland_protocols::wlr::unstable::layer_shell::v1::client::zwlr_layer_shell_
 use zwp_input_method::input_method_unstable_v2::zwp_input_method_manager_v2::ZwpInputMethodManagerV2;
 use zwp_virtual_keyboard::virtual_keyboard_unstable_v1::zwp_virtual_keyboard_manager_v1::ZwpVirtualKeyboardManagerV1;
 
-// TODO check which modules need to be public
 pub mod keymap;
 pub mod layer_shell;
 pub mod vk_service;

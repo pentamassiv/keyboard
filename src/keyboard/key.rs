@@ -1,5 +1,6 @@
-use crate::keyboard::*;
 use std::collections::HashMap;
+
+use crate::keyboard::{Interaction, KeyAction, KeyMeta};
 
 #[derive(Debug, Clone)]
 pub struct Key {

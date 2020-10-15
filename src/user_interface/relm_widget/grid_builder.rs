@@ -1,10 +1,11 @@
-use crate::config::directories;
-use crate::keyboard::{KeyArrangement, KeyDisplay, KeyMeta, LayoutMeta, Location};
 use gtk::{
     ButtonExt, ContainerExt, Grid, GridExt, Popover, Stack, StackExt, StyleContextExt,
     ToggleButton, WidgetExt,
 };
 use std::collections::HashMap;
+
+use crate::config::directories;
+use crate::keyboard::{KeyArrangement, KeyDisplay, KeyMeta, LayoutMeta, Location};
 
 /// Buttons are identified by a tuple of three strings '(layout_name, view_name, key_id)'
 pub type ButtonId = (String, String, String);

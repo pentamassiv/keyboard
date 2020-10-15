@@ -1,7 +1,8 @@
-use crate::keyboard::{Interaction, SwipeAction, TapDuration, TapMotion};
-use crate::user_interface::{Msg, Win};
 use relm::Relm;
 use std::time::Instant;
+
+use crate::keyboard::{Interaction, SwipeAction, TapDuration, TapMotion};
+use crate::user_interface::{Msg, Win};
 
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub struct Point {

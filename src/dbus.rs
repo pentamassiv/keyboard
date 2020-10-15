@@ -1,10 +1,16 @@
+use std::sync::{
+    atomic::{AtomicBool, Ordering},
+    mpsc,
+    mpsc::channel,
+    Arc, Mutex,
+};
+
 use crate::user_interface;
-use std::sync::atomic::{AtomicBool, Ordering};
-use std::sync::{mpsc, mpsc::channel};
-use std::sync::{Arc, Mutex};
+
 mod dbus_client;
-use dbus_client::DBusClient;
 mod dbus_server;
+
+use dbus_client::DBusClient;
 use dbus_server::DBusServer;
 
 pub struct DBusService {

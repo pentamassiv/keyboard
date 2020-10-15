@@ -1,10 +1,13 @@
-use crate::keyboard::{Interaction, TapDuration, TapMotion};
 use std::collections::HashMap;
-mod deserializer;
-use deserializer::LayoutYamlParser;
+
+use crate::keyboard::{Interaction, TapDuration, TapMotion};
+
 mod deserialized_structs;
+mod deserializer;
+
 pub use deserialized_structs::{KeyAction, KeyDisplay, KeyEvent, Modifier, Outline};
 use deserialized_structs::{KeyDeserialized, KeyIds, LayoutDeserialized};
+use deserializer::LayoutYamlParser;
 
 #[derive(Debug)]
 pub struct KeyMeta {

@@ -1,10 +1,5 @@
-use dbus::blocking::Connection;
-use std::sync::mpsc;
-use std::thread;
-
-use dbus::arg::Variant;
-use std::collections::HashMap;
-use std::time::Duration;
+use dbus::{arg::Variant, blocking::Connection};
+use std::{collections::HashMap, sync::mpsc, thread, time::Duration};
 
 pub struct DBusClient;
 impl DBusClient {

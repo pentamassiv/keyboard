@@ -1,8 +1,9 @@
-use super::deserializer::LayoutSource;
-use crate::config::fallback_layout::*;
 use serde::{de::Error, Deserialize, Deserializer, Serialize};
 use std::collections::HashMap;
 use std::fs::File;
+
+use super::deserializer::LayoutSource;
+use crate::config::fallback_layout::{FALLBACK_LAYOUT, FALLBACK_LAYOUT_NAME};
 
 /// Keys are embedded in a single string
 pub type KeyIds = String;

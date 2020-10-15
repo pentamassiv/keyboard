@@ -1,15 +1,18 @@
-use crate::keyboard;
-use std::collections::HashSet;
-use std::convert::TryInto;
-use std::io::{Seek, SeekFrom, Write};
-use std::os::unix::io::IntoRawFd;
-use std::sync::{Arc, Mutex};
-use std::time::Instant;
+use std::{
+    collections::HashSet,
+    convert::TryInto,
+    io::{Seek, SeekFrom, Write},
+    os::unix::io::IntoRawFd,
+    sync::{Arc, Mutex},
+    time::Instant,
+};
 use tempfile::tempfile;
 use wayland_client::protocol::wl_seat::WlSeat;
 use wayland_client::{Main, Proxy};
 use zwp_virtual_keyboard::virtual_keyboard_unstable_v1::zwp_virtual_keyboard_manager_v1::ZwpVirtualKeyboardManagerV1;
 use zwp_virtual_keyboard::virtual_keyboard_unstable_v1::zwp_virtual_keyboard_v1::ZwpVirtualKeyboardV1;
+
+use crate::keyboard;
 
 macro_rules! unwrap_or_return {
     ( $e:expr ) => {

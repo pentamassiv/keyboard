@@ -1,10 +1,13 @@
-use crate::user_interface;
 use dbus::blocking::Connection;
 use dbus_crossroads::{Context, Crossroads};
 use relm::Sender;
-use std::sync::atomic::{AtomicBool, Ordering};
-use std::sync::{Arc, Mutex};
+use std::sync::{
+    atomic::{AtomicBool, Ordering},
+    Arc, Mutex,
+};
 use std::thread;
+
+use crate::user_interface;
 
 pub struct DBusServer;
 impl DBusServer {
