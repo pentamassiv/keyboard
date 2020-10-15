@@ -1,7 +1,7 @@
 # Maintainer: Robin Grell (pentamassiv) <pentamassiv@posteo.de>
 
 pkgname=fingerboard
-pkgver=0.1.0
+pkgver=0.16
 pkgrel=1
 pkgdesc="A customizable open-source keyboard with advanced features"
 url="https://github.com/grelltrier/keyboard"
@@ -45,5 +45,5 @@ package() {
   # Moves folders with keyboard layouts, stylesheets and icons
   install -Dm 644 data/keyboards/* -t "${pkgdir}/${HOME}/.fingerboard/data/keyboards"
   install -Dm 644 data/icons/* -t "${pkgdir}/${HOME}/.fingerboard/data/icons"
-  install -Dm 644 theming/* -t "${pkgdir}/${HOME}/.fingerboard/theming"
+  install -Dm 644 data/theming/* -t "${pkgdir}/${HOME}/.fingerboard/data/theming"
 }
