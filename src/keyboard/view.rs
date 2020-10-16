@@ -1,5 +1,7 @@
+// Imports from other crates
 use std::collections::HashMap;
 
+// Imports from other modules
 use crate::keyboard::{Key, KeyArrangement, KeyMeta, RESOLUTIONX, RESOLUTIONY};
 
 #[derive(Debug)]

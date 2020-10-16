@@ -1,13 +1,17 @@
+// Imports from other crates
 use std::collections::HashMap;
 
+// Imports from other modules
 use crate::keyboard::{Interaction, TapDuration, TapMotion};
 
+// Modules
 mod deserialized_structs;
 mod deserializer;
-
-pub use deserialized_structs::{KeyAction, KeyDisplay, KeyEvent, Modifier, Outline};
 use deserialized_structs::{KeyDeserialized, KeyIds, LayoutDeserialized};
 use deserializer::LayoutYamlParser;
+
+// Re-exports
+pub use deserialized_structs::{KeyAction, KeyDisplay, KeyEvent, Modifier, Outline};
 
 #[derive(Debug)]
 pub struct KeyMeta {

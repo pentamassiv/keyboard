@@ -1,7 +1,9 @@
+// Imports from other crates
 use serde::{de::Error, Deserialize, Deserializer, Serialize};
 use std::collections::HashMap;
 use std::fs::File;
 
+// Imports from other modules
 use super::deserializer::LayoutSource;
 use crate::config::fallback_layout::{FALLBACK_LAYOUT, FALLBACK_LAYOUT_NAME};
 

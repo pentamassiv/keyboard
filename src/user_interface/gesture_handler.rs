@@ -1,6 +1,8 @@
+// Imports from other crates
 use relm::Relm;
 use std::time::Instant;
 
+// Imports from other modules
 use crate::keyboard::{Interaction, SwipeAction, TapDuration, TapMotion};
 use crate::user_interface::{Msg, Win};
 

@@ -1,6 +1,8 @@
+// Imports from other crates
 use std::collections::HashMap;
 use std::path;
 
+// Imports from other modules
 use super::deserialized_structs::LayoutDeserialized;
 use crate::config::directories;
 

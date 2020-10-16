@@ -1,21 +1,31 @@
+// Imports from other crates
 use std::sync::{Arc, Mutex};
 use wayland_client::EventQueue;
 use zwp_input_method_service::{HintPurpose, IMService, KeyboardVisibility};
 
+// Imports from other modules
 pub use self::wayland::vk_service::KeyMotion;
 use crate::keyboard;
 
+// Modules
 pub mod wayland;
 
 #[derive(Debug, PartialEq, Clone)]
+/// Possible types of submissions
 pub enum Submission {
+    /// Submit a string
     Text(String),
+    /// Emulates a physical key that is pressed and released
     Keycode(u32),
+    /// Emulates a physical key that gets toggled (if it was previously released, emulates a press and if it was previously pressed, emulates a release)
     ToggleKeycode(u32),
+    /// Emulates a modifier getting pressed (e.g SHIFT)
     Modifier(keyboard::Modifier),
+    /// Erase the number of chars before the cursor
     Erase(u32),
 }
 
+/// Handles all submissions
 pub struct Submitter<T: 'static + KeyboardVisibility + HintPurpose> {
     event_queue: EventQueue,
     im_service: Option<IMService<T>>,
@@ -23,14 +33,18 @@ pub struct Submitter<T: 'static + KeyboardVisibility + HintPurpose> {
 }
 
 impl<T: 'static + KeyboardVisibility + HintPurpose> Submitter<T> {
+    /// Creates a new Submitter
     pub fn new(connector: T) -> Submitter<T> {
+        // Gets all necessary wayland objects to use the available protocols
         let (event_queue, seat, vk_mgr, im_mgr) = wayland::init_wayland();
         let mut im_service = None;
         let mut virtual_keyboard = None;
+        // Tries to create a VKService (wrapper for the virtual_keyboard protocol). The shell has to support to protocol to be available
         if let Some(vk_mgr) = vk_mgr {
             virtual_keyboard = Some(wayland::vk_service::VKService::new(&seat, &vk_mgr));
             info!("VirtualKeyboard service available");
         };
+        // Tries to create a IMService (wrapper for the input_method protocol). The shell has to support to protocol to be available
         if let Some(im_mgr) = im_mgr {
             im_service = Some(IMService::new(&seat, im_mgr, connector));
             info!("InputMethod service available");
@@ -43,6 +57,7 @@ impl<T: 'static + KeyboardVisibility + HintPurpose> Submitter<T> {
         }
     }
 
+    /// Fetch new events from the wayland event queue
     pub fn fetch_events(&mut self) {
         self.event_queue
             .dispatch_pending(&mut (), |event, _, _| {
@@ -54,15 +69,17 @@ impl<T: 'static + KeyboardVisibility + HintPurpose> Submitter<T> {
             .unwrap();
     }
 
-    pub fn get_surrounding_text(&self) -> String {
+    /// Get the strings left and right to the cursor
+    pub fn get_surrounding_text(&self) -> (String, String) {
         if let Some(im) = &self.im_service {
             return im.get_surrounding_text();
         } else {
             warn!("The surrounding text can not be requested because the imput_method protocol is unavailable");
         }
-        "".to_string()
+        ("".to_string(), "".to_string())
     }
 
+    /// Sends requests to release all keys and modifiers
     pub fn release_all_keys_and_modifiers(&mut self) {
         if let Some(virtual_keyboard) = &mut self.virtual_keyboard {
             if virtual_keyboard
@@ -76,7 +93,11 @@ impl<T: 'static + KeyboardVisibility + HintPurpose> Submitter<T> {
         }
     }
 
+    /// Submits the Submission with the available protocol.
+    /// If available the input_method protocol is tried first because it is simpler to submit strings
+    /// and more reliable when it comes to submitting non-ascii chars
     pub fn submit(&mut self, submission: Submission) {
+        // Depending on the variant of submission, a different method is executed
         match submission {
             Submission::Text(text) => {
                 self.submit_text(&text);
@@ -144,6 +165,9 @@ impl<T: 'static + KeyboardVisibility + HintPurpose> Submitter<T> {
         }
     }
 
+    /// Try to submit the text
+    /// If the input_method protocol is available, use it to submit the string as a whole.
+    /// If it is not available, submit each character individually via virtual_keyboard protocol (This is error prone and should only be used as a last resort).
     fn submit_text(&mut self, text: &str) {
         info!("Submitter is trying to submit the text: {}", text);
         let mut success = false;
@@ -170,6 +194,8 @@ impl<T: 'static + KeyboardVisibility + HintPurpose> Submitter<T> {
         }
     }
 
+    /// Erases the specified amount of chars left of the cursor
+    /// Uses the input_method protocol if available. As a fallback it sends press/release requests of the DELETE key repeatedly.
     fn erase(&mut self, no_char: u32) {
         info!(
             "Submitter is trying to erase the last {} characters",

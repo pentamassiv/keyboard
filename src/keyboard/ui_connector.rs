@@ -1,8 +1,10 @@
+// Imports from other crates
 use wayland_protocols::unstable::text_input::v3::client::zwp_text_input_v3::{
     ContentHint, ContentPurpose,
 };
 use zwp_input_method_service::{HintPurpose, KeyboardVisibility};
 
+// Imports from other modules
 use crate::user_interface::Msg;
 use crate::user_interface::Win;
 
@@ -54,7 +56,7 @@ impl EmitUIMsg for UIConnector {
     fn emit_ui_msg(&self, message: UIMsg) {
         match message {
             UIMsg::Visible(visable) => {
-                self.emit(Msg::Visible(visable));
+                self.emit(Msg::SetVisibility(visable));
             }
             UIMsg::HintPurpose(content_hint, content_purpose) => {
                 self.emit(Msg::HintPurpose(content_hint, content_purpose));

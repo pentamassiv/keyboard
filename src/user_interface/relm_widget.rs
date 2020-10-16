@@ -1,3 +1,4 @@
+// Imports from other crates
 use gtk::{
     ContainerExt, CssProviderExt, GestureDragExt, GtkWindowExt, OverlayExt, StackExt, WidgetExt,
 };
@@ -8,6 +9,7 @@ use gtk::{ButtonExt, StyleContextExt};
 #[cfg(feature = "suggestions")]
 use std::collections::HashMap;
 
+// Imports from other modules
 use super::gesture_handler::GestureSignal;
 use super::{Gestures, Msg, Orientation, UIManager, Widgets, Win};
 use crate::config::directories;
@@ -15,8 +17,10 @@ use crate::config::input_settings;
 use crate::submitter::wayland;
 use crate::{keyboard, keyboard::UIConnector};
 
+// Modules
 mod grid_builder;
 
+// Re-exports
 pub use grid_builder::GridBuilder;
 
 pub const WINDOW_DEFAULT_HEIGHT: i32 = 720;

@@ -1,3 +1,4 @@
+// Imports from other crates
 use dbus::blocking::Connection;
 use dbus_crossroads::{Context, Crossroads};
 use relm::Sender;
@@ -7,6 +8,7 @@ use std::sync::{
 };
 use std::thread;
 
+// Imports from other modules
 use crate::user_interface;
 
 pub struct DBusServer;
@@ -52,7 +54,7 @@ impl DBusServer {
                         sender
                             .lock()
                             .unwrap()
-                            .send(user_interface::Msg::Visible(visible))
+                            .send(user_interface::Msg::SetVisibility(visible))
                             .expect("send message");
                         Ok(())
                     },

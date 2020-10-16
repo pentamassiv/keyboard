@@ -1,9 +1,11 @@
+// Imports from other crates
 use gtk::{
     ButtonExt, ContainerExt, Grid, GridExt, Popover, Stack, StackExt, StyleContextExt,
     ToggleButton, WidgetExt,
 };
 use std::collections::HashMap;
 
+// Imports from other modules
 use crate::config::directories;
 use crate::keyboard::{KeyArrangement, KeyDisplay, KeyMeta, LayoutMeta, Location};
 

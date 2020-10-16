@@ -1,3 +1,4 @@
+// Imports from other modules
 use crate::submitter::Submission;
 
 pub struct Interpreter {
@@ -10,8 +11,14 @@ impl Interpreter {
         Interpreter { prev_submissions }
     }
 
-    pub fn interpret(&mut self, surrounding_text: &str, submission: Submission) -> Vec<Submission> {
-        info!("Received the surrounding text: {}", surrounding_text);
+    pub fn interpret(
+        &mut self,
+        surrounding_text: (String, String),
+        submission: Submission,
+    ) -> Vec<Submission> {
+        info!("Received the surrounding text:");
+        info!("Left of the cursor: {}", surrounding_text.0);
+        info!("Right of the cursor: {}", surrounding_text.1);
         let mut new_submissions = Vec::new();
         match submission {
             Submission::Text(current_submission) => {

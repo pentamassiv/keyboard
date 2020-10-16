@@ -1,6 +1,8 @@
+// Imports from other crates
 use gtk::{ToggleButtonExt, WidgetExt};
 use std::collections::HashSet;
 
+// Imports from other modules
 use super::{GestureModel, Model, Msg, TapMotion, Win};
 
 impl relm::Update for Win {
@@ -87,7 +89,7 @@ impl relm::Update for Win {
                 }
             }
             Msg::SubmitText(text) => self.keyboard.submit_text(text),
-            Msg::Visible(new_visibility) => {
+            Msg::SetVisibility(new_visibility) => {
                 self.ui_manager.change_visibility(new_visibility);
             }
             Msg::HintPurpose(content_hint, content_purpose) => self

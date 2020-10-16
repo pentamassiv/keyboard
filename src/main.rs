@@ -19,12 +19,14 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+// Imports from other crates
 #[macro_use]
 extern crate bitflags;
 #[macro_use]
 extern crate log;
 use relm::Widget;
 
+// Modules
 mod config;
 mod dbus;
 mod interpreter;
@@ -32,12 +34,16 @@ mod keyboard;
 mod submitter;
 mod user_interface;
 
+/// Gets the region from the locale
+/// E.g. if the locale is set to 'en-US', this function returns 'us'
+/// It is used as the "language", hence the name
 fn get_locale_language() -> String {
     let locale = format!("{}", locale_config::Locale::user_default());
     let locale_language: String = locale.rsplit('-').take(1).collect();
     locale_language.to_lowercase()
 }
 
+/// Initiates the logger and starts the main loop
 fn main() {
     pretty_env_logger::init();
     user_interface::Win::run(()).unwrap();

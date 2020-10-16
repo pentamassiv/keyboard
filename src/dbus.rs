@@ -1,3 +1,4 @@
+// Imports from other crates
 use std::sync::{
     atomic::{AtomicBool, Ordering},
     mpsc,
@@ -5,11 +6,12 @@ use std::sync::{
     Arc, Mutex,
 };
 
+// Imports from other modules
 use crate::user_interface;
 
+// Modules
 mod dbus_client;
 mod dbus_server;
-
 use dbus_client::DBusClient;
 use dbus_server::DBusServer;
 
