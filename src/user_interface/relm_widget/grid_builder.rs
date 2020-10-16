@@ -27,6 +27,7 @@ impl GridBuilder {
                 grid.get_style_context()
                     .add_class(&format!("grid_{}", grid_name));
                 stack.add_named(&grid, &grid_name);
+                info!("Added view named: '{}'", grid_name);
                 for (key_id, button_popup) in key_refs {
                     hashmap_with_key_refs.insert(
                         (layout_name.clone(), view_name.clone(), key_id),

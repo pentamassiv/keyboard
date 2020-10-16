@@ -41,8 +41,9 @@ impl LayoutYamlParser {
             }
         }
 
-        // If no layout was loaded, use hardcoded fallback layout
-        if layouts.is_empty() {
+        // If no layout for the language set with locale was loaded, use hardcoded fallback layout
+        let locale_language = crate::get_locale_language();
+        if !layouts.contains_key(&locale_language) {
             warn!("No yaml files describing a layout were found. Trying to create fallback layout");
             let layout_source = LayoutSource::FallbackStr;
             LayoutYamlParser::add_layout_to_hashmap(

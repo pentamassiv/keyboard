@@ -221,7 +221,7 @@ fn load_css() {
             info! {"CSS file successfully loaded"};
         }
         Err(_) => {
-            warn! {"Unable to load CSS file. The file might be missing or broken. Using default CSS"}
+            warn! {"Unable to load CSS file from path '{}'. The file might be missing or broken. Using default CSS",css_path_abs}
         }
     }
 }

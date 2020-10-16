@@ -193,9 +193,7 @@ impl Keyboard {
     fn get_start_layout_view(available_layout_names: HashSet<String>) -> (String, String) {
         let start_layout = FALLBACK_LAYOUT_NAME.to_string();
         let start_view = FALLBACK_VIEW_NAME.to_string();
-        let locale = format!("{}", locale_config::Locale::user_default());
-        let locale_language: String = locale.rsplit('-').take(1).collect();
-        let locale_language = locale_language.to_lowercase();
+        let locale_language = crate::get_locale_language();
         info!("The language was determined to be {}", locale_language);
         for layout_name in available_layout_names {
             if locale_language == layout_name {

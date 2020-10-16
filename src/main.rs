@@ -32,6 +32,12 @@ mod keyboard;
 mod submitter;
 mod user_interface;
 
+fn get_locale_language() -> String {
+    let locale = format!("{}", locale_config::Locale::user_default());
+    let locale_language: String = locale.rsplit('-').take(1).collect();
+    locale_language.to_lowercase()
+}
+
 fn main() {
     pretty_env_logger::init();
     user_interface::Win::run(()).unwrap();
