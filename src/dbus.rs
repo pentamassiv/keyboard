@@ -1,8 +1,6 @@
 // Imports from other crates
 use std::sync::{
     atomic::{AtomicBool, Ordering},
-    mpsc,
-    mpsc::channel,
     Arc, Mutex,
 };
 
@@ -18,7 +16,7 @@ use dbus_server::DBusServer;
 /// The DBusService starts the DBusClient and DBusServer and saves the state of the visibility of the keyboard.
 /// It also can forward events that need to be sent to feedbackd to the DBusClient. This is used to give a haptic feedback when buttons are pressed and released
 pub struct DBusService {
-    event_transmitter: mpsc::Sender<String>,
+    client: DBusClient,
     visibility: Arc<AtomicBool>,
 }
 
@@ -28,13 +26,9 @@ impl DBusService {
         let visibility = Arc::new(AtomicBool::new(false));
         let visibility_clone = Arc::clone(&visibility); // Gets moved to DBusServer
 
-        let (tx, rx) = channel(); // Create a simple streaming channel
-        DBusClient::spawn_and_detach(rx);
+        let client = DBusClient::new();
         DBusServer::spawn_and_detach(Mutex::new(sender), visibility_clone);
-        DBusService {
-            event_transmitter: tx,
-            visibility,
-        }
+        DBusService { client, visibility }
     }
 
     /// Changes the value of the visibility of the keyboard. It does not cause the keyboard to show or hide. That has to be done by the UI manager
@@ -45,10 +39,7 @@ impl DBusService {
 
     /// Tell the DBusClient to send the event to feedbackd (used for haptic feedback)
     pub fn haptic_feedback(&self, event: String) {
-        if let Ok(()) = self.event_transmitter.send(event) {
-            info!("Event was sent over the channel to the DBusClient")
-        } else {
-            error!("It was not possible to send the event over the channel to the DBusClient. The receiver was deallocated before.")
-        };
+        info!("'{}' event is handed to the DBusClient", event);
+        self.client.send(event);
     }
 }
