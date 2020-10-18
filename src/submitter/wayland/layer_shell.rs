@@ -6,10 +6,8 @@ pub fn make_overlay_layer(window: &gtk::Window) {
     gtk_layer_shell::set_layer(window, gtk_layer_shell::Layer::Overlay);
 
     // The margins are the gaps around the window's edges
-    // Margins and anchors can be set like this...
     gtk_layer_shell::set_margin(window, gtk_layer_shell::Edge::Left, 0);
     gtk_layer_shell::set_margin(window, gtk_layer_shell::Edge::Right, 0);
-    // ... or like this
     // Anchors are if the window is pinned to each edge of the output
     gtk_layer_shell::set_anchor(window, gtk_layer_shell::Edge::Left, true);
     gtk_layer_shell::set_anchor(window, gtk_layer_shell::Edge::Right, true);

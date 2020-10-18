@@ -1,7 +1,7 @@
 pub const FALLBACK_LAYOUT_NAME: &str = "FALLBACK";
 pub const FALLBACK_VIEW_NAME: &str = "base";
 
-// All " within the layout definition need to be escape
+// Some of the charachter within the layout definition need to be escaped
 pub const FALLBACK_LAYOUT: &str = "---
 views:
     base:

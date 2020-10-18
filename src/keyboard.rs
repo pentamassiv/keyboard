@@ -21,7 +21,7 @@ use view::View;
 pub use self::meta::{
     KeyAction, KeyArrangement, KeyDisplay, KeyMeta, LayoutMeta, Location, Modifier,
 };
-pub use ui_connector::{EmitUIMsg, UIConnector, UIMsg};
+pub use ui_connector::UIConnector;
 
 pub const RESOLUTIONX: i32 = 1000;
 pub const RESOLUTIONY: i32 = 1000;

@@ -9,7 +9,7 @@ use wayland_protocols::unstable::text_input::v3::client::zwp_text_input_v3::{
 // Imports from other modules
 #[cfg(feature = "gesture")]
 use crate::config::path_defaults;
-use crate::keyboard::{Interaction, TapMotion};
+use crate::keyboard::TapMotion;
 
 // Modules
 mod gesture_handler;
@@ -31,8 +31,6 @@ pub enum Msg {
     // Contains the coordinates and the type of gesture signal. This message is sent when the user taps or swipes on the keyboard.
     // The raw signals need to be converted to an 'Interaction' before they can get sent to the keyboard module
     GestureSignal(f64, f64, GestureSignal),
-    // Contains an 'Interaction' and it's coordinate. It's used to notify the keyboard about a user interaction (eg. a long press, a swipe begin...)
-    Interaction((f64, f64), Interaction),
     // Contains the button_id to eighter release or press. This is for the visual feedback only. The buttons do NOT do anything.
     ButtonInteraction(String, TapMotion),
     // Contains the button_id to eighter release or press. The button is only released when another LatchingButtonInteraction message with its id is received.

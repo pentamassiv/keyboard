@@ -1,3 +1,4 @@
+// Standard keymap used for the virtual keyboard
 pub const KEYMAP: &str = "xkb_keymap {\
 xkb_keycodes \"(unnamed)\" {\
         minimum = 8;\

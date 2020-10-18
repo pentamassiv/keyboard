@@ -14,6 +14,8 @@ use deserializer::LayoutYamlParser;
 pub use deserialized_structs::{KeyAction, KeyDisplay, KeyEvent, Modifier, Outline};
 
 #[derive(Debug)]
+/// Struct to save all information needed to build a key and its representation as a button
+/// In comparison to the KeyDeserialized struct, not specified information is set tof default values
 pub struct KeyMeta {
     pub actions: HashMap<Interaction, Vec<KeyAction>>,
     pub key_display: KeyDisplay,
@@ -23,10 +25,14 @@ pub struct KeyMeta {
 }
 
 impl KeyMeta {
+    /// Convert the KeyDeserialized struct to a KeyMeta struct. This is done by copying the information that was deserialized and supplementing it with default values
     fn from(key_id: &str, key_deserialized: Option<&KeyDeserialized>) -> KeyMeta {
+        // Make a default KeyMeta struct
         let mut key_meta = KeyMeta::default(key_id);
+        // If some of the information about the key was provided in the layout definition file, overwrite the default values
         if let Some(key_deserialized) = key_deserialized {
             if let Some(deserialized_actions) = &key_deserialized.actions {
+                // The HashMap<KeyEvent, Vec<KeyAction>> gets transformed to HashMap<Interaction, Vec<KeyAction>>
                 key_meta.actions =
                     KeyMeta::make_interaction_keyaction_hashmap(deserialized_actions);
             };
@@ -46,9 +52,11 @@ impl KeyMeta {
         key_meta
     }
 
+    // Returns a default KeyMeta struct
     fn default(key_id: &str) -> KeyMeta {
         let key_id = key_id.to_string();
         let mut actions = HashMap::new();
+        // If the key is pressed (short), its key_id is submitted
         actions.insert(
             Interaction::Tap(TapDuration::Short, TapMotion::Release),
             vec![KeyAction::EnterString(key_id.clone())],
@@ -57,13 +65,18 @@ impl KeyMeta {
         if key_id.len() == 1 {
             long_press_str.make_ascii_uppercase();
         }
+        // If it was pressed for a longer time, its capitalized key_id is sent
         actions.insert(
             Interaction::Tap(TapDuration::Long, TapMotion::Release),
             vec![KeyAction::EnterString(long_press_str)],
         );
+        // The default to display the key is with its label set to its id
         let key_display = KeyDisplay::Text(key_id);
+        // The outline is Standard
         let outline = Outline::Standard;
+        // No popover is added
         let popup = None;
+        // No css style classes are added
         let styles = None;
 
         KeyMeta {
@@ -75,13 +88,17 @@ impl KeyMeta {
         }
     }
 
+    /// Transforms the HashMap<KeyEvent, Vec<KeyAction>> in HashMap<Interaction, Vec<KeyAction>>
+    /// This is done because for the user it is easer to define KeyEvents that cause a KeyAction, but the Keyboard struct uses Interactions instead
     fn make_interaction_keyaction_hashmap(
         deserialized_actions: &HashMap<KeyEvent, Vec<KeyAction>>,
     ) -> HashMap<Interaction, Vec<KeyAction>> {
         let mut actions = HashMap::new();
+        // Transform all entries...
         for (key_event, key_action_vec) in deserialized_actions {
-            // All actions are executed on release except for the toggle_keycode with a longpress
-            // Then one action is created for the long_press and one for the long_press_release
+            // All actions are executed on release
+            // Except for the toggle_keycode with a long press, then one action is created for the long press and one for its release
+            // And except for the Modifier action. This action gets activated with the press
             let mut press_action_vec = Vec::new();
             let mut release_action_vec = Vec::new();
             for action in key_action_vec {
@@ -103,6 +120,7 @@ impl KeyMeta {
                 }
             }
 
+            // If some actions should get executed when the button is pressed, add them with their Interaction to the actions HashMap that will be returned
             if !press_action_vec.is_empty() {
                 let interaction_press = match key_event {
                     KeyEvent::ShortPress => Interaction::Tap(TapDuration::Short, TapMotion::Press),
@@ -111,6 +129,7 @@ impl KeyMeta {
                 actions.insert(interaction_press, press_action_vec);
             }
 
+            // If some actions should get executed when the button is released, add them with their Interaction to the actions HashMap that will be returned
             if !release_action_vec.is_empty() {
                 let interaction_release = match key_event {
                     KeyEvent::ShortPress => {
@@ -121,20 +140,24 @@ impl KeyMeta {
                 actions.insert(interaction_release, release_action_vec);
             }
         }
+        // Shrink the HashMap to save memory
         actions.shrink_to_fit();
         actions
     }
 }
 
 #[derive(Debug)]
+/// This struct contains the arrangement of all its keys and all the information to build them
 pub struct LayoutMeta {
     pub views: HashMap<String, KeyArrangement>,
     pub keys: HashMap<String, KeyMeta>,
 }
 
 impl LayoutMeta {
-    pub fn new() -> HashMap<String, LayoutMeta> {
+    /// Search for layout definitions in a path, deserialize them, complete the information and return a HashMap of eachs layouts name with its LayoutMeta
+    pub fn deserialize() -> HashMap<String, LayoutMeta> {
         let mut layout_meta = HashMap::new();
+        // Deserialize all available layouts from a file path
         let layout_deserialized = LayoutYamlParser::get_layouts();
         for (layout_name, layout_deserialized) in layout_deserialized {
             info!("LayoutMeta created for layout: {}", layout_name);
@@ -143,29 +166,37 @@ impl LayoutMeta {
         layout_meta
     }
 
-    // KeyMeta for all needed keys is created and the string of keyids is converted to a hashmap with the location and size of each key
+    /// Transforms a LayoutDeserialized to a LayoutMeta. This is done by creating the KeyMeta for all needed keys.
+    /// Also the string of key_ids is converted to a hashmap with the location and size of each key
     fn from(layout_deserialized: LayoutDeserialized) -> LayoutMeta {
         let mut views = HashMap::new();
         let mut keys = HashMap::new();
+        // For each view..
         for (view_name, key_arrangement) in layout_deserialized.views {
+            // The KeyMeta for all its keys is created and added to the HashMap
             let keys_for_view =
                 LayoutMeta::get_key_meta_for_all_keys(&key_arrangement, &layout_deserialized.keys);
-            for (key_id, key_meta) in keys_for_view {
-                keys.insert(key_id, key_meta); // Could use map1.extend(map2); instead
-            }
+            keys.extend(keys_for_view);
+            //for (key_id, key_meta) in keys_for_view {
+            //keys.insert(key_id, key_meta); // Could use map1.extend(map2); instead
+            //}
             let view = KeyArrangement::from(&key_arrangement, &keys);
             views.insert(view_name, view);
         }
         LayoutMeta { views, keys }
     }
 
+    /// Gets the KeyMeta for all keys
+    /// If a KeyDeserialized of a key exists, it is used to build the KeyMeta, if not a default KeyMeta is created
     fn get_key_meta_for_all_keys(
         key_arrangement_deserialized: &[KeyIds],
         key_meta: &HashMap<String, KeyDeserialized>,
     ) -> HashMap<String, KeyMeta> {
         let mut keys = HashMap::new();
+        // For all keys..
         for row in key_arrangement_deserialized {
             for key_id in row.split_whitespace() {
+                // create the KeyMeta for that key_id and add it to the HashMap
                 let key_meta = KeyMeta::from(key_id, key_meta.get(key_id));
                 keys.insert(key_id.to_string(), key_meta);
             }
@@ -174,7 +205,8 @@ impl LayoutMeta {
     }
 }
 
-#[derive(Debug)]
+#[derive(Debug, Copy, Clone)]
+/// Location of a key
 pub struct Location {
     pub x: i32,
     pub y: i32,
@@ -183,12 +215,15 @@ pub struct Location {
 }
 
 #[derive(Debug)]
+/// Stores how the keys are arranged
 pub struct KeyArrangement {
-    pub key_arrangement: HashMap<String, Location>,
-    pub no_rows: i32,
-    pub no_columns: i32,
+    key_arrangement: HashMap<String, Location>,
+    no_rows: i32,
+    no_columns: i32,
 }
+
 impl KeyArrangement {
+    /// Create a new KeyArrangement from the strings of KeyIds and the information about the keys
     pub fn from(
         key_arrangement_deserialized: &[KeyIds],
         key_meta: &HashMap<String, KeyMeta>,
@@ -204,6 +239,23 @@ impl KeyArrangement {
         }
     }
 
+    // Return the number of rows
+    pub fn get_no_rows(&self) -> i32 {
+        self.no_rows
+    }
+
+    // Return the number of columns
+    pub fn get_no_columns(&self) -> i32 {
+        self.no_columns
+    }
+
+    // Return a reference of the KeyArrangement
+    pub fn get_key_arrangement(&self) -> &HashMap<String, Location> {
+        &self.key_arrangement
+    }
+
+    // Create the key arrangement, this needs to get centered afterwards because not all rows have to contain the same amount of keys
+    // The layout definition in files are simpler this way because no blank keys or something alike need to be described to achieve centered rows
     fn get_uncentered_key_arrangement(
         key_arrangement_deserialized: &[KeyIds],
         key_meta: &HashMap<String, KeyMeta>,
@@ -211,9 +263,14 @@ impl KeyArrangement {
         let mut key_arrangement = HashMap::new();
         let mut row_widths = Vec::new(); // Tracks width of the rows to later center the rows
         for (row_no, row) in key_arrangement_deserialized.iter().enumerate() {
+            // For each of the rows of strings of key ids
             row_widths.insert(row_no, 0);
+            // Get the individual key ids and for each of them..
             for key_id in row.split_whitespace() {
+                // Calculate where in the grid the button should be placed
                 let (x, y) = (row_widths[row_no], row_no as i32);
+
+                // Calculate how many cells the button should be wide/high
                 let (width, height) = (
                     key_meta
                         .get(key_id)
@@ -234,32 +291,27 @@ impl KeyArrangement {
         (key_arrangement, row_widths)
     }
 
+    /// If a row is not centered, it moves each of its keys along to the right, to get it centered
     fn get_centered_key_arrangement(
-        uncentered_key_arrangement: HashMap<String, Location>,
+        mut uncentered_key_arrangement: HashMap<String, Location>,
         row_widths: &[i32],
     ) -> (HashMap<String, Location>, i32, i32) {
         let no_columns = row_widths.iter().max().unwrap();
         let no_rows = row_widths.len() as i32;
-        let mut key_arrangement_centered = HashMap::new();
+
+        // Moves the x coordinate to center the arrangement
         for (
-            key,
+            _,
             Location {
                 x,
                 y,
-                width,
-                height,
+                width: _,
+                height: _,
             },
-        ) in uncentered_key_arrangement
+        ) in uncentered_key_arrangement.iter_mut()
         {
-            let new_x = (no_columns - row_widths[y as usize]) / 2 + x;
-            let new_location = Location {
-                x: new_x,
-                y,
-                width,
-                height,
-            };
-            key_arrangement_centered.insert(key, new_location);
+            *x += (no_columns - row_widths[*y as usize]) / 2;
         }
-        (key_arrangement_centered, *no_columns, no_rows)
+        (uncentered_key_arrangement, *no_columns, no_rows)
     }
 }
