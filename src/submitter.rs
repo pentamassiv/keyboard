@@ -1,7 +1,9 @@
 // Imports from other crates
 use std::sync::{Arc, Mutex};
 use wayland_client::EventQueue;
-use zwp_input_method_service::{HintPurpose, IMService, KeyboardVisibility};
+use zwp_input_method_service::{
+    HintPurpose, IMService, KeyboardVisibility, ReceiveSurroundingText,
+};
 
 // Imports from other modules
 pub use self::wayland::vk_service::KeyMotion;
@@ -26,15 +28,20 @@ pub enum Submission {
 }
 
 /// Handles all submissions
-pub struct Submitter<T: 'static + KeyboardVisibility + HintPurpose> {
+pub struct Submitter<
+    T: 'static + KeyboardVisibility + HintPurpose,
+    D: 'static + ReceiveSurroundingText,
+> {
     event_queue: EventQueue,
-    im_service: Option<IMService<T>>,
+    im_service: Option<IMService<T, D>>,
     virtual_keyboard: Option<Arc<Mutex<wayland::vk_service::VKService>>>,
 }
 
-impl<T: 'static + KeyboardVisibility + HintPurpose> Submitter<T> {
+impl<T: 'static + KeyboardVisibility + HintPurpose, D: 'static + ReceiveSurroundingText>
+    Submitter<T, D>
+{
     /// Creates a new Submitter
-    pub fn new(connector: T) -> Submitter<T> {
+    pub fn new(ui_connector: T, content_connector: D) -> Submitter<T, D> {
         // Gets all necessary wayland objects to use the available protocols
         let (event_queue, seat, vk_mgr, im_mgr) = wayland::init_wayland();
         let mut im_service = None;
@@ -46,7 +53,12 @@ impl<T: 'static + KeyboardVisibility + HintPurpose> Submitter<T> {
         };
         // Tries to create a IMService (wrapper for the input_method protocol). The shell has to support to protocol to be available
         if let Some(im_mgr) = im_mgr {
-            im_service = Some(IMService::new(&seat, im_mgr, connector));
+            im_service = Some(IMService::new(
+                &seat,
+                im_mgr,
+                ui_connector,
+                content_connector,
+            ));
             info!("InputMethod service available");
         };
 
@@ -67,16 +79,6 @@ impl<T: 'static + KeyboardVisibility + HintPurpose> Submitter<T> {
                 )
             })
             .unwrap();
-    }
-
-    /// Get the strings left and right to the cursor
-    pub fn get_surrounding_text(&self) -> (String, String) {
-        if let Some(im) = &self.im_service {
-            return im.get_surrounding_text();
-        } else {
-            warn!("The surrounding text can not be requested because the imput_method protocol is unavailable");
-        }
-        ("".to_string(), "".to_string())
     }
 
     /// Sends requests to release all keys and modifiers

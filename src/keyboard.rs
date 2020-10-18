@@ -1,6 +1,7 @@
 // Imports from other crates
 extern crate pretty_env_logger;
 use std::collections::{HashMap, HashSet};
+use std::sync::mpsc;
 
 // Imports from other modules
 use crate::config::fallback_layout::{FALLBACK_LAYOUT_NAME, FALLBACK_VIEW_NAME};
@@ -10,6 +11,7 @@ use crate::submitter::{Submission, Submitter};
 use crate::user_interface::Msg;
 
 // Modules
+mod content_connector;
 mod key;
 mod meta;
 mod ui_connector;
@@ -84,7 +86,7 @@ pub struct Keyboard {
     prev_view: Option<String>,
     ui_connection: UIConnector, // Allows sending messages to the UI
     interpreter: Interpreter,
-    submitter: Submitter<ui_connector::UIConnector>,
+    submitter: Submitter<ui_connector::UIConnector, content_connector::ContentConnector>,
 }
 
 impl Keyboard {
@@ -95,7 +97,14 @@ impl Keyboard {
     ) -> Keyboard {
         // Creates a new submitter and moves a clone of the ui_connector to it
         let ui_connection = ui_connector.clone();
-        let submitter = Submitter::new(ui_connector);
+        // Create a new channel. This will be used to send changes of the surrounding text to the interpreter
+        let (tx, rx) = mpsc::channel();
+        // Create a new interpreter that stores the receiver of the channel
+        let interpreter = Interpreter::new(rx);
+        // Create a new connection to allow the input_method protocol to notify the keyboard about changes to the surrounding text
+        let content_connector = content_connector::ContentConnector::new(tx);
+        // Create a new Submitter
+        let submitter = Submitter::new(ui_connector, content_connector);
 
         // Create a view for each 'KeyArrangement'
         let mut views = HashMap::new();
@@ -119,8 +128,6 @@ impl Keyboard {
             "Keyboard starts in layout: {}, view: {}",
             active_view.0, active_view.1
         );
-        // Create a new interpreter
-        let interpreter = Interpreter::new();
         Keyboard {
             views,
             active_view,
@@ -245,11 +252,8 @@ impl Keyboard {
 
             // If there is a pending submission,..
             if let Some(submission) = submission {
-                // ..get the text that surrounds the cursor
-                let surrounding_text = self.submitter.get_surrounding_text();
-                // .. to give the interpreter the context to interpret the submission
-                let interpreted_submissions =
-                    self.interpreter.interpret(surrounding_text, submission);
+                // .. give the interpreter the submission to interpret
+                let interpreted_submissions = self.interpreter.interpret(submission);
                 // Submit each of the returned submissions
                 for submission in interpreted_submissions {
                     self.submitter.submit(submission);

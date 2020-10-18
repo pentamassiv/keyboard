@@ -35,7 +35,7 @@ tempfile = "3.1"
 dbus = "0.9"
 dbus-crossroads = "0.3"
 locale_config = "0.3"
-zwp-input-method-service="0.3"
+zwp-input-method-service={path ="../test/zwp_input_method_service"}
 
 [features]
 # None of the optional features are activated by default
