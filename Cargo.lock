@@ -1337,6 +1337,8 @@ dependencies = [
 [[package]]
 name = "zwp-input-method-service"
 version = "0.4.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c7183de776a84ea59edc88d9c511092349a7ca006b21e4b9dc5b8ead2c863ac8"
 dependencies = [
  "input_event_codes_hashmap",
  "log",
