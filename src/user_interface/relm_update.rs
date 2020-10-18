@@ -1,6 +1,5 @@
 // Imports from other crates
 use gtk::{ToggleButtonExt, WidgetExt};
-use std::collections::HashSet;
 
 // Imports from other modules
 use super::{GestureModel, Model, Msg, TapMotion, Win};
@@ -17,7 +16,6 @@ impl relm::Update for Win {
     fn model(_: &relm::Relm<Self>, _: Self::ModelParam) -> Model {
         Model {
             gesture: GestureModel::new(),
-            latched_keys: HashSet::new(),
         }
     }
 
@@ -46,41 +44,12 @@ impl relm::Update for Win {
                 };
                 // Find the mentioned button
                 let (layout, view) = self.ui_manager.current_layout_view.clone();
-                if let Some((button, _)) = self.key_refs.get(&(layout, view, key_id.clone())) {
-                    if !self.model.latched_keys.contains(&key_id) {
-                        // Activate/Deactivate it (visual feedback of the button press)
-                        button.set_active(tap_motion == TapMotion::Press);
-                    }
+                if let Some((button, _)) = self.key_refs.get(&(layout, view, key_id)) {
+                    // Activate/Deactivate it (visual feedback of the button press)
+                    button.set_active(tap_motion == TapMotion::Press);
                     // Give haptic feedback
                     self.ui_manager
                         .haptic_feedback(tap_motion == TapMotion::Press);
-                }
-            }
-            Msg::LatchingButtonInteraction(key_id) => {
-                info! {
-                    "Trying to latch '{}' key", key_id
-                };
-                let (layout, view) = self.ui_manager.current_layout_view.clone();
-                if let Some((_, _)) = self.key_refs.get(&(layout, view, key_id.clone())) {
-                    if self.model.latched_keys.remove(&key_id) {
-                        info! {
-                            "'{}' key is no longer latched", key_id
-                        }
-                    } else {
-                        info! {
-                            "'{}' key is now latched", key_id
-                        }
-                        self.model.latched_keys.insert(key_id);
-                    }
-                }
-            }
-            // Release all buttons. This means not button will be set to active afterwards and they will all look like they are released
-            Msg::ReleaseAllButtions => {
-                for key_id in self.model.latched_keys.drain() {
-                    let (layout, view) = self.ui_manager.current_layout_view.clone();
-                    if let Some((button, _)) = self.key_refs.get(&(layout, view, key_id.clone())) {
-                        button.set_active(false);
-                    }
                 }
             }
             // Open the popover of the specified button

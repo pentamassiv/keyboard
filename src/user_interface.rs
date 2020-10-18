@@ -1,7 +1,7 @@
 // Imports from other crates
 use gtk::WidgetExt;
 use relm::Channel;
-use std::collections::{HashMap, HashSet};
+use std::collections::HashMap;
 use wayland_protocols::unstable::text_input::v3::client::zwp_text_input_v3::{
     ContentHint, ContentPurpose,
 };
@@ -22,7 +22,6 @@ use ui_manager::UIManager;
 /// Saves all relevant information needed to display the user interface
 pub struct Model {
     gesture: GestureModel,
-    latched_keys: HashSet<String>,
 }
 
 /// Messages that can be sent to initiate an update of the user interface or react to the users actions
@@ -33,12 +32,6 @@ pub enum Msg {
     GestureSignal(f64, f64, GestureSignal),
     // Contains the button_id to eighter release or press. This is for the visual feedback only. The buttons do NOT do anything.
     ButtonInteraction(String, TapMotion),
-    // Contains the button_id to eighter release or press. The button is only released when another LatchingButtonInteraction message with its id is received.
-    // Regular ButtonInteraction messages do not release the key
-    // This is for the visual feedback only. The buttons do NOT do anything.
-    LatchingButtonInteraction(String),
-    // Releases all pressed buttons. Even latched buttons are released.
-    ReleaseAllButtions,
     // Contains the id of the button which will open its popover
     OpenPopup(String),
     // Contains a string that will be submitted by the keyboard

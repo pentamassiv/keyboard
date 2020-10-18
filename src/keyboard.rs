@@ -79,6 +79,7 @@ pub struct Keyboard {
     pub views: HashMap<(String, String), View>,
     pub active_view: (String, String),
     active_key: Option<Key>,
+    latched_keys: HashSet<String>,
     prev_layout: Option<String>,
     prev_view: Option<String>,
     ui_connection: UIConnector, // Allows sending messages to the UI
@@ -124,6 +125,7 @@ impl Keyboard {
             views,
             active_view,
             active_key: None,
+            latched_keys: HashSet::new(),
             prev_layout: None,
             prev_view: None,
             ui_connection,
@@ -165,8 +167,20 @@ impl Keyboard {
                 // ..if it was a tap
                 Interaction::Tap(_, tap_motion) => {
                     // ..send a message to the UI to release or press the button of the key
-                    self.ui_connection
-                        .emit(Msg::ButtonInteraction(key.get_id(), tap_motion));
+
+                    let key_id = key.get_id();
+                    match tap_motion {
+                        TapMotion::Press => {
+                            self.ui_connection
+                                .emit(Msg::ButtonInteraction(key.get_id(), tap_motion));
+                        }
+                        TapMotion::Release => {
+                            if !self.latched_keys.contains(&key_id) {
+                                self.ui_connection
+                                    .emit(Msg::ButtonInteraction(key.get_id(), tap_motion));
+                            }
+                        }
+                    }
                     // ..and execute its actions
                     if let Some(key_actions) = key.get_actions(interaction) {
                         self.execute_tap_action(&key.get_id(), key_actions);
@@ -178,7 +192,17 @@ impl Keyboard {
                     // .. if it is the begin, send a message to the UI to release all buttons
                     // .. and also tell the submitter to release all keys and modifiers
                     SwipeAction::Begin => {
-                        self.ui_connection.emit(Msg::ReleaseAllButtions);
+                        for key_id in self.latched_keys.drain() {
+                            self.ui_connection
+                                .emit(Msg::ButtonInteraction(key_id, TapMotion::Release));
+                        }
+                        if let Some(active_key) = &self.active_key {
+                            self.ui_connection.emit(Msg::ButtonInteraction(
+                                active_key.get_id(),
+                                TapMotion::Release,
+                            ));
+                        }
+                        self.active_key = None;
                         self.submitter.release_all_keys_and_modifiers();
                     }
                     // NOT IMPLEMENTED YET
@@ -300,9 +324,18 @@ impl Keyboard {
             KeyAction::EnterString(text) => submission = Some(Submission::Text(text.to_string())),
             KeyAction::Modifier(modifier) => {
                 submission = Some(Submission::Modifier(modifier.clone()));
-                ui_message = Some(crate::user_interface::Msg::LatchingButtonInteraction(
-                    key_id.to_string(),
-                ));
+                // If the modifier key id is present in the latched_keys HashMap, remove it
+                if self.latched_keys.remove(key_id) {
+                    info! {
+                        "'{}' key is no longer latched", key_id
+                    }
+                } else {
+                    info! {
+                        "'{}' key is now latched", key_id
+                    }
+                    // Else insert it
+                    self.latched_keys.insert(key_id.to_string());
+                }
             }
             KeyAction::Erase => {
                 submission = Some(Submission::Erase(1));
