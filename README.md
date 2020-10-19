@@ -38,7 +38,7 @@ cp -r data ~/.fingerboard
 If the layout you are looking for is not available, you can easily edit one of the other layouts to adapt it to the missing language. You can't break anything with a malformed layout description. There is a (basic) fallback layout for exactly those cases :). If you made a layout for a missing language, share it with me so others can use it too.
 
 ## TODO
-So far the code is not really commented but by the end of october I plan on adding tons of diagrams and comments because this is 
+So far the code is commented but by the end of october I plan on adding additional diagrams because this is 
 a school project. Within the next months I will add next word prediction and gesture typing to it's functionality.
 
 ## Debugging
