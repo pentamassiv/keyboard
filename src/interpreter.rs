@@ -11,7 +11,7 @@ use crate::user_interface::Msg;
 /// Currently it only changes '  ' to '. '
 pub struct Interpreter {
     ui_connection: UIConnector,
-    receiver: mpsc::Receiver<(String, String)>,
+    receiver: mpsc::Receiver<(String, String)>, // Receives the surrounding text
     text_left_of_cursor: String,
     text_right_of_cursor: String,
     prev_submissions: Vec<Submission>,
@@ -35,34 +35,25 @@ impl Interpreter {
         }
     }
 
-    /// Interprets the submission a key would send while considering the surrounding text and previous submissions.
-    /// It returns a vector of the submissions the user had intended
-    pub fn interpret(&mut self, submission: Submission) -> Vec<Submission> {
+    /// Interprets the text that would have been sent while considering the surrounding text and previous submissions.
+    /// It returns a vector of the submissions it is assumed the user had intended
+    /// Currently it doesn't do much
+    /// It only changes '  ' to '. '
+    pub fn interpret_text(&mut self, text_to_interpret: String) -> Vec<Submission> {
         self.update_surrounding_text();
         info!("Received the surrounding text:");
         info!("Left of the cursor: {}", self.text_left_of_cursor);
         info!("Right of the cursor: {}", self.text_right_of_cursor);
         let mut new_submissions = Vec::new();
-        // Only text submissions are interpreted so far. All other submissions are not altered
-        match submission {
-            Submission::Text(current_submission) => {
-                // If the current and the previous text submission are a SPACE, it is assumed a sentence was terminated and the previous space gets replaced with a dot
-                if current_submission == " "
-                    && self.prev_submissions.last() == Some(&Submission::Text(" ".to_string()))
-                {
-                    info!("End of sentence suspected because space was entered twice in a row. Will be replaced with '. '");
-                    new_submissions.push(Submission::Erase(1));
-                    new_submissions.push(Submission::Text(". ".to_string()));
-                } else {
-                    new_submissions.push(Submission::Text(current_submission));
-                }
-            }
-            Submission::Erase(_)
-            | Submission::Keycode(_)
-            | Submission::ToggleKeycode(_)
-            | Submission::Modifier(_) => {
-                new_submissions.push(submission);
-            }
+        // If the current and the previous text submission are a SPACE, it is assumed a sentence was terminated and the previous space gets replaced with a dot
+        if text_to_interpret == " "
+            && self.prev_submissions.last() == Some(&Submission::Text(" ".to_string()))
+        {
+            info!("End of sentence suspected because space was entered twice in a row. Will be replaced with '. '");
+            new_submissions.push(Submission::Erase(1));
+            new_submissions.push(Submission::Text(". ".to_string()));
+        } else {
+            new_submissions.push(Submission::Text(text_to_interpret));
         }
         self.prev_submissions = new_submissions.clone();
 
@@ -70,17 +61,42 @@ impl Interpreter {
         // Suggestions are not implemented yet so these don't make any sense
         #[cfg(feature = "suggestions")]
         self.ui_connection.emit(Msg::Suggestions((
-            Some("A".to_string()),
-            None,
+            Some("sug_left".to_string()),
+            Some("sug_center".to_string()),
             Some("sug_right".to_string()),
         )));
         new_submissions
     }
 
+    /// Interpret an update to a gesture
+    /// This is not implemented yet
+    pub fn interpret_gesture(&mut self, _x: i32, _y: i32) {
+        self.update_surrounding_text();
+        #[cfg(feature = "suggestions")]
+        self.ui_connection.emit(Msg::Suggestions((
+            None,
+            Some("gesture_calculating".to_string()),
+            None,
+        )));
+    }
+
+    /// Notify the interpreter about the end of a gesture and get the most likely word
+    pub fn get_gesture_result(&mut self, _x: i32, _y: i32) -> String {
+        self.update_surrounding_text();
+        #[cfg(feature = "suggestions")]
+        {
+            self.ui_connection
+                .emit(Msg::Suggestions((None, None, None)));
+            return "gesture".to_string();
+        };
+        "".to_string()
+    }
+
+    /// Updates the interpretes knowledge about the surrounding text
     fn update_surrounding_text(&mut self) {
         // Initalitze the variable
         let mut text_changed = None;
-        // Try to get updates of the surrounding string from the receiver
+        // Try to get updates of the surrounding string from the receiver until there are no updates
         loop {
             match self.receiver.try_recv() {
                 // If there was an update, overwrite the surrounding text

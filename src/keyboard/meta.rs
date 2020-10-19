@@ -90,6 +90,7 @@ impl KeyMeta {
 
     /// Transforms the HashMap<KeyEvent, Vec<KeyAction>> in HashMap<Interaction, Vec<KeyAction>>
     /// This is done because for the user it is easer to define KeyEvents that cause a KeyAction, but the Keyboard struct uses Interactions instead
+    /// Some actions are executed when the button is pressed and others get executed when they are released. This is also taken care of in this method
     fn make_interaction_keyaction_hashmap(
         deserialized_actions: &HashMap<KeyEvent, Vec<KeyAction>>,
     ) -> HashMap<Interaction, Vec<KeyAction>> {
@@ -99,16 +100,28 @@ impl KeyMeta {
             // All actions are executed on release
             // Except for the toggle_keycode with a long press, then one action is created for the long press and one for its release
             // And except for the Modifier action. This action gets activated with the press
-            let mut press_action_vec = Vec::new();
-            let mut release_action_vec = Vec::new();
+            // Get the duration of the tap
+            let tap_duration = match key_event {
+                KeyEvent::ShortPress => TapDuration::Short,
+                KeyEvent::LongPress => TapDuration::Long,
+            };
             for action in key_action_vec {
+                let mut activate_when_pressed = false;
+                let mut activate_when_released = false;
                 match action {
+                    // There should never be a FeedbackPressRelease KeyAction defined by the user. If it is, it will be ignored
+                    KeyAction::FeedbackPressRelease(_) => {}
+                    // The ToggleKeycode causes a toggle when the button is pressed and when it is released
                     KeyAction::ToggleKeycode(_) => {
-                        press_action_vec.push(action.clone());
-                        release_action_vec.push(action.clone());
+                        activate_when_pressed = true;
+                        activate_when_released = true;
                     }
-                    KeyAction::Modifier(_) => press_action_vec.push(action.clone()),
+                    // The Modifier key action is executed when the key is pressed
+                    KeyAction::Modifier(_) => {
+                        activate_when_pressed = true;
+                    }
 
+                    // All other key actions are executed when the key is released
                     KeyAction::EnterKeycode(_)
                     | KeyAction::EnterString(_)
                     | KeyAction::SwitchView(_)
@@ -116,33 +129,50 @@ impl KeyMeta {
                     | KeyAction::SwitchLayout(_)
                     | KeyAction::TempSwitchLayout(_)
                     | KeyAction::Erase
-                    | KeyAction::OpenPopup => release_action_vec.push(action.clone()),
-                }
-            }
-
-            // If some actions should get executed when the button is pressed, add them with their Interaction to the actions HashMap that will be returned
-            if !press_action_vec.is_empty() {
-                let interaction_press = match key_event {
-                    KeyEvent::ShortPress => Interaction::Tap(TapDuration::Short, TapMotion::Press),
-                    KeyEvent::LongPress => Interaction::Tap(TapDuration::Long, TapMotion::Press),
-                };
-                actions.insert(interaction_press, press_action_vec);
-            }
-
-            // If some actions should get executed when the button is released, add them with their Interaction to the actions HashMap that will be returned
-            if !release_action_vec.is_empty() {
-                let interaction_release = match key_event {
-                    KeyEvent::ShortPress => {
-                        Interaction::Tap(TapDuration::Short, TapMotion::Release)
+                    | KeyAction::OpenPopup => {
+                        activate_when_released = true;
                     }
-                    KeyEvent::LongPress => Interaction::Tap(TapDuration::Long, TapMotion::Release),
-                };
-                actions.insert(interaction_release, release_action_vec);
+                }
+                // If the action gets executed when it is pressed, add it to the actions
+                if activate_when_pressed {
+                    Self::add_tap_action_to_hashmap(
+                        tap_duration,
+                        TapMotion::Press,
+                        action.clone(),
+                        &mut actions,
+                    );
+                }
+                // If the action gets executed when it is released, add it to the actions
+                if activate_when_released {
+                    Self::add_tap_action_to_hashmap(
+                        tap_duration,
+                        TapMotion::Release,
+                        action.clone(),
+                        &mut actions,
+                    );
+                }
             }
         }
         // Shrink the HashMap to save memory
         actions.shrink_to_fit();
         actions
+    }
+
+    pub fn add_tap_action_to_hashmap(
+        duration: TapDuration,
+        motion: TapMotion,
+        action: KeyAction,
+        hashmap: &mut HashMap<Interaction, Vec<KeyAction>>,
+    ) {
+        let interaction = Interaction::Tap(duration, motion);
+        let actions_vec = hashmap.get_mut(&interaction);
+        if let Some(actions_vec) = actions_vec {
+            actions_vec.push(action);
+        } else {
+            let mut actions_vec = Vec::new();
+            actions_vec.push(action);
+            hashmap.insert(interaction, actions_vec);
+        }
     }
 }
 

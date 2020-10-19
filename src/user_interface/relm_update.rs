@@ -38,12 +38,10 @@ impl relm::Update for Win {
                 self.keyboard.input(x, y, interaction);
             }
             // If a button was clicked, activate it or deactivate it and give haptic feedback
-            Msg::ButtonInteraction(key_id, tap_motion) => {
+            Msg::ButtonInteraction(layout, view, key_id, tap_motion) => {
                 info! {
                     "Trying to interact with '{}' key", key_id
                 };
-                // Find the mentioned button
-                let (layout, view) = self.ui_manager.current_layout_view.clone();
                 if let Some((button, _)) = self.key_refs.get(&(layout, view, key_id)) {
                     // Activate/Deactivate it (visual feedback of the button press)
                     button.set_active(tap_motion == TapMotion::Press);

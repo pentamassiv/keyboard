@@ -286,7 +286,7 @@ fn make_suggestions_and_pref_buttons(
     let mut buttons = make_suggestion_buttons(relm);
     // Make a button that openes the preferences
     let mut layout_names = Vec::new();
-    for (layout_name, _) in keyboard.views.keys() {
+    for (layout_name, _) in keyboard.get_views().keys() {
         layout_names.push(layout_name);
     }
     let preferences_button = make_pref_button(relm, layout_names);

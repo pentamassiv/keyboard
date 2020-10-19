@@ -26,6 +26,11 @@ pub enum KeyEvent {
 #[serde(deny_unknown_fields)]
 /// The activation of a key can cause different action to take place
 pub enum KeyAction {
+    /// Give feedback about the button being pressed/released.
+    /// 'true' signals a press of the button
+    /// 'false' signals its release
+    /// This is automatically added and should not be used in the layout description (in the yaml file)
+    FeedbackPressRelease(bool),
     #[serde(rename = "enter_keycode")]
     #[serde(deserialize_with = "from_str")] // Look up the keycode to translate the string to a keycode
     /// Enter a keycode

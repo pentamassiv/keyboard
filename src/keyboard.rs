@@ -78,12 +78,14 @@ pub enum SwipeAction {
 /// interpret the keypress and notify the UI and Submitter, if they need to take action. The keyboard also saves which layout/view it was set to before,
 /// if the change is only until the next interaction
 pub struct Keyboard {
-    pub views: HashMap<(String, String), View>,
+    views: HashMap<(String, String), View>,
     pub active_view: (String, String),
-    active_key: Option<Key>,
     latched_keys: HashSet<String>,
-    prev_layout: Option<String>,
-    prev_view: Option<String>,
+    active_key: Option<Key>,
+    layout_of_active_key: String, // Necessary to remember to release the key on the correct layout after a switch of the layout
+    view_of_active_key: String, // Necessary to remember to release the key on the correct view after a switch of the view
+    next_layout: Option<String>,
+    next_view: Option<String>,
     ui_connection: UIConnector, // Allows sending messages to the UI
     interpreter: Interpreter,
     submitter: Submitter<ui_connector::UIConnector, content_connector::ContentConnector>,
@@ -124,6 +126,10 @@ impl Keyboard {
 
         // Select a layout and view to start with
         let active_view = Keyboard::get_start_layout_view(layout_names);
+
+        let layout_of_active_key = active_view.0.clone();
+        let view_of_active_key = active_view.1.clone();
+
         info!(
             "Keyboard starts in layout: {}, view: {}",
             active_view.0, active_view.1
@@ -131,27 +137,46 @@ impl Keyboard {
         Keyboard {
             views,
             active_view,
-            active_key: None,
             latched_keys: HashSet::new(),
-            prev_layout: None,
-            prev_view: None,
+            active_key: None,
+            layout_of_active_key,
+            view_of_active_key,
+            next_layout: None,
+            next_view: None,
             ui_connection,
             interpreter,
             submitter,
         }
     }
 
-    /// This method is used to tell the keyboard about a new user interaction
-    /// The keyboard handles everything from the interpretation to the execution of the actions the key initiates.
-    pub fn input(&mut self, x: i32, y: i32, interaction: Interaction) {
-        let active_view = &self.active_view;
-        info!("Keyboard handles {} at x: {}, y: {}", interaction, x, y);
+    /// Get the views the keyboard has
+    pub fn get_views(&self) -> &HashMap<(String, String), View> {
+        &self.views
+    }
 
-        // If the interaction was a keypress, the closest key to the interaction is returned and saved as the active_key.
-        // If the interaction was too far away from a key 'None' is returned.
-        // This increases the speed but it is also necessary to ensure a release always releases the last activated button. Small moves of the finger of a user don't necessaryly trigger a SwipeUpdate
-        // This means a user could press a button at its edge and move it just enough for a different button to be returned as closest_button after slightly moving the finger.
-        // The wrong button would be released and the pressed button would never be released.
+    /// This method is used to tell the keyboard about a new user interaction
+    /// The keyboard then handles everything from the interpretation to the execution of the actions the key initiates. The submitter and
+    /// the UI get notified when they need to take action
+    pub fn input(&mut self, x: i32, y: i32, interaction: Interaction) {
+        info!("Keyboard handles {} at x: {}, y: {}", interaction, x, y);
+        // Differentiate between a tap and a swipe
+        match interaction {
+            Interaction::Tap(_, _) => {
+                self.handle_tap(x, y, interaction);
+            }
+            Interaction::Swipe(swipe_action) => {
+                self.handle_swipe(x, y, swipe_action);
+            }
+        }
+    }
+
+    /// Handle an Interaction::Tap
+    /// Find out, which key was pressed or released and then execute its actions
+    fn handle_tap(&mut self, x: i32, y: i32, interaction: Interaction) {
+        let active_view = &self.active_view.clone();
+        // If it was a short press, find out which key was pressed
+        // Otherwise use the last active key
+        // This is an option because if the interaction was too far away from any buttons, it returns 'None'
         let key = if let Interaction::Tap(TapDuration::Short, TapMotion::Press) = interaction {
             self.active_key = self
                 .views
@@ -160,111 +185,200 @@ impl Keyboard {
                 .get_closest_key(x, y)
                 .cloned();
             info!("Keyboard looked up closest key");
+            // Remember which layout and view the key was on to be able to release the correct key later on
+            let (layout_of_active_key, view_of_active_key) = self.active_view.clone();
+            self.layout_of_active_key = layout_of_active_key;
+            self.view_of_active_key = view_of_active_key;
             &self.active_key
         } else {
             info!("Keyboard did not look up the closest key, but used the previously pressed key");
             &self.active_key
         };
 
-        // If the interaction was close enough of a key..
+        // If the interaction was close enough to a key..
         if let Some(key) = key {
+            // .. execute its actions
             let key = key.clone();
-            // ..check the variant of the interaction
-            match interaction {
-                // ..if it was a tap
-                Interaction::Tap(_, tap_motion) => {
-                    // ..send a message to the UI to release or press the button of the key
+            self.execute_tap_actions(&key, interaction);
+        }
+    }
 
-                    let key_id = key.get_id();
-                    match tap_motion {
-                        TapMotion::Press => {
-                            self.ui_connection
-                                .emit(Msg::ButtonInteraction(key.get_id(), tap_motion));
-                        }
-                        TapMotion::Release => {
-                            if !self.latched_keys.contains(&key_id) {
-                                self.ui_connection
-                                    .emit(Msg::ButtonInteraction(key.get_id(), tap_motion));
-                            }
-                        }
-                    }
-                    // ..and execute its actions
-                    if let Some(key_actions) = key.get_actions(interaction) {
-                        self.execute_tap_action(&key.get_id(), key_actions);
-                    };
+    /// Handle swipe interactions
+    /// If it was the beginning of a swipe, all keys are released
+    /// If it was an update, update the calculations for the gesture recognition
+    /// If it was the end of a gesture, submit the most likely word
+    fn handle_swipe(&mut self, x: i32, y: i32, swipe_action: SwipeAction) {
+        match swipe_action {
+            // If it is the beginning, ..
+            SwipeAction::Begin => {
+                let (layout_of_active_key, view_of_active_key) = (
+                    self.layout_of_active_key.to_string(),
+                    self.view_of_active_key.to_string(),
+                );
+                // ..send a message to the UI to release all buttons
+                for key_id in self.latched_keys.drain() {
+                    self.ui_connection.emit(Msg::ButtonInteraction(
+                        layout_of_active_key.clone(),
+                        view_of_active_key.clone(),
+                        key_id,
+                        TapMotion::Release,
+                    ));
                 }
+                if let Some(active_key) = &self.active_key {
+                    self.ui_connection.emit(Msg::ButtonInteraction(
+                        layout_of_active_key,
+                        view_of_active_key,
+                        active_key.get_id(),
+                        TapMotion::Release,
+                    ));
+                    self.active_key = None;
+                }
+                // .. and also tell the submitter to release all keys and modifiers
+                self.submitter.release_all_keys_and_modifiers();
+            }
+            // NOT IMPLEMENTED YET
+            // Tells interpreter to update calculations for gesture recognition
+            SwipeAction::Update => self.interpreter.interpret_gesture(x, y),
+            // NOT IMPLEMENTED YET
+            // Submits the most likely word
+            SwipeAction::Finish => {
+                let text = self.interpreter.get_gesture_result(x, y);
+                let submission = Submission::Text(text);
+                self.submitter.submit(submission);
+            }
+        }
+    }
 
-                // ..if the variant was a swipe, check if it is the beginning, update or end of it
-                Interaction::Swipe(swipe_action) => match swipe_action {
-                    // .. if it is the begin, send a message to the UI to release all buttons
-                    // .. and also tell the submitter to release all keys and modifiers
-                    SwipeAction::Begin => {
-                        for key_id in self.latched_keys.drain() {
-                            self.ui_connection
-                                .emit(Msg::ButtonInteraction(key_id, TapMotion::Release));
-                        }
-                        if let Some(active_key) = &self.active_key {
+    /// Execute the actions that the key causes when it is tapped
+    /// EnterString actions get interpreted before they get submitted
+    fn execute_tap_actions(&mut self, key: &Key, interaction: Interaction) {
+        info!("Keyboard handles actions for key {}", key.get_id());
+
+        // Switch back to the previous layout/view
+        self.switch_back_to_prev_view();
+
+        if let Some(action_vec) = key.get_actions(interaction) {
+            // Execute each action of the vector
+            for action in action_vec {
+                match action {
+                    KeyAction::FeedbackPressRelease(press) => {
+                        let (layout_of_active_key, view_of_active_key) = (
+                            self.layout_of_active_key.to_string(),
+                            self.view_of_active_key.to_string(),
+                        );
+                        // Pressing a button always notifies the UI about it
+                        if *press {
                             self.ui_connection.emit(Msg::ButtonInteraction(
-                                active_key.get_id(),
+                                layout_of_active_key,
+                                view_of_active_key,
+                                key.get_id(),
+                                TapMotion::Press,
+                            ));
+                        }
+                        // A release only gets sent to the UI if the key is no longer latched
+                        else if !self.latched_keys.contains(&key.get_id()) {
+                            self.ui_connection.emit(Msg::ButtonInteraction(
+                                layout_of_active_key,
+                                view_of_active_key,
+                                key.get_id(),
                                 TapMotion::Release,
                             ));
                         }
-                        self.active_key = None;
-                        self.submitter.release_all_keys_and_modifiers();
                     }
-                    // NOT IMPLEMENTED YET
-                    // Will tell interpreter to update calculations for gesture recognition and then submit the most likely word
-                    SwipeAction::Update | SwipeAction::Finish => {}
-                },
+                    KeyAction::EnterKeycode(keycode) => {
+                        let submission = Submission::Keycode(*keycode);
+                        self.submitter.submit(submission);
+                    }
+                    KeyAction::ToggleKeycode(keycode) => {
+                        let submission = Submission::ToggleKeycode(*keycode);
+                        self.submitter.submit(submission);
+                    }
+                    // Strings get interpreted before they are sent
+                    KeyAction::EnterString(text) => {
+                        let interpreted_submissions =
+                            self.interpreter.interpret_text(text.to_string());
+                        // Submit each of the returned submissions
+                        for submission in interpreted_submissions {
+                            self.submitter.submit(submission);
+                        }
+                    }
+                    // Modifiers always latch. They are not released when the user lifts of the finger, but when the key is pressed a second time
+                    KeyAction::Modifier(modifier) => {
+                        let submission = Submission::Modifier(modifier.clone());
+                        let key_id = key.get_id();
+                        // If the modifier key id is present in the latched_keys HashMap, remove it
+                        if self.latched_keys.remove(&key_id) {
+                            info! {
+                                "'{}' key is no longer latched", key_id
+                            }
+                        }
+                        // Otherwise insert it
+                        else {
+                            info! {
+                                "'{}' key is now latched", key_id
+                            }
+                            self.latched_keys.insert(key_id.to_string());
+                        }
+                        self.submitter.submit(submission);
+                    }
+                    // Delete one char
+                    KeyAction::Erase => {
+                        let submission = Submission::Erase(1);
+                        self.submitter.submit(submission);
+                    }
+                    KeyAction::SwitchView(new_view) => {
+                        self.switch_layout(None, Some(new_view.to_string()), false);
+                    }
+                    KeyAction::TempSwitchView(new_view) => {
+                        self.switch_layout(None, Some(new_view.to_string()), true);
+                    }
+                    KeyAction::SwitchLayout(new_layout) => {
+                        self.switch_layout(Some(new_layout.to_string()), None, false);
+                    }
+                    KeyAction::TempSwitchLayout(new_layout) => {
+                        self.switch_layout(Some(new_layout.to_string()), None, true);
+                    }
+                    KeyAction::OpenPopup => {
+                        let ui_message = Msg::OpenPopup(key.get_id());
+                        self.ui_connection.emit(ui_message);
+                    }
+                }
             }
         }
     }
 
-    /// Give interpreter the actions of the key and execute the returned actions, then switch to the previous layout/view
-    fn execute_tap_action(&mut self, key_id: &str, actions_vec: &[KeyAction]) {
-        info!("Keyboard handles actions for key {}", key_id);
-        // Save the previous layout and view in a variable because one of the actions might overwrite them later
-        // At the end of the method, the UI will be told to switch to this layout and view
-        let mut prev_layout = self.prev_layout.clone();
-        let mut prev_view = self.prev_view.clone();
-
-        // For each action in the vector..
-        for action in actions_vec {
-            // .. get the submission and the message for the UI that the action causes. Each action causes at least one of them
-            let (ui_message, submission) = self.get_ui_submitter_msg_from_action(key_id, action);
-
-            // If a message for the UI is available, it is sent
-            // If the UI is instructed to permanently (NOT just temporarily) switch to a new layout, the values of prev_layout and prev_view
-            // are set to None to prevent a switch of the layout/view at the end of the method
-            if let Some(ui_message) = ui_message {
-                if let Msg::ChangeUILayoutView(_, _) = ui_message {
-                    if let KeyAction::TempSwitchView(_) = action {
-                    } else if let KeyAction::TempSwitchLayout(_) = action {
-                    } else {
-                        prev_layout = None;
-                        prev_view = None;
-                        self.prev_layout = None;
-                        self.prev_view = None;
-                    }
-                }
-                self.ui_connection.emit(ui_message);
-            }
-
-            // If there is a pending submission,..
-            if let Some(submission) = submission {
-                // .. give the interpreter the submission to interpret
-                let interpreted_submissions = self.interpreter.interpret(submission);
-                // Submit each of the returned submissions
-                for submission in interpreted_submissions {
-                    self.submitter.submit(submission);
-                }
-            }
+    /// Tells the UI to switch to a different layout/view and if it is not a permanent switch, it stores the layout/view to switch back to when the next button is pressed
+    fn switch_layout(
+        &mut self,
+        new_layout: Option<String>,
+        new_view: Option<String>,
+        temporary: bool,
+    ) {
+        // If it is only temporarily, save the layout/view to switch back to
+        if temporary {
+            self.next_layout = Some(self.active_view.0.clone());
+            self.next_view = Some(self.active_view.1.clone());
         }
-
-        // Switch back to the previous layout/view
-        self.switch_back_to_prev_view(prev_layout, prev_view);
+        // Notify the UI about the change
+        let ui_message = Msg::ChangeUILayoutView(new_layout, new_view);
+        self.ui_connection.emit(ui_message);
     }
 
+    /// Switches the layout/view back to the supplied layout/view
+    /// This method is meant to be used to switch back to the previous layout/view
+    fn switch_back_to_prev_view(&mut self) {
+        let prev_layout = &self.next_layout;
+        let prev_view = &self.next_view;
+        if prev_layout.is_some() || prev_view.is_some() {
+            let ui_message = crate::user_interface::Msg::ChangeUILayoutView(
+                prev_layout.clone(),
+                prev_view.clone(),
+            );
+            self.ui_connection.emit(ui_message);
+            self.next_layout = None;
+            self.next_view = None;
+        };
+    }
     /// Selects one of the available layouts or the fallback layout to start the keyboard with
     fn get_start_layout_view(available_layout_names: HashSet<String>) -> (String, String) {
         // If no other layout/view is selecte, start with the fallback layout/view
@@ -288,17 +402,6 @@ impl Keyboard {
         (start_layout, start_view)
     }
 
-    /// Switches the layout/view back to the supplied layout/view
-    /// This method is meant to be used to switch back to the previous layout/view
-    fn switch_back_to_prev_view(&mut self, prev_layout: Option<String>, prev_view: Option<String>) {
-        if prev_layout.is_some() || prev_view.is_some() {
-            let ui_message = crate::user_interface::Msg::ChangeUILayoutView(prev_layout, prev_view);
-            self.ui_connection.emit(ui_message);
-            self.prev_layout = None;
-            self.prev_view = None;
-        };
-    }
-
     /// Fetch the events from the wayland event queue
     pub fn fetch_events(&mut self) {
         self.submitter.fetch_events();
@@ -307,73 +410,5 @@ impl Keyboard {
     /// Submit the text
     pub fn submit_text(&mut self, text: String) {
         self.submitter.submit(Submission::Text(text));
-    }
-
-    /// Each KeyAction results in a message to the UI and/or a Submission.
-    /// This method translates the KeyAction in its UI message and Submission
-    fn get_ui_submitter_msg_from_action(
-        &mut self,
-        key_id: &str,
-        action: &KeyAction,
-    ) -> (Option<Msg>, Option<Submission>) {
-        let mut submission = None;
-        let mut ui_message = None;
-        match action {
-            KeyAction::EnterKeycode(keycode) => {
-                submission = Some(Submission::Keycode(*keycode));
-            }
-            KeyAction::ToggleKeycode(keycode) => {
-                submission = Some(Submission::ToggleKeycode(*keycode));
-            }
-            KeyAction::EnterString(text) => submission = Some(Submission::Text(text.to_string())),
-            KeyAction::Modifier(modifier) => {
-                submission = Some(Submission::Modifier(modifier.clone()));
-                // If the modifier key id is present in the latched_keys HashMap, remove it
-                if self.latched_keys.remove(key_id) {
-                    info! {
-                        "'{}' key is no longer latched", key_id
-                    }
-                } else {
-                    info! {
-                        "'{}' key is now latched", key_id
-                    }
-                    // Else insert it
-                    self.latched_keys.insert(key_id.to_string());
-                }
-            }
-            KeyAction::Erase => {
-                submission = Some(Submission::Erase(1));
-            }
-            KeyAction::SwitchView(new_view) => {
-                ui_message = Some(crate::user_interface::Msg::ChangeUILayoutView(
-                    None,
-                    Some(new_view.to_string()),
-                ));
-            }
-            KeyAction::TempSwitchView(new_view) => {
-                ui_message = Some(crate::user_interface::Msg::ChangeUILayoutView(
-                    None,
-                    Some(new_view.to_string()),
-                ));
-                self.prev_view = Some(self.active_view.1.clone());
-            }
-            KeyAction::SwitchLayout(new_layout) => {
-                ui_message = Some(crate::user_interface::Msg::ChangeUILayoutView(
-                    Some(new_layout.to_string()),
-                    None,
-                ));
-            }
-            KeyAction::TempSwitchLayout(new_layout) => {
-                ui_message = Some(crate::user_interface::Msg::ChangeUILayoutView(
-                    Some(new_layout.to_string()),
-                    None,
-                ));
-                self.prev_layout = Some(self.active_view.0.clone());
-            }
-            KeyAction::OpenPopup => {
-                ui_message = Some(crate::user_interface::Msg::OpenPopup(key_id.to_string()));
-            }
-        }
-        (ui_message, submission)
     }
 }
