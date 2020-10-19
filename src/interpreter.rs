@@ -2,11 +2,15 @@
 use std::sync::mpsc;
 
 // Imports from other modules
+use crate::keyboard::UIConnector;
 use crate::submitter::Submission;
+#[cfg(feature = "suggestions")]
+use crate::user_interface::Msg;
 
 /// The Interpreter attempts to correct errors and guess the submission the user had in mind when clicking the key.
 /// Currently it only changes '  ' to '. '
 pub struct Interpreter {
+    ui_connection: UIConnector,
     receiver: mpsc::Receiver<(String, String)>,
     text_left_of_cursor: String,
     text_right_of_cursor: String,
@@ -15,11 +19,15 @@ pub struct Interpreter {
 
 impl Interpreter {
     /// Create a new Interpreter
-    pub fn new(receiver: mpsc::Receiver<(String, String)>) -> Interpreter {
+    pub fn new(
+        ui_connection: UIConnector,
+        receiver: mpsc::Receiver<(String, String)>,
+    ) -> Interpreter {
         let prev_submissions = Vec::new();
         let text_left_of_cursor = "".to_string();
         let text_right_of_cursor = "".to_string();
         Interpreter {
+            ui_connection,
             receiver,
             text_left_of_cursor,
             text_right_of_cursor,
@@ -57,6 +65,15 @@ impl Interpreter {
             }
         }
         self.prev_submissions = new_submissions.clone();
+
+        // Notify the UI about new suggestions
+        // Suggestions are not implemented yet so these don't make any sense
+        #[cfg(feature = "suggestions")]
+        self.ui_connection.emit(Msg::Suggestions((
+            Some("A".to_string()),
+            None,
+            Some("sug_right".to_string()),
+        )));
         new_submissions
     }
 

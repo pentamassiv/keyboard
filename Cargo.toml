@@ -43,7 +43,7 @@ default = []
 
 # Activates gesture feature
 # Currently there will only be the path painted but no gesture detection. This will change within the next few months
-gesture = ["cairo-rs"]
+gesture = ["cairo-rs", "suggestions"]
 
 # Suggestions are not functional yet so they can be ignored
 suggestions = []

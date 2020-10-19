@@ -68,7 +68,11 @@ impl relm::Update for Win {
             }
             // Tell the keyboard to submit the text
             Msg::SubmitText(text) => self.keyboard.submit_text(text),
-            // Have the UIManager handle the change of visibility
+            // Update the labels of the buttons for the suggestions
+            #[cfg(feature = "suggestions")]
+            Msg::Suggestions((left, center, right)) => {
+                self.update_suggestions(left, center, right);
+            }
             Msg::SetVisibility(new_visibility) => {
                 self.ui_manager.change_visibility(new_visibility);
             }

@@ -1,4 +1,6 @@
 // Imports from other crates
+#[cfg(feature = "suggestions")]
+use gtk::ButtonExt;
 use gtk::WidgetExt;
 use relm::Channel;
 use std::collections::HashMap;
@@ -36,6 +38,9 @@ pub enum Msg {
     OpenPopup(String),
     // Contains a string that will be submitted by the keyboard
     SubmitText(String),
+    // Updates the suggestions
+    #[cfg(feature = "suggestions")]
+    Suggestions((Option<String>, Option<String>, Option<String>)),
     // Contains the value the visibility of the user interface is supposed to be set to
     SetVisibility(bool),
     // Contains the ContentHint and ContentPurpose the user_interface is supposed to be set to. This is not implemented yet but in the future, it could change the layout
@@ -71,11 +76,22 @@ struct Gestures {
     drag_gesture: gtk::GestureDrag,
 }
 
+#[cfg(feature = "suggestions")]
+#[derive(Debug, Clone)]
+/// Contains the buttons that display the suggestions
+struct Suggestions {
+    left: gtk::Button,
+    center: gtk::Button,
+    right: gtk::Button,
+}
+
 /// Contains all widgets that need to get accessed
 struct Widgets {
     window: gtk::Window,
     _overlay: gtk::Overlay,
     _draw_handler: relm::DrawHandler<gtk::DrawingArea>,
+    #[cfg(feature = "suggestions")]
+    suggestions: Suggestions,
     stack: gtk::Stack,
 }
 
@@ -153,5 +169,29 @@ impl Win {
         // Paint the line of dots
         context.stroke();
         info!("Path of gesture was drawn");
+    }
+
+    #[cfg(feature = "suggestions")]
+    fn update_suggestions(
+        &mut self,
+        left: Option<String>,
+        center: Option<String>,
+        right: Option<String>,
+    ) {
+        if let Some(left) = left {
+            self.widgets.suggestions.left.set_label(&left);
+        } else {
+            self.widgets.suggestions.left.set_label("");
+        }
+        if let Some(center) = center {
+            self.widgets.suggestions.center.set_label(&center);
+        } else {
+            self.widgets.suggestions.center.set_label("");
+        }
+        if let Some(right) = right {
+            self.widgets.suggestions.right.set_label(&right);
+        } else {
+            self.widgets.suggestions.right.set_label("");
+        }
     }
 }

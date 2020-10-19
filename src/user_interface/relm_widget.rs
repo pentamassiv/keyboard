@@ -11,6 +11,8 @@ use std::collections::HashMap;
 
 // Imports from other modules
 use super::gesture_handler::GestureSignal;
+#[cfg(feature = "suggestions")]
+use super::Suggestions;
 use super::{Gestures, Msg, Orientation, UIManager, Widgets, Win};
 use crate::config::directories;
 use crate::config::input_settings;
@@ -62,9 +64,22 @@ impl relm::Widget for Win {
         let v_box = gtk::Box::new(gtk::Orientation::Vertical, 2);
 
         #[cfg(feature = "suggestions")]
+        let suggestions;
+        #[cfg(feature = "suggestions")]
         {
             // Make the box of suggestions
-            let h_box = make_suggestions_hbox(relm, &keyboard);
+            let h_box = gtk::Box::new(gtk::Orientation::Horizontal, 0);
+            h_box.set_margin_start(0);
+            h_box.set_margin_end(0);
+            let suggestions_and_pref_buttons = make_suggestions_and_pref_buttons(relm, &keyboard);
+            suggestions = Suggestions {
+                left: suggestions_and_pref_buttons.get(0).unwrap().clone(),
+                center: suggestions_and_pref_buttons.get(1).unwrap().clone(),
+                right: suggestions_and_pref_buttons.get(2).unwrap().clone(),
+            };
+            for button in suggestions_and_pref_buttons {
+                h_box.add(&button);
+            }
             v_box.add(&h_box);
             info! {"Suggestion buttons added"};
         }
@@ -107,6 +122,8 @@ impl relm::Widget for Win {
                 window,
                 _overlay: overlay,
                 _draw_handler: draw_handler,
+                #[cfg(feature = "suggestions")]
+                suggestions,
                 stack,
             },
             gestures: Gestures {
@@ -260,25 +277,22 @@ fn load_css() {
 }
 
 #[cfg(feature = "suggestions")]
-/// Create a horizontal box of suggestion buttons and a button to open the preferences
-fn make_suggestions_hbox(relm: &relm::Relm<super::Win>, keyboard: &keyboard::Keyboard) -> gtk::Box {
+/// Create the suggestion buttons and a button to open the preferences
+fn make_suggestions_and_pref_buttons(
+    relm: &relm::Relm<super::Win>,
+    keyboard: &keyboard::Keyboard,
+) -> Vec<gtk::Button> {
     // Make the buttons to display suggestions
-    let suggestion_buttons = make_suggestion_buttons(relm);
+    let mut buttons = make_suggestion_buttons(relm);
     // Make a button that openes the preferences
     let mut layout_names = Vec::new();
     for (layout_name, _) in keyboard.views.keys() {
         layout_names.push(layout_name);
     }
     let preferences_button = make_pref_button(relm, layout_names);
-    // Add the preferences button and the others to a horizontal box and return it
-    let h_box = gtk::Box::new(gtk::Orientation::Horizontal, 0);
-    h_box.set_margin_start(0);
-    h_box.set_margin_end(0);
-    for suggestion_button in suggestion_buttons {
-        h_box.add(&suggestion_button);
-    }
-    h_box.add(&preferences_button);
-    h_box
+    // Add the preferences button
+    buttons.push(preferences_button);
+    buttons
 }
 
 #[cfg(feature = "suggestions")]

@@ -100,7 +100,7 @@ impl Keyboard {
         // Create a new channel. This will be used to send changes of the surrounding text to the interpreter
         let (tx, rx) = mpsc::channel();
         // Create a new interpreter that stores the receiver of the channel
-        let interpreter = Interpreter::new(rx);
+        let interpreter = Interpreter::new(ui_connection.clone(), rx);
         // Create a new connection to allow the input_method protocol to notify the keyboard about changes to the surrounding text
         let content_connector = content_connector::ContentConnector::new(tx);
         // Create a new Submitter

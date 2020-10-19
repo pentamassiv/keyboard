@@ -3,3 +3,11 @@ installation/packaging/bin/keyboard/data
 installation/packaging/bin/keyboard/installation/packaging/virtboard
 installation/packaging/bin/keyboard/target/release/fingerboard
 .vscode/settings.json
+osk-wayland
+QEMU/gtk-layer-shell.tar.gz
+QEMU/usr/lib/libgtk-layer-shell.so.0
+QEMU/usr/lib/libgtk-layer-shell.so.0.3.0
+QEMU/usr/lib/pkgconfig/gtk-layer-shell-0.pc
+QEMU/usr/lib/libgtk-layer-shell.so
+QEMU/usr/include/gtk-layer-shell/gtk-layer-shell.h
+docs/install.sh
