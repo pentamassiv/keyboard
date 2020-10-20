@@ -121,12 +121,12 @@ package submitter {
         }
     }
 
-    Submitter *-- IMService : uses
-    Submitter *-- VKService : uses
-    Submission - Submitter : handles
-    Submitter - Wayland : calls
-    IMServiceArc "1" *-- "1" IMProtocolState : pending
-    IMServiceArc "1" *-- "1" IMProtocolState : current
-    IMService "1" *-- "1" IMServiceArc : wrapps
+    Submitter *-- IMService : > uses
+    Submitter *-- VKService : > uses
+    Submission - Submitter : < handles
+    Submitter - Wayland : > calls method
+    IMServiceArc "1" *- "1" IMProtocolState : > pending
+    IMServiceArc "1" *- "1" IMProtocolState : > current
+    IMService "1" *-- "1" IMServiceArc : > wrapps
 }
 @enduml

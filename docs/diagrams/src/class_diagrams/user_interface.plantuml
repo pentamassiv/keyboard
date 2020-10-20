@@ -3,10 +3,8 @@
 !includeurl https://raw.githubusercontent.com/grelltrier/RedDress-PlantUML/master/style.puml
 
 package user_interface {
-note "The enums TapMotion, Interaction, LayoutMeta, \nKeyArrangement, KeyMeta, KeyDisplay and Location from \nthe keyboard package are also used but not displayed to \nnot obstruct the diagram" as N
 
     +class Model {
-        {field} gesture: GestureModel
     }
     +enum Msg {
         {field} GestureSignal(f64, f64, GestureSignal)
@@ -59,11 +57,11 @@ note "The enums TapMotion, Interaction, LayoutMeta, \nKeyArrangement, KeyMeta, K
         {method} {static} make_suggestion_buttons(relm: &relm::Relm<super::Win>): Vec<gtk::Button>
     }
 
-    +class GridBuilder{
-        {method} +make_stack(relm: &relm::Relm<crate::user_interface::Win>, layout_meta_hashmap: HashMap<String, LayoutMeta>): (Stack, HashMap<ButtonId, (ToggleButton, Option<Popover>)>)
-        make_grid(relm: &relm::Relm<crate::user_interface::Win>, view_arrangement: &KeyArrangement, view_keys: &HashMap<String, KeyMeta>): (Grid, HashMap<String, (ToggleButton, Option<Popover>)>)
+    +abstract class GridBuilder{
+        {method} +make_stack(relm: &relm::Relm<Win>, layout_meta_hashmap: HashMap<String, LayoutMeta>): (Stack, HashMap<ButtonId, (ToggleButton, Option<Popover>)>)
+        make_grid(relm: &relm::Relm<Win>, view_arrangement: &KeyArrangement, view_keys: &HashMap<String, KeyMeta>): (Grid, HashMap<String, (ToggleButton, Option<Popover>)>)
         {method} make_button(key_id: &str, key_meta: &KeyMeta): ToggleButton
-        {method} attach_popover(relm: &relm::Relm<crate::user_interface::Win>,button: ToggleButton, key_meta: &KeyMeta): Option<Popover>
+        {method} attach_popover(relm: &relm::Relm<Win>,button: ToggleButton, key_meta: &KeyMeta): Option<Popover>
         {method} +make_grid_name(layout_name: &str, view_name: &str): String
     }
 
@@ -113,32 +111,21 @@ note "The enums TapMotion, Interaction, LayoutMeta, \nKeyArrangement, KeyMeta, K
     Win *-- Model
     Win *-- Widgets
     Win *-- Gestures
-    Win - Msg: receives
+    Win - Msg: < receives
     Win *-- UIManager
     Win -() "relm::Update"
     "relm::Widget" ()- Win
-    UIManager - Msg: emits
+    UIManager - Msg: > emits
     UIManager *-- dbus.DBusService
     GestureModel *-- GestureInterpretation
-    GestureModel "1" -- "many" Point: describes gesture
-    GridBuilder -- Win : creates
-    GridBuilder -- submitter.layer_shell : calls method
-    Win -- GestureSignal : emits
-    GestureModel - GestureSignal : interprets
+    GestureModel "1" -- "many" Point: > describe gesture
+    GridBuilder -- Win : > creates
+    GridBuilder -- submitter.layer_shell : > calls method
+    Win -- GestureSignal : > emits
+    GestureModel - GestureSignal : > interprets
 
     ' The following are structs from other packages
     Win *-- keyboard.Keyboard
-
-    ' The following are enums from other packages
-    
-    ' The enums were left out of the diagram to make it better readable
-    ' Msg -- keyboard.TapMotion
-    ' GestureModel -- keyboard.Interaction
-    ' GridBuilder -- keyboard.LayoutMeta
-    ' GridBuilder -- keyboard.KeyArrangement
-    ' GridBuilder -- keyboard.KeyMeta
-    ' GridBuilder -- keyboard.KeyDisplay
-    ' GridBuilder -- keyboard.Location
 
 }
 @enduml

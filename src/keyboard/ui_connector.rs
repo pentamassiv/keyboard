@@ -12,7 +12,7 @@ use crate::user_interface::Win;
 /// This is a connection to send messages to the UI
 /// It is used by the input_method service to notify the UI about requested changes to the visibility or content hint/purpose
 pub struct UIConnector {
-    pub message_pipe: relm::Relm<crate::user_interface::Win>,
+    message_pipe: relm::Relm<crate::user_interface::Win>,
 }
 
 impl UIConnector {
