@@ -124,7 +124,7 @@ impl VKService {
         // Wrap the service in Arc<Mutex<>>
         let vk_service = Arc::new(Mutex::new(vk_service));
         // Overwrite the default handler of the CTRL+C signal to release the keys and modifiers when it is received
-        VKService::release_keys_when_ctrl_c(Arc::clone(&vk_service));
+        VKService::release_keys_on_ctrl_c(Arc::clone(&vk_service));
         vk_service
     }
 
@@ -380,7 +380,7 @@ impl VKService {
     }
 
     /// Overwrites the handle of the CTRL+C signal so that all keys and modifiers are released before the application is ended
-    fn release_keys_when_ctrl_c(vk_service: Arc<Mutex<VKService>>) {
+    fn release_keys_on_ctrl_c(vk_service: Arc<Mutex<VKService>>) {
         ctrlc::set_handler(move || {
         warn!("Received CTRL+C signal. Aborting program!");
         if vk_service

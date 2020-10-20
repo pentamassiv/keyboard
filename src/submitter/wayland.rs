@@ -113,7 +113,6 @@ pub fn get_layer_shell() -> Option<LayerShell> {
 pub fn init_wayland() -> (
     EventQueue,
     WlSeat,
-    //Option<LayerShell>, // Possibly remove
     Option<VirtualKeyboardMgr>,
     Option<InputMethodMgr>,
 ) {

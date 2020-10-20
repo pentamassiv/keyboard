@@ -1,0 +1,144 @@
+@startuml user_interface
+!define DARKBLUE
+!includeurl https://raw.githubusercontent.com/grelltrier/RedDress-PlantUML/master/style.puml
+
+package user_interface {
+note "The enums TapMotion, Interaction, LayoutMeta, \nKeyArrangement, KeyMeta, KeyDisplay and Location from \nthe keyboard package are also used but not displayed to \nnot obstruct the diagram" as N
+
+    +class Model {
+        {field} gesture: GestureModel
+    }
+    +enum Msg {
+        {field} GestureSignal(f64, f64, GestureSignal)
+        {field} ButtonInteraction(String, String, String, TapMotion),
+        {field} OpenPopup(String)
+        {field} SubmitText(String)
+        {field} Suggestions((Option<String>, Option<String>, Option<String>))
+        {field} SetVisibility(bool)
+        {field} HintPurpose(ContentHint, ContentPurpose)
+        {field} ChangeUILayoutView(Option<String>, Option<String>)
+        {field} ChangeUIOrientation(Orientation)
+        {field} ChangeKBLayoutView(String, String)
+        {field} PollEvents
+        {field} UpdateDrawBuffer
+        {field} Quit
+    }
+
+    class Gestures {
+        {field} long_press_gesture: gtk::GestureLongPress
+        {field} drag_gesture: gtk::GestureDrag
+    }
+
+    class Suggestions {
+        {field} left: gtk::Button
+        {field} center: gtk::Button
+        {field} right: gtk::Button
+    }
+
+    class Widgets {
+        {field} window: gtk::Window
+        {field} _overlay: gtk::Overlay
+        {field} _draw_handler: relm::DrawHandler<gtk::DrawingArea>
+        {field} suggestions: Suggestions
+        {field} stack: gtk::Stack
+    }
+
+    +class Win {
+        {field} +relm: relm::Relm
+        {field} key_refs: HashMap<(String, String, String), (gtk::ToggleButton, Option<gtk::Popover>)>,
+        {field} _channel: Channel<Msg>
+
+        {method} get_rel_coordinates(x: f64, y: f64): (i32, i32)
+        {method} erase_path()
+        {method} draw_path() 
+        {method} update_suggestions(left: Option<String>, center: Option<String>, right: Option<String>)
+
+        {method} {static} load_css()
+        {method} {static} make_suggestions_and_pref_buttons(relm: &relm::Relm<super::Win>, keyboard: &keyboard::Keyboard): Vec<gtk::Button>
+        {method} {static} make_pref_button(relm: &relm::Relm<super::Win>, layout_names: Vec<&String>): gtk::Button
+        {method} {static} make_suggestion_buttons(relm: &relm::Relm<super::Win>): Vec<gtk::Button>
+    }
+
+    +class GridBuilder{
+        {method} +make_stack(relm: &relm::Relm<crate::user_interface::Win>, layout_meta_hashmap: HashMap<String, LayoutMeta>): (Stack, HashMap<ButtonId, (ToggleButton, Option<Popover>)>)
+        make_grid(relm: &relm::Relm<crate::user_interface::Win>, view_arrangement: &KeyArrangement, view_keys: &HashMap<String, KeyMeta>): (Grid, HashMap<String, (ToggleButton, Option<Popover>)>)
+        {method} make_button(key_id: &str, key_meta: &KeyMeta): ToggleButton
+        {method} attach_popover(relm: &relm::Relm<crate::user_interface::Win>,button: ToggleButton, key_meta: &KeyMeta): Option<Popover>
+        {method} +make_grid_name(layout_name: &str, view_name: &str): String
+    }
+
+    +class UIManager {
+        {field} sender: Sender<Msg>
+        {field} window: Window
+        {field} stack: Stack
+        {field} +current_layout_view: (String, String)
+        {field} prev_layout: String
+
+        {method} +new(sender: Sender<super::Msg>, window: Window, stack: Stack, current_layout_view: (String, String)): UIManager
+        {method} +haptic_feedback(is_press: bool)
+        {method} +change_visibility(new_visibility: bool)
+        {method} +change_hint_purpose(content_hint: ContentHint, content_purpose: ContentPurpose)
+        {method} +change_orientation(orientation: Orientation)
+        {method} +change_layout_view(new_layout: &Option<String>, new_view: Option<String>): Result<(), UIError>
+        {method} make_new_layout_view_name(new_layout: &Option<String>, new_view: Option<String>): (String, String)
+    }
+
+    +class Point {
+        {field} +x: f64
+        {field} +y: f64
+        {field} +time: Instant
+    }
+    
+    +enum GestureSignal {
+        {field} DragBegin
+        {field} DragUpdate
+        {field} DragEnd
+        {field} LongPress
+    }
+
+    enum GestureInterpretation {
+        {field} NoGesture
+        {field} LongPress
+        {field} Swipe
+    }
+
+    +class GestureModel {
+        {method} +new(): GestureModel
+        {method} +convert_to_interaction(x: f64, y: f64, input: GestureSignal): ((f64, f64), Interaction)
+        {method} +get_swipe_path(): Vec<Point> 
+    }
+
+    Model *-- GestureModel
+    Widgets *-- Suggestions
+    Win *-- Model
+    Win *-- Widgets
+    Win *-- Gestures
+    Win - Msg: receives
+    Win *-- UIManager
+    Win -() "relm::Update"
+    "relm::Widget" ()- Win
+    UIManager - Msg: emits
+    UIManager *-- dbus.DBusService
+    GestureModel *-- GestureInterpretation
+    GestureModel "1" -- "many" Point: describes gesture
+    GridBuilder -- Win : creates
+    GridBuilder -- submitter.layer_shell : calls method
+    Win -- GestureSignal : emits
+    GestureModel - GestureSignal : interprets
+
+    ' The following are structs from other packages
+    Win *-- keyboard.Keyboard
+
+    ' The following are enums from other packages
+    
+    ' The enums were left out of the diagram to make it better readable
+    ' Msg -- keyboard.TapMotion
+    ' GestureModel -- keyboard.Interaction
+    ' GridBuilder -- keyboard.LayoutMeta
+    ' GridBuilder -- keyboard.KeyArrangement
+    ' GridBuilder -- keyboard.KeyMeta
+    ' GridBuilder -- keyboard.KeyDisplay
+    ' GridBuilder -- keyboard.Location
+
+}
+@enduml

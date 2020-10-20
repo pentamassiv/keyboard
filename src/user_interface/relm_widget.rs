@@ -139,7 +139,7 @@ impl relm::Widget for Win {
     /// This includes adding callbacks for GTK events and starting the UI with the currently active layout/view
     fn init_view(&mut self) {
         // Try making the window a layer
-        if crate::submitter::wayland::get_layer_shell().is_some() {
+        if wayland::get_layer_shell().is_some() {
             wayland::layer_shell::make_overlay_layer(&self.widgets.window);
         }
 
