@@ -1,4 +1,4 @@
-@startuml parse_yaml_file
+@startuml layout_yaml_parser_get_layouts
 partition "LayoutYamlParser::get_layouts()"{
     
     start

@@ -1,0 +1,28 @@
+@startuml layout_meta_from
+partition "LayoutMeta::from()"{
+  
+  start
+  :LayoutYamlParser::get_layouts();
+  :         <<CentralBuffer>>
+  LayoutDeserialized storage|
+
+  :Create LayoutMeta storage;
+  : <<CentralBuffer>>
+  LayoutMeta storage|
+  while (more LayoutDeserialized?) is (yes)
+    :LayoutMeta::from(layout_deserialized);
+    :result|
+    if (result) then (Ok)
+    :LayoutMeta|
+    :Add to storage;
+    else (no)
+        :Emit error;
+    endif
+  endwhile (no)
+
+  :         <<CentralBuffer>>
+  LayoutDeserialized storage|
+
+  stop
+}
+@enduml

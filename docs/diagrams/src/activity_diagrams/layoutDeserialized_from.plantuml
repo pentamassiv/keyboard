@@ -1,4 +1,4 @@
-@startuml deserialize_layout
+@startuml layout_deserialized_from
 partition "LayoutDeserialized::from()"{
     start
 
@@ -11,20 +11,29 @@ partition "LayoutDeserialized::from()"{
         :result|
     else (fallback_string)
         :serde_yaml::from_str(fallback_string);
-
         :result|
     endif
 
     if (result) then (success)
         :deserialized_layout|
         :Ok(file_name, deserialized_layout)|
+        note left
+           The layout needs
+           default information
+           added before it 
+           can be used to 
+           construct a
+           Keyboard from it.
+           This is why it later
+           gets converted 
+           to a LayoutMeta 
+        end note
+        stop
     else (error)
         :Emit info;
         :Err()|
+        stop
     endif
-
-    stop
-
 }
 
 @enduml

@@ -1,4 +1,4 @@
-@startuml init_view
+@startuml win_view
 partition "Win::view()"{
   start
   :load_css();
@@ -26,6 +26,8 @@ partition "Win::view()"{
   :Set up Window;
   :Attach gtk::GestureHandlers to Overlay;
   :Create UIManager;
+  :Create Win;
+  :Win|
   stop
 }
 

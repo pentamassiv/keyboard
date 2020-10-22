@@ -1,4 +1,4 @@
-@startuml load_css
+@startuml win_load_css
 
 partition "Win::load_css()"{  
   start
