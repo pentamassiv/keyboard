@@ -1,0 +1,22 @@
+@startuml deserialize_LayoutMeta
+partition "LayoutDeserialized::from()"{
+  
+  start
+  :LayoutYamlParser::get_layouts();
+  :    <<HashMap>>
+  LayoutDeserialized|
+
+  :Create storage;
+  :    <<HashMap>>
+  LayoutMeta storage|
+  while (more LayoutDeserialized?) is (yes)
+    :LayoutMeta::from(layout_deserialized);
+    :LayoutMeta|
+    :Add to storage;
+  endwhile (no)
+
+  :return storage;
+
+  stop
+}
+@enduml

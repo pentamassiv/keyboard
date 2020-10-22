@@ -1,0 +1,38 @@
+@startuml parse_yaml_file
+partition "LayoutYamlParser::get_layouts()"{
+    
+    start
+
+    :        <<CentralBuffer>>
+    LayoutDeserialized storage|
+
+    if (Get path to layout definitions) then (success)
+        if (Read directory) then (success)
+            while (YAML file available?) is (yes)
+                :LayoutSource|
+                :LayoutDeserialized::from(layout_source);
+                :LayoutDeserialized|
+                :Add deserialized layout to buffer;
+            endwhile (no)
+        else (failure)
+            :Emit error;
+        endif
+    else (failure)
+    endif
+
+    :get_locale_language();
+    :Language of user|
+    if (Layout with language of user available?) then (yes)
+    else (no)
+        :Emit warning;
+        :Deserialize layout from fallback string;
+        :LayoutDeserialized|
+        :Add deserialized layout to buffer;
+    endif
+
+    :        <<CentralBuffer>>
+    LayoutDeserialized storage|
+
+    stop
+}
+@enduml
