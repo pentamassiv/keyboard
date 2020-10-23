@@ -4,19 +4,24 @@ partition "LayoutDeserialized::from()"{
 
     if (Deserialize from) then (file)
         :Get file name;
-        :file_name|
+        if (file name = 'previous') then (no)
+        else (yes)
+            :Err()]
+            stop
+        endif
+        :file_name]
         :Open file;
-        :yaml_file|
+        :yaml_file]
         :serde_yaml::from_reader(yaml_file);
-        :result|
+        :result]
     else (fallback_string)
         :serde_yaml::from_str(fallback_string);
-        :result|
+        :result]
     endif
 
     if (result) then (success)
-        :deserialized_layout|
-        :Ok(file_name, deserialized_layout)|
+        :deserialized_layout]
+        :Ok(file_name, deserialized_layout)]
         note left
            The layout needs
            default information
@@ -31,7 +36,7 @@ partition "LayoutDeserialized::from()"{
         stop
     else (error)
         :Emit info;
-        :Err()|
+        :Err()]
         stop
     endif
 }

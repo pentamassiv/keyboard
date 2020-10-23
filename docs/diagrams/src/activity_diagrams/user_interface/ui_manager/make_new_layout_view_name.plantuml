@@ -1,0 +1,27 @@
+@startuml uimanager::make_new_layout_view_name
+
+partition "UIManager::make_new_layout_view_name()"{
+  start
+  :view = current view;
+  
+  if (supposed to change to new layout?) then (yes)
+    if (new layouts name is 'previous') then (yes)
+      :layout = previous layout;
+    else (no)
+      :layout = new layout;
+    endif
+    :view = "base";
+  else (no)
+    :layout = current layout;
+  endif
+  
+  if (supposed to change to new view?) then (yes)
+    :view = new view;
+  else (no)
+  endif
+  
+  : (layout, view)]
+
+  stop
+}
+@enduml

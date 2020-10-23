@@ -172,28 +172,25 @@ impl<T: 'static + KeyboardVisibility + HintPurpose, D: 'static + ReceiveSurround
     /// If it is not available, submit each character individually via virtual_keyboard protocol (This is error prone and should only be used as a last resort).
     fn submit_text(&mut self, text: &str) {
         info!("Submitter is trying to submit the text: {}", text);
-        let mut success = false;
         if let Some(im) = &mut self.im_service {
             if im.commit_string(text.to_string()).is_ok() && im.commit().is_ok() {
-                success = true;
+                return;
             };
         }
-        if !success {
-            if let Some(virtual_keyboard) = &mut self.virtual_keyboard {
-                // The virtual_keyboard protocol is very limited regarding text input and can only input individual keys. Trying to submit each character individually
-                if virtual_keyboard
-                    .lock()
-                    .unwrap()
-                    .send_unicode_str(&text)
-                    .is_ok()
-                {
-                    success = true;
-                }
+
+        if let Some(virtual_keyboard) = &mut self.virtual_keyboard {
+            // The virtual_keyboard protocol is very limited regarding text input and can only input individual keys. Trying to submit each character individually
+            if virtual_keyboard
+                .lock()
+                .unwrap()
+                .send_unicode_str(&text)
+                .is_ok()
+            {
+                return;
             }
         }
-        if !success {
-            error!("Failed to submit the text: {}", text);
-        }
+
+        error!("Failed to submit the text: {}", text);
     }
 
     /// Erases the specified amount of chars left of the cursor
@@ -203,35 +200,30 @@ impl<T: 'static + KeyboardVisibility + HintPurpose, D: 'static + ReceiveSurround
             "Submitter is trying to erase the last {} characters",
             no_char
         );
-        let mut success = false;
         if let Some(im) = &self.im_service {
             if im.delete_surrounding_text(no_char, 0).is_ok() && im.commit().is_ok() {
-                success = true;
+                info!("Submitter successfully used input_method to erase the characters");
+                return;
             };
-            info!("Submitter successfully used input_method to erase the characters");
         }
-        if !success {
-            if let Some(virtual_keyboard) = &mut self.virtual_keyboard {
-                for _ in 0..no_char {
-                    // Keycode for 'DELETE is 111
-                    if virtual_keyboard
-                        .lock()
-                        .unwrap()
-                        .press_release_key(111)
-                        .is_err()
-                    {
-                        break;
-                    } else {
-                        info!(
-                            "Submitter successfully used virtual_keyboard to erase the characters"
-                        );
-                        success = true;
-                    }
+
+        if let Some(virtual_keyboard) = &mut self.virtual_keyboard {
+            for _ in 0..no_char {
+                // Keycode for 'DELETE is 111
+                if virtual_keyboard
+                    .lock()
+                    .unwrap()
+                    .press_release_key(111)
+                    .is_err()
+                {
+                    break;
+                } else {
+                    info!("Submitter successfully used virtual_keyboard to erase the characters");
                 }
             }
+            return;
         }
-        if !success {
-            error!("Submitter failed to erase the characters");
-        }
+
+        error!("Submitter failed to erase the characters");
     }
 }

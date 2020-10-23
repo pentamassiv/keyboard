@@ -167,6 +167,10 @@ impl LayoutDeserialized {
             LayoutSource::YamlFile(path) => {
                 // Use the file name as the name for the layout
                 layout_name = String::from(path.file_stem().unwrap().to_str().unwrap());
+                // The name 'previous' can not be used because it is used to signal that the layout is supposed to switch to the previous layout
+                if layout_name == "previous" {
+                    return Err(Error::custom("The layout can not be named 'previous'. That name is used internally and can not be used because it would never be possible to switch to this layout. Please chose a different name"));
+                }
                 // Try to open the file
                 let file_descriptor: String = format!("{}", &path.display());
                 let yaml_file = File::open(&file_descriptor).expect("No file found!");

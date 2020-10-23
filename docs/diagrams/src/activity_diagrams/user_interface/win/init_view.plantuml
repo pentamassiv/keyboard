@@ -1,0 +1,31 @@
+@startuml win_init_view
+
+partition "Win::init_view()"{  
+  start
+  if (Compositor supports layer shell?) then (yes)
+    :layer_shell::make_overlay_layer();
+  endif
+  :Set up callbacks for possible events;
+  note right
+    The callbacks will cause a message
+    to be sent over Relm's stream.
+    The message is then handled in the
+    update() method of the Win struct
+  end note
+  :Make all widgets visible;
+  :Hide the window;
+  note right
+    The window starts out hidden 
+    and is only displayed when
+    requested (by DBus or input_method)
+  end note
+  :Make the grid from the 
+  active view of the keyboard visible;
+  note right
+    The window remains hidden
+    This sets up the stack for 
+    when the window becomes visible
+  end note
+  stop
+}
+@enduml

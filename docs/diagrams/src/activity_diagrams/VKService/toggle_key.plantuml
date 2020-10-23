@@ -1,0 +1,12 @@
+@startuml vkservice_toggle_key
+
+partition "VKService::toggle_key()"{
+  start
+    if (key is already pressed?) then (yes)
+      :Use VKService::send_key() to release it;
+    else (no)
+      :Use VKService::send_key() to press it;
+    endif
+    :result]
+  stop
+@enduml

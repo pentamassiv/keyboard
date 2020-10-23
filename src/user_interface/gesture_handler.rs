@@ -81,9 +81,11 @@ impl GestureModel {
                     GestureInterpretation::Swipe => Interaction::Swipe(SwipeAction::Update),
                 }
             }
-            // If the signal was a DragEnd, the interaction depends on the previous interpretation of a signal
-            // and the swipe path is cleared
+            // If the signal was a DragEnd, the swipe path is cleared
+            // and the returned interaction depends on the previous interpretation of a signal
             GestureSignal::DragEnd => {
+                // Clear swipe path
+                self.swipe_path = Vec::new();
                 let new_interaction = match self.prev_interpretation {
                     // If no gesture was detected, it was a short release
                     GestureInterpretation::NoGesture => {
@@ -96,8 +98,6 @@ impl GestureModel {
                     // And if the previously detected gesture was a swipe, the returned interaction is a 'SwipeFinish'
                     GestureInterpretation::Swipe => Interaction::Swipe(SwipeAction::Finish),
                 };
-                // Clear swipe path
-                self.swipe_path = Vec::new();
                 self.prev_interpretation = GestureInterpretation::NoGesture;
                 new_interaction
             }

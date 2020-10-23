@@ -1,0 +1,16 @@
+@startuml win_make_suggestions_and_pref_buttons
+
+partition "Win::make_suggestions_and_pref_buttons()"{  
+  start
+  :Win::make_suggestion_buttons();
+  :<<CentralBuffer>>
+      ButtonStorage]
+  :Get all layout names from keyboard;
+  :Win::make_pref_button();
+  :Preferences Button]
+  :Add preference button to storage;
+  :<<CentralBuffer>>
+      ButtonStorage]
+  stop
+}
+@enduml

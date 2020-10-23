@@ -1,0 +1,24 @@
+@startuml uimanager::change_layout_view
+
+partition "UIManager::change_layout_view()"{
+  start
+  :UIManager::make_new_layout_view_name();
+  :Make the stack name from it;
+  if (stack has child with that name) then (yes)
+    :Change to that child of the stack;
+    :Notify the Win struct about the change by 
+    sending a ChangeKBLayoutView message;
+    if (new layout was set) then (yes)
+      :Set prev_layout to old layout;
+    else (no)
+    endif
+    :Set current layout and view to new values;
+    :Ok(())]
+  else (no)
+    :Emit warning;
+    :Err(UIError::LayoutViewNonExistent)]
+  endif
+  
+  stop
+}
+@enduml

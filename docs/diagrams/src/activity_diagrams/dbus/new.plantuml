@@ -1,0 +1,23 @@
+@startuml dbus_service_new
+
+partition "DBusService::new()"{
+  start
+  :Set visibility to false;
+  :visibility = false;
+  :DBusClient::new();
+  partition "DBusServer::spawn_and_detach()"{
+    fork
+    :Connect to session bus
+    Request the name 'sm.puri.OSK0';
+    :Create the interface to provide the 
+    SetVisible method and the 'Visible' property;
+    :Serve DBusClients forever;
+    stop
+    fork again
+    end fork
+  }
+
+  :DBusService]
+  stop
+}
+@enduml

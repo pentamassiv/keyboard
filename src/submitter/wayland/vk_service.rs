@@ -249,7 +249,6 @@ impl VKService {
 
     // Tries to send a key press or a key release via the virtual_keyboard protocol without checking if the keycode is valid
     fn send_keycode(&mut self, keycode: u32, keymotion: KeyMotion) -> Result<(), SubmitError> {
-        let time = self.get_time();
         if self.virtual_keyboard.is_alive() {
             // Add or remove the keycode from the HashSet of pressed keys
             match keymotion {
@@ -259,7 +258,7 @@ impl VKService {
             // Get the wayland object from the proxy
             let virtual_keyboard = ZwpVirtualKeyboardV1::from(self.virtual_keyboard.clone());
             // Send the request to the wayland server
-            virtual_keyboard.key(time, keycode, keymotion as u32);
+            virtual_keyboard.key(self.get_time(), keycode, keymotion as u32);
             Ok(())
         } else {
             error!("Virtual_keyboard proxy was no longer alive");

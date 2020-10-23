@@ -1,0 +1,29 @@
+@startuml win_make_suggestions_and_pref_buttons
+
+partition "Win::make_suggestions_and_pref_buttons()"{  
+  start
+  :Make Button
+  Set style class
+  Set label
+  Make Popover;
+  :Popover]
+  :Make vertical Box
+  Add Box to Popover;
+  :Get all available layouts for portrait mode;
+
+  while (new layout available?) is (yes)
+    :Make a Button
+    Set its label;
+    :Add Button to vertical
+    Box of Popover;
+    :Connect the buttons release 
+    event to sending a
+    ChangeUILayoutView message;
+  endwhile (no)
+
+  :Add preference button to storage;
+  :<<CentralBuffer>>
+      ButtonStorage]
+  stop
+}
+@enduml

@@ -3,7 +3,7 @@
 partition "Win::load_css()"{  
   start
   :Create CssProvider;
-  :CssProvider|
+  :CssProvider]
   if (Get path to style sheet) then (success)
     if (Load style sheet?) then (success)
       :Apply style from provider;

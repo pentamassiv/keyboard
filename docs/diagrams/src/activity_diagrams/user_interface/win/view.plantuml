@@ -3,14 +3,14 @@ partition "Win::view()"{
   start
   :load_css();
   :Make UIConnector;
-  :UIConnector|
+  :UIConnector]
   :LayoutMeta::deserialize();
 
   :        <<CentralBuffer>>
-  LayoutDeserializedStorage|
+  LayoutDeserializedStorage]
 
   :Keyboard::from(UIConnector, LayoutDeserializedStorage);
-  :Keyboard|
+  :Keyboard]
   :GridBuilder::make_stack(LayoutDeserializedStorage);
   note right
     The Stack contains a Grid of 
@@ -18,7 +18,7 @@ partition "Win::view()"{
   end note
 
   :        <<CentralBuffer>>
-  Stack of Grids for views|
+  Stack of Grids for views]
 
   :Create DrawingArea;
   :Overlay DrawingArea over Stack;
@@ -27,7 +27,7 @@ partition "Win::view()"{
   :Attach gtk::GestureHandlers to Overlay;
   :Create UIManager;
   :Create Win;
-  :Win|
+  :Win]
   stop
 }
 

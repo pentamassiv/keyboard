@@ -1,0 +1,84 @@
+@startuml submitter_submit
+
+partition "submitter_submit"{
+
+  start
+  if (Check submission) then (Text)
+    if (IMService available) then (yes)
+      :Submit text via IMService;
+      :result]
+      if (result) then (success)
+        stop
+      else (failure)
+      endif
+    else (no)
+    endif
+    if (VKService available) then (yes)
+      :VKService::send_unicode_str;
+      :result]
+      if (result) then (success)
+        stop
+      else (failure)
+      endif
+    endif
+    :Emit error;
+  elseif (Keycode) then (yes)
+    if (VKService available) then (yes)
+      :VKService::press_release_key();
+      :result]
+      if (result) then (success)
+      else (failure)
+        :Emit error;
+      endif
+    else (no)
+      :Emit error;
+    endif
+  elseif (ToggleKeycode) then (yes)
+    if (VKService available) then (yes)
+      :VKService::toggle_key();
+      :result]
+      if (result) then (success)
+      else (failure)
+        :Emit error;
+      endif
+    else (no)
+      :Emit error;
+    endif
+  elseif (Modifier) then (yes)
+    if (VKService available) then (yes)
+      :VKService::toggle_modifier();
+      :result]
+      if (result) then (success)
+      else (failure)
+        :Emit error;
+      endif
+    else (no)
+      :Emit error;
+    endif
+  elseif (Erase) then (yes)
+
+
+
+    if (IMService available) then (yes)
+      :Erase chars via IMService;
+      :result]
+      if (result) then (success)
+        stop
+      else (failure)
+      endif
+    else (no)
+    endif
+    if (VKService available) then (yes)
+      :Repeatedly send keycode for 'DELETE' key
+      :result]
+      if (result) then (success)
+      else (failure)
+        :Emit error;
+      endif
+    else (no)
+      :Emit error;
+    endif
+  endif
+  stop
+}
+@enduml

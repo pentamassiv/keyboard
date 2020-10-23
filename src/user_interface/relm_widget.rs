@@ -284,11 +284,13 @@ fn make_suggestions_and_pref_buttons(
 ) -> Vec<gtk::Button> {
     // Make the buttons to display suggestions
     let mut buttons = make_suggestion_buttons(relm);
+    // Get the names of all layouts
+    let layout_names: Vec<&String> = keyboard
+        .get_views()
+        .keys()
+        .map(|(layout_name, _)| layout_name)
+        .collect();
     // Make a button that openes the preferences
-    let mut layout_names = Vec::new();
-    for (layout_name, _) in keyboard.get_views().keys() {
-        layout_names.push(layout_name);
-    }
     let preferences_button = make_pref_button(relm, layout_names);
     // Add the preferences button
     buttons.push(preferences_button);

@@ -1,0 +1,26 @@
+@startuml vkservice_send_key
+
+partition "VKService::send_key()"{
+  start
+    if (Keycode valid?) then (yes)
+      if (virtual_keyboard proxy) then (alive)
+        if (keymotion) then (press)
+          :Remove key from pressed_keys;
+        else (release)
+          :Add key to pressed_keys;
+        endif
+        :Use virtual_keyboard protocol to
+        press/release of keycode;
+        :Ok(())]
+
+      else (not alive)
+        :Emit error;
+        :Err(NotAlive)]
+      endif
+
+    else (no)
+      :Emit error;
+      :Err(InvalidKeycode)]
+    endif
+  stop
+@enduml

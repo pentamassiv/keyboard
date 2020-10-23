@@ -94,7 +94,6 @@ impl GridBuilder {
     fn make_button(key_id: &str, key_meta: &KeyMeta) -> ToggleButton {
         // Make a new ToggleButton
         let button = ToggleButton::new();
-        button.set_label("");
         button.set_hexpand(true);
         button.get_style_context().add_class("key");
         button
@@ -118,9 +117,13 @@ impl GridBuilder {
                     icon_path.push(&icon_name);
                     let image = gtk::Image::from_file(&icon_path);
                     button.set_image(Some(&image));
+                    button.set_always_show_image(true);
+                } else {
+                    error!(
+                        "Unable to locate the image to display for button '{}'",
+                        key_id
+                    );
                 }
-                button.set_always_show_image(true);
-                //button.set_label("");
             }
         }
         button

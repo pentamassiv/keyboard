@@ -1,0 +1,26 @@
+@startuml grid_builder_make_button
+
+partition "GridBuilder::make_button()"{
+  start
+  :Make new ToggleButton;
+  :button = ToggleButton]
+  :Add style class 'key'
+  Add style class which is named its key_id;
+
+  if (More style classes are to be added) then (yes)
+    :Add all of the style classes;
+  endif
+  if (Key should display) then (text)
+    :Set button's label to that text;
+  else (image)
+    if (Image was found) then (yes)
+      :Set button to display the image
+      Have the button always show the image;
+    else (false)
+      :Emit error;
+    endif
+  endif
+  :button]
+  stop
+}
+@enduml

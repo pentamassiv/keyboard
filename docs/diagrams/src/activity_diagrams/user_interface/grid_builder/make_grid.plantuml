@@ -1,0 +1,21 @@
+@startuml grid_builder_make_grid
+
+partition "GridBuilder::make_grid()"{  
+  start
+  :Make new grid;
+  :grid = Grid]
+  :Make new storage for key references;
+  :    <<CentralBuffer>>
+  KeyReferences storage]
+
+  while (for each Location in KeyArrangement of view) is (true)
+    :Get KeyMeta of view;
+    :GridBuilder::make_button();
+    :GridBuilder::attach_popover();
+    :Place new button at that location in the grid
+    :Add the button and its Popover to hashmap_with_key_refs;
+  endwhile (false)
+  :(grid, hashmap_with_key_refs)]
+  stop
+}
+@enduml

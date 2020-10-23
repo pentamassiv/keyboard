@@ -1,0 +1,32 @@
+@startuml gesture_model_convert_to_interaction
+
+partition "GestureModel::convert_to_interaction()"{  
+  start
+  
+  if (Interaction is DragBegin?) then (yes)
+    :Interaction::TapShortPress]
+  elseif (LongPress) then (yes)
+    :Interaction::TapLongPress]
+  elseif (DragUpdate) then (yes)
+    :Add point to swipe path;
+    if (Previous interpretation was NoGesture?) then (yes)
+        :Interaction::SwipeBegin]
+    elseif (LongPress?) then (yes)
+        :Interaction::SwipeBegin]
+    else (no (Swipe)))
+        :Interaction::SwipeUpdate]
+    endif
+  else (no (DragEnd))
+    :Clear swipe path;
+    if (Previous interpretation was NoGesture?) then (yes)
+        :Interaction::TapShortRelease]
+    elseif (LongPress?) then (yes)
+        :Interaction::TapLongRelease]
+    else (no (Swipe))
+        :Interaction::SwipeFinish]
+    endif
+  endif
+  :Interaction]
+  stop
+}
+@enduml

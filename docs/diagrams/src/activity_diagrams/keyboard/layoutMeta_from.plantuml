@@ -4,16 +4,16 @@ partition "LayoutMeta::from()"{
   start
   :LayoutYamlParser::get_layouts();
   :         <<CentralBuffer>>
-  LayoutDeserialized storage|
+  LayoutDeserialized storage]
 
   :Create LayoutMeta storage;
   : <<CentralBuffer>>
-  LayoutMeta storage|
+  LayoutMeta storage]
   while (more LayoutDeserialized?) is (yes)
     :LayoutMeta::from(layout_deserialized);
-    :result|
+    :result]
     if (result) then (Ok)
-    :LayoutMeta|
+    :LayoutMeta]
     :Add to storage;
     else (no)
         :Emit error;
@@ -21,7 +21,7 @@ partition "LayoutMeta::from()"{
   endwhile (no)
 
   :         <<CentralBuffer>>
-  LayoutDeserialized storage|
+  LayoutDeserialized storage]
 
   stop
 }

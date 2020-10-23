@@ -1,0 +1,23 @@
+@startuml win_draw_path
+
+partition "Win::draw_path()"{
+  start
+  :Win::erase_path();
+  :Get context to draw with;
+  :DrawContext]
+  :Set draw operator
+  Set color
+  Set max age;
+
+  while (more dots in swipe path?) is (yes)
+    if (dots age < max age) then (no)
+      break;
+    else (yes)
+      :Draw line between last dot and this one;
+    endif
+  endwhile (no)
+  :Set line width;
+  :Paint path on context;
+  stop
+}
+@enduml

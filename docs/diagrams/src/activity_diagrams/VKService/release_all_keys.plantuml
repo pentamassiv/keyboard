@@ -1,0 +1,46 @@
+@startuml vkservice_release_all_keys_and_modifiers
+
+partition "VKService::release_all_keys_and_modifiers()"{
+  start
+    partition "release_all_keys()"{
+      :Initialize return value;
+      :result = Ok(())]
+      :Get all pressed keys (keycodes);
+      while (pressed keycode available?) is (yes)
+        :VKService::send_keycode() to release the keycode;
+        :release_result]
+        if (release_result) then (success)
+          :Remove key from list
+          of pressed keys;
+        else (failure)
+          :release_all_keys_result = Err;
+          :Emit error;
+        endif
+        :Next keycode;
+      endwhile (no)
+      :release_all_keys_result]
+    }
+    partition "release_all_modifiers()"{
+      :Get bitflag of all modifiers released;
+      partition "send_modifiers_bitflag()"{
+        if (virtual_keyboard proxy) then (alive)
+          :Use virtual_keyboard protocol to
+          submit the new modifier bitflag;
+          :Remember the submitted bitflag;
+          :release_modifiers_result = Ok(())]
+        else (not alive)
+          :Emit error;
+          :release_modifiers_result = Err(NotAlive)]
+        endif
+      }
+    }
+    if (both results are Ok(())) then (yes)
+      :result = Ok(())]
+    elseif (one of the results is 'NotAlive') then (yes)
+      :result = Err(NotAlive))]
+    else (no)
+      :result = Err(InvalidKeycode))]
+    endif
+    
+  stop
+@enduml

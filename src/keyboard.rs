@@ -239,7 +239,6 @@ impl Keyboard {
             // NOT IMPLEMENTED YET
             // Tells interpreter to update calculations for gesture recognition
             SwipeAction::Update => self.interpreter.interpret_gesture(x, y),
-            // NOT IMPLEMENTED YET
             // Submits the most likely word
             SwipeAction::Finish => {
                 let text = self.interpreter.get_gesture_result(x, y);

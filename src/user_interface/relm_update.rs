@@ -45,12 +45,12 @@ impl relm::Update for Win {
                 if let Some((button, _)) = self.key_refs.get(&(layout, view, key_id)) {
                     // Activate/Deactivate it (visual feedback of the button press)
                     button.set_active(tap_motion == TapMotion::Press);
+                    // Give haptic feedback
+                    self.ui_manager
+                        .haptic_feedback(tap_motion == TapMotion::Press);
                 } else {
                     error!("UI does not know the key id and can't handle the ButtonInteraction");
                 }
-                // Give haptic feedback
-                self.ui_manager
-                    .haptic_feedback(tap_motion == TapMotion::Press);
             }
             // Open the popover of the specified button
             Msg::OpenPopup(key_id) => {

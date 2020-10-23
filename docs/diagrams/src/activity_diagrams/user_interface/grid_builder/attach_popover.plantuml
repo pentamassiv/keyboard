@@ -1,0 +1,32 @@
+@startuml grid_builder_attach_popover
+
+partition "GridBuilder::attach_popover()"{
+  start
+  :Create a new option to have a popover;
+  :popover_option=None]
+
+  if (Key ought to have a popover) then (yes)
+    :Create new popover;
+    :popover=Popover]
+    :Create new vertical box;
+    while (for popup_string in KeyMeta) is (true)
+      :Add horizontal box;
+      while (for popup_id in popup_string) is (true)
+        :Make new popup button
+        Add style class 'popover_key'
+        Set its label to its id
+        Add it to horizontal box;
+        :Connect its 'clicked' event to 
+        sending a SubmitText message
+        with its id;
+      endwhile (false)
+      :Add horizontal box to vertical box;
+    endwhile (false)
+    :Add vertical box to popover;
+    :popover_option = Some(popover);
+  else (no)
+  endif
+  :popover_option]
+  stop
+}
+@enduml
