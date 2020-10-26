@@ -1,0 +1,132 @@
+@startuml submitter
+!define DARKBLUE
+!includeurl https://raw.githubusercontent.com/grelltrier/RedDress-PlantUML/master/style.puml
+
+package submitter {
+
+    +enum Submission {
+        Text(String)
+        Keycode(u32)
+        ToggleKeycode(u32)
+        Modifier(keyboard::Modifier)
+        Erase(u32)
+    }
+
+    +class Submitter<T implements KeyboardVisibility + HintPurpose, D implements ReceiveSurroundingText> {
+        event_queue: EventQueue
+
+        {static} +new(ui_connector: T, content_connector: D): Submitter<T, D>
+        +fetch_events()
+        +release_all_keys_and_modifiers()
+        +submit(submission: Submission)
+        submit_text(text: &str)
+        erase(no_char: u32) {
+    }
+
+    class Wayland{
+        {static} get_wl_display_seat(): (Display, WlSeat)
+        {static} get_wl_global_mgr(display: &Display): (EventQueue, GlobalManager)
+        {static} try_get_mgrs(global_mgr: &GlobalManager): (Option<VirtualKeyboardMgr>, Option<InputMethodMgr>)
+        {static} +get_layer_shell(): Option<LayerShell> 
+        {static} +init_wayland(): (EventQueue, WlSeat, Option<VirtualKeyboardMgr>, Option<InputMethodMgr>) 
+
+        {static} +make_overlay_layer(window: &gtk::Window)
+
+    }
+    note top of Wayland : This class does not exist and only serves for the modeling of its functions
+
+    +class VKService {
+        base_time: std::time::Instant
+        pressed_keys: HashSet<u32>
+        pressed_modifiers: ModifiersBitflag
+        virtual_keyboard: Proxy<ZwpVirtualKeyboardV1>
+
+        drop()
+
+        {static} +new(seat: &WlSeat, vk_mgr: &Main<ZwpVirtualKeyboardManagerV1>):  Arc<Mutex<VKService>>
+        {static} init_virtual_keyboard(virtual_keyboard_main: & Main<ZwpVirtualKeyboardV1>)
+        get_time()
+        +release_all_keys_and_modifiers(): Result<(), SubmitError> 
+        +release_all_keys(): Result<(), SubmitError>
+        +press_release_key(keycode: u32): Result<(), SubmitError>
+        +toggle_key(keycode: u32): Result<(), SubmitError> 
+        +send_key(keycode: u32, keymotion: KeyMotion): Result<(), SubmitError>
+        send_keycode(keycode: u32, keymotion: KeyMotion): Result<(), SubmitError> 
+        +release_all_modifiers(): Result<(), SubmitError>
+        +toggle_modifier(modifier: keyboard::Modifier): Result<(), SubmitError>
+        send_modifiers_bitflag(modifiers: ModifiersBitflag): Result<(), SubmitError>
+        +send_unicode_str(text: &str): Result<(), SubmitError>
+        send_unicode_char(unicode_char: char): Result<(), SubmitError>
+        release_keys_on_ctrl_c(vk_service: Arc<Mutex<VKService>>)
+    }
+
+    together {
+            
+        class IMProtocolState {
+            surrounding_text: String
+            cursor: u32
+            content_purpose: ContentPurpose
+            content_hint: ContentHint
+            text_change_cause: ChangeCause
+            active: bool
+
+            fn default(): IMProtocolState
+        }
+
+        class IMServiceArc<T implements KeyboardVisibility + HintPurpose, D implements ReceiveSurroundingText> {
+            im: Main<ZwpInputMethodV2>
+            ui_connector: T
+            content_connector: D
+            serial: Wrapping<u32>
+
+            {static} new(seat: &WlSeat, im_manager: Main<ZwpInputMethodManagerV2>, ui_connector: T, content_connector: D): Arc<Mutex<IMServiceArc<T, D>>> 
+            assign_filter(im_service: Arc<Mutex<IMServiceArc<T, D>>>)
+            commit_string(text: String): Result<(), SubmitError>
+            delete_surrounding_text(before: u32, after: u32): Result<(), SubmitError>
+            commit(): Result<(), SubmitError>
+            is_active(): bool
+            get_surrounding_text(): (String, String)
+            handle_activate()
+            handle_deactivate()
+            handle_surrounding_text(text: String, cursor: u32, anchor: u32)
+            handle_text_change_cause(cause: ChangeCause)
+            handle_content_type(hint: ContentHint, purpose: ContentPurpose)
+            handle_done()
+            handle_unavailable()
+            pending_becomes_current()
+            limit_before_after(before: u32, after: u32): (u32, u32)
+            update_cursor_and_surrounding_text(before: u32, after: u32)
+        }
+
+        +class IMService<T implements KeyboardVisibility + HintPurpose, D implements ReceiveSurroundingText> {
+            {static} +new(seat: &WlSeat, im_manager: Main<ZwpInputMethodManagerV2>, ui_connector: T, content_connector: D): IMService<T, D> 
+            +commit_string(text: String): Result<(), SubmitError>
+            +delete_surrounding_text(before: u32, after: u32): Result<(), SubmitError>
+            +commit(): Result<(), SubmitError>
+            +is_active(): bool
+            +get_surrounding_text(): (String, String)
+        }
+
+        +interface KeyboardVisibility {
+            show_keyboard()
+            hide_keyboard()
+        }
+
+        +interface ReceiveSurroundingText {
+            text_changed(string_left_of_cursor: String, string_right_of_cursor: String)
+        }
+
+        +interface HintPurpose {
+            fn set_hint_purpose(content_hint: ContentHint, content_purpose: ContentPurpose)
+        }
+    }
+
+    Submitter *-- IMService : > uses
+    Submitter *-- VKService : > uses
+    Submission - Submitter : < handles
+    Submitter - Wayland : > calls method
+    IMServiceArc "1" *- "1" IMProtocolState : > pending
+    IMServiceArc "1" *- "1" IMProtocolState : > current
+    IMService "1" *-- "1" IMServiceArc : > wrapps
+}
+@enduml

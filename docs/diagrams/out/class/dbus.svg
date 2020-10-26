@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="500px" preserveAspectRatio="none" style="width:797px;height:500px;background:#777777;" version="1.1" viewBox="0 0 797 500" width="797px" zoomAndPan="magnify"><defs><filter height="300%" id="fmaqf6ilg2xxl" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[85854914a254229271247f711f245f5e]
+cluster dbus--><polygon fill="#777777" filter="url(#fmaqf6ilg2xxl)" points="16,6.294,57,6.294,64,29.0939,775,29.0939,775,348.294,16,348.294,16,6.294" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="16" x2="64" y1="29.0939" y2="29.0939"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="35" x="20" y="21.2999">dbus</text><!--MD5=[f57290ba224303f1ad01e034b26ebd12]
+cluster user_interface--><polygon fill="#777777" filter="url(#fmaqf6ilg2xxl)" points="460,395.294,564,395.294,571,418.0939,574,418.0939,574,488.294,460,488.294,460,395.294" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="460" x2="571" y1="418.0939" y2="418.0939"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="98" x="464" y="410.2999">user_interface</text><!--MD5=[5fc356c58253652766d0963485b7e913]
+class DBusService--><rect fill="#2E2E2E" filter="url(#fmaqf6ilg2xxl)" height="94.7996" id="DBusService" style="stroke: #1B1B1B; stroke-width: 1.5;" width="332" x="71" y="41.294"/><ellipse cx="195.5" cy="54.294" fill="#1A66C2" rx="8" ry="8" style="stroke: #1B1B1B; stroke-width: 1.0;"/><path d="M199,52.9971 C198.9531,52.294 198.7969,51.8565 198.4688,51.4034 C197.8438,50.5909 196.8594,50.1377 195.6563,50.1377 C193.3906,50.1377 191.9844,51.7627 191.9844,54.3565 C191.9844,56.9346 193.375,58.544 195.6094,58.544 C197.6094,58.544 198.9375,57.3877 199.0313,55.5596 L197.4219,55.5596 C197.3125,56.5752 196.6875,57.1534 195.6563,57.1534 C194.375,57.1534 193.6406,56.1221 193.6406,54.3721 C193.6406,52.6065 194.4219,51.544 195.7188,51.544 C196.6719,51.544 197.2031,52.0127 197.4219,52.9971 L199,52.9971 Z "/><ellipse cx="216.5" cy="53.294" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#FFFFFF" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="64" x="223.5" y="57.913">DBusService</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="72" x2="402" y1="67.294" y2="67.294"/><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="126" x="77" y="81.5129">visibility: Arc&lt;AtomicBool&gt;</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="72" x2="402" y1="88.4939" y2="88.4939"/><ellipse cx="82" cy="99.4939" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="309" x="88" y="102.7128">new(sender: relm::Sender&lt;user_interface::Msg&gt;): DBusService</text><ellipse cx="82" cy="112.6938" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="143" x="88" y="115.9127">change_visibility(visible: bool)</text><ellipse cx="82" cy="125.8937" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="149" x="88" y="129.1126">haptic_feedback(event: String)</text><!--MD5=[33fe418a985a8f7e01607e3ccbe6d9a9]
+class DBusClient--><rect fill="#2E2E2E" filter="url(#fmaqf6ilg2xxl)" height="121.1994" id="DBusClient" style="stroke: #1B1B1B; stroke-width: 1.5;" width="208" x="32" y="211.294"/><ellipse cx="99.5" cy="224.294" fill="#1A66C2" rx="8" ry="8" style="stroke: #1B1B1B; stroke-width: 1.0;"/><path d="M103,222.9971 C102.9531,222.294 102.7969,221.8565 102.4688,221.4034 C101.8438,220.5909 100.8594,220.1377 99.6563,220.1377 C97.3906,220.1377 95.9844,221.7627 95.9844,224.3565 C95.9844,226.9346 97.375,228.544 99.6094,228.544 C101.6094,228.544 102.9375,227.3877 103.0313,225.5596 L101.4219,225.5596 C101.3125,226.5752 100.6875,227.1534 99.6563,227.1534 C98.375,227.1534 97.6406,226.1221 97.6406,224.3721 C97.6406,222.6065 98.4219,221.544 99.7188,221.544 C100.6719,221.544 101.2031,222.0127 101.4219,222.9971 L103,222.9971 Z "/><ellipse cx="120.5" cy="223.294" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#FFFFFF" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="54" x="127.5" y="227.913">DBusClient</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="33" x2="239" y1="237.294" y2="237.294"/><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="114" x="38" y="251.5129">connection: Connection</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="66" x="38" y="264.7128">app_id: String</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="55" x="38" y="277.9127">timeout: i32</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="196" x="38" y="291.1126">hints: HashMap&lt;String, Variant&lt;String&gt;&gt;</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="33" x2="239" y1="298.0936" y2="298.0936"/><ellipse cx="43" cy="309.0936" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="88" x="49" y="312.3125">new(): DBusClient</text><ellipse cx="43" cy="322.2935" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="93" x="49" y="325.5124">send(event: String)</text><!--MD5=[0c6246a58c456a02ce107b0cab2a2694]
+class DBusServer--><rect fill="#2E2E2E" filter="url(#fmaqf6ilg2xxl)" height="55.1999" id="DBusServer" style="stroke: #1B1B1B; stroke-width: 1.5;" width="484" x="275" y="244.294"/><ellipse cx="477.5" cy="257.294" fill="#A9DCDF" rx="8" ry="8" style="stroke: #1B1B1B; stroke-width: 1.0;"/><path d="M479.0156,258.9346 L479.5313,260.544 L481.2344,260.544 L478.4688,252.5284 L476.6406,252.5284 L473.7813,260.544 L475.4688,260.544 L476.0156,258.9346 L479.0156,258.9346 Z M478.5625,257.5596 L476.4688,257.5596 L477.5156,254.419 L478.5625,257.5596 Z "/><ellipse cx="498.5" cy="256.294" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#FFFFFF" font-family="Verdana" font-size="11" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="60" x="505.5" y="261.9689">DBusServer</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="276" x2="758" y1="270.294" y2="270.294"/><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="276" x2="758" y1="278.294" y2="278.294"/><ellipse cx="286" cy="289.294" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="461" x="292" y="292.5129">spawn_and_detach(sender: Mutex&lt;Sender&lt;user_interface::Msg&gt;&gt;, visibility: Arc&lt;AtomicBool&gt;)</text><!--MD5=[febb0e59bf5db791293ce68f42ffbec9]
+class user_interface.Msg--><rect fill="#2E2E2E" filter="url(#fmaqf6ilg2xxl)" height="42" id="user_interface.Msg" style="stroke: #1B1B1B; stroke-width: 1.5;" width="47" x="493.5" y="430.294"/><ellipse cx="505.5" cy="443.294" fill="#1A66C2" rx="8" ry="8" style="stroke: #1B1B1B; stroke-width: 1.0;"/><path d="M509,441.9971 C508.9531,441.294 508.7969,440.8565 508.4688,440.4034 C507.8438,439.5909 506.8594,439.1377 505.6563,439.1377 C503.3906,439.1377 501.9844,440.7627 501.9844,443.3565 C501.9844,445.9346 503.375,447.544 505.6094,447.544 C507.6094,447.544 508.9375,446.3877 509.0313,444.5596 L507.4219,444.5596 C507.3125,445.5752 506.6875,446.1534 505.6563,446.1534 C504.375,446.1534 503.6406,445.1221 503.6406,443.3721 C503.6406,441.6065 504.4219,440.544 505.7188,440.544 C506.6719,440.544 507.2031,441.0127 507.4219,441.9971 L509,441.9971 Z "/><text fill="#FFFFFF" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="21" x="516.5" y="446.913">Msg</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="494.5" x2="539.5" y1="456.294" y2="456.294"/><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="494.5" x2="539.5" y1="464.294" y2="464.294"/><!--MD5=[8679a2de48a631f381afcbc79d4a09e0]
+reverse link DBusService to DBusClient--><path d="M204.55,147.954 C193.3,168.104 180.68,190.714 169.37,211.004 " fill="none" id="DBusService&lt;-DBusClient" style="stroke: #FFFFFF; stroke-width: 1.0;"/><polygon fill="#FFFFFF" points="210.99,136.404,204.5753,139.6981,205.1489,146.8864,211.5636,143.5922,210.99,136.404" style="stroke: #FFFFFF; stroke-width: 1.0;"/><text fill="#BBBBBB" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="99" x="193" y="177.5129">uses to send events</text><text fill="#BBBBBB" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="6" x="200.9105" y="154.2603">1</text><text fill="#BBBBBB" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="6" x="166.8815" y="200.4425">1</text><!--MD5=[63bfd771f6189ccd20a63686bed410ef]
+link DBusService to DBusServer--><path d="M309.11,136.404 C362.09,170.654 432.2,215.974 475.94,244.254 " fill="none" id="DBusService-DBusServer" style="stroke: #FFFFFF; stroke-width: 1.0;"/><text fill="#BBBBBB" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="97" x="378" y="177.5129">starts and detaches</text><text fill="#BBBBBB" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="6" x="312.8286" y="154.2603">1</text><text fill="#BBBBBB" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="6" x="459.2004" y="233.1757">1</text><!--MD5=[0acd930ea75ecc3443a1e7de04e4f36e]
+link DBusServer to user_interface.Msg--><path d="M517,299.364 C517,335.154 517,398.034 517,430.164 " fill="none" id="DBusServer-user_interface.Msg" style="stroke: #FFFFFF; stroke-width: 1.0;"/><text fill="#BBBBBB" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="56" x="518" y="375.5129">sends to UI</text><!--MD5=[6d92b8f8ae4717d0ba9b87ba34fa4e63]
+@startuml dbus
+!define DARKBLUE
+!includeurl https://raw.githubusercontent.com/grelltrier/RedDress-PlantUML/master/style.puml
+
+package dbus {
+
+    +class DBusService {
+        visibility: Arc<AtomicBool>
+
+        {static} +new(sender: relm::Sender<user_interface::Msg>): DBusService
+        +change_visibility(visible: bool)
+        +haptic_feedback(event: String)
+    }
+
+    +class DBusClient {
+        connection: Connection
+        app_id: String
+        timeout: i32
+        hints: HashMap<String, Variant<String>>
+
+        {static} +new(): DBusClient
+        +send(event: String)
+    }
+
+    +abstract class DBusServer{
+        {static} +spawn_and_detach(sender: Mutex<Sender<user_interface::Msg>>, visibility: Arc<AtomicBool>)
+    }
+
+    DBusService "1" *- - "1" DBusClient : uses to send events
+    DBusService "1" - - "1" DBusServer : starts and detaches
+    DBusServer - - user_interface.Msg : sends to UI
+}
+@enduml
+
+@startuml dbus
+
+
+
+skinparam backgroundColor 777
+skinparam stereotypeCBackgroundColor 1a66c2
+
+
+
+
+
+
+
+
+
+skinparam backgroundColor 777
+
+
+
+
+
+
+
+skinparam circledCharacter {
+  radius 8
+  fontSize 11
+  fontName Verdana
+}
+
+skinparam class {
+    backgroundColor 2e2e2e
+  borderColor 1b1b1b
+    fontColor fff
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor aaa
+  stereotypeFontSize 11
+    arrowColor fff
+  arrowFontName Verdana
+  arrowFontColor bbb
+  arrowFontSize 11
+
+  attributeFontColor aaa
+  attributeFontSize 11
+  attributeIconSize 11
+}
+
+
+skinparam actor {
+    backgroundColor 1a66c2
+  borderColor 002642
+    fontColor fff
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor aaa
+  stereotypeFontSize 11
+}
+
+skinparam participant {
+    backgroundColor 2e2e2e
+  borderColor 1b1b1b
+    fontColor fff
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor aaa
+  stereotypeFontSize 11
+}
+
+skinparam collections {
+    backgroundColor 2e2e2e
+  borderColor 1b1b1b
+    fontColor fff
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor aaa
+  stereotypeFontSize 11
+}
+
+skinparam SequenceBox{
+    backgroundColor 575757
+  borderColor 767676
+    fontColor fff
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor aaa
+  stereotypeFontSize 11
+}
+
+
+skinparam interface {
+    backgroundColor 1a66c2
+  borderColor 002642
+    fontColor fff
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor aaa
+  stereotypeFontSize 11
+}
+
+skinparam component {
+    backgroundColor 2e2e2e
+  borderColor 1b1b1b
+    fontColor fff
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor aaa
+  stereotypeFontSize 11
+}
+
+skinparam node {
+    backgroundColor 2e2e2e
+  borderColor 1b1b1b
+    fontColor fff
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor aaa
+  stereotypeFontSize 11
+}
+
+skinparam database {
+    backgroundColor 2e2e2e
+  borderColor 1b1b1b
+    fontColor fff
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor aaa
+  stereotypeFontSize 11
+}
+
+skinparam queue {
+    backgroundColor 2e2e2e
+  borderColor 1b1b1b
+    fontColor fff
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor aaa
+  stereotypeFontSize 11
+}
+
+
+skinparam usecase {
+    backgroundColor 2e2e2e
+  borderColor 1b1b1b
+    fontColor fff
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor aaa
+  stereotypeFontSize 11
+    arrowColor fff
+  arrowFontName Verdana
+  arrowFontColor bbb
+  arrowFontSize 11
+}
+
+skinparam activity {
+    backgroundColor 2e2e2e
+  borderColor 1b1b1b
+    fontColor fff
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor aaa
+  stereotypeFontSize 11
+    arrowColor fff
+  arrowFontName Verdana
+  arrowFontColor bbb
+  arrowFontSize 11
+}
+
+skinparam sequence {
+    fontColor fff
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor aaa
+  stereotypeFontSize 11
+    arrowColor fff
+  arrowFontName Verdana
+  arrowFontColor bbb
+  arrowFontSize 11
+
+  lifeLineBorderColor 1a66c2
+  lifeLineBackgroundColor 575757
+}
+
+skinparam boundary {
+    backgroundColor 1a66c2
+  borderColor 002642
+    fontColor fff
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor aaa
+  stereotypeFontSize 11
+}
+
+skinparam control {
+    backgroundColor 1a66c2
+  borderColor 002642
+    fontColor fff
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor aaa
+  stereotypeFontSize 11
+}
+
+skinparam entity {
+    backgroundColor 1a66c2
+  borderColor 002642
+    fontColor fff
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor aaa
+  stereotypeFontSize 11
+}
+
+
+skinparam state {
+    backgroundColor 2e2e2e
+  borderColor 1b1b1b
+    fontColor fff
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor aaa
+  stereotypeFontSize 11
+    arrowColor fff
+  arrowFontName Verdana
+  arrowFontColor bbb
+  arrowFontSize 11
+  startColor 1a66c2
+  endColor 002642
+}
+
+
+skinparam object {
+    backgroundColor 2e2e2e
+  borderColor 1b1b1b
+    fontColor fff
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor aaa
+  stereotypeFontSize 11
+    arrowColor fff
+  arrowFontName Verdana
+  arrowFontColor bbb
+  arrowFontSize 11
+}
+
+
+skinparam note {
+    backgroundColor 1a66c2
+  borderColor 002642
+    fontColor fff
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor aaa
+  stereotypeFontSize 11
+}
+
+skinparam cloud {
+    backgroundColor 2e2e2e
+  borderColor 1b1b1b
+    fontColor fff
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor aaa
+  stereotypeFontSize 11
+    arrowColor fff
+  arrowFontName Verdana
+  arrowFontColor bbb
+  arrowFontSize 11
+}
+
+skinparam rectangle {
+    backgroundColor 2e2e2e
+  borderColor 1b1b1b
+    fontColor fff
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor aaa
+  stereotypeFontSize 11
+}
+
+skinparam storage {
+    backgroundColor 2e2e2e
+  borderColor 1b1b1b
+    fontColor fff
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor aaa
+  stereotypeFontSize 11
+}
+
+
+package dbus {
+
+    +class DBusService {
+        visibility: Arc<AtomicBool>
+
+        {static} +new(sender: relm::Sender<user_interface::Msg>): DBusService
+        +change_visibility(visible: bool)
+        +haptic_feedback(event: String)
+    }
+
+    +class DBusClient {
+        connection: Connection
+        app_id: String
+        timeout: i32
+        hints: HashMap<String, Variant<String>>
+
+        {static} +new(): DBusClient
+        +send(event: String)
+    }
+
+    +abstract class DBusServer{
+        {static} +spawn_and_detach(sender: Mutex<Sender<user_interface::Msg>>, visibility: Arc<AtomicBool>)
+    }
+
+    DBusService "1" *- - "1" DBusClient : uses to send events
+    DBusService "1" - - "1" DBusServer : starts and detaches
+    DBusServer - - user_interface.Msg : sends to UI
+}
+@enduml
+
+PlantUML version 1.2020.15(Sun Jun 28 13:39:45 CEST 2020)
+(MIT source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

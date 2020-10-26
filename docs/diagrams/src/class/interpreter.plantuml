@@ -1,0 +1,23 @@
+@startuml interpreter
+!define DARKBLUE
+!includeurl https://raw.githubusercontent.com/grelltrier/RedDress-PlantUML/master/style.puml
+
+package interpreter {
+
+    +class Interpreter {
+        receiver: mpsc::Receiver<(String, String)>
+        text_left_of_cursor: String
+        text_right_of_cursor: String
+        prev_submissions: Vec<Submission>
+
+        {static} +new(ui_connection: UIConnector, receiver: mpsc::Receiver<(String, String)>)
+        +interpret_text(text_to_interpret: String): Vec<Submission>
+        +interpret_gesture(_x: i32, _y: i32)
+        +get_gesture_result(_x: i32, _y: i32): String
+        update_surrounding_text()
+    }
+
+    Interpreter *-- keyboard.UIConnector : > uses to send messages to the UI
+    Interpreter -- submitter.Submission : > receives to interpret
+}
+@enduml

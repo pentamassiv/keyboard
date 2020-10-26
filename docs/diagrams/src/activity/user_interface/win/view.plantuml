@@ -1,0 +1,34 @@
+@startuml win_view
+partition "Win::view()"{
+  start
+  :load_css();
+  :Make UIConnector;
+  :UIConnector]
+  :LayoutMeta::deserialize();
+
+  :        <<CentralBuffer>>
+  LayoutDeserializedStorage]
+
+  :Keyboard::from(UIConnector, LayoutDeserializedStorage);
+  :Keyboard]
+  :GridBuilder::make_stack(LayoutDeserializedStorage);
+  note right
+    The Stack contains a Grid of 
+    ToggleButtons for each view
+  end note
+
+  :        <<CentralBuffer>>
+  Stack of Grids for views]
+
+  :Create DrawingArea
+  Overlay DrawingArea over Stack
+  Make Box of suggestions
+  Set up Window
+  Attach gtk::GestureHandlers to Overlay
+  Create UIManager
+  Create Win;
+  :Win]
+  stop
+}
+
+@enduml

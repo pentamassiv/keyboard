@@ -1,221 +1,170 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="1414px" preserveAspectRatio="none" style="width:2650px;height:1414px;background:#777777;" version="1.1" viewBox="0 0 2650 1414" width="2650px" zoomAndPan="magnify"><defs><filter height="300%" id="f1lzvodu3upjgv" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[f57290ba224303f1ad01e034b26ebd12]
-cluster user_interface--><polygon fill="#777777" filter="url(#f1lzvodu3upjgv)" points="16,6.294,120,6.294,127,29.0939,854,29.0939,854,1008.294,16,1008.294,16,6.294" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="16" x2="127" y1="29.0939" y2="29.0939"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="98" x="20" y="21.2999">user_interface</text><!--MD5=[521d98e988af60f2490e0d6bd01cf1d6]
-cluster layout_meta--><polygon fill="#777777" filter="url(#f1lzvodu3upjgv)" points="878,626.294,968,626.294,975,649.0939,1941,649.0939,1941,1402.294,878,1402.294,878,626.294" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="878" x2="975" y1="649.0939" y2="649.0939"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="84" x="882" y="641.2999">layout_meta</text><!--MD5=[d8f9eb381476c1ab6e7b4673404ff11c]
-cluster keyboard--><polygon fill="#777777" filter="url(#f1lzvodu3upjgv)" points="1965,613.294,2035,613.294,2042,636.0939,2601,636.0939,2601,1217.294,1965,1217.294,1965,613.294" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="1965" x2="2042" y1="636.0939" y2="636.0939"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="64" x="1969" y="628.2999">keyboard</text><!--MD5=[dd8a4c39a55de402715073e2862d1c2e]
-class Dot--><rect fill="#2E2E2E" filter="url(#f1lzvodu3upjgv)" height="81.5997" id="Dot" style="stroke: #1B1B1B; stroke-width: 1.5;" width="71" x="727.5" y="910.294"/><ellipse cx="752.1" cy="923.294" fill="#1A66C2" rx="8" ry="8" style="stroke: #1B1B1B; stroke-width: 1.0;"/><path d="M755.6,921.9971 C755.5531,921.294 755.3969,920.8565 755.0688,920.4034 C754.4438,919.5909 753.4594,919.1377 752.2563,919.1377 C749.9906,919.1377 748.5844,920.7627 748.5844,923.3565 C748.5844,925.9346 749.975,927.544 752.2094,927.544 C754.2094,927.544 755.5375,926.3877 755.6313,924.5596 L754.0219,924.5596 C753.9125,925.5752 753.2875,926.1534 752.2563,926.1534 C750.975,926.1534 750.2406,925.1221 750.2406,923.3721 C750.2406,921.6065 751.0219,920.544 752.3188,920.544 C753.2719,920.544 753.8031,921.0127 754.0219,921.9971 L755.6,921.9971 Z "/><text fill="#FFFFFF" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="17" x="765.9" y="926.913">Dot</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="728.5" x2="797.5" y1="936.294" y2="936.294"/><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="27" x="733.5" y="950.5129">x: f64</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="27" x="733.5" y="963.7128">y: f64</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="59" x="733.5" y="976.9127">time: Instant</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="728.5" x2="797.5" y1="983.8937" y2="983.8937"/><!--MD5=[3cab58e622330109321580dbb0b85605]
-class Input--><rect fill="#2E2E2E" filter="url(#f1lzvodu3upjgv)" height="42" id="Input" style="stroke: #1B1B1B; stroke-width: 1.5;" width="50" x="649" y="714.294"/><ellipse cx="661" cy="727.294" fill="#1A66C2" rx="8" ry="8" style="stroke: #1B1B1B; stroke-width: 1.0;"/><path d="M664.5,725.9971 C664.4531,725.294 664.2969,724.8565 663.9688,724.4034 C663.3438,723.5909 662.3594,723.1377 661.1563,723.1377 C658.8906,723.1377 657.4844,724.7627 657.4844,727.3565 C657.4844,729.9346 658.875,731.544 661.1094,731.544 C663.1094,731.544 664.4375,730.3877 664.5313,728.5596 L662.9219,728.5596 C662.8125,729.5752 662.1875,730.1534 661.1563,730.1534 C659.875,730.1534 659.1406,729.1221 659.1406,727.3721 C659.1406,725.6065 659.9219,724.544 661.2188,724.544 C662.1719,724.544 662.7031,725.0127 662.9219,725.9971 L664.5,725.9971 Z "/><text fill="#FFFFFF" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="24" x="672" y="730.913">Input</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="650" x2="698" y1="740.294" y2="740.294"/><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="650" x2="698" y1="748.294" y2="748.294"/><!--MD5=[7e20e022571e30ec1001cf6eabd7f3e2]
-class Model--><rect fill="#2E2E2E" filter="url(#f1lzvodu3upjgv)" height="42" id="Model" style="stroke: #1B1B1B; stroke-width: 1.5;" width="55" x="530.5" y="497.794"/><ellipse cx="542.5" cy="510.794" fill="#1A66C2" rx="8" ry="8" style="stroke: #1B1B1B; stroke-width: 1.0;"/><path d="M546,509.4971 C545.9531,508.794 545.7969,508.3565 545.4688,507.9034 C544.8438,507.0909 543.8594,506.6377 542.6563,506.6377 C540.3906,506.6377 538.9844,508.2627 538.9844,510.8565 C538.9844,513.4346 540.375,515.044 542.6094,515.044 C544.6094,515.044 545.9375,513.8877 546.0313,512.0596 L544.4219,512.0596 C544.3125,513.0752 543.6875,513.6534 542.6563,513.6534 C541.375,513.6534 540.6406,512.6221 540.6406,510.8721 C540.6406,509.1065 541.4219,508.044 542.7188,508.044 C543.6719,508.044 544.2031,508.5127 544.4219,509.4971 L546,509.4971 Z "/><text fill="#FFFFFF" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="29" x="553.5" y="514.413">Model</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="531.5" x2="584.5" y1="523.794" y2="523.794"/><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="531.5" x2="584.5" y1="531.794" y2="531.794"/><!--MD5=[6b79b5687bd0e7dbe0fc0d1c3dfd2a98]
-class Msg--><rect fill="#2E2E2E" filter="url(#f1lzvodu3upjgv)" height="173.999" id="Msg" style="stroke: #1B1B1B; stroke-width: 1.5;" width="102" x="736" y="41.294"/><ellipse cx="773" cy="54.294" fill="#EB937F" rx="8" ry="8" style="stroke: #1B1B1B; stroke-width: 1.0;"/><path d="M771.5156,54.8409 L775.3594,54.8409 L775.3594,53.4659 L771.5156,53.4659 L771.5156,51.6534 L775.6719,51.6534 L775.6719,50.2784 L769.875,50.2784 L769.875,58.294 L775.8594,58.294 L775.8594,56.919 L771.5156,56.919 L771.5156,54.8409 Z "/><text fill="#FFFFFF" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="21" x="789" y="57.913">Msg</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="737" x2="837" y1="67.294" y2="67.294"/><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="29" x="742" y="81.5129">Press</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="53" x="742" y="94.7128">LongPress</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="29" x="742" y="107.9127">Swipe</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="40" x="742" y="121.1126">Release</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="50" x="742" y="134.3125">EnterInput</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="29" x="742" y="147.5124">Erase</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="55" x="742" y="160.7123">SwitchView</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="65" x="742" y="173.9122">SwitchLayout</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="90" x="742" y="187.1121">UpdateDrawBuffer</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="20" x="742" y="200.312">Quit</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="737" x2="837" y1="207.293" y2="207.293"/><!--MD5=[1d4e6756eb5f7ba49ae43d908b54fdb1]
-class Gestures--><rect fill="#2E2E2E" filter="url(#f1lzvodu3upjgv)" height="81.5997" id="Gestures" style="stroke: #1B1B1B; stroke-width: 1.5;" width="217" x="620.5" y="477.794"/><ellipse cx="702.5" cy="490.794" fill="#1A66C2" rx="8" ry="8" style="stroke: #1B1B1B; stroke-width: 1.0;"/><path d="M706,489.4971 C705.9531,488.794 705.7969,488.3565 705.4688,487.9034 C704.8438,487.0909 703.8594,486.6377 702.6563,486.6377 C700.3906,486.6377 698.9844,488.2627 698.9844,490.8565 C698.9844,493.4346 700.375,495.044 702.6094,495.044 C704.6094,495.044 705.9375,493.8877 706.0313,492.0596 L704.4219,492.0596 C704.3125,493.0752 703.6875,493.6534 702.6563,493.6534 C701.375,493.6534 700.6406,492.6221 700.6406,490.8721 C700.6406,489.1065 701.4219,488.044 702.7188,488.044 C703.6719,488.044 704.2031,488.5127 704.4219,489.4971 L706,489.4971 Z "/><text fill="#FFFFFF" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="46" x="718.5" y="494.413">Gestures</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="621.5" x2="836.5" y1="503.794" y2="503.794"/><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="205" x="626.5" y="518.0129">_long_press_gesture: GestureLongPress,</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="144" x="626.5" y="531.2128">_drag_gesture: GestureDrag,</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="135" x="626.5" y="544.4127">_pan_gesture: GesturePan,</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="621.5" x2="836.5" y1="551.3937" y2="551.3937"/><!--MD5=[b0d551779ae5a4c43f98061a760028b1]
-class Widgets--><rect fill="#2E2E2E" filter="url(#f1lzvodu3upjgv)" height="94.7996" id="Widgets" style="stroke: #1B1B1B; stroke-width: 1.5;" width="253" x="242.5" y="471.294"/><ellipse cx="346" cy="484.294" fill="#1A66C2" rx="8" ry="8" style="stroke: #1B1B1B; stroke-width: 1.0;"/><path d="M349.5,482.9971 C349.4531,482.294 349.2969,481.8565 348.9688,481.4034 C348.3438,480.5909 347.3594,480.1377 346.1563,480.1377 C343.8906,480.1377 342.4844,481.7627 342.4844,484.3565 C342.4844,486.9346 343.875,488.544 346.1094,488.544 C348.1094,488.544 349.4375,487.3877 349.5313,485.5596 L347.9219,485.5596 C347.8125,486.5752 347.1875,487.1534 346.1563,487.1534 C344.875,487.1534 344.1406,486.1221 344.1406,484.3721 C344.1406,482.6065 344.9219,481.544 346.2188,481.544 C347.1719,481.544 347.7031,482.0127 347.9219,482.9971 L349.5,482.9971 Z "/><text fill="#FFFFFF" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="39" x="362" y="487.913">Widgets</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="243.5" x2="494.5" y1="497.294" y2="497.294"/><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="83" x="248.5" y="511.5129">window: Window,</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="78" x="248.5" y="524.7128">label: gtk::Label,</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="241" x="248.5" y="537.9127">draw_handler: relm::DrawHandler&lt;DrawingArea&gt;,</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="85" x="248.5" y="551.1126">stack: gtk::Stack,</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="243.5" x2="494.5" y1="558.0936" y2="558.0936"/><!--MD5=[5655c84227694af7943d3c60ac6af392]
-class Win--><rect fill="#2E2E2E" filter="url(#f1lzvodu3upjgv)" height="134.3993" id="Win" style="stroke: #1B1B1B; stroke-width: 1.5;" width="260" x="392" y="276.294"/><ellipse cx="509.5" cy="289.294" fill="#1A66C2" rx="8" ry="8" style="stroke: #1B1B1B; stroke-width: 1.0;"/><path d="M513,287.9971 C512.9531,287.294 512.7969,286.8565 512.4688,286.4034 C511.8438,285.5909 510.8594,285.1377 509.6563,285.1377 C507.3906,285.1377 505.9844,286.7627 505.9844,289.3565 C505.9844,291.9346 507.375,293.544 509.6094,293.544 C511.6094,293.544 512.9375,292.3877 513.0313,290.5596 L511.4219,290.5596 C511.3125,291.5752 510.6875,292.1534 509.6563,292.1534 C508.375,292.1534 507.6406,291.1221 507.6406,289.3721 C507.6406,287.6065 508.4219,286.544 509.7188,286.544 C510.6719,286.544 511.2031,287.0127 511.4219,287.9971 L513,287.9971 Z "/><text fill="#FFFFFF" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="18" x="525.5" y="292.913">Win</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="393" x2="651" y1="302.294" y2="302.294"/><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="393" x2="651" y1="310.294" y2="310.294"/><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="248" x="398" y="324.5129">type_input(&amp;self, input: &amp;str, end_with_space: bool)</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="242" x="398" y="337.7128">get_rel_coordinates(&amp;self, x: f64, y: f64): (i32, i32)</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="108" x="398" y="350.9127">erase_path(&amp;mut self)</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="172" x="398" y="364.1126">activate_button(&amp;self, x: f64, y: f64)</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="104" x="398" y="377.3125">draw_path(&amp;mut self)</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="87" x="398" y="390.5124">connect_signals()</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="52" x="398" y="403.7123">load_css()</text><!--MD5=[29cf0f8494eecd71f7c7616fefcee374]
-class relm::Update--><rect fill="#2E2E2E" filter="url(#f1lzvodu3upjgv)" height="81.5997" id="relm::Update" style="stroke: #1B1B1B; stroke-width: 1.5;" width="288" x="365" y="87.294"/><ellipse cx="474.5" cy="100.294" fill="#B4A7E5" rx="8" ry="8" style="stroke: #1B1B1B; stroke-width: 1.0;"/><path d="M475.3438,96.2784 L473.6875,96.2784 L473.6875,104.294 L475.3438,104.294 L475.3438,96.2784 Z "/><text fill="#FFFFFF" font-family="Verdana" font-size="11" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="62" x="490.5" y="103.913">relm::Update</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="366" x2="652" y1="113.294" y2="113.294"/><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="366" x2="652" y1="121.294" y2="121.294"/><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="276" x="371" y="135.5129">model(_: &amp;relm::Relm&lt;Self&gt;, _: Self::ModelParam): Model</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="240" x="371" y="148.7128">subscriptions(&amp;mut self, relm: &amp;relm::Relm&lt;Self&gt;)</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="146" x="371" y="161.9127">update(&amp;mut self, event: Msg)</text><!--MD5=[35fb01dc934725efa6ee2cb3c4da5022]
-class relm::Widget--><rect fill="#2E2E2E" filter="url(#f1lzvodu3upjgv)" height="68.3998" id="relm::Widget" style="stroke: #1B1B1B; stroke-width: 1.5;" width="297" x="32.5" y="94.294"/><ellipse cx="147.5" cy="107.294" fill="#B4A7E5" rx="8" ry="8" style="stroke: #1B1B1B; stroke-width: 1.0;"/><path d="M148.3438,103.2784 L146.6875,103.2784 L146.6875,111.294 L148.3438,111.294 L148.3438,103.2784 Z "/><text fill="#FFFFFF" font-family="Verdana" font-size="11" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="60" x="163.5" y="110.913">relm::Widget</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="33.5" x2="328.5" y1="120.294" y2="120.294"/><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="33.5" x2="328.5" y1="128.294" y2="128.294"/><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="104" x="38.5" y="142.5129">root(&amp;self): Self::Root</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="285" x="38.5" y="155.7128">view(relm: &amp;relm::Relm&lt;Self&gt;, mut model: Self::Model): Self</text><!--MD5=[cee412b1c34cfbf86f4e412a6f58dbc2]
-class layout_meta.KeyEvent--><rect fill="#2E2E2E" filter="url(#f1lzvodu3upjgv)" height="81.5997" id="layout_meta.KeyEvent" style="stroke: #1B1B1B; stroke-width: 1.5;" width="73" x="1459.5" y="1291.294"/><ellipse cx="1471.5" cy="1304.294" fill="#EB937F" rx="8" ry="8" style="stroke: #1B1B1B; stroke-width: 1.0;"/><path d="M1470.0156,1304.8409 L1473.8594,1304.8409 L1473.8594,1303.4659 L1470.0156,1303.4659 L1470.0156,1301.6534 L1474.1719,1301.6534 L1474.1719,1300.2784 L1468.375,1300.2784 L1468.375,1308.294 L1474.3594,1308.294 L1474.3594,1306.919 L1470.0156,1306.919 L1470.0156,1304.8409 Z "/><text fill="#FFFFFF" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="47" x="1482.5" y="1307.913">KeyEvent</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="1460.5" x2="1531.5" y1="1317.294" y2="1317.294"/><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="53" x="1465.5" y="1331.5129">LongPress</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="55" x="1465.5" y="1344.7128">ShortPress</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="29" x="1465.5" y="1357.9127">Swipe</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="1460.5" x2="1531.5" y1="1364.8937" y2="1364.8937"/><!--MD5=[4c8cc39e286141014e19fc67fbe96efe]
-class layout_meta.KeyAction--><rect fill="#2E2E2E" filter="url(#f1lzvodu3upjgv)" height="107.9995" id="layout_meta.KeyAction" style="stroke: #1B1B1B; stroke-width: 1.5;" width="81" x="1833.5" y="1278.294"/><ellipse cx="1848.2" cy="1291.294" fill="#EB937F" rx="8" ry="8" style="stroke: #1B1B1B; stroke-width: 1.0;"/><path d="M1846.7156,1291.8409 L1850.5594,1291.8409 L1850.5594,1290.4659 L1846.7156,1290.4659 L1846.7156,1288.6534 L1850.8719,1288.6534 L1850.8719,1287.2784 L1845.075,1287.2784 L1845.075,1295.294 L1851.0594,1295.294 L1851.0594,1293.919 L1846.7156,1293.919 L1846.7156,1291.8409 Z "/><text fill="#FFFFFF" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="49" x="1859.8" y="1294.913">KeyAction</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="1834.5" x2="1913.5" y1="1304.294" y2="1304.294"/><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="38" x="1839.5" y="1318.5129">Modifier</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="55" x="1839.5" y="1331.7128">SwitchView</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="29" x="1839.5" y="1344.9127">Erase</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="69" x="1839.5" y="1358.1126">EnterKeycode</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="58" x="1839.5" y="1371.3125">OpenPopup</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="1834.5" x2="1913.5" y1="1378.2935" y2="1378.2935"/><!--MD5=[dea3e67a0db9bc23a420016d777265aa]
-class layout_meta.KeyMeta--><rect fill="#2E2E2E" filter="url(#f1lzvodu3upjgv)" height="107.9995" id="layout_meta.KeyMeta" style="stroke: #1B1B1B; stroke-width: 1.5;" width="289" x="1463.5" y="1086.794"/><ellipse cx="1583" cy="1099.794" fill="#1A66C2" rx="8" ry="8" style="stroke: #1B1B1B; stroke-width: 1.0;"/><path d="M1586.5,1098.4971 C1586.4531,1097.794 1586.2969,1097.3565 1585.9688,1096.9034 C1585.3438,1096.0909 1584.3594,1095.6377 1583.1563,1095.6377 C1580.8906,1095.6377 1579.4844,1097.2627 1579.4844,1099.8565 C1579.4844,1102.4346 1580.875,1104.044 1583.1094,1104.044 C1585.1094,1104.044 1586.4375,1102.8877 1586.5313,1101.0596 L1584.9219,1101.0596 C1584.8125,1102.0752 1584.1875,1102.6534 1583.1563,1102.6534 C1581.875,1102.6534 1581.1406,1101.6221 1581.1406,1099.8721 C1581.1406,1098.1065 1581.9219,1097.044 1583.2188,1097.044 C1584.1719,1097.044 1584.7031,1097.5127 1584.9219,1098.4971 L1586.5,1098.4971 Z "/><text fill="#FFFFFF" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="43" x="1599" y="1103.413">KeyMeta</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="1464.5" x2="1751.5" y1="1112.794" y2="1112.794"/><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="277" x="1469.5" y="1127.0129">actions: Option&lt;HashMap&lt;KeyEvent, Vec&lt;KeyAction&gt;&gt;&gt;</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="163" x="1469.5" y="1140.2128">key_display: Option&lt;KeyDisplay&gt;</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="136" x="1469.5" y="1153.4127">pub outline: Option&lt;Outline&gt;</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="139" x="1469.5" y="1166.6126">popup: Option&lt;Vec&lt;String&gt;&gt;</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="138" x="1469.5" y="1179.8125">styles: Option&lt;Vec&lt;String&gt;&gt;</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="1464.5" x2="1751.5" y1="1186.7935" y2="1186.7935"/><!--MD5=[ed9454eac4f45d4052b52a98bd978fff]
-class layout_meta.KeyDisplay--><rect fill="#2E2E2E" filter="url(#f1lzvodu3upjgv)" height="68.3998" id="layout_meta.KeyDisplay" style="stroke: #1B1B1B; stroke-width: 1.5;" width="81" x="1567.5" y="1298.294"/><ellipse cx="1579.5" cy="1311.294" fill="#EB937F" rx="8" ry="8" style="stroke: #1B1B1B; stroke-width: 1.0;"/><path d="M1578.0156,1311.8409 L1581.8594,1311.8409 L1581.8594,1310.4659 L1578.0156,1310.4659 L1578.0156,1308.6534 L1582.1719,1308.6534 L1582.1719,1307.2784 L1576.375,1307.2784 L1576.375,1315.294 L1582.3594,1315.294 L1582.3594,1313.919 L1578.0156,1313.919 L1578.0156,1311.8409 Z "/><text fill="#FFFFFF" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="55" x="1590.5" y="1314.913">KeyDisplay</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="1568.5" x2="1647.5" y1="1324.294" y2="1324.294"/><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="22" x="1573.5" y="1338.5129">Text</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="30" x="1573.5" y="1351.7128">Image</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="1568.5" x2="1647.5" y1="1358.6938" y2="1358.6938"/><!--MD5=[a22a0e0655c77cc0c9d611b485de6a50]
-class layout_meta.LayoutMeta--><rect fill="#2E2E2E" filter="url(#f1lzvodu3upjgv)" height="94.7996" id="layout_meta.LayoutMeta" style="stroke: #1B1B1B; stroke-width: 1.5;" width="416" x="1310" y="903.794"/><ellipse cx="1486" cy="916.794" fill="#1A66C2" rx="8" ry="8" style="stroke: #1B1B1B; stroke-width: 1.0;"/><path d="M1489.5,915.4971 C1489.4531,914.794 1489.2969,914.3565 1488.9688,913.9034 C1488.3438,913.0909 1487.3594,912.6377 1486.1563,912.6377 C1483.8906,912.6377 1482.4844,914.2627 1482.4844,916.8565 C1482.4844,919.4346 1483.875,921.044 1486.1094,921.044 C1488.1094,921.044 1489.4375,919.8877 1489.5313,918.0596 L1487.9219,918.0596 C1487.8125,919.0752 1487.1875,919.6534 1486.1563,919.6534 C1484.875,919.6534 1484.1406,918.6221 1484.1406,916.8721 C1484.1406,915.1065 1484.9219,914.044 1486.2188,914.044 C1487.1719,914.044 1487.7031,914.5127 1487.9219,915.4971 L1489.5,915.4971 Z "/><text fill="#FFFFFF" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="57" x="1502" y="920.413">LayoutMeta</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="1311" x2="1725" y1="929.794" y2="929.794"/><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="225" x="1316" y="944.0129">pub views: HashMap&lt;String, Vec&lt;ButtonIds&gt;&gt;</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="199" x="1316" y="957.2128">pub buttons: HashMap&lt;String, KeyMeta&gt;</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="1311" x2="1725" y1="964.1938" y2="964.1938"/><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="404" x="1316" y="978.4127">from(source: LayoutMetaSource): Result&lt;(String, LayoutMeta), serde_yaml::Error&gt;</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="220" x="1316" y="991.6126">get_size_of_button(&amp;self, button_id: &amp;str): i32</text><!--MD5=[f75192f40544243dd364959471b56df4]
-class layout_meta.Outline--><rect fill="#2E2E2E" filter="url(#f1lzvodu3upjgv)" height="107.9995" id="layout_meta.Outline" style="stroke: #1B1B1B; stroke-width: 1.5;" width="78" x="1684" y="1278.294"/><ellipse cx="1704.1" cy="1291.294" fill="#EB937F" rx="8" ry="8" style="stroke: #1B1B1B; stroke-width: 1.0;"/><path d="M1702.6156,1291.8409 L1706.4594,1291.8409 L1706.4594,1290.4659 L1702.6156,1290.4659 L1702.6156,1288.6534 L1706.7719,1288.6534 L1706.7719,1287.2784 L1700.975,1287.2784 L1700.975,1295.294 L1706.9594,1295.294 L1706.9594,1293.919 L1702.6156,1293.919 L1702.6156,1291.8409 Z "/><text fill="#FFFFFF" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="34" x="1716.9" y="1294.913">Outline</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="1685" x2="1761" y1="1304.294" y2="1304.294"/><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="44" x="1690" y="1318.5129">Standard</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="19" x="1690" y="1331.7128">Half</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="66" x="1690" y="1344.9127">OneAndAHalf</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="34" x="1690" y="1358.1126">Double</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="51" x="1690" y="1371.3125">Quadruple</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="1685" x2="1761" y1="1378.2935" y2="1378.2935"/><!--MD5=[0f12f85f3b6b4a772975b4c497daa5d7]
-class layout_meta.LayoutMetaSource--><rect fill="#2E2E2E" filter="url(#f1lzvodu3upjgv)" height="68.3998" id="layout_meta.LayoutMetaSource" style="stroke: #1B1B1B; stroke-width: 1.5;" width="118" x="1807" y="701.294"/><ellipse cx="1819" cy="714.294" fill="#EB937F" rx="8" ry="8" style="stroke: #1B1B1B; stroke-width: 1.0;"/><path d="M1817.5156,714.8409 L1821.3594,714.8409 L1821.3594,713.4659 L1817.5156,713.4659 L1817.5156,711.6534 L1821.6719,711.6534 L1821.6719,710.2784 L1815.875,710.2784 L1815.875,718.294 L1821.8594,718.294 L1821.8594,716.919 L1817.5156,716.919 L1817.5156,714.8409 Z "/><text fill="#FFFFFF" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="92" x="1830" y="717.913">LayoutMetaSource</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="1808" x2="1924" y1="727.294" y2="727.294"/><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="41" x="1813" y="741.5129">YamlFile</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="55" x="1813" y="754.7128">FallbackStr</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="1808" x2="1924" y1="761.6938" y2="761.6938"/><!--MD5=[192adc815e350574101dc835572fb4f2]
-class layout_meta.Modifier--><rect fill="#2E2E2E" filter="url(#f1lzvodu3upjgv)" height="147.5992" id="layout_meta.Modifier" style="stroke: #1B1B1B; stroke-width: 1.5;" width="64" x="894" y="661.294"/><ellipse cx="906" cy="674.294" fill="#EB937F" rx="8" ry="8" style="stroke: #1B1B1B; stroke-width: 1.0;"/><path d="M904.5156,674.8409 L908.3594,674.8409 L908.3594,673.4659 L904.5156,673.4659 L904.5156,671.6534 L908.6719,671.6534 L908.6719,670.2784 L902.875,670.2784 L902.875,678.294 L908.8594,678.294 L908.8594,676.919 L904.5156,676.919 L904.5156,674.8409 Z "/><text fill="#FFFFFF" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="38" x="917" y="677.913">Modifier</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="895" x2="957" y1="687.294" y2="687.294"/><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="35" x="900" y="701.5129">Control</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="21" x="900" y="714.7128">Shift</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="24" x="900" y="727.9127">Lock</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="12" x="900" y="741.1126">Alt</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="27" x="900" y="754.3125">Mod2</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="27" x="900" y="767.5124">Mod3</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="27" x="900" y="780.7123">Mod4</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="27" x="900" y="793.9122">Mod5</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="895" x2="957" y1="800.8932" y2="800.8932"/><!--MD5=[c2e916d16dc249f3a1408be64481bdb8]
-class layout_meta.LayoutYamlParser--><rect fill="#2E2E2E" filter="url(#f1lzvodu3upjgv)" height="68.3998" id="layout_meta.LayoutYamlParser" style="stroke: #1B1B1B; stroke-width: 1.5;" width="744" x="993" y="701.294"/><ellipse cx="1316.5" cy="714.294" fill="#A9DCDF" rx="8" ry="8" style="stroke: #1B1B1B; stroke-width: 1.0;"/><path d="M1318.0156,715.9346 L1318.5313,717.544 L1320.2344,717.544 L1317.4688,709.5284 L1315.6406,709.5284 L1312.7813,717.544 L1314.4688,717.544 L1315.0156,715.9346 L1318.0156,715.9346 Z M1317.5625,714.5596 L1315.4688,714.5596 L1316.5156,711.419 L1317.5625,714.5596 Z "/><text fill="#FFFFFF" font-family="Verdana" font-size="11" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="90" x="1332.5" y="717.913">LayoutYamlParser</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="994" x2="1736" y1="727.294" y2="727.294"/><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="994" x2="1736" y1="735.294" y2="735.294"/><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="220" x="999" y="749.5129">get_layouts(): HashMap&lt;String, LayoutMeta&gt;</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="732" x="999" y="762.7128">add_layout_to_hashmap(hashmap_with_layouts: &amp;mut HashMap&lt;String, LayoutMeta&gt;, layout_result: Result&lt;(String, LayoutMeta), serde_yaml::Error&gt;)</text><!--MD5=[0d4effa8c0d2d5f22de6356d0183243f]
-class keyboard.Keyboard--><rect fill="#2E2E2E" filter="url(#f1lzvodu3upjgv)" height="173.999" id="keyboard.Keyboard" style="stroke: #1B1B1B; stroke-width: 1.5;" width="603" x="1981.5" y="648.294"/><ellipse cx="2256" cy="661.294" fill="#1A66C2" rx="8" ry="8" style="stroke: #1B1B1B; stroke-width: 1.0;"/><path d="M2259.5,659.9971 C2259.4531,659.294 2259.2969,658.8565 2258.9688,658.4034 C2258.3438,657.5909 2257.3594,657.1377 2256.1563,657.1377 C2253.8906,657.1377 2252.4844,658.7627 2252.4844,661.3565 C2252.4844,663.9346 2253.875,665.544 2256.1094,665.544 C2258.1094,665.544 2259.4375,664.3877 2259.5313,662.5596 L2257.9219,662.5596 C2257.8125,663.5752 2257.1875,664.1534 2256.1563,664.1534 C2254.875,664.1534 2254.1406,663.1221 2254.1406,661.3721 C2254.1406,659.6065 2254.9219,658.544 2256.2188,658.544 C2257.1719,658.544 2257.7031,659.0127 2257.9219,659.9971 L2259.5,659.9971 Z "/><text fill="#FFFFFF" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="47" x="2272" y="664.913">Keyboard</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="1982.5" x2="2583.5" y1="674.294" y2="674.294"/><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="213" x="1987.5" y="688.5129">pub views: HashMap&lt;(String, String), View&gt;</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="154" x="1987.5" y="701.7128">pub active_view: (String, String)</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="115" x="1987.5" y="714.9127">active_keys: Vec&lt;Key&gt;</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="1982.5" x2="2583.5" y1="721.8937" y2="721.8937"/><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="81" x="1987.5" y="736.1126">new(): Keyboard</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="556" x="1987.5" y="749.3125">init(&amp;mut self, relm: &amp;relm::Relm&lt;Win&gt;, layout_metas: HashMap&lt;String, LayoutMeta&gt;): HashMap&lt;String, gtk::Grid&gt;</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="184" x="1987.5" y="762.5124">get_view_name(&amp;self): (String, String)</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="305" x="1987.5" y="775.7123">make_view_name(layout_name: &amp;str, view_name: &amp;str): String</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="591" x="1987.5" y="788.9122">add_layout(&amp;mut self, relm: &amp;relm::Relm&lt;Win&gt;, layout_name: &amp;str, layout_meta: LayoutMeta): HashMap&lt;String, gtk::Grid&gt;</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="395" x="1987.5" y="802.1121">get_closest_key(&amp;self, layout_name: &amp;str, view_name: &amp;str, x: i32, y: i32): Option</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="451" x="1987.5" y="815.312">get_all_button_sizes(&amp;self, button_ids: &amp;[String], layout_meta: &amp;LayoutMeta): Vec&lt;Vec&lt;i32&gt;&gt;</text><!--MD5=[c7eadfb8b7d21ed5ee6a36eac58a8122]
-class keyboard.Key--><rect fill="#2E2E2E" filter="url(#f1lzvodu3upjgv)" height="121.1994" id="keyboard.Key" style="stroke: #1B1B1B; stroke-width: 1.5;" width="382" x="1981" y="1080.294"/><ellipse cx="2159" cy="1093.294" fill="#1A66C2" rx="8" ry="8" style="stroke: #1B1B1B; stroke-width: 1.0;"/><path d="M2162.5,1091.9971 C2162.4531,1091.294 2162.2969,1090.8565 2161.9688,1090.4034 C2161.3438,1089.5909 2160.3594,1089.1377 2159.1563,1089.1377 C2156.8906,1089.1377 2155.4844,1090.7627 2155.4844,1093.3565 C2155.4844,1095.9346 2156.875,1097.544 2159.1094,1097.544 C2161.1094,1097.544 2162.4375,1096.3877 2162.5313,1094.5596 L2160.9219,1094.5596 C2160.8125,1095.5752 2160.1875,1096.1534 2159.1563,1096.1534 C2157.875,1096.1534 2157.1406,1095.1221 2157.1406,1093.3721 C2157.1406,1091.6065 2157.9219,1090.544 2159.2188,1090.544 C2160.1719,1090.544 2160.7031,1091.0127 2160.9219,1091.9971 L2162.5,1091.9971 Z "/><text fill="#FFFFFF" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="19" x="2175" y="1096.913">Key</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="1982" x2="2362" y1="1106.294" y2="1106.294"/><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="233" x="1987" y="1120.5129">actions: HashMap&lt;KeyEvent, Vec&lt;KeyAction&gt;&gt;</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="88" x="1987" y="1133.7128">button: gtk::Button</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="108" x="1987" y="1146.9127">popover: gtk::Popover</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="1982" x2="2362" y1="1153.8937" y2="1153.8937"/><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="298" x="1987" y="1168.1126">from(relm: &amp;relm::Relm&lt;Win&gt;, key_id: &amp;str, key_meta: Option</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="29" x="2285" y="1168.1126">): Key</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="370" x="1987" y="1181.3125">make_default_actions(key_id: &amp;str): HashMap&lt;KeyEvent, Vec&lt;KeyAction&gt;&gt;</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="240" x="1987" y="1194.5124">activate(&amp;self, win: &amp;Win, key_event: &amp;KeyEvent)</text><!--MD5=[4e5a4e1e7a2d9ee9a5760f9bb5899d6e]
-class keyboard.View--><rect fill="#2E2E2E" filter="url(#f1lzvodu3upjgv)" height="107.9995" id="keyboard.View" style="stroke: #1B1B1B; stroke-width: 1.5;" width="360" x="2193" y="897.294"/><ellipse cx="2358" cy="910.294" fill="#1A66C2" rx="8" ry="8" style="stroke: #1B1B1B; stroke-width: 1.0;"/><path d="M2361.5,908.9971 C2361.4531,908.294 2361.2969,907.8565 2360.9688,907.4034 C2360.3438,906.5909 2359.3594,906.1377 2358.1563,906.1377 C2355.8906,906.1377 2354.4844,907.7627 2354.4844,910.3565 C2354.4844,912.9346 2355.875,914.544 2358.1094,914.544 C2360.1094,914.544 2361.4375,913.3877 2361.5313,911.5596 L2359.9219,911.5596 C2359.8125,912.5752 2359.1875,913.1534 2358.1563,913.1534 C2356.875,913.1534 2356.1406,912.1221 2356.1406,910.3721 C2356.1406,908.6065 2356.9219,907.544 2358.2188,907.544 C2359.1719,907.544 2359.7031,908.0127 2359.9219,908.9971 L2361.5,908.9971 Z "/><text fill="#FFFFFF" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="23" x="2374" y="913.913">View</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="2194" x2="2552" y1="923.294" y2="923.294"/><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="2194" x2="2552" y1="931.294" y2="931.294"/><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="213" x="2199" y="945.5129">key_coordinates: HashMap&lt;(i32, i32), Key&gt;</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="57" x="2199" y="958.7128">new(): View</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="265" x="2199" y="971.9127">add_key_coordinate(&amp;mut self, x: i32, y: i32, key: Key)</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="272" x="2199" y="985.1126">get_closest_key(&amp;self, input_x: i32, input_y: i32): Option</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="348" x="2199" y="998.3125">get_distance(&amp;self, coordinate_a: (i32, i32), coordinate_b: (i32, i32)): i32</text><!--MD5=[9c89efc05f0ee0ebfd1d79e19243412c]
-reverse link Input to layout_meta.KeyEvent--><path d="M668.34,769.584 C660.63,826.504 653.58,943.404 710,1016.294 C904.6,1267.684 1331.29,1319.134 1459.11,1329.054 " fill="none" id="Input&lt;-layout_meta.KeyEvent" style="stroke: #FFFFFF; stroke-width: 1.0;"/><polygon fill="#FFFFFF" points="670.28,756.474,665.4458,761.8248,668.5257,768.3451,673.3599,762.9943,670.28,756.474" style="stroke: #FFFFFF; stroke-width: 1.0;"/><!--MD5=[945c1149a49bcdb267dc62b2b677a973]
-reverse link Input to Dot--><path d="M687.48,768.704 C703.22,806.564 729.28,869.214 746.29,910.124 " fill="none" id="Input&lt;-Dot" style="stroke: #FFFFFF; stroke-width: 1.0;"/><polygon fill="#FFFFFF" points="682.37,756.424,680.9752,763.4989,686.9695,767.5075,688.3642,760.4326,682.37,756.424" style="stroke: #FFFFFF; stroke-width: 1.0;"/><!--MD5=[b2e3cd08db4fb62b6bb6aa6f2de46f05]
-reverse link Model to keyboard.Keyboard--><path d="M580.43,549.894 C586.93,556.474 594.57,562.574 603,566.294 C739.08,626.324 1795.09,576.484 1941,605.294 C1989.87,614.944 2040.93,630.804 2088.24,648.164 " fill="none" id="Model&lt;-keyboard.Keyboard" style="stroke: #FFFFFF; stroke-width: 1.0;"/><polygon fill="#FFFFFF" points="571.77,540.134,572.7639,547.2763,579.7391,549.1058,578.7452,541.9635,571.77,540.134" style="stroke: #FFFFFF; stroke-width: 1.0;"/><!--MD5=[f07bccb1f57db5e1026db2b7f868d798]
-reverse link Model to Input--><path d="M575.19,551.584 C599.39,596.324 642.78,676.564 663.03,714.014 " fill="none" id="Model&lt;-Input" style="stroke: #FFFFFF; stroke-width: 1.0;"/><polygon fill="#FFFFFF" points="568.91,539.974,568.2445,547.1543,574.6165,550.5303,575.282,543.35,568.91,539.974" style="stroke: #FFFFFF; stroke-width: 1.0;"/><!--MD5=[0d413e6557b0ef06b11981d7c92e9836]
-reverse link Win to Widgets--><path d="M454.81,420.484 C439.56,437.784 423.8,455.654 410.01,471.284 " fill="none" id="Win&lt;-Widgets" style="stroke: #FFFFFF; stroke-width: 1.0;"/><polygon fill="#FFFFFF" points="463.72,410.384,456.7519,412.2402,455.7853,419.3863,462.7534,417.53,463.72,410.384" style="stroke: #FFFFFF; stroke-width: 1.0;"/><!--MD5=[b9de35f75834ba6be8fbd81cb13a4afa]
-reverse link Win to Gestures--><path d="M611.1,418.974 C635.21,439.184 660.38,460.274 681.24,477.764 " fill="none" id="Win&lt;-Gestures" style="stroke: #FFFFFF; stroke-width: 1.0;"/><polygon fill="#FFFFFF" points="600.85,410.384,602.885,417.302,610.0535,418.0843,608.0185,411.1663,600.85,410.384" style="stroke: #FFFFFF; stroke-width: 1.0;"/><!--MD5=[123866860a100eeaac738bf44e84d7a2]
-reverse link Win to Model--><path d="M538.39,423.274 C544.07,450.664 549.97,479.104 553.8,497.534 " fill="none" id="Win&lt;-Model" style="stroke: #FFFFFF; stroke-width: 1.0;"/><polygon fill="#FFFFFF" points="535.71,410.384,533.0133,417.0719,538.1496,422.1334,540.8462,415.4455,535.71,410.384" style="stroke: #FFFFFF; stroke-width: 1.0;"/><!--MD5=[70645556ad46b0494875ebc014e0e663]
-link Win to keyboard.Key--><path d="M652.37,348.124 C1113.23,362.504 2638,417.664 2638,517.794 C2638,517.794 2638,517.794 2638,952.294 C2638,1014.814 2491.83,1066.114 2363.22,1099.154 " fill="none" id="Win-keyboard.Key" style="stroke: #FFFFFF; stroke-width: 1.0;"/><!--MD5=[c958f2067d3922af485c4e7f18cded53]
-reverse link relm::Update to Win--><path d="M512.66,189.334 C514.31,216.354 516.26,248.324 517.96,276.034 " fill="none" id="relm::Update&lt;-Win" style="stroke: #FFFFFF; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="none" points="505.68,189.744,511.45,169.354,519.65,188.894,505.68,189.744" style="stroke: #FFFFFF; stroke-width: 1.0;"/><!--MD5=[ba8d4b16e2a3d81a9a033e752bb24b1e]
-reverse link relm::Widget to Win--><path d="M250.99,173.014 C298.62,202.764 362.53,242.684 416.33,276.284 " fill="none" id="relm::Widget&lt;-Win" style="stroke: #FFFFFF; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="none" points="247.16,178.874,233.91,162.344,254.58,167.004,247.16,178.874" style="stroke: #FFFFFF; stroke-width: 1.0;"/><!--MD5=[98391cd48eb920393abbcea454d954db]
-link relm::Update to Msg--><path d="M653.29,128.294 C682.91,128.294 712.2,128.294 735.79,128.294 " fill="none" id="relm::Update-Msg" style="stroke: #FFFFFF; stroke-width: 1.0;"/><text fill="#BBBBBB" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="46" x="671.5" y="121.5129">reacts_to</text><!--MD5=[f0a7f8cc389347839bb1f4c4668a9268]
-link keyboard.Key to layout_meta.KeyEvent--><path d="M2018.44,1201.344 C1992.81,1210.114 1966.32,1218.474 1941,1225.294 C1885.61,1240.204 1870.75,1239.944 1814,1248.294 C1697.17,1265.494 1656.61,1227.504 1550,1278.294 C1543.12,1281.574 1536.59,1286.084 1530.6,1291.104 " fill="none" id="keyboard.Key-layout_meta.KeyEvent" style="stroke: #FFFFFF; stroke-width: 1.0;"/><!--MD5=[4b860664e35f98a1d7677fed8d928a33]
-link keyboard.Key to layout_meta.KeyAction--><path d="M2110.99,1201.474 C2092.57,1217.804 2071.71,1234.714 2051,1248.294 C2007.14,1277.034 1951.75,1301.314 1914.73,1316.054 " fill="none" id="keyboard.Key-layout_meta.KeyAction" style="stroke: #FFFFFF; stroke-width: 1.0;"/><!--MD5=[0998c985e80ffeedbe7b71c5e3ba3796]
-reverse link keyboard.Keyboard to keyboard.View--><path d="M2324.38,834.674 C2333.45,856.244 2342.72,878.294 2350.7,897.264 " fill="none" id="keyboard.Keyboard&lt;-keyboard.View" style="stroke: #FFFFFF; stroke-width: 1.0;"/><polygon fill="#FFFFFF" points="2319.22,822.414,2317.8527,829.4943,2323.8625,833.4796,2325.2298,826.3993,2319.22,822.414" style="stroke: #FFFFFF; stroke-width: 1.0;"/><text fill="#BBBBBB" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="18" x="2337" y="863.5129">has</text><!--MD5=[0e7317e0089eac84c70968e3b3a3d9d6]
-link keyboard.Keyboard to keyboard.Key--><path d="M2173.46,822.524 C2152.91,844.504 2134.34,869.794 2123,897.294 C2098.44,956.854 2119.48,1029.874 2141.12,1080.134 " fill="none" id="keyboard.Keyboard-keyboard.Key" style="stroke: #FFFFFF; stroke-width: 1.0;"/><text fill="#BBBBBB" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="51" x="2124" y="955.0129">are_active</text><!--MD5=[fc926c75dc034dee579b334fe947ae9d]
-reverse link keyboard.View to keyboard.Key--><path d="M2306.39,1014.434 C2283.7,1035.594 2258.4,1059.204 2235.92,1080.164 " fill="none" id="keyboard.View&lt;-keyboard.Key" style="stroke: #FFFFFF; stroke-width: 1.0;"/><polygon fill="#FFFFFF" points="2315.94,1005.524,2308.8247,1006.6956,2307.1695,1013.7142,2314.2848,1012.5426,2315.94,1005.524" style="stroke: #FFFFFF; stroke-width: 1.0;"/><text fill="#BBBBBB" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="56" x="2279" y="1046.5129">consists_of</text><!--MD5=[48eba29ee9ba3a5a1616c12eacec4bb9]
-link layout_meta.LayoutYamlParser to layout_meta.LayoutMeta--><path d="M1388.91,769.734 C1414.62,805.704 1455.71,863.174 1484.61,903.594 " fill="none" id="layout_meta.LayoutYamlParser-layout_meta.LayoutMeta" style="stroke: #FFFFFF; stroke-width: 1.0;"/><text fill="#BBBBBB" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="37" x="1456" y="863.5129">creates</text><text fill="#BBBBBB" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="6" x="1387.0267" y="787.9933">1</text><text fill="#BBBBBB" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="6" x="1473.2652" y="892.8817">n</text><!--MD5=[8da02ca80514dc1c554b8c5fba8ab0e1]
-link layout_meta.LayoutYamlParser to layout_meta.LayoutMetaSource--><path d="M1737.31,735.294 C1763.33,735.294 1787.04,735.294 1806.82,735.294 " fill="none" id="layout_meta.LayoutYamlParser-layout_meta.LayoutMetaSource" style="stroke: #FFFFFF; stroke-width: 1.0;"/><text fill="#BBBBBB" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="34" x="1755" y="728.5129">parses</text><text fill="#BBBBBB" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="6" x="1744.9335" y="732.3788">1</text><text fill="#BBBBBB" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="6" x="1792.8532" y="731.6673">n</text><!--MD5=[bd74de783bca9d7862726d1e8c3a6ee4]
-link layout_meta.LayoutMeta to layout_meta.KeyMeta--><path d="M1540.48,999.124 C1553.23,1025.704 1569.24,1059.054 1582.47,1086.614 " fill="none" id="layout_meta.LayoutMeta-layout_meta.KeyMeta" style="stroke: #FFFFFF; stroke-width: 1.0;"/><text fill="#BBBBBB" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="56" x="1564" y="1046.5129">consists_of</text><text fill="#BBBBBB" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="6" x="1537.0976" y="1016.6704">n</text><text fill="#BBBBBB" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="6" x="1572.6363" y="1075.6925">1</text><!--MD5=[69979c9fcc59c9b1778de2f8deee93b7]
-link layout_meta.KeyMeta to layout_meta.KeyEvent--><path d="M1573.4,1195.164 C1565.56,1207.584 1557.37,1220.834 1550,1233.294 C1538.92,1252.014 1527.2,1273.114 1517.52,1290.924 " fill="none" id="layout_meta.KeyMeta-layout_meta.KeyEvent" style="stroke: #FFFFFF; stroke-width: 1.0;"/><text fill="#BBBBBB" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="48" x="1551" y="1244.5129">describes</text><text fill="#BBBBBB" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="6" x="1562.5825" y="1213.1947">n</text><text fill="#BBBBBB" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="9" x="1511.3389" y="1280.2641">m</text><!--MD5=[bd4a9d1940d572e616127663824e3002]
-link layout_meta.KeyMeta to layout_meta.KeyAction--><path d="M1682.45,1194.834 C1731.32,1229.654 1793.38,1273.864 1833.39,1302.364 " fill="none" id="layout_meta.KeyMeta-layout_meta.KeyAction" style="stroke: #FFFFFF; stroke-width: 1.0;"/><text fill="#BBBBBB" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="48" x="1757" y="1244.5129">describes</text><text fill="#BBBBBB" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="6" x="1686.0511" y="1213.2014">n</text><text fill="#BBBBBB" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="9" x="1816.6367" y="1293.3387">m</text><!--MD5=[050e9e68d1bf613013d378306c125322]
-link layout_meta.KeyMeta to layout_meta.KeyDisplay--><path d="M1608,1194.834 C1608,1228.004 1608,1269.714 1608,1298.224 " fill="none" id="layout_meta.KeyMeta-layout_meta.KeyDisplay" style="stroke: #FFFFFF; stroke-width: 1.0;"/><text fill="#BBBBBB" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="48" x="1609" y="1244.5129">describes</text><text fill="#BBBBBB" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="6" x="1601.5969" y="1213.2014">n</text><text fill="#BBBBBB" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="6" x="1601.4094" y="1287.436">1</text><!--MD5=[028c5223e502c64b3f79d18d26c492e6]
-link layout_meta.KeyMeta to layout_meta.Outline--><path d="M1642.08,1194.804 C1650.02,1207.364 1658.38,1220.754 1666,1233.294 C1674.79,1247.764 1684.1,1263.564 1692.6,1278.184 " fill="none" id="layout_meta.KeyMeta-layout_meta.Outline" style="stroke: #FFFFFF; stroke-width: 1.0;"/><text fill="#BBBBBB" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="48" x="1674" y="1244.5129">describes</text><text fill="#BBBBBB" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="6" x="1640.2564" y="1213.1674">n</text><text fill="#BBBBBB" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="6" x="1682.1119" y="1267.2719">1</text><!--MD5=[5d9d4cf71febaedbd002c26a501373fc]
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="1086px" preserveAspectRatio="none" style="width:1941px;height:1086px;background:#777777;" version="1.1" viewBox="0 0 1941 1086" width="1941px" zoomAndPan="magnify"><defs><filter height="300%" id="f91mne7vu57du" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[f57290ba224303f1ad01e034b26ebd12]
+cluster user_interface--><polygon fill="#777777" filter="url(#f91mne7vu57du)" points="16,6.294,120,6.294,127,29.0939,1773,29.0939,1773,1074.794,16,1074.794,16,6.294" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="16" x2="127" y1="29.0939" y2="29.0939"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="98" x="20" y="21.2999">user_interface</text><!--MD5=[85854914a254229271247f711f245f5e]
+cluster dbus--><polygon fill="#777777" filter="url(#f91mne7vu57du)" points="1797,779.294,1838,779.294,1845,802.0939,1919,802.0939,1919,891.294,1797,891.294,1797,779.294" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="1797" x2="1845" y1="802.0939" y2="802.0939"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="35" x="1801" y="794.2999">dbus</text><!--MD5=[3e09a69be21538652ac4edbcb9c29289]
+cluster submitter--><polygon fill="#777777" filter="url(#f91mne7vu57du)" points="1797,268.294,1868,268.294,1875,291.0939,1907,291.0939,1907,380.294,1797,380.294,1797,268.294" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="1797" x2="1875" y1="291.0939" y2="291.0939"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="65" x="1801" y="283.2999">submitter</text><!--MD5=[d8f9eb381476c1ab6e7b4673404ff11c]
+cluster keyboard--><polygon fill="#777777" filter="url(#f91mne7vu57du)" points="1797,550.294,1867,550.294,1874,573.0939,1903,573.0939,1903,662.294,1797,662.294,1797,550.294" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="1797" x2="1874" y1="573.0939" y2="573.0939"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="64" x="1801" y="565.2999">keyboard</text><!--MD5=[7e20e022571e30ec1001cf6eabd7f3e2]
+class Model--><rect fill="#2E2E2E" filter="url(#f91mne7vu57du)" height="42" id="Model" style="stroke: #1B1B1B; stroke-width: 1.5;" width="67" x="382.5" y="604.294"/><ellipse cx="394.5" cy="617.294" fill="#1A66C2" rx="8" ry="8" style="stroke: #1B1B1B; stroke-width: 1.0;"/><path d="M398,615.9971 C397.9531,615.294 397.7969,614.8565 397.4688,614.4034 C396.8438,613.5909 395.8594,613.1377 394.6563,613.1377 C392.3906,613.1377 390.9844,614.7627 390.9844,617.3565 C390.9844,619.9346 392.375,621.544 394.6094,621.544 C396.6094,621.544 397.9375,620.3877 398.0313,618.5596 L396.4219,618.5596 C396.3125,619.5752 395.6875,620.1534 394.6563,620.1534 C393.375,620.1534 392.6406,619.1221 392.6406,617.3721 C392.6406,615.6065 393.4219,614.544 394.7188,614.544 C395.6719,614.544 396.2031,615.0127 396.4219,615.9971 L398,615.9971 Z "/><ellipse cx="410.5" cy="616.294" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#FFFFFF" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="29" x="417.5" y="620.913">Model</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="383.5" x2="448.5" y1="630.294" y2="630.294"/><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="383.5" x2="448.5" y1="638.294" y2="638.294"/><!--MD5=[6b79b5687bd0e7dbe0fc0d1c3dfd2a98]
+class Msg--><rect fill="#2E2E2E" filter="url(#f91mne7vu57du)" height="213.5987" id="Msg" style="stroke: #1B1B1B; stroke-width: 1.5;" width="316" x="32" y="518.294"/><ellipse cx="170" cy="531.294" fill="#EB937F" rx="8" ry="8" style="stroke: #1B1B1B; stroke-width: 1.0;"/><path d="M168.5156,531.8409 L172.3594,531.8409 L172.3594,530.4659 L168.5156,530.4659 L168.5156,528.6534 L172.6719,528.6534 L172.6719,527.2784 L166.875,527.2784 L166.875,535.294 L172.8594,535.294 L172.8594,533.919 L168.5156,533.919 L168.5156,531.8409 Z "/><ellipse cx="191" cy="530.294" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#FFFFFF" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="21" x="198" y="534.913">Msg</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="33" x2="347" y1="544.294" y2="544.294"/><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="188" x="38" y="558.5129">GestureSignal(f64, f64, GestureSignal)</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="246" x="38" y="571.7128">ButtonInteraction(String, String, String, TapMotion),</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="94" x="38" y="584.9127">OpenPopup(String)</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="91" x="38" y="598.1126">SubmitText(String)</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="304" x="38" y="611.3125">Suggestions((Option&lt;String&gt;, Option&lt;String&gt;, Option&lt;String&gt;))</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="82" x="38" y="624.5124">SetVisibility(bool)</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="210" x="38" y="637.7123">HintPurpose(ContentHint, ContentPurpose)</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="263" x="38" y="650.9122">ChangeUILayoutView(Option&lt;String&gt;, Option&lt;String&gt;)</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="163" x="38" y="664.1121">ChangeUIOrientation(Orientation)</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="178" x="38" y="677.312">ChangeKBLayoutView(String, String)</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="51" x="38" y="690.5119">PollEvents</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="90" x="38" y="703.7118">UpdateDrawBuffer</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="20" x="38" y="716.9117">Quit</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="33" x2="347" y1="723.8927" y2="723.8927"/><!--MD5=[1d4e6756eb5f7ba49ae43d908b54fdb1]
+class Gestures--><rect fill="#2E2E2E" filter="url(#f91mne7vu57du)" height="68.3998" id="Gestures" style="stroke: #1B1B1B; stroke-width: 1.5;" width="229" x="594.5" y="591.294"/><ellipse cx="682.5" cy="604.294" fill="#1A66C2" rx="8" ry="8" style="stroke: #1B1B1B; stroke-width: 1.0;"/><path d="M686,602.9971 C685.9531,602.294 685.7969,601.8565 685.4688,601.4034 C684.8438,600.5909 683.8594,600.1377 682.6563,600.1377 C680.3906,600.1377 678.9844,601.7627 678.9844,604.3565 C678.9844,606.9346 680.375,608.544 682.6094,608.544 C684.6094,608.544 685.9375,607.3877 686.0313,605.5596 L684.4219,605.5596 C684.3125,606.5752 683.6875,607.1534 682.6563,607.1534 C681.375,607.1534 680.6406,606.1221 680.6406,604.3721 C680.6406,602.6065 681.4219,601.544 682.7188,601.544 C683.6719,601.544 684.2031,602.0127 684.4219,602.9971 L686,602.9971 Z "/><text fill="#FFFFFF" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="46" x="698.5" y="607.913">Gestures</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="595.5" x2="822.5" y1="617.294" y2="617.294"/><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="217" x="600.5" y="631.5129">long_press_gesture: gtk::GestureLongPress</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="156" x="600.5" y="644.7128">drag_gesture: gtk::GestureDrag</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="595.5" x2="822.5" y1="651.6938" y2="651.6938"/><!--MD5=[9c25b1a7a4b422e21a10b51bb7cdb692]
+class Suggestions--><rect fill="#2E2E2E" filter="url(#f91mne7vu57du)" height="81.5997" id="Suggestions" style="stroke: #1B1B1B; stroke-width: 1.5;" width="101" x="946.5" y="813.294"/><ellipse cx="965.25" cy="826.294" fill="#1A66C2" rx="8" ry="8" style="stroke: #1B1B1B; stroke-width: 1.0;"/><path d="M968.75,824.9971 C968.7031,824.294 968.5469,823.8565 968.2188,823.4034 C967.5938,822.5909 966.6094,822.1377 965.4063,822.1377 C963.1406,822.1377 961.7344,823.7627 961.7344,826.3565 C961.7344,828.9346 963.125,830.544 965.3594,830.544 C967.3594,830.544 968.6875,829.3877 968.7813,827.5596 L967.1719,827.5596 C967.0625,828.5752 966.4375,829.1534 965.4063,829.1534 C964.125,829.1534 963.3906,828.1221 963.3906,826.3721 C963.3906,824.6065 964.1719,823.544 965.4688,823.544 C966.4219,823.544 966.9531,824.0127 967.1719,824.9971 L968.75,824.9971 Z "/><text fill="#FFFFFF" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="60" x="977.75" y="829.913">Suggestions</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="947.5" x2="1046.5" y1="839.294" y2="839.294"/><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="72" x="952.5" y="853.5129">left: gtk::Button</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="89" x="952.5" y="866.7128">center: gtk::Button</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="79" x="952.5" y="879.9127">right: gtk::Button</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="947.5" x2="1046.5" y1="886.8937" y2="886.8937"/><!--MD5=[b0d551779ae5a4c43f98061a760028b1]
+class Widgets--><rect fill="#2E2E2E" filter="url(#f91mne7vu57du)" height="107.9995" id="Widgets" style="stroke: #1B1B1B; stroke-width: 1.5;" width="277" x="858.5" y="571.294"/><ellipse cx="974" cy="584.294" fill="#1A66C2" rx="8" ry="8" style="stroke: #1B1B1B; stroke-width: 1.0;"/><path d="M977.5,582.9971 C977.4531,582.294 977.2969,581.8565 976.9688,581.4034 C976.3438,580.5909 975.3594,580.1377 974.1563,580.1377 C971.8906,580.1377 970.4844,581.7627 970.4844,584.3565 C970.4844,586.9346 971.875,588.544 974.1094,588.544 C976.1094,588.544 977.4375,587.3877 977.5313,585.5596 L975.9219,585.5596 C975.8125,586.5752 975.1875,587.1534 974.1563,587.1534 C972.875,587.1534 972.1406,586.1221 972.1406,584.3721 C972.1406,582.6065 972.9219,581.544 974.2188,581.544 C975.1719,581.544 975.7031,582.0127 975.9219,582.9971 L977.5,582.9971 Z "/><text fill="#FFFFFF" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="39" x="990" y="587.913">Widgets</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="859.5" x2="1134.5" y1="597.294" y2="597.294"/><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="101" x="864.5" y="611.5129">window: gtk::Window</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="108" x="864.5" y="624.7128">_overlay: gtk::Overlay</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="265" x="864.5" y="637.9127">_draw_handler: relm::DrawHandler&lt;gtk::DrawingArea&gt;</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="125" x="864.5" y="651.1126">suggestions: Suggestions</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="82" x="864.5" y="664.3125">stack: gtk::Stack</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="859.5" x2="1134.5" y1="671.2935" y2="671.2935"/><!--MD5=[5655c84227694af7943d3c60ac6af392]
+class Win--><rect fill="#2E2E2E" filter="url(#f91mne7vu57du)" height="200.3988" id="Win" style="stroke: #1B1B1B; stroke-width: 1.5;" width="606" x="502" y="243.294"/><ellipse cx="786.5" cy="256.294" fill="#1A66C2" rx="8" ry="8" style="stroke: #1B1B1B; stroke-width: 1.0;"/><path d="M790,254.9971 C789.9531,254.294 789.7969,253.8565 789.4688,253.4034 C788.8438,252.5909 787.8594,252.1377 786.6563,252.1377 C784.3906,252.1377 782.9844,253.7627 782.9844,256.3565 C782.9844,258.9346 784.375,260.544 786.6094,260.544 C788.6094,260.544 789.9375,259.3877 790.0313,257.5596 L788.4219,257.5596 C788.3125,258.5752 787.6875,259.1534 786.6563,259.1534 C785.375,259.1534 784.6406,258.1221 784.6406,256.3721 C784.6406,254.6065 785.4219,253.544 786.7188,253.544 C787.6719,253.544 788.2031,254.0127 788.4219,254.9971 L790,254.9971 Z "/><ellipse cx="807.5" cy="255.294" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#FFFFFF" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="18" x="814.5" y="259.913">Win</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="503" x2="1107" y1="269.294" y2="269.294"/><ellipse cx="513" cy="280.294" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="79" x="519" y="283.5129">relm: relm::Relm</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="426" x="519" y="296.7128">key_refs: HashMap&lt;(String, String, String), (gtk::ToggleButton, Option&lt;gtk::Popover&gt;)&gt;,</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="123" x="519" y="309.9127">_channel: Channel&lt;Msg&gt;</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="503" x2="1107" y1="316.8937" y2="316.8937"/><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="212" x="508" y="331.1126">get_rel_coordinates(x: f64, y: f64): (i32, i32)</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="63" x="508" y="344.3125">erase_path()</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="59" x="508" y="357.5124">draw_path()</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="418" x="508" y="370.7123">update_suggestions(left: Option&lt;String&gt;, center: Option&lt;String&gt;, right: Option&lt;String&gt;)</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="0" x="511" y="383.9122"/><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="52" x="508" y="397.1121">load_css()</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="594" x="508" y="410.312">make_suggestions_and_pref_buttons(relm: &amp;relm::Relm&lt;super::Win&gt;, keyboard: &amp;keyboard::Keyboard): Vec&lt;gtk::Button&gt;</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="341" x="508" y="423.5119">make_pref_button(relm: &amp;relm::Relm&lt;super::Win&gt;, layout_names: Vec</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="62" x="849" y="423.5119">): gtk::Button</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="375" x="508" y="436.7118">make_suggestion_buttons(relm: &amp;relm::Relm&lt;super::Win&gt;): Vec&lt;gtk::Button&gt;</text><!--MD5=[fd2653a7081ec45a927e5a46ae91a539]
+class GridBuilder--><rect fill="#2E2E2E" filter="url(#f91mne7vu57du)" height="107.9995" id="GridBuilder" style="stroke: #1B1B1B; stroke-width: 1.5;" width="893" x="659.5" y="60.294"/><ellipse cx="1069.5" cy="73.294" fill="#A9DCDF" rx="8" ry="8" style="stroke: #1B1B1B; stroke-width: 1.0;"/><path d="M1071.0156,74.9346 L1071.5313,76.544 L1073.2344,76.544 L1070.4688,68.5284 L1068.6406,68.5284 L1065.7813,76.544 L1067.4688,76.544 L1068.0156,74.9346 L1071.0156,74.9346 Z M1070.5625,73.5596 L1068.4688,73.5596 L1069.5156,70.419 L1070.5625,73.5596 Z "/><ellipse cx="1090.5" cy="72.294" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#FFFFFF" font-family="Verdana" font-size="11" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="54" x="1097.5" y="77.9689">GridBuilder</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="660.5" x2="1551.5" y1="86.294" y2="86.294"/><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="660.5" x2="1551.5" y1="94.294" y2="94.294"/><ellipse cx="670.5" cy="105.294" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="772" x="676.5" y="108.5129">make_stack(relm: &amp;relm::Relm&lt;Win&gt;, layout_meta_hashmap: HashMap&lt;String, LayoutMeta&gt;): (Stack, HashMap&lt;ButtonId, (ToggleButton, Option&lt;Popover&gt;)&gt;)</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="870" x="676.5" y="121.7128">make_grid(relm: &amp;relm::Relm&lt;Win&gt;, view_arrangement: &amp;KeyArrangement, view_keys: &amp;HashMap&lt;String, KeyMeta&gt;): (Grid, HashMap&lt;String, (ToggleButton, Option&lt;Popover&gt;)&gt;)</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="309" x="676.5" y="134.9127">make_button(key_id: &amp;str, key_meta: &amp;KeyMeta): ToggleButton</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="504" x="676.5" y="148.1126">attach_popover(relm: &amp;relm::Relm&lt;Win&gt;,button: ToggleButton, key_meta: &amp;KeyMeta): Option&lt;Popover&gt;</text><ellipse cx="670.5" cy="158.0936" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="301" x="676.5" y="161.3125">make_grid_name(layout_name: &amp;str, view_name: &amp;str): String</text><!--MD5=[d602b77267d5088762cb6a59b8ed96b1]
+class UIManager--><rect fill="#2E2E2E" filter="url(#f91mne7vu57du)" height="200.3988" id="UIManager" style="stroke: #1B1B1B; stroke-width: 1.5;" width="586" x="1171" y="525.294"/><ellipse cx="1427.5" cy="538.294" fill="#1A66C2" rx="8" ry="8" style="stroke: #1B1B1B; stroke-width: 1.0;"/><path d="M1431,536.9971 C1430.9531,536.294 1430.7969,535.8565 1430.4688,535.4034 C1429.8438,534.5909 1428.8594,534.1377 1427.6563,534.1377 C1425.3906,534.1377 1423.9844,535.7627 1423.9844,538.3565 C1423.9844,540.9346 1425.375,542.544 1427.6094,542.544 C1429.6094,542.544 1430.9375,541.3877 1431.0313,539.5596 L1429.4219,539.5596 C1429.3125,540.5752 1428.6875,541.1534 1427.6563,541.1534 C1426.375,541.1534 1425.6406,540.1221 1425.6406,538.3721 C1425.6406,536.6065 1426.4219,535.544 1427.7188,535.544 C1428.6719,535.544 1429.2031,536.0127 1429.4219,536.9971 L1431,536.9971 Z "/><ellipse cx="1448.5" cy="537.294" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#FFFFFF" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="54" x="1455.5" y="541.913">UIManager</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="1172" x2="1756" y1="551.294" y2="551.294"/><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="108" x="1188" y="565.5129">sender: Sender&lt;Msg&gt;</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="80" x="1188" y="578.7128">window: Window</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="61" x="1188" y="591.9127">stack: Stack</text><ellipse cx="1182" cy="601.8937" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="174" x="1188" y="605.1126">current_layout_view: (String, String)</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="91" x="1188" y="618.3125">prev_layout: String</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="1172" x2="1756" y1="625.2935" y2="625.2935"/><ellipse cx="1182" cy="636.2935" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="563" x="1188" y="639.5124">new(sender: Sender&lt;super::Msg&gt;, window: Window, stack: Stack, current_layout_view: (String, String)): UIManager</text><ellipse cx="1182" cy="649.4934" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="156" x="1188" y="652.7123">haptic_feedback(is_press: bool)</text><ellipse cx="1182" cy="662.6933" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="176" x="1188" y="665.9122">change_visibility(new_visibility: bool)</text><ellipse cx="1182" cy="675.8932" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="408" x="1188" y="679.1121">change_hint_purpose(content_hint: ContentHint, content_purpose: ContentPurpose)</text><ellipse cx="1182" cy="689.0931" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="209" x="1188" y="692.312">change_orientation(orientation: Orientation)</text><ellipse cx="1182" cy="702.293" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="478" x="1188" y="705.5119">change_layout_view(new_layout: &amp;Option&lt;String&gt;, new_view: Option&lt;String&gt;): Result&lt;(), UIError&gt;</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="505" x="1188" y="718.7118">make_new_layout_view_name(new_layout: &amp;Option&lt;String&gt;, new_view: Option&lt;String&gt;): (String, String)</text><!--MD5=[972bde5337b4335dd91fa5354c932445]
+class Point--><rect fill="#2E2E2E" filter="url(#f91mne7vu57du)" height="81.5997" id="Point" style="stroke: #1B1B1B; stroke-width: 1.5;" width="82" x="221" y="976.794"/><ellipse cx="242" cy="989.794" fill="#1A66C2" rx="8" ry="8" style="stroke: #1B1B1B; stroke-width: 1.0;"/><path d="M245.5,988.4971 C245.4531,987.794 245.2969,987.3565 244.9688,986.9034 C244.3438,986.0909 243.3594,985.6377 242.1563,985.6377 C239.8906,985.6377 238.4844,987.2627 238.4844,989.8565 C238.4844,992.4346 239.875,994.044 242.1094,994.044 C244.1094,994.044 245.4375,992.8877 245.5313,991.0596 L243.9219,991.0596 C243.8125,992.0752 243.1875,992.6534 242.1563,992.6534 C240.875,992.6534 240.1406,991.6221 240.1406,989.8721 C240.1406,988.1065 240.9219,987.044 242.2188,987.044 C243.1719,987.044 243.7031,987.5127 243.9219,988.4971 L245.5,988.4971 Z "/><ellipse cx="260" cy="988.794" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#FFFFFF" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="24" x="267" y="993.413">Point</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="222" x2="302" y1="1002.794" y2="1002.794"/><ellipse cx="232" cy="1013.794" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="27" x="238" y="1017.0129">x: f64</text><ellipse cx="232" cy="1026.9939" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="27" x="238" y="1030.2128">y: f64</text><ellipse cx="232" cy="1040.1938" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="59" x="238" y="1043.4127">time: Instant</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="222" x2="302" y1="1050.3937" y2="1050.3937"/><!--MD5=[48cb74c8515dfbc5eaeddec77cb5d7ba]
+class GestureSignal--><rect fill="#2E2E2E" filter="url(#f91mne7vu57du)" height="94.7996" id="GestureSignal" style="stroke: #1B1B1B; stroke-width: 1.5;" width="107" x="630.5" y="806.794"/><ellipse cx="642.5" cy="819.794" fill="#EB937F" rx="8" ry="8" style="stroke: #1B1B1B; stroke-width: 1.0;"/><path d="M641.0156,820.3409 L644.8594,820.3409 L644.8594,818.9659 L641.0156,818.9659 L641.0156,817.1534 L645.1719,817.1534 L645.1719,815.7784 L639.375,815.7784 L639.375,823.794 L645.3594,823.794 L645.3594,822.419 L641.0156,822.419 L641.0156,820.3409 Z "/><ellipse cx="658.5" cy="818.794" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#FFFFFF" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="69" x="665.5" y="823.413">GestureSignal</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="631.5" x2="736.5" y1="832.794" y2="832.794"/><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="51" x="636.5" y="847.0129">DragBegin</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="59" x="636.5" y="860.2128">DragUpdate</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="43" x="636.5" y="873.4127">DragEnd</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="53" x="636.5" y="886.6126">LongPress</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="631.5" x2="736.5" y1="893.5936" y2="893.5936"/><!--MD5=[57dc7c53717205a055e270d1e3ca012b]
+class GestureInterpretation--><rect fill="#2E2E2E" filter="url(#f91mne7vu57du)" height="81.5997" id="GestureInterpretation" style="stroke: #1B1B1B; stroke-width: 1.5;" width="130" x="338" y="976.794"/><ellipse cx="350" cy="989.794" fill="#EB937F" rx="8" ry="8" style="stroke: #1B1B1B; stroke-width: 1.0;"/><path d="M348.5156,990.3409 L352.3594,990.3409 L352.3594,988.9659 L348.5156,988.9659 L348.5156,987.1534 L352.6719,987.1534 L352.6719,985.7784 L346.875,985.7784 L346.875,993.794 L352.8594,993.794 L352.8594,992.419 L348.5156,992.419 L348.5156,990.3409 Z "/><text fill="#FFFFFF" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="104" x="361" y="993.413">GestureInterpretation</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="339" x2="467" y1="1002.794" y2="1002.794"/><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="54" x="344" y="1017.0129">NoGesture</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="53" x="344" y="1030.2128">LongPress</text><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="29" x="344" y="1043.4127">Swipe</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="339" x2="467" y1="1050.3937" y2="1050.3937"/><!--MD5=[4fb32d4831d457097ae866f3cb0e0da7]
+class GestureModel--><rect fill="#2E2E2E" filter="url(#f91mne7vu57du)" height="81.5997" id="GestureModel" style="stroke: #1B1B1B; stroke-width: 1.5;" width="418" x="119" y="813.294"/><ellipse cx="284" cy="826.294" fill="#1A66C2" rx="8" ry="8" style="stroke: #1B1B1B; stroke-width: 1.0;"/><path d="M287.5,824.9971 C287.4531,824.294 287.2969,823.8565 286.9688,823.4034 C286.3438,822.5909 285.3594,822.1377 284.1563,822.1377 C281.8906,822.1377 280.4844,823.7627 280.4844,826.3565 C280.4844,828.9346 281.875,830.544 284.1094,830.544 C286.1094,830.544 287.4375,829.3877 287.5313,827.5596 L285.9219,827.5596 C285.8125,828.5752 285.1875,829.1534 284.1563,829.1534 C282.875,829.1534 282.1406,828.1221 282.1406,826.3721 C282.1406,824.6065 282.9219,823.544 284.2188,823.544 C285.1719,823.544 285.7031,824.0127 285.9219,824.9971 L287.5,824.9971 Z "/><ellipse cx="305" cy="825.294" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#FFFFFF" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="69" x="312" y="829.913">GestureModel</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="120" x2="536" y1="839.294" y2="839.294"/><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="120" x2="536" y1="847.294" y2="847.294"/><ellipse cx="130" cy="858.294" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="103" x="136" y="861.5129">new(): GestureModel</text><ellipse cx="130" cy="871.4939" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="395" x="136" y="874.7128">convert_to_interaction(x: f64, y: f64, input: GestureSignal): ((f64, f64), Interaction)</text><ellipse cx="130" cy="884.6938" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#AAAAAA" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="145" x="136" y="887.9127">get_swipe_path(): Vec&lt;Point&gt;</text><ellipse cx="1148" cy="343.294" fill="#2E2E2E" filter="url(#f91mne7vu57du)" rx="5" ry="5" style="stroke: #1B1B1B; stroke-width: 1.5;"/><text fill="#FFFFFF" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="70" x="1113" y="358.5129">"relm::Update"</text><ellipse cx="462" cy="343.294" fill="#2E2E2E" filter="url(#f91mne7vu57du)" rx="5" ry="5" style="stroke: #1B1B1B; stroke-width: 1.5;"/><text fill="#FFFFFF" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="68" x="428" y="358.5129">"relm::Widget"</text><!--MD5=[4b4d3704d53885d7ba1be4905c43df78]
+class dbus.DBusService--><rect fill="#2E2E2E" filter="url(#f91mne7vu57du)" height="42" id="dbus.DBusService" style="stroke: #1B1B1B; stroke-width: 1.5;" width="90" x="1813" y="833.294"/><ellipse cx="1825" cy="846.294" fill="#1A66C2" rx="8" ry="8" style="stroke: #1B1B1B; stroke-width: 1.0;"/><path d="M1828.5,844.9971 C1828.4531,844.294 1828.2969,843.8565 1827.9688,843.4034 C1827.3438,842.5909 1826.3594,842.1377 1825.1563,842.1377 C1822.8906,842.1377 1821.4844,843.7627 1821.4844,846.3565 C1821.4844,848.9346 1822.875,850.544 1825.1094,850.544 C1827.1094,850.544 1828.4375,849.3877 1828.5313,847.5596 L1826.9219,847.5596 C1826.8125,848.5752 1826.1875,849.1534 1825.1563,849.1534 C1823.875,849.1534 1823.1406,848.1221 1823.1406,846.3721 C1823.1406,844.6065 1823.9219,843.544 1825.2188,843.544 C1826.1719,843.544 1826.7031,844.0127 1826.9219,844.9971 L1828.5,844.9971 Z "/><text fill="#FFFFFF" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="64" x="1836" y="849.913">DBusService</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="1814" x2="1902" y1="859.294" y2="859.294"/><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="1814" x2="1902" y1="867.294" y2="867.294"/><!--MD5=[7329b948e99d19466e7810f1e3d913b8]
+class submitter.layer_shell--><rect fill="#2E2E2E" filter="url(#f91mne7vu57du)" height="42" id="submitter.layer_shell" style="stroke: #1B1B1B; stroke-width: 1.5;" width="78" x="1813" y="322.294"/><ellipse cx="1825" cy="335.294" fill="#1A66C2" rx="8" ry="8" style="stroke: #1B1B1B; stroke-width: 1.0;"/><path d="M1828.5,333.9971 C1828.4531,333.294 1828.2969,332.8565 1827.9688,332.4034 C1827.3438,331.5909 1826.3594,331.1377 1825.1563,331.1377 C1822.8906,331.1377 1821.4844,332.7627 1821.4844,335.3565 C1821.4844,337.9346 1822.875,339.544 1825.1094,339.544 C1827.1094,339.544 1828.4375,338.3877 1828.5313,336.5596 L1826.9219,336.5596 C1826.8125,337.5752 1826.1875,338.1534 1825.1563,338.1534 C1823.875,338.1534 1823.1406,337.1221 1823.1406,335.3721 C1823.1406,333.6065 1823.9219,332.544 1825.2188,332.544 C1826.1719,332.544 1826.7031,333.0127 1826.9219,333.9971 L1828.5,333.9971 Z "/><text fill="#FFFFFF" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="52" x="1836" y="338.913">layer_shell</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="1814" x2="1890" y1="348.294" y2="348.294"/><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="1814" x2="1890" y1="356.294" y2="356.294"/><!--MD5=[0d4effa8c0d2d5f22de6356d0183243f]
+class keyboard.Keyboard--><rect fill="#2E2E2E" filter="url(#f91mne7vu57du)" height="42" id="keyboard.Keyboard" style="stroke: #1B1B1B; stroke-width: 1.5;" width="73" x="1813.5" y="604.294"/><ellipse cx="1825.5" cy="617.294" fill="#1A66C2" rx="8" ry="8" style="stroke: #1B1B1B; stroke-width: 1.0;"/><path d="M1829,615.9971 C1828.9531,615.294 1828.7969,614.8565 1828.4688,614.4034 C1827.8438,613.5909 1826.8594,613.1377 1825.6563,613.1377 C1823.3906,613.1377 1821.9844,614.7627 1821.9844,617.3565 C1821.9844,619.9346 1823.375,621.544 1825.6094,621.544 C1827.6094,621.544 1828.9375,620.3877 1829.0313,618.5596 L1827.4219,618.5596 C1827.3125,619.5752 1826.6875,620.1534 1825.6563,620.1534 C1824.375,620.1534 1823.6406,619.1221 1823.6406,617.3721 C1823.6406,615.6065 1824.4219,614.544 1825.7188,614.544 C1826.6719,614.544 1827.2031,615.0127 1827.4219,615.9971 L1829,615.9971 Z "/><text fill="#FFFFFF" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="47" x="1836.5" y="620.913">Keyboard</text><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="1814.5" x2="1885.5" y1="630.294" y2="630.294"/><line style="stroke: #1B1B1B; stroke-width: 1.5;" x1="1814.5" x2="1885.5" y1="638.294" y2="638.294"/><!--MD5=[3c6e6a537c409c8777341be1195f327f]
+reverse link Model to GestureModel--><path d="M403.4,658.804 C387.62,699.494 360.61,769.174 343.56,813.154 " fill="none" id="Model&lt;-GestureModel" style="stroke: #FFFFFF; stroke-width: 1.0;"/><polygon fill="#FFFFFF" points="408.19,646.434,402.2906,650.5809,403.8496,657.6215,409.749,653.4746,408.19,646.434" style="stroke: #FFFFFF; stroke-width: 1.0;"/><!--MD5=[e5d5797d4e755da255b05d574d02f567]
+reverse link Widgets to Suggestions--><path d="M997,692.644 C997,731.714 997,779.834 997,813.174 " fill="none" id="Widgets&lt;-Suggestions" style="stroke: #FFFFFF; stroke-width: 1.0;"/><polygon fill="#FFFFFF" points="997,679.514,993,685.514,997,691.514,1001,685.514,997,679.514" style="stroke: #FFFFFF; stroke-width: 1.0;"/><!--MD5=[123866860a100eeaac738bf44e84d7a2]
+reverse link Win to Model--><path d="M542.78,450.554 C531.74,457.744 521.09,465.324 511,473.294 C466.04,508.814 436.45,571.854 423.49,604.084 " fill="none" id="Win&lt;-Model" style="stroke: #FFFFFF; stroke-width: 1.0;"/><polygon fill="#FFFFFF" points="553.94,443.484,546.7309,443.3148,543.802,449.9043,551.0111,450.0735,553.94,443.484" style="stroke: #FFFFFF; stroke-width: 1.0;"/><!--MD5=[0d413e6557b0ef06b11981d7c92e9836]
+reverse link Win to Widgets--><path d="M880.46,454.334 C907.95,494.424 937.79,537.954 960.4,570.924 " fill="none" id="Win&lt;-Widgets" style="stroke: #FFFFFF; stroke-width: 1.0;"/><polygon fill="#FFFFFF" points="872.96,443.404,873.0544,450.6145,879.7466,453.3006,879.6522,446.0901,872.96,443.404" style="stroke: #FFFFFF; stroke-width: 1.0;"/><!--MD5=[b9de35f75834ba6be8fbd81cb13a4afa]
+reverse link Win to Gestures--><path d="M766.72,455.944 C750.1,504.424 731.85,557.634 720.42,590.994 " fill="none" id="Win&lt;-Gestures" style="stroke: #FFFFFF; stroke-width: 1.0;"/><polygon fill="#FFFFFF" points="771.02,443.404,765.2912,447.7836,767.1305,454.7561,772.8593,450.3766,771.02,443.404" style="stroke: #FFFFFF; stroke-width: 1.0;"/><!--MD5=[d4326c97b4f97629bcb73e612b666cdb]
+link Win to Msg--><path d="M501.72,443.094 C478.21,452.684 455.06,462.774 433,473.294 C404.87,486.704 375.93,502.614 348.26,518.994 " fill="none" id="Win-Msg" style="stroke: #FFFFFF; stroke-width: 1.0;"/><text fill="#BBBBBB" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="42" x="434" y="484.5129">receives</text><polygon fill="#BBBBBB" points="479,480.3939,483,482.3939,479,484.3939,479,480.3939" style="stroke: #BBBBBB; stroke-width: 1.0;"/><!--MD5=[c693da8a96a2a36e47cd78ead860951f]
+reverse link Win to UIManager--><path d="M1050.41,448.564 C1109.43,473.644 1172.32,500.364 1230.77,525.194 " fill="none" id="Win&lt;-UIManager" style="stroke: #FFFFFF; stroke-width: 1.0;"/><polygon fill="#FFFFFF" points="1038.27,443.404,1042.2257,449.4333,1049.3127,448.1007,1045.3569,442.0715,1038.27,443.404" style="stroke: #FFFFFF; stroke-width: 1.0;"/><!--MD5=[23370221755e3e3d97fa0d625988b780]
+link Win to Winlol22--><path d="M1108.14,343.294 C1119.66,343.294 1131.18,343.294 1142.71,343.294 " fill="none" id="Win-Winlol22" style="stroke: #FFFFFF; stroke-width: 1.0;"/><!--MD5=[97155906f25fa97e46c0758925b52623]
+link Winlol25 to Win--><path d="M467.02,343.294 C478.58,343.294 490.13,343.294 501.68,343.294 " fill="none" id="Winlol25-Win" style="stroke: #FFFFFF; stroke-width: 1.0;"/><!--MD5=[0d800c5b3a13a7b57317496d080dbe7b]
+link UIManager to Msg--><path d="M1185.28,525.214 C1174.44,522.654 1163.66,520.334 1153,518.294 C981,485.434 531.77,464.874 365,518.294 C359.4,520.084 353.8,522.094 348.22,524.274 " fill="none" id="UIManager-Msg" style="stroke: #FFFFFF; stroke-width: 1.0;"/><polygon fill="#BBBBBB" points="665.5,480.3939,661.5,482.3939,665.5,484.3939,665.5,480.3939" style="stroke: #BBBBBB; stroke-width: 1.0;"/><text fill="#BBBBBB" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="26" x="671.5" y="484.5129">emits</text><!--MD5=[1d63b4c3ba765f65f6b2b69aa129016e]
+reverse link UIManager to dbus.DBusService--><path d="M1708.28,731.534 C1730.72,743.974 1752.65,757.274 1773,771.294 C1799.01,789.204 1824.48,815.244 1840.66,833.144 " fill="none" id="UIManager&lt;-dbus.DBusService" style="stroke: #FFFFFF; stroke-width: 1.0;"/><polygon fill="#FFFFFF" points="1696.87,725.304,1700.2175,731.691,1707.4007,731.0576,1704.0532,724.6706,1696.87,725.304" style="stroke: #FFFFFF; stroke-width: 1.0;"/><!--MD5=[4e78aa42c583f26133d36fb71f0d77f3]
+reverse link GestureModel to GestureInterpretation--><path d="M364.25,906.324 C369.29,914.614 374.07,923.274 378,931.794 C384.51,945.904 389.78,962.104 393.76,976.564 " fill="none" id="GestureModel&lt;-GestureInterpretation" style="stroke: #FFFFFF; stroke-width: 1.0;"/><polygon fill="#FFFFFF" points="357.3,895.304,357.1241,902.5129,363.7109,905.448,363.8868,898.239,357.3,895.304" style="stroke: #FFFFFF; stroke-width: 1.0;"/><!--MD5=[811788a094b3de7be30865dda6564cfd]
+link GestureModel to Point--><path d="M298.33,895.454 C291.1,906.754 284.02,919.364 279,931.794 C273.31,945.894 269.47,962.094 266.89,976.544 " fill="none" id="GestureModel-Point" style="stroke: #FFFFFF; stroke-width: 1.0;"/><text fill="#BBBBBB" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="82" x="280" y="943.0129">describe gesture</text><polygon fill="#BBBBBB" points="317.5,951.9939,319.5,955.9939,321.5,951.9939,317.5,951.9939" style="stroke: #BBBBBB; stroke-width: 1.0;"/><text fill="#BBBBBB" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="6" x="287.3274" y="913.0168">1</text><text fill="#BBBBBB" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="27" x="238.464" y="965.904">many</text><!--MD5=[891635bdec6345140c38d72772154d6d]
+link GridBuilder to Win--><path d="M1035.43,168.514 C1005.89,190.794 970.56,217.434 936.55,243.084 " fill="none" id="GridBuilder-Win" style="stroke: #FFFFFF; stroke-width: 1.0;"/><polygon fill="#BBBBBB" points="997,205.3939,993,207.3939,997,209.3939,997,205.3939" style="stroke: #BBBBBB; stroke-width: 1.0;"/><text fill="#BBBBBB" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="37" x="1003" y="209.5129">creates</text><!--MD5=[fc921dd3a0de2a123b0cf69c8cc90c60]
+link GridBuilder to submitter.layer_shell--><path d="M1504.3,168.344 C1618.1,188.584 1724.43,213.954 1773,243.294 C1804.62,262.394 1828.76,299.064 1841.62,322.014 " fill="none" id="GridBuilder-submitter.layer_shell" style="stroke: #FFFFFF; stroke-width: 1.0;"/><text fill="#BBBBBB" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="61" x="1698" y="209.5129">calls method</text><polygon fill="#BBBBBB" points="1762,205.3939,1766,207.3939,1762,209.3939,1762,205.3939" style="stroke: #BBBBBB; stroke-width: 1.0;"/><!--MD5=[111c22adde44e3993712468779078efb]
+link Win to GestureSignal--><path d="M602.29,443.304 C576.5,464.464 553.69,489.354 538,518.294 C492.68,601.914 497.54,646.214 538,732.294 C557.05,772.814 597.06,804.434 630.39,825.164 " fill="none" id="Win-GestureSignal" style="stroke: #FFFFFF; stroke-width: 1.0;"/><text fill="#BBBBBB" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="26" x="539" y="629.0129">emits</text><polygon fill="#BBBBBB" points="548.5,637.9939,550.5,641.9939,552.5,637.9939,548.5,637.9939" style="stroke: #BBBBBB; stroke-width: 1.0;"/><!--MD5=[0bd9bebb325bc92935dc0397b6ffd9f9]
+link GestureModel to GestureSignal--><path d="M537.15,854.294 C571.65,854.294 604.55,854.294 630.43,854.294 " fill="none" id="GestureModel-GestureSignal" style="stroke: #FFFFFF; stroke-width: 1.0;"/><text fill="#BBBBBB" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="46" x="555.25" y="847.5129">interprets</text><polygon fill="#BBBBBB" points="604.25,843.3939,608.25,845.3939,604.25,847.3939,604.25,843.3939" style="stroke: #BBBBBB; stroke-width: 1.0;"/><!--MD5=[629c3b7ee07e2be18ffa56d54d1ab78e]
+reverse link Win to keyboard.Keyboard--><path d="M1121.05,442.244 C1122.71,442.594 1124.35,442.944 1126,443.294 C1409.28,502.864 1523.08,372.204 1773,518.294 C1806.78,538.034 1829.92,579.104 1841.48,603.924 " fill="none" id="Win&lt;-keyboard.Keyboard" style="stroke: #FFFFFF; stroke-width: 1.0;"/><polygon fill="#FFFFFF" points="1108.33,439.434,1113.3268,444.6332,1120.048,442.0204,1115.0511,436.8212,1108.33,439.434" style="stroke: #FFFFFF; stroke-width: 1.0;"/><!--MD5=[38ca24cc823b963c91e98991dd873923]
 @startuml user_interface
 !define DARKBLUE
 !includeurl https://raw.githubusercontent.com/grelltrier/RedDress-PlantUML/master/style.puml
 
 package user_interface {
-    class Dot {
-        x: f64
-        y: f64
-        time: Instant
+
+    +class Model {
     }
-    class Input {
-    }
-    class Model {
-    }
-    enum Msg {
-        Press
-        LongPress
-        Swipe
-        Release
-        EnterInput
-        Erase
-        SwitchView
-        SwitchLayout
-        UpdateDrawBuffer
-        Quit
-    }
-    class Gestures {
-        _long_press_gesture: GestureLongPress,
-        _drag_gesture: GestureDrag,
-        _pan_gesture: GesturePan,
-    }
-    class Widgets {
-        window: Window,
-        label: gtk::Label,
-        draw_handler: relm::DrawHandler<DrawingArea>,
-        stack: gtk::Stack,
-    }
-    class Win {
-        type_input(&self, input: &str, end_with_space: bool)
-        get_rel_coordinates(&self, x: f64, y: f64): (i32, i32)
-        erase_path(&mut self)
-        activate_button(&self, x: f64, y: f64)
-        draw_path(&mut self)
-        connect_signals()
-        {static} load_css()
-    }
-    interface relm::Update {
-        model(_: &relm::Relm<Self>, _: Self::ModelParam): Model
-        subscriptions(&mut self, relm: &relm::Relm<Self>)
-        update(&mut self, event: Msg)
-    }
-    interface relm::Widget {
-        root(&self): Self::Root
-        view(relm: &relm::Relm<Self>, mut model: Self::Model): Self
+    +enum Msg {
+        {field} GestureSignal(f64, f64, GestureSignal)
+        {field} ButtonInteraction(String, String, String, TapMotion),
+        {field} OpenPopup(String)
+        {field} SubmitText(String)
+        {field} Suggestions((Option<String>, Option<String>, Option<String>))
+        {field} SetVisibility(bool)
+        {field} HintPurpose(ContentHint, ContentPurpose)
+        {field} ChangeUILayoutView(Option<String>, Option<String>)
+        {field} ChangeUIOrientation(Orientation)
+        {field} ChangeKBLayoutView(String, String)
+        {field} PollEvents
+        {field} UpdateDrawBuffer
+        {field} Quit
     }
 
-    Input *- - layout_meta.KeyEvent
-    Input *- - Dot
-    Model *- - keyboard.Keyboard
-    Model *- - Input
+    class Gestures {
+        {field} long_press_gesture: gtk::GestureLongPress
+        {field} drag_gesture: gtk::GestureDrag
+    }
+
+    class Suggestions {
+        {field} left: gtk::Button
+        {field} center: gtk::Button
+        {field} right: gtk::Button
+    }
+
+    class Widgets {
+        {field} window: gtk::Window
+        {field} _overlay: gtk::Overlay
+        {field} _draw_handler: relm::DrawHandler<gtk::DrawingArea>
+        {field} suggestions: Suggestions
+        {field} stack: gtk::Stack
+    }
+
+    +class Win {
+        {field} +relm: relm::Relm
+        {field} key_refs: HashMap<(String, String, String), (gtk::ToggleButton, Option<gtk::Popover>)>,
+        {field} _channel: Channel<Msg>
+
+        {method} get_rel_coordinates(x: f64, y: f64): (i32, i32)
+        {method} erase_path()
+        {method} draw_path() 
+        {method} update_suggestions(left: Option<String>, center: Option<String>, right: Option<String>)
+
+        {method} {static} load_css()
+        {method} {static} make_suggestions_and_pref_buttons(relm: &relm::Relm<super::Win>, keyboard: &keyboard::Keyboard): Vec<gtk::Button>
+        {method} {static} make_pref_button(relm: &relm::Relm<super::Win>, layout_names: Vec<&String>): gtk::Button
+        {method} {static} make_suggestion_buttons(relm: &relm::Relm<super::Win>): Vec<gtk::Button>
+    }
+
+    +abstract class GridBuilder{
+        {method} +make_stack(relm: &relm::Relm<Win>, layout_meta_hashmap: HashMap<String, LayoutMeta>): (Stack, HashMap<ButtonId, (ToggleButton, Option<Popover>)>)
+        make_grid(relm: &relm::Relm<Win>, view_arrangement: &KeyArrangement, view_keys: &HashMap<String, KeyMeta>): (Grid, HashMap<String, (ToggleButton, Option<Popover>)>)
+        {method} make_button(key_id: &str, key_meta: &KeyMeta): ToggleButton
+        {method} attach_popover(relm: &relm::Relm<Win>,button: ToggleButton, key_meta: &KeyMeta): Option<Popover>
+        {method} +make_grid_name(layout_name: &str, view_name: &str): String
+    }
+
+    +class UIManager {
+        {field} sender: Sender<Msg>
+        {field} window: Window
+        {field} stack: Stack
+        {field} +current_layout_view: (String, String)
+        {field} prev_layout: String
+
+        {method} +new(sender: Sender<super::Msg>, window: Window, stack: Stack, current_layout_view: (String, String)): UIManager
+        {method} +haptic_feedback(is_press: bool)
+        {method} +change_visibility(new_visibility: bool)
+        {method} +change_hint_purpose(content_hint: ContentHint, content_purpose: ContentPurpose)
+        {method} +change_orientation(orientation: Orientation)
+        {method} +change_layout_view(new_layout: &Option<String>, new_view: Option<String>): Result<(), UIError>
+        {method} make_new_layout_view_name(new_layout: &Option<String>, new_view: Option<String>): (String, String)
+    }
+
+    +class Point {
+        {field} +x: f64
+        {field} +y: f64
+        {field} +time: Instant
+    }
+    
+    +enum GestureSignal {
+        {field} DragBegin
+        {field} DragUpdate
+        {field} DragEnd
+        {field} LongPress
+    }
+
+    enum GestureInterpretation {
+        {field} NoGesture
+        {field} LongPress
+        {field} Swipe
+    }
+
+    +class GestureModel {
+        {method} +new(): GestureModel
+        {method} +convert_to_interaction(x: f64, y: f64, input: GestureSignal): ((f64, f64), Interaction)
+        {method} +get_swipe_path(): Vec<Point> 
+    }
+
+    Model *- - GestureModel
+    Widgets *- - Suggestions
+    Win *- - Model
     Win *- - Widgets
     Win *- - Gestures
-    Win *- - Model
-    Win - - keyboard.Key
-    class Win implements relm::Update
-    class Win implements relm::Widget
-    relm::Update - Msg : reacts_to
-}
+    Win - Msg: < receives
+    Win *- - UIManager
+    Win -() "relm::Update"
+    "relm::Widget" ()- Win
+    UIManager - Msg: > emits
+    UIManager *- - dbus.DBusService
+    GestureModel *- - GestureInterpretation
+    GestureModel "1" - - "many" Point: > describe gesture
+    GridBuilder - - Win : > creates
+    GridBuilder - - submitter.layer_shell : > calls method
+    Win - - GestureSignal : > emits
+    GestureModel - GestureSignal : > interprets
 
-package keyboard {
-    
-    class Key {
-        actions: HashMap<KeyEvent, Vec<KeyAction>>
-        button: gtk::Button
-        popover: gtk::Popover
-        from(relm: &relm::Relm<Win>, key_id: &str, key_meta: Option<&KeyMeta>): Key
-        make_default_actions(key_id: &str): HashMap<KeyEvent, Vec<KeyAction>>
-        activate(&self, win: &Win, key_event: &KeyEvent)
-    }
-    class Keyboard {
-        {field} pub views: HashMap<(String, String), View>
-        {field} pub active_view: (String, String)
-        {field} active_keys: Vec<Key>
-        new(): Keyboard
-        init(&mut self, relm: &relm::Relm<Win>, layout_metas: HashMap<String, LayoutMeta>): HashMap<String, gtk::Grid>
-        get_view_name(&self): (String, String)
-        make_view_name(layout_name: &str, view_name: &str): String
-        add_layout(&mut self, relm: &relm::Relm<Win>, layout_name: &str, layout_meta: LayoutMeta): HashMap<String, gtk::Grid>
-        get_closest_key(&self, layout_name: &str, view_name: &str, x: i32, y: i32): Option<&Key>
-        get_all_button_sizes(&self, button_ids: &[String], layout_meta: &LayoutMeta): Vec<Vec<i32>>
-    }
-    class View {
-        key_coordinates: HashMap<(i32, i32), Key>
-        new(): View
-        add_key_coordinate(&mut self, x: i32, y: i32, key: Key)
-        get_closest_key(&self, input_x: i32, input_y: i32): Option<&Key>
-        get_distance(&self, coordinate_a: (i32, i32), coordinate_b: (i32, i32)): i32
-    }
+    ' The following are structs from other packages
+    Win *- - keyboard.Keyboard
 
-    Key - - layout_meta.KeyEvent
-    Key - - layout_meta.KeyAction
-
-    Keyboard *- - View : has
-    Keyboard - - Key : are_active
-
-    View *- - Key : consists_of
-}
-
-package layout_meta {
-    class KeyMeta {
-        actions: Option<HashMap<KeyEvent, Vec<KeyAction>>>
-        key_display: Option<KeyDisplay>
-        pub outline: Option<Outline>
-        popup: Option<Vec<String>>
-        styles: Option<Vec<String>>
-    }
-    enum KeyEvent {
-        LongPress
-        ShortPress
-        Swipe
-    }
-    enum KeyAction {
-        Modifier
-        SwitchView
-        Erase
-        EnterKeycode
-        OpenPopup
-    }
-    enum KeyDisplay {
-        Text
-        Image
-    }
-    class LayoutMeta {
-        pub views: HashMap<String, Vec<ButtonIds>>
-        pub buttons: HashMap<String, KeyMeta>
-        from(source: LayoutMetaSource): Result<(String, LayoutMeta), serde_yaml::Error>
-        get_size_of_button(&self, button_id: &str): i32
-    }
-    enum Outline {
-        Standard
-        Half
-        OneAndAHalf
-        Double
-        Quadruple
-    }
-    enum LayoutMetaSource {
-        YamlFile
-        FallbackStr
-    }
-    enum Modifier {
-        Control
-        Shift
-        Lock
-        Alt
-        Mod2
-        Mod3
-        Mod4
-        Mod5
-    }
-    abstract class LayoutYamlParser {
-        get_layouts(): HashMap<String, LayoutMeta>
-        add_layout_to_hashmap(hashmap_with_layouts: &mut HashMap<String, LayoutMeta>, layout_result: Result<(String, LayoutMeta), serde_yaml::Error>)
-    }
-    LayoutYamlParser "1" - - "n" LayoutMeta: creates
-    LayoutYamlParser "1" - "n" LayoutMetaSource: parses
-    LayoutMeta "n" - - "1" KeyMeta : consists_of
-    KeyMeta "n" - - "m" KeyEvent : describes
-    KeyMeta "n" - - "m" KeyAction : describes
-    KeyMeta "n" - - "1" KeyDisplay : describes
-    KeyMeta "n" - - "1" Outline : describes
 }
 @enduml
 
@@ -511,171 +460,129 @@ skinparam storage {
 
 
 package user_interface {
-    class Dot {
-        x: f64
-        y: f64
-        time: Instant
+
+    +class Model {
     }
-    class Input {
-    }
-    class Model {
-    }
-    enum Msg {
-        Press
-        LongPress
-        Swipe
-        Release
-        EnterInput
-        Erase
-        SwitchView
-        SwitchLayout
-        UpdateDrawBuffer
-        Quit
-    }
-    class Gestures {
-        _long_press_gesture: GestureLongPress,
-        _drag_gesture: GestureDrag,
-        _pan_gesture: GesturePan,
-    }
-    class Widgets {
-        window: Window,
-        label: gtk::Label,
-        draw_handler: relm::DrawHandler<DrawingArea>,
-        stack: gtk::Stack,
-    }
-    class Win {
-        type_input(&self, input: &str, end_with_space: bool)
-        get_rel_coordinates(&self, x: f64, y: f64): (i32, i32)
-        erase_path(&mut self)
-        activate_button(&self, x: f64, y: f64)
-        draw_path(&mut self)
-        connect_signals()
-        {static} load_css()
-    }
-    interface relm::Update {
-        model(_: &relm::Relm<Self>, _: Self::ModelParam): Model
-        subscriptions(&mut self, relm: &relm::Relm<Self>)
-        update(&mut self, event: Msg)
-    }
-    interface relm::Widget {
-        root(&self): Self::Root
-        view(relm: &relm::Relm<Self>, mut model: Self::Model): Self
+    +enum Msg {
+        {field} GestureSignal(f64, f64, GestureSignal)
+        {field} ButtonInteraction(String, String, String, TapMotion),
+        {field} OpenPopup(String)
+        {field} SubmitText(String)
+        {field} Suggestions((Option<String>, Option<String>, Option<String>))
+        {field} SetVisibility(bool)
+        {field} HintPurpose(ContentHint, ContentPurpose)
+        {field} ChangeUILayoutView(Option<String>, Option<String>)
+        {field} ChangeUIOrientation(Orientation)
+        {field} ChangeKBLayoutView(String, String)
+        {field} PollEvents
+        {field} UpdateDrawBuffer
+        {field} Quit
     }
 
-    Input *- - layout_meta.KeyEvent
-    Input *- - Dot
-    Model *- - keyboard.Keyboard
-    Model *- - Input
+    class Gestures {
+        {field} long_press_gesture: gtk::GestureLongPress
+        {field} drag_gesture: gtk::GestureDrag
+    }
+
+    class Suggestions {
+        {field} left: gtk::Button
+        {field} center: gtk::Button
+        {field} right: gtk::Button
+    }
+
+    class Widgets {
+        {field} window: gtk::Window
+        {field} _overlay: gtk::Overlay
+        {field} _draw_handler: relm::DrawHandler<gtk::DrawingArea>
+        {field} suggestions: Suggestions
+        {field} stack: gtk::Stack
+    }
+
+    +class Win {
+        {field} +relm: relm::Relm
+        {field} key_refs: HashMap<(String, String, String), (gtk::ToggleButton, Option<gtk::Popover>)>,
+        {field} _channel: Channel<Msg>
+
+        {method} get_rel_coordinates(x: f64, y: f64): (i32, i32)
+        {method} erase_path()
+        {method} draw_path() 
+        {method} update_suggestions(left: Option<String>, center: Option<String>, right: Option<String>)
+
+        {method} {static} load_css()
+        {method} {static} make_suggestions_and_pref_buttons(relm: &relm::Relm<super::Win>, keyboard: &keyboard::Keyboard): Vec<gtk::Button>
+        {method} {static} make_pref_button(relm: &relm::Relm<super::Win>, layout_names: Vec<&String>): gtk::Button
+        {method} {static} make_suggestion_buttons(relm: &relm::Relm<super::Win>): Vec<gtk::Button>
+    }
+
+    +abstract class GridBuilder{
+        {method} +make_stack(relm: &relm::Relm<Win>, layout_meta_hashmap: HashMap<String, LayoutMeta>): (Stack, HashMap<ButtonId, (ToggleButton, Option<Popover>)>)
+        make_grid(relm: &relm::Relm<Win>, view_arrangement: &KeyArrangement, view_keys: &HashMap<String, KeyMeta>): (Grid, HashMap<String, (ToggleButton, Option<Popover>)>)
+        {method} make_button(key_id: &str, key_meta: &KeyMeta): ToggleButton
+        {method} attach_popover(relm: &relm::Relm<Win>,button: ToggleButton, key_meta: &KeyMeta): Option<Popover>
+        {method} +make_grid_name(layout_name: &str, view_name: &str): String
+    }
+
+    +class UIManager {
+        {field} sender: Sender<Msg>
+        {field} window: Window
+        {field} stack: Stack
+        {field} +current_layout_view: (String, String)
+        {field} prev_layout: String
+
+        {method} +new(sender: Sender<super::Msg>, window: Window, stack: Stack, current_layout_view: (String, String)): UIManager
+        {method} +haptic_feedback(is_press: bool)
+        {method} +change_visibility(new_visibility: bool)
+        {method} +change_hint_purpose(content_hint: ContentHint, content_purpose: ContentPurpose)
+        {method} +change_orientation(orientation: Orientation)
+        {method} +change_layout_view(new_layout: &Option<String>, new_view: Option<String>): Result<(), UIError>
+        {method} make_new_layout_view_name(new_layout: &Option<String>, new_view: Option<String>): (String, String)
+    }
+
+    +class Point {
+        {field} +x: f64
+        {field} +y: f64
+        {field} +time: Instant
+    }
+    
+    +enum GestureSignal {
+        {field} DragBegin
+        {field} DragUpdate
+        {field} DragEnd
+        {field} LongPress
+    }
+
+    enum GestureInterpretation {
+        {field} NoGesture
+        {field} LongPress
+        {field} Swipe
+    }
+
+    +class GestureModel {
+        {method} +new(): GestureModel
+        {method} +convert_to_interaction(x: f64, y: f64, input: GestureSignal): ((f64, f64), Interaction)
+        {method} +get_swipe_path(): Vec<Point> 
+    }
+
+    Model *- - GestureModel
+    Widgets *- - Suggestions
+    Win *- - Model
     Win *- - Widgets
     Win *- - Gestures
-    Win *- - Model
-    Win - - keyboard.Key
-    class Win implements relm::Update
-    class Win implements relm::Widget
-    relm::Update - Msg : reacts_to
-}
+    Win - Msg: < receives
+    Win *- - UIManager
+    Win -() "relm::Update"
+    "relm::Widget" ()- Win
+    UIManager - Msg: > emits
+    UIManager *- - dbus.DBusService
+    GestureModel *- - GestureInterpretation
+    GestureModel "1" - - "many" Point: > describe gesture
+    GridBuilder - - Win : > creates
+    GridBuilder - - submitter.layer_shell : > calls method
+    Win - - GestureSignal : > emits
+    GestureModel - GestureSignal : > interprets
 
-package keyboard {
-    
-    class Key {
-        actions: HashMap<KeyEvent, Vec<KeyAction>>
-        button: gtk::Button
-        popover: gtk::Popover
-        from(relm: &relm::Relm<Win>, key_id: &str, key_meta: Option<&KeyMeta>): Key
-        make_default_actions(key_id: &str): HashMap<KeyEvent, Vec<KeyAction>>
-        activate(&self, win: &Win, key_event: &KeyEvent)
-    }
-    class Keyboard {
-        {field} pub views: HashMap<(String, String), View>
-        {field} pub active_view: (String, String)
-        {field} active_keys: Vec<Key>
-        new(): Keyboard
-        init(&mut self, relm: &relm::Relm<Win>, layout_metas: HashMap<String, LayoutMeta>): HashMap<String, gtk::Grid>
-        get_view_name(&self): (String, String)
-        make_view_name(layout_name: &str, view_name: &str): String
-        add_layout(&mut self, relm: &relm::Relm<Win>, layout_name: &str, layout_meta: LayoutMeta): HashMap<String, gtk::Grid>
-        get_closest_key(&self, layout_name: &str, view_name: &str, x: i32, y: i32): Option<&Key>
-        get_all_button_sizes(&self, button_ids: &[String], layout_meta: &LayoutMeta): Vec<Vec<i32>>
-    }
-    class View {
-        key_coordinates: HashMap<(i32, i32), Key>
-        new(): View
-        add_key_coordinate(&mut self, x: i32, y: i32, key: Key)
-        get_closest_key(&self, input_x: i32, input_y: i32): Option<&Key>
-        get_distance(&self, coordinate_a: (i32, i32), coordinate_b: (i32, i32)): i32
-    }
+    Win *- - keyboard.Keyboard
 
-    Key - - layout_meta.KeyEvent
-    Key - - layout_meta.KeyAction
-
-    Keyboard *- - View : has
-    Keyboard - - Key : are_active
-
-    View *- - Key : consists_of
-}
-
-package layout_meta {
-    class KeyMeta {
-        actions: Option<HashMap<KeyEvent, Vec<KeyAction>>>
-        key_display: Option<KeyDisplay>
-        pub outline: Option<Outline>
-        popup: Option<Vec<String>>
-        styles: Option<Vec<String>>
-    }
-    enum KeyEvent {
-        LongPress
-        ShortPress
-        Swipe
-    }
-    enum KeyAction {
-        Modifier
-        SwitchView
-        Erase
-        EnterKeycode
-        OpenPopup
-    }
-    enum KeyDisplay {
-        Text
-        Image
-    }
-    class LayoutMeta {
-        pub views: HashMap<String, Vec<ButtonIds>>
-        pub buttons: HashMap<String, KeyMeta>
-        from(source: LayoutMetaSource): Result<(String, LayoutMeta), serde_yaml::Error>
-        get_size_of_button(&self, button_id: &str): i32
-    }
-    enum Outline {
-        Standard
-        Half
-        OneAndAHalf
-        Double
-        Quadruple
-    }
-    enum LayoutMetaSource {
-        YamlFile
-        FallbackStr
-    }
-    enum Modifier {
-        Control
-        Shift
-        Lock
-        Alt
-        Mod2
-        Mod3
-        Mod4
-        Mod5
-    }
-    abstract class LayoutYamlParser {
-        get_layouts(): HashMap<String, LayoutMeta>
-        add_layout_to_hashmap(hashmap_with_layouts: &mut HashMap<String, LayoutMeta>, layout_result: Result<(String, LayoutMeta), serde_yaml::Error>)
-    }
-    LayoutYamlParser "1" - - "n" LayoutMeta: creates
-    LayoutYamlParser "1" - "n" LayoutMetaSource: parses
-    LayoutMeta "n" - - "1" KeyMeta : consists_of
-    KeyMeta "n" - - "m" KeyEvent : describes
-    KeyMeta "n" - - "m" KeyAction : describes
-    KeyMeta "n" - - "1" KeyDisplay : describes
-    KeyMeta "n" - - "1" Outline : describes
 }
 @enduml
 

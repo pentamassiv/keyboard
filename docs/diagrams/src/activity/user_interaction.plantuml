@@ -1,0 +1,41 @@
+@startuml user_interaction
+
+partition "user_interaction"{
+
+  start
+  :User interacts with screen;
+  if (press?) then (yes)
+    if () then (immediatly)
+      :GestureDrag detects begin of drag;
+      :drag_begin event]
+      :Msg::GestureSignal(x, y, GestureSignal::DragBegin)]
+    stop
+    else (after specified delay)
+      :GestureLongPress detects long press;
+      :pressed event]
+      :Msg::GestureSignal(x, y, GestureSignal::LongPress)]
+    stop
+    endif
+  elseif (swipe?) then (yes)
+    :GestureDrag detects update of drag;
+    :drag_update event]
+    :Calculate x and y coordinate of message from events startpoint and offset;
+    :Msg::GestureSignal(x, y, GestureSignal::DragUpdate)]
+    stop
+  else (no (release))
+    :GestureDrag detects end of drag;
+    :drag_end event]
+    :Calculate x and y coordinate of message from events startpoint and offset;
+    :Msg::GestureSignal(x, y, GestureSignal::DragEnd)]
+    stop
+  endif
+
+  floating note right
+    The messages are sent
+    to the Relm stream 
+    and handled in the
+    update() method of
+    the Win struct.
+  end note
+}
+@enduml

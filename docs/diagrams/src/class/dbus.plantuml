@@ -1,0 +1,33 @@
+@startuml dbus
+!define DARKBLUE
+!includeurl https://raw.githubusercontent.com/grelltrier/RedDress-PlantUML/master/style.puml
+
+package dbus {
+
+    +class DBusService {
+        visibility: Arc<AtomicBool>
+
+        {static} +new(sender: relm::Sender<user_interface::Msg>): DBusService
+        +change_visibility(visible: bool)
+        +haptic_feedback(event: String)
+    }
+
+    +class DBusClient {
+        connection: Connection
+        app_id: String
+        timeout: i32
+        hints: HashMap<String, Variant<String>>
+
+        {static} +new(): DBusClient
+        +send(event: String)
+    }
+
+    +abstract class DBusServer{
+        {static} +spawn_and_detach(sender: Mutex<Sender<user_interface::Msg>>, visibility: Arc<AtomicBool>)
+    }
+
+    DBusService "1" *-- "1" DBusClient : uses to send events
+    DBusService "1" -- "1" DBusServer : starts and detaches
+    DBusServer -- user_interface.Msg : sends to UI
+}
+@enduml

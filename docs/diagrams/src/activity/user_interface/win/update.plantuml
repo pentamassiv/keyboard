@@ -1,0 +1,56 @@
+@startuml win_update
+!pragma useVerticalIf on
+partition "Win::update()"{ 
+
+    start
+    if (GestureSignal) then (yes)
+        :GestureModel::convert_to_interaction(GestureSignal);
+        :Interaction]
+        :Convert absolute coordinates to relative coodinates;
+        :Keyboard::input(Interaction);
+    elseif (ButtonInteraction) then (yes)
+        :ButtonId]
+        if (Button exist?) then (yes)
+            :Activate/deactivate ToggleButton;
+        else (no)
+            :Emit error;
+        endif
+        :Give haptic feedback;
+    elseif (OpenPopup) then (yes)
+        :ButtonId]
+        if (Button exist?) then (yes)
+            :Deactivate ToggleButton;
+            if (Has popover?) then (yes)
+                :Show Popover;
+            else (no)
+                :Emit error;
+            endif
+        else (no)
+        :Emit error;
+    endif
+    elseif (SubmitText) then (yes)
+        :Keyboard::submit_text;
+    elseif (Suggestions) then (yes)
+        :Set the labels of the suggestion buttons to the new values;
+    elseif (SetVisibility) then (yes)
+        :Change the visibility of the window
+        Update 'visibility' value of DBusService;
+    elseif (HintPurpose) then (yes)
+        :Not implemented;
+    elseif (ChangeUILayoutView) then (yes)
+        :UIManager.change_layout_view();
+    elseif (ChangeKBLayoutView) then (yes)
+        :Set active_view of Keyboard to new value;
+    elseif (ChangeUIOrientation) then (yes)
+        :UIManager.change_orientation();
+    elseif (PollEvents) then (yes)
+        :Fetch the new events from the wayland server;
+    elseif (UpdateDrawBuffer) then (yes)
+        :Win::draw_path();
+    elseif (Quit) then (yes)
+        :gtk::main_quit();
+        end
+    endif
+    stop
+}
+@enduml

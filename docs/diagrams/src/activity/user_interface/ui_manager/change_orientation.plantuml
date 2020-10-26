@@ -1,0 +1,29 @@
+@startuml uimanager::change_orientation
+
+partition "UIManager::change_orientation()"{
+  start
+  if (new orientation) then (landscape)
+    if (name of active layout ends with '_wide'?) then (yes)
+      :Emit info;
+    else (no)
+      :Append '_wide' to name of current layout;
+      if (UIManager.change_layout_view()) then (Ok)
+        :Emit info;
+      else (error)
+        :Emit info;
+      endif
+    endif
+  else (portrait)
+    if (name of active layout ends with '_wide'?) then (yes)
+      if (ui_manager.change_layout_view) then (Ok)
+        :Emit info;
+      else (error)
+        :Emit warning;
+      endif
+    else (no)
+      :Emit info;
+    endif
+  endif
+  stop
+}
+@enduml

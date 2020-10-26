@@ -1,0 +1,49 @@
+@startuml keyboard_execute_tap_actions
+!pragma useVerticalIf on
+
+partition "keyboard_execute_tap_actions"{
+
+  start
+  :If the last switch was temporary,
+  switch back to previous layout;
+  
+  if () then (actions)
+    while (for action to execute) is (next)
+      if (FeedbackPressRelease?) then (yes)
+        if (press?) then (yes)
+          :Tell UI to display the press of the button;
+        elseif (key in latched_keys?) then (yes)
+        else (no)
+          :Tell UI to display the release of the button;
+        endif
+      elseif (EnterKeycode?) then (yes)
+        :Submit keycode;
+      elseif (EnterKeycode?) then (yes)
+        :Submit keycode;
+      elseif (ToggleKeycode?) then (yes)
+        :Toggle keycode;
+      elseif (EnterString?) then (yes)
+        :Send text of the button to the interpreter;
+        :Vector of submissions]
+        :Submit all of the returned submissions;
+      elseif (Modifier?) then (yes)
+        if (modifier latched?) then (yes)
+          :Remove this key from latched keys;
+        else (no)
+          :Add this key to latched keys;
+        endif
+        :Submit modifier;
+      elseif (Erase?) then (yes)
+        :Submit erase;
+      elseif (OpenPopup?) then (yes)
+        :Tell UI to open the popup;
+      else (switch layout/view)
+        :If the switch is temporary, remember the active view to switch back to;
+        :Tell UI to switch layout;
+      endif
+    endwhile (end)
+  else (no actions)
+  endif
+  stop
+}
+@enduml
