@@ -1,4 +1,5 @@
 // Imports from other crates
+use dbus::strings::Path;
 use dbus::{arg::Variant, blocking::Connection};
 use std::{collections::HashMap, time::Duration};
 
@@ -20,12 +21,15 @@ impl DBusClient {
         let timeout = -1; // Never timeout (This is only necessary if you want to end the feedback prematurely)
         let hints: HashMap<String, Variant<String>> = HashMap::new(); // No hints are sent
         info!("DBus client to handle haptic-feedback was spawned in a new thread and is waiting to receive events");
-        DBusClient {
+
+        let dbus_client = DBusClient {
             connection,
             app_id,
             timeout,
             hints,
-        }
+        };
+        dbus_client.session_register();
+        dbus_client
     }
 
     /// Calls the 'TriggerFeedback' method with the specified event
@@ -45,5 +49,50 @@ impl DBusClient {
                 (&self.app_id, event, self.hints.clone(), self.timeout),
             )
             .unwrap();
+    }
+
+    fn session_register(&self) {
+        let autostart_id = envmnt::get_or("DESKTOP_AUTOSTART_ID", "");
+        println!("autostart_id: {}", autostart_id);
+        let proxy = self.connection.with_proxy(
+            "org.gnome.SessionManager",
+            "/org/gnome/SessionManager",
+            Duration::from_millis(5000),
+        );
+
+        let (client_id,): (Path,) = proxy
+            .method_call(
+                "org.gnome.SessionManager",
+                "RegisterClient",
+                ("sm.puri.OSK0", autostart_id),
+            )
+            .unwrap();
+
+        println!("client_id: {}", client_id);
+
+        /*if (!autostart_id) {
+            g_debug("No autostart id");
+            autostart_id = "";
+        }
+        GError *error = NULL;
+        _proxy = g_dbus_proxy_new_for_bus_sync(G_BUS_TYPE_SESSION,
+            G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START, NULL,
+            "org.gnome.SessionManager", "/org/gnome/SessionManager",
+            "org.gnome.SessionManager", NULL, &error);
+        if (error) {
+            g_warning("Could not connect to session manager: %s\n",
+                    error->message);
+            g_clear_error(&error);
+            return;
+        }
+        g_dbus_proxy_call_sync(_proxy, "RegisterClient",
+            g_variant_new("(ss)", SESSION_NAME, autostart_id),
+            G_DBUS_CALL_FLAGS_NONE, 1000, NULL, &error);
+        if (error) {
+            g_warning("Could not register to session manager: %s\n",
+                    error->message);
+            g_clear_error(&error);
+            return;
+        }*/
     }
 }

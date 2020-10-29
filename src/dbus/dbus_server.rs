@@ -1,7 +1,10 @@
 // Imports from other crates
+use dbus::arg::Variant;
 use dbus::blocking::Connection;
+use dbus::Message;
 use dbus_crossroads::{Context, Crossroads};
 use relm::Sender;
+use std::collections::HashMap;
 use std::sync::{
     atomic::{AtomicBool, Ordering},
     Arc, Mutex,
@@ -34,6 +37,10 @@ impl DBusServer {
             let mut crossroads = Crossroads::new();
             // Builds a new interface, which can be used for 'sm.puri.OSK0' objects.
             let iface_token = crossroads.register("sm.puri.OSK0", move |b| {
+                // This row is just for introspection: It advertises that we can send a
+                // PropertiesChanged signal. We use the single-tuple to say that we have one single argument,
+                // named "Visible" of type "bool".
+                b.signal::<(bool,), _>("PropertiesChanged", ("Visible",));
                 // Adds the method SetVisible to the interface. This method allows clients to show or hide the keyboard over DBus.
                 // Phosh uses this when you click on the little keyboard symbol in the bottom bar.
                 // We have the method name, followed by names of input and output arguments (used for introspection).
@@ -42,7 +49,7 @@ impl DBusServer {
                     "SetVisible",
                     ("visible",),
                     (),
-                    move |_ctx: &mut Context,
+                    move |ctx: &mut Context,
                           _visibility: &mut Arc<AtomicBool>,
                           (visible,): (bool,)| {
                         // This is what happens when the method is called.
@@ -56,6 +63,19 @@ impl DBusServer {
                             .unwrap()
                             .send(user_interface::Msg::SetVisibility(visible))
                             .expect("send message");
+
+                        // The ctx parameter can be used to conveniently send extra messages.
+                        let mut hashmap = HashMap::new();
+                        hashmap.insert("Visible".to_string(), Variant(visible));
+                        let signal_msg = Message::new_signal(
+                            "/sm/puri/OSK0",
+                            "org.freedesktop.DBus.Properties",
+                            "PropertiesChanged",
+                        )
+                        .unwrap();
+                        let signal_msg = signal_msg.append2("sm.puri.OSK0".to_string(), hashmap);
+                        ctx.push_msg(signal_msg);
+
                         Ok(())
                     },
                 );
