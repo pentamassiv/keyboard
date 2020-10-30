@@ -1,15 +1,16 @@
 // Imports from other crates
 use dbus::arg::Variant;
 use dbus::blocking::Connection;
+use dbus::strings::Path;
 use dbus::Message;
 use dbus_crossroads::{Context, Crossroads};
 use relm::Sender;
-use std::collections::HashMap;
 use std::sync::{
     atomic::{AtomicBool, Ordering},
     Arc, Mutex,
 };
 use std::thread;
+use std::{collections::HashMap, time::Duration};
 
 // Imports from other modules
 use crate::user_interface;
@@ -29,8 +30,9 @@ impl DBusServer {
             // this name to change the visibility of the virtual keyboard
             let connection = Connection::new_session().unwrap();
             connection
-                .request_name("sm.puri.OSK0", false, true, false)
+                .request_name("sm.puri.OSK0", false, false, false)
                 .unwrap();
+            Self::session_register(&connection);
             // Create a new crossroads instance.
             // The instance is configured so that introspection and properties interfaces
             // are added by default on object path additions.
@@ -67,13 +69,16 @@ impl DBusServer {
                         // The ctx parameter can be used to conveniently send extra messages.
                         let mut hashmap = HashMap::new();
                         hashmap.insert("Visible".to_string(), Variant(visible));
+                        let mut hashmap2 = hashmap.clone();
+                        hashmap2.drain();
                         let signal_msg = Message::new_signal(
                             "/sm/puri/OSK0",
                             "org.freedesktop.DBus.Properties",
                             "PropertiesChanged",
                         )
                         .unwrap();
-                        let signal_msg = signal_msg.append2("sm.puri.OSK0".to_string(), hashmap);
+                        let signal_msg =
+                            signal_msg.append3("sm.puri.OSK0".to_string(), hashmap, hashmap2);
                         ctx.push_msg(signal_msg);
 
                         Ok(())
@@ -92,5 +97,24 @@ impl DBusServer {
             // Serves clients forever
             crossroads.serve(&connection)
         });
+    }
+    fn session_register(connection: &Connection) {
+        let autostart_id = envmnt::get_or("DESKTOP_AUTOSTART_ID", "");
+        println!("autostart_id: {}", autostart_id);
+        let proxy = connection.with_proxy(
+            "org.gnome.SessionManager",
+            "/org/gnome/SessionManager",
+            Duration::from_millis(5000),
+        );
+
+        let (client_id,): (Path,) = proxy
+            .method_call(
+                "org.gnome.SessionManager",
+                "RegisterClient",
+                ("sm.puri.OSK0", autostart_id),
+            )
+            .unwrap();
+
+        println!("client_id: {}", client_id);
     }
 }

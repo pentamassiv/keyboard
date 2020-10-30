@@ -26,8 +26,8 @@ impl DBusService {
         let visibility = Arc::new(AtomicBool::new(false));
         let visibility_clone = Arc::clone(&visibility); // Gets moved to DBusServer
 
-        let client = DBusClient::new();
         DBusServer::spawn_and_detach(Mutex::new(sender), visibility_clone);
+        let client = DBusClient::new();
         DBusService { client, visibility }
     }
 
