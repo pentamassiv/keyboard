@@ -3,7 +3,7 @@ pub fn make_overlay_layer(window: &gtk::Window) {
     gtk_layer_shell::init_for_window(window);
 
     // Order above normal windows
-    gtk_layer_shell::set_layer(window, gtk_layer_shell::Layer::Overlay);
+    gtk_layer_shell::set_layer(window, gtk_layer_shell::Layer::Top);
 
     // Set the zone to be exclusive so the keyboard pushes other windows away instead of just laying on top of them
     //gtk_layer_shell::auto_exclusive_zone_enable(window);
