@@ -1,4 +1,6 @@
 @startuml keyboard_execute_tap_actions
+!define LIGHTBLUE
+!includeurl https://raw.githubusercontent.com/grelltrier/RedDress-PlantUML/master/style.puml
 !pragma useVerticalIf on
 
 partition "keyboard_execute_tap_actions"{

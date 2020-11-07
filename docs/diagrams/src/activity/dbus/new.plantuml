@@ -1,4 +1,6 @@
 @startuml dbus_service_new
+!define LIGHTBLUE
+!includeurl https://raw.githubusercontent.com/grelltrier/RedDress-PlantUML/master/style.puml
 
 partition "DBusService::new()"{
   start

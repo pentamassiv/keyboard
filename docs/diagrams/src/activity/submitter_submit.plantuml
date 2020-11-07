@@ -1,4 +1,6 @@
 @startuml submitter_submit
+!define LIGHTBLUE
+!includeurl https://raw.githubusercontent.com/grelltrier/RedDress-PlantUML/master/style.puml
 
 partition "submitter_submit"{
 

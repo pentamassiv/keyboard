@@ -1,4 +1,7 @@
 @startuml layout_meta_from
+!define LIGHTBLUE
+!includeurl https://raw.githubusercontent.com/grelltrier/RedDress-PlantUML/master/style.puml
+
 partition "LayoutMeta::from()"{
   
   start

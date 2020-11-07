@@ -1,4 +1,6 @@
 @startuml win_make_suggestions_and_pref_buttons
+!define LIGHTBLUE
+!includeurl https://raw.githubusercontent.com/grelltrier/RedDress-PlantUML/master/style.puml
 
 partition "Win::make_suggestions_and_pref_buttons()"{  
   start

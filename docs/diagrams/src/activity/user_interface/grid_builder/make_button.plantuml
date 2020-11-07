@@ -1,4 +1,6 @@
 @startuml grid_builder_make_button
+!define LIGHTBLUE
+!includeurl https://raw.githubusercontent.com/grelltrier/RedDress-PlantUML/master/style.puml
 
 partition "GridBuilder::make_button()"{
   start

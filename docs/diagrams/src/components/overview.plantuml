@@ -1,4 +1,6 @@
 @startuml
+!define LIGHTBLUE
+!includeurl https://raw.githubusercontent.com/grelltrier/RedDress-PlantUML/master/style.puml
 
 Messages - [UI]
 [UI] --> Input

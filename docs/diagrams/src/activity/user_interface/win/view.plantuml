@@ -1,4 +1,8 @@
 @startuml win_view
+!define LIGHTBLUE
+!includeurl https://raw.githubusercontent.com/grelltrier/RedDress-PlantUML/master/style.puml
+
+
 partition "Win::view()"{
   start
   :load_css();

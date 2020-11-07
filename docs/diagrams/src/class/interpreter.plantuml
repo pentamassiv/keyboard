@@ -1,5 +1,5 @@
 @startuml interpreter
-!define DARKBLUE
+!define LIGHTBLUE
 !includeurl https://raw.githubusercontent.com/grelltrier/RedDress-PlantUML/master/style.puml
 
 package interpreter {

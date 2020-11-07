@@ -1,4 +1,6 @@
 @startuml grid_builder_attach_popover
+!define LIGHTBLUE
+!includeurl https://raw.githubusercontent.com/grelltrier/RedDress-PlantUML/master/style.puml
 
 partition "GridBuilder::attach_popover()"{
   start

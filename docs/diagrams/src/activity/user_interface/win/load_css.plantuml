@@ -1,4 +1,6 @@
 @startuml win_load_css
+!define LIGHTBLUE
+!includeurl https://raw.githubusercontent.com/grelltrier/RedDress-PlantUML/master/style.puml
 
 partition "Win::load_css()"{  
   start

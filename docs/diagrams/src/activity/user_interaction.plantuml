@@ -1,4 +1,6 @@
 @startuml user_interaction
+!define LIGHTBLUE
+!includeurl https://raw.githubusercontent.com/grelltrier/RedDress-PlantUML/master/style.puml
 
 partition "user_interaction"{
 

@@ -1,4 +1,6 @@
 @startuml grid_builder_make_stack
+!define LIGHTBLUE
+!includeurl https://raw.githubusercontent.com/grelltrier/RedDress-PlantUML/master/style.puml
 
 partition "GridBuilder::make_stack(relm, layout_meta_hashmap)"{  
   start

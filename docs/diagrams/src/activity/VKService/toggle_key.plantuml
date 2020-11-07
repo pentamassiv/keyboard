@@ -1,4 +1,6 @@
 @startuml vkservice_toggle_key
+!define LIGHTBLUE
+!includeurl https://raw.githubusercontent.com/grelltrier/RedDress-PlantUML/master/style.puml
 
 partition "VKService::toggle_key()"{
   start

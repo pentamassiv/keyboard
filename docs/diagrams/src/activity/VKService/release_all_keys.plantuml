@@ -1,4 +1,6 @@
 @startuml vkservice_release_all_keys_and_modifiers
+!define LIGHTBLUE
+!includeurl https://raw.githubusercontent.com/grelltrier/RedDress-PlantUML/master/style.puml
 
 partition "VKService::release_all_keys_and_modifiers()"{
   start

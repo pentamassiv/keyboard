@@ -1,4 +1,7 @@
 @startuml layout_deserialized_from
+!define LIGHTBLUE
+!includeurl https://raw.githubusercontent.com/grelltrier/RedDress-PlantUML/master/style.puml
+
 partition "LayoutDeserialized::from()"{
     start
 

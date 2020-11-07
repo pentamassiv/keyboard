@@ -1,4 +1,6 @@
 @startuml win_draw_path
+!define LIGHTBLUE
+!includeurl https://raw.githubusercontent.com/grelltrier/RedDress-PlantUML/master/style.puml
 
 partition "Win::draw_path()"{
   start

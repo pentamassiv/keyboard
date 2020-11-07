@@ -1,5 +1,8 @@
 @startuml win_update
 !pragma useVerticalIf on
+!define LIGHTBLUE
+!includeurl https://raw.githubusercontent.com/grelltrier/RedDress-PlantUML/master/style.puml
+
 partition "Win::update()"{ 
 
     start

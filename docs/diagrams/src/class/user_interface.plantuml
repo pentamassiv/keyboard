@@ -1,5 +1,5 @@
 @startuml user_interface
-!define DARKBLUE
+!define LIGHTBLUE
 !includeurl https://raw.githubusercontent.com/grelltrier/RedDress-PlantUML/master/style.puml
 
 package user_interface {

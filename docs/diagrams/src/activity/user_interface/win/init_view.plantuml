@@ -1,4 +1,6 @@
 @startuml win_init_view
+!define LIGHTBLUE
+!includeurl https://raw.githubusercontent.com/grelltrier/RedDress-PlantUML/master/style.puml
 
 partition "Win::init_view()"{  
   start

@@ -1,4 +1,7 @@
 @startuml layout_yaml_parser_get_layouts
+!define LIGHTBLUE
+!includeurl https://raw.githubusercontent.com/grelltrier/RedDress-PlantUML/master/style.puml
+
 partition "LayoutYamlParser::get_layouts()"{
     
     start
