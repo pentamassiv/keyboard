@@ -1,0 +1,14 @@
+@startuml
+
+Messages - [UI]
+[UI] --> Input
+Input -- [Keyboard]
+Decode -- [Decoder]
+Submit -- [Submitter]
+[Keyboard] --> Decode
+[Keyboard] --> Submit
+Decoder --> Messages
+Keyboard --> Messages
+Submitter --> Messages
+
+@enduml
