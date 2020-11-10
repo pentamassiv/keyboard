@@ -1,0 +1,1065 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+      <meta name="generator" content="Railroad Diagram Generator 1.62" />
+      <style type="text/css">
+    ::-moz-selection
+    {
+      color: #F0F0FF;
+      background: #00000F;
+    }
+    ::selection
+    {
+      color: #F0F0FF;
+      background: #00000F;
+    }
+    .ebnf a, .grammar a
+    {
+      text-decoration: none;
+    }
+    .ebnf a:hover, .grammar a:hover
+    {
+      color: #000005;
+      text-decoration: underline;
+    }
+    .signature
+    {
+      color: #000080;
+      font-size: 11px;
+      text-align: right;
+    }
+    body
+    {
+      font: normal 12px Verdana, sans-serif;
+      color: #00000F;
+      background: #F0F0FF;
+    }
+    a:link, a:visited
+    {
+      color: #00000F;
+    }
+    a:link.signature, a:visited.signature
+    {
+      color: #000080;
+    }
+    a.button, #tabs li a
+    {
+      padding: 0.25em 0.5em;
+      border: 1px solid #000080;
+      background: #C6C6F1;
+      color: #000080;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    a.button:hover, #tabs li a:hover
+    {
+      color: #000005;
+      background: #D1D1FF;
+      border-color: #000005;
+    }
+    #tabs
+    {
+      padding: 3px 10px;
+      margin-left: 0;
+      margin-top: 58px;
+      border-bottom: 1px solid #00000F;
+    }
+    #tabs li
+    {
+      list-style: none;
+      margin-left: 5px;
+      display: inline;
+    }
+    #tabs li a
+    {
+      border-bottom: 1px solid #00000F;
+    }
+    #tabs li a.active
+    {
+      color: #00000F;
+      background: #F0F0FF;
+      border-color: #00000F;
+      border-bottom: 1px solid #F0F0FF;
+      outline: none;
+    }
+    #divs div
+    {
+      display: none;
+      overflow:auto;
+    }
+    #divs div.active
+    {
+      display: block;
+    }
+    #text
+    {
+      border-color: #000080;
+      background: #FAFAFF;
+      color: #000005;
+    }
+    .small
+    {
+      vertical-align: top;
+      text-align: right;
+      font-size: 9px;
+      font-weight: normal;
+      line-height: 120%;
+    }
+    td.small
+    {
+      padding-top: 0px;
+    }
+    .hidden
+    {
+      visibility: hidden;
+    }
+    td:hover .hidden
+    {
+      visibility: visible;
+    }
+    div.download
+    {
+      display: none;
+      background: #F0F0FF;
+      position: absolute;
+      right: 34px;
+      top: 94px;
+      padding: 10px;
+      border: 1px dotted #00000F;
+    }
+    #divs div.ebnf, .ebnf code
+    {
+      display: block;
+      padding: 10px;
+      background: #D1D1FF;
+      width: 992px;
+    }
+    #divs div.grammar
+    {
+      display: block;
+      padding-left: 16px;
+      padding-top: 2px;
+      padding-bottom: 2px;
+      background: #D1D1FF;
+    }
+    pre
+    {
+      margin: 0px;
+    }
+    .ebnf div
+    {
+      padding-left: 13ch;
+      text-indent: -13ch;
+    }
+    .ebnf code, .grammar code, textarea, pre
+    {
+      font:12px SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+    }
+    tr.option-line td:first-child
+    {
+      text-align: right
+    }
+    tr.option-text td
+    {
+      padding-bottom: 10px
+    }
+    table.palette
+    {
+      border-top: 1px solid #000005;
+      border-right: 1px solid #000005;
+      margin-bottom: 4px
+    }
+    td.palette
+    {
+      border-bottom: 1px solid #000005;
+      border-left: 1px solid #000005;
+    }
+    a.palette
+    {
+      padding: 2px 3px 2px 10px;
+      text-decoration: none;
+    }
+    .palette
+    {
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -o-user-select: none;
+      -ms-user-select: none;
+    }
+  </style><svg xmlns="http://www.w3.org/2000/svg">
+         <defs>
+            <style type="text/css">
+    @namespace "http://www.w3.org/2000/svg";
+    .line                 {fill: none; stroke: #000033; stroke-width: 1;}
+    .bold-line            {stroke: #E0E0FF; shape-rendering: crispEdges; stroke-width: 2;}
+    .thin-line            {stroke: #00001F; shape-rendering: crispEdges}
+    .filled               {fill: #000033; stroke: none;}
+    text.terminal         {font-family: Verdana, Sans-serif;
+                            font-size: 12px;
+                            fill: #E0E0FF;
+                            font-weight: bold;
+                          }
+    text.nonterminal      {font-family: Verdana, Sans-serif;
+                            font-size: 12px;
+                            fill: #00001A;
+                            font-weight: normal;
+                          }
+    text.regexp           {font-family: Verdana, Sans-serif;
+                            font-size: 12px;
+                            fill: #00001F;
+                            font-weight: normal;
+                          }
+    rect, circle, polygon {fill: #000033; stroke: #000033;}
+    rect.terminal         {fill: #4D4DFF; stroke: #000033; stroke-width: 1;}
+    rect.nonterminal      {fill: #9E9EFF; stroke: #000033; stroke-width: 1;}
+    rect.text             {fill: none; stroke: none;}
+    polygon.regexp        {fill: #C7C7FF; stroke: #000033; stroke-width: 1;}
+  </style>
+         </defs></svg></head>
+   <body>
+      <xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml" style="font-size: 14px; font-weight:bold"><xhtml:a name="LayoutDefinition">LayoutDefinition:</xhtml:a></xhtml:p><svg xmlns="http://www.w3.org/2000/svg" width="261" height="37">
+         <defs>
+            <style type="text/css">
+    @namespace "http://www.w3.org/2000/svg";
+    .line                 {fill: none; stroke: #000033; stroke-width: 1;}
+    .bold-line            {stroke: #E0E0FF; shape-rendering: crispEdges; stroke-width: 2;}
+    .thin-line            {stroke: #00001F; shape-rendering: crispEdges}
+    .filled               {fill: #000033; stroke: none;}
+    text.terminal         {font-family: Verdana, Sans-serif;
+                            font-size: 12px;
+                            fill: #E0E0FF;
+                            font-weight: bold;
+                          }
+    text.nonterminal      {font-family: Verdana, Sans-serif;
+                            font-size: 12px;
+                            fill: #00001A;
+                            font-weight: normal;
+                          }
+    text.regexp           {font-family: Verdana, Sans-serif;
+                            font-size: 12px;
+                            fill: #00001F;
+                            font-weight: normal;
+                          }
+    rect, circle, polygon {fill: #000033; stroke: #000033;}
+    rect.terminal         {fill: #4D4DFF; stroke: #000033; stroke-width: 1;}
+    rect.nonterminal      {fill: #9E9EFF; stroke: #000033; stroke-width: 1;}
+    rect.text             {fill: none; stroke: none;}
+    polygon.regexp        {fill: #C7C7FF; stroke: #000033; stroke-width: 1;}
+  </style>
+         </defs>
+         <polygon points="9 17 1 13 1 21"/>
+         <polygon points="17 17 9 13 9 21"/>
+         <rect x="31" y="3" width="38" height="32" rx="10"/>
+         <rect x="29" y="1" width="38" height="32" class="terminal" rx="10"/>
+         <text class="terminal" x="39" y="21">---</text><a xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#Views" xlink:title="Views">
+            <rect x="89" y="3" width="56" height="32"/>
+            <rect x="87" y="1" width="56" height="32" class="nonterminal"/>
+            <text class="nonterminal" x="97" y="21">Views</text></a><a xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#Buttons" xlink:title="Buttons">
+            <rect x="165" y="3" width="68" height="32"/>
+            <rect x="163" y="1" width="68" height="32" class="nonterminal"/>
+            <text class="nonterminal" x="173" y="21">Buttons</text></a><svg:path xmlns:svg="http://www.w3.org/2000/svg" class="line" d="m17 17 h2 m0 0 h10 m38 0 h10 m0 0 h10 m56 0 h10 m0 0 h10 m68 0 h10 m3 0 h-3"/>
+         <polygon points="251 17 259 13 259 21"/>
+         <polygon points="251 17 243 13 243 21"/></svg><xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml">
+         <xhtml:div class="ebnf"><xhtml:code>
+               <div><a href="#LayoutDefinition" title="LayoutDefinition">LayoutDefinition</a></div>
+               <div>         ::= '---' <a href="#Views" title="Views">Views</a> <a href="#Buttons" title="Buttons">Buttons</a></div></xhtml:code></xhtml:div>
+      </xhtml:p>
+      <xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml">no references</xhtml:p><xhtml:br xmlns:xhtml="http://www.w3.org/1999/xhtml" /><xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml" style="font-size: 14px; font-weight:bold"><xhtml:a name="Views">Views:</xhtml:a></xhtml:p><svg xmlns="http://www.w3.org/2000/svg" width="331" height="71">
+         <defs>
+            <style type="text/css">
+    @namespace "http://www.w3.org/2000/svg";
+    .line                 {fill: none; stroke: #000033; stroke-width: 1;}
+    .bold-line            {stroke: #E0E0FF; shape-rendering: crispEdges; stroke-width: 2;}
+    .thin-line            {stroke: #00001F; shape-rendering: crispEdges}
+    .filled               {fill: #000033; stroke: none;}
+    text.terminal         {font-family: Verdana, Sans-serif;
+                            font-size: 12px;
+                            fill: #E0E0FF;
+                            font-weight: bold;
+                          }
+    text.nonterminal      {font-family: Verdana, Sans-serif;
+                            font-size: 12px;
+                            fill: #00001A;
+                            font-weight: normal;
+                          }
+    text.regexp           {font-family: Verdana, Sans-serif;
+                            font-size: 12px;
+                            fill: #00001F;
+                            font-weight: normal;
+                          }
+    rect, circle, polygon {fill: #000033; stroke: #000033;}
+    rect.terminal         {fill: #4D4DFF; stroke: #000033; stroke-width: 1;}
+    rect.nonterminal      {fill: #9E9EFF; stroke: #000033; stroke-width: 1;}
+    rect.text             {fill: none; stroke: none;}
+    polygon.regexp        {fill: #C7C7FF; stroke: #000033; stroke-width: 1;}
+  </style>
+         </defs>
+         <polygon points="9 51 1 47 1 55"/>
+         <polygon points="17 51 9 47 9 55"/>
+         <rect x="31" y="37" width="64" height="32" rx="10"/>
+         <rect x="29" y="35" width="64" height="32" class="terminal" rx="10"/>
+         <text class="terminal" x="39" y="55">views:</text><a xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#BaseView" xlink:title="BaseView">
+            <rect x="115" y="37" width="80" height="32"/>
+            <rect x="113" y="35" width="80" height="32" class="nonterminal"/>
+            <text class="nonterminal" x="123" y="55">BaseView</text></a><a xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#View" xlink:title="View">
+            <rect x="235" y="3" width="48" height="32"/>
+            <rect x="233" y="1" width="48" height="32" class="nonterminal"/>
+            <text class="nonterminal" x="243" y="21">View</text></a><svg:path xmlns:svg="http://www.w3.org/2000/svg" class="line" d="m17 51 h2 m0 0 h10 m64 0 h10 m0 0 h10 m80 0 h10 m20 0 h10 m0 0 h58 m-88 0 l20 0 m-1 0 q-9 0 -9 -10 l0 -14 q0 -10 10 -10 m68 34 l20 0 m-20 0 q10 0 10 -10 l0 -14 q0 -10 -10 -10 m-68 0 h10 m48 0 h10 m23 34 h-3"/>
+         <polygon points="321 51 329 47 329 55"/>
+         <polygon points="321 51 313 47 313 55"/></svg><xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml">
+         <xhtml:div class="ebnf"><xhtml:code>
+               <div><a href="#Views" title="Views">Views</a>    ::= 'views:' <a href="#BaseView" title="BaseView">BaseView</a> <a href="#View" title="View">View</a>*</div></xhtml:code></xhtml:div>
+      </xhtml:p>
+      <xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml">referenced by:
+         <xhtml:ul>
+            <xhtml:li><xhtml:a href="#LayoutDefinition" title="LayoutDefinition">LayoutDefinition</xhtml:a></xhtml:li>
+         </xhtml:ul>
+      </xhtml:p><xhtml:br xmlns:xhtml="http://www.w3.org/1999/xhtml" /><xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml" style="font-size: 14px; font-weight:bold"><xhtml:a name="BaseView">BaseView:</xhtml:a></xhtml:p><svg xmlns="http://www.w3.org/2000/svg" width="215" height="53">
+         <defs>
+            <style type="text/css">
+    @namespace "http://www.w3.org/2000/svg";
+    .line                 {fill: none; stroke: #000033; stroke-width: 1;}
+    .bold-line            {stroke: #E0E0FF; shape-rendering: crispEdges; stroke-width: 2;}
+    .thin-line            {stroke: #00001F; shape-rendering: crispEdges}
+    .filled               {fill: #000033; stroke: none;}
+    text.terminal         {font-family: Verdana, Sans-serif;
+                            font-size: 12px;
+                            fill: #E0E0FF;
+                            font-weight: bold;
+                          }
+    text.nonterminal      {font-family: Verdana, Sans-serif;
+                            font-size: 12px;
+                            fill: #00001A;
+                            font-weight: normal;
+                          }
+    text.regexp           {font-family: Verdana, Sans-serif;
+                            font-size: 12px;
+                            fill: #00001F;
+                            font-weight: normal;
+                          }
+    rect, circle, polygon {fill: #000033; stroke: #000033;}
+    rect.terminal         {fill: #4D4DFF; stroke: #000033; stroke-width: 1;}
+    rect.nonterminal      {fill: #9E9EFF; stroke: #000033; stroke-width: 1;}
+    rect.text             {fill: none; stroke: none;}
+    polygon.regexp        {fill: #C7C7FF; stroke: #000033; stroke-width: 1;}
+  </style>
+         </defs>
+         <polygon points="9 33 1 29 1 37"/>
+         <polygon points="17 33 9 29 9 37"/>
+         <rect x="31" y="19" width="56" height="32" rx="10"/>
+         <rect x="29" y="17" width="56" height="32" class="terminal" rx="10"/>
+         <text class="terminal" x="39" y="37">base:</text><a xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#Ids" xlink:title="Ids">
+            <rect x="127" y="19" width="40" height="32"/>
+            <rect x="125" y="17" width="40" height="32" class="nonterminal"/>
+            <text class="nonterminal" x="135" y="37">Ids</text></a><svg:path xmlns:svg="http://www.w3.org/2000/svg" class="line" d="m17 33 h2 m0 0 h10 m56 0 h10 m20 0 h10 m40 0 h10 m-80 0 l20 0 m-1 0 q-9 0 -9 -10 l0 -12 q0 -10 10 -10 m60 32 l20 0 m-20 0 q10 0 10 -10 l0 -12 q0 -10 -10 -10 m-60 0 h10 m0 0 h50 m23 32 h-3"/>
+         <polygon points="205 33 213 29 213 37"/>
+         <polygon points="205 33 197 29 197 37"/></svg><xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml">
+         <xhtml:div class="ebnf"><xhtml:code>
+               <div><a href="#BaseView" title="BaseView">BaseView</a> ::= 'base:' <a href="#Ids" title="Ids">Ids</a>+</div></xhtml:code></xhtml:div>
+      </xhtml:p>
+      <xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml">referenced by:
+         <xhtml:ul>
+            <xhtml:li><xhtml:a href="#Views" title="Views">Views</xhtml:a></xhtml:li>
+         </xhtml:ul>
+      </xhtml:p><xhtml:br xmlns:xhtml="http://www.w3.org/1999/xhtml" /><xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml" style="font-size: 14px; font-weight:bold"><xhtml:a name="View">View:</xhtml:a></xhtml:p><svg xmlns="http://www.w3.org/2000/svg" width="289" height="53">
+         <defs>
+            <style type="text/css">
+    @namespace "http://www.w3.org/2000/svg";
+    .line                 {fill: none; stroke: #000033; stroke-width: 1;}
+    .bold-line            {stroke: #E0E0FF; shape-rendering: crispEdges; stroke-width: 2;}
+    .thin-line            {stroke: #00001F; shape-rendering: crispEdges}
+    .filled               {fill: #000033; stroke: none;}
+    text.terminal         {font-family: Verdana, Sans-serif;
+                            font-size: 12px;
+                            fill: #E0E0FF;
+                            font-weight: bold;
+                          }
+    text.nonterminal      {font-family: Verdana, Sans-serif;
+                            font-size: 12px;
+                            fill: #00001A;
+                            font-weight: normal;
+                          }
+    text.regexp           {font-family: Verdana, Sans-serif;
+                            font-size: 12px;
+                            fill: #00001F;
+                            font-weight: normal;
+                          }
+    rect, circle, polygon {fill: #000033; stroke: #000033;}
+    rect.terminal         {fill: #4D4DFF; stroke: #000033; stroke-width: 1;}
+    rect.nonterminal      {fill: #9E9EFF; stroke: #000033; stroke-width: 1;}
+    rect.text             {fill: none; stroke: none;}
+    polygon.regexp        {fill: #C7C7FF; stroke: #000033; stroke-width: 1;}
+  </style>
+         </defs>
+         <polygon points="9 33 1 29 1 37"/>
+         <polygon points="17 33 9 29 9 37"/><a xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ViewName" xlink:title="ViewName">
+            <rect x="31" y="19" width="86" height="32"/>
+            <rect x="29" y="17" width="86" height="32" class="nonterminal"/>
+            <text class="nonterminal" x="39" y="37">ViewName</text></a><rect x="137" y="19" width="24" height="32" rx="10"/>
+         <rect x="135" y="17" width="24" height="32" class="terminal" rx="10"/>
+         <text class="terminal" x="145" y="37">:</text><a xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#Ids" xlink:title="Ids">
+            <rect x="201" y="19" width="40" height="32"/>
+            <rect x="199" y="17" width="40" height="32" class="nonterminal"/>
+            <text class="nonterminal" x="209" y="37">Ids</text></a><svg:path xmlns:svg="http://www.w3.org/2000/svg" class="line" d="m17 33 h2 m0 0 h10 m86 0 h10 m0 0 h10 m24 0 h10 m20 0 h10 m40 0 h10 m-80 0 l20 0 m-1 0 q-9 0 -9 -10 l0 -12 q0 -10 10 -10 m60 32 l20 0 m-20 0 q10 0 10 -10 l0 -12 q0 -10 -10 -10 m-60 0 h10 m0 0 h50 m23 32 h-3"/>
+         <polygon points="279 33 287 29 287 37"/>
+         <polygon points="279 33 271 29 271 37"/></svg><xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml">
+         <xhtml:div class="ebnf"><xhtml:code>
+               <div><a href="#View" title="View">View</a>     ::= <a href="#ViewName" title="ViewName">ViewName</a> ':' <a href="#Ids" title="Ids">Ids</a>+</div></xhtml:code></xhtml:div>
+      </xhtml:p>
+      <xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml">referenced by:
+         <xhtml:ul>
+            <xhtml:li><xhtml:a href="#Views" title="Views">Views</xhtml:a></xhtml:li>
+         </xhtml:ul>
+      </xhtml:p><xhtml:br xmlns:xhtml="http://www.w3.org/1999/xhtml" /><xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml" style="font-size: 14px; font-weight:bold"><xhtml:a name="Ids">Ids:</xhtml:a></xhtml:p><svg xmlns="http://www.w3.org/2000/svg" width="265" height="81">
+         <defs>
+            <style type="text/css">
+    @namespace "http://www.w3.org/2000/svg";
+    .line                 {fill: none; stroke: #000033; stroke-width: 1;}
+    .bold-line            {stroke: #E0E0FF; shape-rendering: crispEdges; stroke-width: 2;}
+    .thin-line            {stroke: #00001F; shape-rendering: crispEdges}
+    .filled               {fill: #000033; stroke: none;}
+    text.terminal         {font-family: Verdana, Sans-serif;
+                            font-size: 12px;
+                            fill: #E0E0FF;
+                            font-weight: bold;
+                          }
+    text.nonterminal      {font-family: Verdana, Sans-serif;
+                            font-size: 12px;
+                            fill: #00001A;
+                            font-weight: normal;
+                          }
+    text.regexp           {font-family: Verdana, Sans-serif;
+                            font-size: 12px;
+                            fill: #00001F;
+                            font-weight: normal;
+                          }
+    rect, circle, polygon {fill: #000033; stroke: #000033;}
+    rect.terminal         {fill: #4D4DFF; stroke: #000033; stroke-width: 1;}
+    rect.nonterminal      {fill: #9E9EFF; stroke: #000033; stroke-width: 1;}
+    rect.text             {fill: none; stroke: none;}
+    polygon.regexp        {fill: #C7C7FF; stroke: #000033; stroke-width: 1;}
+  </style>
+         </defs>
+         <polygon points="9 61 1 57 1 65"/>
+         <polygon points="17 61 9 57 9 65"/>
+         <rect x="31" y="47" width="36" height="32" rx="10"/>
+         <rect x="29" y="45" width="36" height="32" class="terminal" rx="10"/>
+         <text class="terminal" x="39" y="65">- "</text><a xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#Id" xlink:title="Id">
+            <rect x="107" y="47" width="32" height="32"/>
+            <rect x="105" y="45" width="32" height="32" class="nonterminal"/>
+            <text class="nonterminal" x="115" y="65">Id</text></a><rect x="107" y="3" width="64" height="32" rx="10"/>
+         <rect x="105" y="1" width="64" height="32" class="terminal" rx="10"/>
+         <text class="terminal" x="115" y="21">SPACE</text>
+         <rect x="211" y="47" width="26" height="32" rx="10"/>
+         <rect x="209" y="45" width="26" height="32" class="terminal" rx="10"/>
+         <text class="terminal" x="219" y="65">"</text>
+         <svg:path xmlns:svg="http://www.w3.org/2000/svg" class="line" d="m17 61 h2 m0 0 h10 m36 0 h10 m20 0 h10 m32 0 h10 m0 0 h32 m-104 0 l20 0 m-1 0 q-9 0 -9 -10 l0 -24 q0 -10 10 -10 m84 44 l20 0 m-20 0 q10 0 10 -10 l0 -24 q0 -10 -10 -10 m-84 0 h10 m64 0 h10 m20 44 h10 m26 0 h10 m3 0 h-3"/>
+         <polygon points="255 61 263 57 263 65"/>
+         <polygon points="255 61 247 57 247 65"/></svg><xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml">
+         <xhtml:div class="ebnf"><xhtml:code>
+               <div><a href="#Ids" title="Ids">Ids</a>      ::= '- "' <a href="#Id" title="Id">Id</a> ( 'SPACE' <a href="#Id" title="Id">Id</a> )* '"'</div></xhtml:code></xhtml:div>
+      </xhtml:p>
+      <xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml">referenced by:
+         <xhtml:ul>
+            <xhtml:li><xhtml:a href="#BaseView" title="BaseView">BaseView</xhtml:a></xhtml:li>
+            <xhtml:li><xhtml:a href="#Popup" title="Popup">Popup</xhtml:a></xhtml:li>
+            <xhtml:li><xhtml:a href="#View" title="View">View</xhtml:a></xhtml:li>
+         </xhtml:ul>
+      </xhtml:p><xhtml:br xmlns:xhtml="http://www.w3.org/1999/xhtml" /><xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml" style="font-size: 14px; font-weight:bold"><xhtml:a name="Id">Id:</xhtml:a></xhtml:p><svg xmlns="http://www.w3.org/2000/svg" width="117" height="37">
+         <defs>
+            <style type="text/css">
+    @namespace "http://www.w3.org/2000/svg";
+    .line                 {fill: none; stroke: #000033; stroke-width: 1;}
+    .bold-line            {stroke: #E0E0FF; shape-rendering: crispEdges; stroke-width: 2;}
+    .thin-line            {stroke: #00001F; shape-rendering: crispEdges}
+    .filled               {fill: #000033; stroke: none;}
+    text.terminal         {font-family: Verdana, Sans-serif;
+                            font-size: 12px;
+                            fill: #E0E0FF;
+                            font-weight: bold;
+                          }
+    text.nonterminal      {font-family: Verdana, Sans-serif;
+                            font-size: 12px;
+                            fill: #00001A;
+                            font-weight: normal;
+                          }
+    text.regexp           {font-family: Verdana, Sans-serif;
+                            font-size: 12px;
+                            fill: #00001F;
+                            font-weight: normal;
+                          }
+    rect, circle, polygon {fill: #000033; stroke: #000033;}
+    rect.terminal         {fill: #4D4DFF; stroke: #000033; stroke-width: 1;}
+    rect.nonterminal      {fill: #9E9EFF; stroke: #000033; stroke-width: 1;}
+    rect.text             {fill: none; stroke: none;}
+    polygon.regexp        {fill: #C7C7FF; stroke: #000033; stroke-width: 1;}
+  </style>
+         </defs>
+         <polygon points="9 17 1 13 1 21"/>
+         <polygon points="17 17 9 13 9 21"/><a xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#String" xlink:title="String">
+            <rect x="31" y="3" width="58" height="32"/>
+            <rect x="29" y="1" width="58" height="32" class="nonterminal"/>
+            <text class="nonterminal" x="39" y="21">String</text></a><svg:path xmlns:svg="http://www.w3.org/2000/svg" class="line" d="m17 17 h2 m0 0 h10 m58 0 h10 m3 0 h-3"/>
+         <polygon points="107 17 115 13 115 21"/>
+         <polygon points="107 17 99 13 99 21"/></svg><xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml">
+         <xhtml:div class="ebnf"><xhtml:code>
+               <div><a href="#Id" title="Id">Id</a>       ::= <a href="#String" title="String">String</a></div></xhtml:code></xhtml:div>
+      </xhtml:p>
+      <xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml">referenced by:
+         <xhtml:ul>
+            <xhtml:li><xhtml:a href="#Ids" title="Ids">Ids</xhtml:a></xhtml:li>
+         </xhtml:ul>
+      </xhtml:p><xhtml:br xmlns:xhtml="http://www.w3.org/1999/xhtml" /><xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml" style="font-size: 14px; font-weight:bold"><xhtml:a name="ViewName">ViewName:</xhtml:a></xhtml:p><svg xmlns="http://www.w3.org/2000/svg" width="117" height="37">
+         <defs>
+            <style type="text/css">
+    @namespace "http://www.w3.org/2000/svg";
+    .line                 {fill: none; stroke: #000033; stroke-width: 1;}
+    .bold-line            {stroke: #E0E0FF; shape-rendering: crispEdges; stroke-width: 2;}
+    .thin-line            {stroke: #00001F; shape-rendering: crispEdges}
+    .filled               {fill: #000033; stroke: none;}
+    text.terminal         {font-family: Verdana, Sans-serif;
+                            font-size: 12px;
+                            fill: #E0E0FF;
+                            font-weight: bold;
+                          }
+    text.nonterminal      {font-family: Verdana, Sans-serif;
+                            font-size: 12px;
+                            fill: #00001A;
+                            font-weight: normal;
+                          }
+    text.regexp           {font-family: Verdana, Sans-serif;
+                            font-size: 12px;
+                            fill: #00001F;
+                            font-weight: normal;
+                          }
+    rect, circle, polygon {fill: #000033; stroke: #000033;}
+    rect.terminal         {fill: #4D4DFF; stroke: #000033; stroke-width: 1;}
+    rect.nonterminal      {fill: #9E9EFF; stroke: #000033; stroke-width: 1;}
+    rect.text             {fill: none; stroke: none;}
+    polygon.regexp        {fill: #C7C7FF; stroke: #000033; stroke-width: 1;}
+  </style>
+         </defs>
+         <polygon points="9 17 1 13 1 21"/>
+         <polygon points="17 17 9 13 9 21"/><a xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#String" xlink:title="String">
+            <rect x="31" y="3" width="58" height="32"/>
+            <rect x="29" y="1" width="58" height="32" class="nonterminal"/>
+            <text class="nonterminal" x="39" y="21">String</text></a><svg:path xmlns:svg="http://www.w3.org/2000/svg" class="line" d="m17 17 h2 m0 0 h10 m58 0 h10 m3 0 h-3"/>
+         <polygon points="107 17 115 13 115 21"/>
+         <polygon points="107 17 99 13 99 21"/></svg><xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml">
+         <xhtml:div class="ebnf"><xhtml:code>
+               <div><a href="#ViewName" title="ViewName">ViewName</a> ::= <a href="#String" title="String">String</a></div></xhtml:code></xhtml:div>
+      </xhtml:p>
+      <xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml">referenced by:
+         <xhtml:ul>
+            <xhtml:li><xhtml:a href="#View" title="View">View</xhtml:a></xhtml:li>
+         </xhtml:ul>
+      </xhtml:p><xhtml:br xmlns:xhtml="http://www.w3.org/1999/xhtml" /><xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml" style="font-size: 14px; font-weight:bold"><xhtml:a name="Buttons">Buttons:</xhtml:a></xhtml:p><svg xmlns="http://www.w3.org/2000/svg" width="813" height="69">
+         <defs>
+            <style type="text/css">
+    @namespace "http://www.w3.org/2000/svg";
+    .line                 {fill: none; stroke: #000033; stroke-width: 1;}
+    .bold-line            {stroke: #E0E0FF; shape-rendering: crispEdges; stroke-width: 2;}
+    .thin-line            {stroke: #00001F; shape-rendering: crispEdges}
+    .filled               {fill: #000033; stroke: none;}
+    text.terminal         {font-family: Verdana, Sans-serif;
+                            font-size: 12px;
+                            fill: #E0E0FF;
+                            font-weight: bold;
+                          }
+    text.nonterminal      {font-family: Verdana, Sans-serif;
+                            font-size: 12px;
+                            fill: #00001A;
+                            font-weight: normal;
+                          }
+    text.regexp           {font-family: Verdana, Sans-serif;
+                            font-size: 12px;
+                            fill: #00001F;
+                            font-weight: normal;
+                          }
+    rect, circle, polygon {fill: #000033; stroke: #000033;}
+    rect.terminal         {fill: #4D4DFF; stroke: #000033; stroke-width: 1;}
+    rect.nonterminal      {fill: #9E9EFF; stroke: #000033; stroke-width: 1;}
+    rect.text             {fill: none; stroke: none;}
+    polygon.regexp        {fill: #C7C7FF; stroke: #000033; stroke-width: 1;}
+  </style>
+         </defs>
+         <polygon points="9 17 1 13 1 21"/>
+         <polygon points="17 17 9 13 9 21"/><a xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ButtonId" xlink:title="ButtonId">
+            <rect x="31" y="3" width="74" height="32"/>
+            <rect x="29" y="1" width="74" height="32" class="nonterminal"/>
+            <text class="nonterminal" x="39" y="21">ButtonId</text></a><rect x="125" y="3" width="24" height="32" rx="10"/>
+         <rect x="123" y="1" width="24" height="32" class="terminal" rx="10"/>
+         <text class="terminal" x="133" y="21">:</text><a xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#Actions" xlink:title="Actions">
+            <rect x="189" y="35" width="66" height="32"/>
+            <rect x="187" y="33" width="66" height="32" class="nonterminal"/>
+            <text class="nonterminal" x="197" y="53">Actions</text></a><a xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#KeyDisplay" xlink:title="KeyDisplay">
+            <rect x="315" y="35" width="88" height="32"/>
+            <rect x="313" y="33" width="88" height="32" class="nonterminal"/>
+            <text class="nonterminal" x="323" y="53">KeyDisplay</text></a><a xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#Outline" xlink:title="Outline">
+            <rect x="463" y="35" width="64" height="32"/>
+            <rect x="461" y="33" width="64" height="32" class="nonterminal"/>
+            <text class="nonterminal" x="471" y="53">Outline</text></a><a xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#Popup" xlink:title="Popup">
+            <rect x="587" y="35" width="60" height="32"/>
+            <rect x="585" y="33" width="60" height="32" class="nonterminal"/>
+            <text class="nonterminal" x="595" y="53">Popup</text></a><a xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#Styles" xlink:title="Styles">
+            <rect x="707" y="35" width="58" height="32"/>
+            <rect x="705" y="33" width="58" height="32" class="nonterminal"/>
+            <text class="nonterminal" x="715" y="53">Styles</text></a><svg:path xmlns:svg="http://www.w3.org/2000/svg" class="line" d="m17 17 h2 m0 0 h10 m74 0 h10 m0 0 h10 m24 0 h10 m20 0 h10 m0 0 h76 m-106 0 h20 m86 0 h20 m-126 0 q10 0 10 10 m106 0 q0 -10 10 -10 m-116 10 v12 m106 0 v-12 m-106 12 q0 10 10 10 m86 0 q10 0 10 -10 m-96 10 h10 m66 0 h10 m40 -32 h10 m0 0 h98 m-128 0 h20 m108 0 h20 m-148 0 q10 0 10 10 m128 0 q0 -10 10 -10 m-138 10 v12 m128 0 v-12 m-128 12 q0 10 10 10 m108 0 q10 0 10 -10 m-118 10 h10 m88 0 h10 m40 -32 h10 m0 0 h74 m-104 0 h20 m84 0 h20 m-124 0 q10 0 10 10 m104 0 q0 -10 10 -10 m-114 10 v12 m104 0 v-12 m-104 12 q0 10 10 10 m84 0 q10 0 10 -10 m-94 10 h10 m64 0 h10 m40 -32 h10 m0 0 h70 m-100 0 h20 m80 0 h20 m-120 0 q10 0 10 10 m100 0 q0 -10 10 -10 m-110 10 v12 m100 0 v-12 m-100 12 q0 10 10 10 m80 0 q10 0 10 -10 m-90 10 h10 m60 0 h10 m40 -32 h10 m0 0 h68 m-98 0 h20 m78 0 h20 m-118 0 q10 0 10 10 m98 0 q0 -10 10 -10 m-108 10 v12 m98 0 v-12 m-98 12 q0 10 10 10 m78 0 q10 0 10 -10 m-88 10 h10 m58 0 h10 m23 -32 h-3"/>
+         <polygon points="803 17 811 13 811 21"/>
+         <polygon points="803 17 795 13 795 21"/></svg><xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml">
+         <xhtml:div class="ebnf"><xhtml:code>
+               <div><a href="#Buttons" title="Buttons">Buttons</a>  ::= <a href="#ButtonId" title="ButtonId">ButtonId</a> ':' <a href="#Actions" title="Actions">Actions</a>? <a href="#KeyDisplay" title="KeyDisplay">KeyDisplay</a>? <a href="#Outline" title="Outline">Outline</a>? <a href="#Popup" title="Popup">Popup</a>? <a href="#Styles" title="Styles">Styles</a>?</div></xhtml:code></xhtml:div>
+      </xhtml:p>
+      <xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml">referenced by:
+         <xhtml:ul>
+            <xhtml:li><xhtml:a href="#LayoutDefinition" title="LayoutDefinition">LayoutDefinition</xhtml:a></xhtml:li>
+         </xhtml:ul>
+      </xhtml:p><xhtml:br xmlns:xhtml="http://www.w3.org/1999/xhtml" /><xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml" style="font-size: 14px; font-weight:bold"><xhtml:a name="Actions">Actions:</xhtml:a></xhtml:p><svg xmlns="http://www.w3.org/2000/svg" width="693" height="87">
+         <defs>
+            <style type="text/css">
+    @namespace "http://www.w3.org/2000/svg";
+    .line                 {fill: none; stroke: #000033; stroke-width: 1;}
+    .bold-line            {stroke: #E0E0FF; shape-rendering: crispEdges; stroke-width: 2;}
+    .thin-line            {stroke: #00001F; shape-rendering: crispEdges}
+    .filled               {fill: #000033; stroke: none;}
+    text.terminal         {font-family: Verdana, Sans-serif;
+                            font-size: 12px;
+                            fill: #E0E0FF;
+                            font-weight: bold;
+                          }
+    text.nonterminal      {font-family: Verdana, Sans-serif;
+                            font-size: 12px;
+                            fill: #00001A;
+                            font-weight: normal;
+                          }
+    text.regexp           {font-family: Verdana, Sans-serif;
+                            font-size: 12px;
+                            fill: #00001F;
+                            font-weight: normal;
+                          }
+    rect, circle, polygon {fill: #000033; stroke: #000033;}
+    rect.terminal         {fill: #4D4DFF; stroke: #000033; stroke-width: 1;}
+    rect.nonterminal      {fill: #9E9EFF; stroke: #000033; stroke-width: 1;}
+    rect.text             {fill: none; stroke: none;}
+    polygon.regexp        {fill: #C7C7FF; stroke: #000033; stroke-width: 1;}
+  </style>
+         </defs>
+         <polygon points="9 51 1 47 1 55"/>
+         <polygon points="17 51 9 47 9 55"/>
+         <rect x="31" y="37" width="72" height="32" rx="10"/>
+         <rect x="29" y="35" width="72" height="32" class="terminal" rx="10"/>
+         <text class="terminal" x="39" y="55">actions:</text>
+         <rect x="143" y="37" width="106" height="32" rx="10"/>
+         <rect x="141" y="35" width="106" height="32" class="terminal" rx="10"/>
+         <text class="terminal" x="151" y="55">short_press:</text><a xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#Action" xlink:title="Action">
+            <rect x="289" y="3" width="58" height="32"/>
+            <rect x="287" y="1" width="58" height="32" class="nonterminal"/>
+            <text class="nonterminal" x="297" y="21">Action</text></a><rect x="427" y="37" width="100" height="32" rx="10"/>
+         <rect x="425" y="35" width="100" height="32" class="terminal" rx="10"/>
+         <text class="terminal" x="435" y="55">long_press:</text><a xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#Action" xlink:title="Action">
+            <rect x="567" y="3" width="58" height="32"/>
+            <rect x="565" y="1" width="58" height="32" class="nonterminal"/>
+            <text class="nonterminal" x="575" y="21">Action</text></a><svg:path xmlns:svg="http://www.w3.org/2000/svg" class="line" d="m17 51 h2 m0 0 h10 m72 0 h10 m20 0 h10 m106 0 h10 m20 0 h10 m0 0 h68 m-98 0 l20 0 m-1 0 q-9 0 -9 -10 l0 -14 q0 -10 10 -10 m78 34 l20 0 m-20 0 q10 0 10 -10 l0 -14 q0 -10 -10 -10 m-78 0 h10 m58 0 h10 m-244 34 h20 m244 0 h20 m-284 0 q10 0 10 10 m264 0 q0 -10 10 -10 m-274 10 v14 m264 0 v-14 m-264 14 q0 10 10 10 m244 0 q10 0 10 -10 m-254 10 h10 m0 0 h234 m40 -34 h10 m100 0 h10 m20 0 h10 m0 0 h68 m-98 0 l20 0 m-1 0 q-9 0 -9 -10 l0 -14 q0 -10 10 -10 m78 34 l20 0 m-20 0 q10 0 10 -10 l0 -14 q0 -10 -10 -10 m-78 0 h10 m58 0 h10 m-238 34 h20 m238 0 h20 m-278 0 q10 0 10 10 m258 0 q0 -10 10 -10 m-268 10 v14 m258 0 v-14 m-258 14 q0 10 10 10 m238 0 q10 0 10 -10 m-248 10 h10 m0 0 h228 m23 -34 h-3"/>
+         <polygon points="683 51 691 47 691 55"/>
+         <polygon points="683 51 675 47 675 55"/></svg><xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml">
+         <xhtml:div class="ebnf"><xhtml:code>
+               <div><a href="#Actions" title="Actions">Actions</a>  ::= 'actions:' ( 'short_press:' <a href="#Action" title="Action">Action</a>* )? ( 'long_press:' <a href="#Action" title="Action">Action</a>* )?</div></xhtml:code></xhtml:div>
+      </xhtml:p>
+      <xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml">referenced by:
+         <xhtml:ul>
+            <xhtml:li><xhtml:a href="#Buttons" title="Buttons">Buttons</xhtml:a></xhtml:li>
+         </xhtml:ul>
+      </xhtml:p><xhtml:br xmlns:xhtml="http://www.w3.org/1999/xhtml" /><xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml" style="font-size: 14px; font-weight:bold"><xhtml:a name="Action">Action:</xhtml:a></xhtml:p><svg xmlns="http://www.w3.org/2000/svg" width="427" height="433">
+         <defs>
+            <style type="text/css">
+    @namespace "http://www.w3.org/2000/svg";
+    .line                 {fill: none; stroke: #000033; stroke-width: 1;}
+    .bold-line            {stroke: #E0E0FF; shape-rendering: crispEdges; stroke-width: 2;}
+    .thin-line            {stroke: #00001F; shape-rendering: crispEdges}
+    .filled               {fill: #000033; stroke: none;}
+    text.terminal         {font-family: Verdana, Sans-serif;
+                            font-size: 12px;
+                            fill: #E0E0FF;
+                            font-weight: bold;
+                          }
+    text.nonterminal      {font-family: Verdana, Sans-serif;
+                            font-size: 12px;
+                            fill: #00001A;
+                            font-weight: normal;
+                          }
+    text.regexp           {font-family: Verdana, Sans-serif;
+                            font-size: 12px;
+                            fill: #00001F;
+                            font-weight: normal;
+                          }
+    rect, circle, polygon {fill: #000033; stroke: #000033;}
+    rect.terminal         {fill: #4D4DFF; stroke: #000033; stroke-width: 1;}
+    rect.nonterminal      {fill: #9E9EFF; stroke: #000033; stroke-width: 1;}
+    rect.text             {fill: none; stroke: none;}
+    polygon.regexp        {fill: #C7C7FF; stroke: #000033; stroke-width: 1;}
+  </style>
+         </defs>
+         <polygon points="9 17 1 13 1 21"/>
+         <polygon points="17 17 9 13 9 21"/>
+         <rect x="71" y="3" width="126" height="32" rx="10"/>
+         <rect x="69" y="1" width="126" height="32" class="terminal" rx="10"/>
+         <text class="terminal" x="79" y="21">enter_keycode:</text>
+         <rect x="71" y="47" width="132" height="32" rx="10"/>
+         <rect x="69" y="45" width="132" height="32" class="terminal" rx="10"/>
+         <text class="terminal" x="79" y="65">toggle_keycode:</text>
+         <rect x="71" y="91" width="108" height="32" rx="10"/>
+         <rect x="69" y="89" width="108" height="32" class="terminal" rx="10"/>
+         <text class="terminal" x="79" y="109">enter_string:</text>
+         <rect x="71" y="135" width="110" height="32" rx="10"/>
+         <rect x="69" y="133" width="110" height="32" class="terminal" rx="10"/>
+         <text class="terminal" x="79" y="153">switch_view:</text>
+         <rect x="71" y="179" width="198" height="32" rx="10"/>
+         <rect x="69" y="177" width="198" height="32" class="terminal" rx="10"/>
+         <text class="terminal" x="79" y="197">temporarily_switch_view:</text>
+         <rect x="71" y="223" width="120" height="32" rx="10"/>
+         <rect x="69" y="221" width="120" height="32" class="terminal" rx="10"/>
+         <text class="terminal" x="79" y="241">switch_layout:</text>
+         <rect x="71" y="267" width="208" height="32" rx="10"/>
+         <rect x="69" y="265" width="208" height="32" class="terminal" rx="10"/>
+         <text class="terminal" x="79" y="285">temporarily_switch_layout:</text>
+         <rect x="319" y="3" width="60" height="32" rx="10"/>
+         <rect x="317" y="1" width="60" height="32" class="terminal" rx="10"/>
+         <text class="terminal" x="327" y="21">String</text>
+         <rect x="51" y="311" width="82" height="32" rx="10"/>
+         <rect x="49" y="309" width="82" height="32" class="terminal" rx="10"/>
+         <text class="terminal" x="59" y="329">modifier:</text><a xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#Modifier" xlink:title="Modifier">
+            <rect x="153" y="311" width="70" height="32"/>
+            <rect x="151" y="309" width="70" height="32" class="nonterminal"/>
+            <text class="nonterminal" x="161" y="329">Modifier</text></a><rect x="51" y="355" width="56" height="32" rx="10"/>
+         <rect x="49" y="353" width="56" height="32" class="terminal" rx="10"/>
+         <text class="terminal" x="59" y="373">erase</text>
+         <rect x="51" y="399" width="104" height="32" rx="10"/>
+         <rect x="49" y="397" width="104" height="32" class="terminal" rx="10"/>
+         <text class="terminal" x="59" y="417">open_popup</text>
+         <svg:path xmlns:svg="http://www.w3.org/2000/svg" class="line" d="m17 17 h2 m40 0 h10 m126 0 h10 m0 0 h82 m-248 0 h20 m228 0 h20 m-268 0 q10 0 10 10 m248 0 q0 -10 10 -10 m-258 10 v24 m248 0 v-24 m-248 24 q0 10 10 10 m228 0 q10 0 10 -10 m-238 10 h10 m132 0 h10 m0 0 h76 m-238 -10 v20 m248 0 v-20 m-248 20 v24 m248 0 v-24 m-248 24 q0 10 10 10 m228 0 q10 0 10 -10 m-238 10 h10 m108 0 h10 m0 0 h100 m-238 -10 v20 m248 0 v-20 m-248 20 v24 m248 0 v-24 m-248 24 q0 10 10 10 m228 0 q10 0 10 -10 m-238 10 h10 m110 0 h10 m0 0 h98 m-238 -10 v20 m248 0 v-20 m-248 20 v24 m248 0 v-24 m-248 24 q0 10 10 10 m228 0 q10 0 10 -10 m-238 10 h10 m198 0 h10 m0 0 h10 m-238 -10 v20 m248 0 v-20 m-248 20 v24 m248 0 v-24 m-248 24 q0 10 10 10 m228 0 q10 0 10 -10 m-238 10 h10 m120 0 h10 m0 0 h88 m-238 -10 v20 m248 0 v-20 m-248 20 v24 m248 0 v-24 m-248 24 q0 10 10 10 m228 0 q10 0 10 -10 m-238 10 h10 m208 0 h10 m20 -264 h10 m60 0 h10 m-368 0 h20 m348 0 h20 m-388 0 q10 0 10 10 m368 0 q0 -10 10 -10 m-378 10 v288 m368 0 v-288 m-368 288 q0 10 10 10 m348 0 q10 0 10 -10 m-358 10 h10 m82 0 h10 m0 0 h10 m70 0 h10 m0 0 h156 m-358 -10 v20 m368 0 v-20 m-368 20 v24 m368 0 v-24 m-368 24 q0 10 10 10 m348 0 q10 0 10 -10 m-358 10 h10 m56 0 h10 m0 0 h272 m-358 -10 v20 m368 0 v-20 m-368 20 v24 m368 0 v-24 m-368 24 q0 10 10 10 m348 0 q10 0 10 -10 m-358 10 h10 m104 0 h10 m0 0 h224 m23 -396 h-3"/>
+         <polygon points="417 17 425 13 425 21"/>
+         <polygon points="417 17 409 13 409 21"/></svg><xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml">
+         <xhtml:div class="ebnf"><xhtml:code>
+               <div><a href="#Action" title="Action">Action</a>   ::= ( 'enter_keycode:' | 'toggle_keycode:' | 'enter_string:' | 'switch_view:' |
+                  'temporarily_switch_view:' | 'switch_layout:' | 'temporarily_switch_layout:' ) 'String'</div>
+               <div>           | 'modifier:' <a href="#Modifier" title="Modifier">Modifier</a></div>
+               <div>           | 'erase'</div>
+               <div>           | 'open_popup'</div></xhtml:code></xhtml:div>
+      </xhtml:p>
+      <xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml">referenced by:
+         <xhtml:ul>
+            <xhtml:li><xhtml:a href="#Actions" title="Actions">Actions</xhtml:a></xhtml:li>
+         </xhtml:ul>
+      </xhtml:p><xhtml:br xmlns:xhtml="http://www.w3.org/1999/xhtml" /><xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml" style="font-size: 14px; font-weight:bold"><xhtml:a name="Modifier">Modifier:</xhtml:a></xhtml:p><svg xmlns="http://www.w3.org/2000/svg" width="167" height="389">
+         <defs>
+            <style type="text/css">
+    @namespace "http://www.w3.org/2000/svg";
+    .line                 {fill: none; stroke: #000033; stroke-width: 1;}
+    .bold-line            {stroke: #E0E0FF; shape-rendering: crispEdges; stroke-width: 2;}
+    .thin-line            {stroke: #00001F; shape-rendering: crispEdges}
+    .filled               {fill: #000033; stroke: none;}
+    text.terminal         {font-family: Verdana, Sans-serif;
+                            font-size: 12px;
+                            fill: #E0E0FF;
+                            font-weight: bold;
+                          }
+    text.nonterminal      {font-family: Verdana, Sans-serif;
+                            font-size: 12px;
+                            fill: #00001A;
+                            font-weight: normal;
+                          }
+    text.regexp           {font-family: Verdana, Sans-serif;
+                            font-size: 12px;
+                            fill: #00001F;
+                            font-weight: normal;
+                          }
+    rect, circle, polygon {fill: #000033; stroke: #000033;}
+    rect.terminal         {fill: #4D4DFF; stroke: #000033; stroke-width: 1;}
+    rect.nonterminal      {fill: #9E9EFF; stroke: #000033; stroke-width: 1;}
+    rect.text             {fill: none; stroke: none;}
+    polygon.regexp        {fill: #C7C7FF; stroke: #000033; stroke-width: 1;}
+  </style>
+         </defs>
+         <polygon points="9 17 1 13 1 21"/>
+         <polygon points="17 17 9 13 9 21"/>
+         <rect x="51" y="3" width="52" height="32" rx="10"/>
+         <rect x="49" y="1" width="52" height="32" class="terminal" rx="10"/>
+         <text class="terminal" x="59" y="21">Shift</text>
+         <rect x="51" y="47" width="50" height="32" rx="10"/>
+         <rect x="49" y="45" width="50" height="32" class="terminal" rx="10"/>
+         <text class="terminal" x="59" y="65">Lock</text>
+         <rect x="51" y="91" width="68" height="32" rx="10"/>
+         <rect x="49" y="89" width="68" height="32" class="terminal" rx="10"/>
+         <text class="terminal" x="59" y="109">Control</text>
+         <rect x="51" y="135" width="38" height="32" rx="10"/>
+         <rect x="49" y="133" width="38" height="32" class="terminal" rx="10"/>
+         <text class="terminal" x="59" y="153">Alt</text>
+         <rect x="51" y="179" width="56" height="32" rx="10"/>
+         <rect x="49" y="177" width="56" height="32" class="terminal" rx="10"/>
+         <text class="terminal" x="59" y="197">Mod1</text>
+         <rect x="51" y="223" width="56" height="32" rx="10"/>
+         <rect x="49" y="221" width="56" height="32" class="terminal" rx="10"/>
+         <text class="terminal" x="59" y="241">Mod2</text>
+         <rect x="51" y="267" width="56" height="32" rx="10"/>
+         <rect x="49" y="265" width="56" height="32" class="terminal" rx="10"/>
+         <text class="terminal" x="59" y="285">Mod3</text>
+         <rect x="51" y="311" width="56" height="32" rx="10"/>
+         <rect x="49" y="309" width="56" height="32" class="terminal" rx="10"/>
+         <text class="terminal" x="59" y="329">Mod4</text>
+         <rect x="51" y="355" width="56" height="32" rx="10"/>
+         <rect x="49" y="353" width="56" height="32" class="terminal" rx="10"/>
+         <text class="terminal" x="59" y="373">Mod5</text>
+         <svg:path xmlns:svg="http://www.w3.org/2000/svg" class="line" d="m17 17 h2 m20 0 h10 m52 0 h10 m0 0 h16 m-108 0 h20 m88 0 h20 m-128 0 q10 0 10 10 m108 0 q0 -10 10 -10 m-118 10 v24 m108 0 v-24 m-108 24 q0 10 10 10 m88 0 q10 0 10 -10 m-98 10 h10 m50 0 h10 m0 0 h18 m-98 -10 v20 m108 0 v-20 m-108 20 v24 m108 0 v-24 m-108 24 q0 10 10 10 m88 0 q10 0 10 -10 m-98 10 h10 m68 0 h10 m-98 -10 v20 m108 0 v-20 m-108 20 v24 m108 0 v-24 m-108 24 q0 10 10 10 m88 0 q10 0 10 -10 m-98 10 h10 m38 0 h10 m0 0 h30 m-98 -10 v20 m108 0 v-20 m-108 20 v24 m108 0 v-24 m-108 24 q0 10 10 10 m88 0 q10 0 10 -10 m-98 10 h10 m56 0 h10 m0 0 h12 m-98 -10 v20 m108 0 v-20 m-108 20 v24 m108 0 v-24 m-108 24 q0 10 10 10 m88 0 q10 0 10 -10 m-98 10 h10 m56 0 h10 m0 0 h12 m-98 -10 v20 m108 0 v-20 m-108 20 v24 m108 0 v-24 m-108 24 q0 10 10 10 m88 0 q10 0 10 -10 m-98 10 h10 m56 0 h10 m0 0 h12 m-98 -10 v20 m108 0 v-20 m-108 20 v24 m108 0 v-24 m-108 24 q0 10 10 10 m88 0 q10 0 10 -10 m-98 10 h10 m56 0 h10 m0 0 h12 m-98 -10 v20 m108 0 v-20 m-108 20 v24 m108 0 v-24 m-108 24 q0 10 10 10 m88 0 q10 0 10 -10 m-98 10 h10 m56 0 h10 m0 0 h12 m23 -352 h-3"/>
+         <polygon points="157 17 165 13 165 21"/>
+         <polygon points="157 17 149 13 149 21"/></svg><xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml">
+         <xhtml:div class="ebnf"><xhtml:code>
+               <div><a href="#Modifier" title="Modifier">Modifier</a> ::= 'Shift'</div>
+               <div>           | 'Lock'</div>
+               <div>           | 'Control'</div>
+               <div>           | 'Alt'</div>
+               <div>           | 'Mod1'</div>
+               <div>           | 'Mod2'</div>
+               <div>           | 'Mod3'</div>
+               <div>           | 'Mod4'</div>
+               <div>           | 'Mod5'</div></xhtml:code></xhtml:div>
+      </xhtml:p>
+      <xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml">referenced by:
+         <xhtml:ul>
+            <xhtml:li><xhtml:a href="#Action" title="Action">Action</xhtml:a></xhtml:li>
+         </xhtml:ul>
+      </xhtml:p><xhtml:br xmlns:xhtml="http://www.w3.org/1999/xhtml" /><xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml" style="font-size: 14px; font-weight:bold"><xhtml:a name="KeyDisplay">KeyDisplay:</xhtml:a></xhtml:p><svg xmlns="http://www.w3.org/2000/svg" width="369" height="81">
+         <defs>
+            <style type="text/css">
+    @namespace "http://www.w3.org/2000/svg";
+    .line                 {fill: none; stroke: #000033; stroke-width: 1;}
+    .bold-line            {stroke: #E0E0FF; shape-rendering: crispEdges; stroke-width: 2;}
+    .thin-line            {stroke: #00001F; shape-rendering: crispEdges}
+    .filled               {fill: #000033; stroke: none;}
+    text.terminal         {font-family: Verdana, Sans-serif;
+                            font-size: 12px;
+                            fill: #E0E0FF;
+                            font-weight: bold;
+                          }
+    text.nonterminal      {font-family: Verdana, Sans-serif;
+                            font-size: 12px;
+                            fill: #00001A;
+                            font-weight: normal;
+                          }
+    text.regexp           {font-family: Verdana, Sans-serif;
+                            font-size: 12px;
+                            fill: #00001F;
+                            font-weight: normal;
+                          }
+    rect, circle, polygon {fill: #000033; stroke: #000033;}
+    rect.terminal         {fill: #4D4DFF; stroke: #000033; stroke-width: 1;}
+    rect.nonterminal      {fill: #9E9EFF; stroke: #000033; stroke-width: 1;}
+    rect.text             {fill: none; stroke: none;}
+    polygon.regexp        {fill: #C7C7FF; stroke: #000033; stroke-width: 1;}
+  </style>
+         </defs>
+         <polygon points="9 17 1 13 1 21"/>
+         <polygon points="17 17 9 13 9 21"/>
+         <rect x="31" y="3" width="106" height="32" rx="10"/>
+         <rect x="29" y="1" width="106" height="32" class="terminal" rx="10"/>
+         <text class="terminal" x="39" y="21">key_display:</text>
+         <rect x="177" y="3" width="52" height="32" rx="10"/>
+         <rect x="175" y="1" width="52" height="32" class="terminal" rx="10"/>
+         <text class="terminal" x="185" y="21">text:</text>
+         <rect x="177" y="47" width="66" height="32" rx="10"/>
+         <rect x="175" y="45" width="66" height="32" class="terminal" rx="10"/>
+         <text class="terminal" x="185" y="65">image:</text><a xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#String" xlink:title="String">
+            <rect x="283" y="3" width="58" height="32"/>
+            <rect x="281" y="1" width="58" height="32" class="nonterminal"/>
+            <text class="nonterminal" x="291" y="21">String</text></a><svg:path xmlns:svg="http://www.w3.org/2000/svg" class="line" d="m17 17 h2 m0 0 h10 m106 0 h10 m20 0 h10 m52 0 h10 m0 0 h14 m-106 0 h20 m86 0 h20 m-126 0 q10 0 10 10 m106 0 q0 -10 10 -10 m-116 10 v24 m106 0 v-24 m-106 24 q0 10 10 10 m86 0 q10 0 10 -10 m-96 10 h10 m66 0 h10 m20 -44 h10 m58 0 h10 m3 0 h-3"/>
+         <polygon points="359 17 367 13 367 21"/>
+         <polygon points="359 17 351 13 351 21"/></svg><xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml">
+         <xhtml:div class="ebnf"><xhtml:code>
+               <div><a href="#KeyDisplay" title="KeyDisplay">KeyDisplay</a></div>
+               <div>         ::= 'key_display:' ( 'text:' | 'image:' ) <a href="#String" title="String">String</a></div></xhtml:code></xhtml:div>
+      </xhtml:p>
+      <xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml">referenced by:
+         <xhtml:ul>
+            <xhtml:li><xhtml:a href="#Buttons" title="Buttons">Buttons</xhtml:a></xhtml:li>
+         </xhtml:ul>
+      </xhtml:p><xhtml:br xmlns:xhtml="http://www.w3.org/1999/xhtml" /><xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml" style="font-size: 14px; font-weight:bold"><xhtml:a name="Outline">Outline:</xhtml:a></xhtml:p><svg xmlns="http://www.w3.org/2000/svg" width="321" height="213">
+         <defs>
+            <style type="text/css">
+    @namespace "http://www.w3.org/2000/svg";
+    .line                 {fill: none; stroke: #000033; stroke-width: 1;}
+    .bold-line            {stroke: #E0E0FF; shape-rendering: crispEdges; stroke-width: 2;}
+    .thin-line            {stroke: #00001F; shape-rendering: crispEdges}
+    .filled               {fill: #000033; stroke: none;}
+    text.terminal         {font-family: Verdana, Sans-serif;
+                            font-size: 12px;
+                            fill: #E0E0FF;
+                            font-weight: bold;
+                          }
+    text.nonterminal      {font-family: Verdana, Sans-serif;
+                            font-size: 12px;
+                            fill: #00001A;
+                            font-weight: normal;
+                          }
+    text.regexp           {font-family: Verdana, Sans-serif;
+                            font-size: 12px;
+                            fill: #00001F;
+                            font-weight: normal;
+                          }
+    rect, circle, polygon {fill: #000033; stroke: #000033;}
+    rect.terminal         {fill: #4D4DFF; stroke: #000033; stroke-width: 1;}
+    rect.nonterminal      {fill: #9E9EFF; stroke: #000033; stroke-width: 1;}
+    rect.text             {fill: none; stroke: none;}
+    polygon.regexp        {fill: #C7C7FF; stroke: #000033; stroke-width: 1;}
+  </style>
+         </defs>
+         <polygon points="9 17 1 13 1 21"/>
+         <polygon points="17 17 9 13 9 21"/>
+         <rect x="31" y="3" width="72" height="32" rx="10"/>
+         <rect x="29" y="1" width="72" height="32" class="terminal" rx="10"/>
+         <text class="terminal" x="39" y="21">outline:</text>
+         <rect x="143" y="3" width="80" height="32" rx="10"/>
+         <rect x="141" y="1" width="80" height="32" class="terminal" rx="10"/>
+         <text class="terminal" x="151" y="21">standard</text>
+         <rect x="143" y="47" width="46" height="32" rx="10"/>
+         <rect x="141" y="45" width="46" height="32" class="terminal" rx="10"/>
+         <text class="terminal" x="151" y="65">half</text>
+         <rect x="143" y="91" width="130" height="32" rx="10"/>
+         <rect x="141" y="89" width="130" height="32" class="terminal" rx="10"/>
+         <text class="terminal" x="151" y="109">one_and_a_half</text>
+         <rect x="143" y="135" width="66" height="32" rx="10"/>
+         <rect x="141" y="133" width="66" height="32" class="terminal" rx="10"/>
+         <text class="terminal" x="151" y="153">double</text>
+         <rect x="143" y="179" width="88" height="32" rx="10"/>
+         <rect x="141" y="177" width="88" height="32" class="terminal" rx="10"/>
+         <text class="terminal" x="151" y="197">quadruple</text>
+         <svg:path xmlns:svg="http://www.w3.org/2000/svg" class="line" d="m17 17 h2 m0 0 h10 m72 0 h10 m20 0 h10 m80 0 h10 m0 0 h50 m-170 0 h20 m150 0 h20 m-190 0 q10 0 10 10 m170 0 q0 -10 10 -10 m-180 10 v24 m170 0 v-24 m-170 24 q0 10 10 10 m150 0 q10 0 10 -10 m-160 10 h10 m46 0 h10 m0 0 h84 m-160 -10 v20 m170 0 v-20 m-170 20 v24 m170 0 v-24 m-170 24 q0 10 10 10 m150 0 q10 0 10 -10 m-160 10 h10 m130 0 h10 m-160 -10 v20 m170 0 v-20 m-170 20 v24 m170 0 v-24 m-170 24 q0 10 10 10 m150 0 q10 0 10 -10 m-160 10 h10 m66 0 h10 m0 0 h64 m-160 -10 v20 m170 0 v-20 m-170 20 v24 m170 0 v-24 m-170 24 q0 10 10 10 m150 0 q10 0 10 -10 m-160 10 h10 m88 0 h10 m0 0 h42 m23 -176 h-3"/>
+         <polygon points="311 17 319 13 319 21"/>
+         <polygon points="311 17 303 13 303 21"/></svg><xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml">
+         <xhtml:div class="ebnf"><xhtml:code>
+               <div><a href="#Outline" title="Outline">Outline</a>  ::= 'outline:' ( 'standard' | 'half' | 'one_and_a_half' | 'double' | 'quadruple'
+                  )</div></xhtml:code></xhtml:div>
+      </xhtml:p>
+      <xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml">referenced by:
+         <xhtml:ul>
+            <xhtml:li><xhtml:a href="#Buttons" title="Buttons">Buttons</xhtml:a></xhtml:li>
+         </xhtml:ul>
+      </xhtml:p><xhtml:br xmlns:xhtml="http://www.w3.org/1999/xhtml" /><xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml" style="font-size: 14px; font-weight:bold"><xhtml:a name="Popup">Popup:</xhtml:a></xhtml:p><svg xmlns="http://www.w3.org/2000/svg" width="225" height="71">
+         <defs>
+            <style type="text/css">
+    @namespace "http://www.w3.org/2000/svg";
+    .line                 {fill: none; stroke: #000033; stroke-width: 1;}
+    .bold-line            {stroke: #E0E0FF; shape-rendering: crispEdges; stroke-width: 2;}
+    .thin-line            {stroke: #00001F; shape-rendering: crispEdges}
+    .filled               {fill: #000033; stroke: none;}
+    text.terminal         {font-family: Verdana, Sans-serif;
+                            font-size: 12px;
+                            fill: #E0E0FF;
+                            font-weight: bold;
+                          }
+    text.nonterminal      {font-family: Verdana, Sans-serif;
+                            font-size: 12px;
+                            fill: #00001A;
+                            font-weight: normal;
+                          }
+    text.regexp           {font-family: Verdana, Sans-serif;
+                            font-size: 12px;
+                            fill: #00001F;
+                            font-weight: normal;
+                          }
+    rect, circle, polygon {fill: #000033; stroke: #000033;}
+    rect.terminal         {fill: #4D4DFF; stroke: #000033; stroke-width: 1;}
+    rect.nonterminal      {fill: #9E9EFF; stroke: #000033; stroke-width: 1;}
+    rect.text             {fill: none; stroke: none;}
+    polygon.regexp        {fill: #C7C7FF; stroke: #000033; stroke-width: 1;}
+  </style>
+         </defs>
+         <polygon points="9 51 1 47 1 55"/>
+         <polygon points="17 51 9 47 9 55"/>
+         <rect x="31" y="37" width="66" height="32" rx="10"/>
+         <rect x="29" y="35" width="66" height="32" class="terminal" rx="10"/>
+         <text class="terminal" x="39" y="55">popup:</text><a xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#Ids" xlink:title="Ids">
+            <rect x="137" y="3" width="40" height="32"/>
+            <rect x="135" y="1" width="40" height="32" class="nonterminal"/>
+            <text class="nonterminal" x="145" y="21">Ids</text></a><svg:path xmlns:svg="http://www.w3.org/2000/svg" class="line" d="m17 51 h2 m0 0 h10 m66 0 h10 m20 0 h10 m0 0 h50 m-80 0 l20 0 m-1 0 q-9 0 -9 -10 l0 -14 q0 -10 10 -10 m60 34 l20 0 m-20 0 q10 0 10 -10 l0 -14 q0 -10 -10 -10 m-60 0 h10 m40 0 h10 m23 34 h-3"/>
+         <polygon points="215 51 223 47 223 55"/>
+         <polygon points="215 51 207 47 207 55"/></svg><xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml">
+         <xhtml:div class="ebnf"><xhtml:code>
+               <div><a href="#Popup" title="Popup">Popup</a>    ::= 'popup:' <a href="#Ids" title="Ids">Ids</a>*</div></xhtml:code></xhtml:div>
+      </xhtml:p>
+      <xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml">referenced by:
+         <xhtml:ul>
+            <xhtml:li><xhtml:a href="#Buttons" title="Buttons">Buttons</xhtml:a></xhtml:li>
+         </xhtml:ul>
+      </xhtml:p><xhtml:br xmlns:xhtml="http://www.w3.org/1999/xhtml" /><xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml" style="font-size: 14px; font-weight:bold"><xhtml:a name="Styles">Styles:</xhtml:a></xhtml:p><svg xmlns="http://www.w3.org/2000/svg" width="331" height="69">
+         <defs>
+            <style type="text/css">
+    @namespace "http://www.w3.org/2000/svg";
+    .line                 {fill: none; stroke: #000033; stroke-width: 1;}
+    .bold-line            {stroke: #E0E0FF; shape-rendering: crispEdges; stroke-width: 2;}
+    .thin-line            {stroke: #00001F; shape-rendering: crispEdges}
+    .filled               {fill: #000033; stroke: none;}
+    text.terminal         {font-family: Verdana, Sans-serif;
+                            font-size: 12px;
+                            fill: #E0E0FF;
+                            font-weight: bold;
+                          }
+    text.nonterminal      {font-family: Verdana, Sans-serif;
+                            font-size: 12px;
+                            fill: #00001A;
+                            font-weight: normal;
+                          }
+    text.regexp           {font-family: Verdana, Sans-serif;
+                            font-size: 12px;
+                            fill: #00001F;
+                            font-weight: normal;
+                          }
+    rect, circle, polygon {fill: #000033; stroke: #000033;}
+    rect.terminal         {fill: #4D4DFF; stroke: #000033; stroke-width: 1;}
+    rect.nonterminal      {fill: #9E9EFF; stroke: #000033; stroke-width: 1;}
+    rect.text             {fill: none; stroke: none;}
+    polygon.regexp        {fill: #C7C7FF; stroke: #000033; stroke-width: 1;}
+  </style>
+         </defs>
+         <polygon points="9 33 1 29 1 37"/>
+         <polygon points="17 33 9 29 9 37"/>
+         <rect x="31" y="19" width="64" height="32" rx="10"/>
+         <rect x="29" y="17" width="64" height="32" class="terminal" rx="10"/>
+         <text class="terminal" x="39" y="37">styles:</text>
+         <rect x="155" y="19" width="30" height="32" rx="10"/>
+         <rect x="153" y="17" width="30" height="32" class="terminal" rx="10"/>
+         <text class="terminal" x="163" y="37">- </text><a xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#String" xlink:title="String">
+            <rect x="205" y="19" width="58" height="32"/>
+            <rect x="203" y="17" width="58" height="32" class="nonterminal"/>
+            <text class="nonterminal" x="213" y="37">String</text></a><svg:path xmlns:svg="http://www.w3.org/2000/svg" class="line" d="m17 33 h2 m0 0 h10 m64 0 h10 m40 0 h10 m30 0 h10 m0 0 h10 m58 0 h10 m-148 0 l20 0 m-1 0 q-9 0 -9 -10 l0 -12 q0 -10 10 -10 m128 32 l20 0 m-20 0 q10 0 10 -10 l0 -12 q0 -10 -10 -10 m-128 0 h10 m0 0 h118 m-168 32 h20 m168 0 h20 m-208 0 q10 0 10 10 m188 0 q0 -10 10 -10 m-198 10 v14 m188 0 v-14 m-188 14 q0 10 10 10 m168 0 q10 0 10 -10 m-178 10 h10 m0 0 h158 m23 -34 h-3"/>
+         <polygon points="321 33 329 29 329 37"/>
+         <polygon points="321 33 313 29 313 37"/></svg><xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml">
+         <xhtml:div class="ebnf"><xhtml:code>
+               <div><a href="#Styles" title="Styles">Styles</a>   ::= 'styles:' ( '- ' <a href="#String" title="String">String</a> )*</div></xhtml:code></xhtml:div>
+      </xhtml:p>
+      <xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml">referenced by:
+         <xhtml:ul>
+            <xhtml:li><xhtml:a href="#Buttons" title="Buttons">Buttons</xhtml:a></xhtml:li>
+         </xhtml:ul>
+      </xhtml:p><xhtml:br xmlns:xhtml="http://www.w3.org/1999/xhtml" /><xhtml:hr xmlns:xhtml="http://www.w3.org/1999/xhtml" />
+      <xhtml:p xmlns:xhtml="http://www.w3.org/1999/xhtml">
+         <xhtml:table class="signature" border="0">
+            <xhtml:tr>
+               <xhtml:td style="width: 100%"> </xhtml:td>
+               <xhtml:td valign="top">
+                  <xhtml:nobr class="signature">... generated by <xhtml:a name="Railroad-Diagram-Generator" class="signature" title="https://bottlecaps.de/rr/ui" href="https://bottlecaps.de/rr/ui" target="_blank">RR - Railroad Diagram Generator</xhtml:a></xhtml:nobr>
+               </xhtml:td>
+               <xhtml:td><xhtml:a name="Railroad-Diagram-Generator" title="https://bottlecaps.de/rr/ui" href="https://bottlecaps.de/rr/ui" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16">
+                        <g transform="scale(0.178)">
+                           <circle cx="45" cy="45" r="45" style="stroke:none; fill:#FFCC00"/>
+                           <circle cx="45" cy="45" r="42" style="stroke:#332900; stroke-width:2px; fill:#FFCC00"/>
+                           <line x1="15" y1="15" x2="75" y2="75" stroke="#332900" style="stroke-width:9px;"/>
+                           <line x1="15" y1="75" x2="75" y2="15" stroke="#332900" style="stroke-width:9px;"/>
+                           <text x="7" y="54" style="font-size:26px; font-family:Arial, Sans-serif; font-weight:bold; fill: #332900">R</text>
+                           <text x="64" y="54" style="font-size:26px; font-family:Arial, Sans-serif; font-weight:bold; fill: #332900">R</text>
+                        </g></svg></xhtml:a></xhtml:td>
+            </xhtml:tr>
+         </xhtml:table>
+      </xhtml:p>
+   </body>
+</html>

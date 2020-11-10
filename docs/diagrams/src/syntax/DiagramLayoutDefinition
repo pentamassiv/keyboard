@@ -1,0 +1,17 @@
+LayoutDefinition ::= '---' Views Buttons
+
+Views ::= 'views:' BaseView View*
+BaseView ::= 'base:'  Ids+
+View ::= ViewName ':' Ids+
+Ids ::= '- "' (Id 'SPACE')* Id '"'
+Idx ::= String
+ViewNamex::= String
+
+Buttons ::= ButtonId ':' Actions? KeyDisplay? Outline? Popup? Styles?
+Actions ::= 'actions:' ('short_press:' Action*)? ('long_press:' Action*)?
+Action ::= (('enter_keycode:' | 'toggle_keycode:' | 'enter_string:' | 'switch_view:' | 'temporarily_switch_view:' | 'switch_layout:' | 'temporarily_switch_layout:') 'String')| 'modifier:' Modifier | 'erase' | 'open_popup'
+Modifier ::= 'Shift' | 'Lock' | 'Control' | 'Alt' | 'Mod1' | 'Mod2' | 'Mod3' | 'Mod4' | 'Mod5'
+KeyDisplay ::= 'key_display:' ('text:' | 'image:') String
+Outline ::= 'outline:' (standard | half | one_and_a_half | double | quadruple)
+Popup ::= 'popup:' Ids*
+Styles ::= 'styles:' ('- ' String)*
