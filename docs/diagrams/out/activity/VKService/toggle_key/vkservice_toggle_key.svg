@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="302px" preserveAspectRatio="none" style="width:494px;height:302px;" version="1.1" viewBox="0 0 494 302" width="494px" zoomAndPan="magnify"><defs><filter height="300%" id="f9cfo2d4zp2jm" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><rect fill="#FFFFFF" filter="url(#f9cfo2d4zp2jm)" height="274.1997" style="stroke: #000000; stroke-width: 2.0;" width="466" x="11" y="11"/><path d="M173,11 L173,20.7999 L163,30.7999 L11,30.7999 " fill="none" style="stroke: #000000; stroke-width: 2.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="152" x="14" y="25.0059">VKService::toggle_key()</text><ellipse cx="246" cy="50.7999" fill="#000000" filter="url(#f9cfo2d4zp2jm)" rx="10" ry="10" style="stroke: none; stroke-width: 1.0;"/><polygon fill="#CCCCCC" filter="url(#f9cfo2d4zp2jm)" points="187.5,80.7999,304.5,80.7999,316.5,92.7999,304.5,104.7999,187.5,104.7999,175.5,92.7999,187.5,80.7999" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="117" x="187.5" y="96.4189">key is already pressed?</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="18" x="157.5" y="89.8189">yes</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="12" x="316.5" y="89.8189">no</text><rect fill="#CCCCCC" filter="url(#f9cfo2d4zp2jm)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="215" x="23" y="114.7999"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="195" x="33" y="135.0189">Use VKService::send_key() to release it</text><rect fill="#CCCCCC" filter="url(#f9cfo2d4zp2jm)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="207" x="258" y="114.7999"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="187" x="268" y="135.0189">Use VKService::send_key() to press it</text><polygon fill="#CCCCCC" filter="url(#f9cfo2d4zp2jm)" points="246,153.9998,258,165.9998,246,177.9998,234,165.9998,246,153.9998" style="stroke: #1A66C2; stroke-width: 1.5;"/><rect fill="#CCCCCC" filter="url(#f9cfo2d4zp2jm)" height="33.1999" style="stroke: #1A66C2; stroke-width: 1.5;" width="47" x="222.5" y="197.9998"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="27" x="232.5" y="218.2188">result</text><ellipse cx="246" cy="262.1997" fill="#FFFFFF" filter="url(#f9cfo2d4zp2jm)" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"/><ellipse cx="246" cy="262.1997" fill="#000000" rx="6" ry="6" style="stroke: #7F7F7F; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="175.5" x2="130.5" y1="92.7999" y2="92.7999"/><line style="stroke: #000000; stroke-width: 1.5;" x1="130.5" x2="130.5" y1="92.7999" y2="114.7999"/><polygon fill="#000000" points="126.5,104.7999,130.5,114.7999,134.5,104.7999,130.5,108.7999" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="316.5" x2="361.5" y1="92.7999" y2="92.7999"/><line style="stroke: #000000; stroke-width: 1.5;" x1="361.5" x2="361.5" y1="92.7999" y2="114.7999"/><polygon fill="#000000" points="357.5,104.7999,361.5,114.7999,365.5,104.7999,361.5,108.7999" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="130.5" x2="130.5" y1="147.9998" y2="165.9998"/><line style="stroke: #000000; stroke-width: 1.5;" x1="130.5" x2="234" y1="165.9998" y2="165.9998"/><polygon fill="#000000" points="224,161.9998,234,165.9998,224,169.9998,228,165.9998" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="361.5" x2="361.5" y1="147.9998" y2="165.9998"/><line style="stroke: #000000; stroke-width: 1.5;" x1="361.5" x2="258" y1="165.9998" y2="165.9998"/><polygon fill="#000000" points="268,161.9998,258,165.9998,268,169.9998,264,165.9998" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="246" x2="246" y1="60.7999" y2="80.7999"/><polygon fill="#000000" points="242,70.7999,246,80.7999,250,70.7999,246,74.7999" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="246" x2="246" y1="177.9998" y2="197.9998"/><polygon fill="#000000" points="242,187.9998,246,197.9998,250,187.9998,246,191.9998" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="246" x2="246" y1="231.1997" y2="251.1997"/><polygon fill="#000000" points="242,241.1997,246,251.1997,250,241.1997,246,245.1997" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[23af1662b9cbd39c959194a96c205f79]
+@startuml vkservice_toggle_key
+!define LIGHTBLUE
+!includeurl https://raw.githubusercontent.com/grelltrier/RedDress-PlantUML/master/style.puml
+
+partition "VKService::toggle_key()"{
+  start
+    if (key is already pressed?) then (yes)
+      :Use VKService::send_key() to release it;
+    else (no)
+      :Use VKService::send_key() to press it;
+    endif
+    :result]
+  stop
+@enduml
+
+@startuml vkservice_toggle_key
+
+
+
+
+skinparam stereotypeCBackgroundColor 1a66c2
+
+
+
+
+
+
+
+skinparam backgroundColor fff
+
+
+
+
+
+
+
+
+skinparam circledCharacter {
+  radius 8
+  fontSize 11
+  fontName Verdana
+}
+
+skinparam class {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+
+  attributeFontColor 333
+  attributeFontSize 11
+  attributeIconSize 11
+}
+
+
+skinparam ActivityBarColor 1a66c2
+skinparam activityDiamondBackgroundColor ccc
+skinparam activityDiamondBorderColor 1a66c2
+
+
+skinparam actor {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam participant {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam collections {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam SequenceBox{
+    backgroundColor e0e0e0
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+skinparam interface {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam component {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam node {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam database {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam queue {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+skinparam usecase {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+skinparam activity {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+skinparam sequence {
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+
+  lifeLineBorderColor 2a86e2
+  lifeLineBackgroundColor e0e0e0
+}
+
+skinparam boundary {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam control {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam entity {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+skinparam state {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+  startColor 2a86e2
+  endColor 1a66c2
+}
+
+
+skinparam object {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+
+skinparam note {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam cloud {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+skinparam rectangle {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam storage {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+partition "VKService::toggle_key()"{
+  start
+    if (key is already pressed?) then (yes)
+      :Use VKService::send_key() to release it;
+    else (no)
+      :Use VKService::send_key() to press it;
+    endif
+    :result]
+  stop
+@enduml
+
+PlantUML version 1.2020.19(Mon Oct 12 17:10:01 CEST 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

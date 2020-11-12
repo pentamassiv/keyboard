@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="602px" preserveAspectRatio="none" style="width:347px;height:602px;" version="1.1" viewBox="0 0 347 602" width="347px" zoomAndPan="magnify"><defs><filter height="300%" id="fvyvlazw6esui" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><rect fill="#FFFFFF" filter="url(#fvyvlazw6esui)" height="574.318" style="stroke: #000000; stroke-width: 2.0;" width="319" x="11" y="11"/><path d="M130,11 L130,20.7999 L120,30.7999 L11,30.7999 " fill="none" style="stroke: #000000; stroke-width: 2.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="109" x="14" y="25.0059">Win::draw_path()</text><ellipse cx="125.5" cy="50.7999" fill="#000000" filter="url(#fvyvlazw6esui)" rx="10" ry="10" style="stroke: none; stroke-width: 1.0;"/><rect fill="#CCCCCC" filter="url(#fvyvlazw6esui)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="111" x="70" y="80.7999"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="91" x="80" y="101.0189">Erase current path</text><rect fill="#CCCCCC" filter="url(#fvyvlazw6esui)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="138" x="56.5" y="133.9998"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="118" x="66.5" y="154.2188">Get context to draw with</text><rect fill="#CCCCCC" filter="url(#fvyvlazw6esui)" height="33.1999" style="stroke: #1A66C2; stroke-width: 1.5;" width="84" x="83.5" y="187.1997"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="64" x="93.5" y="207.4187">DrawContext</text><rect fill="#CCCCCC" filter="url(#fvyvlazw6esui)" height="59.5997" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="107" x="72" y="240.3996"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="87" x="82" y="260.6186">Set draw operator</text><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="43" x="82" y="273.8185">Set color</text><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="61" x="82" y="287.0184">Set max age</text><polygon fill="#CCCCCC" filter="url(#fvyvlazw6esui)" points="77.5,375.7183,173.5,375.7183,185.5,387.7183,173.5,399.7183,77.5,399.7183,65.5,387.7183,77.5,375.7183" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="96" x="77.5" y="391.3372">dots age &lt; max age</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="12" x="53.5" y="384.7373">no</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="18" x="185.5" y="384.7373">yes</text><rect fill="#CCCCCC" filter="url(#fvyvlazw6esui)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="209" x="91" y="409.7183"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="189" x="101" y="429.9372">Draw line between last dot and this one</text><polygon fill="#CCCCCC" filter="url(#fvyvlazw6esui)" points="77,319.9993,174,319.9993,186,331.9993,174,343.9993,77,343.9993,65,331.9993,77,319.9993" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="21" x="129.5" y="354.2183">next</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="97" x="77" y="335.6183">for dot in swipe path</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="18" x="47" y="329.0184">end</text><rect fill="#CCCCCC" filter="url(#fvyvlazw6esui)" height="46.3998" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="122" x="64.5" y="484.9182"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="63" x="74.5" y="505.1371">Set line width</text><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="102" x="74.5" y="518.337">Paint path on context</text><ellipse cx="125.5" cy="562.318" fill="#FFFFFF" filter="url(#fvyvlazw6esui)" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"/><ellipse cx="125.5" cy="562.318" fill="#000000" rx="6" ry="6" style="stroke: #7F7F7F; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="125.5" x2="125.5" y1="60.7999" y2="80.7999"/><polygon fill="#000000" points="121.5,70.7999,125.5,80.7999,129.5,70.7999,125.5,74.7999" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="125.5" x2="125.5" y1="113.9998" y2="133.9998"/><polygon fill="#000000" points="121.5,123.9998,125.5,133.9998,129.5,123.9998,125.5,127.9998" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="125.5" x2="125.5" y1="167.1997" y2="187.1997"/><polygon fill="#000000" points="121.5,177.1997,125.5,187.1997,129.5,177.1997,125.5,181.1997" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="125.5" x2="125.5" y1="220.3996" y2="240.3996"/><polygon fill="#000000" points="121.5,230.3996,125.5,240.3996,129.5,230.3996,125.5,234.3996" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="65.5" x2="55.5" y1="387.7183" y2="387.7183"/><line style="stroke: #000000; stroke-width: 1.5;" x1="55.5" x2="55.5" y1="387.7183" y2="409.7183"/><line style="stroke: #000000; stroke-width: 1.5;" x1="55.5" x2="27" y1="409.7183" y2="409.7183"/><polygon fill="#000000" points="37,405.7183,27,409.7183,37,413.7183,33,409.7183" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="185.5" x2="195.5" y1="387.7183" y2="387.7183"/><line style="stroke: #000000; stroke-width: 1.5;" x1="195.5" x2="195.5" y1="387.7183" y2="409.7183"/><polygon fill="#000000" points="191.5,399.7183,195.5,409.7183,199.5,399.7183,195.5,403.7183" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="195.5" x2="195.5" y1="442.9182" y2="452.9182"/><line style="stroke: #000000; stroke-width: 1.5;" x1="195.5" x2="314" y1="452.9182" y2="452.9182"/><polygon fill="#000000" points="310,403.7183,314,393.7183,318,403.7183,314,399.7183" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="314" x2="314" y1="331.9993" y2="452.9182"/><line style="stroke: #000000; stroke-width: 1.5;" x1="314" x2="186" y1="331.9993" y2="331.9993"/><polygon fill="#000000" points="196,327.9993,186,331.9993,196,335.9993,192,331.9993" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="125.5" x2="125.5" y1="343.9993" y2="375.7183"/><polygon fill="#000000" points="121.5,365.7183,125.5,375.7183,129.5,365.7183,125.5,369.7183" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="65" x2="27" y1="331.9993" y2="331.9993"/><polygon fill="#000000" points="23,389.7183,27,399.7183,31,389.7183,27,393.7183" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="27" x2="27" y1="331.9993" y2="464.9182"/><line style="stroke: #000000; stroke-width: 1.5;" x1="27" x2="125.5" y1="464.9182" y2="464.9182"/><line style="stroke: #000000; stroke-width: 1.5;" x1="125.5" x2="125.5" y1="464.9182" y2="484.9182"/><polygon fill="#000000" points="121.5,474.9182,125.5,484.9182,129.5,474.9182,125.5,478.9182" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="125.5" x2="125.5" y1="299.9993" y2="319.9993"/><polygon fill="#000000" points="121.5,309.9993,125.5,319.9993,129.5,309.9993,125.5,313.9993" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="125.5" x2="125.5" y1="531.318" y2="551.318"/><polygon fill="#000000" points="121.5,541.318,125.5,551.318,129.5,541.318,125.5,545.318" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[992a38d8a9917a5eaeb365ca8c54211a]
+@startuml win_draw_path
+!define LIGHTBLUE
+!includeurl https://raw.githubusercontent.com/grelltrier/RedDress-PlantUML/master/style.puml
+
+partition "Win::draw_path()"{
+  start
+  :Erase current path;
+  :Get context to draw with;
+  :DrawContext]
+  :Set draw operator
+  Set color
+  Set max age;
+
+  while (for dot in swipe path) is (next)
+    if (dots age < max age) then (no)
+      break;
+    else (yes)
+      :Draw line between last dot and this one;
+    endif
+  endwhile (end)
+  :Set line width
+  Paint path on context;
+  stop
+}
+@enduml
+
+@startuml win_draw_path
+
+
+
+
+skinparam stereotypeCBackgroundColor 1a66c2
+
+
+
+
+
+
+
+skinparam backgroundColor fff
+
+
+
+
+
+
+
+
+skinparam circledCharacter {
+  radius 8
+  fontSize 11
+  fontName Verdana
+}
+
+skinparam class {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+
+  attributeFontColor 333
+  attributeFontSize 11
+  attributeIconSize 11
+}
+
+
+skinparam ActivityBarColor 1a66c2
+skinparam activityDiamondBackgroundColor ccc
+skinparam activityDiamondBorderColor 1a66c2
+
+
+skinparam actor {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam participant {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam collections {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam SequenceBox{
+    backgroundColor e0e0e0
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+skinparam interface {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam component {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam node {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam database {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam queue {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+skinparam usecase {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+skinparam activity {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+skinparam sequence {
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+
+  lifeLineBorderColor 2a86e2
+  lifeLineBackgroundColor e0e0e0
+}
+
+skinparam boundary {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam control {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam entity {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+skinparam state {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+  startColor 2a86e2
+  endColor 1a66c2
+}
+
+
+skinparam object {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+
+skinparam note {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam cloud {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+skinparam rectangle {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam storage {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+partition "Win::draw_path()"{
+  start
+  :Erase current path;
+  :Get context to draw with;
+  :DrawContext]
+  :Set draw operator
+  Set color
+  Set max age;
+
+  while (for dot in swipe path) is (next)
+    if (dots age < max age) then (no)
+      break;
+    else (yes)
+      :Draw line between last dot and this one;
+    endif
+  endwhile (end)
+  :Set line width
+  Paint path on context;
+  stop
+}
+@enduml
+
+PlantUML version 1.2020.19(Mon Oct 12 17:10:01 CEST 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

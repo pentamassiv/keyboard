@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="1796px" preserveAspectRatio="none" style="width:500px;height:1796px;" version="1.1" viewBox="0 0 500 1796" width="500px" zoomAndPan="magnify"><defs><filter height="300%" id="f90em4eoxnq7k" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><rect fill="#FFFFFF" filter="url(#f90em4eoxnq7k)" height="1768.9979" style="stroke: #000000; stroke-width: 2.0;" width="472.5" x="11" y="11"/><path d="M107,11 L107,20.7999 L97,30.7999 L11,30.7999 " fill="none" style="stroke: #000000; stroke-width: 2.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="86" x="14" y="25.0059">Win::update()</text><ellipse cx="247.25" cy="50.7999" fill="#000000" filter="url(#f90em4eoxnq7k)" rx="10" ry="10" style="stroke: none; stroke-width: 1.0;"/><rect fill="#CCCCCC" filter="url(#f90em4eoxnq7k)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="280" x="173.25" y="104.7999"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="260" x="183.25" y="125.0189">GestureModel::convert_to_interaction(GestureSignal)</text><rect fill="#CCCCCC" filter="url(#f90em4eoxnq7k)" height="33.1999" style="stroke: #1A66C2; stroke-width: 1.5;" width="71" x="277.75" y="157.9998"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="51" x="287.75" y="178.2188">Interaction</text><rect fill="#CCCCCC" filter="url(#f90em4eoxnq7k)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="269" x="178.75" y="211.1997"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="249" x="188.75" y="231.4187">Convert absolute coordinates to relative coodinates</text><rect fill="#CCCCCC" filter="url(#f90em4eoxnq7k)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="155" x="235.75" y="264.3996"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="135" x="245.75" y="284.6186">Keyboard::input(Interaction)</text><rect fill="#CCCCCC" filter="url(#f90em4eoxnq7k)" height="33.1999" style="stroke: #1A66C2; stroke-width: 1.5;" width="60" x="311" y="341.5995"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="40" x="321" y="361.8185">ButtonId</text><polygon fill="#CCCCCC" filter="url(#f90em4eoxnq7k)" points="309.5,394.7994,372.5,394.7994,384.5,406.7994,372.5,418.7994,309.5,418.7994,297.5,406.7994,309.5,394.7994" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="63" x="309.5" y="410.4184">Button exist?</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="18" x="279.5" y="403.8185">yes</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="12" x="384.5" y="403.8185">no</text><rect fill="#CCCCCC" filter="url(#f90em4eoxnq7k)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="179" x="179.75" y="428.7994"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="159" x="189.75" y="449.0184">Activate/deactivate ToggleButton</text><rect fill="#CCCCCC" filter="url(#f90em4eoxnq7k)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="68" x="378.75" y="428.7994"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="48" x="388.75" y="449.0184">Emit error</text><polygon fill="#CCCCCC" filter="url(#f90em4eoxnq7k)" points="341,467.9993,353,479.9993,341,491.9993,329,479.9993,341,467.9993" style="stroke: #1A66C2; stroke-width: 1.5;"/><rect fill="#CCCCCC" filter="url(#f90em4eoxnq7k)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="123" x="279.5" y="511.9993"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="103" x="289.5" y="532.2183">Give haptic feedback</text><rect fill="#CCCCCC" filter="url(#f90em4eoxnq7k)" height="33.1999" style="stroke: #1A66C2; stroke-width: 1.5;" width="60" x="322.25" y="589.1992"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="40" x="332.25" y="609.4182">ButtonId</text><polygon fill="#CCCCCC" filter="url(#f90em4eoxnq7k)" points="320.75,642.3991,383.75,642.3991,395.75,654.3991,383.75,666.3991,320.75,666.3991,308.75,654.3991,320.75,642.3991" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="63" x="320.75" y="658.0181">Button exist?</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="18" x="290.75" y="651.4182">yes</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="12" x="395.75" y="651.4182">no</text><rect fill="#CCCCCC" filter="url(#f90em4eoxnq7k)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="139" x="205.5" y="676.3991"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="119" x="215.5" y="696.6181">Deactivate ToggleButton</text><polygon fill="#CCCCCC" filter="url(#f90em4eoxnq7k)" points="240.5,729.599,309.5,729.599,321.5,741.599,309.5,753.599,240.5,753.599,228.5,741.599,240.5,729.599" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="69" x="240.5" y="745.218">Has popover?</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="18" x="210.5" y="738.6181">yes</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="12" x="321.5" y="738.6181">no</text><rect fill="#CCCCCC" filter="url(#f90em4eoxnq7k)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="91" x="173" y="763.599"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="71" x="183" y="783.818">Show Popover</text><rect fill="#CCCCCC" filter="url(#f90em4eoxnq7k)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="68" x="297.5" y="763.599"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="48" x="307.5" y="783.818">Emit error</text><polygon fill="#CCCCCC" filter="url(#f90em4eoxnq7k)" points="275,802.7989,287,814.7989,275,826.7989,263,814.7989,275,802.7989" style="stroke: #1A66C2; stroke-width: 1.5;"/><rect fill="#CCCCCC" filter="url(#f90em4eoxnq7k)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="68" x="395.5" y="676.3991"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="48" x="405.5" y="696.6181">Emit error</text><polygon fill="#CCCCCC" filter="url(#f90em4eoxnq7k)" points="352.25,832.7989,364.25,844.7989,352.25,856.7989,340.25,844.7989,352.25,832.7989" style="stroke: #1A66C2; stroke-width: 1.5;"/><rect fill="#CCCCCC" filter="url(#f90em4eoxnq7k)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="129" x="248.75" y="900.7989"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="109" x="258.75" y="921.0179">Keyboard::submit_text</text><rect fill="#CCCCCC" filter="url(#f90em4eoxnq7k)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="298" x="164.25" y="977.9988"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="278" x="174.25" y="998.2178">Set the labels of the suggestion buttons to the new values</text><rect fill="#CCCCCC" filter="url(#f90em4eoxnq7k)" height="46.3998" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="207" x="209.75" y="1055.1987"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="165" x="219.75" y="1075.4177">Change the visibility of the window</text><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="187" x="219.75" y="1088.6176">Update 'visibility' value of DBusService</text><rect fill="#CCCCCC" filter="url(#f90em4eoxnq7k)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="101" x="262.75" y="1145.5985"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="81" x="272.75" y="1165.8175">Not implemented</text><rect fill="#CCCCCC" filter="url(#f90em4eoxnq7k)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="184" x="221.25" y="1222.7985"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="164" x="231.25" y="1243.0174">UIManager.change_layout_view()</text><rect fill="#CCCCCC" filter="url(#f90em4eoxnq7k)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="222" x="202.25" y="1299.9984"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="202" x="212.25" y="1320.2173">Set active_view of Keyboard to new value</text><rect fill="#CCCCCC" filter="url(#f90em4eoxnq7k)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="177" x="224.75" y="1377.1983"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="157" x="234.75" y="1397.4172">UIManager.change_orientation()</text><rect fill="#CCCCCC" filter="url(#f90em4eoxnq7k)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="246" x="190.25" y="1454.3982"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="226" x="200.25" y="1474.6171">Fetch the new events from the wayland server</text><rect fill="#CCCCCC" filter="url(#f90em4eoxnq7k)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="103" x="261.75" y="1531.5981"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="83" x="271.75" y="1551.817">Win::draw_path()</text><rect fill="#CCCCCC" filter="url(#f90em4eoxnq7k)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="95" x="265.75" y="1608.798"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="75" x="275.75" y="1629.0169">gtk::main_quit()</text><ellipse cx="313.25" cy="1671.9979" fill="#FFFFFF" filter="url(#f90em4eoxnq7k)" rx="10" ry="10" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 2.5;" x1="307.0628" x2="319.4372" y1="1665.8107" y2="1678.185"/><line style="stroke: #000000; stroke-width: 2.5;" x1="319.4372" x2="307.0628" y1="1665.8107" y2="1678.185"/><polygon fill="#CCCCCC" filter="url(#f90em4eoxnq7k)" points="52.5,80.7999,121.5,80.7999,133.5,92.7999,121.5,104.7999,52.5,104.7999,40.5,92.7999,52.5,80.7999" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="69" x="52.5" y="96.4189">GestureSignal</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="18" x="133.5" y="89.8189">yes</text><polygon fill="#CCCCCC" filter="url(#f90em4eoxnq7k)" points="46,317.5995,128,317.5995,140,329.5995,128,341.5995,46,341.5995,34,329.5995,46,317.5995" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="82" x="46" y="333.2185">ButtonInteraction</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="18" x="140" y="326.6186">yes</text><polygon fill="#CCCCCC" filter="url(#f90em4eoxnq7k)" points="58,565.1992,116,565.1992,128,577.1992,116,589.1992,58,589.1992,46,577.1992,58,565.1992" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="58" x="58" y="580.8182">OpenPopup</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="18" x="128" y="574.2183">yes</text><polygon fill="#CCCCCC" filter="url(#f90em4eoxnq7k)" points="59.5,876.7989,114.5,876.7989,126.5,888.7989,114.5,900.7989,59.5,900.7989,47.5,888.7989,59.5,876.7989" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="55" x="59.5" y="892.4179">SubmitText</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="18" x="126.5" y="885.818">yes</text><polygon fill="#CCCCCC" filter="url(#f90em4eoxnq7k)" points="57,953.9988,117,953.9988,129,965.9988,117,977.9988,57,977.9988,45,965.9988,57,953.9988" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="60" x="57" y="969.6178">Suggestions</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="18" x="129" y="963.0179">yes</text><polygon fill="#CCCCCC" filter="url(#f90em4eoxnq7k)" points="60,1031.1987,114,1031.1987,126,1043.1987,114,1055.1987,60,1055.1987,48,1043.1987,60,1031.1987" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="54" x="60" y="1046.8177">SetVisibility</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="18" x="126" y="1040.2178">yes</text><polygon fill="#CCCCCC" filter="url(#f90em4eoxnq7k)" points="57,1121.5985,117,1121.5985,129,1133.5985,117,1145.5985,57,1145.5985,45,1133.5985,57,1121.5985" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="60" x="57" y="1137.2175">HintPurpose</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="18" x="129" y="1130.6176">yes</text><polygon fill="#CCCCCC" filter="url(#f90em4eoxnq7k)" points="34.5,1198.7985,139.5,1198.7985,151.5,1210.7985,139.5,1222.7985,34.5,1222.7985,22.5,1210.7985,34.5,1198.7985" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="105" x="34.5" y="1214.4174">ChangeUILayoutView</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="18" x="151.5" y="1207.8175">yes</text><polygon fill="#CCCCCC" filter="url(#f90em4eoxnq7k)" points="33,1275.9984,141,1275.9984,153,1287.9984,141,1299.9984,33,1299.9984,21,1287.9984,33,1275.9984" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="108" x="33" y="1291.6173">ChangeKBLayoutView</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="18" x="153" y="1285.0174">yes</text><polygon fill="#CCCCCC" filter="url(#f90em4eoxnq7k)" points="36,1353.1983,138,1353.1983,150,1365.1983,138,1377.1983,36,1377.1983,24,1365.1983,36,1353.1983" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="102" x="36" y="1368.8172">ChangeUIOrientation</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="18" x="150" y="1362.2173">yes</text><polygon fill="#CCCCCC" filter="url(#f90em4eoxnq7k)" points="61.5,1430.3982,112.5,1430.3982,124.5,1442.3982,112.5,1454.3982,61.5,1454.3982,49.5,1442.3982,61.5,1430.3982" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="51" x="61.5" y="1446.0171">PollEvents</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="18" x="124.5" y="1439.4172">yes</text><polygon fill="#CCCCCC" filter="url(#f90em4eoxnq7k)" points="42,1507.5981,132,1507.5981,144,1519.5981,132,1531.5981,42,1531.5981,30,1519.5981,42,1507.5981" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="90" x="42" y="1523.217">UpdateDrawBuffer</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="18" x="144" y="1516.6171">yes</text><polygon fill="#CCCCCC" filter="url(#f90em4eoxnq7k)" points="75,1584.798,99,1584.798,111,1596.798,99,1608.798,75,1608.798,63,1596.798,75,1584.798" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="20" x="77" y="1600.4169">Quit</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="18" x="111" y="1593.817">yes</text><polygon fill="#CCCCCC" filter="url(#f90em4eoxnq7k)" points="247.25,1701.9979,259.25,1713.9979,247.25,1725.9979,235.25,1713.9979,247.25,1701.9979" style="stroke: #1A66C2; stroke-width: 1.5;"/><ellipse cx="247.25" cy="1756.9979" fill="#FFFFFF" filter="url(#f90em4eoxnq7k)" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"/><ellipse cx="247.25" cy="1756.9979" fill="#000000" rx="6" ry="6" style="stroke: #7F7F7F; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="313.25" x2="313.25" y1="137.9998" y2="157.9998"/><polygon fill="#000000" points="309.25,147.9998,313.25,157.9998,317.25,147.9998,313.25,151.9998" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="313.25" x2="313.25" y1="191.1997" y2="211.1997"/><polygon fill="#000000" points="309.25,201.1997,313.25,211.1997,317.25,201.1997,313.25,205.1997" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="313.25" x2="313.25" y1="244.3996" y2="264.3996"/><polygon fill="#000000" points="309.25,254.3996,313.25,264.3996,317.25,254.3996,313.25,258.3996" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="297.5" x2="269.25" y1="406.7994" y2="406.7994"/><line style="stroke: #000000; stroke-width: 1.5;" x1="269.25" x2="269.25" y1="406.7994" y2="428.7994"/><polygon fill="#000000" points="265.25,418.7994,269.25,428.7994,273.25,418.7994,269.25,422.7994" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="384.5" x2="412.75" y1="406.7994" y2="406.7994"/><line style="stroke: #000000; stroke-width: 1.5;" x1="412.75" x2="412.75" y1="406.7994" y2="428.7994"/><polygon fill="#000000" points="408.75,418.7994,412.75,428.7994,416.75,418.7994,412.75,422.7994" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="269.25" x2="269.25" y1="461.9993" y2="479.9993"/><line style="stroke: #000000; stroke-width: 1.5;" x1="269.25" x2="329" y1="479.9993" y2="479.9993"/><polygon fill="#000000" points="319,475.9993,329,479.9993,319,483.9993,323,479.9993" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="412.75" x2="412.75" y1="461.9993" y2="479.9993"/><line style="stroke: #000000; stroke-width: 1.5;" x1="412.75" x2="353" y1="479.9993" y2="479.9993"/><polygon fill="#000000" points="363,475.9993,353,479.9993,363,483.9993,359,479.9993" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="341" x2="341" y1="374.7994" y2="394.7994"/><polygon fill="#000000" points="337,384.7994,341,394.7994,345,384.7994,341,388.7994" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="341" x2="341" y1="491.9993" y2="511.9993"/><polygon fill="#000000" points="337,501.9993,341,511.9993,345,501.9993,341,505.9993" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="228.5" x2="218.5" y1="741.599" y2="741.599"/><line style="stroke: #000000; stroke-width: 1.5;" x1="218.5" x2="218.5" y1="741.599" y2="763.599"/><polygon fill="#000000" points="214.5,753.599,218.5,763.599,222.5,753.599,218.5,757.599" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="321.5" x2="331.5" y1="741.599" y2="741.599"/><line style="stroke: #000000; stroke-width: 1.5;" x1="331.5" x2="331.5" y1="741.599" y2="763.599"/><polygon fill="#000000" points="327.5,753.599,331.5,763.599,335.5,753.599,331.5,757.599" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="218.5" x2="218.5" y1="796.7989" y2="814.7989"/><line style="stroke: #000000; stroke-width: 1.5;" x1="218.5" x2="263" y1="814.7989" y2="814.7989"/><polygon fill="#000000" points="253,810.7989,263,814.7989,253,818.7989,257,814.7989" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="331.5" x2="331.5" y1="796.7989" y2="814.7989"/><line style="stroke: #000000; stroke-width: 1.5;" x1="331.5" x2="287" y1="814.7989" y2="814.7989"/><polygon fill="#000000" points="297,810.7989,287,814.7989,297,818.7989,293,814.7989" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="275" x2="275" y1="709.599" y2="729.599"/><polygon fill="#000000" points="271,719.599,275,729.599,279,719.599,275,723.599" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="308.75" x2="275" y1="654.3991" y2="654.3991"/><line style="stroke: #000000; stroke-width: 1.5;" x1="275" x2="275" y1="654.3991" y2="676.3991"/><polygon fill="#000000" points="271,666.3991,275,676.3991,279,666.3991,275,670.3991" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="395.75" x2="429.5" y1="654.3991" y2="654.3991"/><line style="stroke: #000000; stroke-width: 1.5;" x1="429.5" x2="429.5" y1="654.3991" y2="676.3991"/><polygon fill="#000000" points="425.5,666.3991,429.5,676.3991,433.5,666.3991,429.5,670.3991" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="275" x2="275" y1="826.7989" y2="844.7989"/><line style="stroke: #000000; stroke-width: 1.5;" x1="275" x2="340.25" y1="844.7989" y2="844.7989"/><polygon fill="#000000" points="330.25,840.7989,340.25,844.7989,330.25,848.7989,334.25,844.7989" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="429.5" x2="429.5" y1="709.599" y2="844.7989"/><line style="stroke: #000000; stroke-width: 1.5;" x1="429.5" x2="364.25" y1="844.7989" y2="844.7989"/><polygon fill="#000000" points="374.25,840.7989,364.25,844.7989,374.25,848.7989,370.25,844.7989" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="352.25" x2="352.25" y1="622.3991" y2="642.3991"/><polygon fill="#000000" points="348.25,632.3991,352.25,642.3991,356.25,632.3991,352.25,636.3991" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="313.25" x2="313.25" y1="1641.9979" y2="1661.9979"/><polygon fill="#000000" points="309.25,1651.9979,313.25,1661.9979,317.25,1651.9979,313.25,1655.9979" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="133.5" x2="313.25" y1="92.7999" y2="92.7999"/><line style="stroke: #000000; stroke-width: 1.5;" x1="313.25" x2="313.25" y1="92.7999" y2="104.7999"/><polygon fill="#000000" points="309.25,94.7999,313.25,104.7999,317.25,94.7999,313.25,98.7999" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="140" x2="341" y1="329.5995" y2="329.5995"/><line style="stroke: #000000; stroke-width: 1.5;" x1="341" x2="341" y1="329.5995" y2="341.5995"/><polygon fill="#000000" points="337,331.5995,341,341.5995,345,331.5995,341,335.5995" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="128" x2="352.25" y1="577.1992" y2="577.1992"/><line style="stroke: #000000; stroke-width: 1.5;" x1="352.25" x2="352.25" y1="577.1992" y2="589.1992"/><polygon fill="#000000" points="348.25,579.1992,352.25,589.1992,356.25,579.1992,352.25,583.1992" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="126.5" x2="313.25" y1="888.7989" y2="888.7989"/><line style="stroke: #000000; stroke-width: 1.5;" x1="313.25" x2="313.25" y1="888.7989" y2="900.7989"/><polygon fill="#000000" points="309.25,890.7989,313.25,900.7989,317.25,890.7989,313.25,894.7989" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="129" x2="313.25" y1="965.9988" y2="965.9988"/><line style="stroke: #000000; stroke-width: 1.5;" x1="313.25" x2="313.25" y1="965.9988" y2="977.9988"/><polygon fill="#000000" points="309.25,967.9988,313.25,977.9988,317.25,967.9988,313.25,971.9988" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="126" x2="313.25" y1="1043.1987" y2="1043.1987"/><line style="stroke: #000000; stroke-width: 1.5;" x1="313.25" x2="313.25" y1="1043.1987" y2="1055.1987"/><polygon fill="#000000" points="309.25,1045.1987,313.25,1055.1987,317.25,1045.1987,313.25,1049.1987" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="129" x2="313.25" y1="1133.5985" y2="1133.5985"/><line style="stroke: #000000; stroke-width: 1.5;" x1="313.25" x2="313.25" y1="1133.5985" y2="1145.5985"/><polygon fill="#000000" points="309.25,1135.5985,313.25,1145.5985,317.25,1135.5985,313.25,1139.5985" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="151.5" x2="313.25" y1="1210.7985" y2="1210.7985"/><line style="stroke: #000000; stroke-width: 1.5;" x1="313.25" x2="313.25" y1="1210.7985" y2="1222.7985"/><polygon fill="#000000" points="309.25,1212.7985,313.25,1222.7985,317.25,1212.7985,313.25,1216.7985" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="153" x2="313.25" y1="1287.9984" y2="1287.9984"/><line style="stroke: #000000; stroke-width: 1.5;" x1="313.25" x2="313.25" y1="1287.9984" y2="1299.9984"/><polygon fill="#000000" points="309.25,1289.9984,313.25,1299.9984,317.25,1289.9984,313.25,1293.9984" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="150" x2="313.25" y1="1365.1983" y2="1365.1983"/><line style="stroke: #000000; stroke-width: 1.5;" x1="313.25" x2="313.25" y1="1365.1983" y2="1377.1983"/><polygon fill="#000000" points="309.25,1367.1983,313.25,1377.1983,317.25,1367.1983,313.25,1371.1983" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="124.5" x2="313.25" y1="1442.3982" y2="1442.3982"/><line style="stroke: #000000; stroke-width: 1.5;" x1="313.25" x2="313.25" y1="1442.3982" y2="1454.3982"/><polygon fill="#000000" points="309.25,1444.3982,313.25,1454.3982,317.25,1444.3982,313.25,1448.3982" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="144" x2="313.25" y1="1519.5981" y2="1519.5981"/><line style="stroke: #000000; stroke-width: 1.5;" x1="313.25" x2="313.25" y1="1519.5981" y2="1531.5981"/><polygon fill="#000000" points="309.25,1521.5981,313.25,1531.5981,317.25,1521.5981,313.25,1525.5981" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="111" x2="313.25" y1="1596.798" y2="1596.798"/><line style="stroke: #000000; stroke-width: 1.5;" x1="313.25" x2="313.25" y1="1596.798" y2="1608.798"/><polygon fill="#000000" points="309.25,1598.798,313.25,1608.798,317.25,1598.798,313.25,1602.798" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="87" x2="87" y1="104.7999" y2="317.5995"/><polygon fill="#000000" points="83,307.5995,87,317.5995,91,307.5995,87,311.5995" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="87" x2="87" y1="341.5995" y2="565.1992"/><polygon fill="#000000" points="83,555.1992,87,565.1992,91,555.1992,87,559.1992" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="87" x2="87" y1="589.1992" y2="876.7989"/><polygon fill="#000000" points="83,866.7989,87,876.7989,91,866.7989,87,870.7989" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="87" x2="87" y1="900.7989" y2="953.9988"/><polygon fill="#000000" points="83,943.9988,87,953.9988,91,943.9988,87,947.9988" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="87" x2="87" y1="977.9988" y2="1031.1987"/><polygon fill="#000000" points="83,1021.1987,87,1031.1987,91,1021.1987,87,1025.1987" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="87" x2="87" y1="1055.1987" y2="1121.5985"/><polygon fill="#000000" points="83,1111.5985,87,1121.5985,91,1111.5985,87,1115.5985" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="87" x2="87" y1="1145.5985" y2="1198.7985"/><polygon fill="#000000" points="83,1188.7985,87,1198.7985,91,1188.7985,87,1192.7985" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="87" x2="87" y1="1222.7985" y2="1275.9984"/><polygon fill="#000000" points="83,1265.9984,87,1275.9984,91,1265.9984,87,1269.9984" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="87" x2="87" y1="1299.9984" y2="1353.1983"/><polygon fill="#000000" points="83,1343.1983,87,1353.1983,91,1343.1983,87,1347.1983" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="87" x2="87" y1="1377.1983" y2="1430.3982"/><polygon fill="#000000" points="83,1420.3982,87,1430.3982,91,1420.3982,87,1424.3982" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="87" x2="87" y1="1454.3982" y2="1507.5981"/><polygon fill="#000000" points="83,1497.5981,87,1507.5981,91,1497.5981,87,1501.5981" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="87" x2="87" y1="1531.5981" y2="1584.798"/><polygon fill="#000000" points="83,1574.798,87,1584.798,91,1574.798,87,1578.798" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="313.25" x2="313.25" y1="297.5995" y2="312.5995"/><line style="stroke: #000000; stroke-width: 1.5;" x1="313.25" x2="473.5" y1="312.5995" y2="312.5995"/><line style="stroke: #000000; stroke-width: 1.5;" x1="473.5" x2="473.5" y1="312.5995" y2="1713.9979"/><line style="stroke: #000000; stroke-width: 1.5;" x1="473.5" x2="259.25" y1="1713.9979" y2="1713.9979"/><polygon fill="#000000" points="269.25,1709.9979,259.25,1713.9979,269.25,1717.9979,265.25,1713.9979" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="341" x2="341" y1="545.1992" y2="560.1992"/><line style="stroke: #000000; stroke-width: 1.5;" x1="341" x2="473.5" y1="560.1992" y2="560.1992"/><polygon fill="#000000" points="463.5,556.1992,473.5,560.1992,463.5,564.1992,467.5,560.1992" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="352.25" x2="352.25" y1="856.7989" y2="871.7989"/><line style="stroke: #000000; stroke-width: 1.5;" x1="352.25" x2="473.5" y1="871.7989" y2="871.7989"/><polygon fill="#000000" points="463.5,867.7989,473.5,871.7989,463.5,875.7989,467.5,871.7989" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="313.25" x2="313.25" y1="933.9988" y2="948.9988"/><line style="stroke: #000000; stroke-width: 1.5;" x1="313.25" x2="473.5" y1="948.9988" y2="948.9988"/><polygon fill="#000000" points="463.5,944.9988,473.5,948.9988,463.5,952.9988,467.5,948.9988" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="313.25" x2="313.25" y1="1011.1987" y2="1026.1987"/><line style="stroke: #000000; stroke-width: 1.5;" x1="313.25" x2="473.5" y1="1026.1987" y2="1026.1987"/><polygon fill="#000000" points="463.5,1022.1987,473.5,1026.1987,463.5,1030.1987,467.5,1026.1987" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="313.25" x2="313.25" y1="1101.5985" y2="1116.5985"/><line style="stroke: #000000; stroke-width: 1.5;" x1="313.25" x2="473.5" y1="1116.5985" y2="1116.5985"/><polygon fill="#000000" points="463.5,1112.5985,473.5,1116.5985,463.5,1120.5985,467.5,1116.5985" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="313.25" x2="313.25" y1="1178.7985" y2="1193.7985"/><line style="stroke: #000000; stroke-width: 1.5;" x1="313.25" x2="473.5" y1="1193.7985" y2="1193.7985"/><polygon fill="#000000" points="463.5,1189.7985,473.5,1193.7985,463.5,1197.7985,467.5,1193.7985" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="313.25" x2="313.25" y1="1255.9984" y2="1270.9984"/><line style="stroke: #000000; stroke-width: 1.5;" x1="313.25" x2="473.5" y1="1270.9984" y2="1270.9984"/><polygon fill="#000000" points="463.5,1266.9984,473.5,1270.9984,463.5,1274.9984,467.5,1270.9984" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="313.25" x2="313.25" y1="1333.1983" y2="1348.1983"/><line style="stroke: #000000; stroke-width: 1.5;" x1="313.25" x2="473.5" y1="1348.1983" y2="1348.1983"/><polygon fill="#000000" points="463.5,1344.1983,473.5,1348.1983,463.5,1352.1983,467.5,1348.1983" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="313.25" x2="313.25" y1="1410.3982" y2="1425.3982"/><line style="stroke: #000000; stroke-width: 1.5;" x1="313.25" x2="473.5" y1="1425.3982" y2="1425.3982"/><polygon fill="#000000" points="463.5,1421.3982,473.5,1425.3982,463.5,1429.3982,467.5,1425.3982" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="313.25" x2="313.25" y1="1487.5981" y2="1502.5981"/><line style="stroke: #000000; stroke-width: 1.5;" x1="313.25" x2="473.5" y1="1502.5981" y2="1502.5981"/><polygon fill="#000000" points="463.5,1498.5981,473.5,1502.5981,463.5,1506.5981,467.5,1502.5981" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="313.25" x2="313.25" y1="1564.798" y2="1579.798"/><line style="stroke: #000000; stroke-width: 1.5;" x1="313.25" x2="473.5" y1="1579.798" y2="1579.798"/><polygon fill="#000000" points="463.5,1575.798,473.5,1579.798,463.5,1583.798,467.5,1579.798" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="247.25" x2="247.25" y1="60.7999" y2="65.7999"/><line style="stroke: #000000; stroke-width: 1.5;" x1="247.25" x2="87" y1="65.7999" y2="65.7999"/><line style="stroke: #000000; stroke-width: 1.5;" x1="87" x2="87" y1="65.7999" y2="80.7999"/><polygon fill="#000000" points="83,70.7999,87,80.7999,91,70.7999,87,74.7999" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="87" x2="87" y1="1608.798" y2="1686.9979"/><line style="stroke: #000000; stroke-width: 1.5;" x1="87" x2="247.25" y1="1686.9979" y2="1686.9979"/><line style="stroke: #000000; stroke-width: 1.5;" x1="247.25" x2="247.25" y1="1686.9979" y2="1701.9979"/><polygon fill="#000000" points="243.25,1691.9979,247.25,1701.9979,251.25,1691.9979,247.25,1695.9979" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="247.25" x2="247.25" y1="1725.9979" y2="1745.9979"/><polygon fill="#000000" points="243.25,1735.9979,247.25,1745.9979,251.25,1735.9979,247.25,1739.9979" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[1e9252136530abe4d1680e1188338b6b]
+@startuml win_update
+!pragma useVerticalIf on
+!define LIGHTBLUE
+!includeurl https://raw.githubusercontent.com/grelltrier/RedDress-PlantUML/master/style.puml
+
+partition "Win::update()"{ 
+
+    start
+    if (GestureSignal) then (yes)
+        :GestureModel::convert_to_interaction(GestureSignal);
+        :Interaction]
+        :Convert absolute coordinates to relative coodinates;
+        :Keyboard::input(Interaction);
+    elseif (ButtonInteraction) then (yes)
+        :ButtonId]
+        if (Button exist?) then (yes)
+            :Activate/deactivate ToggleButton;
+        else (no)
+            :Emit error;
+        endif
+        :Give haptic feedback;
+    elseif (OpenPopup) then (yes)
+        :ButtonId]
+        if (Button exist?) then (yes)
+            :Deactivate ToggleButton;
+            if (Has popover?) then (yes)
+                :Show Popover;
+            else (no)
+                :Emit error;
+            endif
+        else (no)
+        :Emit error;
+    endif
+    elseif (SubmitText) then (yes)
+        :Keyboard::submit_text;
+    elseif (Suggestions) then (yes)
+        :Set the labels of the suggestion buttons to the new values;
+    elseif (SetVisibility) then (yes)
+        :Change the visibility of the window
+        Update 'visibility' value of DBusService;
+    elseif (HintPurpose) then (yes)
+        :Not implemented;
+    elseif (ChangeUILayoutView) then (yes)
+        :UIManager.change_layout_view();
+    elseif (ChangeKBLayoutView) then (yes)
+        :Set active_view of Keyboard to new value;
+    elseif (ChangeUIOrientation) then (yes)
+        :UIManager.change_orientation();
+    elseif (PollEvents) then (yes)
+        :Fetch the new events from the wayland server;
+    elseif (UpdateDrawBuffer) then (yes)
+        :Win::draw_path();
+    elseif (Quit) then (yes)
+        :gtk::main_quit();
+        end
+    endif
+    stop
+}
+@enduml
+
+@startuml win_update
+!pragma useVerticalIf on
+
+
+
+
+skinparam stereotypeCBackgroundColor 1a66c2
+
+
+
+
+
+
+
+skinparam backgroundColor fff
+
+
+
+
+
+
+
+
+skinparam circledCharacter {
+  radius 8
+  fontSize 11
+  fontName Verdana
+}
+
+skinparam class {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+
+  attributeFontColor 333
+  attributeFontSize 11
+  attributeIconSize 11
+}
+
+
+skinparam ActivityBarColor 1a66c2
+skinparam activityDiamondBackgroundColor ccc
+skinparam activityDiamondBorderColor 1a66c2
+
+
+skinparam actor {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam participant {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam collections {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam SequenceBox{
+    backgroundColor e0e0e0
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+skinparam interface {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam component {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam node {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam database {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam queue {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+skinparam usecase {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+skinparam activity {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+skinparam sequence {
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+
+  lifeLineBorderColor 2a86e2
+  lifeLineBackgroundColor e0e0e0
+}
+
+skinparam boundary {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam control {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam entity {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+skinparam state {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+  startColor 2a86e2
+  endColor 1a66c2
+}
+
+
+skinparam object {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+
+skinparam note {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam cloud {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+skinparam rectangle {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam storage {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+partition "Win::update()"{ 
+
+    start
+    if (GestureSignal) then (yes)
+        :GestureModel::convert_to_interaction(GestureSignal);
+        :Interaction]
+        :Convert absolute coordinates to relative coodinates;
+        :Keyboard::input(Interaction);
+    elseif (ButtonInteraction) then (yes)
+        :ButtonId]
+        if (Button exist?) then (yes)
+            :Activate/deactivate ToggleButton;
+        else (no)
+            :Emit error;
+        endif
+        :Give haptic feedback;
+    elseif (OpenPopup) then (yes)
+        :ButtonId]
+        if (Button exist?) then (yes)
+            :Deactivate ToggleButton;
+            if (Has popover?) then (yes)
+                :Show Popover;
+            else (no)
+                :Emit error;
+            endif
+        else (no)
+        :Emit error;
+    endif
+    elseif (SubmitText) then (yes)
+        :Keyboard::submit_text;
+    elseif (Suggestions) then (yes)
+        :Set the labels of the suggestion buttons to the new values;
+    elseif (SetVisibility) then (yes)
+        :Change the visibility of the window
+        Update 'visibility' value of DBusService;
+    elseif (HintPurpose) then (yes)
+        :Not implemented;
+    elseif (ChangeUILayoutView) then (yes)
+        :UIManager.change_layout_view();
+    elseif (ChangeKBLayoutView) then (yes)
+        :Set active_view of Keyboard to new value;
+    elseif (ChangeUIOrientation) then (yes)
+        :UIManager.change_orientation();
+    elseif (PollEvents) then (yes)
+        :Fetch the new events from the wayland server;
+    elseif (UpdateDrawBuffer) then (yes)
+        :Win::draw_path();
+    elseif (Quit) then (yes)
+        :gtk::main_quit();
+        end
+    endif
+    stop
+}
+@enduml
+
+PlantUML version 1.2020.19(Mon Oct 12 17:10:01 CEST 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

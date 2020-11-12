@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="824px" preserveAspectRatio="none" style="width:521px;height:824px;" version="1.1" viewBox="0 0 521 824" width="521px" zoomAndPan="magnify"><defs><filter height="300%" id="f1l99wqts0c6gk" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><rect fill="#FFFFFF" filter="url(#f1l99wqts0c6gk)" height="796.198" style="stroke: #000000; stroke-width: 2.0;" width="493.5" x="11" y="11"/><path d="M91,11 L91,20.7999 L81,30.7999 L11,30.7999 " fill="none" style="stroke: #000000; stroke-width: 2.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="70" x="14" y="25.0059">Win::view()</text><ellipse cx="172" cy="50.7999" fill="#000000" filter="url(#f1l99wqts0c6gk)" rx="10" ry="10" style="stroke: none; stroke-width: 1.0;"/><rect fill="#CCCCCC" filter="url(#f1l99wqts0c6gk)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="72" x="136" y="80.7999"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="52" x="146" y="101.0189">load_css()</text><rect fill="#CCCCCC" filter="url(#f1l99wqts0c6gk)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="112" x="116" y="133.9998"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="92" x="126" y="154.2188">Make UIConnector</text><rect fill="#CCCCCC" filter="url(#f1l99wqts0c6gk)" height="33.1999" style="stroke: #1A66C2; stroke-width: 1.5;" width="82" x="131" y="187.1997"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="62" x="141" y="207.4187">UIConnector</text><rect fill="#CCCCCC" filter="url(#f1l99wqts0c6gk)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="143" x="100.5" y="240.3996"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="123" x="110.5" y="260.6186">LayoutMeta::deserialize()</text><rect fill="#CCCCCC" filter="url(#f1l99wqts0c6gk)" height="46.3998" style="stroke: #1A66C2; stroke-width: 1.5;" width="151" x="96.5" y="293.5995"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="88" x="130.5" y="313.8185">&lt;&lt;CentralBuffer&gt;&gt;</text><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="131" x="106.5" y="327.0184">LayoutDeserializedStorage</text><rect fill="#CCCCCC" filter="url(#f1l99wqts0c6gk)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="302" x="21" y="359.9993"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="282" x="31" y="380.2183">Keyboard::from(UIConnector, LayoutDeserializedStorage)</text><rect fill="#CCCCCC" filter="url(#f1l99wqts0c6gk)" height="33.1999" style="stroke: #1A66C2; stroke-width: 1.5;" width="67" x="138.5" y="413.1992"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="47" x="148.5" y="433.4182">Keyboard</text><path d="M331.5,464.7992 L331.5,478.9991 L311.5,482.9991 L331.5,486.9991 L331.5,501.199 A0,0 0 0 0 331.5,501.199 L494.5,501.199 A0,0 0 0 0 494.5,501.199 L494.5,474.7992 L484.5,464.7992 L331.5,464.7992 A0,0 0 0 0 331.5,464.7992 " fill="#2A86E2" filter="url(#f1l99wqts0c6gk)" style="stroke: #1A66C2; stroke-width: 1.0;"/><path d="M484.5,464.7992 L484.5,474.7992 L494.5,474.7992 L484.5,464.7992 " fill="#2A86E2" style="stroke: #1A66C2; stroke-width: 1.0;"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="139" x="337.5" y="480.0181">The Stack contains a Grid of</text><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="138" x="337.5" y="493.218">ToggleButtons for each view</text><rect fill="#CCCCCC" filter="url(#f1l99wqts0c6gk)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="279" x="32.5" y="466.3991"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="259" x="42.5" y="486.6181">GridBuilder::make_stack(LayoutDeserializedStorage)</text><rect fill="#CCCCCC" filter="url(#f1l99wqts0c6gk)" height="46.3998" style="stroke: #1A66C2; stroke-width: 1.5;" width="137" x="103.5" y="521.199"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="88" x="137.5" y="541.4179">&lt;&lt;CentralBuffer&gt;&gt;</text><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="117" x="113.5" y="554.6178">Stack of Grids for views</text><rect fill="#CCCCCC" filter="url(#f1l99wqts0c6gk)" height="112.3993" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="213" x="65.5" y="587.5988"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="99" x="75.5" y="607.8177">Create DrawingArea</text><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="161" x="75.5" y="621.0176">Overlay DrawingArea over Stack</text><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="123" x="75.5" y="634.2175">Make Box of suggestions</text><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="72" x="75.5" y="647.4174">Set up Window</text><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="193" x="75.5" y="660.6173">Attach gtk::GestureHandlers to Overlay</text><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="90" x="75.5" y="673.8172">Create UIManager</text><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="54" x="75.5" y="687.0171">Create Win</text><rect fill="#CCCCCC" filter="url(#f1l99wqts0c6gk)" height="33.1999" style="stroke: #1A66C2; stroke-width: 1.5;" width="38" x="153" y="719.9981"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="18" x="163" y="740.217">Win</text><ellipse cx="172" cy="784.198" fill="#FFFFFF" filter="url(#f1l99wqts0c6gk)" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"/><ellipse cx="172" cy="784.198" fill="#000000" rx="6" ry="6" style="stroke: #7F7F7F; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="172" x2="172" y1="60.7999" y2="80.7999"/><polygon fill="#000000" points="168,70.7999,172,80.7999,176,70.7999,172,74.7999" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="172" x2="172" y1="113.9998" y2="133.9998"/><polygon fill="#000000" points="168,123.9998,172,133.9998,176,123.9998,172,127.9998" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="172" x2="172" y1="167.1997" y2="187.1997"/><polygon fill="#000000" points="168,177.1997,172,187.1997,176,177.1997,172,181.1997" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="172" x2="172" y1="220.3996" y2="240.3996"/><polygon fill="#000000" points="168,230.3996,172,240.3996,176,230.3996,172,234.3996" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="172" x2="172" y1="273.5995" y2="293.5995"/><polygon fill="#000000" points="168,283.5995,172,293.5995,176,283.5995,172,287.5995" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="172" x2="172" y1="339.9993" y2="359.9993"/><polygon fill="#000000" points="168,349.9993,172,359.9993,176,349.9993,172,353.9993" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="172" x2="172" y1="393.1992" y2="413.1992"/><polygon fill="#000000" points="168,403.1992,172,413.1992,176,403.1992,172,407.1992" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="172" x2="172" y1="446.3991" y2="466.3991"/><polygon fill="#000000" points="168,456.3991,172,466.3991,176,456.3991,172,460.3991" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="172" x2="172" y1="499.599" y2="521.199"/><polygon fill="#000000" points="168,511.199,172,521.199,176,511.199,172,515.199" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="172" x2="172" y1="567.5988" y2="587.5988"/><polygon fill="#000000" points="168,577.5988,172,587.5988,176,577.5988,172,581.5988" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="172" x2="172" y1="699.9981" y2="719.9981"/><polygon fill="#000000" points="168,709.9981,172,719.9981,176,709.9981,172,713.9981" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="172" x2="172" y1="753.198" y2="773.198"/><polygon fill="#000000" points="168,763.198,172,773.198,176,763.198,172,767.198" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[98002ee1edec3c952307ffd291490e91]
+@startuml win_view
+!define LIGHTBLUE
+!includeurl https://raw.githubusercontent.com/grelltrier/RedDress-PlantUML/master/style.puml
+
+
+partition "Win::view()"{
+  start
+  :load_css();
+  :Make UIConnector;
+  :UIConnector]
+  :LayoutMeta::deserialize();
+
+  :        <<CentralBuffer>>
+  LayoutDeserializedStorage]
+
+  :Keyboard::from(UIConnector, LayoutDeserializedStorage);
+  :Keyboard]
+  :GridBuilder::make_stack(LayoutDeserializedStorage);
+  note right
+    The Stack contains a Grid of 
+    ToggleButtons for each view
+  end note
+
+  :        <<CentralBuffer>>
+  Stack of Grids for views]
+
+  :Create DrawingArea
+  Overlay DrawingArea over Stack
+  Make Box of suggestions
+  Set up Window
+  Attach gtk::GestureHandlers to Overlay
+  Create UIManager
+  Create Win;
+  :Win]
+  stop
+}
+
+@enduml
+
+@startuml win_view
+
+
+
+
+skinparam stereotypeCBackgroundColor 1a66c2
+
+
+
+
+
+
+
+skinparam backgroundColor fff
+
+
+
+
+
+
+
+
+skinparam circledCharacter {
+  radius 8
+  fontSize 11
+  fontName Verdana
+}
+
+skinparam class {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+
+  attributeFontColor 333
+  attributeFontSize 11
+  attributeIconSize 11
+}
+
+
+skinparam ActivityBarColor 1a66c2
+skinparam activityDiamondBackgroundColor ccc
+skinparam activityDiamondBorderColor 1a66c2
+
+
+skinparam actor {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam participant {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam collections {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam SequenceBox{
+    backgroundColor e0e0e0
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+skinparam interface {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam component {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam node {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam database {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam queue {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+skinparam usecase {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+skinparam activity {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+skinparam sequence {
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+
+  lifeLineBorderColor 2a86e2
+  lifeLineBackgroundColor e0e0e0
+}
+
+skinparam boundary {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam control {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam entity {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+skinparam state {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+  startColor 2a86e2
+  endColor 1a66c2
+}
+
+
+skinparam object {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+
+skinparam note {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam cloud {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+skinparam rectangle {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam storage {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+
+partition "Win::view()"{
+  start
+  :load_css();
+  :Make UIConnector;
+  :UIConnector]
+  :LayoutMeta::deserialize();
+
+  :        <<CentralBuffer>>
+  LayoutDeserializedStorage]
+
+  :Keyboard::from(UIConnector, LayoutDeserializedStorage);
+  :Keyboard]
+  :GridBuilder::make_stack(LayoutDeserializedStorage);
+  note right
+    The Stack contains a Grid of 
+    ToggleButtons for each view
+  end note
+
+  :        <<CentralBuffer>>
+  Stack of Grids for views]
+
+  :Create DrawingArea
+  Overlay DrawingArea over Stack
+  Make Box of suggestions
+  Set up Window
+  Attach gtk::GestureHandlers to Overlay
+  Create UIManager
+  Create Win;
+  :Win]
+  stop
+}
+
+@enduml
+
+PlantUML version 1.2020.19(Mon Oct 12 17:10:01 CEST 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="1086px" preserveAspectRatio="none" style="width:298px;height:1086px;" version="1.1" viewBox="0 0 298 1086" width="298px" zoomAndPan="magnify"><defs><filter height="300%" id="f1ut6jlsw7cawt" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><rect fill="#FFFFFF" filter="url(#f1ut6jlsw7cawt)" height="1058.5362" style="stroke: #000000; stroke-width: 2.0;" width="270.5" x="11" y="11"/><path d="M209,11 L209,20.7999 L199,30.7999 L11,30.7999 " fill="none" style="stroke: #000000; stroke-width: 2.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="188" x="14" y="25.0059">GridBuilder::attach_popover()</text><ellipse cx="145" cy="50.7999" fill="#000000" filter="url(#f1ut6jlsw7cawt)" rx="10" ry="10" style="stroke: none; stroke-width: 1.0;"/><rect fill="#CCCCCC" filter="url(#f1ut6jlsw7cawt)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="208" x="41" y="80.7999"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="188" x="51" y="101.0189">Create a new option to have a popover</text><rect fill="#CCCCCC" filter="url(#f1ut6jlsw7cawt)" height="33.1999" style="stroke: #1A66C2; stroke-width: 1.5;" width="127" x="81.5" y="133.9998"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="107" x="91.5" y="154.2188">popover_option=None</text><rect fill="#CCCCCC" filter="url(#f1ut6jlsw7cawt)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="119" x="85.5" y="235.7997"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="99" x="95.5" y="256.0186">Create new popover</text><rect fill="#CCCCCC" filter="url(#f1ut6jlsw7cawt)" height="33.1999" style="stroke: #1A66C2; stroke-width: 1.5;" width="107" x="91.5" y="288.9996"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="87" x="101.5" y="309.2185">popover=Popover</text><rect fill="#CCCCCC" filter="url(#f1ut6jlsw7cawt)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="135" x="77.5" y="342.1995"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="115" x="87.5" y="362.4184">Create new vertical box</text><rect fill="#CCCCCC" filter="url(#f1ut6jlsw7cawt)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="110" x="90" y="451.1183"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="90" x="100" y="471.3372">Add horizontal box</text><rect fill="#CCCCCC" filter="url(#f1ut6jlsw7cawt)" height="72.7996" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="165" x="62.5" y="560.0371"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="116" x="72.5" y="580.2561">Make new popup button</text><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="145" x="72.5" y="593.456">Add style class 'popover_key'</text><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="92" x="72.5" y="606.6559">Set its label to its id</text><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="110" x="72.5" y="619.8558">Add it to horizontal box</text><rect fill="#CCCCCC" filter="url(#f1ut6jlsw7cawt)" height="59.5997" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="173" x="58.5" y="655.1368"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="138" x="68.5" y="675.3558">Connect its 'clicked' event to</text><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="153" x="68.5" y="688.5557">sending a SubmitText message</text><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="44" x="68.5" y="701.7556">with its id</text><polygon fill="#CCCCCC" filter="url(#f1ut6jlsw7cawt)" points="76.5,504.3182,213.5,504.3182,225.5,516.3182,213.5,528.3182,76.5,528.3182,64.5,516.3182,76.5,504.3182" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="19" x="149" y="538.5371">true</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="137" x="76.5" y="519.9372">for popup_id in popup_string</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="23" x="41.5" y="513.3372">false</text><rect fill="#CCCCCC" filter="url(#f1ut6jlsw7cawt)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="181" x="54.5" y="756.7365"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="161" x="64.5" y="776.9555">Add horizontal box to vertical box</text><polygon fill="#CCCCCC" filter="url(#f1ut6jlsw7cawt)" points="77,395.3994,213,395.3994,225,407.3994,213,419.3994,77,419.3994,65,407.3994,77,395.3994" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="19" x="149" y="429.6183">true</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="136" x="77" y="411.0184">for popup_string in KeyMeta</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="23" x="42" y="404.4184">false</text><rect fill="#CCCCCC" filter="url(#f1ut6jlsw7cawt)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="153" x="68.5" y="831.9364"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="133" x="78.5" y="852.1554">Add vertical box to popover</text><rect fill="#CCCCCC" filter="url(#f1ut6jlsw7cawt)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="183" x="53.5" y="885.1363"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="163" x="63.5" y="905.3553">popover_option = Some(popover)</text><polygon fill="#CCCCCC" filter="url(#f1ut6jlsw7cawt)" points="75,187.1997,215,187.1997,227,199.1997,215,211.1997,75,211.1997,63,199.1997,75,187.1997" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="18" x="149" y="221.4187">yes</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="140" x="75" y="202.8187">Key ought to have a popover</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="12" x="227" y="196.2188">no</text><polygon fill="#CCCCCC" filter="url(#f1ut6jlsw7cawt)" points="145,938.3362,157,950.3362,145,962.3362,133,950.3362,145,938.3362" style="stroke: #1A66C2; stroke-width: 1.5;"/><rect fill="#CCCCCC" filter="url(#f1ut6jlsw7cawt)" height="33.1999" style="stroke: #1A66C2; stroke-width: 1.5;" width="95" x="97.5" y="982.3362"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="75" x="107.5" y="1002.5552">popover_option</text><ellipse cx="145" cy="1046.5362" fill="#FFFFFF" filter="url(#f1ut6jlsw7cawt)" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"/><ellipse cx="145" cy="1046.5362" fill="#000000" rx="6" ry="6" style="stroke: #7F7F7F; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="145" x2="145" y1="60.7999" y2="80.7999"/><polygon fill="#000000" points="141,70.7999,145,80.7999,149,70.7999,145,74.7999" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="145" x2="145" y1="113.9998" y2="133.9998"/><polygon fill="#000000" points="141,123.9998,145,133.9998,149,123.9998,145,127.9998" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="145" x2="145" y1="268.9996" y2="288.9996"/><polygon fill="#000000" points="141,278.9996,145,288.9996,149,278.9996,145,282.9996" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="145" x2="145" y1="322.1995" y2="342.1995"/><polygon fill="#000000" points="141,332.1995,145,342.1995,149,332.1995,145,336.1995" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="145" x2="145" y1="632.8367" y2="655.1368"/><polygon fill="#000000" points="141,645.1368,145,655.1368,149,645.1368,145,649.1368" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="145" x2="145" y1="528.3182" y2="560.0371"/><polygon fill="#000000" points="141,550.0371,145,560.0371,149,550.0371,145,554.0371" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="145" x2="145" y1="714.7365" y2="724.7365"/><line style="stroke: #000000; stroke-width: 1.5;" x1="145" x2="243.5" y1="724.7365" y2="724.7365"/><polygon fill="#000000" points="239.5,635.1368,243.5,625.1368,247.5,635.1368,243.5,631.1368" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="243.5" x2="243.5" y1="516.3182" y2="724.7365"/><line style="stroke: #000000; stroke-width: 1.5;" x1="243.5" x2="225.5" y1="516.3182" y2="516.3182"/><polygon fill="#000000" points="235.5,512.3182,225.5,516.3182,235.5,520.3182,231.5,516.3182" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="64.5" x2="46.5" y1="516.3182" y2="516.3182"/><polygon fill="#000000" points="42.5,621.1368,46.5,631.1368,50.5,621.1368,46.5,625.1368" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="46.5" x2="46.5" y1="516.3182" y2="736.7365"/><line style="stroke: #000000; stroke-width: 1.5;" x1="46.5" x2="145" y1="736.7365" y2="736.7365"/><line style="stroke: #000000; stroke-width: 1.5;" x1="145" x2="145" y1="736.7365" y2="756.7365"/><polygon fill="#000000" points="141,746.7365,145,756.7365,149,746.7365,145,750.7365" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="145" x2="145" y1="484.3182" y2="504.3182"/><polygon fill="#000000" points="141,494.3182,145,504.3182,149,494.3182,145,498.3182" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="145" x2="145" y1="419.3994" y2="451.1183"/><polygon fill="#000000" points="141,441.1183,145,451.1183,149,441.1183,145,445.1183" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="145" x2="145" y1="789.9364" y2="799.9364"/><line style="stroke: #000000; stroke-width: 1.5;" x1="145" x2="255.5" y1="799.9364" y2="799.9364"/><polygon fill="#000000" points="251.5,616.5369,255.5,606.5369,259.5,616.5369,255.5,612.5369" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="255.5" x2="255.5" y1="407.3994" y2="799.9364"/><line style="stroke: #000000; stroke-width: 1.5;" x1="255.5" x2="225" y1="407.3994" y2="407.3994"/><polygon fill="#000000" points="235,403.3994,225,407.3994,235,411.3994,231,407.3994" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="65" x2="27" y1="407.3994" y2="407.3994"/><polygon fill="#000000" points="23,602.5369,27,612.5369,31,602.5369,27,606.5369" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="27" x2="27" y1="407.3994" y2="811.9364"/><line style="stroke: #000000; stroke-width: 1.5;" x1="27" x2="145" y1="811.9364" y2="811.9364"/><line style="stroke: #000000; stroke-width: 1.5;" x1="145" x2="145" y1="811.9364" y2="831.9364"/><polygon fill="#000000" points="141,821.9364,145,831.9364,149,821.9364,145,825.9364" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="145" x2="145" y1="375.3994" y2="395.3994"/><polygon fill="#000000" points="141,385.3994,145,395.3994,149,385.3994,145,389.3994" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="145" x2="145" y1="865.1363" y2="885.1363"/><polygon fill="#000000" points="141,875.1363,145,885.1363,149,875.1363,145,879.1363" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="145" x2="145" y1="211.1997" y2="235.7997"/><polygon fill="#000000" points="141,225.7997,145,235.7997,149,225.7997,145,229.7997" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="227" x2="265.5" y1="199.1997" y2="199.1997"/><polygon fill="#000000" points="261.5,562.4369,265.5,572.4369,269.5,562.4369,265.5,566.4369" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="265.5" x2="265.5" y1="199.1997" y2="950.3362"/><line style="stroke: #000000; stroke-width: 1.5;" x1="265.5" x2="157" y1="950.3362" y2="950.3362"/><polygon fill="#000000" points="167,946.3362,157,950.3362,167,954.3362,163,950.3362" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="145" x2="145" y1="918.3362" y2="938.3362"/><polygon fill="#000000" points="141,928.3362,145,938.3362,149,928.3362,145,932.3362" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="145" x2="145" y1="167.1997" y2="187.1997"/><polygon fill="#000000" points="141,177.1997,145,187.1997,149,177.1997,145,181.1997" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="145" x2="145" y1="962.3362" y2="982.3362"/><polygon fill="#000000" points="141,972.3362,145,982.3362,149,972.3362,145,976.3362" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="145" x2="145" y1="1015.5362" y2="1035.5362"/><polygon fill="#000000" points="141,1025.5362,145,1035.5362,149,1025.5362,145,1029.5362" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[82490ed504fbd71b350c4117a5fee769]
+@startuml grid_builder_attach_popover
+!define LIGHTBLUE
+!includeurl https://raw.githubusercontent.com/grelltrier/RedDress-PlantUML/master/style.puml
+
+partition "GridBuilder::attach_popover()"{
+  start
+  :Create a new option to have a popover;
+  :popover_option=None]
+
+  if (Key ought to have a popover) then (yes)
+    :Create new popover;
+    :popover=Popover]
+    :Create new vertical box;
+    while (for popup_string in KeyMeta) is (true)
+      :Add horizontal box;
+      while (for popup_id in popup_string) is (true)
+        :Make new popup button
+        Add style class 'popover_key'
+        Set its label to its id
+        Add it to horizontal box;
+        :Connect its 'clicked' event to 
+        sending a SubmitText message
+        with its id;
+      endwhile (false)
+      :Add horizontal box to vertical box;
+    endwhile (false)
+    :Add vertical box to popover;
+    :popover_option = Some(popover);
+  else (no)
+  endif
+  :popover_option]
+  stop
+}
+@enduml
+
+@startuml grid_builder_attach_popover
+
+
+
+
+skinparam stereotypeCBackgroundColor 1a66c2
+
+
+
+
+
+
+
+skinparam backgroundColor fff
+
+
+
+
+
+
+
+
+skinparam circledCharacter {
+  radius 8
+  fontSize 11
+  fontName Verdana
+}
+
+skinparam class {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+
+  attributeFontColor 333
+  attributeFontSize 11
+  attributeIconSize 11
+}
+
+
+skinparam ActivityBarColor 1a66c2
+skinparam activityDiamondBackgroundColor ccc
+skinparam activityDiamondBorderColor 1a66c2
+
+
+skinparam actor {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam participant {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam collections {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam SequenceBox{
+    backgroundColor e0e0e0
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+skinparam interface {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam component {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam node {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam database {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam queue {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+skinparam usecase {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+skinparam activity {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+skinparam sequence {
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+
+  lifeLineBorderColor 2a86e2
+  lifeLineBackgroundColor e0e0e0
+}
+
+skinparam boundary {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam control {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam entity {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+skinparam state {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+  startColor 2a86e2
+  endColor 1a66c2
+}
+
+
+skinparam object {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+
+skinparam note {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam cloud {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+skinparam rectangle {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam storage {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+partition "GridBuilder::attach_popover()"{
+  start
+  :Create a new option to have a popover;
+  :popover_option=None]
+
+  if (Key ought to have a popover) then (yes)
+    :Create new popover;
+    :popover=Popover]
+    :Create new vertical box;
+    while (for popup_string in KeyMeta) is (true)
+      :Add horizontal box;
+      while (for popup_id in popup_string) is (true)
+        :Make new popup button
+        Add style class 'popover_key'
+        Set its label to its id
+        Add it to horizontal box;
+        :Connect its 'clicked' event to 
+        sending a SubmitText message
+        with its id;
+      endwhile (false)
+      :Add horizontal box to vertical box;
+    endwhile (false)
+    :Add vertical box to popover;
+    :popover_option = Some(popover);
+  else (no)
+  endif
+  :popover_option]
+  stop
+}
+@enduml
+
+PlantUML version 1.2020.19(Mon Oct 12 17:10:01 CEST 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

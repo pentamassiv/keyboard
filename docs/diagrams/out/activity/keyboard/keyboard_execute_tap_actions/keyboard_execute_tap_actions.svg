@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="1560px" preserveAspectRatio="none" style="width:631px;height:1560px;" version="1.1" viewBox="0 0 631 1560" width="631px" zoomAndPan="magnify"><defs><filter height="300%" id="f1oc297vm9430x" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><rect fill="#FFFFFF" filter="url(#f1oc297vm9430x)" height="1532.3172" style="stroke: #000000; stroke-width: 2.0;" width="603" x="11" y="11"/><path d="M219,11 L219,20.7999 L209,30.7999 L11,30.7999 " fill="none" style="stroke: #000000; stroke-width: 2.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="198" x="14" y="25.0059">keyboard_execute_tap_actions</text><ellipse cx="307.5" cy="50.7999" fill="#000000" filter="url(#f1oc297vm9430x)" rx="10" ry="10" style="stroke: none; stroke-width: 1.0;"/><rect fill="#CCCCCC" filter="url(#f1oc297vm9430x)" height="46.3998" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="177" x="219" y="80.7999"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="157" x="229" y="101.0189">If the last switch was temporary,</text><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="147" x="229" y="114.2188">switch back to previous layout</text><rect fill="#CCCCCC" filter="url(#f1oc297vm9430x)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="212" x="339" y="319.5186"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="192" x="349" y="339.7375">Tell UI to display the press of the button</text><polygon fill="#CCCCCC" filter="url(#f1oc297vm9430x)" points="258.5,295.5186,292.5,295.5186,304.5,307.5186,292.5,319.5186,258.5,319.5186,246.5,307.5186,258.5,295.5186" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="34" x="258.5" y="311.1376">press?</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="18" x="304.5" y="304.5376">yes</text><polygon fill="#CCCCCC" filter="url(#f1oc297vm9430x)" points="224,372.7185,327,372.7185,339,384.7185,327,396.7185,224,396.7185,212,384.7185,224,372.7185" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="12" x="279.5" y="406.9374">no</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="103" x="224" y="388.3375">key in latched_keys?</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="18" x="339" y="381.7375">yes</text><rect fill="#CCCCCC" filter="url(#f1oc297vm9430x)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="220" x="271.5" y="416.7185"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="200" x="281.5" y="436.9374">Tell UI to display the release of the button</text><polygon fill="#CCCCCC" filter="url(#f1oc297vm9430x)" points="381.5,469.9184,393.5,481.9184,381.5,493.9184,369.5,481.9184,381.5,469.9184" style="stroke: #1A66C2; stroke-width: 1.5;"/><rect fill="#CCCCCC" filter="url(#f1oc297vm9430x)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="98" x="332.5" y="537.9184"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="78" x="342.5" y="558.1373">Submit keycode</text><rect fill="#CCCCCC" filter="url(#f1oc297vm9430x)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="98" x="332.5" y="615.1183"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="78" x="342.5" y="635.3372">Submit keycode</text><rect fill="#CCCCCC" filter="url(#f1oc297vm9430x)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="98" x="332.5" y="692.3182"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="78" x="342.5" y="712.5371">Toggle keycode</text><rect fill="#CCCCCC" filter="url(#f1oc297vm9430x)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="212" x="275.5" y="769.5181"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="192" x="285.5" y="789.737">Send text of the button to the interpreter</text><rect fill="#CCCCCC" filter="url(#f1oc297vm9430x)" height="33.1999" style="stroke: #1A66C2; stroke-width: 1.5;" width="128" x="317.5" y="837.718"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="108" x="327.5" y="857.9369">Vector of submissions</text><rect fill="#CCCCCC" filter="url(#f1oc297vm9430x)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="204" x="279.5" y="890.9179"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="184" x="289.5" y="911.1368">Submit all of the returned submissions</text><polygon fill="#CCCCCC" filter="url(#f1oc297vm9430x)" points="349.25,968.1178,431.25,968.1178,443.25,980.1178,431.25,992.1178,349.25,992.1178,337.25,980.1178,349.25,968.1178" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="82" x="349.25" y="983.7368">modifier latched?</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="18" x="319.25" y="977.1368">yes</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="12" x="443.25" y="977.1368">no</text><rect fill="#CCCCCC" filter="url(#f1oc297vm9430x)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="192" x="197" y="1002.1178"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="172" x="207" y="1022.3367">Remove this key from latched keys</text><rect fill="#CCCCCC" filter="url(#f1oc297vm9430x)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="157" x="409" y="1002.1178"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="137" x="419" y="1022.3367">Add this key to latched keys</text><polygon fill="#CCCCCC" filter="url(#f1oc297vm9430x)" points="390.25,1041.3177,402.25,1053.3177,390.25,1065.3177,378.25,1053.3177,390.25,1041.3177" style="stroke: #1A66C2; stroke-width: 1.5;"/><rect fill="#CCCCCC" filter="url(#f1oc297vm9430x)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="94" x="343.25" y="1085.3177"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="74" x="353.25" y="1105.5366">Submit modifier</text><rect fill="#CCCCCC" filter="url(#f1oc297vm9430x)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="84" x="339.5" y="1162.5176"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="64" x="349.5" y="1182.7365">Submit erase</text><rect fill="#CCCCCC" filter="url(#f1oc297vm9430x)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="141" x="311" y="1239.7175"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="121" x="321" y="1259.9364">Tell UI to open the popup</text><polygon fill="#CCCCCC" filter="url(#f1oc297vm9430x)" points="51,251.5186,175,251.5186,187,263.5186,175,275.5186,51,275.5186,39,263.5186,51,251.5186" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="124" x="51" y="267.1376">FeedbackPressRelease?</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="18" x="187" y="260.5376">yes</text><polygon fill="#CCCCCC" filter="url(#f1oc297vm9430x)" points="75.5,513.9184,150.5,513.9184,162.5,525.9184,150.5,537.9184,75.5,537.9184,63.5,525.9184,75.5,513.9184" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="75" x="75.5" y="529.5374">EnterKeycode?</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="18" x="162.5" y="522.9374">yes</text><polygon fill="#CCCCCC" filter="url(#f1oc297vm9430x)" points="75.5,591.1183,150.5,591.1183,162.5,603.1183,150.5,615.1183,75.5,615.1183,63.5,603.1183,75.5,591.1183" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="75" x="75.5" y="606.7373">EnterKeycode?</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="18" x="162.5" y="600.1373">yes</text><polygon fill="#CCCCCC" filter="url(#f1oc297vm9430x)" points="72,668.3182,154,668.3182,166,680.3182,154,692.3182,72,692.3182,60,680.3182,72,668.3182" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="82" x="72" y="683.9372">ToggleKeycode?</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="18" x="166" y="677.3372">yes</text><polygon fill="#CCCCCC" filter="url(#f1oc297vm9430x)" points="83,745.5181,143,745.5181,155,757.5181,143,769.5181,83,769.5181,71,757.5181,83,745.5181" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="60" x="83" y="761.1371">EnterString?</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="18" x="155" y="754.5371">yes</text><polygon fill="#CCCCCC" filter="url(#f1oc297vm9430x)" points="91,944.1178,135,944.1178,147,956.1178,135,968.1178,91,968.1178,79,956.1178,91,944.1178" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="44" x="91" y="959.7368">Modifier?</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="18" x="147" y="953.1368">yes</text><polygon fill="#CCCCCC" filter="url(#f1oc297vm9430x)" points="95.5,1138.5176,130.5,1138.5176,142.5,1150.5176,130.5,1162.5176,95.5,1162.5176,83.5,1150.5176,95.5,1138.5176" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="35" x="95.5" y="1154.1366">Erase?</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="18" x="142.5" y="1147.5366">yes</text><polygon fill="#CCCCCC" filter="url(#f1oc297vm9430x)" points="81,1215.7175,145,1215.7175,157,1227.7175,145,1239.7175,81,1239.7175,69,1227.7175,81,1215.7175" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="88" x="117" y="1249.9364">switch layout/view</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="64" x="81" y="1231.3365">OpenPopup?</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="18" x="157" y="1224.7365">yes</text><rect fill="#CCCCCC" filter="url(#f1oc297vm9430x)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="358" x="128.5" y="1292.9174"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="338" x="138.5" y="1313.1363">If the switch is temporary, remember the active view to switch back to</text><rect fill="#CCCCCC" filter="url(#f1oc297vm9430x)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="129" x="243" y="1346.1173"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="109" x="253" y="1366.3362">Tell UI to switch layout</text><polygon fill="#CCCCCC" filter="url(#f1oc297vm9430x)" points="307.5,1399.3172,319.5,1411.3172,307.5,1423.3172,295.5,1411.3172,307.5,1399.3172" style="stroke: #1A66C2; stroke-width: 1.5;"/><polygon fill="#CCCCCC" filter="url(#f1oc297vm9430x)" points="258,195.7997,357,195.7997,369,207.7997,357,219.7997,258,219.7997,246,207.7997,258,195.7997" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="21" x="311.5" y="230.0186">next</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="99" x="258" y="211.4187">for action to execute</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="18" x="228" y="204.8187">end</text><polygon fill="#CCCCCC" filter="url(#f1oc297vm9430x)" points="307.5,147.1997,307.5,147.1997,319.5,159.1997,307.5,171.1997,307.5,171.1997,295.5,159.1997,307.5,147.1997" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="35" x="311.5" y="181.4187">actions</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="50" x="319.5" y="156.2188">no actions</text><polygon fill="#CCCCCC" filter="url(#f1oc297vm9430x)" points="307.5,1465.3172,319.5,1477.3172,307.5,1489.3172,295.5,1477.3172,307.5,1465.3172" style="stroke: #1A66C2; stroke-width: 1.5;"/><ellipse cx="307.5" cy="1520.3172" fill="#FFFFFF" filter="url(#f1oc297vm9430x)" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"/><ellipse cx="307.5" cy="1520.3172" fill="#000000" rx="6" ry="6" style="stroke: #7F7F7F; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="307.5" x2="307.5" y1="60.7999" y2="80.7999"/><polygon fill="#000000" points="303.5,70.7999,307.5,80.7999,311.5,70.7999,307.5,74.7999" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="304.5" x2="445" y1="307.5186" y2="307.5186"/><line style="stroke: #000000; stroke-width: 1.5;" x1="445" x2="445" y1="307.5186" y2="319.5186"/><polygon fill="#000000" points="441,309.5186,445,319.5186,449,309.5186,445,313.5186" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="339" x2="445" y1="384.7185" y2="384.7185"/><line style="stroke: #000000; stroke-width: 1.5;" x1="445" x2="445" y1="384.7185" y2="411.7185"/><line style="stroke: #000000; stroke-width: 1.5;" x1="445" x2="551" y1="411.7185" y2="411.7185"/><polygon fill="#000000" points="541,407.7185,551,411.7185,541,415.7185,545,411.7185" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="275.5" x2="275.5" y1="319.5186" y2="372.7185"/><polygon fill="#000000" points="271.5,362.7185,275.5,372.7185,279.5,362.7185,275.5,366.7185" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="445" x2="445" y1="352.7185" y2="367.7185"/><line style="stroke: #000000; stroke-width: 1.5;" x1="445" x2="551" y1="367.7185" y2="367.7185"/><line style="stroke: #000000; stroke-width: 1.5;" x1="551" x2="551" y1="367.7185" y2="481.9184"/><line style="stroke: #000000; stroke-width: 1.5;" x1="551" x2="393.5" y1="481.9184" y2="481.9184"/><polygon fill="#000000" points="403.5,477.9184,393.5,481.9184,403.5,485.9184,399.5,481.9184" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="187" x2="275.5" y1="263.5186" y2="263.5186"/><line style="stroke: #000000; stroke-width: 1.5;" x1="275.5" x2="275.5" y1="263.5186" y2="295.5186"/><polygon fill="#000000" points="271.5,285.5186,275.5,295.5186,279.5,285.5186,275.5,289.5186" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="275.5" x2="275.5" y1="396.7185" y2="401.7185"/><line style="stroke: #000000; stroke-width: 1.5;" x1="275.5" x2="381.5" y1="401.7185" y2="401.7185"/><line style="stroke: #000000; stroke-width: 1.5;" x1="381.5" x2="381.5" y1="401.7185" y2="416.7185"/><polygon fill="#000000" points="377.5,406.7185,381.5,416.7185,385.5,406.7185,381.5,410.7185" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="381.5" x2="381.5" y1="449.9184" y2="454.9184"/><line style="stroke: #000000; stroke-width: 1.5;" x1="381.5" x2="381.5" y1="454.9184" y2="469.9184"/><polygon fill="#000000" points="377.5,459.9184,381.5,469.9184,385.5,459.9184,381.5,463.9184" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="381.5" x2="381.5" y1="802.718" y2="837.718"/><polygon fill="#000000" points="377.5,827.718,381.5,837.718,385.5,827.718,381.5,831.718" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="381.5" x2="381.5" y1="870.9179" y2="890.9179"/><polygon fill="#000000" points="377.5,880.9179,381.5,890.9179,385.5,880.9179,381.5,884.9179" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="337.25" x2="293" y1="980.1178" y2="980.1178"/><line style="stroke: #000000; stroke-width: 1.5;" x1="293" x2="293" y1="980.1178" y2="1002.1178"/><polygon fill="#000000" points="289,992.1178,293,1002.1178,297,992.1178,293,996.1178" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="443.25" x2="487.5" y1="980.1178" y2="980.1178"/><line style="stroke: #000000; stroke-width: 1.5;" x1="487.5" x2="487.5" y1="980.1178" y2="1002.1178"/><polygon fill="#000000" points="483.5,992.1178,487.5,1002.1178,491.5,992.1178,487.5,996.1178" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="293" x2="293" y1="1035.3177" y2="1053.3177"/><line style="stroke: #000000; stroke-width: 1.5;" x1="293" x2="378.25" y1="1053.3177" y2="1053.3177"/><polygon fill="#000000" points="368.25,1049.3177,378.25,1053.3177,368.25,1057.3177,372.25,1053.3177" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="487.5" x2="487.5" y1="1035.3177" y2="1053.3177"/><line style="stroke: #000000; stroke-width: 1.5;" x1="487.5" x2="402.25" y1="1053.3177" y2="1053.3177"/><polygon fill="#000000" points="412.25,1049.3177,402.25,1053.3177,412.25,1057.3177,408.25,1053.3177" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="390.25" x2="390.25" y1="1065.3177" y2="1085.3177"/><polygon fill="#000000" points="386.25,1075.3177,390.25,1085.3177,394.25,1075.3177,390.25,1079.3177" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="307.5" x2="307.5" y1="1326.1173" y2="1346.1173"/><polygon fill="#000000" points="303.5,1336.1173,307.5,1346.1173,311.5,1336.1173,307.5,1340.1173" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="162.5" x2="381.5" y1="525.9184" y2="525.9184"/><line style="stroke: #000000; stroke-width: 1.5;" x1="381.5" x2="381.5" y1="525.9184" y2="537.9184"/><polygon fill="#000000" points="377.5,527.9184,381.5,537.9184,385.5,527.9184,381.5,531.9184" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="162.5" x2="381.5" y1="603.1183" y2="603.1183"/><line style="stroke: #000000; stroke-width: 1.5;" x1="381.5" x2="381.5" y1="603.1183" y2="615.1183"/><polygon fill="#000000" points="377.5,605.1183,381.5,615.1183,385.5,605.1183,381.5,609.1183" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="166" x2="381.5" y1="680.3182" y2="680.3182"/><line style="stroke: #000000; stroke-width: 1.5;" x1="381.5" x2="381.5" y1="680.3182" y2="692.3182"/><polygon fill="#000000" points="377.5,682.3182,381.5,692.3182,385.5,682.3182,381.5,686.3182" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="155" x2="381.5" y1="757.5181" y2="757.5181"/><line style="stroke: #000000; stroke-width: 1.5;" x1="381.5" x2="381.5" y1="757.5181" y2="769.5181"/><polygon fill="#000000" points="377.5,759.5181,381.5,769.5181,385.5,759.5181,381.5,763.5181" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="147" x2="390.25" y1="956.1178" y2="956.1178"/><line style="stroke: #000000; stroke-width: 1.5;" x1="390.25" x2="390.25" y1="956.1178" y2="968.1178"/><polygon fill="#000000" points="386.25,958.1178,390.25,968.1178,394.25,958.1178,390.25,962.1178" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="142.5" x2="381.5" y1="1150.5176" y2="1150.5176"/><line style="stroke: #000000; stroke-width: 1.5;" x1="381.5" x2="381.5" y1="1150.5176" y2="1162.5176"/><polygon fill="#000000" points="377.5,1152.5176,381.5,1162.5176,385.5,1152.5176,381.5,1156.5176" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="157" x2="381.5" y1="1227.7175" y2="1227.7175"/><line style="stroke: #000000; stroke-width: 1.5;" x1="381.5" x2="381.5" y1="1227.7175" y2="1239.7175"/><polygon fill="#000000" points="377.5,1229.7175,381.5,1239.7175,385.5,1229.7175,381.5,1233.7175" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="113" x2="113" y1="275.5186" y2="513.9184"/><polygon fill="#000000" points="109,503.9184,113,513.9184,117,503.9184,113,507.9184" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="113" x2="113" y1="537.9184" y2="591.1183"/><polygon fill="#000000" points="109,581.1183,113,591.1183,117,581.1183,113,585.1183" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="113" x2="113" y1="615.1183" y2="668.3182"/><polygon fill="#000000" points="109,658.3182,113,668.3182,117,658.3182,113,662.3182" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="113" x2="113" y1="692.3182" y2="745.5181"/><polygon fill="#000000" points="109,735.5181,113,745.5181,117,735.5181,113,739.5181" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="113" x2="113" y1="769.5181" y2="944.1178"/><polygon fill="#000000" points="109,934.1178,113,944.1178,117,934.1178,113,938.1178" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="113" x2="113" y1="968.1178" y2="1138.5176"/><polygon fill="#000000" points="109,1128.5176,113,1138.5176,117,1128.5176,113,1132.5176" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="113" x2="113" y1="1162.5176" y2="1215.7175"/><polygon fill="#000000" points="109,1205.7175,113,1215.7175,117,1205.7175,113,1209.7175" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="381.5" x2="381.5" y1="493.9184" y2="508.9184"/><line style="stroke: #000000; stroke-width: 1.5;" x1="381.5" x2="576" y1="508.9184" y2="508.9184"/><line style="stroke: #000000; stroke-width: 1.5;" x1="576" x2="576" y1="508.9184" y2="1411.3172"/><line style="stroke: #000000; stroke-width: 1.5;" x1="576" x2="319.5" y1="1411.3172" y2="1411.3172"/><polygon fill="#000000" points="329.5,1407.3172,319.5,1411.3172,329.5,1415.3172,325.5,1411.3172" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="381.5" x2="381.5" y1="571.1183" y2="586.1183"/><line style="stroke: #000000; stroke-width: 1.5;" x1="381.5" x2="576" y1="586.1183" y2="586.1183"/><polygon fill="#000000" points="566,582.1183,576,586.1183,566,590.1183,570,586.1183" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="381.5" x2="381.5" y1="648.3182" y2="663.3182"/><line style="stroke: #000000; stroke-width: 1.5;" x1="381.5" x2="576" y1="663.3182" y2="663.3182"/><polygon fill="#000000" points="566,659.3182,576,663.3182,566,667.3182,570,663.3182" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="381.5" x2="381.5" y1="725.5181" y2="740.5181"/><line style="stroke: #000000; stroke-width: 1.5;" x1="381.5" x2="576" y1="740.5181" y2="740.5181"/><polygon fill="#000000" points="566,736.5181,576,740.5181,566,744.5181,570,740.5181" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="381.5" x2="381.5" y1="924.1178" y2="939.1178"/><line style="stroke: #000000; stroke-width: 1.5;" x1="381.5" x2="576" y1="939.1178" y2="939.1178"/><polygon fill="#000000" points="566,935.1178,576,939.1178,566,943.1178,570,939.1178" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="390.25" x2="390.25" y1="1118.5176" y2="1133.5176"/><line style="stroke: #000000; stroke-width: 1.5;" x1="390.25" x2="576" y1="1133.5176" y2="1133.5176"/><polygon fill="#000000" points="566,1129.5176,576,1133.5176,566,1137.5176,570,1133.5176" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="381.5" x2="381.5" y1="1195.7175" y2="1210.7175"/><line style="stroke: #000000; stroke-width: 1.5;" x1="381.5" x2="576" y1="1210.7175" y2="1210.7175"/><polygon fill="#000000" points="566,1206.7175,576,1210.7175,566,1214.7175,570,1210.7175" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="381.5" x2="381.5" y1="1272.9174" y2="1287.9174"/><line style="stroke: #000000; stroke-width: 1.5;" x1="381.5" x2="576" y1="1287.9174" y2="1287.9174"/><polygon fill="#000000" points="566,1283.9174,576,1287.9174,566,1291.9174,570,1287.9174" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="307.5" x2="307.5" y1="219.7997" y2="236.5186"/><line style="stroke: #000000; stroke-width: 1.5;" x1="307.5" x2="113" y1="236.5186" y2="236.5186"/><line style="stroke: #000000; stroke-width: 1.5;" x1="113" x2="113" y1="236.5186" y2="251.5186"/><polygon fill="#000000" points="109,241.5186,113,251.5186,117,241.5186,113,245.5186" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="113" x2="113" y1="1239.7175" y2="1277.9174"/><line style="stroke: #000000; stroke-width: 1.5;" x1="113" x2="307.5" y1="1277.9174" y2="1277.9174"/><line style="stroke: #000000; stroke-width: 1.5;" x1="307.5" x2="307.5" y1="1277.9174" y2="1292.9174"/><polygon fill="#000000" points="303.5,1282.9174,307.5,1292.9174,311.5,1282.9174,307.5,1286.9174" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="307.5" x2="307.5" y1="1379.3172" y2="1384.3172"/><line style="stroke: #000000; stroke-width: 1.5;" x1="307.5" x2="307.5" y1="1384.3172" y2="1399.3172"/><polygon fill="#000000" points="303.5,1389.3172,307.5,1399.3172,311.5,1389.3172,307.5,1393.3172" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="307.5" x2="307.5" y1="1423.3172" y2="1433.3172"/><line style="stroke: #000000; stroke-width: 1.5;" x1="307.5" x2="588" y1="1433.3172" y2="1433.3172"/><polygon fill="#000000" points="584,831.318,588,821.318,592,831.318,588,827.318" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="588" x2="588" y1="207.7997" y2="1433.3172"/><line style="stroke: #000000; stroke-width: 1.5;" x1="588" x2="369" y1="207.7997" y2="207.7997"/><polygon fill="#000000" points="379,203.7997,369,207.7997,379,211.7997,375,207.7997" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="246" x2="27" y1="207.7997" y2="207.7997"/><polygon fill="#000000" points="23,817.318,27,827.318,31,817.318,27,821.318" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="27" x2="27" y1="207.7997" y2="1445.3172"/><line style="stroke: #000000; stroke-width: 1.5;" x1="27" x2="307.5" y1="1445.3172" y2="1445.3172"/><line style="stroke: #000000; stroke-width: 1.5;" x1="307.5" x2="307.5" y1="1445.3172" y2="1465.3172"/><polygon fill="#000000" points="303.5,1455.3172,307.5,1465.3172,311.5,1455.3172,307.5,1459.3172" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="307.5" x2="307.5" y1="171.1997" y2="195.7997"/><polygon fill="#000000" points="303.5,185.7997,307.5,195.7997,311.5,185.7997,307.5,189.7997" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="319.5" x2="598" y1="159.1997" y2="159.1997"/><polygon fill="#000000" points="594,811.318,598,821.318,602,811.318,598,815.318" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="598" x2="598" y1="159.1997" y2="1477.3172"/><line style="stroke: #000000; stroke-width: 1.5;" x1="598" x2="319.5" y1="1477.3172" y2="1477.3172"/><polygon fill="#000000" points="329.5,1473.3172,319.5,1477.3172,329.5,1481.3172,325.5,1477.3172" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="307.5" x2="307.5" y1="127.1997" y2="147.1997"/><polygon fill="#000000" points="303.5,137.1997,307.5,147.1997,311.5,137.1997,307.5,141.1997" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="307.5" x2="307.5" y1="1489.3172" y2="1509.3172"/><polygon fill="#000000" points="303.5,1499.3172,307.5,1509.3172,311.5,1499.3172,307.5,1503.3172" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[ef03fcc8d37da96b86331719eaea6c3b]
+@startuml keyboard_execute_tap_actions
+!define LIGHTBLUE
+!includeurl https://raw.githubusercontent.com/grelltrier/RedDress-PlantUML/master/style.puml
+!pragma useVerticalIf on
+
+partition "keyboard_execute_tap_actions"{
+
+  start
+  :If the last switch was temporary,
+  switch back to previous layout;
+  
+  if () then (actions)
+    while (for action to execute) is (next)
+      if (FeedbackPressRelease?) then (yes)
+        if (press?) then (yes)
+          :Tell UI to display the press of the button;
+        elseif (key in latched_keys?) then (yes)
+        else (no)
+          :Tell UI to display the release of the button;
+        endif
+      elseif (EnterKeycode?) then (yes)
+        :Submit keycode;
+      elseif (EnterKeycode?) then (yes)
+        :Submit keycode;
+      elseif (ToggleKeycode?) then (yes)
+        :Toggle keycode;
+      elseif (EnterString?) then (yes)
+        :Send text of the button to the interpreter;
+        :Vector of submissions]
+        :Submit all of the returned submissions;
+      elseif (Modifier?) then (yes)
+        if (modifier latched?) then (yes)
+          :Remove this key from latched keys;
+        else (no)
+          :Add this key to latched keys;
+        endif
+        :Submit modifier;
+      elseif (Erase?) then (yes)
+        :Submit erase;
+      elseif (OpenPopup?) then (yes)
+        :Tell UI to open the popup;
+      else (switch layout/view)
+        :If the switch is temporary, remember the active view to switch back to;
+        :Tell UI to switch layout;
+      endif
+    endwhile (end)
+  else (no actions)
+  endif
+  stop
+}
+@enduml
+
+@startuml keyboard_execute_tap_actions
+
+
+
+
+skinparam stereotypeCBackgroundColor 1a66c2
+
+
+
+
+
+
+
+skinparam backgroundColor fff
+
+
+
+
+
+
+
+
+skinparam circledCharacter {
+  radius 8
+  fontSize 11
+  fontName Verdana
+}
+
+skinparam class {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+
+  attributeFontColor 333
+  attributeFontSize 11
+  attributeIconSize 11
+}
+
+
+skinparam ActivityBarColor 1a66c2
+skinparam activityDiamondBackgroundColor ccc
+skinparam activityDiamondBorderColor 1a66c2
+
+
+skinparam actor {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam participant {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam collections {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam SequenceBox{
+    backgroundColor e0e0e0
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+skinparam interface {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam component {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam node {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam database {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam queue {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+skinparam usecase {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+skinparam activity {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+skinparam sequence {
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+
+  lifeLineBorderColor 2a86e2
+  lifeLineBackgroundColor e0e0e0
+}
+
+skinparam boundary {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam control {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam entity {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+skinparam state {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+  startColor 2a86e2
+  endColor 1a66c2
+}
+
+
+skinparam object {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+
+skinparam note {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam cloud {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+skinparam rectangle {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam storage {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+!pragma useVerticalIf on
+
+partition "keyboard_execute_tap_actions"{
+
+  start
+  :If the last switch was temporary,
+  switch back to previous layout;
+  
+  if () then (actions)
+    while (for action to execute) is (next)
+      if (FeedbackPressRelease?) then (yes)
+        if (press?) then (yes)
+          :Tell UI to display the press of the button;
+        elseif (key in latched_keys?) then (yes)
+        else (no)
+          :Tell UI to display the release of the button;
+        endif
+      elseif (EnterKeycode?) then (yes)
+        :Submit keycode;
+      elseif (EnterKeycode?) then (yes)
+        :Submit keycode;
+      elseif (ToggleKeycode?) then (yes)
+        :Toggle keycode;
+      elseif (EnterString?) then (yes)
+        :Send text of the button to the interpreter;
+        :Vector of submissions]
+        :Submit all of the returned submissions;
+      elseif (Modifier?) then (yes)
+        if (modifier latched?) then (yes)
+          :Remove this key from latched keys;
+        else (no)
+          :Add this key to latched keys;
+        endif
+        :Submit modifier;
+      elseif (Erase?) then (yes)
+        :Submit erase;
+      elseif (OpenPopup?) then (yes)
+        :Tell UI to open the popup;
+      else (switch layout/view)
+        :If the switch is temporary, remember the active view to switch back to;
+        :Tell UI to switch layout;
+      endif
+    endwhile (end)
+  else (no actions)
+  endif
+  stop
+}
+@enduml
+
+PlantUML version 1.2020.19(Mon Oct 12 17:10:01 CEST 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

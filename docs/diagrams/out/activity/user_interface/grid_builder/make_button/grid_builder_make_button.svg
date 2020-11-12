@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="697px" preserveAspectRatio="none" style="width:539px;height:697px;" version="1.1" viewBox="0 0 539 697" width="539px" zoomAndPan="magnify"><defs><filter height="300%" id="f1xi79m2q37cmt" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><rect fill="#FFFFFF" filter="url(#f1xi79m2q37cmt)" height="669.9991" style="stroke: #000000; stroke-width: 2.0;" width="511" x="11" y="11"/><path d="M193,11 L193,20.7999 L183,30.7999 L11,30.7999 " fill="none" style="stroke: #000000; stroke-width: 2.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="172" x="14" y="25.0059">GridBuilder::make_button()</text><ellipse cx="248.375" cy="50.7999" fill="#000000" filter="url(#f1xi79m2q37cmt)" rx="10" ry="10" style="stroke: none; stroke-width: 1.0;"/><rect fill="#CCCCCC" filter="url(#f1xi79m2q37cmt)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="137" x="179.875" y="80.7999"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="117" x="189.875" y="101.0189">Make new ToggleButton</text><rect fill="#CCCCCC" filter="url(#f1xi79m2q37cmt)" height="33.1999" style="stroke: #1A66C2; stroke-width: 1.5;" width="126" x="185.375" y="133.9998"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="106" x="195.375" y="154.2188">button = ToggleButton</text><rect fill="#CCCCCC" filter="url(#f1xi79m2q37cmt)" height="46.3998" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="221" x="137.875" y="187.1997"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="99" x="147.875" y="207.4187">Add style class 'key'</text><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="201" x="147.875" y="220.6186">Add style class which is named its key_id</text><rect fill="#CCCCCC" filter="url(#f1xi79m2q37cmt)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="149" x="173.875" y="302.1995"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="129" x="183.875" y="322.4184">Add all of the style classes</text><polygon fill="#CCCCCC" filter="url(#f1xi79m2q37cmt)" points="162.875,253.5995,333.875,253.5995,345.875,265.5995,333.875,277.5995,162.875,277.5995,150.875,265.5995,162.875,253.5995" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="18" x="252.375" y="287.8185">yes</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="171" x="162.875" y="269.2185">More style classes are to be added</text><polygon fill="#CCCCCC" filter="url(#f1xi79m2q37cmt)" points="248.375,355.3994,260.375,367.3994,248.375,379.3994,236.375,367.3994,248.375,355.3994" style="stroke: #1A66C2; stroke-width: 1.5;"/><polygon fill="#CCCCCC" filter="url(#f1xi79m2q37cmt)" points="202.875,399.3994,293.875,399.3994,305.875,411.3994,293.875,423.3994,202.875,423.3994,190.875,411.3994,202.875,399.3994" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="91" x="202.875" y="415.0184">Key should display</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="18" x="172.875" y="408.4184">text</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="29" x="305.875" y="408.4184">image</text><rect fill="#CCCCCC" filter="url(#f1xi79m2q37cmt)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="156" x="23" y="433.3994"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="136" x="33" y="453.6183">Set button's label to that text</text><polygon fill="#CCCCCC" filter="url(#f1xi79m2q37cmt)" points="354.25,433.3994,437.25,433.3994,449.25,445.3994,437.25,457.3994,354.25,457.3994,342.25,445.3994,354.25,433.3994" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="83" x="354.25" y="449.0184">Image was found</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="18" x="324.25" y="442.4184">yes</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="23" x="449.25" y="442.4184">false</text><rect fill="#CCCCCC" filter="url(#f1xi79m2q37cmt)" height="46.3998" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="213" x="209" y="467.3994"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="148" x="219" y="487.6183">Set button to display the image</text><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="193" x="219" y="500.8182">Have the button always show the image</text><rect fill="#CCCCCC" filter="url(#f1xi79m2q37cmt)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="68" x="442" y="467.3994"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="48" x="452" y="487.6183">Emit error</text><polygon fill="#CCCCCC" filter="url(#f1xi79m2q37cmt)" points="395.75,519.7992,407.75,531.7992,395.75,543.7992,383.75,531.7992,395.75,519.7992" style="stroke: #1A66C2; stroke-width: 1.5;"/><polygon fill="#CCCCCC" filter="url(#f1xi79m2q37cmt)" points="248.375,549.7992,260.375,561.7992,248.375,573.7992,236.375,561.7992,248.375,549.7992" style="stroke: #1A66C2; stroke-width: 1.5;"/><rect fill="#CCCCCC" filter="url(#f1xi79m2q37cmt)" height="33.1999" style="stroke: #1A66C2; stroke-width: 1.5;" width="50" x="223.375" y="593.7992"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="30" x="233.375" y="614.0181">button</text><ellipse cx="248.375" cy="657.9991" fill="#FFFFFF" filter="url(#f1xi79m2q37cmt)" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"/><ellipse cx="248.375" cy="657.9991" fill="#000000" rx="6" ry="6" style="stroke: #7F7F7F; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="248.375" x2="248.375" y1="60.7999" y2="80.7999"/><polygon fill="#000000" points="244.375,70.7999,248.375,80.7999,252.375,70.7999,248.375,74.7999" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="248.375" x2="248.375" y1="113.9998" y2="133.9998"/><polygon fill="#000000" points="244.375,123.9998,248.375,133.9998,252.375,123.9998,248.375,127.9998" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="248.375" x2="248.375" y1="167.1997" y2="187.1997"/><polygon fill="#000000" points="244.375,177.1997,248.375,187.1997,252.375,177.1997,248.375,181.1997" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="248.375" x2="248.375" y1="277.5995" y2="302.1995"/><polygon fill="#000000" points="244.375,292.1995,248.375,302.1995,252.375,292.1995,248.375,296.1995" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="345.875" x2="357.875" y1="265.5995" y2="265.5995"/><polygon fill="#000000" points="353.875,308.7994,357.875,318.7994,361.875,308.7994,357.875,312.7994" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="357.875" x2="357.875" y1="265.5995" y2="367.3994"/><line style="stroke: #000000; stroke-width: 1.5;" x1="357.875" x2="260.375" y1="367.3994" y2="367.3994"/><polygon fill="#000000" points="270.375,363.3994,260.375,367.3994,270.375,371.3994,266.375,367.3994" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="248.375" x2="248.375" y1="335.3994" y2="355.3994"/><polygon fill="#000000" points="244.375,345.3994,248.375,355.3994,252.375,345.3994,248.375,349.3994" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="248.375" x2="248.375" y1="233.5995" y2="253.5995"/><polygon fill="#000000" points="244.375,243.5995,248.375,253.5995,252.375,243.5995,248.375,247.5995" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="342.25" x2="315.5" y1="445.3994" y2="445.3994"/><line style="stroke: #000000; stroke-width: 1.5;" x1="315.5" x2="315.5" y1="445.3994" y2="467.3994"/><polygon fill="#000000" points="311.5,457.3994,315.5,467.3994,319.5,457.3994,315.5,461.3994" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="449.25" x2="476" y1="445.3994" y2="445.3994"/><line style="stroke: #000000; stroke-width: 1.5;" x1="476" x2="476" y1="445.3994" y2="467.3994"/><polygon fill="#000000" points="472,457.3994,476,467.3994,480,457.3994,476,461.3994" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="315.5" x2="315.5" y1="513.7992" y2="531.7992"/><line style="stroke: #000000; stroke-width: 1.5;" x1="315.5" x2="383.75" y1="531.7992" y2="531.7992"/><polygon fill="#000000" points="373.75,527.7992,383.75,531.7992,373.75,535.7992,377.75,531.7992" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="476" x2="476" y1="500.5993" y2="531.7992"/><line style="stroke: #000000; stroke-width: 1.5;" x1="476" x2="407.75" y1="531.7992" y2="531.7992"/><polygon fill="#000000" points="417.75,527.7992,407.75,531.7992,417.75,535.7992,413.75,531.7992" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="190.875" x2="101" y1="411.3994" y2="411.3994"/><line style="stroke: #000000; stroke-width: 1.5;" x1="101" x2="101" y1="411.3994" y2="433.3994"/><polygon fill="#000000" points="97,423.3994,101,433.3994,105,423.3994,101,427.3994" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="305.875" x2="395.75" y1="411.3994" y2="411.3994"/><line style="stroke: #000000; stroke-width: 1.5;" x1="395.75" x2="395.75" y1="411.3994" y2="433.3994"/><polygon fill="#000000" points="391.75,423.3994,395.75,433.3994,399.75,423.3994,395.75,427.3994" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="101" x2="101" y1="466.5993" y2="561.7992"/><line style="stroke: #000000; stroke-width: 1.5;" x1="101" x2="236.375" y1="561.7992" y2="561.7992"/><polygon fill="#000000" points="226.375,557.7992,236.375,561.7992,226.375,565.7992,230.375,561.7992" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="395.75" x2="395.75" y1="543.7992" y2="561.7992"/><line style="stroke: #000000; stroke-width: 1.5;" x1="395.75" x2="260.375" y1="561.7992" y2="561.7992"/><polygon fill="#000000" points="270.375,557.7992,260.375,561.7992,270.375,565.7992,266.375,561.7992" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="248.375" x2="248.375" y1="379.3994" y2="399.3994"/><polygon fill="#000000" points="244.375,389.3994,248.375,399.3994,252.375,389.3994,248.375,393.3994" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="248.375" x2="248.375" y1="573.7992" y2="593.7992"/><polygon fill="#000000" points="244.375,583.7992,248.375,593.7992,252.375,583.7992,248.375,587.7992" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="248.375" x2="248.375" y1="626.9991" y2="646.9991"/><polygon fill="#000000" points="244.375,636.9991,248.375,646.9991,252.375,636.9991,248.375,640.9991" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[e3964a466f35cd00c9014f823ee03af9]
+@startuml grid_builder_make_button
+!define LIGHTBLUE
+!includeurl https://raw.githubusercontent.com/grelltrier/RedDress-PlantUML/master/style.puml
+
+partition "GridBuilder::make_button()"{
+  start
+  :Make new ToggleButton;
+  :button = ToggleButton]
+  :Add style class 'key'
+  Add style class which is named its key_id;
+
+  if (More style classes are to be added) then (yes)
+    :Add all of the style classes;
+  endif
+  if (Key should display) then (text)
+    :Set button's label to that text;
+  else (image)
+    if (Image was found) then (yes)
+      :Set button to display the image
+      Have the button always show the image;
+    else (false)
+      :Emit error;
+    endif
+  endif
+  :button]
+  stop
+}
+@enduml
+
+@startuml grid_builder_make_button
+
+
+
+
+skinparam stereotypeCBackgroundColor 1a66c2
+
+
+
+
+
+
+
+skinparam backgroundColor fff
+
+
+
+
+
+
+
+
+skinparam circledCharacter {
+  radius 8
+  fontSize 11
+  fontName Verdana
+}
+
+skinparam class {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+
+  attributeFontColor 333
+  attributeFontSize 11
+  attributeIconSize 11
+}
+
+
+skinparam ActivityBarColor 1a66c2
+skinparam activityDiamondBackgroundColor ccc
+skinparam activityDiamondBorderColor 1a66c2
+
+
+skinparam actor {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam participant {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam collections {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam SequenceBox{
+    backgroundColor e0e0e0
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+skinparam interface {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam component {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam node {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam database {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam queue {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+skinparam usecase {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+skinparam activity {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+skinparam sequence {
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+
+  lifeLineBorderColor 2a86e2
+  lifeLineBackgroundColor e0e0e0
+}
+
+skinparam boundary {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam control {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam entity {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+skinparam state {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+  startColor 2a86e2
+  endColor 1a66c2
+}
+
+
+skinparam object {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+
+skinparam note {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam cloud {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+skinparam rectangle {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam storage {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+partition "GridBuilder::make_button()"{
+  start
+  :Make new ToggleButton;
+  :button = ToggleButton]
+  :Add style class 'key'
+  Add style class which is named its key_id;
+
+  if (More style classes are to be added) then (yes)
+    :Add all of the style classes;
+  endif
+  if (Key should display) then (text)
+    :Set button's label to that text;
+  else (image)
+    if (Image was found) then (yes)
+      :Set button to display the image
+      Have the button always show the image;
+    else (false)
+      :Emit error;
+    endif
+  endif
+  :button]
+  stop
+}
+@enduml
+
+PlantUML version 1.2020.19(Mon Oct 12 17:10:01 CEST 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="687px" preserveAspectRatio="none" style="width:2237px;height:687px;" version="1.1" viewBox="0 0 2237 687" width="2237px" zoomAndPan="magnify"><defs><filter height="300%" id="f1femxmnvhcbvi" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[d8f9eb381476c1ab6e7b4673404ff11c]
+cluster keyboard--><polygon fill="#FFFFFF" filter="url(#f1femxmnvhcbvi)" points="16,6.294,86,6.294,93,29.0939,2220,29.0939,2220,680.294,16,680.294,16,6.294" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="16" x2="93" y1="29.0939" y2="29.0939"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="64" x="20" y="21.2999">keyboard</text><!--MD5=[28760d33e02c4e59700b4cb204473a08]
+class LayoutMeta--><rect codeLine="5" fill="#CCCCCC" filter="url(#f1femxmnvhcbvi)" height="107.9995" id="LayoutMeta" style="stroke: #1A66C2; stroke-width: 1.5;" width="412" x="925" y="203.794"/><ellipse cx="1093" cy="216.794" fill="#1A66C2" rx="8" ry="8" style="stroke: #1A66C2; stroke-width: 1.0;"/><path d="M1096.5,215.4971 C1096.4531,214.794 1096.2969,214.3565 1095.9688,213.9034 C1095.3438,213.0909 1094.3594,212.6377 1093.1563,212.6377 C1090.8906,212.6377 1089.4844,214.2627 1089.4844,216.8565 C1089.4844,219.4346 1090.875,221.044 1093.1094,221.044 C1095.1094,221.044 1096.4375,219.8877 1096.5313,218.0596 L1094.9219,218.0596 C1094.8125,219.0752 1094.1875,219.6534 1093.1563,219.6534 C1091.875,219.6534 1091.1406,218.6221 1091.1406,216.8721 C1091.1406,215.1065 1091.9219,214.044 1093.2188,214.044 C1094.1719,214.044 1094.7031,214.5127 1094.9219,215.4971 L1096.5,215.4971 Z "/><ellipse cx="1114" cy="215.794" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="57" x="1121" y="220.413">LayoutMeta</text><line style="stroke: #1A66C2; stroke-width: 1.5;" x1="926" x2="1336" y1="229.794" y2="229.794"/><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="206" x="931" y="244.0129">key_arrangement_deserialized: &amp;[KeyIds],</text><line style="stroke: #1A66C2; stroke-width: 1.5;" x1="926" x2="1336" y1="250.9939" y2="250.9939"/><ellipse cx="936" cy="261.9939" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="226" x="942" y="265.2128">deserialize() -&gt; HashMap&lt;String, LayoutMeta&gt;</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="295" x="942" y="278.4127">from(layout_deserialized: LayoutDeserialized) -&gt; LayoutMeta</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="138" x="942" y="291.6126">get_key_meta_for_all_keys(</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="389" x="942" y="304.8125">key_meta: &amp;HashMap&lt;String, KeyDeserialized&gt;) -&gt; HashMap&lt;String, KeyMeta&gt;</text><!--MD5=[4f1f3706c1a355a8488e154afcaed5df]
+class Location--><rect codeLine="13" fill="#CCCCCC" filter="url(#f1femxmnvhcbvi)" height="94.7996" id="Location" style="stroke: #1A66C2; stroke-width: 1.5;" width="79" x="399.5" y="419.794"/><ellipse cx="411.5" cy="432.794" fill="#1A66C2" rx="8" ry="8" style="stroke: #1A66C2; stroke-width: 1.0;"/><path d="M415,431.4971 C414.9531,430.794 414.7969,430.3565 414.4688,429.9034 C413.8438,429.0909 412.8594,428.6377 411.6563,428.6377 C409.3906,428.6377 407.9844,430.2627 407.9844,432.8565 C407.9844,435.4346 409.375,437.044 411.6094,437.044 C413.6094,437.044 414.9375,435.8877 415.0313,434.0596 L413.4219,434.0596 C413.3125,435.0752 412.6875,435.6534 411.6563,435.6534 C410.375,435.6534 409.6406,434.6221 409.6406,432.8721 C409.6406,431.1065 410.4219,430.044 411.7188,430.044 C412.6719,430.044 413.2031,430.5127 413.4219,431.4971 L415,431.4971 Z "/><ellipse cx="427.5" cy="431.794" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="41" x="434.5" y="436.413">Location</text><line style="stroke: #1A66C2; stroke-width: 1.5;" x1="400.5" x2="477.5" y1="445.794" y2="445.794"/><ellipse cx="410.5" cy="456.794" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="26" x="416.5" y="460.0129">x: i32</text><ellipse cx="410.5" cy="469.9939" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="26" x="416.5" y="473.2128">y: i32</text><ellipse cx="410.5" cy="483.1938" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="45" x="416.5" y="486.4127">width: i32</text><ellipse cx="410.5" cy="496.3937" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="49" x="416.5" y="499.6126">height: i32</text><line style="stroke: #1A66C2; stroke-width: 1.5;" x1="400.5" x2="477.5" y1="506.5936" y2="506.5936"/><!--MD5=[786d269c236892c0ba79d616c431ebde]
+class KeyArrangement--><rect codeLine="20" fill="#CCCCCC" filter="url(#f1femxmnvhcbvi)" height="147.5992" id="KeyArrangement" style="stroke: #1A66C2; stroke-width: 1.5;" width="814" x="32" y="183.794"/><ellipse cx="388.5" cy="196.794" fill="#1A66C2" rx="8" ry="8" style="stroke: #1A66C2; stroke-width: 1.0;"/><path d="M392,195.4971 C391.9531,194.794 391.7969,194.3565 391.4688,193.9034 C390.8438,193.0909 389.8594,192.6377 388.6563,192.6377 C386.3906,192.6377 384.9844,194.2627 384.9844,196.8565 C384.9844,199.4346 386.375,201.044 388.6094,201.044 C390.6094,201.044 391.9375,199.8877 392.0313,198.0596 L390.4219,198.0596 C390.3125,199.0752 389.6875,199.6534 388.6563,199.6534 C387.375,199.6534 386.6406,198.6221 386.6406,196.8721 C386.6406,195.1065 387.4219,194.044 388.7188,194.044 C389.6719,194.044 390.2031,194.5127 390.4219,195.4971 L392,195.4971 Z "/><ellipse cx="409.5" cy="195.794" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="82" x="416.5" y="200.413">KeyArrangement</text><line style="stroke: #1A66C2; stroke-width: 1.5;" x1="33" x2="845" y1="209.794" y2="209.794"/><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="62" x="38" y="224.0129">no_rows: i32</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="79" x="38" y="237.2128">no_columns: i32</text><line style="stroke: #1A66C2; stroke-width: 1.5;" x1="33" x2="845" y1="244.1938" y2="244.1938"/><ellipse cx="43" cy="255.1938" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="534" x="49" y="258.4127">from(key_arrangement_deserialized: &amp;[KeyIds], key_meta: &amp;HashMap&lt;String, KeyMeta&gt;) -&gt; KeyArrangement</text><ellipse cx="43" cy="268.3937" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="101" x="49" y="271.6126">get_no_rows() -&gt; i32</text><ellipse cx="43" cy="281.5936" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="118" x="49" y="284.8125">get_no_columns() -&gt; i32</text><ellipse cx="43" cy="294.7935" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="272" x="49" y="298.0124">get_key_arrangement() -&gt; &amp;HashMap&lt;String, Location&gt;</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="791" x="49" y="311.2123">get_uncentered_key_arrangement(key_arrangement_deserialized: &amp;[KeyIds], key_meta: &amp;HashMap&lt;String, KeyMeta&gt;) -&gt; (HashMap&lt;String, Location&gt;, Vec&lt;i32&gt;)</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="761" x="49" y="324.4122">get_centered_key_arrangement(mut uncentered_key_arrangement: HashMap&lt;String, Location&gt;,row_widths: &amp;[i32]) -&gt; (HashMap&lt;String, Location&gt;, i32, i32)</text><!--MD5=[51bdaa37133dcab647f42fa876193409]
+class KeyMeta--><rect codeLine="32" fill="#CCCCCC" filter="url(#f1femxmnvhcbvi)" height="160.7991" id="KeyMeta" style="stroke: #1A66C2; stroke-width: 1.5;" width="742" x="1462" y="177.294"/><ellipse cx="1802" cy="190.294" fill="#1A66C2" rx="8" ry="8" style="stroke: #1A66C2; stroke-width: 1.0;"/><path d="M1805.5,188.9971 C1805.4531,188.294 1805.2969,187.8565 1804.9688,187.4034 C1804.3438,186.5909 1803.3594,186.1377 1802.1563,186.1377 C1799.8906,186.1377 1798.4844,187.7627 1798.4844,190.3565 C1798.4844,192.9346 1799.875,194.544 1802.1094,194.544 C1804.1094,194.544 1805.4375,193.3877 1805.5313,191.5596 L1803.9219,191.5596 C1803.8125,192.5752 1803.1875,193.1534 1802.1563,193.1534 C1800.875,193.1534 1800.1406,192.1221 1800.1406,190.3721 C1800.1406,188.6065 1800.9219,187.544 1802.2188,187.544 C1803.1719,187.544 1803.7031,188.0127 1803.9219,188.9971 L1805.5,188.9971 Z "/><ellipse cx="1823" cy="189.294" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="43" x="1830" y="193.913">KeyMeta</text><line style="stroke: #1A66C2; stroke-width: 1.5;" x1="1463" x2="2203" y1="203.294" y2="203.294"/><ellipse cx="1473" cy="214.294" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="237" x="1479" y="217.5129">actions: HashMap&lt;Interaction, Vec&lt;KeyAction&gt;&gt;</text><ellipse cx="1473" cy="227.4939" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="119" x="1479" y="230.7128">key_display: KeyDisplay</text><ellipse cx="1473" cy="240.6938" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="71" x="1479" y="243.9127">outline: Outline</text><ellipse cx="1473" cy="253.8937" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="139" x="1479" y="257.1126">popup: Option&lt;Vec&lt;String&gt;&gt;</text><ellipse cx="1473" cy="267.0936" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="138" x="1479" y="270.3125">styles: Option&lt;Vec&lt;String&gt;&gt;</text><line style="stroke: #1A66C2; stroke-width: 1.5;" x1="1463" x2="2203" y1="277.2935" y2="277.2935"/><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="210" x="1479" y="291.5124">from(key_id: &amp;str, key_deserialized: Option</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="63" x="1689" y="291.5124">) -&gt; KeyMeta</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="157" x="1479" y="304.7123">default(key_id: &amp;str) -&gt; KeyMeta</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="711" x="1479" y="317.9122">make_interaction_keyaction_hashmap(deserialized_actions: &amp;HashMap&lt;KeyEvent, Vec&lt;KeyAction&gt;&gt;) -&gt; HashMap&lt;Interaction, Vec&lt;KeyAction&gt;&gt;</text><ellipse cx="1473" cy="327.8932" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="719" x="1479" y="331.1121">add_tap_action_to_hashmap(duration: TapDuration, motion: TapMotion, action: KeyAction, hashmap: &amp;mut HashMap&lt;Interaction, Vec&lt;KeyAction&gt;&gt;)</text><!--MD5=[b31884a2ffccc450f344eefc1e1043d3]
+class LayoutYamlParser--><rect codeLine="45" fill="#CCCCCC" filter="url(#f1femxmnvhcbvi)" height="68.3998" id="LayoutYamlParser" style="stroke: #1A66C2; stroke-width: 1.5;" width="827" x="878.5" y="596.294"/><ellipse cx="1237.5" cy="609.294" fill="#A9DCDF" rx="8" ry="8" style="stroke: #1A66C2; stroke-width: 1.0;"/><path d="M1239.0156,610.9346 L1239.5313,612.544 L1241.2344,612.544 L1238.4688,604.5284 L1236.6406,604.5284 L1233.7813,612.544 L1235.4688,612.544 L1236.0156,610.9346 L1239.0156,610.9346 Z M1238.5625,609.5596 L1236.4688,609.5596 L1237.5156,606.419 L1238.5625,609.5596 Z "/><ellipse cx="1258.5" cy="608.294" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="Verdana" font-size="11" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="90" x="1265.5" y="613.9689">LayoutYamlParser</text><line style="stroke: #1A66C2; stroke-width: 1.5;" x1="879.5" x2="1704.5" y1="622.294" y2="622.294"/><line style="stroke: #1A66C2; stroke-width: 1.5;" x1="879.5" x2="1704.5" y1="630.294" y2="630.294"/><ellipse cx="889.5" cy="641.294" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="266" x="895.5" y="644.5129">get_layouts() -&gt; HashMap&lt;String, LayoutDeserialized&gt;</text><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="804" x="895.5" y="657.7128">add_layout_to_hashmap(hashmap_with_layouts: &amp;mut HashMap&lt;String, LayoutDeserialized&gt;, layout_result: Result&lt;(String, LayoutDeserialized), serde_yaml::Error&gt;)</text><!--MD5=[22088138aa175941b0ef8f2404b0dc21]
+class KeyDeserialized--><rect codeLine="50" fill="#CCCCCC" filter="url(#f1femxmnvhcbvi)" height="107.9995" id="KeyDeserialized" style="stroke: #1A66C2; stroke-width: 1.5;" width="300" x="1562" y="413.294"/><ellipse cx="1663" cy="426.294" fill="#1A66C2" rx="8" ry="8" style="stroke: #1A66C2; stroke-width: 1.0;"/><path d="M1666.5,424.9971 C1666.4531,424.294 1666.2969,423.8565 1665.9688,423.4034 C1665.3438,422.5909 1664.3594,422.1377 1663.1563,422.1377 C1660.8906,422.1377 1659.4844,423.7627 1659.4844,426.3565 C1659.4844,428.9346 1660.875,430.544 1663.1094,430.544 C1665.1094,430.544 1666.4375,429.3877 1666.5313,427.5596 L1664.9219,427.5596 C1664.8125,428.5752 1664.1875,429.1534 1663.1563,429.1534 C1661.875,429.1534 1661.1406,428.1221 1661.1406,426.3721 C1661.1406,424.6065 1661.9219,423.544 1663.2188,423.544 C1664.1719,423.544 1664.7031,424.0127 1664.9219,424.9971 L1666.5,424.9971 Z "/><ellipse cx="1684" cy="425.294" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="79" x="1691" y="429.913">KeyDeserialized</text><line style="stroke: #1A66C2; stroke-width: 1.5;" x1="1563" x2="1861" y1="439.294" y2="439.294"/><ellipse cx="1573" cy="450.294" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="277" x="1579" y="453.5129">actions: Option&lt;HashMap&lt;KeyEvent, Vec&lt;KeyAction&gt;&gt;&gt;</text><ellipse cx="1573" cy="463.4939" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="163" x="1579" y="466.7128">key_display: Option&lt;KeyDisplay&gt;</text><ellipse cx="1573" cy="476.6938" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="115" x="1579" y="479.9127">outline: Option&lt;Outline&gt;</text><ellipse cx="1573" cy="489.8937" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="139" x="1579" y="493.1126">popup: Option&lt;Vec&lt;String&gt;&gt;</text><ellipse cx="1573" cy="503.0936" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="138" x="1579" y="506.3125">styles: Option&lt;Vec&lt;String&gt;&gt;</text><line style="stroke: #1A66C2; stroke-width: 1.5;" x1="1563" x2="1861" y1="513.2935" y2="513.2935"/><!--MD5=[fa24df536eb4bde7179933ee8c69c032]
+class LayoutDeserialized--><rect codeLine="58" fill="#CCCCCC" filter="url(#f1femxmnvhcbvi)" height="68.3998" id="LayoutDeserialized" style="stroke: #1A66C2; stroke-width: 1.5;" width="453" x="904.5" y="433.294"/><ellipse cx="1075" cy="446.294" fill="#1A66C2" rx="8" ry="8" style="stroke: #1A66C2; stroke-width: 1.0;"/><path d="M1078.5,444.9971 C1078.4531,444.294 1078.2969,443.8565 1077.9688,443.4034 C1077.3438,442.5909 1076.3594,442.1377 1075.1563,442.1377 C1072.8906,442.1377 1071.4844,443.7627 1071.4844,446.3565 C1071.4844,448.9346 1072.875,450.544 1075.1094,450.544 C1077.1094,450.544 1078.4375,449.3877 1078.5313,447.5596 L1076.9219,447.5596 C1076.8125,448.5752 1076.1875,449.1534 1075.1563,449.1534 C1073.875,449.1534 1073.1406,448.1221 1073.1406,446.3721 C1073.1406,444.6065 1073.9219,443.544 1075.2188,443.544 C1076.1719,443.544 1076.7031,444.0127 1076.9219,444.9971 L1078.5,444.9971 Z "/><ellipse cx="1096" cy="445.294" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="93" x="1103" y="449.913">LayoutDeserialized</text><line style="stroke: #1A66C2; stroke-width: 1.5;" x1="905.5" x2="1356.5" y1="459.294" y2="459.294"/><ellipse cx="915.5" cy="470.294" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="192" x="921.5" y="473.5129">views: HashMap&lt;String, Vec&lt;KeyIds&gt;&gt;</text><line style="stroke: #1A66C2; stroke-width: 1.5;" x1="905.5" x2="1356.5" y1="480.4939" y2="480.4939"/><ellipse cx="915.5" cy="491.4939" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#333333" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="430" x="921.5" y="494.7128">from(source: LayoutSource) -&gt; Result&lt;(String, LayoutDeserialized), serde_yaml::Error&gt;)</text><!--MD5=[e17bd019cf9874112af63a52ea874b62]
+class Keyboard--><rect fill="#CCCCCC" filter="url(#f1femxmnvhcbvi)" height="42" id="Keyboard" style="stroke: #1A66C2; stroke-width: 1.5;" width="73" x="1094.5" y="60.294"/><ellipse cx="1106.5" cy="73.294" fill="#1A66C2" rx="8" ry="8" style="stroke: #1A66C2; stroke-width: 1.0;"/><path d="M1110,71.9971 C1109.9531,71.294 1109.7969,70.8565 1109.4688,70.4034 C1108.8438,69.5909 1107.8594,69.1377 1106.6563,69.1377 C1104.3906,69.1377 1102.9844,70.7627 1102.9844,73.3565 C1102.9844,75.9346 1104.375,77.544 1106.6094,77.544 C1108.6094,77.544 1109.9375,76.3877 1110.0313,74.5596 L1108.4219,74.5596 C1108.3125,75.5752 1107.6875,76.1534 1106.6563,76.1534 C1105.375,76.1534 1104.6406,75.1221 1104.6406,73.3721 C1104.6406,71.6065 1105.4219,70.544 1106.7188,70.544 C1107.6719,70.544 1108.2031,71.0127 1108.4219,71.9971 L1110,71.9971 Z "/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="47" x="1117.5" y="76.913">Keyboard</text><line style="stroke: #1A66C2; stroke-width: 1.5;" x1="1095.5" x2="1166.5" y1="86.294" y2="86.294"/><line style="stroke: #1A66C2; stroke-width: 1.5;" x1="1095.5" x2="1166.5" y1="94.294" y2="94.294"/><!--MD5=[85709df1dcf9b2ae2437120fee6ede7c]
+link Keyboard to LayoutMeta--><path codeLine="65" d="M1131,102.314 C1131,126.844 1131,169.354 1131,203.584 " fill="none" id="Keyboard-LayoutMeta" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#333333" points="1135,143.8939,1137.3511,136.6579,1132.6489,136.6579,1135,143.8939" style="stroke: #333333; stroke-width: 1.0;"/><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="62" x="1143" y="143.5129">created from</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="27" x="1102.1859" y="192.6585">many</text><!--MD5=[303e8c6ece692bbf6b4fbd28d5c78bf7]
+link LayoutMeta to LayoutDeserialized--><path codeLine="66" d="M1131,311.964 C1131,350.144 1131,400.434 1131,433.054 " fill="none" id="LayoutMeta-LayoutDeserialized" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#333333" points="1135,379.8939,1137.3511,372.6579,1132.6489,372.6579,1135,379.8939" style="stroke: #333333; stroke-width: 1.0;"/><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="62" x="1143" y="379.5129">created from</text><!--MD5=[8c6ef8f83e671290cf66166a7ff659d1]
+link KeyArrangement to LayoutMeta--><path codeLine="67" d="M846.04,257.794 C868.43,257.794 890.46,257.794 911.75,257.794 " fill="none" id="KeyArrangement-to-LayoutMeta" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="924.9,257.794,918.9,253.794,912.9,257.794,918.9,261.794,924.9,257.794" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#333333" points="863.5,247.3939,870.7361,249.7451,870.7361,245.0428,863.5,247.3939" style="stroke: #333333; stroke-width: 1.0;"/><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="31" x="875.5" y="251.0129">stores</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="27" x="854.5822" y="268.151">many</text><!--MD5=[8e60ee6b282cf5939dbf0c7048a6befb]
+reverse link KeyArrangement to Location--><path codeLine="68" d="M439,345.144 C439,370.684 439,397.674 439,419.674 " fill="none" id="KeyArrangement-backto-Location" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="439,331.954,435,337.954,439,343.954,443,337.954,439,331.954" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#333333" points="443,379.8939,445.3511,372.6579,440.6489,372.6579,443,379.8939" style="stroke: #333333; stroke-width: 1.0;"/><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="71" x="451" y="379.5129">maps key id to</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="27" x="410.0172" y="408.9734">many</text><!--MD5=[b7c3dac17e379f590157df4aa338c1e2]
+reverse link LayoutMeta to KeyMeta--><path codeLine="69" d="M1350.4,257.794 C1386.07,257.794 1423.86,257.794 1461.97,257.794 " fill="none" id="LayoutMeta-backto-KeyMeta" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="1337.35,257.794,1343.35,261.794,1349.35,257.794,1343.35,253.794,1337.35,257.794" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#333333" points="1362.5,247.3939,1355.2639,245.0428,1355.2639,249.7451,1362.5,247.3939" style="stroke: #333333; stroke-width: 1.0;"/><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="77" x="1366.5" y="251.0129">maps info about</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="27" x="1427.1592" y="268.149">many</text><!--MD5=[9369aafb7b1a1672fa069e6733fa6235]
+link LayoutMeta to LayoutYamlParser--><path codeLine="70" d="M1337.38,289.564 C1380.64,305.904 1421.22,330.714 1448,368.294 C1503.75,446.544 1401.39,545.444 1337.54,596.094 " fill="none" id="LayoutMeta-LayoutYamlParser" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#333333" points="1468.0021,471.3939,1470.3495,464.1566,1465.6472,464.1591,1468.0021,471.3939" style="stroke: #333333; stroke-width: 1.0;"/><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="61" x="1476" y="471.0129">calls method</text><!--MD5=[4f95d8b4dcbbded2e4eb3582380ec1dc]
+link LayoutDeserialized to LayoutYamlParser--><path codeLine="71" d="M1164.36,501.654 C1192.08,529.374 1231.32,568.614 1258.96,596.254 " fill="none" id="LayoutDeserialized-LayoutYamlParser" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#333333" points="1226.1716,556.0655,1229.6257,562.8447,1232.9508,559.5197,1226.1716,556.0655" style="stroke: #333333; stroke-width: 1.0;"/><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="37" x="1237" y="562.5129">creates</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="27" x="1141.2699" y="519.8975">many</text><!--MD5=[89892462f650c07d8c79b74767a4e73b]
+reverse link LayoutDeserialized to KeyDeserialized--><path codeLine="72" d="M1214.5,428.144 C1256.29,410.664 1308.25,392.064 1357,383.294 C1435.38,369.194 1522.42,389.214 1590.69,413.244 " fill="none" id="LayoutDeserialized-backto-KeyDeserialized" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="1202.43,433.274,1209.5169,434.6065,1213.4727,428.5772,1206.3857,427.2447,1202.43,433.274" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#333333" points="1364.9969,375.7356,1357.6734,373.6727,1357.8595,378.3713,1364.9969,375.7356" style="stroke: #333333; stroke-width: 1.0;"/><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="77" x="1369" y="379.5129">maps info about</text><!--MD5=[d4e91fd12b92e903b04765dcbc896c79]
+link KeyMeta to KeyDeserialized--><path codeLine="73" d="M1786.56,338.424 C1771.97,363.454 1756.22,390.464 1742.97,413.184 " fill="none" id="KeyMeta-KeyDeserialized" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#333333" points="1769.9852,379.3495,1775.6611,374.2826,1771.5989,371.9141,1769.9852,379.3495" style="stroke: #333333; stroke-width: 1.0;"/><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="62" x="1780" y="379.5129">created from</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="27" x="1754.2216" y="356.4208">many</text><!--MD5=[f574cfcd33d7170916bfb8043cef64f3]
+@startuml build_keyboard
+!define LIGHTBLUE
+!includeurl https://raw.githubusercontent.com/grelltrier/RedDress-PlantUML/master/style.puml
+
+package keyboard {
+    +class LayoutMeta {
+        {static} +deserialize() -> HashMap<String, LayoutMeta>
+        {static} from(layout_deserialized: LayoutDeserialized) -> LayoutMeta
+        {static} get_key_meta_for_all_keys(
+        key_arrangement_deserialized: &[KeyIds],
+        key_meta: &HashMap<String, KeyDeserialized>) -> HashMap<String, KeyMeta>
+    }
+
+    +class Location {
+        +x: i32
+        +y: i32
+        +width: i32
+        +height: i32
+    }
+
+    +class KeyArrangement {
+        no_rows: i32
+        no_columns: i32
+
+        {static} +from(key_arrangement_deserialized: &[KeyIds], key_meta: &HashMap<String, KeyMeta>) -> KeyArrangement
+        +get_no_rows() -> i32
+        +get_no_columns() -> i32
+        +get_key_arrangement() -> &HashMap<String, Location>
+        {static} get_uncentered_key_arrangement(key_arrangement_deserialized: &[KeyIds], key_meta: &HashMap<String, KeyMeta>) -> (HashMap<String, Location>, Vec<i32>)
+        {static} get_centered_key_arrangement(mut uncentered_key_arrangement: HashMap<String, Location>,row_widths: &[i32]) -> (HashMap<String, Location>, i32, i32)
+    }
+
+    +class KeyMeta {
+        +actions: HashMap<Interaction, Vec<KeyAction>>
+        +key_display: KeyDisplay
+        +outline: Outline
+        +popup: Option<Vec<String>>
+        +styles: Option<Vec<String>>
+
+        {static} from(key_id: &str, key_deserialized: Option<&KeyDeserialized>) -> KeyMeta
+        {static} default(key_id: &str) -> KeyMeta
+        {static} make_interaction_keyaction_hashmap(deserialized_actions: &HashMap<KeyEvent, Vec<KeyAction>>) -> HashMap<Interaction, Vec<KeyAction>>
+        {static} +add_tap_action_to_hashmap(duration: TapDuration, motion: TapMotion, action: KeyAction, hashmap: &mut HashMap<Interaction, Vec<KeyAction>>)
+    }
+
+    +abstract class LayoutYamlParser{
+        {static} +get_layouts() -> HashMap<String, LayoutDeserialized>
+        {static} add_layout_to_hashmap(hashmap_with_layouts: &mut HashMap<String, LayoutDeserialized>, layout_result: Result<(String, LayoutDeserialized), serde_yaml::Error>)
+    }
+
+    +class KeyDeserialized {
+        +actions: Option<HashMap<KeyEvent, Vec<KeyAction>>>
+        +key_display: Option<KeyDisplay>
+        +outline: Option<Outline>
+        +popup: Option<Vec<String>>
+        +styles: Option<Vec<String>>
+    }
+
+    +class LayoutDeserialized {
+        +views: HashMap<String, Vec<KeyIds>>
+
+        {static} +from(source: LayoutSource) -> Result<(String, LayoutDeserialized), serde_yaml::Error>)
+    }
+
+    
+    Keyboard - - "many" LayoutMeta : > created from
+    LayoutMeta - - LayoutDeserialized : > created from
+    KeyArrangement "many" -* LayoutMeta : < stores
+    KeyArrangement *- - "many" Location : > maps key id to
+    LayoutMeta *- "many" KeyMeta : > maps info about
+    LayoutMeta - - LayoutYamlParser : > calls method
+    LayoutDeserialized "many" - - LayoutYamlParser : < creates
+    LayoutDeserialized *- KeyDeserialized : > maps info about
+    KeyMeta "many" - - KeyDeserialized : > created from
+}
+@enduml
+
+@startuml build_keyboard
+
+
+
+
+skinparam stereotypeCBackgroundColor 1a66c2
+
+
+
+
+
+
+
+skinparam backgroundColor fff
+
+
+
+
+
+
+
+
+skinparam circledCharacter {
+  radius 8
+  fontSize 11
+  fontName Verdana
+}
+
+skinparam class {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+
+  attributeFontColor 333
+  attributeFontSize 11
+  attributeIconSize 11
+}
+
+
+skinparam ActivityBarColor 1a66c2
+skinparam activityDiamondBackgroundColor ccc
+skinparam activityDiamondBorderColor 1a66c2
+
+
+skinparam actor {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam participant {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam collections {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam SequenceBox{
+    backgroundColor e0e0e0
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+skinparam interface {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam component {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam node {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam database {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam queue {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+skinparam usecase {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+skinparam activity {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+skinparam sequence {
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+
+  lifeLineBorderColor 2a86e2
+  lifeLineBackgroundColor e0e0e0
+}
+
+skinparam boundary {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam control {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam entity {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+skinparam state {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+  startColor 2a86e2
+  endColor 1a66c2
+}
+
+
+skinparam object {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+
+skinparam note {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam cloud {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+skinparam rectangle {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam storage {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+package keyboard {
+    +class LayoutMeta {
+        {static} +deserialize() -> HashMap<String, LayoutMeta>
+        {static} from(layout_deserialized: LayoutDeserialized) -> LayoutMeta
+        {static} get_key_meta_for_all_keys(
+        key_arrangement_deserialized: &[KeyIds],
+        key_meta: &HashMap<String, KeyDeserialized>) -> HashMap<String, KeyMeta>
+    }
+
+    +class Location {
+        +x: i32
+        +y: i32
+        +width: i32
+        +height: i32
+    }
+
+    +class KeyArrangement {
+        no_rows: i32
+        no_columns: i32
+
+        {static} +from(key_arrangement_deserialized: &[KeyIds], key_meta: &HashMap<String, KeyMeta>) -> KeyArrangement
+        +get_no_rows() -> i32
+        +get_no_columns() -> i32
+        +get_key_arrangement() -> &HashMap<String, Location>
+        {static} get_uncentered_key_arrangement(key_arrangement_deserialized: &[KeyIds], key_meta: &HashMap<String, KeyMeta>) -> (HashMap<String, Location>, Vec<i32>)
+        {static} get_centered_key_arrangement(mut uncentered_key_arrangement: HashMap<String, Location>,row_widths: &[i32]) -> (HashMap<String, Location>, i32, i32)
+    }
+
+    +class KeyMeta {
+        +actions: HashMap<Interaction, Vec<KeyAction>>
+        +key_display: KeyDisplay
+        +outline: Outline
+        +popup: Option<Vec<String>>
+        +styles: Option<Vec<String>>
+
+        {static} from(key_id: &str, key_deserialized: Option<&KeyDeserialized>) -> KeyMeta
+        {static} default(key_id: &str) -> KeyMeta
+        {static} make_interaction_keyaction_hashmap(deserialized_actions: &HashMap<KeyEvent, Vec<KeyAction>>) -> HashMap<Interaction, Vec<KeyAction>>
+        {static} +add_tap_action_to_hashmap(duration: TapDuration, motion: TapMotion, action: KeyAction, hashmap: &mut HashMap<Interaction, Vec<KeyAction>>)
+    }
+
+    +abstract class LayoutYamlParser{
+        {static} +get_layouts() -> HashMap<String, LayoutDeserialized>
+        {static} add_layout_to_hashmap(hashmap_with_layouts: &mut HashMap<String, LayoutDeserialized>, layout_result: Result<(String, LayoutDeserialized), serde_yaml::Error>)
+    }
+
+    +class KeyDeserialized {
+        +actions: Option<HashMap<KeyEvent, Vec<KeyAction>>>
+        +key_display: Option<KeyDisplay>
+        +outline: Option<Outline>
+        +popup: Option<Vec<String>>
+        +styles: Option<Vec<String>>
+    }
+
+    +class LayoutDeserialized {
+        +views: HashMap<String, Vec<KeyIds>>
+
+        {static} +from(source: LayoutSource) -> Result<(String, LayoutDeserialized), serde_yaml::Error>)
+    }
+
+    
+    Keyboard - - "many" LayoutMeta : > created from
+    LayoutMeta - - LayoutDeserialized : > created from
+    KeyArrangement "many" -* LayoutMeta : < stores
+    KeyArrangement *- - "many" Location : > maps key id to
+    LayoutMeta *- "many" KeyMeta : > maps info about
+    LayoutMeta - - LayoutYamlParser : > calls method
+    LayoutDeserialized "many" - - LayoutYamlParser : < creates
+    LayoutDeserialized *- KeyDeserialized : > maps info about
+    KeyMeta "many" - - KeyDeserialized : > created from
+}
+@enduml
+
+PlantUML version 1.2020.19(Mon Oct 12 17:10:01 CEST 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

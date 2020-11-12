@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="494px" preserveAspectRatio="none" style="width:266px;height:494px;" version="1.1" viewBox="0 0 266 494" width="266px" zoomAndPan="magnify"><defs><filter height="300%" id="f1s2pcl759pv2s" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[77f1f5e3ad56f923d1fc18272c4f6b93]
+entity Messages--><ellipse cx="106.73" cy="28.5" fill="#2A86E2" filter="url(#f1s2pcl759pv2s)" rx="8" ry="8" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="51" x="81.23" y="55.7189">Messages</text><!--MD5=[c42ed81cef7fdd2e33758127945b9a5b]
+entity UI--><rect fill="#CCCCCC" filter="url(#f1s2pcl759pv2s)" height="43.1999" style="stroke: #1A66C2; stroke-width: 1.5;" width="51" x="174.23" y="7"/><rect fill="#CCCCCC" height="10" style="stroke: #1A66C2; stroke-width: 1.5;" width="15" x="205.23" y="12"/><rect fill="#CCCCCC" height="2" style="stroke: #1A66C2; stroke-width: 1.5;" width="4" x="203.23" y="14"/><rect fill="#CCCCCC" height="2" style="stroke: #1A66C2; stroke-width: 1.5;" width="4" x="203.23" y="18"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="11" x="189.23" y="37.2189">UI</text><!--MD5=[1e9204083aa66e691856924869ece9f5]
+entity Input--><ellipse cx="222.73" cy="136" fill="#2A86E2" filter="url(#f1s2pcl759pv2s)" rx="8" ry="8" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="24" x="210.73" y="163.2189">Input</text><!--MD5=[fb474a65459f7c6e90680d615206be56]
+entity Keyboard--><rect fill="#CCCCCC" filter="url(#f1s2pcl759pv2s)" height="43.1999" style="stroke: #1A66C2; stroke-width: 1.5;" width="87" x="152.23" y="222"/><rect fill="#CCCCCC" height="10" style="stroke: #1A66C2; stroke-width: 1.5;" width="15" x="219.23" y="227"/><rect fill="#CCCCCC" height="2" style="stroke: #1A66C2; stroke-width: 1.5;" width="4" x="217.23" y="229"/><rect fill="#CCCCCC" height="2" style="stroke: #1A66C2; stroke-width: 1.5;" width="4" x="217.23" y="233"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="47" x="167.23" y="252.2189">Keyboard</text><!--MD5=[92c7b17a015847b9ef3f57e5296a880e]
+entity Decode--><ellipse cx="151.73" cy="351" fill="#2A86E2" filter="url(#f1s2pcl759pv2s)" rx="8" ry="8" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="38" x="132.73" y="378.2189">Decode</text><!--MD5=[5b7db7b76c91b79ede5808f63e19d150]
+entity Decoder--><rect fill="#CCCCCC" filter="url(#f1s2pcl759pv2s)" height="43.1999" style="stroke: #1A66C2; stroke-width: 1.5;" width="82" x="19.73" y="437"/><rect fill="#CCCCCC" height="10" style="stroke: #1A66C2; stroke-width: 1.5;" width="15" x="81.73" y="442"/><rect fill="#CCCCCC" height="2" style="stroke: #1A66C2; stroke-width: 1.5;" width="4" x="79.73" y="444"/><rect fill="#CCCCCC" height="2" style="stroke: #1A66C2; stroke-width: 1.5;" width="4" x="79.73" y="448"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="42" x="34.73" y="467.2189">Decoder</text><!--MD5=[fc241586e3e4cf255457dad9b5d09a8f]
+entity Submit--><ellipse cx="240.73" cy="351" fill="#2A86E2" filter="url(#f1s2pcl759pv2s)" rx="8" ry="8" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="33" x="224.23" y="378.2189">Submit</text><!--MD5=[601b3688e0b3072c6e779eb008a5cc5b]
+entity Submitter--><rect fill="#CCCCCC" filter="url(#f1s2pcl759pv2s)" height="43.1999" style="stroke: #1A66C2; stroke-width: 1.5;" width="86" x="166.73" y="437"/><rect fill="#CCCCCC" height="10" style="stroke: #1A66C2; stroke-width: 1.5;" width="15" x="232.73" y="442"/><rect fill="#CCCCCC" height="2" style="stroke: #1A66C2; stroke-width: 1.5;" width="4" x="230.73" y="444"/><rect fill="#CCCCCC" height="2" style="stroke: #1A66C2; stroke-width: 1.5;" width="4" x="230.73" y="448"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="46" x="181.73" y="467.2189">Submitter</text><!--MD5=[36e23723805b6fb0ac71180713704cc9]
+link Messages to UI--><path d="M115.81,28.5 C135.26,28.5 154.71,28.5 174.16,28.5 " fill="none" id="Messages-UI" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[dc8ca5d2e642fca6af6d93e33f09ec79]
+link UI to Input--><path d="M204.22,50.09 C208.84,71.29 215.9,103.68 219.83,121.71 " fill="none" id="UI-to-Input" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="220.95,126.82,222.9293,117.1721,219.879,121.9361,215.115,118.8857,220.95,126.82" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[8988854f9a17f94e25123fc5b1802ba7]
+link Input to Keyboard--><path d="M220.61,145.28 C216.43,161.6 207.02,198.37 201.05,221.72 " fill="none" id="Input-Keyboard" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[6c1bc99ca27d48cd88163cb6be26f84b]
+link Decode to Decoder--><path d="M144.59,360.28 C130.51,376.6 98.8,413.37 78.65,436.72 " fill="none" id="Decode-Decoder" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[ce39ff41fbc3a0cf6a3b8d3096a4a6a6]
+link Submit to Submitter--><path d="M238.3,360.28 C233.5,376.6 222.7,413.37 215.84,436.72 " fill="none" id="Submit-Submitter" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[a803784da1c4535b7fa9814105cf3dd4]
+link Keyboard to Decode--><path d="M187.14,265.09 C178.23,286.47 164.56,319.24 157.08,337.17 " fill="none" id="Keyboard-to-Decode" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="155.14,341.82,162.3013,335.0586,157.0681,337.2067,154.92,331.9736,155.14,341.82" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[41fd3ffdf2eab2bcc74e6a1d1c48b310]
+link Keyboard to Submit--><path d="M204.51,265.09 C213.63,286.47 227.61,319.24 235.26,337.17 " fill="none" id="Keyboard-to-Submit" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="237.24,341.82,237.3713,331.972,235.2704,337.2243,230.0181,335.1234,237.24,341.82" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[5489389be5d7c536ad4a5a5199decd60]
+link Decoder to Messages--><path d="M54.81,436.81 C40.13,381.82 6,228.2 45.73,110 C55.13,82.05 78.5,56.08 93.44,41.55 " fill="none" id="Decoder-to-Messages" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="97.41,37.76,88.1413,41.0904,93.7968,41.2161,93.6711,46.8716,97.41,37.76" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[8a8593487a73e2095a2c9d6f621c59a7]
+link Keyboard to Messages--><path d="M187.05,221.74 C168.82,178.1 126.98,77.97 112.1,42.36 " fill="none" id="Keyboard-to-Messages" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="110.11,37.59,109.89,47.4364,112.0381,42.2033,117.2713,44.3514,110.11,37.59" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[d9204338305b0645ee469c47744732f2]
+link Submitter to Messages--><path d="M168.04,436.99 C145.41,423.39 119.51,403.21 106.73,377 C49.19,259 89.47,90.51 102.85,42.64 " fill="none" id="Submitter-to-Messages" style="stroke: #000000; stroke-width: 1.0;"/><polygon fill="#000000" points="104.27,37.65,97.9514,45.2048,102.8964,42.4576,105.6436,47.4026,104.27,37.65" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[3c322207ec3e31053c083a04fa907286]
+@startuml overview_components
+!define LIGHTBLUE
+!includeurl https://raw.githubusercontent.com/grelltrier/RedDress-PlantUML/master/style.puml
+
+Messages - [UI]
+[UI] - -> Input
+Input - - [Keyboard]
+Decode - - [Decoder]
+Submit - - [Submitter]
+[Keyboard] - -> Decode
+[Keyboard] - -> Submit
+Decoder - -> Messages
+Keyboard - -> Messages
+Submitter - -> Messages
+
+@enduml
+
+@startuml overview_components
+
+
+
+
+skinparam stereotypeCBackgroundColor 1a66c2
+
+
+
+
+
+
+
+skinparam backgroundColor fff
+
+
+
+
+
+
+
+
+skinparam circledCharacter {
+  radius 8
+  fontSize 11
+  fontName Verdana
+}
+
+skinparam class {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+
+  attributeFontColor 333
+  attributeFontSize 11
+  attributeIconSize 11
+}
+
+
+skinparam ActivityBarColor 1a66c2
+skinparam activityDiamondBackgroundColor ccc
+skinparam activityDiamondBorderColor 1a66c2
+
+
+skinparam actor {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam participant {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam collections {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam SequenceBox{
+    backgroundColor e0e0e0
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+skinparam interface {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam component {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam node {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam database {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam queue {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+skinparam usecase {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+skinparam activity {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+skinparam sequence {
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+
+  lifeLineBorderColor 2a86e2
+  lifeLineBackgroundColor e0e0e0
+}
+
+skinparam boundary {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam control {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam entity {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+skinparam state {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+  startColor 2a86e2
+  endColor 1a66c2
+}
+
+
+skinparam object {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+
+skinparam note {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam cloud {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+skinparam rectangle {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam storage {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+Messages - [UI]
+[UI] - -> Input
+Input - - [Keyboard]
+Decode - - [Decoder]
+Submit - - [Submitter]
+[Keyboard] - -> Decode
+[Keyboard] - -> Submit
+Decoder - -> Messages
+Keyboard - -> Messages
+Submitter - -> Messages
+
+@enduml
+
+PlantUML version 1.2020.19(Mon Oct 12 17:10:01 CEST 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

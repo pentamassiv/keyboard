@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="729px" preserveAspectRatio="none" style="width:390px;height:729px;" version="1.1" viewBox="0 0 390 729" width="390px" zoomAndPan="magnify"><defs><filter height="300%" id="f4898b7zsd0uh" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><rect fill="#FFFFFF" filter="url(#f4898b7zsd0uh)" height="701.7178" style="stroke: #000000; stroke-width: 2.0;" width="362" x="11" y="11"/><path d="M177,11 L177,20.7999 L167,30.7999 L11,30.7999 " fill="none" style="stroke: #000000; stroke-width: 2.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="156" x="14" y="25.0059">GridBuilder::make_grid()</text><ellipse cx="192" cy="50.7999" fill="#000000" filter="url(#f4898b7zsd0uh)" rx="10" ry="10" style="stroke: none; stroke-width: 1.0;"/><rect fill="#CCCCCC" filter="url(#f4898b7zsd0uh)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="91" x="146.5" y="80.7999"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="71" x="156.5" y="101.0189">Make new grid</text><rect fill="#CCCCCC" filter="url(#f4898b7zsd0uh)" height="33.1999" style="stroke: #1A66C2; stroke-width: 1.5;" width="71" x="156.5" y="133.9998"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="51" x="166.5" y="154.2188">grid = Grid</text><rect fill="#CCCCCC" filter="url(#f4898b7zsd0uh)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="203" x="90.5" y="187.1997"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="183" x="100.5" y="207.4187">Make new storage for key references</text><rect fill="#CCCCCC" filter="url(#f4898b7zsd0uh)" height="46.3998" style="stroke: #1A66C2; stroke-width: 1.5;" width="136" x="124" y="240.3996"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="88" x="146" y="260.6186">&lt;&lt;CentralBuffer&gt;&gt;</text><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="116" x="134" y="273.8185">KeyReferences storage</text><rect fill="#CCCCCC" filter="url(#f4898b7zsd0uh)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="121" x="131.5" y="362.5184"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="101" x="141.5" y="382.7373">Get KeyMeta of view</text><rect fill="#CCCCCC" filter="url(#f4898b7zsd0uh)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="151" x="116.5" y="415.7183"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="131" x="126.5" y="435.9372">GridBuilder::make_button()</text><rect fill="#CCCCCC" filter="url(#f4898b7zsd0uh)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="164" x="110" y="483.9182"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="144" x="120" y="504.1371">GridBuilder::attach_popover()</text><rect fill="#CCCCCC" filter="url(#f4898b7zsd0uh)" height="46.3998" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="306" x="39" y="537.1181"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="206" x="49" y="557.337">Place new button at that location in the grid</text><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="286" x="49" y="570.5369">:Add the button and its Popover to hashmap_with_key_refs</text><polygon fill="#CCCCCC" filter="url(#f4898b7zsd0uh)" points="83.5,306.7994,300.5,306.7994,312.5,318.7994,300.5,330.7994,83.5,330.7994,71.5,318.7994,83.5,306.7994" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="19" x="196" y="341.0184">true</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="217" x="83.5" y="322.4184">for each Location in KeyArrangement of view</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="23" x="48.5" y="315.8185">false</text><rect fill="#CCCCCC" filter="url(#f4898b7zsd0uh)" height="33.1999" style="stroke: #1A66C2; stroke-width: 1.5;" width="171" x="106.5" y="625.5179"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="151" x="116.5" y="645.7368">(grid, hashmap_with_key_refs)</text><ellipse cx="192" cy="689.7178" fill="#FFFFFF" filter="url(#f4898b7zsd0uh)" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"/><ellipse cx="192" cy="689.7178" fill="#000000" rx="6" ry="6" style="stroke: #7F7F7F; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="192" x2="192" y1="60.7999" y2="80.7999"/><polygon fill="#000000" points="188,70.7999,192,80.7999,196,70.7999,192,74.7999" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="192" x2="192" y1="113.9998" y2="133.9998"/><polygon fill="#000000" points="188,123.9998,192,133.9998,196,123.9998,192,127.9998" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="192" x2="192" y1="167.1997" y2="187.1997"/><polygon fill="#000000" points="188,177.1997,192,187.1997,196,177.1997,192,181.1997" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="192" x2="192" y1="220.3996" y2="240.3996"/><polygon fill="#000000" points="188,230.3996,192,240.3996,196,230.3996,192,234.3996" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="192" x2="192" y1="395.7183" y2="415.7183"/><polygon fill="#000000" points="188,405.7183,192,415.7183,196,405.7183,192,409.7183" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="192" x2="192" y1="448.9182" y2="483.9182"/><polygon fill="#000000" points="188,473.9182,192,483.9182,196,473.9182,192,477.9182" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="192" x2="192" y1="517.1181" y2="537.1181"/><polygon fill="#000000" points="188,527.1181,192,537.1181,196,527.1181,192,531.1181" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="192" x2="192" y1="330.7994" y2="362.5184"/><polygon fill="#000000" points="188,352.5184,192,362.5184,196,352.5184,192,356.5184" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="192" x2="192" y1="583.5179" y2="593.5179"/><line style="stroke: #000000; stroke-width: 1.5;" x1="192" x2="357" y1="593.5179" y2="593.5179"/><polygon fill="#000000" points="353,464.4182,357,454.4182,361,464.4182,357,460.4182" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="357" x2="357" y1="318.7994" y2="593.5179"/><line style="stroke: #000000; stroke-width: 1.5;" x1="357" x2="312.5" y1="318.7994" y2="318.7994"/><polygon fill="#000000" points="322.5,314.7994,312.5,318.7994,322.5,322.7994,318.5,318.7994" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="71.5" x2="27" y1="318.7994" y2="318.7994"/><polygon fill="#000000" points="23,450.4182,27,460.4182,31,450.4182,27,454.4182" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="27" x2="27" y1="318.7994" y2="605.5179"/><line style="stroke: #000000; stroke-width: 1.5;" x1="27" x2="192" y1="605.5179" y2="605.5179"/><line style="stroke: #000000; stroke-width: 1.5;" x1="192" x2="192" y1="605.5179" y2="625.5179"/><polygon fill="#000000" points="188,615.5179,192,625.5179,196,615.5179,192,619.5179" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="192" x2="192" y1="286.7994" y2="306.7994"/><polygon fill="#000000" points="188,296.7994,192,306.7994,196,296.7994,192,300.7994" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="192" x2="192" y1="658.7178" y2="678.7178"/><polygon fill="#000000" points="188,668.7178,192,678.7178,196,668.7178,192,672.7178" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[fdd2614d724aed814caf1e21a3df0622]
+@startuml grid_builder_make_grid
+!define LIGHTBLUE
+!includeurl https://raw.githubusercontent.com/grelltrier/RedDress-PlantUML/master/style.puml
+
+partition "GridBuilder::make_grid()"{  
+  start
+  :Make new grid;
+  :grid = Grid]
+  :Make new storage for key references;
+  :    <<CentralBuffer>>
+  KeyReferences storage]
+
+  while (for each Location in KeyArrangement of view) is (true)
+    :Get KeyMeta of view;
+    :GridBuilder::make_button();
+    :GridBuilder::attach_popover();
+    :Place new button at that location in the grid
+    :Add the button and its Popover to hashmap_with_key_refs;
+  endwhile (false)
+  :(grid, hashmap_with_key_refs)]
+  stop
+}
+@enduml
+
+@startuml grid_builder_make_grid
+
+
+
+
+skinparam stereotypeCBackgroundColor 1a66c2
+
+
+
+
+
+
+
+skinparam backgroundColor fff
+
+
+
+
+
+
+
+
+skinparam circledCharacter {
+  radius 8
+  fontSize 11
+  fontName Verdana
+}
+
+skinparam class {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+
+  attributeFontColor 333
+  attributeFontSize 11
+  attributeIconSize 11
+}
+
+
+skinparam ActivityBarColor 1a66c2
+skinparam activityDiamondBackgroundColor ccc
+skinparam activityDiamondBorderColor 1a66c2
+
+
+skinparam actor {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam participant {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam collections {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam SequenceBox{
+    backgroundColor e0e0e0
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+skinparam interface {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam component {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam node {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam database {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam queue {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+skinparam usecase {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+skinparam activity {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+skinparam sequence {
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+
+  lifeLineBorderColor 2a86e2
+  lifeLineBackgroundColor e0e0e0
+}
+
+skinparam boundary {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam control {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam entity {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+skinparam state {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+  startColor 2a86e2
+  endColor 1a66c2
+}
+
+
+skinparam object {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+
+skinparam note {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam cloud {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+skinparam rectangle {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam storage {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+partition "GridBuilder::make_grid()"{  
+  start
+  :Make new grid;
+  :grid = Grid]
+  :Make new storage for key references;
+  :    <<CentralBuffer>>
+  KeyReferences storage]
+
+  while (for each Location in KeyArrangement of view) is (true)
+    :Get KeyMeta of view;
+    :GridBuilder::make_button();
+    :GridBuilder::attach_popover();
+    :Place new button at that location in the grid
+    :Add the button and its Popover to hashmap_with_key_refs;
+  endwhile (false)
+  :(grid, hashmap_with_key_refs)]
+  stop
+}
+@enduml
+
+PlantUML version 1.2020.19(Mon Oct 12 17:10:01 CEST 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

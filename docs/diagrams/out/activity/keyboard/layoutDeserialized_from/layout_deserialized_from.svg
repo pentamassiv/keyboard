@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="925px" preserveAspectRatio="none" style="width:557px;height:925px;" version="1.1" viewBox="0 0 557 925" width="557px" zoomAndPan="magnify"><defs><filter height="300%" id="fbbrjrcslzaa6" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><rect fill="#FFFFFF" filter="url(#fbbrjrcslzaa6)" height="897.6983" style="stroke: #000000; stroke-width: 2.0;" width="529" x="11" y="11"/><path d="M189,11 L189,20.7999 L179,30.7999 L11,30.7999 " fill="none" style="stroke: #000000; stroke-width: 2.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="168" x="14" y="25.0059">LayoutDeserialized::from()</text><ellipse cx="318.25" cy="50.7999" fill="#000000" filter="url(#fbbrjrcslzaa6)" rx="10" ry="10" style="stroke: none; stroke-width: 1.0;"/><polygon fill="#CCCCCC" filter="url(#fbbrjrcslzaa6)" points="278.75,80.7999,357.75,80.7999,369.75,92.7999,357.75,104.7999,278.75,104.7999,266.75,92.7999,278.75,80.7999" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="79" x="278.75" y="96.4189">Deserialize from</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="13" x="253.75" y="89.8189">file</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="70" x="369.75" y="89.8189">fallback_string</text><rect fill="#CCCCCC" filter="url(#fbbrjrcslzaa6)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="84" x="167.5" y="114.7999"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="64" x="177.5" y="135.0189">Get file name</text><rect fill="#CCCCCC" filter="url(#fbbrjrcslzaa6)" height="33.1999" style="stroke: #1A66C2; stroke-width: 1.5;" width="43" x="188" y="216.5998"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="23" x="198" y="236.8187">Err()</text><ellipse cx="209.5" cy="289.6997" fill="#FFFFFF" filter="url(#fbbrjrcslzaa6)" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"/><ellipse cx="209.5" cy="289.6997" fill="#000000" rx="6" ry="6" style="stroke: #7F7F7F; stroke-width: 1.0;"/><polygon fill="#CCCCCC" filter="url(#fbbrjrcslzaa6)" points="159,167.9998,260,167.9998,272,179.9998,260,191.9998,159,191.9998,147,179.9998,159,167.9998" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="18" x="213.5" y="202.2188">yes</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="101" x="159" y="183.6188">file name = 'previous'</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="12" x="272" y="177.0189">no</text><rect fill="#CCCCCC" filter="url(#fbbrjrcslzaa6)" height="33.1999" style="stroke: #1A66C2; stroke-width: 1.5;" width="66" x="176.5" y="342.6997"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="46" x="186.5" y="362.9187">file_name</text><rect fill="#CCCCCC" filter="url(#fbbrjrcslzaa6)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="63" x="178" y="395.8996"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="43" x="188" y="416.1186">Open file</text><rect fill="#CCCCCC" filter="url(#fbbrjrcslzaa6)" height="33.1999" style="stroke: #1A66C2; stroke-width: 1.5;" width="62" x="178.5" y="449.0995"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="42" x="188.5" y="469.3185">yaml_file</text><rect fill="#CCCCCC" filter="url(#fbbrjrcslzaa6)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="193" x="113" y="502.2994"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="173" x="123" y="522.5184">serde_yaml::from_reader(yaml_file)</text><rect fill="#CCCCCC" filter="url(#fbbrjrcslzaa6)" height="33.1999" style="stroke: #1A66C2; stroke-width: 1.5;" width="47" x="186" y="555.4993"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="27" x="196" y="575.7183">result</text><rect fill="#CCCCCC" filter="url(#fbbrjrcslzaa6)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="202" x="326" y="114.7999"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="182" x="336" y="135.0189">serde_yaml::from_str(fallback_string)</text><rect fill="#CCCCCC" filter="url(#fbbrjrcslzaa6)" height="33.1999" style="stroke: #1A66C2; stroke-width: 1.5;" width="47" x="403.5" y="167.9998"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="27" x="413.5" y="188.2188">result</text><polygon fill="#CCCCCC" filter="url(#fbbrjrcslzaa6)" points="318.25,594.6992,330.25,606.6992,318.25,618.6992,306.25,606.6992,318.25,594.6992" style="stroke: #1A66C2; stroke-width: 1.5;"/><polygon fill="#CCCCCC" filter="url(#fbbrjrcslzaa6)" points="304.75,638.6992,331.75,638.6992,343.75,650.6992,331.75,662.6992,304.75,662.6992,292.75,650.6992,304.75,638.6992" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="27" x="304.75" y="654.3182">result</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="42" x="250.75" y="647.7183">success</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="24" x="343.75" y="647.7183">error</text><rect fill="#CCCCCC" filter="url(#fbbrjrcslzaa6)" height="33.1999" style="stroke: #1A66C2; stroke-width: 1.5;" width="113" x="189.5" y="672.6992"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="93" x="199.5" y="692.9182">deserialized_layout</text><path d="M23,725.8991 L23,854.6983 A0,0 0 0 0 23,854.6983 L132,854.6983 A0,0 0 0 0 132,854.6983 L132,794.2987 L152,790.2987 L132,786.2987 L132,735.8991 L122,725.8991 L23,725.8991 A0,0 0 0 0 23,725.8991 " fill="#2A86E2" filter="url(#fbbrjrcslzaa6)" style="stroke: #1A66C2; stroke-width: 1.0;"/><path d="M122,725.8991 L122,735.8991 L132,735.8991 L122,725.8991 " fill="#2A86E2" style="stroke: #1A66C2; stroke-width: 1.0;"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="84" x="29" y="741.1181">The layout needs</text><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="88" x="29" y="754.318">default information</text><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="72" x="29" y="767.5179">added before it</text><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="72" x="29" y="780.7178">can be used to</text><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="55" x="29" y="793.9177">construct a</text><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="83" x="29" y="807.1176">Keyboard from it.</text><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="87" x="29" y="820.3175">This is why it later</text><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="73" x="29" y="833.5174">gets converted</text><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="78" x="29" y="846.7173">to a LayoutMeta</text><rect fill="#CCCCCC" filter="url(#fbbrjrcslzaa6)" height="33.1999" style="stroke: #1A66C2; stroke-width: 1.5;" width="188" x="152" y="773.6987"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="168" x="162" y="793.9177">Ok(file_name, deserialized_layout)</text><ellipse cx="246" cy="885.6983" fill="#FFFFFF" filter="url(#fbbrjrcslzaa6)" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"/><ellipse cx="246" cy="885.6983" fill="#000000" rx="6" ry="6" style="stroke: #7F7F7F; stroke-width: 1.0;"/><rect fill="#CCCCCC" filter="url(#fbbrjrcslzaa6)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="61" x="360" y="672.6992"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="41" x="370" y="692.9182">Emit info</text><rect fill="#CCCCCC" filter="url(#fbbrjrcslzaa6)" height="33.1999" style="stroke: #1A66C2; stroke-width: 1.5;" width="43" x="369" y="725.8991"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="23" x="379" y="746.1181">Err()</text><ellipse cx="390.5" cy="805.099" fill="#FFFFFF" filter="url(#fbbrjrcslzaa6)" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"/><ellipse cx="390.5" cy="805.099" fill="#000000" rx="6" ry="6" style="stroke: #7F7F7F; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="209.5" x2="209.5" y1="249.7997" y2="278.6997"/><polygon fill="#000000" points="205.5,268.6997,209.5,278.6997,213.5,268.6997,209.5,272.6997" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="209.5" x2="209.5" y1="191.9998" y2="216.5998"/><polygon fill="#000000" points="205.5,206.5998,209.5,216.5998,213.5,206.5998,209.5,210.5998" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="272" x2="284" y1="179.9998" y2="179.9998"/><polygon fill="#000000" points="280,248.6997,284,258.6997,288,248.6997,284,252.6997" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="284" x2="284" y1="179.9998" y2="322.6997"/><line style="stroke: #000000; stroke-width: 1.5;" x1="284" x2="209.5" y1="322.6997" y2="322.6997"/><line style="stroke: #000000; stroke-width: 1.5;" x1="209.5" x2="209.5" y1="322.6997" y2="342.6997"/><polygon fill="#000000" points="205.5,332.6997,209.5,342.6997,213.5,332.6997,209.5,336.6997" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="209.5" x2="209.5" y1="147.9998" y2="167.9998"/><polygon fill="#000000" points="205.5,157.9998,209.5,167.9998,213.5,157.9998,209.5,161.9998" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="209.5" x2="209.5" y1="375.8996" y2="395.8996"/><polygon fill="#000000" points="205.5,385.8996,209.5,395.8996,213.5,385.8996,209.5,389.8996" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="209.5" x2="209.5" y1="429.0995" y2="449.0995"/><polygon fill="#000000" points="205.5,439.0995,209.5,449.0995,213.5,439.0995,209.5,443.0995" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="209.5" x2="209.5" y1="482.2994" y2="502.2994"/><polygon fill="#000000" points="205.5,492.2994,209.5,502.2994,213.5,492.2994,209.5,496.2994" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="209.5" x2="209.5" y1="535.4993" y2="555.4993"/><polygon fill="#000000" points="205.5,545.4993,209.5,555.4993,213.5,545.4993,209.5,549.4993" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="427" x2="427" y1="147.9998" y2="167.9998"/><polygon fill="#000000" points="423,157.9998,427,167.9998,431,157.9998,427,161.9998" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="266.75" x2="209.5" y1="92.7999" y2="92.7999"/><line style="stroke: #000000; stroke-width: 1.5;" x1="209.5" x2="209.5" y1="92.7999" y2="114.7999"/><polygon fill="#000000" points="205.5,104.7999,209.5,114.7999,213.5,104.7999,209.5,108.7999" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="369.75" x2="427" y1="92.7999" y2="92.7999"/><line style="stroke: #000000; stroke-width: 1.5;" x1="427" x2="427" y1="92.7999" y2="114.7999"/><polygon fill="#000000" points="423,104.7999,427,114.7999,431,104.7999,427,108.7999" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="209.5" x2="209.5" y1="588.6992" y2="606.6992"/><line style="stroke: #000000; stroke-width: 1.5;" x1="209.5" x2="306.25" y1="606.6992" y2="606.6992"/><polygon fill="#000000" points="296.25,602.6992,306.25,606.6992,296.25,610.6992,300.25,606.6992" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="427" x2="427" y1="201.1997" y2="606.6992"/><line style="stroke: #000000; stroke-width: 1.5;" x1="427" x2="330.25" y1="606.6992" y2="606.6992"/><polygon fill="#000000" points="340.25,602.6992,330.25,606.6992,340.25,610.6992,336.25,606.6992" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="318.25" x2="318.25" y1="60.7999" y2="80.7999"/><polygon fill="#000000" points="314.25,70.7999,318.25,80.7999,322.25,70.7999,318.25,74.7999" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="246" x2="246" y1="705.8991" y2="773.6987"/><polygon fill="#000000" points="242,763.6987,246,773.6987,250,763.6987,246,767.6987" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="246" x2="246" y1="806.8986" y2="874.6983"/><polygon fill="#000000" points="242,864.6983,246,874.6983,250,864.6983,246,868.6983" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="390.5" x2="390.5" y1="705.8991" y2="725.8991"/><polygon fill="#000000" points="386.5,715.8991,390.5,725.8991,394.5,715.8991,390.5,719.8991" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="390.5" x2="390.5" y1="759.099" y2="794.099"/><polygon fill="#000000" points="386.5,784.099,390.5,794.099,394.5,784.099,390.5,788.099" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="292.75" x2="246" y1="650.6992" y2="650.6992"/><line style="stroke: #000000; stroke-width: 1.5;" x1="246" x2="246" y1="650.6992" y2="672.6992"/><polygon fill="#000000" points="242,662.6992,246,672.6992,250,662.6992,246,666.6992" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="343.75" x2="390.5" y1="650.6992" y2="650.6992"/><line style="stroke: #000000; stroke-width: 1.5;" x1="390.5" x2="390.5" y1="650.6992" y2="672.6992"/><polygon fill="#000000" points="386.5,662.6992,390.5,672.6992,394.5,662.6992,390.5,666.6992" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="318.25" x2="318.25" y1="618.6992" y2="638.6992"/><polygon fill="#000000" points="314.25,628.6992,318.25,638.6992,322.25,628.6992,318.25,632.6992" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[8c87a51462a12111fad07ad404f2de09]
+@startuml layout_deserialized_from
+!define LIGHTBLUE
+!includeurl https://raw.githubusercontent.com/grelltrier/RedDress-PlantUML/master/style.puml
+
+partition "LayoutDeserialized::from()"{
+    start
+
+    if (Deserialize from) then (file)
+        :Get file name;
+        if (file name = 'previous') then (no)
+        else (yes)
+            :Err()]
+            stop
+        endif
+        :file_name]
+        :Open file;
+        :yaml_file]
+        :serde_yaml::from_reader(yaml_file);
+        :result]
+    else (fallback_string)
+        :serde_yaml::from_str(fallback_string);
+        :result]
+    endif
+
+    if (result) then (success)
+        :deserialized_layout]
+        :Ok(file_name, deserialized_layout)]
+        note left
+           The layout needs
+           default information
+           added before it 
+           can be used to 
+           construct a
+           Keyboard from it.
+           This is why it later
+           gets converted 
+           to a LayoutMeta 
+        end note
+        stop
+    else (error)
+        :Emit info;
+        :Err()]
+        stop
+    endif
+}
+
+@enduml
+
+@startuml layout_deserialized_from
+
+
+
+
+skinparam stereotypeCBackgroundColor 1a66c2
+
+
+
+
+
+
+
+skinparam backgroundColor fff
+
+
+
+
+
+
+
+
+skinparam circledCharacter {
+  radius 8
+  fontSize 11
+  fontName Verdana
+}
+
+skinparam class {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+
+  attributeFontColor 333
+  attributeFontSize 11
+  attributeIconSize 11
+}
+
+
+skinparam ActivityBarColor 1a66c2
+skinparam activityDiamondBackgroundColor ccc
+skinparam activityDiamondBorderColor 1a66c2
+
+
+skinparam actor {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam participant {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam collections {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam SequenceBox{
+    backgroundColor e0e0e0
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+skinparam interface {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam component {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam node {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam database {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam queue {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+skinparam usecase {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+skinparam activity {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+skinparam sequence {
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+
+  lifeLineBorderColor 2a86e2
+  lifeLineBackgroundColor e0e0e0
+}
+
+skinparam boundary {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam control {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam entity {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+skinparam state {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+  startColor 2a86e2
+  endColor 1a66c2
+}
+
+
+skinparam object {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+
+skinparam note {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam cloud {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+skinparam rectangle {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam storage {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+partition "LayoutDeserialized::from()"{
+    start
+
+    if (Deserialize from) then (file)
+        :Get file name;
+        if (file name = 'previous') then (no)
+        else (yes)
+            :Err()]
+            stop
+        endif
+        :file_name]
+        :Open file;
+        :yaml_file]
+        :serde_yaml::from_reader(yaml_file);
+        :result]
+    else (fallback_string)
+        :serde_yaml::from_str(fallback_string);
+        :result]
+    endif
+
+    if (result) then (success)
+        :deserialized_layout]
+        :Ok(file_name, deserialized_layout)]
+        note left
+           The layout needs
+           default information
+           added before it 
+           can be used to 
+           construct a
+           Keyboard from it.
+           This is why it later
+           gets converted 
+           to a LayoutMeta 
+        end note
+        stop
+    else (error)
+        :Emit info;
+        :Err()]
+        stop
+    endif
+}
+
+@enduml
+
+PlantUML version 1.2020.19(Mon Oct 12 17:10:01 CEST 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

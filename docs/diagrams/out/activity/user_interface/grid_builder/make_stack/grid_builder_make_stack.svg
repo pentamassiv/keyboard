@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="1084px" preserveAspectRatio="none" style="width:405px;height:1084px;" version="1.1" viewBox="0 0 405 1084" width="405px" zoomAndPan="magnify"><defs><filter height="300%" id="fjylydjy8y4lj" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><rect fill="#FFFFFF" filter="url(#fjylydjy8y4lj)" height="1056.1363" style="stroke: #000000; stroke-width: 2.0;" width="377" x="11" y="11"/><path d="M367,11 L367,20.7999 L357,30.7999 L11,30.7999 " fill="none" style="stroke: #000000; stroke-width: 2.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="346" x="14" y="25.0059">GridBuilder::make_stack(relm, layout_meta_hashmap)</text><ellipse cx="217.5" cy="50.7999" fill="#000000" filter="url(#fjylydjy8y4lj)" rx="10" ry="10" style="stroke: none; stroke-width: 1.0;"/><rect fill="#CCCCCC" filter="url(#fjylydjy8y4lj)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="100" x="167.5" y="80.7999"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="80" x="177.5" y="101.0189">Make new stack</text><rect fill="#CCCCCC" filter="url(#fjylydjy8y4lj)" height="33.1999" style="stroke: #1A66C2; stroke-width: 1.5;" width="87" x="174" y="133.9998"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="67" x="184" y="154.2188">stack = Stack</text><rect fill="#CCCCCC" filter="url(#fjylydjy8y4lj)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="203" x="116" y="187.1997"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="183" x="126" y="207.4187">Make new storage for key references</text><rect fill="#CCCCCC" filter="url(#fjylydjy8y4lj)" height="46.3998" style="stroke: #1A66C2; stroke-width: 1.5;" width="136" x="149.5" y="240.3996"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="88" x="171.5" y="260.6186">&lt;&lt;CentralBuffer&gt;&gt;</text><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="116" x="159.5" y="273.8185">KeyReferences storage</text><rect fill="#CCCCCC" filter="url(#fjylydjy8y4lj)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="235" x="100" y="418.2373"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="215" x="110" y="438.4562">grid_name = GridBuilder::make_grid_name()</text><rect fill="#CCCCCC" filter="url(#fjylydjy8y4lj)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="226" x="104.5" y="471.4372"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="206" x="114.5" y="491.6561">(grid, key_refs) = GridBuilder::make_grid()</text><rect fill="#CCCCCC" filter="url(#fjylydjy8y4lj)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="102" x="166.5" y="524.6371"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="82" x="176.5" y="544.856">Add grid to stack</text><rect fill="#CCCCCC" filter="url(#fjylydjy8y4lj)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="235" x="100" y="639.0369"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="215" x="110" y="659.2558">grid_name = GridBuilder::make_grid_name()</text><rect fill="#CCCCCC" filter="url(#fjylydjy8y4lj)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="226" x="104.5" y="692.2368"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="206" x="114.5" y="712.4557">(grid, key_refs) = GridBuilder::make_grid()</text><rect fill="#CCCCCC" filter="url(#fjylydjy8y4lj)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="102" x="166.5" y="754.3367"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="82" x="176.5" y="774.5557">Add grid to stack</text><rect fill="#CCCCCC" filter="url(#fjylydjy8y4lj)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="285" x="75" y="807.5366"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="265" x="85" y="827.7556">Add key_refs from new grid to KeyReferences storage</text><polygon fill="#CCCCCC" filter="url(#fjylydjy8y4lj)" points="172,577.837,263,577.837,275,589.837,263,601.837,172,601.837,160,589.837,172,577.837" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="21" x="221.5" y="612.0559">next</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="91" x="172" y="593.456">for key in key_refs</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="18" x="142" y="586.856">end</text><polygon fill="#CCCCCC" filter="url(#fjylydjy8y4lj)" points="149.5,362.5184,285.5,362.5184,297.5,374.5184,285.5,386.5184,149.5,386.5184,137.5,374.5184,149.5,362.5184" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="21" x="221.5" y="396.7373">next</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="136" x="149.5" y="378.1373">for each view in LayoutMeta</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="18" x="119.5" y="371.5374">end</text><polygon fill="#CCCCCC" filter="url(#fjylydjy8y4lj)" points="105.5,306.7994,329.5,306.7994,341.5,318.7994,329.5,330.7994,105.5,330.7994,93.5,318.7994,105.5,306.7994" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="21" x="221.5" y="341.0184">next</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="224" x="105.5" y="322.4184">for each LayoutMeta in layout_meta_hashmap</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="18" x="75.5" y="315.8185">end</text><rect fill="#CCCCCC" filter="url(#fjylydjy8y4lj)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="173" x="131" y="926.7365"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="153" x="141" y="946.9555">Shrink hashmap_with_key_refs</text><rect fill="#CCCCCC" filter="url(#fjylydjy8y4lj)" height="33.1999" style="stroke: #1A66C2; stroke-width: 1.5;" width="180" x="127.5" y="979.9364"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="160" x="137.5" y="1000.1554">(stack, hashmap_with_key_refs)</text><ellipse cx="217.5" cy="1044.1363" fill="#FFFFFF" filter="url(#fjylydjy8y4lj)" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"/><ellipse cx="217.5" cy="1044.1363" fill="#000000" rx="6" ry="6" style="stroke: #7F7F7F; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="217.5" x2="217.5" y1="60.7999" y2="80.7999"/><polygon fill="#000000" points="213.5,70.7999,217.5,80.7999,221.5,70.7999,217.5,74.7999" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="217.5" x2="217.5" y1="113.9998" y2="133.9998"/><polygon fill="#000000" points="213.5,123.9998,217.5,133.9998,221.5,123.9998,217.5,127.9998" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="217.5" x2="217.5" y1="167.1997" y2="187.1997"/><polygon fill="#000000" points="213.5,177.1997,217.5,187.1997,221.5,177.1997,217.5,181.1997" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="217.5" x2="217.5" y1="220.3996" y2="240.3996"/><polygon fill="#000000" points="213.5,230.3996,217.5,240.3996,221.5,230.3996,217.5,234.3996" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="217.5" x2="217.5" y1="451.4372" y2="471.4372"/><polygon fill="#000000" points="213.5,461.4372,217.5,471.4372,221.5,461.4372,217.5,465.4372" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="217.5" x2="217.5" y1="504.6371" y2="524.6371"/><polygon fill="#000000" points="213.5,514.6371,217.5,524.6371,221.5,514.6371,217.5,518.6371" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="217.5" x2="217.5" y1="672.2368" y2="692.2368"/><polygon fill="#000000" points="213.5,682.2368,217.5,692.2368,221.5,682.2368,217.5,686.2368" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="217.5" x2="217.5" y1="725.4367" y2="754.3367"/><polygon fill="#000000" points="213.5,744.3367,217.5,754.3367,221.5,744.3367,217.5,748.3367" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="217.5" x2="217.5" y1="787.5366" y2="807.5366"/><polygon fill="#000000" points="213.5,797.5366,217.5,807.5366,221.5,797.5366,217.5,801.5366" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="217.5" x2="217.5" y1="601.837" y2="639.0369"/><polygon fill="#000000" points="213.5,629.0369,217.5,639.0369,221.5,629.0369,217.5,633.0369" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="217.5" x2="217.5" y1="840.7365" y2="850.7365"/><line style="stroke: #000000; stroke-width: 1.5;" x1="217.5" x2="372" y1="850.7365" y2="850.7365"/><polygon fill="#000000" points="368,734.3367,372,724.3367,376,734.3367,372,730.3367" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="372" x2="372" y1="589.837" y2="850.7365"/><line style="stroke: #000000; stroke-width: 1.5;" x1="372" x2="275" y1="589.837" y2="589.837"/><polygon fill="#000000" points="285,585.837,275,589.837,285,593.837,281,589.837" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="160" x2="63" y1="589.837" y2="589.837"/><polygon fill="#000000" points="59,720.3367,63,730.3367,67,720.3367,63,724.3367" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="63" x2="63" y1="589.837" y2="862.7365"/><line style="stroke: #000000; stroke-width: 1.5;" x1="63" x2="381" y1="862.7365" y2="862.7365"/><line style="stroke: #000000; stroke-width: 1.5;" x1="381" x2="381" y1="374.5184" y2="862.7365"/><line style="stroke: #000000; stroke-width: 1.5;" x1="381" x2="297.5" y1="374.5184" y2="374.5184"/><polygon fill="#000000" points="307.5,370.5184,297.5,374.5184,307.5,378.5184,303.5,374.5184" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="217.5" x2="217.5" y1="557.837" y2="577.837"/><polygon fill="#000000" points="213.5,567.837,217.5,577.837,221.5,567.837,217.5,571.837" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="217.5" x2="217.5" y1="386.5184" y2="418.2373"/><polygon fill="#000000" points="213.5,408.2373,217.5,418.2373,221.5,408.2373,217.5,412.2373" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="137.5" x2="45" y1="374.5184" y2="374.5184"/><polygon fill="#000000" points="41,614.4369,45,624.4369,49,614.4369,45,618.4369" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="45" x2="45" y1="374.5184" y2="884.7365"/><line style="stroke: #000000; stroke-width: 1.5;" x1="45" x2="381" y1="884.7365" y2="884.7365"/><line style="stroke: #000000; stroke-width: 1.5;" x1="381" x2="381" y1="318.7994" y2="884.7365"/><line style="stroke: #000000; stroke-width: 1.5;" x1="381" x2="341.5" y1="318.7994" y2="318.7994"/><polygon fill="#000000" points="351.5,314.7994,341.5,318.7994,351.5,322.7994,347.5,318.7994" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="217.5" x2="217.5" y1="330.7994" y2="362.5184"/><polygon fill="#000000" points="213.5,352.5184,217.5,362.5184,221.5,352.5184,217.5,356.5184" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="93.5" x2="27" y1="318.7994" y2="318.7994"/><polygon fill="#000000" points="23,595.837,27,605.837,31,595.837,27,599.837" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="27" x2="27" y1="318.7994" y2="906.7365"/><line style="stroke: #000000; stroke-width: 1.5;" x1="27" x2="217.5" y1="906.7365" y2="906.7365"/><line style="stroke: #000000; stroke-width: 1.5;" x1="217.5" x2="217.5" y1="906.7365" y2="926.7365"/><polygon fill="#000000" points="213.5,916.7365,217.5,926.7365,221.5,916.7365,217.5,920.7365" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="217.5" x2="217.5" y1="286.7994" y2="306.7994"/><polygon fill="#000000" points="213.5,296.7994,217.5,306.7994,221.5,296.7994,217.5,300.7994" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="217.5" x2="217.5" y1="959.9364" y2="979.9364"/><polygon fill="#000000" points="213.5,969.9364,217.5,979.9364,221.5,969.9364,217.5,973.9364" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="217.5" x2="217.5" y1="1013.1363" y2="1033.1363"/><polygon fill="#000000" points="213.5,1023.1363,217.5,1033.1363,221.5,1023.1363,217.5,1027.1363" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[62c9d494d7539e14e8af40dd7de26d90]
+@startuml grid_builder_make_stack
+!define LIGHTBLUE
+!includeurl https://raw.githubusercontent.com/grelltrier/RedDress-PlantUML/master/style.puml
+
+partition "GridBuilder::make_stack(relm, layout_meta_hashmap)"{  
+  start
+  :Make new stack;
+  :stack = Stack]
+  :Make new storage for key references;
+  :    <<CentralBuffer>>
+  KeyReferences storage]
+
+  while (for each LayoutMeta in layout_meta_hashmap) is (next)
+    while (for each view in LayoutMeta) is (next)
+      :grid_name = GridBuilder::make_grid_name();
+      :(grid, key_refs) = GridBuilder::make_grid();
+      :Add grid to stack;
+      while (for key in key_refs) is (next)
+        :grid_name = GridBuilder::make_grid_name();
+        :(grid, key_refs) = GridBuilder::make_grid();
+        :Add grid to stack;
+        :Add key_refs from new grid to KeyReferences storage;
+      endwhile (end)
+    endwhile (end)
+  endwhile (end)
+  :Shrink hashmap_with_key_refs;
+  :(stack, hashmap_with_key_refs)]
+
+  stop
+}
+@enduml
+
+@startuml grid_builder_make_stack
+
+
+
+
+skinparam stereotypeCBackgroundColor 1a66c2
+
+
+
+
+
+
+
+skinparam backgroundColor fff
+
+
+
+
+
+
+
+
+skinparam circledCharacter {
+  radius 8
+  fontSize 11
+  fontName Verdana
+}
+
+skinparam class {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+
+  attributeFontColor 333
+  attributeFontSize 11
+  attributeIconSize 11
+}
+
+
+skinparam ActivityBarColor 1a66c2
+skinparam activityDiamondBackgroundColor ccc
+skinparam activityDiamondBorderColor 1a66c2
+
+
+skinparam actor {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam participant {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam collections {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam SequenceBox{
+    backgroundColor e0e0e0
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+skinparam interface {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam component {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam node {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam database {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam queue {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+skinparam usecase {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+skinparam activity {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+skinparam sequence {
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+
+  lifeLineBorderColor 2a86e2
+  lifeLineBackgroundColor e0e0e0
+}
+
+skinparam boundary {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam control {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam entity {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+skinparam state {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+  startColor 2a86e2
+  endColor 1a66c2
+}
+
+
+skinparam object {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+
+skinparam note {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam cloud {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+skinparam rectangle {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam storage {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+partition "GridBuilder::make_stack(relm, layout_meta_hashmap)"{  
+  start
+  :Make new stack;
+  :stack = Stack]
+  :Make new storage for key references;
+  :    <<CentralBuffer>>
+  KeyReferences storage]
+
+  while (for each LayoutMeta in layout_meta_hashmap) is (next)
+    while (for each view in LayoutMeta) is (next)
+      :grid_name = GridBuilder::make_grid_name();
+      :(grid, key_refs) = GridBuilder::make_grid();
+      :Add grid to stack;
+      while (for key in key_refs) is (next)
+        :grid_name = GridBuilder::make_grid_name();
+        :(grid, key_refs) = GridBuilder::make_grid();
+        :Add grid to stack;
+        :Add key_refs from new grid to KeyReferences storage;
+      endwhile (end)
+    endwhile (end)
+  endwhile (end)
+  :Shrink hashmap_with_key_refs;
+  :(stack, hashmap_with_key_refs)]
+
+  stop
+}
+@enduml
+
+PlantUML version 1.2020.19(Mon Oct 12 17:10:01 CEST 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

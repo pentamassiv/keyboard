@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="452px" preserveAspectRatio="none" style="width:1465px;height:452px;" version="1.1" viewBox="0 0 1465 452" width="1465px" zoomAndPan="magnify"><defs><filter height="300%" id="f1tjo6zapgz7lv" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><rect fill="#FFFFFF" filter="url(#f1tjo6zapgz7lv)" height="424.9993" style="stroke: #000000; stroke-width: 2.0;" width="1437" x="11" y="11"/><path d="M270,11 L270,20.7999 L260,30.7999 L11,30.7999 " fill="none" style="stroke: #000000; stroke-width: 2.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="249" x="14" y="25.0059">GestureModel::convert_to_interaction()</text><ellipse cx="724.5" cy="50.7999" fill="#000000" filter="url(#f1tjo6zapgz7lv)" rx="10" ry="10" style="stroke: none; stroke-width: 1.0;"/><polygon fill="#CCCCCC" filter="url(#f1tjo6zapgz7lv)" points="35.5,80.7999,157.5,80.7999,169.5,92.7999,157.5,104.7999,35.5,104.7999,23.5,92.7999,35.5,80.7999" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="18" x="100.5" y="115.0189">yes</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="122" x="35.5" y="96.4189">Interaction is DragBegin?</text><rect fill="#CCCCCC" filter="url(#f1tjo6zapgz7lv)" height="33.1999" style="stroke: #1A66C2; stroke-width: 1.5;" width="151" x="21" y="137.9998"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="131" x="31" y="158.2188">Interaction::TapShortPress</text><polygon fill="#CCCCCC" filter="url(#f1tjo6zapgz7lv)" points="230,80.7999,283,80.7999,295,92.7999,283,104.7999,230,104.7999,218,92.7999,230,80.7999" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="18" x="260.5" y="115.0189">yes</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="53" x="230" y="96.4189">LongPress</text><rect fill="#CCCCCC" filter="url(#f1tjo6zapgz7lv)" height="33.1999" style="stroke: #1A66C2; stroke-width: 1.5;" width="149" x="182" y="137.9998"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="129" x="192" y="158.2188">Interaction::TapLongPress</text><polygon fill="#CCCCCC" filter="url(#f1tjo6zapgz7lv)" points="578,80.7999,637,80.7999,649,92.7999,637,104.7999,578,104.7999,566,92.7999,578,80.7999" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="18" x="611.5" y="115.0189">yes</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="59" x="578" y="96.4189">DragUpdate</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="66" x="649" y="89.8189">no (DragEnd)</text><rect fill="#CCCCCC" filter="url(#f1tjo6zapgz7lv)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="132" x="541.5" y="137.9998"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="112" x="551.5" y="158.2188">Add point to swipe path</text><polygon fill="#CCCCCC" filter="url(#f1tjo6zapgz7lv)" points="353,194.7997,548,194.7997,560,206.7997,548,218.7997,353,218.7997,341,206.7997,353,194.7997" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="18" x="454.5" y="229.0186">yes</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="195" x="353" y="210.4187">Previous interpretation was NoGesture?</text><rect fill="#CCCCCC" filter="url(#f1tjo6zapgz7lv)" height="33.1999" style="stroke: #1A66C2; stroke-width: 1.5;" width="133" x="384" y="251.9996"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="113" x="394" y="272.2185">Interaction::SwipeBegin</text><polygon fill="#CCCCCC" filter="url(#f1tjo6zapgz7lv)" points="617,194.7997,676,194.7997,688,206.7997,676,218.7997,617,218.7997,605,206.7997,617,194.7997" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="18" x="650.5" y="229.0186">yes</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="59" x="617" y="210.4187">LongPress?</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="56" x="688" y="203.8187">no (Swipe))</text><rect fill="#CCCCCC" filter="url(#f1tjo6zapgz7lv)" height="33.1999" style="stroke: #1A66C2; stroke-width: 1.5;" width="133" x="580" y="251.9996"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="113" x="590" y="272.2185">Interaction::SwipeBegin</text><rect fill="#CCCCCC" filter="url(#f1tjo6zapgz7lv)" height="33.1999" style="stroke: #1A66C2; stroke-width: 1.5;" width="141" x="733" y="248.3996"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="121" x="743" y="268.6186">Interaction::SwipeUpdate</text><rect fill="#CCCCCC" filter="url(#f1tjo6zapgz7lv)" height="33.1999" rx="12.5" ry="12.5" style="stroke: #1A66C2; stroke-width: 1.5;" width="101" x="1110.5" y="134.3999"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="81" x="1120.5" y="154.6188">Clear swipe path</text><polygon fill="#CCCCCC" filter="url(#f1tjo6zapgz7lv)" points="896,191.1997,1091,191.1997,1103,203.1997,1091,215.1997,896,215.1997,884,203.1997,896,191.1997" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="18" x="997.5" y="225.4187">yes</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="195" x="896" y="206.8187">Previous interpretation was NoGesture?</text><rect fill="#CCCCCC" filter="url(#f1tjo6zapgz7lv)" height="33.1999" style="stroke: #1A66C2; stroke-width: 1.5;" width="162" x="912.5" y="248.3996"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="142" x="922.5" y="268.6186">Interaction::TapShortRelease</text><polygon fill="#CCCCCC" filter="url(#f1tjo6zapgz7lv)" points="1173.5,191.1997,1232.5,191.1997,1244.5,203.1997,1232.5,215.1997,1173.5,215.1997,1161.5,203.1997,1173.5,191.1997" style="stroke: #1A66C2; stroke-width: 1.5;"/><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="18" x="1207" y="225.4187">yes</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="59" x="1173.5" y="206.8187">LongPress?</text><text fill="#333333" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="52" x="1244.5" y="200.2188">no (Swipe)</text><rect fill="#CCCCCC" filter="url(#f1tjo6zapgz7lv)" height="33.1999" style="stroke: #1A66C2; stroke-width: 1.5;" width="160" x="1123" y="248.3996"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="140" x="1133" y="268.6186">Interaction::TapLongRelease</text><rect fill="#CCCCCC" filter="url(#f1tjo6zapgz7lv)" height="33.1999" style="stroke: #1A66C2; stroke-width: 1.5;" width="135" x="1303" y="244.7997"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="115" x="1313" y="265.0186">Interaction::SwipeFinish</text><rect fill="#CCCCCC" filter="url(#f1tjo6zapgz7lv)" height="33.1999" style="stroke: #1A66C2; stroke-width: 1.5;" width="71" x="689" y="348.7994"/><text fill="#000000" font-family="Verdana" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="51" x="699" y="369.0184">Interaction</text><ellipse cx="724.5" cy="412.9993" fill="#FFFFFF" filter="url(#f1tjo6zapgz7lv)" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"/><ellipse cx="724.5" cy="412.9993" fill="#000000" rx="6" ry="6" style="stroke: #7F7F7F; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="450.5" x2="450.5" y1="218.7997" y2="251.9996"/><polygon fill="#000000" points="446.5,241.9996,450.5,251.9996,454.5,241.9996,450.5,245.9996" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="450.5" x2="450.5" y1="285.1995" y2="308.7994"/><polygon fill="#000000" points="446.5,298.7994,450.5,308.7994,454.5,298.7994,450.5,302.7994" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="646.5" x2="646.5" y1="218.7997" y2="251.9996"/><polygon fill="#000000" points="642.5,241.9996,646.5,251.9996,650.5,241.9996,646.5,245.9996" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="646.5" x2="646.5" y1="285.1995" y2="308.7994"/><polygon fill="#000000" points="642.5,298.7994,646.5,308.7994,650.5,298.7994,646.5,302.7994" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="560" x2="605" y1="206.7997" y2="206.7997"/><polygon fill="#000000" points="595,202.7997,605,206.7997,595,210.7997,599,206.7997" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="607.5" x2="607.5" y1="171.1997" y2="176.1997"/><line style="stroke: #000000; stroke-width: 1.5;" x1="607.5" x2="450.5" y1="176.1997" y2="176.1997"/><line style="stroke: #000000; stroke-width: 1.5;" x1="450.5" x2="450.5" y1="176.1997" y2="194.7997"/><polygon fill="#000000" points="446.5,184.7997,450.5,194.7997,454.5,184.7997,450.5,188.7997" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="688" x2="803.5" y1="206.7997" y2="206.7997"/><line style="stroke: #000000; stroke-width: 1.5;" x1="803.5" x2="803.5" y1="206.7997" y2="248.3996"/><polygon fill="#000000" points="799.5,238.3996,803.5,248.3996,807.5,238.3996,803.5,242.3996" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="803.5" x2="803.5" y1="281.5995" y2="308.7994"/><polygon fill="#000000" points="799.5,298.7994,803.5,308.7994,807.5,298.7994,803.5,302.7994" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="450.5" x2="803.5" y1="308.7994" y2="308.7994"/><line style="stroke: #000000; stroke-width: 1.5;" x1="993.5" x2="993.5" y1="215.1997" y2="248.3996"/><polygon fill="#000000" points="989.5,238.3996,993.5,248.3996,997.5,238.3996,993.5,242.3996" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="993.5" x2="993.5" y1="281.5995" y2="305.1995"/><polygon fill="#000000" points="989.5,295.1995,993.5,305.1995,997.5,295.1995,993.5,299.1995" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="1203" x2="1203" y1="215.1997" y2="248.3996"/><polygon fill="#000000" points="1199,238.3996,1203,248.3996,1207,238.3996,1203,242.3996" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="1203" x2="1203" y1="281.5995" y2="305.1995"/><polygon fill="#000000" points="1199,295.1995,1203,305.1995,1207,295.1995,1203,299.1995" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="1103" x2="1161.5" y1="203.1997" y2="203.1997"/><polygon fill="#000000" points="1151.5,199.1997,1161.5,203.1997,1151.5,207.1997,1155.5,203.1997" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="1161" x2="1161" y1="167.5998" y2="176.1997"/><line style="stroke: #000000; stroke-width: 1.5;" x1="1161" x2="993.5" y1="176.1997" y2="176.1997"/><line style="stroke: #000000; stroke-width: 1.5;" x1="993.5" x2="993.5" y1="176.1997" y2="191.1997"/><polygon fill="#000000" points="989.5,181.1997,993.5,191.1997,997.5,181.1997,993.5,185.1997" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="1244.5" x2="1370.5" y1="203.1997" y2="203.1997"/><line style="stroke: #000000; stroke-width: 1.5;" x1="1370.5" x2="1370.5" y1="203.1997" y2="244.7997"/><polygon fill="#000000" points="1366.5,234.7997,1370.5,244.7997,1374.5,234.7997,1370.5,238.7997" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="1370.5" x2="1370.5" y1="277.9996" y2="305.1995"/><polygon fill="#000000" points="1366.5,295.1995,1370.5,305.1995,1374.5,295.1995,1370.5,299.1995" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="993.5" x2="1370.5" y1="305.1995" y2="305.1995"/><line style="stroke: #000000; stroke-width: 1.5;" x1="96.5" x2="96.5" y1="104.7999" y2="137.9998"/><polygon fill="#000000" points="92.5,127.9998,96.5,137.9998,100.5,127.9998,96.5,131.9998" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="96.5" x2="96.5" y1="171.1997" y2="328.7994"/><polygon fill="#000000" points="92.5,318.7994,96.5,328.7994,100.5,318.7994,96.5,322.7994" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="256.5" x2="256.5" y1="104.7999" y2="137.9998"/><polygon fill="#000000" points="252.5,127.9998,256.5,137.9998,260.5,127.9998,256.5,131.9998" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="256.5" x2="256.5" y1="171.1997" y2="328.7994"/><polygon fill="#000000" points="252.5,318.7994,256.5,328.7994,260.5,318.7994,256.5,322.7994" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="607.5" x2="607.5" y1="104.7999" y2="137.9998"/><polygon fill="#000000" points="603.5,127.9998,607.5,137.9998,611.5,127.9998,607.5,131.9998" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="607.5" x2="607.5" y1="308.7994" y2="328.7994"/><polygon fill="#000000" points="603.5,318.7994,607.5,328.7994,611.5,318.7994,607.5,322.7994" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="169.5" x2="218" y1="92.7999" y2="92.7999"/><polygon fill="#000000" points="208,88.7999,218,92.7999,208,96.7999,212,92.7999" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="295" x2="566" y1="92.7999" y2="92.7999"/><polygon fill="#000000" points="556,88.7999,566,92.7999,556,96.7999,560,92.7999" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="724.5" x2="724.5" y1="60.7999" y2="65.7999"/><line style="stroke: #000000; stroke-width: 1.5;" x1="724.5" x2="96.5" y1="65.7999" y2="65.7999"/><line style="stroke: #000000; stroke-width: 1.5;" x1="96.5" x2="96.5" y1="65.7999" y2="80.7999"/><polygon fill="#000000" points="92.5,70.7999,96.5,80.7999,100.5,70.7999,96.5,74.7999" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="649" x2="1161" y1="92.7999" y2="92.7999"/><line style="stroke: #000000; stroke-width: 1.5;" x1="1161" x2="1161" y1="92.7999" y2="134.3999"/><polygon fill="#000000" points="1157,124.3999,1161,134.3999,1165,124.3999,1161,128.3999" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="1161" x2="1161" y1="305.1995" y2="328.7994"/><polygon fill="#000000" points="1157,318.7994,1161,328.7994,1165,318.7994,1161,322.7994" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="96.5" x2="1161" y1="328.7994" y2="328.7994"/><line style="stroke: #000000; stroke-width: 1.5;" x1="724.5" x2="724.5" y1="328.7994" y2="348.7994"/><polygon fill="#000000" points="720.5,338.7994,724.5,348.7994,728.5,338.7994,724.5,342.7994" style="stroke: #000000; stroke-width: 1.0;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="724.5" x2="724.5" y1="381.9993" y2="401.9993"/><polygon fill="#000000" points="720.5,391.9993,724.5,401.9993,728.5,391.9993,724.5,395.9993" style="stroke: #000000; stroke-width: 1.0;"/><!--MD5=[f11bc7e0f65fa1040f1205adc8b1c0d5]
+@startuml gesture_model_convert_to_interaction
+!define LIGHTBLUE
+!includeurl https://raw.githubusercontent.com/grelltrier/RedDress-PlantUML/master/style.puml
+
+partition "GestureModel::convert_to_interaction()"{  
+  start
+  
+  if (Interaction is DragBegin?) then (yes)
+    :Interaction::TapShortPress]
+  elseif (LongPress) then (yes)
+    :Interaction::TapLongPress]
+  elseif (DragUpdate) then (yes)
+    :Add point to swipe path;
+    if (Previous interpretation was NoGesture?) then (yes)
+        :Interaction::SwipeBegin]
+    elseif (LongPress?) then (yes)
+        :Interaction::SwipeBegin]
+    else (no (Swipe)))
+        :Interaction::SwipeUpdate]
+    endif
+  else (no (DragEnd))
+    :Clear swipe path;
+    if (Previous interpretation was NoGesture?) then (yes)
+        :Interaction::TapShortRelease]
+    elseif (LongPress?) then (yes)
+        :Interaction::TapLongRelease]
+    else (no (Swipe))
+        :Interaction::SwipeFinish]
+    endif
+  endif
+  :Interaction]
+  stop
+}
+@enduml
+
+@startuml gesture_model_convert_to_interaction
+
+
+
+
+skinparam stereotypeCBackgroundColor 1a66c2
+
+
+
+
+
+
+
+skinparam backgroundColor fff
+
+
+
+
+
+
+
+
+skinparam circledCharacter {
+  radius 8
+  fontSize 11
+  fontName Verdana
+}
+
+skinparam class {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+
+  attributeFontColor 333
+  attributeFontSize 11
+  attributeIconSize 11
+}
+
+
+skinparam ActivityBarColor 1a66c2
+skinparam activityDiamondBackgroundColor ccc
+skinparam activityDiamondBorderColor 1a66c2
+
+
+skinparam actor {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam participant {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam collections {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam SequenceBox{
+    backgroundColor e0e0e0
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+skinparam interface {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam component {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam node {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam database {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam queue {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+skinparam usecase {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+skinparam activity {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+skinparam sequence {
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+
+  lifeLineBorderColor 2a86e2
+  lifeLineBackgroundColor e0e0e0
+}
+
+skinparam boundary {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam control {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam entity {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+skinparam state {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+  startColor 2a86e2
+  endColor 1a66c2
+}
+
+
+skinparam object {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+
+skinparam note {
+    backgroundColor 2a86e2
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam cloud {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+    arrowColor 000
+  arrowFontName Verdana
+  arrowFontColor 333
+  arrowFontSize 11
+}
+
+skinparam rectangle {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+skinparam storage {
+    backgroundColor ccc
+  borderColor 1a66c2
+    fontColor 000
+  fontName Verdana
+  fontSize 11
+  stereotypeFontColor 333
+  stereotypeFontSize 11
+}
+
+
+partition "GestureModel::convert_to_interaction()"{  
+  start
+  
+  if (Interaction is DragBegin?) then (yes)
+    :Interaction::TapShortPress]
+  elseif (LongPress) then (yes)
+    :Interaction::TapLongPress]
+  elseif (DragUpdate) then (yes)
+    :Add point to swipe path;
+    if (Previous interpretation was NoGesture?) then (yes)
+        :Interaction::SwipeBegin]
+    elseif (LongPress?) then (yes)
+        :Interaction::SwipeBegin]
+    else (no (Swipe)))
+        :Interaction::SwipeUpdate]
+    endif
+  else (no (DragEnd))
+    :Clear swipe path;
+    if (Previous interpretation was NoGesture?) then (yes)
+        :Interaction::TapShortRelease]
+    elseif (LongPress?) then (yes)
+        :Interaction::TapLongRelease]
+    else (no (Swipe))
+        :Interaction::SwipeFinish]
+    endif
+  endif
+  :Interaction]
+  stop
+}
+@enduml
+
+PlantUML version 1.2020.19(Mon Oct 12 17:10:01 CEST 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>
