@@ -42,7 +42,7 @@ impl relm::Update for Win {
                 info! {
                     "Trying to interact with '{}' key", key_id
                 };
-                if let Some((button, _)) = self.key_refs.get(&(layout, view, key_id)) {
+                if let Some((button, _)) = self.widgets.buttons.get(&(layout, view, key_id)) {
                     // Activate/Deactivate it (visual feedback of the button press)
                     button.set_active(tap_motion == TapMotion::Press);
                     // Give haptic feedback
@@ -55,7 +55,7 @@ impl relm::Update for Win {
             // Open the popover of the specified button
             Msg::OpenPopup(key_id) => {
                 let (layout, view) = self.ui_manager.current_layout_view.clone();
-                if let Some((button, popover)) = self.key_refs.get(&(layout, view, key_id)) {
+                if let Some((button, popover)) = self.widgets.buttons.get(&(layout, view, key_id)) {
                     button.set_active(false);
                     if let Some(popover) = popover {
                         popover.show_all();

@@ -93,6 +93,7 @@ struct Widgets {
     #[cfg(feature = "suggestions")]
     suggestions: Suggestions,
     stack: gtk::Stack,
+    buttons: HashMap<(String, String, String), (gtk::ToggleButton, Option<gtk::Popover>)>,
 }
 
 /// Contains all structs needed for the user interface
@@ -100,7 +101,6 @@ pub struct Win {
     pub relm: relm::Relm<Win>,
     model: Model,
     keyboard: crate::keyboard::Keyboard,
-    key_refs: HashMap<(String, String, String), (gtk::ToggleButton, Option<gtk::Popover>)>,
     widgets: Widgets,
     gestures: Gestures,
     ui_manager: UIManager,

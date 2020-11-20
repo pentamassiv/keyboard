@@ -50,7 +50,7 @@ impl relm::Widget for Win {
         // Build the keyboard struct that stores all logic of the keys
         let keyboard = keyboard::Keyboard::from(message_pipe, &layout_meta);
         // Build the stack of grids of the layouts from the meta data
-        let (stack, key_refs) = GridBuilder::make_stack(relm, layout_meta);
+        let (stack, buttons) = GridBuilder::make_stack(relm, layout_meta);
         // Make a new drawing area on which the gesture paths will get painted to
         let drawing_area = gtk::DrawingArea::new();
         let mut draw_handler = relm::DrawHandler::new().expect("draw handler");
@@ -117,7 +117,6 @@ impl relm::Widget for Win {
             relm: relm.clone(),
             model,
             keyboard,
-            key_refs,
             widgets: Widgets {
                 window,
                 _overlay: overlay,
@@ -125,6 +124,7 @@ impl relm::Widget for Win {
                 #[cfg(feature = "suggestions")]
                 suggestions,
                 stack,
+                buttons,
             },
             gestures: Gestures {
                 long_press_gesture,
