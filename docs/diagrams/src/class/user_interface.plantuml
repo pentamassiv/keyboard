@@ -39,11 +39,11 @@ package user_interface {
         {field} _draw_handler: relm::DrawHandler<gtk::DrawingArea>
         {field} suggestions: Suggestions
         {field} stack: gtk::Stack
+        {field} key_refs: HashMap<(String, String, String), (gtk::ToggleButton, Option<gtk::Popover>)>,
     }
 
     +class Win {
         {field} +relm: relm::Relm
-        {field} key_refs: HashMap<(String, String, String), (gtk::ToggleButton, Option<gtk::Popover>)>,
         {field} _channel: Channel<Msg>
 
         {method} get_rel_coordinates(x: f64, y: f64): (i32, i32)
