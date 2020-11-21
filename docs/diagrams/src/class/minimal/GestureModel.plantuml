@@ -1,0 +1,37 @@
+@startuml GestureModel
+!define LIGHTBLUE
+!includeurl https://raw.githubusercontent.com/grelltrier/RedDress-PlantUML/master/style.puml
+
+    +class Point {
+        {field} +x: f64
+        {field} +y: f64
+        {field} +time: Instant
+    }
+    
+    +enum GestureSignal {
+        {field} DragBegin
+        {field} DragUpdate
+        {field} DragEnd
+        {field} LongPress
+    }
+
+    enum GestureInterpretation {
+        {field} NoGesture
+        {field} LongPress
+        {field} Swipe
+    }
+
+    +class GestureModel {
+        {method} +new(): GestureModel
+        {method} +convert_to_interaction(x: f64, y: f64, input: GestureSignal): ((f64, f64), Interaction)
+        {method} +get_swipe_path(): Vec<Point> 
+    }
+
+    Model *-- GestureModel
+   
+    GestureModel *-- GestureInterpretation
+    GestureModel "1" -- "many" Point: > describe gesture
+    GestureModel - GestureSignal : > interprets
+
+
+@enduml

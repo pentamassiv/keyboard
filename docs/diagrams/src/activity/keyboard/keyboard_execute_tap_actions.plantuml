@@ -25,7 +25,7 @@ partition "keyboard_execute_tap_actions"{
       elseif (ToggleKeycode?) then (yes)
         :Toggle keycode;
       elseif (EnterString?) then (yes)
-        :Send text of the button to the interpreter;
+        :Send text of the button to the decoder;
         :Vector of submissions]
         :Submit all of the returned submissions;
       elseif (Modifier?) then (yes)

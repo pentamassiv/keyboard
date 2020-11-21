@@ -1,0 +1,54 @@
+@startuml minimal_user_interface
+!define LIGHTBLUE
+!includeurl https://raw.githubusercontent.com/grelltrier/RedDress-PlantUML/master/style.puml
+
+package user_interface {
+
+    +class Model {
+    }
+
+    class Gestures {
+    }
+
+    class Suggestions {
+    }
+
+    class Widgets {
+    }
+
+    +class Win {
+    }
+
+    +abstract class GridBuilder{
+    }
+
+    +class UIManager {
+    }
+
+    +class Point {
+    }
+
+    +class GestureModel {
+    }
+
+    Model *-- GestureModel
+    Widgets *-- Suggestions
+    Win *-- Model
+    Win *-- Widgets
+    Win *-- Gestures
+    Win *-- UIManager
+    Win -() "relm::Update"
+    "relm::Widget" ()- Win
+    UIManager *-- dbus.DBusService
+    GestureModel "1" - "many" Point: > describe gesture
+    GridBuilder - Win : > creates
+    GridBuilder -- submitter.layer_shell : > calls method
+
+    ' The following are structs from other packages
+    Win *-- keyboard.Keyboard
+
+    hide methods
+    hide fields
+
+}
+@enduml

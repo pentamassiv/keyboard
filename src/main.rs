@@ -29,7 +29,7 @@ use relm::Widget;
 // Modules
 mod config;
 mod dbus;
-mod interpreter;
+mod decoder;
 mod keyboard;
 mod submitter;
 mod user_interface;

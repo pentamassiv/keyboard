@@ -26,12 +26,12 @@ partition "keyboard_input"{
       :Tell submitter to release
       all keys and modifiers;
     elseif (Update?) then (yes)
-      :Notify the interpreter
+      :Notify the decoder
       about the new point
       of the gesture;
     else (Finish)
       :Get most likely word for
-      gesture from interpreter;
+      gesture from decoder;
       :Submit the word;
     endif
   endif

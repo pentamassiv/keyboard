@@ -1,0 +1,25 @@
+@startuml UIManager
+!define LIGHTBLUE
+!includeurl https://raw.githubusercontent.com/grelltrier/RedDress-PlantUML/master/style.puml
+
+    +class UIManager {
+        {field} sender: Sender<Msg>
+        {field} window: Window
+        {field} stack: Stack
+        {field} +current_layout_view: (String, String)
+        {field} prev_layout: String
+
+        {method} +new(sender: Sender<super::Msg>, window: Window, stack: Stack, current_layout_view: (String, String)): UIManager
+        {method} +haptic_feedback(is_press: bool)
+        {method} +change_visibility(new_visibility: bool)
+        {method} +change_hint_purpose(content_hint: ContentHint, content_purpose: ContentPurpose)
+        {method} +change_orientation(orientation: Orientation)
+        {method} +change_layout_view(new_layout: &Option<String>, new_view: Option<String>): Result<(), UIError>
+        {method} make_new_layout_view_name(new_layout: &Option<String>, new_view: Option<String>): (String, String)
+    }
+
+    Win *-- UIManager
+    UIManager - Msg: > emits
+    UIManager *-- dbus.DBusService
+
+@enduml

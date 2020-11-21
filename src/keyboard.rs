@@ -5,7 +5,7 @@ use std::sync::mpsc;
 
 // Imports from other modules
 use crate::config::fallback_layout::{FALLBACK_LAYOUT_NAME, FALLBACK_VIEW_NAME};
-use crate::interpreter::Interpreter;
+use crate::decoder::Decoder;
 pub use crate::submitter::KeyMotion;
 use crate::submitter::{Submission, Submitter};
 use crate::user_interface::Msg;
@@ -73,9 +73,9 @@ pub enum SwipeAction {
     Finish,
 }
 
-/// The keyboard struct is the "heart" of the application. It is the connector between the Interpreter and the Submitter.
+/// The keyboard struct is the "heart" of the application. It is the connector between the Decoder and the Submitter.
 /// It also stores the available views, which contain the keys. It is the keyboards job to find out which key the user wanted to press,
-/// interpret the keypress and notify the UI and Submitter, if they need to take action. The keyboard also saves which layout/view it was set to before,
+/// Decode the keypress and notify the UI and Submitter, if they need to take action. The keyboard also saves which layout/view it was set to before,
 /// if the change is only until the next interaction
 pub struct Keyboard {
     views: HashMap<(String, String), View>,
@@ -87,7 +87,7 @@ pub struct Keyboard {
     next_layout: Option<String>,
     next_view: Option<String>,
     ui_connection: UIConnector, // Allows sending messages to the UI
-    interpreter: Interpreter,
+    decoder: Decoder,
     submitter: Submitter<ui_connector::UIConnector, content_connector::ContentConnector>,
 }
 
@@ -99,10 +99,10 @@ impl Keyboard {
     ) -> Keyboard {
         // Creates a new submitter and moves a clone of the ui_connector to it
         let ui_connection = ui_connector.clone();
-        // Create a new channel. This will be used to send changes of the surrounding text to the interpreter
+        // Create a new channel. This will be used to send changes of the surrounding text to the decoder
         let (tx, rx) = mpsc::channel();
-        // Create a new interpreter that stores the receiver of the channel
-        let interpreter = Interpreter::new(ui_connection.clone(), rx);
+        // Create a new decoder that stores the receiver of the channel
+        let decoder = Decoder::new(ui_connection.clone(), rx);
         // Create a new connection to allow the input_method protocol to notify the keyboard about changes to the surrounding text
         let content_connector = content_connector::ContentConnector::new(tx);
         // Create a new Submitter
@@ -144,7 +144,7 @@ impl Keyboard {
             next_layout: None,
             next_view: None,
             ui_connection,
-            interpreter,
+            decoder,
             submitter,
         }
     }
@@ -155,7 +155,7 @@ impl Keyboard {
     }
 
     /// This method is used to tell the keyboard about a new user interaction
-    /// The keyboard then handles everything from the interpretation to the execution of the actions the key initiates. The submitter and
+    /// The keyboard then handles everything from the decoding to the execution of the actions the key initiates. The submitter and
     /// the UI get notified when they need to take action
     pub fn input(&mut self, x: i32, y: i32, interaction: Interaction) {
         info!("Keyboard handles {} at x: {}, y: {}", interaction, x, y);
@@ -237,11 +237,11 @@ impl Keyboard {
                 self.submitter.release_all_keys_and_modifiers();
             }
             // NOT IMPLEMENTED YET
-            // Tells interpreter to update calculations for gesture recognition
-            SwipeAction::Update => self.interpreter.interpret_gesture(x, y),
+            // Tells decoder to update calculations for gesture recognition
+            SwipeAction::Update => self.decoder.decode_gesture(x, y),
             // Submits the most likely word
             SwipeAction::Finish => {
-                let text = self.interpreter.get_gesture_result(x, y);
+                let text = self.decoder.get_gesture_result(x, y);
                 let submission = Submission::Text(text);
                 self.submitter.submit(submission);
             }
@@ -249,7 +249,7 @@ impl Keyboard {
     }
 
     /// Execute the actions that the key causes when it is tapped
-    /// EnterString actions get interpreted before they get submitted
+    /// EnterString actions get decoded before they get submitted
     fn execute_tap_actions(&mut self, key: &Key, interaction: Interaction) {
         info!("Keyboard handles actions for key {}", key.get_id());
 
@@ -292,12 +292,11 @@ impl Keyboard {
                         let submission = Submission::ToggleKeycode(*keycode);
                         self.submitter.submit(submission);
                     }
-                    // Strings get interpreted before they are sent
+                    // Strings get decoded before they are sent
                     KeyAction::EnterString(text) => {
-                        let interpreted_submissions =
-                            self.interpreter.interpret_text(text.to_string());
+                        let decoded_submissions = self.decoder.decode_text(text.to_string());
                         // Submit each of the returned submissions
-                        for submission in interpreted_submissions {
+                        for submission in decoded_submissions {
                             self.submitter.submit(submission);
                         }
                     }

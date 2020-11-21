@@ -1,4 +1,4 @@
-@startuml keyboard
+@startuml minimal_keyboard
 !define LIGHTBLUE
 !includeurl https://raw.githubusercontent.com/grelltrier/RedDress-PlantUML/master/style.puml
 
@@ -9,22 +9,16 @@ package keyboard {
     }
 
     +class Keyboard {
-        pub active_view: (String, String)
-        latched_keys: HashSet<String>
-        layout_of_active_key: String
-        view_of_active_key: String
-        next_layout: Option<String>
-        next_view: Option<String>
+        {field} active_view: (String, String)
+        {field} latched_keys: HashSet<String>
+        {field} layout_of_active_key: String
+        {field} view_of_active_key: String
+        {field} next_layout: Option<String>
+        {field} next_view: Option<String>
 
         {static} +from(ui_connector: ui_connector::UIConnector, layout_meta_hashmap: &HashMap<String, LayoutMeta>):Keyboard
         +get_views(): &HashMap<(String, String), View>
         +input(x: i32, y: i32, interaction: Interaction)
-        handle_tap(x: i32, y: i32, interaction: Interaction)
-        handle_swipe(x: i32, y: i32, swipe_action: SwipeAction)
-        execute_tap_actions(key: &Key, interaction: Interaction)
-        switch_layout(new_layout: Option<String>, new_view: Option<String>, temporary: bool) 
-        switch_back_to_prev_view()
-        get_start_layout_view(available_layout_names: HashSet<String>): (String, String)
         +fetch_events()
         +submit_text(text: String)
     }
@@ -43,7 +37,6 @@ package keyboard {
         {static} +from(key_name: &str, key_meta: &KeyMeta): Key
         +get_id(): String
         +get_actions(interaction: Interaction): Option<&Vec<KeyAction>>
-        {static} add_feedback_actions(actions: &mut HashMap<Interaction, Vec<KeyAction>>)
     }
 
     +class View {
@@ -52,7 +45,6 @@ package keyboard {
 
         {static} +from(key_arrangement: &KeyArrangement, key_meta: &HashMap<String, KeyMeta>): View
         +get_closest_key(input_x: i32, input_y: i32): Option<Key>
-        {static} get_distance(point_a: (i32, i32), point_b: (i32, i32), max_delta: (i32, i32)): i32
     }
 
     Keyboard *-- decoder.Decoder
@@ -63,8 +55,10 @@ package keyboard {
     KeyboardVisibility ()- UIConnector
     UIConnector -() HintPurpose
     View *-- "many" Key : stores position
-
     Keyboard - "many" LayoutMeta : from
     UIConnector -- user_interface.Msg : emits
+
+
+    submitter.Submitter -[hidden]- decoder.Decoder
 }
 @enduml
