@@ -1,4 +1,5 @@
-@startuml uimanager::change_orientation
+@startuml uimanager_change_orientation
+!pragma useVerticalIf on
 !define LIGHTBLUE
 !includeurl https://raw.githubusercontent.com/grelltrier/RedDress-PlantUML/master/style.puml
 

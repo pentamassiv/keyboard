@@ -1,4 +1,4 @@
-@startuml uimanager::make_new_layout_view_name
+@startuml uimanager_make_new_layout_view_name
 !define LIGHTBLUE
 !includeurl https://raw.githubusercontent.com/grelltrier/RedDress-PlantUML/master/style.puml
 

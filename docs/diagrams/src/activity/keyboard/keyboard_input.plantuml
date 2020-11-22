@@ -1,4 +1,5 @@
 @startuml keyboard_input
+!pragma useVerticalIf on
 !define LIGHTBLUE
 !includeurl https://raw.githubusercontent.com/grelltrier/RedDress-PlantUML/master/style.puml
 
@@ -15,7 +16,7 @@ partition "keyboard_input"{
       :key = last active key]
     endif
     if (Check key) then (is some)
-      :Execute the keys actions for the input interaction;
+      :self.execute_tap_actions();
     else (is none)
     endif
   else (swipe)

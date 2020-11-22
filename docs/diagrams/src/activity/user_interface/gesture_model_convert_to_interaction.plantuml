@@ -1,4 +1,5 @@
 @startuml gesture_model_convert_to_interaction
+!pragma useVerticalIf on
 !define LIGHTBLUE
 !includeurl https://raw.githubusercontent.com/grelltrier/RedDress-PlantUML/master/style.puml
 
