@@ -2,7 +2,7 @@
 
 pkgname=fingerboard-bin
 _pkgname=fingerboard
-pkgver=0.18
+pkgver=0.20
 pkgrel=1
 pkgdesc="A customizable open-source keyboard with advanced features (pre-compiled)"
 url="https://github.com/grelltrier/keyboard"

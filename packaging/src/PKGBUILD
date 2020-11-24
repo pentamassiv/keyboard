@@ -1,7 +1,7 @@
 # Maintainer: Robin Grell (pentamassiv) <pentamassiv@posteo.de>
 
 pkgname=fingerboard
-pkgver=0.18
+pkgver=0.20
 pkgrel=1
 pkgdesc="A customizable open-source keyboard with advanced features"
 url="https://github.com/grelltrier/keyboard"
@@ -13,7 +13,7 @@ makedepends=(git gcc pkgconf fakeroot) # It also requires cargo but that often i
 provides=(squeekboard squeekboard-git)
 conflicts=(squeekboard squeekboard-git fingerboard-bin)
 replaces=(squeekboard squeekboard-git fingerboard-bin)
-_commit=5d70b6066519040e263e7e625e76af6bff927cbc  # tags/v0.18
+_commit=3cae8d02b0dd5f865e8367fe6ddd549d60cf7385  # tags/v0.20
 source=("git+https://github.com/grelltrier/keyboard#commit=$_commit")
 sha256sums=("SKIP")
 
