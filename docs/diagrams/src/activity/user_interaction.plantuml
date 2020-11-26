@@ -30,7 +30,7 @@ partition "user_interaction"{
     :drag_end event]
     :Calculate x and y coordinate of message from events startpoint and offset;
     :Msg::GestureSignal(x, y, GestureSignal::DragEnd)]
+    endif
     stop
-  endif
 }
 @enduml
