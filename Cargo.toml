@@ -9,7 +9,7 @@ edition = "2018"
 
 [dependencies]
 libc = "0.2"
-memmap = "0.7"
+memmap2 = "0.2.1"
 home = "0.5"
 bitflags = "1.2"
 ctrlc = "3.1"
