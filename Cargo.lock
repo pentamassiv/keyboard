@@ -216,7 +216,6 @@ dependencies = [
  "memmap2",
  "pretty_env_logger",
  "relm",
- "relm-attributes",
  "relm-derive",
  "serde",
  "serde_yaml",
@@ -986,9 +985,9 @@ checksum = "b5eb417147ba9860a96cfe72a0b93bf88fee1744b5636ec99ab20c1aa9376581"
 
 [[package]]
 name = "relm"
-version = "0.20.0"
+version = "0.21.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6814cb3502d3edb83435a777c27bee4fcce4613a36884a2a1b7ee36df9f1978a"
+checksum = "9146725e1241fb01e2b2dab85e43859d770c527d95e56451a30abda65d189e2c"
 dependencies = [
  "cairo-rs",
  "glib",
@@ -1002,38 +1001,15 @@ dependencies = [
 ]
 
 [[package]]
-name = "relm-attributes"
-version = "0.16.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4a8db24611fee7bb021f3aad7c4eaaba6d360947860b78b933a4d3ef86079b7f"
-dependencies = [
- "quote 0.6.13",
- "relm-gen-widget",
- "syn 0.15.44",
-]
-
-[[package]]
 name = "relm-derive"
-version = "0.20.0"
+version = "0.21.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "cd3820afe557690469806fa09d5bca7cc13db66358eea330fa7db9bc8baf5827"
+checksum = "f8dfad01c044fc443386089bc153b4586199e96ac4d3749f0a85ec3aec88a069"
 dependencies = [
  "lazy_static",
- "proc-macro2 0.4.30",
- "quote 0.6.13",
- "syn 0.15.44",
-]
-
-[[package]]
-name = "relm-gen-widget"
-version = "0.16.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "49ad47b054bdc12c90fb6b37c81ef785ee2a4a8a92c4e150b18325052766fbb0"
-dependencies = [
- "lazy_static",
- "proc-macro2 0.4.30",
- "quote 0.6.13",
- "syn 0.15.44",
+ "proc-macro2 1.0.24",
+ "quote 1.0.9",
+ "syn 1.0.60",
 ]
 
 [[package]]

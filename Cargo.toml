@@ -18,9 +18,8 @@ gdk-sys = "0.10"
 gdk = "0.13"
 gtk = "0.9"
 cairo-rs = { version = "0.9", optional = true }
-relm = "0.20"
-relm-derive = "0.20"
-relm-attributes = "0.16"
+relm = "0.21"
+relm-derive = "0.21"
 serde = { version = "1.0", features = ["derive"] }
 serde_yaml = "0.8.4"
 log = "0.4"
