@@ -1,3 +1,5 @@
+[![dependency status](https://deps.rs/repo/github/grelltrier/keyboard/status.svg)](https://deps.rs/repo/github/grelltrier/keyboard)
+
 # Fingerboard
 Fingerboard is an open-source keyboard meant to be used on a smartphone. It serves as a drop-in replacement for squeekboard.
 It uses GTK-rs for the GUI and input-method-v2 and virtual-keyboard-v1 to talk to a wayland compositor like phoc/phosh.
