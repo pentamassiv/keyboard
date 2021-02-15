@@ -40,7 +40,7 @@ pub enum Msg {
     SubmitText(String),
     // Updates the suggestions
     #[cfg(feature = "suggestions")]
-    Suggestions((Option<String>, Option<String>, Option<String>)),
+    Suggestions(Vec<String>),
     // Contains the value the visibility of the user interface is supposed to be set to
     SetVisibility(bool),
     // Contains the ContentHint and ContentPurpose the user_interface is supposed to be set to. This is not implemented yet but in the future, it could change the layout
@@ -172,23 +172,18 @@ impl Win {
     }
 
     #[cfg(feature = "suggestions")]
-    fn update_suggestions(
-        &mut self,
-        left: Option<String>,
-        center: Option<String>,
-        right: Option<String>,
-    ) {
-        if let Some(left) = left {
+    fn update_suggestions(&mut self, suggestions: Vec<String>) {
+        if let Some(left) = suggestions.get(0) {
             self.widgets.suggestions.left.set_label(&left);
         } else {
             self.widgets.suggestions.left.set_label("");
         }
-        if let Some(center) = center {
+        if let Some(center) = suggestions.get(1) {
             self.widgets.suggestions.center.set_label(&center);
         } else {
             self.widgets.suggestions.center.set_label("");
         }
-        if let Some(right) = right {
+        if let Some(right) = suggestions.get(2) {
             self.widgets.suggestions.right.set_label(&right);
         } else {
             self.widgets.suggestions.right.set_label("");

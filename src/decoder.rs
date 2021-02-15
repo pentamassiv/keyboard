@@ -6,6 +6,7 @@ use crate::keyboard::UIConnector;
 use crate::submitter::Submission;
 #[cfg(feature = "suggestions")]
 use crate::user_interface::Msg;
+use input_decoder::InputDecoder;
 
 /// The Decoder attempts to correct errors and guess the submission the user had in mind when clicking the key.
 /// Currently it only changes '  ' to '. '
@@ -15,6 +16,8 @@ pub struct Decoder {
     text_left_of_cursor: String,
     text_right_of_cursor: String,
     prev_submissions: Vec<Submission>,
+    input_decoder: InputDecoder,
+    previous_words: Vec<String>,
 }
 
 impl Decoder {
@@ -23,12 +26,16 @@ impl Decoder {
         let prev_submissions = Vec::new();
         let text_left_of_cursor = "".to_string();
         let text_right_of_cursor = "".to_string();
+        let input_decoder = InputDecoder::new("./language_model.bin");
+        let previous_words = Vec::new();
         Decoder {
             ui_connection,
             receiver,
             text_left_of_cursor,
             text_right_of_cursor,
             prev_submissions,
+            input_decoder,
+            previous_words,
         }
     }
 
@@ -43,26 +50,68 @@ impl Decoder {
         info!("Right of the cursor: {}", self.text_right_of_cursor);
         let mut new_submissions = Vec::new();
         // If the current and the previous text submission are a SPACE, it is assumed a sentence was terminated and the previous space gets replaced with a dot
-        if text_to_decode == " "
-            && self.prev_submissions.last() == Some(&Submission::Text(" ".to_string()))
-        {
-            info!("End of sentence suspected because space was entered twice in a row. Will be replaced with '. '");
-            new_submissions.push(Submission::Erase(1));
-            new_submissions.push(Submission::Text(". ".to_string()));
+        if text_to_decode == " " {
+            if self.prev_submissions.last() == Some(&Submission::Text(" ".to_string())) {
+                info!("End of sentence suspected because space was entered twice in a row. Will be replaced with '. '");
+                new_submissions.push(Submission::Erase(1));
+                new_submissions.push(Submission::Text(". ".to_string()));
+            } else {
+                let no_new_words = self.update_last_words();
+                for idx in 0..no_new_words {
+                    println!("Entered '{}' into decoder", &self.previous_words[idx]);
+                    self.input_decoder.entered_word(&self.previous_words[idx]);
+                }
+
+                // Notify the UI about new suggestions
+                // Suggestions are not implemented yet so these don't make any sense
+                #[cfg(feature = "suggestions")]
+                {
+                    let predictions = self.input_decoder.get_predictions();
+                    let predictions: Vec<String> = predictions
+                        .into_iter()
+                        .map(|(word, _)| word)
+                        .take(3)
+                        .collect();
+
+                    self.ui_connection.emit(Msg::Suggestions(predictions));
+                }
+                new_submissions.push(Submission::Text(text_to_decode));
+            }
         } else {
             new_submissions.push(Submission::Text(text_to_decode));
         }
         self.prev_submissions = new_submissions.clone();
 
-        // Notify the UI about new suggestions
-        // Suggestions are not implemented yet so these don't make any sense
-        #[cfg(feature = "suggestions")]
-        self.ui_connection.emit(Msg::Suggestions((
-            Some("sug_left".to_string()),
-            Some("sug_center".to_string()),
-            Some("sug_right".to_string()),
-        )));
         new_submissions
+    }
+
+    // Updates the previous_words field and returns the number of new words
+    fn update_last_words(&mut self) -> usize {
+        let previous_words = &self.previous_words;
+
+        let updated_words: Vec<&str> = self
+            .text_left_of_cursor
+            .split_ascii_whitespace()
+            .rev()
+            .take(2)
+            .collect();
+        let updated_words: Vec<String> = updated_words
+            .into_iter()
+            .rev()
+            .map(|x| x.to_string())
+            .collect();
+
+        let no_changed_words = if !previous_words.is_empty()
+            && updated_words.get(0) == previous_words.get(previous_words.len() - 1)
+        {
+            updated_words.len() - 1
+        } else {
+            println!("Reset language model");
+            self.input_decoder.reset();
+            updated_words.len()
+        };
+        self.previous_words = updated_words;
+        no_changed_words
     }
 
     /// Decode an update to a gesture
@@ -70,11 +119,8 @@ impl Decoder {
     pub fn decode_gesture(&mut self, _x: i32, _y: i32) {
         self.update_surrounding_text();
         #[cfg(feature = "suggestions")]
-        self.ui_connection.emit(Msg::Suggestions((
-            None,
-            Some("gesture_calculating".to_string()),
-            None,
-        )));
+        self.ui_connection
+            .emit(Msg::Suggestions(vec!["gesture_calculating".to_string()]));
     }
 
     /// Notify the decoder about the end of a gesture and get the most likely word
@@ -82,8 +128,7 @@ impl Decoder {
         self.update_surrounding_text();
         #[cfg(feature = "suggestions")]
         {
-            self.ui_connection
-                .emit(Msg::Suggestions((None, None, None)));
+            self.ui_connection.emit(Msg::Suggestions(Vec::new()));
             return "gesture".to_string();
         };
         "".to_string()

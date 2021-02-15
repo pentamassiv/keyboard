@@ -70,8 +70,8 @@ impl relm::Update for Win {
             Msg::SubmitText(text) => self.keyboard.submit_text(text),
             // Update the labels of the buttons for the suggestions
             #[cfg(feature = "suggestions")]
-            Msg::Suggestions((left, center, right)) => {
-                self.update_suggestions(left, center, right);
+            Msg::Suggestions(suggestions) => {
+                self.update_suggestions(suggestions);
             }
             Msg::SetVisibility(new_visibility) => {
                 self.ui_manager.change_visibility(new_visibility);

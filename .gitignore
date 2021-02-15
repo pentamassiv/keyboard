@@ -12,3 +12,4 @@ QEMU/usr/lib/libgtk-layer-shell.so
 QEMU/usr/include/gtk-layer-shell/gtk-layer-shell.h
 docs/install.sh
 packaging/bin/fingerboard-v0.20-aarch64.tar.gz
+language_model.bin
