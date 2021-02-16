@@ -165,7 +165,8 @@ impl GridBuilder {
                         connect_button_release_event(clicked_button, _),
                         return (
                             Some(crate::user_interface::Msg::SubmitText(
-                                clicked_button.get_label().unwrap().to_string()
+                                clicked_button.get_label().unwrap().to_string(),
+                                false
                             )),
                             gtk::Inhibit(false)
                         )

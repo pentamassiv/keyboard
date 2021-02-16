@@ -67,7 +67,7 @@ impl relm::Update for Win {
                 }
             }
             // Tell the keyboard to submit the text
-            Msg::SubmitText(text) => self.keyboard.submit_text(text),
+            Msg::SubmitText(text, append_space) => self.keyboard.submit_text(text, append_space),
             // Update the labels of the buttons for the suggestions
             #[cfg(feature = "suggestions")]
             Msg::Suggestions(suggestions) => {

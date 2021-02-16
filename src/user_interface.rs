@@ -37,7 +37,7 @@ pub enum Msg {
     // Contains the id of the button which will open its popover
     OpenPopup(String),
     // Contains a string that will be submitted by the keyboard
-    SubmitText(String),
+    SubmitText(String, bool),
     // Updates the suggestions
     #[cfg(feature = "suggestions")]
     Suggestions(Vec<String>),

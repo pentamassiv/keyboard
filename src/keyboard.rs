@@ -406,7 +406,14 @@ impl Keyboard {
     }
 
     /// Submit the text
-    pub fn submit_text(&mut self, text: String) {
+    pub fn submit_text(&mut self, text: String, append_space: bool) {
         self.submitter.submit(Submission::Text(text));
+        if append_space {
+            let decoded_submissions = self.decoder.decode_text(" ".to_string());
+            // Submit each of the returned submissions
+            for submission in decoded_submissions {
+                self.submitter.submit(submission);
+            }
+        }
     }
 }

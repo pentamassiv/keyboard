@@ -15,7 +15,7 @@ pub struct Decoder {
     receiver: mpsc::Receiver<(String, String)>, // Receives the surrounding text
     text_left_of_cursor: String,
     text_right_of_cursor: String,
-    prev_submissions: Vec<Submission>,
+    //prev_submissions: Vec<Submission>,
     input_decoder: InputDecoder,
     previous_words: Vec<String>,
 }
@@ -23,7 +23,7 @@ pub struct Decoder {
 impl Decoder {
     /// Create a new Decoder
     pub fn new(ui_connection: UIConnector, receiver: mpsc::Receiver<(String, String)>) -> Decoder {
-        let prev_submissions = Vec::new();
+        //let prev_submissions = Vec::new();
         let text_left_of_cursor = "".to_string();
         let text_right_of_cursor = "".to_string();
         let input_decoder = InputDecoder::new("./language_model.bin");
@@ -33,7 +33,7 @@ impl Decoder {
             receiver,
             text_left_of_cursor,
             text_right_of_cursor,
-            prev_submissions,
+            //prev_submissions,
             input_decoder,
             previous_words,
         }
@@ -48,18 +48,33 @@ impl Decoder {
         info!("Received the surrounding text:");
         info!("Left of the cursor: {}", self.text_left_of_cursor);
         info!("Right of the cursor: {}", self.text_right_of_cursor);
+
+        // Check if the last submitted char was a space
+        //let mut last_submitted_char_was_space = false;
+        //if let Some(Submission::Text(last_submitted_text)) = self.prev_submissions.last() {
+        //    if last_submitted_text.ends_with(" ") {
+        //        last_submitted_char_was_space = true;
+        //    }
+        //};
+
         let mut new_submissions = Vec::new();
         // If the current and the previous text submission are a SPACE, it is assumed a sentence was terminated and the previous space gets replaced with a dot
-        if text_to_decode == " " {
-            if self.prev_submissions.last() == Some(&Submission::Text(" ".to_string())) {
+        if text_to_decode.ends_with(' ') {
+            println!("Text ended with space");
+            if text_to_decode == " " && self.text_left_of_cursor.ends_with(' ') {
                 info!("End of sentence suspected because space was entered twice in a row. Will be replaced with '. '");
                 new_submissions.push(Submission::Erase(1));
                 new_submissions.push(Submission::Text(". ".to_string()));
             } else {
+                println!("Text ended with space but this is the other branch");
                 let no_new_words = self.update_last_words();
-                for idx in 0..no_new_words {
-                    println!("Entered '{}' into decoder", &self.previous_words[idx]);
-                    self.input_decoder.entered_word(&self.previous_words[idx]);
+                for word in self
+                    .previous_words
+                    .iter()
+                    .skip(self.previous_words.len() - no_new_words)
+                {
+                    println!("Entered '{}' into decoder", word);
+                    self.input_decoder.entered_word(&word);
                 }
 
                 // Notify the UI about new suggestions
@@ -80,7 +95,7 @@ impl Decoder {
         } else {
             new_submissions.push(Submission::Text(text_to_decode));
         }
-        self.prev_submissions = new_submissions.clone();
+        //self.prev_submissions = new_submissions.clone();
 
         new_submissions
     }
@@ -88,6 +103,14 @@ impl Decoder {
     // Updates the previous_words field and returns the number of new words
     fn update_last_words(&mut self) -> usize {
         let previous_words = &self.previous_words;
+
+        info!(
+            "previous_words: {:?}, {:?}",
+            previous_words.get(0),
+            previous_words.get(1)
+        );
+
+        info!("text_left_of_cursor: {}", self.text_left_of_cursor);
 
         let updated_words: Vec<&str> = self
             .text_left_of_cursor
@@ -101,6 +124,12 @@ impl Decoder {
             .map(|x| x.to_string())
             .collect();
 
+        info!(
+            "updated_words: {:?}, {:?}",
+            updated_words.get(0),
+            updated_words.get(1)
+        );
+
         let no_changed_words = if !previous_words.is_empty()
             && updated_words.get(0) == previous_words.get(previous_words.len() - 1)
         {
@@ -111,6 +140,7 @@ impl Decoder {
             updated_words.len()
         };
         self.previous_words = updated_words;
+        info!("no_changed_words: {}", no_changed_words);
         no_changed_words
     }
 

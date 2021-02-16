@@ -373,9 +373,10 @@ fn make_suggestion_buttons(relm: &relm::Relm<super::Win>) -> Vec<gtk::Button> {
         // .. that when clicked will ask the UI to submit its label
         let relm_clone = relm.clone();
         let suggestion_closure = move |button: &gtk::Button| {
+            let text_to_submit = button.get_label().unwrap().to_string();
             relm_clone
                 .stream()
-                .emit(Msg::SubmitText(button.get_label().unwrap().to_string()))
+                .emit(Msg::SubmitText(text_to_submit, true))
         };
 
         new_suggestion_button.connect_clicked(suggestion_closure);
