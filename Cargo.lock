@@ -678,7 +678,7 @@ dependencies = [
 [[package]]
 name = "input_decoder"
 version = "0.1.0"
-source = "git+https://github.com/grelltrier/input_decoder#586d8bf2f7ec7a4099c8ceb3e4137d94f7f43c36"
+source = "git+https://github.com/grelltrier/input_decoder#85542a8422de4728c2035b18be0e06098405440f"
 dependencies = [
  "dtw",
  "knn_dtw",
@@ -716,7 +716,7 @@ dependencies = [
 [[package]]
 name = "language_model"
 version = "0.1.0"
-source = "git+https://github.com/grelltrier/language_model#525f66e0300e2db5fd12199216aa253a00fa6cec"
+source = "git+https://github.com/grelltrier/language_model#1748023b872e4f9d433ad7f498eed387db744002"
 dependencies = [
  "bincode",
  "flate2",

@@ -25,9 +25,6 @@ pub use self::meta::{
 };
 pub use ui_connector::UIConnector;
 
-pub const RESOLUTIONX: i32 = 1000;
-pub const RESOLUTIONY: i32 = 1000;
-
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 /// Enum to differentiate a press from a release of a key
 pub enum TapMotion {
@@ -157,7 +154,7 @@ impl Keyboard {
     /// This method is used to tell the keyboard about a new user interaction
     /// The keyboard then handles everything from the decoding to the execution of the actions the key initiates. The submitter and
     /// the UI get notified when they need to take action
-    pub fn input(&mut self, x: i32, y: i32, interaction: Interaction) {
+    pub fn input(&mut self, x: f64, y: f64, interaction: Interaction) {
         info!("Keyboard handles {} at x: {}, y: {}", interaction, x, y);
         // Differentiate between a tap and a swipe
         match interaction {
@@ -172,7 +169,7 @@ impl Keyboard {
 
     /// Handle an Interaction::Tap
     /// Find out, which key was pressed or released and then execute its actions
-    fn handle_tap(&mut self, x: i32, y: i32, interaction: Interaction) {
+    fn handle_tap(&mut self, x: f64, y: f64, interaction: Interaction) {
         let active_view = &self.active_view.clone();
         // If it was a short press, find out which key was pressed
         // Otherwise use the last active key
@@ -207,7 +204,7 @@ impl Keyboard {
     /// If it was the beginning of a swipe, all keys are released
     /// If it was an update, update the calculations for the gesture recognition
     /// If it was the end of a gesture, submit the most likely word
-    fn handle_swipe(&mut self, x: i32, y: i32, swipe_action: SwipeAction) {
+    fn handle_swipe(&mut self, x: f64, y: f64, swipe_action: SwipeAction) {
         match swipe_action {
             // If it is the beginning, ..
             SwipeAction::Begin => {
@@ -238,12 +235,11 @@ impl Keyboard {
             }
             // NOT IMPLEMENTED YET
             // Tells decoder to update calculations for gesture recognition
-            SwipeAction::Update => self.decoder.decode_gesture(x, y),
+            SwipeAction::Update => self.decoder.update_gesture(x, y),
             // Submits the most likely word
             SwipeAction::Finish => {
                 let text = self.decoder.get_gesture_result(x, y);
-                let submission = Submission::Text(text);
-                self.submitter.submit(submission);
+                self.submit_text(text, true);
             }
         }
     }

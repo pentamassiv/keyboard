@@ -111,13 +111,13 @@ pub struct Win {
 impl Win {
     /// Converts the given absolute coordinates to coordinates relative to the gtk::Stack's width and height.
     /// This is done to abstract the actual dimensions of the user interface and don't have to recalculate the keys locations each time the size of the user interface changes
-    fn get_rel_coordinates(&self, x: f64, y: f64) -> (i32, i32) {
+    fn get_rel_coordinates(&self, x: f64, y: f64) -> (f64, f64) {
         // Get width and height of the gtk::Stack that is used to display the button rows
         let allocation = self.widgets.stack.get_allocation();
         let (width, height) = (allocation.width, allocation.height);
         // Calculate the relative coordinates
-        let x_rel = (crate::keyboard::RESOLUTIONX as f64 * (x / width as f64)) as i32;
-        let y_rel = (crate::keyboard::RESOLUTIONY as f64 * (y / height as f64)) as i32;
+        let x_rel = x / width as f64;
+        let y_rel = y / height as f64;
         info!("The relative coordinate is x: {}, y: {}", x_rel, y_rel);
         (x_rel, y_rel)
     }

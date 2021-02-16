@@ -234,6 +234,7 @@ impl relm::Widget for Win {
             .set_visible_child_name(&starting_layout_view);
         info!("UI layout/view started in {}", starting_layout_view);
         info!("UI initialized");
+        self.keyboard.submit_text("".to_string(), false);
     }
 }
 

@@ -9,53 +9,42 @@ use crate::user_interface::Msg;
 use input_decoder::InputDecoder;
 
 /// The Decoder attempts to correct errors and guess the submission the user had in mind when clicking the key.
-/// Currently it only changes '  ' to '. '
 pub struct Decoder {
     ui_connection: UIConnector,
     receiver: mpsc::Receiver<(String, String)>, // Receives the surrounding text
     text_left_of_cursor: String,
     text_right_of_cursor: String,
-    //prev_submissions: Vec<Submission>,
     input_decoder: InputDecoder,
     previous_words: Vec<String>,
+    drawn_path: Vec<(f64, f64)>,
 }
 
 impl Decoder {
     /// Create a new Decoder
     pub fn new(ui_connection: UIConnector, receiver: mpsc::Receiver<(String, String)>) -> Decoder {
-        //let prev_submissions = Vec::new();
         let text_left_of_cursor = "".to_string();
         let text_right_of_cursor = "".to_string();
         let input_decoder = InputDecoder::new("./language_model.bin");
         let previous_words = Vec::new();
+        let drawn_path = Vec::new();
         Decoder {
             ui_connection,
             receiver,
             text_left_of_cursor,
             text_right_of_cursor,
-            //prev_submissions,
             input_decoder,
             previous_words,
+            drawn_path,
         }
     }
 
     /// Decodes the text that would have been sent while considering the surrounding text and previous submissions.
     /// It returns a vector of the submissions it is assumed the user had intended
-    /// Currently it doesn't do much
-    /// It only changes '  ' to '. '
     pub fn decode_text(&mut self, text_to_decode: String) -> Vec<Submission> {
         self.update_surrounding_text();
         info!("Received the surrounding text:");
         info!("Left of the cursor: {}", self.text_left_of_cursor);
         info!("Right of the cursor: {}", self.text_right_of_cursor);
-
-        // Check if the last submitted char was a space
-        //let mut last_submitted_char_was_space = false;
-        //if let Some(Submission::Text(last_submitted_text)) = self.prev_submissions.last() {
-        //    if last_submitted_text.ends_with(" ") {
-        //        last_submitted_char_was_space = true;
-        //    }
-        //};
 
         let mut new_submissions = Vec::new();
         // If the current and the previous text submission are a SPACE, it is assumed a sentence was terminated and the previous space gets replaced with a dot
@@ -95,7 +84,6 @@ impl Decoder {
         } else {
             new_submissions.push(Submission::Text(text_to_decode));
         }
-        //self.prev_submissions = new_submissions.clone();
 
         new_submissions
     }
@@ -146,22 +134,27 @@ impl Decoder {
 
     /// Decode an update to a gesture
     /// This is not implemented yet
-    pub fn decode_gesture(&mut self, _x: i32, _y: i32) {
-        self.update_surrounding_text();
-        #[cfg(feature = "suggestions")]
-        self.ui_connection
-            .emit(Msg::Suggestions(vec!["gesture_calculating".to_string()]));
+    pub fn update_gesture(&mut self, x: f64, y: f64) {
+        self.drawn_path.push((x, y));
     }
 
     /// Notify the decoder about the end of a gesture and get the most likely word
-    pub fn get_gesture_result(&mut self, _x: i32, _y: i32) -> String {
-        self.update_surrounding_text();
+    pub fn get_gesture_result(&mut self, x: f64, y: f64) -> String {
+        self.drawn_path.push((x, y));
+
+        let predictions = self.input_decoder.find_similar_words(&self.drawn_path);
+        self.drawn_path.clear();
+
+        let predictions: Vec<String> = predictions
+            .into_iter()
+            .map(|(word, _)| word)
+            .take(3)
+            .collect();
+        let most_likely_word = predictions[0].clone();
+
         #[cfg(feature = "suggestions")]
-        {
-            self.ui_connection.emit(Msg::Suggestions(Vec::new()));
-            return "gesture".to_string();
-        };
-        "".to_string()
+        self.ui_connection.emit(Msg::Suggestions(predictions));
+        most_likely_word
     }
 
     /// Updates the decoders knowledge about the surrounding text
