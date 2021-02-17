@@ -151,10 +151,20 @@ impl Keyboard {
         &self.views
     }
 
+    fn get_idealized_coordinate(&self, x: f64, y: f64) -> (f64, f64) {
+        if let Some(active_view) = self.views.get(&self.active_view) {
+            (x, active_view.get_row_to_column_ratio() * y)
+        } else {
+            // This should never happen
+            panic!("The name of the active view was not found in the list of available views. This should never happen");
+        }
+    }
+
     /// This method is used to tell the keyboard about a new user interaction
     /// The keyboard then handles everything from the decoding to the execution of the actions the key initiates. The submitter and
     /// the UI get notified when they need to take action
     pub fn input(&mut self, x: f64, y: f64, interaction: Interaction) {
+        let (x, y) = self.get_idealized_coordinate(x, y);
         info!("Keyboard handles {} at x: {}, y: {}", interaction, x, y);
         // Differentiate between a tap and a swipe
         match interaction {

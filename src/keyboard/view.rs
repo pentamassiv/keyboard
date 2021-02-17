@@ -8,10 +8,11 @@ use crate::keyboard::{Key, KeyArrangement, KeyMeta};
 /// The view contains all its keys and their location in a two-dimensional space.
 /// The dimensions of this space are independent from the UI to avoid recalculation of all locations when the UI changes its size.
 /// It is expected the keys get arranged in a grid. If a key spans two or more of the cells of the grid, the key needs to be cloned and set to occupy each of these cells
+/// Keyboards can have different dimensions. We assume all keys to be as wide as they are high
 pub struct View {
     key_coordinates: Vec<((f64, f64), Key)>,
-    cell_height: f64, // Stores the height of the cells
-    cell_width: f64,  // Store the width of the cells
+    cell_radius: f64, // Store the width of the cells
+    row_to_column_ratio: f64,
 }
 
 impl View {
@@ -20,8 +21,12 @@ impl View {
         let mut key_coordinates = Vec::new();
         // A HashMap can't contain keys that are f64 so instead of dividing 1 by the number of columns/width, a lorge number is used and then rounded to calculate the
         // width/height of the cells
-        let cell_width = 1.0 / key_arrangement.get_no_columns() as f64;
-        let cell_height = 1.0 / key_arrangement.get_no_rows() as f64;
+
+        let cell_radius = 1.0 / key_arrangement.get_no_columns() as f64;
+
+        let row_to_column_ratio =
+            key_arrangement.get_no_rows() as f64 / key_arrangement.get_no_columns() as f64;
+
         // Get the name and location and size of each key that will be in this view
         for (key_id, location) in key_arrangement.get_key_arrangement() {
             // Make a new key based on the key meta information
@@ -35,21 +40,19 @@ impl View {
                 for height in 0..location.height {
                     let (x_rel, y_rel) = (x + width, y + height);
                     // Moves the location of the key half a column to the right and bottom so that it is in the center of the buttons of the UI and not the top left corner
-                    let x_rel = x_rel as f64 * cell_width + cell_width / 2.0;
-                    let y_rel = y_rel as f64 * cell_height + cell_height / 2.0;
+                    let x_rel = x_rel as f64 * cell_radius + cell_radius / 2.0;
+                    let y_rel = y_rel as f64 * cell_radius + cell_radius / 2.0;
                     key_coordinates.push(((x_rel, y_rel), key.clone()));
                 }
             }
         }
 
-        println!("{:?}", key_coordinates);
-
         // Shrinks the HashMap to save memory
         key_coordinates.shrink_to_fit();
         View {
             key_coordinates,
-            cell_height,
-            cell_width,
+            cell_radius,
+            row_to_column_ratio,
         }
     }
 
@@ -63,7 +66,7 @@ impl View {
         println!("Input coordinate ({}/{})", input_x, input_y);
 
         // The maximum distance a key can have to be considered as closer is twice the cell height/width to avoid very far away buttons to get pressed
-        let max_deltas = (2.0 * self.cell_width, 2.0 * self.cell_height);
+        let max_deltas = (2.0 * self.cell_radius, 2.0 * self.cell_radius);
         // Calculate the distance between the user interaction and each of the keys
         // If the distance exceeds the maximum delta in one of the dimensions, the distance is maximum so the button can never be closer
         for ((key_coordinate_x, key_coodinate_y), key) in &self.key_coordinates {
@@ -94,5 +97,9 @@ impl View {
             let tmp = delta_x.powi(2) + delta_y.powi(2);
             tmp.sqrt()
         }
+    }
+
+    pub fn get_row_to_column_ratio(&self) -> f64 {
+        self.row_to_column_ratio
     }
 }

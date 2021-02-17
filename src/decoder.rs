@@ -145,11 +145,22 @@ impl Decoder {
         let predictions = self.input_decoder.find_similar_words(&self.drawn_path);
         self.drawn_path.clear();
 
+        println!("predictions before conversion:");
+        for (word, _) in predictions.iter().take(10) {
+            println!("{}", word);
+        }
+
         let predictions: Vec<String> = predictions
             .into_iter()
             .map(|(word, _)| word)
             .take(3)
             .collect();
+
+        println!("predictions after conversion:");
+        for word in &predictions {
+            println!("{}", word);
+        }
+
         let most_likely_word = predictions[0].clone();
 
         #[cfg(feature = "suggestions")]

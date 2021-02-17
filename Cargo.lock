@@ -678,7 +678,7 @@ dependencies = [
 [[package]]
 name = "input_decoder"
 version = "0.1.0"
-source = "git+https://github.com/grelltrier/input_decoder#85542a8422de4728c2035b18be0e06098405440f"
+source = "git+https://github.com/grelltrier/input_decoder#0f1331703db679ac39f81c9c18552baa28e1e1a9"
 dependencies = [
  "dtw",
  "knn_dtw",
@@ -895,7 +895,7 @@ dependencies = [
 [[package]]
 name = "path_gen"
 version = "0.1.0"
-source = "git+https://github.com/grelltrier/path_gen#69a092a80ee901448bf87ea4bc0418334e29a5f3"
+source = "git+https://github.com/grelltrier/path_gen#9ae86b08876f24ea839c67ff3d74ae7b7a7cfa84"
 
 [[package]]
 name = "pin-project-lite"
