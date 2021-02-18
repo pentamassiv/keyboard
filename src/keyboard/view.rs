@@ -10,7 +10,7 @@ use crate::keyboard::{Key, KeyArrangement, KeyMeta};
 /// It is expected the keys get arranged in a grid. If a key spans two or more of the cells of the grid, the key needs to be cloned and set to occupy each of these cells
 /// Keyboards can have different dimensions. We assume all keys to be as wide as they are high
 pub struct View {
-    key_coordinates: Vec<((f64, f64), Key)>,
+    pub key_coordinates: Vec<((f64, f64), Key)>,
     cell_radius: f64, // Store the width of the cells
     row_to_column_ratio: f64,
 }

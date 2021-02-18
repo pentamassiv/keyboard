@@ -112,6 +112,14 @@ impl Keyboard {
             layout_names.insert(layout_name.to_string());
             for (view_name, key_arrangement) in &layout_meta.views {
                 let view = View::from(&key_arrangement, &layout_meta.keys);
+
+                if layout_name == "us" && view_name == "base" {
+                    println!("US layouts base views:");
+                    for ((x, y), key) in &view.key_coordinates {
+                        println!("(\"{}\".to_string(), {}, {}),", key.get_id(), x, y);
+                    }
+                }
+
                 views.insert((layout_name.clone(), view_name.clone()), view);
                 info!(
                     "Keyboard struct added new view: (layout: {}, view: {})",
