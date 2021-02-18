@@ -678,7 +678,7 @@ dependencies = [
 [[package]]
 name = "input_decoder"
 version = "0.1.0"
-source = "git+https://github.com/grelltrier/input_decoder#681b242369568912d3342097fbade9a2b01734e2"
+source = "git+https://github.com/grelltrier/input_decoder#d6f27f2317e69444e04bcb8bdd63413214850ca4"
 dependencies = [
  "dtw",
  "knn_dtw",

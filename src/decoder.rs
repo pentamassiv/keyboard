@@ -24,7 +24,7 @@ impl Decoder {
     pub fn new(ui_connection: UIConnector, receiver: mpsc::Receiver<(String, String)>) -> Decoder {
         let text_left_of_cursor = "".to_string();
         let text_right_of_cursor = "".to_string();
-        let input_decoder = InputDecoder::new("./language_model.bin");
+        let input_decoder = InputDecoder::new("./language_model.bin", 10000);
         let previous_words = Vec::new();
         let drawn_path = Vec::new();
         Decoder {
