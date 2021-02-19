@@ -172,7 +172,10 @@ impl Keyboard {
     /// The keyboard then handles everything from the decoding to the execution of the actions the key initiates. The submitter and
     /// the UI get notified when they need to take action
     pub fn input(&mut self, x: f64, y: f64, interaction: Interaction) {
+        println!("Input method:");
+        println!("before   x: {}, y: {}", x, y);
         let (x, y) = self.get_idealized_coordinate(x, y);
+        println!("idealized   x: {}, y: {}", x, y);
         info!("Keyboard handles {} at x: {}, y: {}", interaction, x, y);
         // Differentiate between a tap and a swipe
         match interaction {

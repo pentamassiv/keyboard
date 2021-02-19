@@ -120,9 +120,9 @@ dependencies = [
 
 [[package]]
 name = "cc"
-version = "1.0.66"
+version = "1.0.67"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4c0496836a84f8d0495758516b8621a622beb77c0fed418570e50764093ced48"
+checksum = "e3c69b077ad434294d3ce9f1f6143a2a4b89a8a2d54ef813d85003a4fd1137fd"
 
 [[package]]
 name = "cfg-if"
@@ -678,7 +678,7 @@ dependencies = [
 [[package]]
 name = "input_decoder"
 version = "0.1.0"
-source = "git+https://github.com/grelltrier/input_decoder#8cbf5a7f9763e1be36a19f36c5ac169eab548336"
+source = "git+https://github.com/grelltrier/input_decoder#fc361180dad11ac2e519a3df0bfbc21c02b0bcd6"
 dependencies = [
  "dtw",
  "knn_dtw",
@@ -895,7 +895,7 @@ dependencies = [
 [[package]]
 name = "path_gen"
 version = "0.1.0"
-source = "git+https://github.com/grelltrier/path_gen#dd5ee9e438ef2f6aafd9f4fb56ac11b3c945b87a"
+source = "git+https://github.com/grelltrier/path_gen#2e4a9612c1cda1bf357c6251a1487410d763276a"
 
 [[package]]
 name = "pin-project-lite"
@@ -1253,18 +1253,18 @@ dependencies = [
 
 [[package]]
 name = "thiserror"
-version = "1.0.23"
+version = "1.0.24"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "76cc616c6abf8c8928e2fdcc0dbfab37175edd8fb49a4641066ad1364fdab146"
+checksum = "e0f4a65597094d4483ddaed134f409b2cb7c1beccf25201a9f73c719254fa98e"
 dependencies = [
  "thiserror-impl",
 ]
 
 [[package]]
 name = "thiserror-impl"
-version = "1.0.23"
+version = "1.0.24"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9be73a2caec27583d0046ef3796c3794f868a5bc813db689eed00c7631275cd1"
+checksum = "7765189610d8241a44529806d6fd1f2e0a08734313a35d5b3a556f92b381f3c0"
 dependencies = [
  "proc-macro2 1.0.24",
  "quote 1.0.9",

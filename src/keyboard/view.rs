@@ -18,18 +18,22 @@ pub struct View {
 impl View {
     // Build a 'View' from the meta infos about the keys and their arrangement
     pub fn from(key_arrangement: &KeyArrangement, key_meta: &HashMap<String, KeyMeta>) -> View {
+        // We divide the number of columns by two because the standard width of keys is 2 but their height is only 1
+        // That was done to arrange all keys in a grid and yet allow rows with one less key to be centered
+        // This is not necessary because buttons are always on the same height
+        let no_standard_sized_columns = key_arrangement.get_no_columns() as f64 / 2.0;
+
         let mut key_coordinates = Vec::new();
         // A HashMap can't contain keys that are f64 so instead of dividing 1 by the number of columns/width, a lorge number is used and then rounded to calculate the
         // width/height of the cells
 
-        let cell_radius = 1.0 / key_arrangement.get_no_columns() as f64;
+        let cell_radius = 1.0 / no_standard_sized_columns;
 
         // Calculate the ratio between the rows and the columns
-        // We multiply it by the factor 2 because the standard width of keys is 2 but their height is only 1
-        // That was done to arrange all keys in a grid and yet allow rows with one less key to be centered
-        // This is not necessary because buttons are always on the same height
-        let row_to_column_ratio =
-            2.0 * key_arrangement.get_no_rows() as f64 / key_arrangement.get_no_columns() as f64;
+        // We divide by the number of standard sized columns to get the amount of acutal keys the keyboard is wide
+        let row_to_column_ratio = key_arrangement.get_no_rows() as f64 / no_standard_sized_columns;
+
+        println!("ROW_TO_COLUMN_RATIO: {}", row_to_column_ratio);
 
         // Get the name and location and size of each key that will be in this view
         for (key_id, location) in key_arrangement.get_key_arrangement() {
@@ -44,7 +48,7 @@ impl View {
                 for height in 0..location.height {
                     let (x_rel, y_rel) = (x + width, y + height);
                     // Moves the location of the key half a column to the right and bottom so that it is in the center of the buttons of the UI and not the top left corner
-                    let x_rel = x_rel as f64 * cell_radius + cell_radius / 2.0;
+                    let x_rel = x_rel as f64 * (cell_radius / 2.0) + cell_radius / 4.0;
                     let y_rel = y_rel as f64 * cell_radius + cell_radius / 2.0;
                     key_coordinates.push(((x_rel, y_rel), key.clone()));
                 }
