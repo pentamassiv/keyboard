@@ -24,8 +24,12 @@ impl View {
 
         let cell_radius = 1.0 / key_arrangement.get_no_columns() as f64;
 
+        // Calculate the ratio between the rows and the columns
+        // We multiply it by the factor 2 because the standard width of keys is 2 but their height is only 1
+        // That was done to arrange all keys in a grid and yet allow rows with one less key to be centered
+        // This is not necessary because buttons are always on the same height
         let row_to_column_ratio =
-            key_arrangement.get_no_rows() as f64 / key_arrangement.get_no_columns() as f64;
+            2.0 * key_arrangement.get_no_rows() as f64 / key_arrangement.get_no_columns() as f64;
 
         // Get the name and location and size of each key that will be in this view
         for (key_id, location) in key_arrangement.get_key_arrangement() {
