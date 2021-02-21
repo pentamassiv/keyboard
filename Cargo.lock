@@ -157,9 +157,9 @@ dependencies = [
 
 [[package]]
 name = "dbus"
-version = "0.9.1"
+version = "0.9.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3b1334c0161ddfccd239ac81b188d62015b049c986c5cd0b7f9447cf2c54f4a3"
+checksum = "f597e08dfa79b593f23bbfc7840b23b2c5aa2e3a98d8e68b67b5b9ff800dc0db"
 dependencies = [
  "libc",
  "libdbus-sys",
@@ -198,12 +198,12 @@ checksum = "88d7ed2934d741c6b37e33e3832298e8850b53fd2d2bea03873375596c7cea4e"
 [[package]]
 name = "dtw"
 version = "0.1.0"
-source = "git+https://github.com/grelltrier/dtw#8951038596a380bcc88124e49d1ac0cd5856d879"
+source = "git+https://github.com/grelltrier/dtw#c1fb8994c025b8ef2052728d5d07592ea86bb148"
 
 [[package]]
 name = "dtw_cost"
 version = "0.1.0"
-source = "git+https://github.com/grelltrier/dtw_cost#54949a2aa945b27414ed20a49408b35455a9c034"
+source = "git+https://github.com/grelltrier/dtw_cost#4eb1439061a07dd2054020e6385ccfc67c2728fd"
 
 [[package]]
 name = "either"
@@ -678,7 +678,7 @@ dependencies = [
 [[package]]
 name = "input_decoder"
 version = "0.1.0"
-source = "git+https://github.com/grelltrier/input_decoder#fc361180dad11ac2e519a3df0bfbc21c02b0bcd6"
+source = "git+https://github.com/grelltrier/input_decoder#3f9b11bcb82cd581ef110706e77b745a097e7ddf"
 dependencies = [
  "dtw",
  "knn_dtw",
