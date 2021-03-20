@@ -71,11 +71,7 @@ impl Decoder {
                 #[cfg(feature = "suggestions")]
                 {
                     let predictions = self.input_decoder.get_predictions();
-                    let predictions: Vec<String> = predictions
-                        .into_iter()
-                        .map(|(word, _)| word)
-                        .take(3)
-                        .collect();
+                    let predictions: Vec<String> = predictions.into_iter().take(3).collect();
 
                     self.ui_connection.emit(Msg::Suggestions(predictions));
                 }
@@ -152,8 +148,8 @@ impl Decoder {
 
         let predictions: Vec<String> = predictions
             .into_iter()
-            .map(|(word, _)| word)
             .take(3)
+            .map(|(word, _)| word)
             .collect();
 
         println!("predictions after conversion:");
