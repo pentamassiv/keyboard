@@ -49,25 +49,23 @@ impl Decoder {
         let mut new_submissions = Vec::new();
         // If the current and the previous text submission are a SPACE, it is assumed a sentence was terminated and the previous space gets replaced with a dot
         if text_to_decode.ends_with(' ') {
-            println!("Text ended with space");
             if text_to_decode == " " && self.text_left_of_cursor.ends_with(' ') {
                 info!("End of sentence suspected because space was entered twice in a row. Will be replaced with '. '");
                 new_submissions.push(Submission::Erase(1));
                 new_submissions.push(Submission::Text(". ".to_string()));
             } else {
-                println!("Text ended with space but this is the other branch");
+                // Notify the input decoder about the changed previous words
                 let no_new_words = self.update_last_words();
                 for word in self
                     .previous_words
                     .iter()
                     .skip(self.previous_words.len() - no_new_words)
                 {
-                    println!("Entered '{}' into decoder", word);
+                    info!("Entered '{}' into decoder", word);
                     self.input_decoder.entered_word(&word);
                 }
 
                 // Notify the UI about new suggestions
-                // Suggestions are not implemented yet so these don't make any sense
                 #[cfg(feature = "suggestions")]
                 {
                     let predictions = self.input_decoder.get_predictions();
@@ -119,7 +117,7 @@ impl Decoder {
         {
             updated_words.len() - 1
         } else {
-            println!("Reset language model");
+            info!("Reset language model");
             self.input_decoder.reset();
             updated_words.len()
         };
@@ -128,22 +126,23 @@ impl Decoder {
         no_changed_words
     }
 
-    /// Decode an update to a gesture
-    /// This is not implemented yet
+    /// Add the new coordinate of the drawn path
     pub fn update_gesture(&mut self, x: f64, y: f64) {
         self.drawn_path.push((x, y));
     }
 
     /// Notify the decoder about the end of a gesture and get the most likely word
     pub fn get_gesture_result(&mut self, x: f64, y: f64) -> String {
+        // Add the last point to the path
         self.drawn_path.push((x, y));
 
+        // Find the word with the most similar ideal path to the drawn gesture
         let predictions = self.input_decoder.find_similar_words(&self.drawn_path);
         self.drawn_path.clear();
 
-        println!("predictions before conversion:");
+        info!("predictions and their similarity:");
         for (word, _) in predictions.iter().take(10) {
-            println!("{}", word);
+            info!("{}", word);
         }
 
         let predictions: Vec<String> = predictions
@@ -152,13 +151,8 @@ impl Decoder {
             .map(|(word, _)| word)
             .collect();
 
-        println!("predictions after conversion:");
-        for word in &predictions {
-            println!("{}", word);
-        }
-
+        // Send the most likely candidates to the ui to suggest and return the most likely candidate
         let most_likely_word = predictions[0].clone();
-
         #[cfg(feature = "suggestions")]
         self.ui_connection.emit(Msg::Suggestions(predictions));
         most_likely_word

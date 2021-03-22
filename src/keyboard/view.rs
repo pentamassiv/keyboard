@@ -33,8 +33,6 @@ impl View {
         // We divide by the number of standard sized columns to get the amount of acutal keys the keyboard is wide
         let row_to_column_ratio = key_arrangement.get_no_rows() as f64 / no_standard_sized_columns;
 
-        println!("ROW_TO_COLUMN_RATIO: {}", row_to_column_ratio);
-
         // Get the name and location and size of each key that will be in this view
         for (key_id, location) in key_arrangement.get_key_arrangement() {
             // Make a new key based on the key meta information
@@ -71,8 +69,6 @@ impl View {
         let mut closest_key = None;
         let mut closest_distance = f64::MAX;
 
-        println!("Input coordinate ({}/{})", input_x, input_y);
-
         // The maximum distance a key can have to be considered as closer is twice the cell height/width to avoid very far away buttons to get pressed
         let max_deltas = (2.0 * self.cell_radius, 2.0 * self.cell_radius);
         // Calculate the distance between the user interaction and each of the keys
@@ -90,7 +86,7 @@ impl View {
             }
         }
 
-        println!("Closest key {:?}", closest_key);
+        info!("Closest key {:?}", closest_key);
         closest_key
     }
 
