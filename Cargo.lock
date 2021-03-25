@@ -250,6 +250,7 @@ dependencies = [
  "locale_config",
  "log",
  "memmap2",
+ "path_gen",
  "pretty_env_logger",
  "relm",
  "relm-derive",
