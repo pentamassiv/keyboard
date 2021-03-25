@@ -244,7 +244,6 @@ impl Keyboard {
                 // .. and also tell the submitter to release all keys and modifiers
                 self.submitter.release_all_keys_and_modifiers();
             }
-            // NOT IMPLEMENTED YET
             // Tells decoder to update calculations for gesture recognition
             SwipeAction::Update => self.decoder.update_gesture(x, y),
             // Submits the most likely word
