@@ -192,7 +192,7 @@ checksum = "88d7ed2934d741c6b37e33e3832298e8850b53fd2d2bea03873375596c7cea4e"
 [[package]]
 name = "dtw"
 version = "0.1.0"
-source = "git+https://github.com/grelltrier/dtw#3ee4682780e942f4c31f3a30bd566fca063673d1"
+source = "git+https://github.com/grelltrier/dtw#5189d1c8965fa5be7a99772d6a75bc68e2b8dec8"
 
 [[package]]
 name = "dtw_cost"
@@ -669,7 +669,7 @@ dependencies = [
 [[package]]
 name = "input_decoder"
 version = "0.1.0"
-source = "git+https://github.com/grelltrier/input_decoder#3211d8f1f6b7bb6de5c948bbf32aa12293313b18"
+source = "git+https://github.com/grelltrier/input_decoder#fb8109c8b58d9cc2b7a54ada9079099b67aba275"
 dependencies = [
  "dtw",
  "knn_dtw",
@@ -698,7 +698,7 @@ dependencies = [
 [[package]]
 name = "knn_dtw"
 version = "0.1.0"
-source = "git+https://github.com/grelltrier/knn_dtw#21f5ba8703cde06fe78ebb1052df6ce004340886"
+source = "git+https://github.com/grelltrier/knn_dtw#6dc4a2477df0876ba6beeab10a12170477004275"
 dependencies = [
  "dtw",
  "dtw_cost",
@@ -707,7 +707,7 @@ dependencies = [
 [[package]]
 name = "language_model"
 version = "0.1.0"
-source = "git+https://github.com/grelltrier/language_model#8f8c759e1d2fadda00fd0746efe6d6556ec63dd2"
+source = "git+https://github.com/grelltrier/language_model#c6496c9a035d51070d4b1297d7d5515b10e818ab"
 dependencies = [
  "bincode",
  "flate2",
@@ -724,9 +724,9 @@ checksum = "e2abad23fbc42b3700f2f279844dc832adb2b2eb069b2df918f455c4e18cc646"
 
 [[package]]
 name = "libc"
-version = "0.2.90"
+version = "0.2.91"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ba4aede83fc3617411dc6993bc8c70919750c1c257c6ca6a502aed6e0e2394ae"
+checksum = "8916b1f6ca17130ec6568feccee27c156ad12037880833a3b842a823236502e7"
 
 [[package]]
 name = "libdbus-sys"
@@ -886,7 +886,7 @@ dependencies = [
 [[package]]
 name = "path_gen"
 version = "0.1.0"
-source = "git+https://github.com/grelltrier/path_gen#cc7c4d8e1f882ba2eaf06299859f7be04bd67edd"
+source = "git+https://github.com/grelltrier/path_gen#724aa9153090222c4d3a32f09006a323c84c7826"
 
 [[package]]
 name = "pin-project-lite"
@@ -1121,18 +1121,18 @@ checksum = "ea6a9290e3c9cf0f18145ef7ffa62d68ee0bf5fcd651017e586dc7fd5da448c2"
 
 [[package]]
 name = "serde"
-version = "1.0.124"
+version = "1.0.125"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bd761ff957cb2a45fbb9ab3da6512de9de55872866160b23c25f1a841e99d29f"
+checksum = "558dc50e1a5a5fa7112ca2ce4effcb321b0300c0d4ccf0776a9f60cd89031171"
 dependencies = [
  "serde_derive",
 ]
 
 [[package]]
 name = "serde_derive"
-version = "1.0.124"
+version = "1.0.125"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1800f7693e94e186f5e25a28291ae1570da908aff7d97a095dec1e56ff99069b"
+checksum = "b093b7a2bb58203b5da3056c05b4ec1fed827dcfdb37347a8841695263b3d06d"
 dependencies = [
  "proc-macro2 1.0.24",
  "quote 1.0.9",
