@@ -255,6 +255,11 @@ impl Keyboard {
         }
     }
 
+    /// Update the suggestions
+    pub fn update_suggestions(&self) {
+        self.decoder.update_suggestions();
+    }
+
     /// Execute the actions that the key causes when it is tapped
     /// EnterString actions get decoded before they get submitted
     fn execute_tap_actions(&mut self, key: &Key, interaction: Interaction) {

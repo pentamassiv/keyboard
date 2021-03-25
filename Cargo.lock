@@ -192,12 +192,12 @@ checksum = "88d7ed2934d741c6b37e33e3832298e8850b53fd2d2bea03873375596c7cea4e"
 [[package]]
 name = "dtw"
 version = "0.1.0"
-source = "git+https://github.com/grelltrier/dtw#5189d1c8965fa5be7a99772d6a75bc68e2b8dec8"
+source = "git+https://github.com/grelltrier/dtw#0f823949a037a398faa501887e79d955fd2c9590"
 
 [[package]]
 name = "dtw_cost"
 version = "0.1.0"
-source = "git+https://github.com/grelltrier/dtw_cost#4eb1439061a07dd2054020e6385ccfc67c2728fd"
+source = "git+https://github.com/grelltrier/dtw_cost#900de2444e77336ac40b42263757b812e68a0ae2"
 
 [[package]]
 name = "either"
@@ -670,7 +670,7 @@ dependencies = [
 [[package]]
 name = "input_decoder"
 version = "0.1.0"
-source = "git+https://github.com/grelltrier/input_decoder#fb8109c8b58d9cc2b7a54ada9079099b67aba275"
+source = "git+https://github.com/grelltrier/input_decoder#cdcb4b9946af9b0698c06948fb1f9d2801b2e817"
 dependencies = [
  "dtw",
  "knn_dtw",
@@ -699,7 +699,7 @@ dependencies = [
 [[package]]
 name = "knn_dtw"
 version = "0.1.0"
-source = "git+https://github.com/grelltrier/knn_dtw#6dc4a2477df0876ba6beeab10a12170477004275"
+source = "git+https://github.com/grelltrier/knn_dtw#f4d66c3323aef4ed377ce1d110dcdc44d78cdfa6"
 dependencies = [
  "dtw",
  "dtw_cost",
@@ -708,7 +708,7 @@ dependencies = [
 [[package]]
 name = "language_model"
 version = "0.1.0"
-source = "git+https://github.com/grelltrier/language_model#c6496c9a035d51070d4b1297d7d5515b10e818ab"
+source = "git+https://github.com/grelltrier/language_model#09591d691e7f1a4c400343ebdf38fe9f90ffa4b2"
 dependencies = [
  "bincode",
  "flate2",
@@ -887,7 +887,7 @@ dependencies = [
 [[package]]
 name = "path_gen"
 version = "0.1.0"
-source = "git+https://github.com/grelltrier/path_gen#724aa9153090222c4d3a32f09006a323c84c7826"
+source = "git+https://github.com/grelltrier/path_gen#232dcefdc4e1f24885eb4e65ccf31a0cfccb8e42"
 
 [[package]]
 name = "pin-project-lite"

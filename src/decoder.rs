@@ -43,7 +43,7 @@ impl Decoder {
     }
 
     /// Decodes the text that would have been sent while considering the surrounding text and previous submissions.
-    /// It returns a vector of the submissions it is assumed the user had intended
+    /// It returns a vector of the submissions it is assumed the user had intended and updates the suggested next words
     pub fn decode_text(&mut self, text_to_decode: String) -> Vec<Submission> {
         self.update_surrounding_text();
         info!("Received the surrounding text:");
@@ -71,12 +71,7 @@ impl Decoder {
 
                 // Notify the UI about new suggestions
                 #[cfg(feature = "suggestions")]
-                {
-                    let predictions = self.input_decoder.get_predictions();
-                    let predictions: Vec<String> = predictions.into_iter().take(3).collect();
-
-                    self.ui_connection.emit(Msg::Suggestions(predictions));
-                }
+                self.update_suggestions();
                 new_submissions.push(Submission::Text(text_to_decode));
             }
         } else {
@@ -133,6 +128,17 @@ impl Decoder {
     /// Add the new coordinate of the drawn path
     pub fn update_gesture(&mut self, x: f64, y: f64) {
         self.drawn_path.push((x, y));
+    }
+
+    #[cfg(feature = "suggestions")]
+    // Notify the UI about new suggestions
+    pub fn update_suggestions(&self) {
+        {
+            let predictions = self.input_decoder.get_predictions();
+            let predictions: Vec<String> = predictions.into_iter().take(3).collect();
+
+            self.ui_connection.emit(Msg::Suggestions(predictions));
+        }
     }
 
     /// Notify the decoder about the end of a gesture and get the most likely word

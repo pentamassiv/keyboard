@@ -234,7 +234,7 @@ impl relm::Widget for Win {
             .set_visible_child_name(&starting_layout_view);
         info!("UI layout/view started in {}", starting_layout_view);
         info!("UI initialized");
-        self.keyboard.submit_text("".to_string(), false);
+        self.keyboard.update_suggestions();
     }
 }
 
@@ -355,19 +355,12 @@ fn make_suggestion_buttons(relm: &relm::Relm<super::Win>) -> Vec<gtk::Button> {
     // Make a vector of strings
     // These will be the labels of the suggestion buttons they start with
     let mut buttons = Vec::new();
-    let button_names = [
-        "sug_l".to_string(),
-        "sug_c".to_string(),
-        "sug_r".to_string(),
-    ];
-    // For each of these strings
-    for name in button_names.iter() {
+    for _ in 0..3 {
         // .. make a new button
         let new_suggestion_button = gtk::Button::new();
         new_suggestion_button
             .get_style_context()
             .add_class("suggestions");
-        new_suggestion_button.set_label(name);
         new_suggestion_button.set_hexpand(true);
         new_suggestion_button.set_focus_on_click(false);
 
