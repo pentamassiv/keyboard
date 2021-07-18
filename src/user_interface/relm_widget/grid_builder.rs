@@ -1,8 +1,9 @@
 // Imports from other crates
-use gtk::{
-    ButtonExt, ContainerExt, Grid, GridExt, Popover, Stack, StackExt, StyleContextExt,
-    ToggleButton, WidgetExt,
-};
+use gtk::prelude::{ButtonExt, ContainerExt, GridExt, StackExt, StyleContextExt, WidgetExt};
+use gtk::{Grid, Popover, Stack, ToggleButton};
+
+use gtk::prelude::WidgetExt::style_context;
+
 use std::collections::HashMap;
 
 // Imports from other modules

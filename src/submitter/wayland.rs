@@ -33,12 +33,12 @@ type InputMethodMgr = wayland_client::Main<ZwpInputMethodManagerV2>;
 fn get_wl_display_seat() -> (Display, WlSeat) {
     // Get the wayland Display from the GTK wayland connection
     // This is unsafe but there are not other ways to get the wayland connection and starting a new one does not work
-    let gdk_display = gdk::Display::get_default();
+    let gdk_display = gdk::Display::default();
     let display_ptr = unsafe { gdk_wayland_display_get_wl_display(gdk_display.to_glib_none().0) };
     let display = unsafe { Display::from_external_display(display_ptr) };
 
     // Get the 'WlSeat' from the GTK wayland connection
-    let gdk_seat = gdk_display.expect("No gdk_display").get_default_seat();
+    let gdk_seat = gdk_display.expect("No gdk_display").default_seat();
     let seat_ptr = unsafe { gdk_wayland_seat_get_wl_seat(gdk_seat.to_glib_none().0) };
     let seat = unsafe { Proxy::<WlSeat>::from_c_ptr(seat_ptr as *mut _) };
     let seat: WlSeat = WlSeat::from(seat);

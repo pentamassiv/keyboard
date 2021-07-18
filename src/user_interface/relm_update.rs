@@ -1,5 +1,5 @@
 // Imports from other crates
-use gtk::{ToggleButtonExt, WidgetExt};
+use gtk::prelude::{ToggleButtonExt, WidgetExt};
 
 // Imports from other modules
 use super::{GestureModel, Model, Msg, TapMotion, Win};

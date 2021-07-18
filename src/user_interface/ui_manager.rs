@@ -1,5 +1,6 @@
 // Imports from other crates
-use gtk::{Stack, StackExt, WidgetExt, Window};
+use gtk::prelude::{StackExt, WidgetExt};
+use gtk::{Stack, Window};
 use relm::Sender;
 use wayland_protocols::unstable::text_input::v3::client::zwp_text_input_v3::{
     ContentHint, ContentPurpose,

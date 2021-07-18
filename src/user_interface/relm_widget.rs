@@ -1,11 +1,11 @@
 // Imports from other crates
-use gtk::{
+use gtk::prelude::{
     ContainerExt, CssProviderExt, GestureDragExt, GtkWindowExt, OverlayExt, StackExt, WidgetExt,
 };
 use relm::Channel;
 
 #[cfg(feature = "suggestions")]
-use gtk::{ButtonExt, StyleContextExt};
+use gtk::prelude::{ButtonExt, StyleContextExt};
 #[cfg(feature = "suggestions")]
 use std::collections::HashMap;
 
