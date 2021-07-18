@@ -132,11 +132,7 @@ impl UIManager {
         // Get the name the grid would be called
         let new_layout_view_name = GridBuilder::make_grid_name(&layout, &view);
         // If such a grid exists...
-        if self
-            .stack
-            .get_child_by_name(&new_layout_view_name)
-            .is_some()
-        {
+        if self.stack.child_by_name(&new_layout_view_name).is_some() {
             // Change to it
             self.stack.set_visible_child_name(&new_layout_view_name);
             // Notify the keyboard struct about the change

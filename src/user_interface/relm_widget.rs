@@ -87,12 +87,12 @@ impl relm::Widget for Win {
 
         // Make the window that contains the UI
         let window = gtk::Window::new(gtk::WindowType::Toplevel);
-        window.set_property_default_height(WINDOW_DEFAULT_HEIGHT);
+        window.set_default_height(WINDOW_DEFAULT_HEIGHT);
         window.add(&v_box);
 
         // Add a GestureLongPress handler to the drawing area
         let long_press_gesture = gtk::GestureLongPress::new(&drawing_area);
-        long_press_gesture.set_property_delay_factor(input_settings::LONG_PRESS_DELAY_FACTOR);
+        long_press_gesture.set_delay_factor(input_settings::LONG_PRESS_DELAY_FACTOR);
         let drag_gesture = gtk::GestureDrag::new(&drawing_area);
 
         // Create a channel to be able to send a message from another thread.
@@ -148,7 +148,7 @@ impl relm::Widget for Win {
         self.widgets
             .window
             .connect_configure_event(move |_, configure_event| {
-                let (width, _) = configure_event.get_size();
+                let (width, _) = configure_event.size();
                 let orientation = if width == 720 {
                     Orientation::Landscape
                 } else {
@@ -183,8 +183,7 @@ impl relm::Widget for Win {
             connect_drag_update(drag_gesture, x_offset, y_offset),
             self.relm,
             {
-                let (x_start, y_start) =
-                    drag_gesture.get_start_point().unwrap_or((-1000.0, -1000.0)); // When popup is opened, there is no startpoint. To avoid being close to any buttons this large negative number is given
+                let (x_start, y_start) = drag_gesture.start_point().unwrap_or((-1000.0, -1000.0)); // When popup is opened, there is no startpoint. To avoid being close to any buttons this large negative number is given
                 let x = x_start + x_offset;
                 let y = y_start + y_offset;
                 Msg::GestureSignal(x, y, GestureSignal::DragUpdate)
@@ -198,8 +197,7 @@ impl relm::Widget for Win {
             connect_drag_end(drag_gesture, x_offset, y_offset),
             self.relm,
             {
-                let (x_start, y_start) =
-                    drag_gesture.get_start_point().unwrap_or((-1000.0, -1000.0)); // When popup is opened, there is no startpoint. To avoid being close to any buttons this large negative number is given
+                let (x_start, y_start) = drag_gesture.start_point().unwrap_or((-1000.0, -1000.0)); // When popup is opened, there is no startpoint. To avoid being close to any buttons this large negative number is given
                 let x = x_start + x_offset;
                 let y = y_start + y_offset;
                 Msg::GestureSignal(x, y, GestureSignal::DragEnd)
@@ -265,7 +263,7 @@ fn load_css() {
             // Give the CssProvided to the default screen so the CSS rules from the stylesheet
             // can be applied to the window.
             gtk::StyleContext::add_provider_for_screen(
-                &gdk::Screen::get_default().expect("Error initializing gtk css provider."),
+                &gdk::Screen::default().expect("Error initializing gtk css provider."),
                 &provider,
                 gtk::STYLE_PROVIDER_PRIORITY_APPLICATION,
             );
@@ -304,9 +302,7 @@ fn make_suggestions_and_pref_buttons(
 fn make_pref_button(relm: &relm::Relm<super::Win>, layout_names: Vec<&String>) -> gtk::Button {
     // Make the button
     let preferences_button = gtk::Button::new();
-    preferences_button
-        .get_style_context()
-        .add_class("preferences");
+    preferences_button.style_context().add_class("preferences");
     preferences_button.set_label("pref");
     preferences_button.set_hexpand(true);
     preferences_button.set_focus_on_click(false);
@@ -338,7 +334,7 @@ fn make_pref_button(relm: &relm::Relm<super::Win>, layout_names: Vec<&String>) -
             connect_button_release_event(clicked_button, _),
             return (
                 Some(crate::user_interface::Msg::ChangeUILayoutView(
-                    Some(clicked_button.get_label().unwrap().to_string()),
+                    Some(clicked_button.label().unwrap().to_string()),
                     None
                 )),
                 gtk::Inhibit(false)
@@ -359,7 +355,7 @@ fn make_suggestion_buttons(relm: &relm::Relm<super::Win>) -> Vec<gtk::Button> {
         // .. make a new button
         let new_suggestion_button = gtk::Button::new();
         new_suggestion_button
-            .get_style_context()
+            .style_context()
             .add_class("suggestions");
         new_suggestion_button.set_hexpand(true);
         new_suggestion_button.set_focus_on_click(false);
@@ -367,7 +363,7 @@ fn make_suggestion_buttons(relm: &relm::Relm<super::Win>) -> Vec<gtk::Button> {
         // .. that when clicked will ask the UI to submit its label
         let relm_clone = relm.clone();
         let suggestion_closure = move |button: &gtk::Button| {
-            let text_to_submit = button.get_label().unwrap().to_string();
+            let text_to_submit = button.label().unwrap().to_string();
             relm_clone
                 .stream()
                 .emit(Msg::SubmitText(text_to_submit, true))

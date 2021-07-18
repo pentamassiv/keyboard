@@ -1,7 +1,6 @@
 // Imports from other crates
 #[cfg(feature = "suggestions")]
-use gtk::ButtonExt;
-use gtk::WidgetExt;
+use gtk::prelude::{ButtonExt, WidgetExt};
 use relm::Channel;
 use std::collections::HashMap;
 use wayland_protocols::unstable::text_input::v3::client::zwp_text_input_v3::{
@@ -113,7 +112,7 @@ impl Win {
     /// This is done to abstract the actual dimensions of the user interface and don't have to recalculate the keys locations each time the size of the user interface changes
     fn get_rel_coordinates(&self, x: f64, y: f64) -> (f64, f64) {
         // Get width and height of the gtk::Stack that is used to display the button rows
-        let allocation = self.widgets.stack.get_allocation();
+        let allocation = self.widgets.stack.allocation();
         let (width, height) = (allocation.width, allocation.height);
         // Calculate the relative coordinates
         let x_rel = x / width as f64;
@@ -125,10 +124,10 @@ impl Win {
     #[cfg(feature = "gesture")]
     /// Erases the path/gesture the user drew on the user interface
     fn erase_path(&mut self) {
-        let context = self.widgets._draw_handler.get_context();
+        let context = self.widgets._draw_handler.get_context().unwrap();
         context.set_operator(cairo::Operator::Clear);
         context.set_source_rgba(0.0, 0.0, 0.0, 0.0);
-        context.paint();
+        context.paint().unwrap();
         info!("Path of gesture was erased");
     }
 
@@ -138,7 +137,7 @@ impl Win {
         // Delete the previous path
         self.erase_path();
         // Set path colors
-        let context = self.widgets._draw_handler.get_context();
+        let context = self.widgets._draw_handler.get_context().unwrap();
         context.set_operator(cairo::Operator::Over);
         context.set_source_rgba(
             path_defaults::PATHCOLOR.0,
@@ -167,7 +166,7 @@ impl Win {
         }
         context.set_line_width(path_defaults::PATHWIDTH);
         // Paint the line of dots
-        context.stroke();
+        context.stroke().unwrap();
         info!("Path of gesture was drawn");
     }
 

@@ -1,8 +1,7 @@
 // Imports from other crates
+//use gtk::prelude::*;
 use gtk::prelude::{ButtonExt, ContainerExt, GridExt, StackExt, StyleContextExt, WidgetExt};
 use gtk::{Grid, Popover, Stack, ToggleButton};
-
-use gtk::prelude::WidgetExt::style_context;
 
 use std::collections::HashMap;
 
@@ -36,7 +35,7 @@ impl GridBuilder {
                 // Make the grid for the layout from the arrangement of the keys and the meta info of the keys
                 let (grid, key_refs) =
                     GridBuilder::make_grid(relm, &view_arrangement, &layout_meta.keys);
-                grid.get_style_context()
+                grid.style_context()
                     .add_class(&format!("grid_{}", grid_name));
                 // Add the grid to the stack
                 stack.add_named(&grid, &grid_name);
@@ -96,15 +95,13 @@ impl GridBuilder {
         // Make a new ToggleButton
         let button = ToggleButton::new();
         button.set_hexpand(true);
-        button.get_style_context().add_class("key");
-        button
-            .get_style_context()
-            .add_class(&format!("key_{}", key_id));
+        button.style_context().add_class("key");
+        button.style_context().add_class(&format!("key_{}", key_id));
 
         // Add style classes, if any were specified
         if let Some(style_classes) = &key_meta.styles {
             for style_classes in style_classes {
-                button.get_style_context().add_class(style_classes);
+                button.style_context().add_class(style_classes);
             }
         }
         // Set the button to display a label or an icon
@@ -150,9 +147,7 @@ impl GridBuilder {
                 for popup_id in popup_string.split_whitespace() {
                     // Make a new button
                     let new_popup_button = gtk::Button::new();
-                    new_popup_button
-                        .get_style_context()
-                        .add_class("popover_key");
+                    new_popup_button.style_context().add_class("popover_key");
                     // Set its label to its id
                     new_popup_button.set_label(popup_id);
                     // Add the button to the horizontal box
@@ -166,7 +161,7 @@ impl GridBuilder {
                         connect_button_release_event(clicked_button, _),
                         return (
                             Some(crate::user_interface::Msg::SubmitText(
-                                clicked_button.get_label().unwrap().to_string(),
+                                clicked_button.label().unwrap().to_string(),
                                 false
                             )),
                             gtk::Inhibit(false)
