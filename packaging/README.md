@@ -1,5 +1,5 @@
 # Packaging for Arch
-There are two packaging options for you to get Fingerboard. You can use a package that [build it from source](src) or you can just install the [compiled binaries](bin). If you don't know what this means, you want the compiled binaries.
+There are two packaging options for you to get Fingerboard. You can use a package that [builds it from source](src) or you can just install the [compiled binaries](bin). If you don't know what this means, you want the compiled binaries.
 To get the PKGBUILD, run
 ```bash
 wget https://raw.githubusercontent.com/grelltrier/keyboard/master/packaging/bin/PKGBUILD
