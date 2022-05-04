@@ -113,7 +113,7 @@ impl Win {
     fn get_rel_coordinates(&self, x: f64, y: f64) -> (f64, f64) {
         // Get width and height of the gtk::Stack that is used to display the button rows
         let allocation = self.widgets.stack.allocation();
-        let (width, height) = (allocation.width, allocation.height);
+        let (width, height) = (allocation.width(), allocation.height());
         // Calculate the relative coordinates
         let x_rel = x / width as f64;
         let y_rel = y / height as f64;

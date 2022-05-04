@@ -13,29 +13,29 @@ memmap2 = "0.5"
 home = "0.5"
 bitflags = "1.2"
 ctrlc = "3.1"
-glib = "0.14"
-gdk-sys = "0.14"
-gdk = "0.14"
-gtk = "0.14"
-cairo-rs = { version = "0.14", optional = true }
-relm = "0.22"
-relm-derive = "0.22"
+glib = "0.15.11"
+gdk-sys = "0.15.1"
+gdk = "0.15.4"
+gtk = "0.15.5"
+cairo-rs = { version = "0.15.11", optional = true }
+relm = "0.23.0"
+relm-derive = "0.23.0"
 serde = { version = "1.0", features = ["derive"] }
 serde_yaml = "0.8.4"
 log = "0.4"
 pretty_env_logger = "0.4"
-gtk-layer-shell="0.2"
+gtk-layer-shell="0.3.1"
 wayland-client = {version="0.29", features = ["use_system_lib"]}
 wayland-protocols = {version="0.29", features = ["client", "unstable_protocols"]}
 zwp-virtual-keyboard = "0.2"
 input_event_codes_hashmap = "0.1"
-zwp-input-method = "0.2.0"
+zwp-input-method = "0.3.0"
 tempfile = "3.1"
 dbus = "0.9"
 dbus-crossroads = "0.5"
 locale_config = "0.3"
-zwp-input-method-service = "0.4"
-envmnt = "0.9"
+zwp-input-method-service = "0.5"
+envmnt = "0.10.0"
 input_decoder = {git = "https://github.com/grelltrier/input_decoder"}
 path_gen = {git = "https://github.com/grelltrier/path_gen"}
 

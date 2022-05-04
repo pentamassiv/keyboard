@@ -2,7 +2,7 @@
 use wayland_protocols::unstable::text_input::v3::client::zwp_text_input_v3::{
     ContentHint, ContentPurpose,
 };
-use zwp_input_method_service::{HintPurpose, KeyboardVisibility};
+use zwp_input_method_service::{HintPurpose, IMVisibility};
 
 // Imports from other modules
 use crate::user_interface::Msg;
@@ -27,12 +27,12 @@ impl UIConnector {
 }
 
 /// Implements the KeyboardVisibility trait from the zwp_input_method_service crate to notify the UI about requested changes to the visibility
-impl KeyboardVisibility for UIConnector {
-    fn show_keyboard(&self) {
+impl IMVisibility for UIConnector {
+    fn activate_im(&self) {
         self.emit(Msg::SetVisibility(true));
         info!("Requested to show the keyboard");
     }
-    fn hide_keyboard(&self) {
+    fn deactivate_im(&self) {
         self.emit(Msg::SetVisibility(false));
         info!("Requested to hide the keyboard");
     }

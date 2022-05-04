@@ -1,5 +1,6 @@
 [![dependency status](https://deps.rs/repo/github/grelltrier/keyboard/status.svg)](https://deps.rs/repo/github/grelltrier/keyboard)
 ![Build](https://github.com/grelltrier/keyboard/workflows/Build/badge.svg)
+![dependabot status](https://img.shields.io/badge/dependabot-enabled-025e8c?logo=Dependabot)
 
 # Fingerboard
 Fingerboard is an open-source keyboard meant to be used on a smartphone. It serves as a drop-in replacement for squeekboard.

@@ -1,9 +1,8 @@
 // Imports from other crates
 use std::sync::{Arc, Mutex};
 use wayland_client::EventQueue;
-use zwp_input_method_service::{
-    HintPurpose, IMService, KeyboardVisibility, ReceiveSurroundingText,
-};
+use zwp_input_method_service::InputMethod;
+use zwp_input_method_service::{HintPurpose, IMService, IMVisibility, ReceiveSurroundingText};
 
 // Imports from other modules
 pub use self::wayland::vk_service::KeyMotion;
@@ -28,18 +27,13 @@ pub enum Submission {
 }
 
 /// Handles all submissions
-pub struct Submitter<
-    T: 'static + KeyboardVisibility + HintPurpose,
-    D: 'static + ReceiveSurroundingText,
-> {
+pub struct Submitter<T: 'static + IMVisibility + HintPurpose, D: 'static + ReceiveSurroundingText> {
     event_queue: EventQueue,
     im_service: Option<IMService<T, D>>,
     virtual_keyboard: Option<Arc<Mutex<wayland::vk_service::VKService>>>,
 }
 
-impl<T: 'static + KeyboardVisibility + HintPurpose, D: 'static + ReceiveSurroundingText>
-    Submitter<T, D>
-{
+impl<T: IMVisibility + HintPurpose, D: ReceiveSurroundingText> Submitter<T, D> {
     /// Creates a new Submitter
     pub fn new(ui_connector: T, content_connector: D) -> Submitter<T, D> {
         // Gets all necessary wayland objects to use the available protocols
@@ -201,7 +195,7 @@ impl<T: 'static + KeyboardVisibility + HintPurpose, D: 'static + ReceiveSurround
             no_char
         );
         if let Some(im) = &self.im_service {
-            if im.delete_surrounding_text(no_char, 0).is_ok() && im.commit().is_ok() {
+            if im.delete_surrounding_text(no_char.try_into().unwrap(), 0).is_ok() && im.commit().is_ok() {
                 info!("Submitter successfully used input_method to erase the characters");
                 return;
             };
