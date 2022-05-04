@@ -1355,9 +1355,9 @@ dependencies = [
 
 [[package]]
 name = "zwp-virtual-keyboard"
-version = "0.2.4"
+version = "0.2.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0b432ded13703ab1c4af1bf9ba3cebb7c1d38f529d3b83d7c163a7b9e6bee026"
+checksum = "cb1770223a14a2699e0d83c7bf457326c52c7217e46297f76d29e826feb43e99"
 dependencies = [
  "wayland-client",
  "wayland-commons",
