@@ -1,5 +1,6 @@
 // Imports from other crates
 use gdk_sys::{GdkDisplay, GdkSeat};
+use glib::object::Cast;
 use glib::translate::ToGlibPtr;
 use wayland_client::{
     protocol::wl_seat::WlSeat, sys::client::wl_display, Display, EventQueue, GlobalManager, Proxy,
@@ -33,12 +34,16 @@ type InputMethodMgr = wayland_client::Main<ZwpInputMethodManagerV2>;
 fn get_wl_display_seat() -> (Display, WlSeat) {
     // Get the wayland Display from the GTK wayland connection
     // This is unsafe but there are not other ways to get the wayland connection and starting a new one does not work
-    let gdk_display = gdk::Display::default();
-    let display_ptr = unsafe { gdk_wayland_display_get_wl_display(gdk_display.to_glib_none().0) };
-    let display = unsafe { Display::from_external_display(display_ptr) };
+    let gdk_display = gdk::Display::default().expect("No gdk_display");
+    let gdkwaylanddisplay = gdk_display
+        .downcast::<gdkwayland::WaylandDisplay>()
+        .unwrap()
+        .wl_display();
+    //let display_ptr = unsafe { gdk_wayland_display_get_wl_display(gdk_display.to_glib_none().0) };
+    let display = Display::from_external_display(gdkwaylanddisplay);
 
     // Get the 'WlSeat' from the GTK wayland connection
-    let gdk_seat = gdk_display.expect("No gdk_display").default_seat();
+    let gdk_seat = gdk_display.default_seat();
     let seat_ptr = unsafe { gdk_wayland_seat_get_wl_seat(gdk_seat.to_glib_none().0) };
     let seat = unsafe { Proxy::<WlSeat>::from_c_ptr(seat_ptr as *mut _) };
     let seat: WlSeat = WlSeat::from(seat);

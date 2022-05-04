@@ -16,6 +16,7 @@ ctrlc = "3.2"
 glib = "0.15.11"
 gdk-sys = "0.15.1"
 gdk = "0.15.4"
+gdkwayland = "0.15.5"
 gtk = "0.15.5"
 cairo-rs = { version = "0.15.11", optional = true }
 relm = "0.23.0"

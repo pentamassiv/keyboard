@@ -254,6 +254,7 @@ dependencies = [
  "envmnt",
  "gdk",
  "gdk-sys",
+ "gdkwayland",
  "glib",
  "gtk",
  "gtk-layer-shell",
@@ -411,6 +412,33 @@ dependencies = [
  "gobject-sys",
  "libc",
  "pango-sys",
+ "pkg-config",
+ "system-deps",
+]
+
+[[package]]
+name = "gdkwayland"
+version = "0.15.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "01395f289f8f0c837e07051fe23afb385b8628bf771f6a1182ca750989225c99"
+dependencies = [
+ "gdk",
+ "gdkwayland-sys",
+ "glib",
+ "libc",
+ "wayland-client",
+]
+
+[[package]]
+name = "gdkwayland-sys"
+version = "0.15.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "cca49a59ad8cfdf36ef7330fe7bdfbe1d34323220cc16a0de2679ee773aee2c2"
+dependencies = [
+ "gdk-sys",
+ "glib-sys",
+ "gobject-sys",
+ "libc",
  "pkg-config",
  "system-deps",
 ]
