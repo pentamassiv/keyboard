@@ -273,7 +273,6 @@ dependencies = [
  "tempfile",
  "wayland-client",
  "wayland-protocols",
- "zwp-input-method",
  "zwp-input-method-service",
  "zwp-virtual-keyboard",
 ]
@@ -1327,27 +1326,14 @@ dependencies = [
 ]
 
 [[package]]
-name = "zwp-input-method"
-version = "0.3.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "15c6d45491d320d7220912a7a7ee6cf5440e51ef221f81cac6471a368be99fb2"
-dependencies = [
- "wayland-client",
- "wayland-commons",
- "wayland-protocols",
- "wayland-scanner",
-]
-
-[[package]]
 name = "zwp-input-method-service"
-version = "0.5.0"
+version = "0.5.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "210f5b5fea88bd5ecd5b98d556cf241ba235b57f07572b82e8db38a9ec474479"
+checksum = "0bb1fbb09dc1329e563d0e464eb80160e8af1e3d8d62056fd84e4e2ff143f389"
 dependencies = [
  "input-event-codes",
  "wayland-client",
  "wayland-protocols",
- "zwp-input-method",
 ]
 
 [[package]]

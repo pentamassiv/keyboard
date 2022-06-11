@@ -4,8 +4,8 @@ use glib::translate::ToGlibPtr;
 use wayland_client::{
     protocol::wl_seat::WlSeat, sys::client::wl_display, Display, EventQueue, GlobalManager, Proxy,
 };
+use wayland_protocols::misc::zwp_input_method_v2::client::zwp_input_method_manager_v2::ZwpInputMethodManagerV2;
 use wayland_protocols::wlr::unstable::layer_shell::v1::client::zwlr_layer_shell_v1::ZwlrLayerShellV1;
-use zwp_input_method::input_method_unstable_v2::zwp_input_method_manager_v2::ZwpInputMethodManagerV2;
 use zwp_virtual_keyboard::virtual_keyboard_unstable_v1::zwp_virtual_keyboard_manager_v1::ZwpVirtualKeyboardManagerV1;
 
 // Modules

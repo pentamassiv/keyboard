@@ -29,7 +29,6 @@ wayland-client = {version="0.29", features = ["use_system_lib"]}
 wayland-protocols = {version="0.29", features = ["client", "unstable_protocols"]}
 zwp-virtual-keyboard = "0.2"
 input_event_codes_hashmap = "0.1"
-zwp-input-method = "0.3.0"
 tempfile = "3.3"
 dbus = "0.9"
 dbus-crossroads = "0.5"
