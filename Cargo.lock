@@ -523,9 +523,9 @@ dependencies = [
 
 [[package]]
 name = "gtk-layer-shell"
-version = "0.3.1"
+version = "0.4.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "cc113383623e6814640c676acbabbc8eaeb6a1f68375173c64e8eed5a3232160"
+checksum = "a703030a7226291a0f9bf25947122ff194990e369f05cacb596b6730f31ef9b8"
 dependencies = [
  "bitflags",
  "gdk",
@@ -538,9 +538,9 @@ dependencies = [
 
 [[package]]
 name = "gtk-layer-shell-sys"
-version = "0.3.1"
+version = "0.4.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e16dd13136f60178918d86fd36d74dadb2f39a28964ae974f5e73271dbbc037a"
+checksum = "e33369d2f611525af872de2ffb690ee6464774df67aec021331bad0e5f95a656"
 dependencies = [
  "gdk-sys",
  "glib-sys",
