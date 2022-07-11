@@ -2,7 +2,7 @@
 ![Build](https://github.com/grelltrier/keyboard/workflows/Build/badge.svg)
 ![dependabot status](https://img.shields.io/badge/dependabot-enabled-025e8c?logo=Dependabot)
 
-# WIP: Unfortunetely the keyboard currently does not run on the Pinephone. The language model is too big to share it on Github and it doesn't work without one. I am working on it
+# WIP: Unfortunately the keyboard currently does not run on the Pinephone. The language model is too big to share it on Github and it doesn't work without one. I am working on it
 
 # Fingerboard
 Fingerboard is an open-source keyboard meant to be used on a smartphone. It serves as a drop-in replacement for squeekboard.
