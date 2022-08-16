@@ -34,7 +34,7 @@ dbus = "0.9"
 dbus-crossroads = "0.5"
 locale_config = "0.3"
 zwp-input-method-service = "0.5"
-envmnt = "0.10.0"
+envmnt = "0.10.2"
 input_decoder = {git = "https://github.com/grelltrier/input_decoder"}
 path_gen = {git = "https://github.com/grelltrier/path_gen"}
 
