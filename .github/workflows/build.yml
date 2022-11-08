@@ -1,6 +1,7 @@
 name: Build
 
 on:
+  workflow_dispatch:
   push:
     branches: [ main ]
   pull_request:
@@ -11,19 +12,67 @@ env:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     name: ci (amd64)
-    container:
-      image: ubuntu:jammy
+    strategy:
+      matrix:
+        rust:
+          - stable
+          - nightly
+          - "1.63.0"
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
       - name: Install dependencies
         run:  |
-            apt-get update -q -y
-            apt-get upgrade -y
-            apt-get install -q -y binutils rust-all libgtk-3-dev libwayland-dev libgtk-layer-shell-dev
+            sudo apt-get update -q -y
+            sudo apt-get upgrade -y
+            sudo apt-get install -q -y binutils libgtk-3-dev libwayland-dev libgtk-layer-shell-dev
+      - uses: actions/checkout@v3
+      - uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            target/
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: ${{ matrix.rust }}
+          components: clippy
+
+      - name: clippy
+        run: cargo clippy -- --deny warnings
+
+      - name: clippy all features
+        run: cargo clippy --features "all" -- --deny warnings
+
       - name: Build and test debug binary
         run: cargo test --verbose
+
       - name: Build and test the release binary
         run: cargo test --release --verbose
+
+  fmt:
+    name: rustfmt
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt
+      - name: "Check if the formatting is correct"
+        run: cargo fmt --all -- --check
+
+  docs:
+    name: check-docs
+    runs-on: ubuntu-latest
+    env: 
+      RUSTDOCFLAGS: "-D warnings"
+    steps:
+      - uses: actions/checkout@v3
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: nightly
+      - name: "Build docs for all features"
+        run: cargo doc --all-features

@@ -195,7 +195,11 @@ impl<T: IMVisibility + HintPurpose, D: ReceiveSurroundingText> Submitter<T, D> {
             no_char
         );
         if let Some(im) = &self.im_service {
-            if im.delete_surrounding_text(no_char.try_into().unwrap(), 0).is_ok() && im.commit().is_ok() {
+            if im
+                .delete_surrounding_text(no_char.try_into().unwrap(), 0)
+                .is_ok()
+                && im.commit().is_ok()
+            {
                 info!("Submitter successfully used input_method to erase the characters");
                 return;
             };
