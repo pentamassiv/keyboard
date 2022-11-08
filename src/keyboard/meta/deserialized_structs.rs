@@ -147,7 +147,7 @@ pub struct KeyDeserialized {
     pub styles: Option<Vec<String>>, // Style classes that can get attatched to the key to easily style it
 }
 
-#[derive(Debug, Deserialize, PartialEq)]
+#[derive(Debug, Deserialize, PartialEq, Eq)]
 #[serde(deny_unknown_fields)]
 /// The deserialized root element describing an entire keyboard
 pub struct LayoutDeserialized {

@@ -11,7 +11,7 @@ use crate::keyboard;
 // Modules
 pub mod wayland;
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(Debug, PartialEq, Eq, Clone)]
 /// Possible types of submissions
 pub enum Submission {
     /// Submit a string

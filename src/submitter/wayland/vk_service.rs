@@ -28,7 +28,7 @@ macro_rules! unwrap_or_return {
     };
 }
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(Debug, PartialEq, Eq, Clone)]
 /// Error when submitting
 pub enum SubmitError {
     /// Virtual keyboard proxy was dropped and is no longer alive
@@ -37,7 +37,7 @@ pub enum SubmitError {
     InvalidKeycode,
 }
 
-#[derive(Debug, PartialEq, Clone)]
+#[derive(Debug, PartialEq, Eq, Clone)]
 /// Enum to differentiate between a key press and a release
 pub enum KeyMotion {
     Press = 1,
