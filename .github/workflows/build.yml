@@ -63,16 +63,3 @@ jobs:
           components: rustfmt
       - name: "Check if the formatting is correct"
         run: cargo fmt --all -- --check
-
-  docs:
-    name: check-docs
-    runs-on: ubuntu-latest
-    env: 
-      RUSTDOCFLAGS: "-D warnings"
-    steps:
-      - uses: actions/checkout@v3
-      - uses: dtolnay/rust-toolchain@stable
-        with:
-          toolchain: nightly
-      - name: "Build docs for all features"
-        run: cargo doc --all-features
