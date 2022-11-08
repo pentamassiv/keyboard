@@ -45,7 +45,7 @@ jobs:
         run: cargo clippy -- --deny warnings
 
       - name: clippy all features
-        run: cargo clippy --features "all" -- --deny warnings
+        run: cargo clippy --all-features -- --deny warnings
 
       - name: Build and test debug binary
         run: cargo test --verbose
