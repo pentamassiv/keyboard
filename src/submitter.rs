@@ -177,7 +177,7 @@ impl<T: IMVisibility + HintPurpose, D: ReceiveSurroundingText> Submitter<T, D> {
             if virtual_keyboard
                 .lock()
                 .unwrap()
-                .send_unicode_str(&text)
+                .send_unicode_str(text)
                 .is_ok()
             {
                 return;

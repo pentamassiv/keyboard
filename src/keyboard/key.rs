@@ -35,9 +35,7 @@ impl Key {
     /// Add the action to give feedback when a button is pressed or released to all vectors of KeyActions
     fn add_feedback_actions(actions: &mut HashMap<Interaction, Vec<KeyAction>>) {
         // Create a vector of all variants of TapDuration and TapMotion to get all combinations in the following for loop
-        let mut durations = Vec::new();
-        durations.push(TapDuration::Short);
-        durations.push(TapDuration::Long);
+        let durations = vec![TapDuration::Short, TapDuration::Long];
         let mut tap_motions = Vec::new();
         tap_motions.push(TapMotion::Press);
         tap_motions.push(TapMotion::Release);
@@ -52,10 +50,10 @@ impl Key {
                         *tap_motion == TapMotion::Press,
                     ));
                 } else {
-                    let mut actions_vec = Vec::new();
-                    actions_vec.push(KeyAction::FeedbackPressRelease(
+                    let actions_vec = vec![KeyAction::FeedbackPressRelease(
                         *tap_motion == TapMotion::Press,
-                    ));
+                    )];
+
                     actions.insert(interaction, actions_vec);
                 }
             }

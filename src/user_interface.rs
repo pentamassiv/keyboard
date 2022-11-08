@@ -173,17 +173,17 @@ impl Win {
     #[cfg(feature = "suggestions")]
     fn update_suggestions(&mut self, suggestions: Vec<String>) {
         if let Some(left) = suggestions.get(0) {
-            self.widgets.suggestions.left.set_label(&left);
+            self.widgets.suggestions.left.set_label(left);
         } else {
             self.widgets.suggestions.left.set_label("");
         }
         if let Some(center) = suggestions.get(1) {
-            self.widgets.suggestions.center.set_label(&center);
+            self.widgets.suggestions.center.set_label(center);
         } else {
             self.widgets.suggestions.center.set_label("");
         }
         if let Some(right) = suggestions.get(2) {
-            self.widgets.suggestions.right.set_label(&right);
+            self.widgets.suggestions.right.set_label(right);
         } else {
             self.widgets.suggestions.right.set_label("");
         }

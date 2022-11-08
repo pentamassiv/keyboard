@@ -66,7 +66,7 @@ impl Decoder {
                     .skip(self.previous_words.len() - no_new_words)
                 {
                     info!("Entered '{}' into decoder", word);
-                    self.input_decoder.entered_word(&word);
+                    self.input_decoder.entered_word(word);
                 }
 
                 // Notify the UI about new suggestions
@@ -93,6 +93,7 @@ impl Decoder {
 
         info!("text_left_of_cursor: {}", self.text_left_of_cursor);
 
+        #[allow(clippy::needless_collect)]
         let updated_words: Vec<&str> = self
             .text_left_of_cursor
             .split_ascii_whitespace()
@@ -111,15 +112,14 @@ impl Decoder {
             updated_words.get(1)
         );
 
-        let no_changed_words = if !previous_words.is_empty()
-            && updated_words.get(0) == previous_words.get(previous_words.len() - 1)
-        {
-            updated_words.len() - 1
-        } else {
-            info!("Reset language model");
-            self.input_decoder.reset();
-            updated_words.len()
-        };
+        let no_changed_words =
+            if !previous_words.is_empty() && updated_words.get(0) == previous_words.last() {
+                updated_words.len() - 1
+            } else {
+                info!("Reset language model");
+                self.input_decoder.reset();
+                updated_words.len()
+            };
         self.previous_words = updated_words;
         info!("no_changed_words: {}", no_changed_words);
         no_changed_words
