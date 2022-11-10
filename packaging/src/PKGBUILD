@@ -10,9 +10,9 @@ license=(GPL3)
 depends=(gtk3 phoc gtk-layer-shell )
 optdepends=('feedbackd: haptic feedback')
 makedepends=(git gcc pkgconf fakeroot) # It also requires cargo but that often is installed through rustup and does not show up as being installed
-provides=(squeekboard squeekboard-git)
-conflicts=(squeekboard squeekboard-git fingerboard-bin)
-replaces=(squeekboard squeekboard-git fingerboard-bin)
+provides=(fingerboard)
+conflicts=(fingerboard-bin)
+replaces=(fingerboard-bin)
 _commit=3cae8d02b0dd5f865e8367fe6ddd549d60cf7385  # tags/v0.20
 source=("git+https://github.com/grelltrier/keyboard#commit=$_commit")
 sha256sums=("SKIP")
