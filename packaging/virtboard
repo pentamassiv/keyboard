@@ -1,3 +1,14 @@
 #!/bin/sh
-# This file was installed from Fingerboard.
-exec fingerboard
+
+# This file was installed by Fingerboard.
+
+set -e
+OSK=/usr/bin/virtboard
+
+if [ -x /usr/bin/squeekboard ]; then
+  OSK=/usr/bin/squeekboard
+fi
+if [ -x /usr/bin/osk-overwrite ]; then
+  OSK=/usr/bin/osk-overwrite
+fi
+exec $OSK
