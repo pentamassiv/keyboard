@@ -40,7 +40,8 @@ check() {
 package() {
   cd keyboard
   install -Dm 755 target/release/${pkgname} -t "${pkgdir}/usr/bin"
-  install -Dm 755 packaging/virtboard -t "${pkgdir}/usr/bin"
+  install -Dm 755 packaging/osk-overwrite -t "${pkgdir}/usr/bin"
+  ln -s target/release/${_pkgname} "$pkgdir/usr/bin/osk-overwrite"
 
   # Moves folders with keyboard layouts, stylesheets and icons
   install -Dm 644 data/keyboards/* -t "${pkgdir}/${HOME}/.fingerboard/data/keyboards"
