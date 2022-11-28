@@ -15,7 +15,7 @@ bitflags = "1.2"
 ctrlc = "3.2"
 glib = "0.16.3"
 gdk-sys = "0.16.0"
-gdk = "0.16.0"
+gdk = "0.16.2"
 gtk = "0.16.1"
 cairo-rs = { version = "0.16.3", optional = true }
 relm = "0.24.0"
