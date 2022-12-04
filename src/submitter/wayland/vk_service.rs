@@ -108,7 +108,7 @@ impl VKService {
         let pressed_keys = HashSet::new();
         let pressed_modifiers = ModifiersBitflag::NO_MODIFIERS;
         // Get the VirtualKeyboard object from its manager
-        let virtual_keyboard = vk_mgr.create_virtual_keyboard(&seat);
+        let virtual_keyboard = vk_mgr.create_virtual_keyboard(seat);
         // Initalize the keyboard with a keymap
         VKService::init_virtual_keyboard(&virtual_keyboard);
         // Get the proxy from the main object
@@ -141,7 +141,7 @@ impl VKService {
         // Allocate the required space in the file first
         keymap_file.seek(SeekFrom::Start(keymap_size_u64)).unwrap();
         keymap_file.write_all(&[0]).unwrap();
-        keymap_file.seek(SeekFrom::Start(0)).unwrap();
+        keymap_file.rewind().unwrap();
         // Memory map the file
         let mut data = unsafe {
             memmap::MmapOptions::new()

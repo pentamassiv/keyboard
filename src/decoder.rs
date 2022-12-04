@@ -10,6 +10,7 @@ use crate::user_interface::Msg;
 /// The Decoder attempts to correct errors and guess the submission the user had in mind when clicking the key.
 /// Currently it only changes '  ' to '. '
 pub struct Decoder {
+    #[allow(dead_code)]
     ui_connection: UIConnector,
     receiver: mpsc::Receiver<(String, String)>, // Receives the surrounding text
     text_left_of_cursor: String,

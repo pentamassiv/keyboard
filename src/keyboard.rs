@@ -114,7 +114,7 @@ impl Keyboard {
         for (layout_name, layout_meta) in layout_meta_hashmap {
             layout_names.insert(layout_name.to_string());
             for (view_name, key_arrangement) in &layout_meta.views {
-                let view = View::from(&key_arrangement, &layout_meta.keys);
+                let view = View::from(key_arrangement, &layout_meta.keys);
                 views.insert((layout_name.clone(), view_name.clone()), view);
                 info!(
                     "Keyboard struct added new view: (layout: {}, view: {})",
@@ -150,6 +150,7 @@ impl Keyboard {
     }
 
     /// Get the views the keyboard has
+    #[allow(dead_code)]
     pub fn get_views(&self) -> &HashMap<(String, String), View> {
         &self.views
     }

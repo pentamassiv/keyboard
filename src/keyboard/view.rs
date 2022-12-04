@@ -25,7 +25,7 @@ impl View {
         // Get the name and location and size of each key that will be in this view
         for (key_id, location) in key_arrangement.get_key_arrangement() {
             // Make a new key based on the key meta information
-            let key = Key::from(&key_id, key_meta.get(key_id).unwrap());
+            let key = Key::from(key_id, key_meta.get(key_id).unwrap());
             // This is the location of the top left edge of the "button"
             let (x, y) = (location.x, location.y);
             // The keys will be arranged in a grid so if a key has a size of e.g. two,

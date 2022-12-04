@@ -173,12 +173,12 @@ impl LayoutDeserialized {
                 }
                 // Try to open the file
                 let file_descriptor: String = format!("{}", &path.display());
-                let yaml_file = File::open(&file_descriptor).expect("No file found!");
+                let yaml_file = File::open(file_descriptor).expect("No file found!");
                 // and deserialize the layout
                 serde_yaml::from_reader(yaml_file)
             }
             // If the source is the fallback string, try to deserialize the layout from the string
-            LayoutSource::FallbackStr => serde_yaml::from_str(&FALLBACK_LAYOUT),
+            LayoutSource::FallbackStr => serde_yaml::from_str(FALLBACK_LAYOUT),
         };
 
         // If the deserialization was successful, return the layout and its name

@@ -100,7 +100,7 @@ impl DBusServer {
     }
     fn session_register(connection: &Connection) {
         let autostart_id = envmnt::get_or("DESKTOP_AUTOSTART_ID", "");
-        println!("autostart_id: {}", autostart_id);
+        println!("autostart_id: {autostart_id}");
         let proxy = connection.with_proxy(
             "org.gnome.SessionManager",
             "/org/gnome/SessionManager",
@@ -115,6 +115,6 @@ impl DBusServer {
             )
             .unwrap();
 
-        println!("client_id: {}", client_id);
+        println!("client_id: {client_id}");
     }
 }

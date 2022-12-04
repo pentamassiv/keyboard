@@ -169,8 +169,7 @@ impl KeyMeta {
         if let Some(actions_vec) = actions_vec {
             actions_vec.push(action);
         } else {
-            let mut actions_vec = Vec::new();
-            actions_vec.push(action);
+            let actions_vec = vec![action];
             hashmap.insert(interaction, actions_vec);
         }
     }

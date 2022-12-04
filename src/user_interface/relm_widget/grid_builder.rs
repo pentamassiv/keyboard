@@ -36,7 +36,7 @@ impl GridBuilder {
                 let (grid, key_refs) =
                     GridBuilder::make_grid(relm, &view_arrangement, &layout_meta.keys);
                 grid.get_style_context()
-                    .add_class(&format!("grid_{}", grid_name));
+                    .add_class(&format!("grid_{grid_name}"));
                 // Add the grid to the stack
                 stack.add_named(&grid, &grid_name);
                 info!("Added view named: '{}'", grid_name);
@@ -73,7 +73,7 @@ impl GridBuilder {
             // Get the key meta infos for the key id
             let key_meta = view_keys.get(key_id).unwrap();
             // Make a button from the key meta infos
-            let button = GridBuilder::make_button(&key_id, key_meta);
+            let button = GridBuilder::make_button(key_id, key_meta);
             // Make a popover for the key
             let popover = GridBuilder::attach_popover(relm, &button, key_meta);
             // Add the key to the grid
@@ -98,7 +98,7 @@ impl GridBuilder {
         button.get_style_context().add_class("key");
         button
             .get_style_context()
-            .add_class(&format!("key_{}", key_id));
+            .add_class(&format!("key_{key_id}"));
 
         // Add style classes, if any were specified
         if let Some(style_classes) = &key_meta.styles {
@@ -108,13 +108,13 @@ impl GridBuilder {
         }
         // Set the button to display a label or an icon
         match &key_meta.key_display {
-            KeyDisplay::Text(label_text) => button.set_label(&label_text),
+            KeyDisplay::Text(label_text) => button.set_label(label_text),
             KeyDisplay::Image(icon_name) => {
                 if let Some(icon_dir_abs) =
                     directories::get_absolute_path(directories::ICON_DIR_REL)
                 {
                     let mut icon_path = icon_dir_abs;
-                    icon_path.push(&icon_name);
+                    icon_path.push(icon_name);
                     let image = gtk::Image::from_file(&icon_path);
                     button.set_image(Some(&image));
                     button.set_always_show_image(true);

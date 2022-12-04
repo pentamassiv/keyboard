@@ -183,7 +183,7 @@ impl<T: 'static + KeyboardVisibility + HintPurpose, D: 'static + ReceiveSurround
             if virtual_keyboard
                 .lock()
                 .unwrap()
-                .send_unicode_str(&text)
+                .send_unicode_str(text)
                 .is_ok()
             {
                 return;

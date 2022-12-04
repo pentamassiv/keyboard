@@ -44,11 +44,10 @@ impl UIManager {
     /// Sends a 'button-pressed' event to the DBusService if 'is_press' is true and 'button-released' if it is false
     /// This causes the device to give haptic feedback
     pub fn haptic_feedback(&self, is_press: bool) {
-        let event;
-        if is_press {
-            event = "button-pressed".to_string();
+        let event = if is_press {
+            "button-pressed".to_string()
         } else {
-            event = "button-released".to_string();
+            "button-released".to_string()
         };
         self.dbus_service.haptic_feedback(event);
     }

@@ -17,7 +17,7 @@ pub mod vk_service;
 #[allow(non_camel_case_types)]
 type wl_seat = libc::c_void;
 
-/// Declares C functions that can be called
+// Declares C functions that can be called
 extern "C" {
     fn gdk_wayland_display_get_wl_display(display: *mut GdkDisplay) -> *mut wl_display;
     fn gdk_wayland_seat_get_wl_seat(seat: *mut GdkSeat) -> *mut wl_seat;
