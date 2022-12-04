@@ -35,8 +35,7 @@ impl GridBuilder {
                 // Make the grid for the layout from the arrangement of the keys and the meta info of the keys
                 let (grid, key_refs) =
                     GridBuilder::make_grid(relm, &view_arrangement, &layout_meta.keys);
-                grid.style_context()
-                    .add_class(&format!("grid_{}", grid_name));
+                grid.style_context().add_class(&format!("grid_{grid_name}"));
                 // Add the grid to the stack
                 stack.add_named(&grid, &grid_name);
                 info!("Added view named: '{}'", grid_name);
@@ -96,7 +95,7 @@ impl GridBuilder {
         let button = ToggleButton::new();
         button.set_hexpand(true);
         button.style_context().add_class("key");
-        button.style_context().add_class(&format!("key_{}", key_id));
+        button.style_context().add_class(&format!("key_{key_id}"));
 
         // Add style classes, if any were specified
         if let Some(style_classes) = &key_meta.styles {

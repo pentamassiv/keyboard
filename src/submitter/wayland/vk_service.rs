@@ -141,7 +141,7 @@ impl VKService {
         // Allocate the required space in the file first
         keymap_file.seek(SeekFrom::Start(keymap_size_u64)).unwrap();
         keymap_file.write_all(&[0]).unwrap();
-        keymap_file.seek(SeekFrom::Start(0)).unwrap();
+        keymap_file.rewind().unwrap();
         // Memory map the file
         let mut data = unsafe {
             memmap2::MmapOptions::new()
