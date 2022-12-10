@@ -1,4 +1,4 @@
-name: build
+name: formatting
 
 on:
   workflow_dispatch:
@@ -11,7 +11,24 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  compile:
+  formatting:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        rust:
+          # - stable
+          - nightly
+          # - "1.63.0"
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/install_deps
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: ${{ matrix.rust }}
+          components: rustfmt
+      - run: cargo fmt --all -- --check
+
+  lint:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -22,25 +39,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/install_deps
-      - name: Set up Rust
-        uses: dtolnay/rust-toolchain@master
+      - uses: dtolnay/rust-toolchain@master
         with:
           toolchain: ${{ matrix.rust }}
-      - run: cargo check --all
-  
-  compile_all_features:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        rust:
-         # - stable
-          - nightly
-         # - "1.63.0"
-    steps:
-      - uses: actions/checkout@v3
-      - uses: ./.github/actions/install_deps
-      - name: Set up Rust
-        uses: dtolnay/rust-toolchain@master
-        with:
-          toolchain: ${{ matrix.rust }}
-      - run: cargo check --all --all-features
+          components: clippy
+      - run: cargo clippy --all-targets --all-features -- -D clippy::pedantic

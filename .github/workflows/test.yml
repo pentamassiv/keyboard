@@ -1,4 +1,4 @@
-name: build
+name: test
 
 on:
   workflow_dispatch:
@@ -11,36 +11,36 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  compile:
+  test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         rust:
-         # - stable
+        #  - stable
           - nightly
-         # - "1.63.0"
+        #  - "1.63.0"
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/install_deps
-      - name: Set up Rust
-        uses: dtolnay/rust-toolchain@master
+      - uses: dtolnay/rust-toolchain@master
         with:
           toolchain: ${{ matrix.rust }}
-      - run: cargo check --all
-  
-  compile_all_features:
+      - name: Test
+        run: cargo test
+
+  test_all_features:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         rust:
-         # - stable
+        #  - stable
           - nightly
-         # - "1.63.0"
+        #  - "1.63.0"
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/install_deps
-      - name: Set up Rust
-        uses: dtolnay/rust-toolchain@master
+      - uses: dtolnay/rust-toolchain@master
         with:
           toolchain: ${{ matrix.rust }}
-      - run: cargo check --all --all-features
+      - name: Test
+        run: cargo test --all-features
