@@ -17,7 +17,7 @@ glib = "0.16.3"
 gdk-sys = "0.16.0"
 gdk = "0.16.0"
 gtk = "0.16.1"
-cairo-rs = { version = "0.16.3", optional = true }
+cairo-rs = { version = "0.16.7", optional = true }
 relm = "0.24.0"
 relm-derive = "0.24.0"
 serde = { version = "1.0", features = ["derive"] }
